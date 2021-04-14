@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;deeplearning&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Thu, 03 Mar 2016 17:34:05 +0800</pubDate>
+        <lastBuildDate>Thu, 03 Mar 2016 17:34:05 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2016/03/03/c3d-use/</guid>
+            <title>C3D Usage Summary</title>
+            <link>http://vra.github.io/2016/03/03/c3d-use/</link>
+            <category>DeepLearning</category>
+            <category>Caffe</category>
+            <pubDate>Thu, 03 Mar 2016 17:34:05 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&lt;a href=&#34;https://github.com/facebook/C3D&#34;&gt;C3D&lt;/a&gt; is a deep learning tool which is modified version of BVLC &lt;a href=&#34;https://github.com/BVLC/caffe&#34;&gt;caffe&lt;/a&gt; to support 3D convolution and pooling. it was released by Facebook. In the field of human action recognition, C3D feature of video clip is the state-of-the-art feature. In this blog, I write some notes for using this tool in practice.  &lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;1-Compile-C3D&#34;&gt;&lt;a href=&#34;#1-Compile-C3D&#34; class=&#34;headerlink&#34; title=&#34;1. Compile C3D&#34;&gt;&lt;/a&gt;1. Compile C3D&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Clone C3D from github:&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git clone https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;facebook&amp;#x2F;C3D.git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Compile it:&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;cp Makefile.config.example Makefile.config&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#adapt makefile according to configuration of your machine, for example, change atblas to mkl&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;make all -j 32 &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;  &lt;code&gt;-j 32&lt;/code&gt; means use 32 cores to compile it in parallel.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;When something goes wrong, search the Internet, find a solution and update your makefile.    
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Test whether the compilation is finished correctly.  &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;#assume you are at C3D root directory right now  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cd examples&amp;#x2F;c3d_feature_extraction  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#download trained sport1m caffemodel from net  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sh c3d_sport1m_feature_extraction_frm.sh  &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code&gt; If the command above runs correctly, your compilation is successful!  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;2-Use-C3D-to-extract-feature-of-UCF101-video-dataset&#34;&gt;&lt;a href=&#34;#2-Use-C3D-to-extract-feature-of-UCF101-video-dataset&#34; class=&#34;headerlink&#34; title=&#34;2. Use C3D to extract feature of UCF101 video dataset&#34;&gt;&lt;/a&gt;2. Use C3D to extract feature of UCF101 video dataset&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Get the dataset and write list files&lt;br&gt; First download UCF101 dataset from &lt;a href=&#34;http://crcv.ucf.edu/data/UCF101.php&#34;&gt;http://crcv.ucf.edu/data/UCF101.php&lt;/a&gt;, and then write list files. Since C3D can read video clips and frames of videos, you can write input list file and output list file in both way. For frame format, you need  to transform video to frames firstly, I use ffmpeg to do this job:&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ffmpeg -i &amp;quot;&amp;#x2F;path&amp;#x2F;to&amp;#x2F;video&amp;quot; &amp;quot;&amp;#x2F;path&amp;#x2F;to&amp;#x2F;frm&amp;#x2F;dir&amp;#x2F;%06d.jpg&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code&gt; The input list file contains the paths to video clips or frames, the output list file contains the path where to save the features.
+
+ The format of input list file is like this:  
+
+ `&amp;lt;string_path&amp;gt; &amp;lt;starting_frame&amp;gt; &amp;lt;label&amp;gt;`  
+
+ for example, `/home/yunfeng/dataset/ucf101/ucf101_frm/YoYo/v_YoYo_g23_c01/ 1 100`  
+ **NOTE: for video clip, `starting_frame` starts from 0, but for frames, it starts from 1.**  
+
+ the format of output list file is like this:  
+ `&amp;lt;output_folder&amp;gt;`  
+ for example, `/output/c3d/YoYo//v_YoYo_g23_c01/000001`  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Create output directory YOURSElF&lt;br&gt; &lt;strong&gt;NOTE: C3D does not create directories in output list file, you must create them yourself.&lt;/strong&gt;   There is a simple way: since we have path to target directory in output list file, we can use it:  &lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;#assume you are at C3D root directory right now&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1. cd examples&amp;#x2F;c3d_feature_extraction&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2. cp prototxt&amp;#x2F;output_list_prefix.txt create_dir.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3. vi create_dir.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code&gt; In vi, do two steps to change diretories to shell commands:
+&lt;/code&gt;&lt;/pre&gt;
+ &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;:0,$s&amp;#x2F;\&amp;#x2F;\d\+&amp;#x2F;\&amp;#x2F;&amp;#x2F;g # remove the number at the end of each line.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;:0,$s&amp;#x2F;output&amp;#x2F;mkdir -p output&amp;#x2F;g # add &amp;#96;mkdir -p&amp;#96; command at the head of each line.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code&gt; then run the command to create directories:
+&lt;/code&gt;&lt;/pre&gt;
+ &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sh create_dir.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Use tools to extract features&lt;br&gt; After finishing first step, you need to write a prototxt file. Fortunately, there is a example file in the directory: &lt;code&gt;prototxt/c3d_sport1m_feature_extractor_frm.prototxt&lt;/code&gt;, you can adapt it to have right access to input list file.  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt; We use tool named `extract_image_features.bin` in `build/tools` directory to extract features, the usage of it is 
+&lt;/code&gt;&lt;/pre&gt;
+ &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt; extract_image_features.bin &amp;lt;feature_extractor_prototxt_file&amp;gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;c3d_pre_trained_model&amp;gt; &amp;lt;gpu_id&amp;gt; &amp;lt;mini_batch_size&amp;gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;number_of_mini_batches&amp;gt; &amp;lt;output_prefix_file&amp;gt; &amp;lt;feature_name1&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;feature_name2&amp;gt; ... &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code&gt; We can use command below to extract feature:
+&lt;/code&gt;&lt;/pre&gt;
+ &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;GLOG_logtosterr&amp;#x3D;1 ..&amp;#x2F;..&amp;#x2F;build&amp;#x2F;tools&amp;#x2F;extract_image_features.bin&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;prototxt&amp;#x2F;c3d_sport1m_feature_extractor_frm.prototxt &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;conv3d_deepnetA_sport1m_iter_1900000 0 50 1 &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;prototxt&amp;#x2F;output_list_prefix.txt fc7­1 fc6­1 prob &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; After extraction of feature, we can use matlab code in &lt;code&gt;script&lt;/code&gt; subdirectory of &lt;code&gt;example/c3d_feature_extraction&lt;/code&gt; to do further job. There are two matlab files in &lt;code&gt;script&lt;/code&gt;, &lt;code&gt;read_binary_blob.m&lt;/code&gt;, &lt;code&gt;read_binary_blob_preserve_shape.m&lt;/code&gt;. There are used to transform features into binary blob data, We can use these two functions for further analysis of features.&lt;/p&gt;
+&lt;h2 id=&#34;3-Train-3D-convolution-neural-network&#34;&gt;&lt;a href=&#34;#3-Train-3D-convolution-neural-network&#34; class=&#34;headerlink&#34; title=&#34;3. Train 3D convolution neural network&#34;&gt;&lt;/a&gt;3. Train 3D convolution neural network&lt;/h2&gt;&lt;p&gt;Since C3D is a fork of &lt;a href=&#34;http://github.com/bvlc/caffe.git&#34;&gt;Caffe&lt;/a&gt;, which is a fast open framework for deep learning, We can use C3D to train deep networks. You can train from scratch or fine-tune C3D on your own dataset.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;   Train from scratch&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt; C3D offers some useful shell scripts to simplify our job, we can read the scripts and adapt it according our tasks.
+
+ **NOTE: you must adapt the shell scripts to ensure that every parameter is correct for your task!**
+
+the schedule of training from scratch is(assuming we are training on ucf101):
+&lt;/code&gt;&lt;/pre&gt;
+ &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;#assume you are at C3D root directory right now&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1. cd examples&amp;#x2F;c3d_train_ucf101&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2. sh create_volume_means.sh # compute the mean file of your dataset&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3. sh train_ucf101.sh # train from scratch &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4. test_ucf101.sh # test the accuracy of training&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Fine-Tune on C3D First you have to download pretrained model, then you can do fine-tuning like this:&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;#assume you are at C3D root directory right now&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1. cd examples&amp;#x2F;c3d_finetuning&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2. sh ucf101_finetuning.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3. sh ucf101_testing.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;4-Classify-C3D-feature-using-SVM&#34;&gt;&lt;a href=&#34;#4-Classify-C3D-feature-using-SVM&#34; class=&#34;headerlink&#34; title=&#34;4.Classify C3D feature using SVM&#34;&gt;&lt;/a&gt;4.Classify C3D feature using SVM&lt;/h2&gt;&lt;p&gt;After extracting features for batchs in each video using C3D tools, in orde to use SVM to classify the videos, we must get a descriptor for each video. We average the c3d features for each video, i.e., sum up those 4096 dimension’s data and calculate the mean of them. I use matlab code below to do this job(using offered funtion &lt;code&gt;read_binary_blob&lt;/code&gt;):&lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;params&#34;&gt;[]&lt;/span&gt;= &lt;span class=&#34;title&#34;&gt;read_ucf101_c3d_feat&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(output_list_relative)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;% Read c3d features (fc6) for videos in ucf101 dataset.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;% For each video, average all its features and get a video descriptor.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;% rather than fileread, importdata save each line separetely.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    dir_list = importdata(output_list_relative);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    dim_feat = &lt;span class=&#34;number&#34;&gt;4096&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt; = &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt; : &lt;span class=&#34;built_in&#34;&gt;size&lt;/span&gt;(dir_list, &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        dir_str = char(dir_list(&lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        feat_files = dir([dir_str, &lt;span class=&#34;string&#34;&gt;&amp;#x27;/*.fc6-1&amp;#x27;&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        num_feat = &lt;span class=&#34;built_in&#34;&gt;length&lt;/span&gt;(feat_files);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        feat = &lt;span class=&#34;built_in&#34;&gt;zeros&lt;/span&gt;(num_feat, dim_feat);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;j&lt;/span&gt; = &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt; : num_feat&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            feat_path = strcat(dir_str, &lt;span class=&#34;string&#34;&gt;&amp;#x27;/&amp;#x27;&lt;/span&gt;, feat_files(&lt;span class=&#34;built_in&#34;&gt;j&lt;/span&gt;).name);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            [~, feat(&lt;span class=&#34;built_in&#34;&gt;j&lt;/span&gt;,:)] = read_binary_blob(feat_path);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        avg_feat = &lt;span class=&#34;built_in&#34;&gt;mean&lt;/span&gt;(feat, &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        avg_feat_double = double(avg_feat);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        fID = fopen(strcat(dir_str, &lt;span class=&#34;string&#34;&gt;&amp;#x27;/c3d.fc6&amp;#x27;&lt;/span&gt;), &lt;span class=&#34;string&#34;&gt;&amp;#x27;w&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;comment&#34;&gt;% libsvm requires that input data must be double&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        fwrite(fID, avg_feat_double, &lt;span class=&#34;string&#34;&gt;&amp;#x27;double&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        fclose(fID);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;The input parameter is the file each line is a relative path to each video frames from the location of script. for example:&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;..&amp;#x2F;output&amp;#x2F;c3d&amp;#x2F;ApplyEyeMakeup&amp;#x2F;v_ApplyEyeMakeup_g01_c01&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;It takes about ten minutes to run this script.  &lt;/p&gt;
+&lt;p&gt;When use libsvm to classify video features, there are two phases: training and testing. The declaration of training and testing functions are: &lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;model = libsvmtrain(train_label_vector, train_data_matrix, options);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[label, accuracy, prob] = libsvmpredict(test_label_vector, test_data_matrix, model, options);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;train_label_vector&lt;/code&gt; is a m by 1 vector, each element is a double value. &lt;code&gt;train_data_matrix&lt;/code&gt; is a m by n matrix, each row is the data of one video. It is similar for predicting function.  &lt;/p&gt;
+&lt;p&gt;In order to construct input data in right way, I write several  wrapper functions for training and testing, which is more convenient to running:&lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;% create_svm_input_data.m&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;params&#34;&gt;[data_matrix]&lt;/span&gt; = &lt;span class=&#34;title&#34;&gt;create_svm_input_data&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(output_list_train)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;% read the c3d feature(fc6) for each video, construct libsvm format data.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    dim_feat = &lt;span class=&#34;number&#34;&gt;4096&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    dir_list = importdata(output_list_train);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    num_train_video = &lt;span class=&#34;built_in&#34;&gt;size&lt;/span&gt;(dir_list, &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    data_matrix = &lt;span class=&#34;built_in&#34;&gt;zeros&lt;/span&gt;(num_train_video, dim_feat);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt; = &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt; : num_train_video&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        feat_path = strcat(char(dir_list(&lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt;)), &lt;span class=&#34;string&#34;&gt;&amp;#x27;/c3d.fc6&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        fid = fopen(feat_path, &lt;span class=&#34;string&#34;&gt;&amp;#x27;r&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        data = fread(fid, &lt;span class=&#34;string&#34;&gt;&amp;#x27;double&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        fclose(fid);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        normed_data = data / norm(data);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        data_matrix(&lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt;, :) = normed_data;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;The &lt;code&gt;output_list_train&lt;/code&gt; is the file contains relative path to each video directory. like:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;../output/c3d/YoYo/v_YoYo_g07_c02&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;And then there is the file to train svm:&lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;%% train_ucf101.m&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;params&#34;&gt;[model]&lt;/span&gt; = &lt;span class=&#34;title&#34;&gt;train_ucf101&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(label_file_path, data_file_path, varargin)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    label_int = load(label_file_path);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    label_double = double(label_int);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    data = create_svm_input_data(data_file_path);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    model = libsvmtrain(label_double, data, varargin&amp;#123;:&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;The &lt;code&gt;label_file_path&lt;/code&gt; is the complete path to the file contains all training labels, including the file name, for example, &lt;code&gt;label_file_path&lt;/code&gt; can be:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;/data/foo/training_label.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;And each line in &lt;code&gt;training_label.txt&lt;/code&gt; contains only one label, for example:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# training_label.txt&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;There is the matlab file to test svm:&lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;%% test_ucf101.m&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;params&#34;&gt;[label, accuracy, predict_prob]&lt;/span&gt; = &lt;span class=&#34;title&#34;&gt;test_ucf101&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(test_label_path, test_data_path, model, varargin)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    label_int = load(test_label_path);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    label_double = double(label_int);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    label_size = &lt;span class=&#34;built_in&#34;&gt;size&lt;/span&gt;(label_double)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    data = create_svm_input_data(test_data_path);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    data_size = &lt;span class=&#34;built_in&#34;&gt;size&lt;/span&gt;(data)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    [label, accuracy, predict_prob] = libsvmpredict(label_double, data, model, varargin&amp;#123;:&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;Note we can use &lt;code&gt;varagin&lt;/code&gt; to pass parameters from a wrapper function to an internal function.&lt;/p&gt;
+&lt;h2 id=&#34;5-Reference&#34;&gt;&lt;a href=&#34;#5-Reference&#34; class=&#34;headerlink&#34; title=&#34;5.Reference&#34;&gt;&lt;/a&gt;5.Reference&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/document/d/1-QqZ3JHd76JfimY4QKqOojcEaf5g3JS0lNh-FHTxLag/edit&#34;&gt;C3D User Guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.csie.ntu.edu.tw/~cjlin/libsvm/&#34;&gt;LIBSVM&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

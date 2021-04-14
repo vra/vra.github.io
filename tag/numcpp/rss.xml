@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;numcpp&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 26 Dec 2020 11:26:36 +0800</pubDate>
+        <lastBuildDate>Sat, 26 Dec 2020 11:26:36 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2020/12/26/numcpp-intro/</guid>
+            <title>NumPy的C++替代NumCpp使用教程</title>
+            <link>http://vra.github.io/2020/12/26/numcpp-intro/</link>
+            <category>C++</category>
+            <category>NumPy</category>
+            <category>NumCpp</category>
+            <pubDate>Sat, 26 Dec 2020 11:26:36 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;NumPy提供了很多开箱即用的函数，用处非常大，所以写C++的时候，让人无比怀念，要是有一个替代版本，就太好了。最近搜索发现， &lt;a href=&#34;https://github.com/dpilger26/NumCpp&#34;&gt;NumCpp&lt;/a&gt; 这是我想要的，而且因为是 &lt;code&gt;Header-only&lt;/code&gt;的库，因此使用时不需要编译，直接添加到头文件包含目录即可，使用很方便。不过NumCpp使用了boost库，需要进行一些下载和配置，这里记录一下。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;总结下来下面是需要下载的东西，我写成了几行代码，在Ubuntu下测试是可以执行的：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;mkdir includes&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/dpilger26/NumCpp.git &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mv NumCpp/include includes/NumCpp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;wget https://dl.bintray.com/boostorg/release/1.75.0/&lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;/boost_1_75_0.zip&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;unzip boost_1_75_0.zip&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mv boost_1_75_0/boost includes/NumCpp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里我们创建了一个&lt;code&gt;includes&lt;/code&gt;目录，用来存放NumCpp和Boost库的头文件，这里以现在 (2020-12-26) 最新的Boost 1.75.0 为例，后面boost库肯定会更新，可以从这里找到最新boost的下载地址：&lt;a href=&#34;https://www.boost.org/users/download&#34;&gt;https://www.boost.org/users/download&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;执行上面的命令后，就可以使用了NumCpp了，下面是一个使用示例：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 文件名：test_num_cpp.cpp&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;quot;NumCpp.hpp&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; a = &amp;#123;&amp;#123;&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;&amp;#125;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; b = &amp;#123;&amp;#123;&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;&amp;#125;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; c = a * b;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        std::cout &amp;lt;&amp;lt; c[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;] &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个例子里面，简单地调用NumCpp最基本的类 &lt;code&gt;nc::NdArray&lt;/code&gt;来进行两个2维数组的矩阵乘操作。&lt;br&gt;详细的教程参考：&lt;a href=&#34;https://github.com/dpilger26/NumCpp&#34;&gt;https://github.com/dpilger26/NumCpp&lt;/a&gt;.&lt;br&gt;接下来就是编译C++代码，这里以Linux下g++编译为例说明，需要注意的有2个点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NumCpp只支持C++14以及以上版本，所以编译时需要加&lt;code&gt;--std=c++14&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;需要将NumCpp所在的目录添加到头文件包含指令&lt;code&gt;-I&lt;/code&gt;里&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具体如下:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;g++ test_num_cpp.cpp --std=c++14 -Iincludes/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;编译完后运行生成的可执行文件:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;./a.out&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

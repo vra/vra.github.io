@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;coloredlogs&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Tue, 10 Sep 2019 16:06:21 +0800</pubDate>
+        <lastBuildDate>Tue, 10 Sep 2019 16:06:21 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2019/09/10/colorful-logging/</guid>
+            <title>Python 彩色命令行输出</title>
+            <link>http://vra.github.io/2019/09/10/colorful-logging/</link>
+            <category>Linux</category>
+            <category>Python</category>
+            <category>coloredlogs</category>
+            <pubDate>Tue, 10 Sep 2019 16:06:21 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;效果：&lt;br&gt;&lt;img src=&#34;/imgs/coloredlogs-demo.png&#34;&gt;&lt;br&gt;下面描述如何来实现。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;安装coloredlogs:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip3 install --user coloredlogs&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;就可以了，使用示例：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; logging&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; coloredlogs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;FIELD_STYLES = &lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    asctime=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;green&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    hostname=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;magenta&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    levelname=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;green&amp;#x27;&lt;/span&gt;, bold=coloredlogs.CAN_USE_BOLD_FONT),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    filename=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;magenta&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    name=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;blue&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    threadName=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;green&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LEVEL_STYLES = &lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    debug=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;green&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    info=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;cyan&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    warning=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;yellow&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    error=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;red&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    critical=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;red&amp;#x27;&lt;/span&gt;, bold=coloredlogs.CAN_USE_BOLD_FONT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger = logging.getLogger(&lt;span class=&#34;string&#34;&gt;&amp;#x27;tos&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;coloredlogs.install(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    level=&lt;span class=&#34;string&#34;&gt;&amp;quot;DEBUG&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    fmt=&lt;span class=&#34;string&#34;&gt;&amp;quot;[%(levelname)s] [%(asctime)s] [%(filename)s:%(lineno)d] %(message)s&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    level_styles=LEVEL_STYLES,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    field_styles=FIELD_STYLES)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.debug(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is Debug mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.info(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is info mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.warn(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is warn mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.error(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is error mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.critical(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is critical mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;sublime text&#34; category</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 29 May 2015 17:33:14 +0800</pubDate>
+        <lastBuildDate>Fri, 29 May 2015 17:33:14 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2015/05/29/sublime-text-summary-2/</guid>
+            <title>Sublime Text 使用技巧2</title>
+            <link>http://vra.github.io/2015/05/29/sublime-text-summary-2/</link>
+            <category>Sublime Text</category>
+            <pubDate>Fri, 29 May 2015 17:33:14 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;1-安装包管理工具Package-Control&#34;&gt;&lt;a href=&#34;#1-安装包管理工具Package-Control&#34; class=&#34;headerlink&#34; title=&#34;1. 安装包管理工具Package Control&#34;&gt;&lt;/a&gt;1. 安装包管理工具Package Control&lt;/h2&gt;&lt;p&gt;包管理工具是安装插件的一个简单有效的方法，安装完Package Control后，就可以用&lt;strong&gt;Ctrl-Shift-P&lt;/strong&gt; 快捷键来安装插件了。&lt;br&gt;包管理器的安装方式:用_Ctrl-`_快捷键打开命令行，然后在命令行中输入如下代码：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; urllib2,os,hashlib; h = &lt;span class=&#34;string&#34;&gt;&amp;#x27;eb2297e1a458f27d836c04bb0cbaf282&amp;#x27;&lt;/span&gt; + &lt;span class=&#34;string&#34;&gt;&amp;#x27;d0e7a3098092775ccb37ca9d6b2e4b7d&amp;#x27;&lt;/span&gt;; pf = &lt;span class=&#34;string&#34;&gt;&amp;#x27;Package Control.sublime-package&amp;#x27;&lt;/span&gt;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;not&lt;/span&gt; os.path.exists(ipp) &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;None&lt;/span&gt;; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &lt;span class=&#34;string&#34;&gt;&amp;#x27;http://packagecontrol.io/&amp;#x27;&lt;/span&gt; + pf.replace(&lt;span class=&#34;string&#34;&gt;&amp;#x27; &amp;#x27;&lt;/span&gt;, &lt;span class=&#34;string&#34;&gt;&amp;#x27;%20&amp;#x27;&lt;/span&gt;)).read(); dh = hashlib.sha256(by).hexdigest(); &lt;span class=&#34;built_in&#34;&gt;open&lt;/span&gt;( os.path.join( ipp, pf), &lt;span class=&#34;string&#34;&gt;&amp;#x27;wb&amp;#x27;&lt;/span&gt; ).write(by) &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; dh == h &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;None&lt;/span&gt;; &lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;#x27;Error validating download (got %s instead of %s), please try manual install&amp;#x27;&lt;/span&gt; % (dh, h) &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; dh != h &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;#x27;Please restart Sublime Text to finish installation&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后按回车，之后重启Sublime Text 2，如果在&lt;strong&gt;Preferences-&amp;gt;Package Setttings&lt;/strong&gt;菜单里出现&lt;strong&gt;Package Control&lt;/strong&gt;，就说明安装成功了。如果使用的是Sublime Text 3，可以看着&lt;a href=&#34;https://packagecontrol.io/installation&#34;&gt;这个链接&lt;/a&gt;。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;2-安装插件Terminal&#34;&gt;&lt;a href=&#34;#2-安装插件Terminal&#34; class=&#34;headerlink&#34; title=&#34;2. 安装插件Terminal&#34;&gt;&lt;/a&gt;2. 安装插件Terminal&lt;/h2&gt;&lt;p&gt;这个插件用来打开一个命令终端，而且这个命令终端的路径就是当前编辑文件或项目所在路径，所以这条命令非常实用，可以在Sublime Text 2里面编辑好文件后，立即在命令行里面编译什么的，很方便。&lt;br&gt;安装方法：用&lt;strong&gt;Ctrl-Shift-P&lt;/strong&gt;打开窗口，输入&lt;strong&gt;Package Control Install&lt;/strong&gt;，按回车，再输入&lt;strong&gt;Terminal&lt;/strong&gt;，回车之后就开始安装，可以通过左下角的小字查看进度。&lt;/p&gt;
+&lt;h2 id=&#34;3-安装主题Theme&#34;&gt;&lt;a href=&#34;#3-安装主题Theme&#34; class=&#34;headerlink&#34; title=&#34;3. 安装主题Theme&#34;&gt;&lt;/a&gt;3. 安装主题Theme&lt;/h2&gt;&lt;p&gt;在包安装界面，输入&lt;strong&gt;Theme&lt;/strong&gt;，即可看到所有的主题，选择自己喜欢的下载。下载后，修改&lt;strong&gt;Preferences-&amp;gt;Settings-User&lt;/strong&gt;，在打开的文件中加入下面一行:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;theme&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;Nexus.sublime-theme&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;保存配置文件，主题立即改变。&lt;/p&gt;
+&lt;h2 id=&#34;4-SublimeLinter：代码检查插件&#34;&gt;&lt;a href=&#34;#4-SublimeLinter：代码检查插件&#34; class=&#34;headerlink&#34; title=&#34;4. SublimeLinter：代码检查插件&#34;&gt;&lt;/a&gt;4. SublimeLinter：代码检查插件&lt;/h2&gt;&lt;p&gt;SublimeLinter据说是一个很好用的代码检查插件，但没用过，所以就只是记录下……&lt;/p&gt;
+&lt;h2 id=&#34;5-SFTP插件&#34;&gt;&lt;a href=&#34;#5-SFTP插件&#34; class=&#34;headerlink&#34; title=&#34;5. SFTP插件&#34;&gt;&lt;/a&gt;5. SFTP插件&lt;/h2&gt;&lt;p&gt;sftp是一个在Sublime Text 2里面可以直接登陆sftp和ftp账号的插件，登陆还可以浏览、修改账号上的内容，有了sftp，就再也不需要FileZilla了~&lt;br&gt;&lt;strong&gt;突然惊喜地发现，SFTP插件也支持SSH，所以以后freeshell可以比较随意地登了。&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; 安装：插件安装，搜索sftp，安装即可。&lt;/li&gt;
+&lt;li&gt; 安装后，按&lt;strong&gt;Ctrl-Shift-P&lt;/strong&gt;，输入sftp，可以看到有&lt;code&gt;Browser Server&lt;/code&gt;，&lt;code&gt;Delete Server&lt;/code&gt;，&lt;code&gt;Edit Server&lt;/code&gt;，&lt;code&gt;Setup Server&lt;/code&gt;等命令，首先选择&lt;strong&gt;Setup Server&lt;/strong&gt;来增加第一个连接。修改默认的配置文件并保存，即为一个连接。配置文件主要有如下内容：&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;// sftp, ftp or ftps&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;type&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;sftp&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;host&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;ssh.freeshell.ustc.edu.cn&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;port&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;88888&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;remote_path&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt; 其中&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; &lt;code&gt;type&lt;/code&gt;表示连接的会话协议类型，&lt;strong&gt;注意ssh设置成sftp即可进行连接&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt; &lt;code&gt;host&lt;/code&gt;是要连接的主机名&lt;/li&gt;
+&lt;li&gt; &lt;code&gt;user&lt;/code&gt;是要进行连接的用户名&lt;/li&gt;
+&lt;li&gt; &lt;code&gt;password&lt;/code&gt;是用户的密码&lt;/li&gt;
+&lt;li&gt; &lt;code&gt;port&lt;/code&gt;是进行连接的端口，ftp默认是22端口&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;6-论文还没改完，去写论文了，下次再写&#34;&gt;&lt;a href=&#34;#6-论文还没改完，去写论文了，下次再写&#34; class=&#34;headerlink&#34; title=&#34;6. 论文还没改完，去写论文了，下次再写~&#34;&gt;&lt;/a&gt;6. 论文还没改完，去写论文了，下次再写~&lt;/h2&gt; ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2015/05/27/sublime-text-summary-1/</guid>
+            <title>Sublime Text 使用技巧1</title>
+            <link>http://vra.github.io/2015/05/27/sublime-text-summary-1/</link>
+            <category>Sublime Text</category>
+            <pubDate>Wed, 27 May 2015 14:10:16 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;Sublime Text 是一款功能很强大的编辑器，用起来很爽，界面也很华丽。但我看了一系列的学习视频时候，才发现为我对Sublime Text 2的许多功能还是不了解，这里记录下来，记性不好，只能通过别的方法来补充了。下面是一些小技巧。&lt;/p&gt;
+&lt;h2 id=&#34;1-打开文件夹并保存为sulime-project&#34;&gt;&lt;a href=&#34;#1-打开文件夹并保存为sulime-project&#34; class=&#34;headerlink&#34; title=&#34;1.打开文件夹并保存为sulime-project&#34;&gt;&lt;/a&gt;1.打开文件夹并保存为sulime-project&lt;/h2&gt;&lt;p&gt;将整个文件夹拖进打开着的Sublime Text 中，然后在工具栏上选择&lt;strong&gt;View-&amp;gt;Side Bar-&amp;gt;Show Side Bar&lt;/strong&gt;，即可看到打开的文件夹了。也可以用快捷键&lt;code&gt;Ctrl-K,Ctrl-B&lt;/code&gt;来完成该操作。 要将打开的文件夹保存为sublime-project，在工具栏上选择**Project-&amp;gt;Save Project As…**然后在打开的对话框中填写保存的项目名，后缀是&lt;code&gt;sublime-project&lt;/code&gt;。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;2-设置首选项&#34;&gt;&lt;a href=&#34;#2-设置首选项&#34; class=&#34;headerlink&#34; title=&#34;2.设置首选项&#34;&gt;&lt;/a&gt;2.设置首选项&lt;/h2&gt;&lt;p&gt;Sublime Text里面有许多的默认选项，如字体大小、tab缩进几个空格等，这些设置都是以类似Json的文本格式保存的。默认的设置文件可以这样打开：工具栏上选择&lt;strong&gt;Preferences-&amp;gt;Settings-Defaults&lt;/strong&gt;。在Window 7上，这个设置文件是只读的（视频教程里面用的是Mac，可以修改），因此用户可以设置自己的首选项，工具栏上选择&lt;strong&gt;Preferences&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Settings-User&lt;/strong&gt;，设置文件就会打开。建议先读懂默认设置里面的每一项设置的内容（每一项设置的内容都有非常详尽的注释，保证一看就懂），然后再复制到用户设置文件里面修改。&lt;/p&gt;
+&lt;h2 id=&#34;3-设置外观&#34;&gt;&lt;a href=&#34;#3-设置外观&#34; class=&#34;headerlink&#34; title=&#34;3.设置外观&#34;&gt;&lt;/a&gt;3.设置外观&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt; 设置配色方案 默认的配色方案有许多，可以通过&lt;strong&gt;Preferences-&amp;gt;Color Scheme&lt;/strong&gt;来选择。除了默认的方案，还可以通过&lt;code&gt;Package Control&lt;/code&gt;命令安装喜欢的命令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt; 设置显示布局 可以将窗口划分为许多小窗口，通过&lt;strong&gt;View-&amp;gt;Layout&lt;/strong&gt;，选择自己想要的布局，有&lt;code&gt;Single&lt;/code&gt;，&lt;code&gt;Columns:2&lt;/code&gt;，&lt;code&gt;Columns:3&lt;/code&gt;，&lt;code&gt;Columns:4&lt;/code&gt;，&lt;code&gt;Rows:2&lt;/code&gt;，&lt;code&gt;Rows:2&lt;/code&gt;，&lt;code&gt;Grid:4&lt;/code&gt;几种选项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;4-多行选择&#34;&gt;&lt;a href=&#34;#4-多行选择&#34; class=&#34;headerlink&#34; title=&#34;4.多行选择&#34;&gt;&lt;/a&gt;4.多行选择&lt;/h2&gt;&lt;p&gt;多行选择是将多个行选定，然后对这些行一起执行操作，对HTML里面的标签操作很方便。选定多个行的方式是：按住&lt;code&gt;Ctrl&lt;/code&gt;键，然后在想要操作的行的某个位置点击，即选定该位置。&lt;/p&gt;
+&lt;h2 id=&#34;5-插件Emmet的使用&#34;&gt;&lt;a href=&#34;#5-插件Emmet的使用&#34; class=&#34;headerlink&#34; title=&#34;5.插件Emmet的使用&#34;&gt;&lt;/a&gt;5.插件Emmet的使用&lt;/h2&gt;&lt;p&gt;看了介绍，Emmet真是个提高效率的很有用的工具。Emmet利用HTML和CSS代码里面的规范的标签和较多的重复性内容，使用简单的标记方法来简洁地进行代码书写。可以通过&lt;code&gt;Package Control&lt;/code&gt; 来搜索Emmet来安装。下面简要地介绍下Emmet的一些标记规则,全部规则见&lt;a href=&#34;http://www.cnblogs.com/matchless/archive/2013/04/10/3010628.html&#34;&gt;这篇博客&lt;/a&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;#&lt;/code&gt;：代表&lt;code&gt;id&lt;/code&gt;，例如&lt;/p&gt;
+&lt;p&gt; &lt;code&gt;div#nav&lt;/code&gt;&lt;br&gt; 效果为&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;id&lt;/span&gt; = &lt;span class=&#34;string&#34;&gt;&amp;quot;nav&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;.&lt;/code&gt; 代表&lt;code&gt;class&lt;/code&gt;，例如&lt;br&gt; &lt;code&gt;div.nav  &lt;/code&gt;&lt;br&gt; 效果为&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;clas&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;nav&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;代表包含，即子标签，如&lt;br&gt; &lt;code&gt;div&amp;gt;p&amp;gt;span  &lt;/code&gt;&lt;br&gt; 效果为&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;+&lt;/code&gt;代表相邻标签，即&lt;br&gt; &lt;code&gt;div&amp;gt;p+span  &lt;/code&gt;&lt;br&gt; 代表&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;*&lt;/code&gt;代表多个标签，如&lt;br&gt; &lt;code&gt;ul&amp;gt;li*3  &lt;/code&gt;&lt;br&gt; 代表&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;#123;&amp;#125;&lt;/code&gt;代表文本内容，如&lt;br&gt; &lt;code&gt;ul&amp;gt;li*3&amp;gt;a&amp;#123;Link&amp;#125;  &lt;/code&gt;&lt;br&gt; 代表&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Link&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Link&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Link&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

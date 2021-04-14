@@ -1,0 +1,750 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog</title>
+    <link href="http://vra.github.io" />
+    <updated>2021-03-21T10:19:28.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/</id>
+        <title>C++中使用pytorch保存的tensor</title>
+        <link rel="alternate" href="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;最近在学习Libtorch——即Pytorch的C++版本，需要使用 Pytorch 导出的 tensor 以便对模型进行 debug。下面是转换代码，总体原理是将 tensor 转换为二进制数据，再在 C++ 里面读入。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;下面是 Pytorch 中的导出 tensor 示例：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; io&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; torch&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;save_tensor&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;device&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    my_tensor = torch.rand(&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;).to(device);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;[python] my_tensor: &amp;quot;&lt;/span&gt;, my_tensor)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    f = io.BytesIO()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    torch.save(my_tensor, f, _use_new_zipfile_serialization=&lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;open&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;#x27;my_tensor_%s.pt&amp;#x27;&lt;/span&gt; % device, &lt;span class=&#34;string&#34;&gt;&amp;quot;wb&amp;quot;&lt;/span&gt;) &lt;span class=&#34;keyword&#34;&gt;as&lt;/span&gt; out_f:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;comment&#34;&gt;# Copy the BytesIO stream to the output file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        out_f.write(f.getbuffer())&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; __name__ == &lt;span class=&#34;string&#34;&gt;&amp;#x27;__main__&amp;#x27;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    save_tensor(&lt;span class=&#34;string&#34;&gt;&amp;#x27;cpu&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里以导出 cpu tensor 为例，cuda tensor 也是同理。&lt;/p&gt;
+&lt;p&gt;在 C++ 中的调用示例如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;torch/torch.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;std::vector&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt; &lt;span class=&#34;title&#34;&gt;get_the_bytes&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(std::string filename)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;std::ifstream &lt;span class=&#34;title&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(filename, std::ios::binary)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;std::vector&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt; &lt;span class=&#34;title&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;params&#34;&gt;        (std::istreambuf_iterator&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt;(input)),&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;params&#34;&gt;        (std::istreambuf_iterator&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt;()))&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    input.&lt;span class=&#34;built_in&#34;&gt;close&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; bytes;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    std::vector&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt; f = &lt;span class=&#34;built_in&#34;&gt;get_the_bytes&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;my_tensor_cpu.pt&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    torch::IValue x = torch::&lt;span class=&#34;built_in&#34;&gt;pickle_load&lt;/span&gt;(f);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    torch::Tensor my_tensor = x.&lt;span class=&#34;built_in&#34;&gt;toTensor&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;[cpp] my_tensor: &amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; my_tensor &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;注意事项：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;torch的Python和C++版本需要保持一致，否则转换可能不成功.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;题外话&#34;&gt;&lt;a href=&#34;#题外话&#34; class=&#34;headerlink&#34; title=&#34;题外话&#34;&gt;&lt;/a&gt;题外话&lt;/h2&gt;&lt;p&gt;最近在学习Libtorch——即Pytorch的C++版本，发现使用起来异常的丝滑，写C++有了Python的体验，妙不可言。&lt;br&gt;后面会更新一些关于libtorch使用的文章，敬请关注。&lt;/p&gt;
+&lt;h2 id=&#34;参考&#34;&gt;&lt;a href=&#34;#参考&#34; class=&#34;headerlink&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;参考&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://discuss.pytorch.org/t/how-to-load-python-tensor-in-c/88813&#34;&gt;https://discuss.pytorch.org/t/how-to-load-python-tensor-in-c/88813&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Python" />
+        <category term="C++" />
+        <category term="Pytorch" />
+        <category term="Libtorch" />
+        <updated>2021-03-21T10:19:28.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2021/02/02/doctest-intro/</id>
+        <title>doctest 用法简介</title>
+        <link rel="alternate" href="http://vra.github.io/2021/02/02/doctest-intro/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://docs.python.org/3/library/doctest.html&#34;&gt;doctest&lt;/a&gt; 是 python 系统库中用于交互式会话例子测试的工具，用于搜索以 &lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 开头的语句，并且将其作为Python命令，对结果进行测试。&lt;/p&gt;
+&lt;p&gt;这个工具可以方便地用于检测自己写的库是否有bug，例如某些函数功能可能发生改变，借此工具可以方便地对代码中的示例语句进行测试。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;基本用法&#34;&gt;&lt;a href=&#34;#基本用法&#34; class=&#34;headerlink&#34; title=&#34;基本用法&#34;&gt;&lt;/a&gt;基本用法&lt;/h2&gt;&lt;p&gt;假如我们有一个 Python 脚本 &lt;code&gt;foo.py&lt;/code&gt;, 其中有一些 &lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 命令：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# file name: foo.py&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;My square function.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;Usage:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;a = my_square(4)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;b = my_square(3)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;a + b&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;25&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;my_square&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;num&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; num * num&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;为了测试我们的 docstring 中的示例用法（即以&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 开头的命令）是否跟代码实现相符合，可以使用下面的命令来操作：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 -m doctest foo.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;没有报错的话默认是没有输出的，如果要看中间的执行信息，可以增加 &lt;code&gt;-v&lt;/code&gt; 参数:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 -m doctest -v foo.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;另外针对只有运行命令记录，没有 python 语句的情况，可以把把命令记录保存到 &lt;code&gt;.txt&lt;/code&gt; 文件中，然后使用同样的调用命令。例如把下面的内容保存到 &lt;code&gt;foo.txt&lt;/code&gt; 文件中：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt;&amp;gt; a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt;&amp;gt; a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;那么就可以使用下面的命令调用&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 -m doctest -v foo.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;输出结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting nothing&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1 items passed all tests:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; foo.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; 1 items.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 passed and 0 failed.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Test passed.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;可以看到 &lt;code&gt;doctest&lt;/code&gt; 会对文件中的每一行进行读取，然后计算期望的值和实际的值是否一样，如果不一样就会报错。例如我们尝试修改上面的 &lt;code&gt;foo.txt&lt;/code&gt; 为下面的内容:&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt;&amp;gt; a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt;&amp;gt; a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;即故意把2+3的结果修改为6，执行 &lt;code&gt;doctest&lt;/code&gt; 命令，结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting nothing&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;**********************************************************************&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;File &lt;span class=&#34;string&#34;&gt;&amp;quot;foo.txt&amp;quot;&lt;/span&gt;, line 2, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; foo.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Failed example:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expected:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Got:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;**********************************************************************&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1 items had failures:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   1 of   2 &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; foo.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; 1 items.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1 passed and 1 failed.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;***Test Failed*** 1 failures.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到，测试出错了，而且出错的详细信息也列出来了。&lt;/p&gt;
+&lt;p&gt;另一种使用的方法是在 python 脚本中增加 &lt;code&gt;doctest.testmod()&lt;/code&gt; 函数调用，方法如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# file-name: foo.py&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;example usage:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;a, b = 2, 3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;a+b&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; __name__ == &lt;span class=&#34;string&#34;&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; doctest&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    doctest.testmod()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;使用下面的命令来执行脚本:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 foo.py -v&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;输出结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting nothing&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1 items passed all tests:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; __main__&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; 1 items.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 passed and 0 failed.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Test passed.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;对于 &lt;code&gt;.txt&lt;/code&gt; 文件的测试，使用 &lt;code&gt;doctest.testfile()&lt;/code&gt; 函数：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; doctest&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;doctest.testfile(&lt;span class=&#34;string&#34;&gt;&amp;quot;example.txt&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;一些使用注意点&#34;&gt;&lt;a href=&#34;#一些使用注意点&#34; class=&#34;headerlink&#34; title=&#34;一些使用注意点&#34;&gt;&lt;/a&gt;一些使用注意点&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 缩进多个层次对结果没有影响，&lt;code&gt;doctest&lt;/code&gt; 测试之前会对每行前面的空格进行删除。&lt;/li&gt;
+&lt;li&gt;doctest 也可以对Error 进行测试，如果想要测试各种特殊case导致的错误的话，doctest是个不错的工具&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Python" />
+        <category term="Unit Test" />
+        <updated>2021-02-02T14:43:43.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2021/01/23/cpp-summary-stringview/</id>
+        <title>C++中的string_view</title>
+        <link rel="alternate" href="http://vra.github.io/2021/01/23/cpp-summary-stringview/"/>
+        <content type="html">&lt;p&gt;C++17标准库里面引入了轻量级的只读字符串表示类型&lt;code&gt;string_view&lt;/code&gt;，用来替代&lt;code&gt;const char*&lt;/code&gt; 和&lt;code&gt;const string&amp;amp;&lt;/code&gt;，在传入函数的时候减小内存开销(因为&lt;code&gt;string_view&lt;/code&gt;类只包含字符串的指针和字符串的长度值，开销小于&lt;code&gt;string&lt;/code&gt;类型)。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;&lt;code&gt;string_view&lt;/code&gt; 定义在头文件&lt;code&gt;&amp;lt;string_view&amp;gt;&lt;/code&gt;中。&lt;/p&gt;
+&lt;p&gt;具体来说，C++17里面引入了模板类&lt;code&gt;basic_string_view&lt;/code&gt;类，而&lt;code&gt;string_view&lt;/code&gt;是针对&lt;code&gt;char&lt;/code&gt;特化的类，如头文件中所表示的：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;using&lt;/span&gt; string_view = basic_string_view&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;using&lt;/span&gt; u8string_view = basic_string_view&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char8_t&lt;/span&gt;&amp;gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;using&lt;/span&gt; u16string_view = basic_string_view&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char16_t&lt;/span&gt;&amp;gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;using&lt;/span&gt; u32string_view = basic_string_view&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char32_t&lt;/span&gt;&amp;gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;using&lt;/span&gt; wstring_view   = basic_string_view&amp;lt;&lt;span class=&#34;keyword&#34;&gt;wchar_t&lt;/span&gt;&amp;gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到针对不同类型的字符数组，都有对应的只读view。&lt;br&gt;顺便提一下，上述代码中用到的&lt;code&gt;using&lt;/code&gt;用法是C++11引入的类型重定义（type alias)，可以给类型和函数起别名，下面是官方给的示例用法:&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;string&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;ios&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;type_traits&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// type alias, identical to&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// typedef std::ios_base::fmtflags flags;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;using&lt;/span&gt; flags = std::ios_base::fmtflags;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// the name &amp;#x27;flags&amp;#x27; now denotes a type:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;flags fl = std::ios_base::dec;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// type alias, identical to&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// typedef void (*func)(int, int);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;using&lt;/span&gt; func = &lt;span class=&#34;built_in&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt;&lt;/span&gt; (*) (&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;, &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// the name &amp;#x27;func&amp;#x27; now denotes a pointer to function:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;example&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;, &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;)&lt;/span&gt; &lt;/span&gt;&amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;func f = example;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// alias template&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;template&lt;/span&gt;&amp;lt;&lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;T&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;using&lt;/span&gt; ptr = T*; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// the name &amp;#x27;ptr&amp;lt;T&amp;gt;&amp;#x27; is now an alias for pointer to T&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ptr&amp;lt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;&amp;gt; x;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code&gt;string_view&lt;/code&gt; 使用方法与&lt;code&gt;string&lt;/code&gt;一样，而且可以由&lt;code&gt;string&lt;/code&gt;类型对象相互初始化，如下所示：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;std::string_view &lt;span class=&#34;title&#34;&gt;sv1&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;hello world&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;std::string &lt;span class=&#34;title&#34;&gt;s1&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(sv1)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;std::string_view &lt;span class=&#34;title&#34;&gt;sv2&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(s1)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;实际测试发现，相同的字符串，&lt;code&gt;string_view&lt;/code&gt; 对象的大小确实比&lt;code&gt;string&lt;/code&gt;对象要小，比如下面的例子：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;string_view&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;function&#34;&gt;std::string_view &lt;span class=&#34;title&#34;&gt;sv1&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;hello world&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;function&#34;&gt;std::string &lt;span class=&#34;title&#34;&gt;s1&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(sv1)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;size of string_view: &amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&#34;built_in&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;sizeof&lt;/span&gt;&lt;/span&gt;(sv1) &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;size of string: &amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&#34;built_in&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;sizeof&lt;/span&gt;&lt;/span&gt;(s1) &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在32位的机器下(x86)，输出如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;size of string_view: 8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;size of string: 28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;因为&lt;code&gt;string_view&lt;/code&gt; 只包含一个指向字符串的指针(*)和一个表示数组大小的整型数值(&lt;code&gt;int&lt;/code&gt;)，因此总大小是4+4=8。而&lt;code&gt;string&lt;/code&gt;是容器类型，内部结构我不太清楚，看输出整体是要比&lt;code&gt;string_view&lt;/code&gt;大挺多的。&lt;/p&gt;
+&lt;p&gt;如果想在C++11的环境下使用C++17才引入的&lt;code&gt;string_view&lt;/code&gt;，可以使用谷歌推出的&lt;a href=&#34;https://github.com/abseil/abseil-cpp&#34;&gt;absl库&lt;/a&gt;，这个库在C++11的环境下实现了很多C++14，17甚至20里面才提出的新特性，可以尝试一下。&lt;/p&gt;
+</content>
+        <category term="C++" />
+        <category term="C++17" />
+        <updated>2021-01-23T07:40:39.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2021/01/03/venv-intro/</id>
+        <title>python虚拟环境管理工具venv教程</title>
+        <link rel="alternate" href="http://vra.github.io/2021/01/03/venv-intro/"/>
+        <content type="html">&lt;h3 id=&#34;0-概述&#34;&gt;&lt;a href=&#34;#0-概述&#34; class=&#34;headerlink&#34; title=&#34;0. 概述&#34;&gt;&lt;/a&gt;0. 概述&lt;/h3&gt;&lt;p&gt;Python有各种各样的系统包和第三方开发的包，让我们的开发变得异常容易。不过也引入了一个问题，不同代码需要的包版本可能是不一样的，所以常常回出现这种情况，为了代码B修改了依赖包的版本，代码B能work了，之前使用的代码A就没法正常工作了。因此常常需要对不同的代码设置不同的Python虚拟环境。&lt;a href=&#34;https://docs.python.org/zh-cn/3/tutorial/venv.html&#34;&gt;venv&lt;/a&gt;是Python自带的虚拟环境管理工具，使用很方便，这里简单记录一下使用方法。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;需要注意的是，venv 工具没法创建不同版本的python环境，也就是如果你用python3.5没法创建python3.6的虚拟环境。如果想要使用不同python版本的虚拟环境，请安装 virtual env包。&lt;/p&gt;
+&lt;h3 id=&#34;1-安装&#34;&gt;&lt;a href=&#34;#1-安装&#34; class=&#34;headerlink&#34; title=&#34;1. 安装&#34;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;p&gt;python3.6及以上已经默认安装，python3.5需要通过系统的包管理工具安装：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install python3-venv&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;2-创建虚拟环境&#34;&gt;&lt;a href=&#34;#2-创建虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;2. 创建虚拟环境&#34;&gt;&lt;/a&gt;2. 创建虚拟环境&lt;/h3&gt;&lt;p&gt;在&lt;code&gt;~/test_env&lt;/code&gt;目录下创建虚拟环境：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 -m venv test_env&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;3-启用虚拟环境&#34;&gt;&lt;a href=&#34;#3-启用虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;3. 启用虚拟环境&#34;&gt;&lt;/a&gt;3. 启用虚拟环境&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt; ~/test_env/bin/activate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到，命令行的提示符前面会出现括号，里面是虚拟环境名称。&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;pip&lt;/code&gt;安装需要的包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip install tensorflow&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意这里不需要root权限，因此无需添加&lt;code&gt;sudo&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;安装的包会放在&lt;code&gt;~/test_env/lib/pythonx.x/site-packages&lt;/code&gt; 目录下。&lt;/p&gt;
+&lt;h3 id=&#34;4-退出虚拟环境&#34;&gt;&lt;a href=&#34;#4-退出虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;4. 退出虚拟环境&#34;&gt;&lt;/a&gt;4. 退出虚拟环境&lt;/h3&gt;&lt;p&gt;退出虚拟的python环境，在命令行执行下面的命令即可：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;deactivate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="venv" />
+        <updated>2021-01-03T01:56:04.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2021/01/02/summary-2020/</id>
+        <title>2020年终总结</title>
+        <link rel="alternate" href="http://vra.github.io/2021/01/02/summary-2020/"/>
+        <content type="html">&lt;h2 id=&#34;2020流水记录&#34;&gt;&lt;a href=&#34;#2020流水记录&#34; class=&#34;headerlink&#34; title=&#34;2020流水记录&#34;&gt;&lt;/a&gt;2020流水记录&lt;/h2&gt;&lt;p&gt;新的一年又开始了，记录一下2020年发生的一些事情，作为对这不平凡的一年的简单的回顾。&lt;/p&gt;
+&lt;p&gt;1月14日，农历腊月二十，我和彤彤在我家结婚了，作为主人翁参与其中，是一种很神奇却很美好的感觉，结婚的大小事情都是爸妈和村里的亲戚邻居一起来做的，很感谢爸妈亲戚邻居们的付出，让寒冬里面的腊月二十热闹而温暖。&lt;/p&gt;
+&lt;p&gt;关于结婚几天发生的事情，我写了一些流水账记录，不过后面没有完全写完，等有空了再回忆回忆，完全写完再发出来吧，也算是给自己一个交代。&lt;/p&gt;
+&lt;p&gt;总之非常感谢所有人的帮助和支持。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;结完婚没多久就过年了，因为疫情影响，各个村都封路了，因此很多亲戚都没能走成，一年一度的见面也落空了。那段时间只能待在家里，每天看关于疫情的新闻，心里很紧张，担心疫情失控。我甚至还想过，疫情会不会让人像恐龙一样，因为突发事件而灭绝，现在看来是太悲观了，而且杞人忧天不止一星半点。&lt;/p&gt;
+&lt;p&gt;转眼春节假期结束了，关于开工的问题，公司决定远程上班两周，再回北京到办公室上班。彤彤和云亮的单位也是类似的政策。因此我们体验了在家里上班的有趣的日子。&lt;/p&gt;
+&lt;p&gt;每天早上起来，妈已经做好了早饭，吃完后就去上阁房的桌子前办公，网不好时去中间屋子看看网。一早上是电话开会，开完会开始干活，晚上写日报。云亮和彤彤也是类似的样子，开会，看资料，写总结。&lt;/p&gt;
+&lt;p&gt;这次疫情证明了远程办公其实是可行的，这让我不禁想，也许未来我就在老家的房子里，烤着温暖的炉子，吃着妈做的好吃的饭，远程为某个遥远的大城市的公司干活。这样家人和工作都能两全，是我理想中想要的生活。当然还有一些需要解决的问题，比如远程工作如何保证效率等等。&lt;/p&gt;
+&lt;p&gt;两周后，农历二月二一过，我和云亮就在包叔的车的接送下，穿过封锁状况未知的村村镇镇，达到陇西火车站，坐上了回北京的车。走之前爸专门去村里的大队部开了一个类似通行证的材料，证明我们没有接触过感染人员，请让我们通行，有种类似护照的感觉，也算是今年这个特殊时刻特别的纪念物品了吧。&lt;/p&gt;
+&lt;p&gt;我还记得刚到北京，地铁里面空荡荡的，大街上也没有多少人，有点像一座空城。&lt;/p&gt;
+&lt;p&gt;后来渐渐地，在强大的国家的有效管控以及医护人员巨大的付出下，疫情受到控制，小区也从进出严格登记，到检查通行证，到最后基本不检查，年中的时候带口罩就好了。&lt;/p&gt;
+&lt;p&gt;因为结婚了，我俩开始更具体地想以后的生活，最直接的是，去哪座城市定居。我们考虑过成都，西安，杭州，南京这些地方，最后因为一些机遇，我俩决定去杭州，后面的规划和目标也渐渐清晰了起来。&lt;/p&gt;
+&lt;p&gt;6在月底的时候，我们转移到杭州了。还好有云亮在北京，我们这次转移才比较容易，很多东西都是他后面给我们寄过来的。&lt;/p&gt;
+&lt;p&gt;还记得刚到杭州的那天晚上，出永福地铁站的时候，天已经全黑了，外面下着小雨，我俩看着陌生的地方，想着要开始一段全新的旅程，心里激动不已。&lt;/p&gt;
+&lt;p&gt;然后我们开始租房子，确定住哪边。在梅雨季节里，我们体验了杭州的潮湿和闷热，好在出梅后，一切都还算适应。&lt;/p&gt;
+&lt;p&gt;然后开始上班，周末和假日也去玩了很多地方，包括云栖竹径，五云寺，北高峰，杭州植物园，良渚文化村，西溪湿地，还有西湖。&lt;/p&gt;
+&lt;p&gt;七月份组内出游活动，我们组去了爬了黄山，去宏村参观了古村落，还去屯溪老街转了转。当然出去玩是一方面，更重要的是团队建设，也是了解组内氛围的好机会，确实借此机会，我也了解到组内公开透明，相互尊重的氛围，让我印象很深刻，也确信是值得加入的。&lt;/p&gt;
+&lt;p&gt;国庆假期，我和彤彤在秦安下高铁后，坐出租去庄浪，一路上听出租车司机讲了很多有意思的事情。晚上9点多到县城，少华已经在等我们了。到家后很晚了，家人们都在，团聚在一起，聊了很多。&lt;/p&gt;
+&lt;p&gt;让我印象很深的是，第二天少华，爸还有我去楼下吃牛肉面。那家店味道很好，而且一大早一起吃牛肉面的经历，也让我觉得值得记录，是家的另一种存在形式吧。&lt;/p&gt;
+&lt;p&gt;第二天高中室友老六结婚，我一大早过去，和朝哥，彦斌帮了下忙，也见到了好几年没有见的老六的爸妈和姐。高中那会他们经常来兰州看老六，每次来都请我们吃饭，带很多水果给我们，我心里很感激。高中毕业那年，我们宿舍组团来庄浪玩，度过了一个快乐又难忘的夏天。&lt;/p&gt;
+&lt;p&gt;国庆第四天彤彤家新房入住，来了很多亲戚，很热闹。这是岳父岳母自己这些年辛苦赚钱买的房子，是一个了不起的人生成就。能感觉到他们还是很自豪很开心的。我和大姐的孩子奥博玩了很久，很感叹他的学习能力。下午全家人和亲戚去饭店吃饭，我和彤彤提前离开，去坐回家的车。晚上到我家。到家后和全家人团聚在一起，是开心幸福的。&lt;/p&gt;
+&lt;p&gt;家里的葡萄成熟了，而且今年长得比较繁，吃起来比外面买的葡萄甜多了，也好吃。&lt;/p&gt;
+&lt;p&gt;在家的几天，和姨夫聊了聊，因为疫情原因过年也没见面。也和三舅三妗子聊了聊，聊了一些跑计划生育时在我家暂住时的事情。和小学同学斌斌结婚，去他家和小学同学聊了聊。去带婷婷和豪豪爬了一次山，所以才有了封面的这张照片。&lt;/p&gt;
+&lt;p&gt;国庆结束后，10月8号就回杭州继续上班了。&lt;/p&gt;
+&lt;p&gt;后面有段时间工作很忙，遇到了很难解决的问题，一行行调试代码，两三周没搞出来，心态快要崩了。某个周末，搞了两天，还是没能解决，周日晚上搞到很晚，头脑一片混乱，不得不在不甘中睡下。周一早上起来发现居然神奇地解决了，激动地哭了。后来塞远请我们吃饭，犒劳我们辛苦的几周.&lt;/p&gt;
+&lt;h2 id=&#34;技术&#34;&gt;&lt;a href=&#34;#技术&#34; class=&#34;headerlink&#34; title=&#34;技术&#34;&gt;&lt;/a&gt;技术&lt;/h2&gt;&lt;h3 id=&#34;开源&#34;&gt;&lt;a href=&#34;#开源&#34; class=&#34;headerlink&#34; title=&#34;开源&#34;&gt;&lt;/a&gt;开源&lt;/h3&gt;&lt;p&gt;今年只写了一个标注图像的工具，&lt;a href=&#34;https://github.com/vra/easybox&#34;&gt;https://github.com/vra/easybox&lt;/a&gt;，可以对图像中的物体进行矩形框标注，特色是即插即用，支持多平台，支持文件夹标注，每张图片支持任意个标注框，可以通过 &lt;code&gt;pip install easybox&lt;/code&gt; 来安装使用。&lt;/p&gt;
+&lt;h2 id=&#34;论文&#34;&gt;&lt;a href=&#34;#论文&#34; class=&#34;headerlink&#34; title=&#34;论文&#34;&gt;&lt;/a&gt;论文&lt;/h2&gt;&lt;p&gt;今年又是命途多舛的一年，和飞哥，鑫焱去年投的CVPR没有中，今年先是改投eccv，没中后又改投accv，仍没有中，最后就放到了arxiv上。总之还是感谢飞哥和鑫焱的辛勤付出，大家都付出了很多，很不容易。&lt;/p&gt;
+&lt;h2 id=&#34;读书&#34;&gt;&lt;a href=&#34;#读书&#34; class=&#34;headerlink&#34; title=&#34;读书&#34;&gt;&lt;/a&gt;读书&lt;/h2&gt;&lt;p&gt;今年读书有点少，只看完了不到五本，flag倒的有点厉害。分析发现，通勤时间没了，所以平均每天看书时间减少了20分钟；而且周末大部分时间在看电影和剧集，读书的时间就更少了。不过《中共党史珍闻录》对我触动很大，从第三者的角度反思了历史上的一些事件，没有粉饰也没有诋毁，太难得了。同时也让我开始思考，伟大如斯的人物都难免犯错，如我等平凡人，做错事更是容易，所以更需要跳出自我麻痹，正视自己的正确与错误，努力改进。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;《人体简史》&lt;/li&gt;
+&lt;li&gt;《山核桃大街谋杀案》&lt;/li&gt;
+&lt;li&gt;《流畅的Python》&lt;/li&gt;
+&lt;li&gt;《中共党史珍闻录》&lt;/li&gt;
+&lt;li&gt;《三少爷的剑》&lt;/li&gt;
+&lt;li&gt;《白发魔女传》&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;影视&#34;&gt;&lt;a href=&#34;#影视&#34; class=&#34;headerlink&#34; title=&#34;影视&#34;&gt;&lt;/a&gt;影视&lt;/h2&gt;&lt;p&gt;今年周末看了很多电影和剧集，最喜欢《小谢尔顿》了，温暖的家庭剧，大部分时候是搞笑的，有时候家人和成长的故事还是很让人动容。&lt;/p&gt;
+&lt;h3 id=&#34;电影&#34;&gt;&lt;a href=&#34;#电影&#34; class=&#34;headerlink&#34; title=&#34;电影&#34;&gt;&lt;/a&gt;电影&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;《Hello!树先生》：小县城的场景太熟悉了，主角有点魔幻&lt;/li&gt;
+&lt;li&gt;《Her》&lt;/li&gt;
+&lt;li&gt;《树上有个好地方》：想起了小学的很多事情&lt;/li&gt;
+&lt;li&gt;《星球大战8》&lt;/li&gt;
+&lt;li&gt;《星球大战9》&lt;/li&gt;
+&lt;li&gt;《1917》：唯美的战争画面&lt;/li&gt;
+&lt;li&gt;《他们已不再变老》&lt;/li&gt;
+&lt;li&gt;《异形系列》&lt;/li&gt;
+&lt;li&gt;《真心半解》&lt;/li&gt;
+&lt;li&gt;《绅士们》&lt;/li&gt;
+&lt;li&gt;《八恶人》&lt;/li&gt;
+&lt;li&gt;《无耻混蛋》&lt;/li&gt;
+&lt;li&gt;《拯救大兵瑞恩》&lt;/li&gt;
+&lt;li&gt;《小妇人》&lt;/li&gt;
+&lt;li&gt;《婚姻故事》&lt;/li&gt;
+&lt;li&gt;《乔乔的异想世界》：感动到哭的电影&lt;/li&gt;
+&lt;li&gt;《利刃出鞘》：好的故事，引人入胜&lt;/li&gt;
+&lt;li&gt;《婚姻故事》&lt;/li&gt;
+&lt;li&gt;《绿皮书》&lt;/li&gt;
+&lt;li&gt;《波西米亚狂想曲》：主角塑造的太好了&lt;/li&gt;
+&lt;li&gt;《华盛顿邮报》&lt;/li&gt;
+&lt;li&gt;《楚门的世界》&lt;/li&gt;
+&lt;li&gt;《闻香识女人》&lt;/li&gt;
+&lt;li&gt;《银翼杀手2049》&lt;/li&gt;
+&lt;li&gt;《双子杀手》&lt;/li&gt;
+&lt;li&gt;《阿拉丁》&lt;/li&gt;
+&lt;li&gt;《白蛇·缘起》&lt;/li&gt;
+&lt;li&gt;《哪吒之魔瞳降世》&lt;/li&gt;
+&lt;li&gt;《星际探索》&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;剧集&#34;&gt;&lt;a href=&#34;#剧集&#34; class=&#34;headerlink&#34; title=&#34;剧集&#34;&gt;&lt;/a&gt;剧集&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;《小谢尔顿1-4季》&lt;/li&gt;
+&lt;li&gt;《爱，死亡与机器人第1季》&lt;/li&gt;
+&lt;li&gt;《曼达洛人1-2季》&lt;/li&gt;
+&lt;li&gt;《性教育第2季》&lt;/li&gt;
+&lt;li&gt;《异星灾变第1季》&lt;/li&gt;
+&lt;li&gt;《环形物语第1季》&lt;/li&gt;
+&lt;li&gt;《我们的父辈》&lt;/li&gt;
+&lt;li&gt;《生活大爆炸第12季》&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;生活&#34;&gt;&lt;a href=&#34;#生活&#34; class=&#34;headerlink&#34; title=&#34;生活&#34;&gt;&lt;/a&gt;生活&lt;/h2&gt;&lt;p&gt;周末我们都会自己做饭，因为自己做的好吃也便宜。我也尝试了自己做饭，做出来味道还不坏，心里还是挺开心的。&lt;/p&gt;
+&lt;p&gt;年末的时候开始和彤彤跳绳了，每天500到1000个，感受肌肉劳累然后完成任务放松的感觉，也许跟做事情一样的道理，no pain, no gain。希望我们能坚持。&lt;/p&gt;
+&lt;p&gt;我们租的房子在12层，往西看就是很高的欧美金融城，晴天傍晚的风光很美。&lt;/p&gt;
+&lt;h2 id=&#34;思考&#34;&gt;&lt;a href=&#34;#思考&#34; class=&#34;headerlink&#34; title=&#34;思考&#34;&gt;&lt;/a&gt;思考&lt;/h2&gt;&lt;p&gt;今年一直在想的一个问题是，我们是否会想现在一样，衣食无忧，每天辛勤工作，最后也会买房子生孩子，养家糊口，但最终没能给这个世界带去大的改变？&lt;br&gt;如果要做更多贡献，该从哪里开始改变这条常规之路呢？&lt;/p&gt;
+</content>
+        <category term="年终总结" />
+        <category term="2020" />
+        <updated>2021-01-02T01:06:13.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2020/12/26/numcpp-intro/</id>
+        <title>NumPy的C++替代NumCpp使用教程</title>
+        <link rel="alternate" href="http://vra.github.io/2020/12/26/numcpp-intro/"/>
+        <content type="html">&lt;p&gt;NumPy提供了很多开箱即用的函数，用处非常大，所以写C++的时候，让人无比怀念，要是有一个替代版本，就太好了。最近搜索发现， &lt;a href=&#34;https://github.com/dpilger26/NumCpp&#34;&gt;NumCpp&lt;/a&gt; 这是我想要的，而且因为是 &lt;code&gt;Header-only&lt;/code&gt;的库，因此使用时不需要编译，直接添加到头文件包含目录即可，使用很方便。不过NumCpp使用了boost库，需要进行一些下载和配置，这里记录一下。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;总结下来下面是需要下载的东西，我写成了几行代码，在Ubuntu下测试是可以执行的：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;mkdir includes&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/dpilger26/NumCpp.git &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mv NumCpp/include includes/NumCpp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;wget https://dl.bintray.com/boostorg/release/1.75.0/&lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;/boost_1_75_0.zip&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;unzip boost_1_75_0.zip&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mv boost_1_75_0/boost includes/NumCpp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里我们创建了一个&lt;code&gt;includes&lt;/code&gt;目录，用来存放NumCpp和Boost库的头文件，这里以现在 (2020-12-26) 最新的Boost 1.75.0 为例，后面boost库肯定会更新，可以从这里找到最新boost的下载地址：&lt;a href=&#34;https://www.boost.org/users/download&#34;&gt;https://www.boost.org/users/download&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;执行上面的命令后，就可以使用了NumCpp了，下面是一个使用示例：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 文件名：test_num_cpp.cpp&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;quot;NumCpp.hpp&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; a = &amp;#123;&amp;#123;&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;&amp;#125;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; b = &amp;#123;&amp;#123;&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;&amp;#125;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; c = a * b;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        std::cout &amp;lt;&amp;lt; c[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;] &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个例子里面，简单地调用NumCpp最基本的类 &lt;code&gt;nc::NdArray&lt;/code&gt;来进行两个2维数组的矩阵乘操作。&lt;br&gt;详细的教程参考：&lt;a href=&#34;https://github.com/dpilger26/NumCpp&#34;&gt;https://github.com/dpilger26/NumCpp&lt;/a&gt;.&lt;br&gt;接下来就是编译C++代码，这里以Linux下g++编译为例说明，需要注意的有2个点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NumCpp只支持C++14以及以上版本，所以编译时需要加&lt;code&gt;--std=c++14&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;需要将NumCpp所在的目录添加到头文件包含指令&lt;code&gt;-I&lt;/code&gt;里&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具体如下:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;g++ test_num_cpp.cpp --std=c++14 -Iincludes/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;编译完后运行生成的可执行文件:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;./a.out&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+        <category term="C++" />
+        <category term="NumPy" />
+        <category term="NumCpp" />
+        <updated>2020-12-26T03:26:36.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2020/03/14/detectron2-usage/</id>
+        <title>detectron2 使用总结</title>
+        <link rel="alternate" href="http://vra.github.io/2020/03/14/detectron2-usage/"/>
+        <content type="html">&lt;h3 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;detectron2 大部分代码都需要GPU&lt;/li&gt;
+&lt;li&gt;detectron2 主要是用于检测和分割的代码框架，像分类这种任务的代码暂时没有&lt;/li&gt;
+&lt;li&gt;官方示例有一些是基于Colab的，需要科学上网才能访问&lt;h3 id=&#34;安装依赖&#34;&gt;&lt;a href=&#34;#安装依赖&#34; class=&#34;headerlink&#34; title=&#34;安装依赖&#34;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install -U torch==1.4+cu100 torchvision==0.5+cu100 -f https://download.pytorch.org/whl/torch_stable.html&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install cython pyyaml==5.1 --ingnore-installed&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 安装 cocoapi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install -U &lt;span class=&#34;string&#34;&gt;&amp;#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+其中cocoapi 需要从GitHub下载代码，如果安装太慢，可以先clone下代码，再进&lt;code&gt;PythonAPI&lt;/code&gt;子目录，运行&lt;code&gt;setup.py&lt;/code&gt;安装:&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/cocodataset/cocoapi.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; cocoapi/PythonAPI&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo python3 setup.py install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;安装-detectron2&#34;&gt;&lt;a href=&#34;#安装-detectron2&#34; class=&#34;headerlink&#34; title=&#34;安装 detectron2&#34;&gt;&lt;/a&gt;安装 detectron2&lt;/h3&gt;&lt;p&gt;这里直接安装编译好的二进制文件。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu100/index.html&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果文件下载太慢或者超时，可以手动在浏览器里面下载好文件，再用下面的命令安装（假设下载的&lt;code&gt;whl&lt;/code&gt;文件是&lt;code&gt;xxx.whl&lt;/code&gt;):&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install xxx.whl&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;安装完后，打开 Python 命令行，执行下面的命令，如果不报错，说明安装成功：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; detectron2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;测试&#34;&gt;&lt;a href=&#34;#测试&#34; class=&#34;headerlink&#34; title=&#34;测试&#34;&gt;&lt;/a&gt;测试&lt;/h3&gt;&lt;p&gt;为了测试，需要下载 detectron2 的源代码，基于 &lt;code&gt;demo/demo.py&lt;/code&gt; 进行简单的测试：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/facebookresearch/detectron2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;python3  detectron2/demo/demo.py --config-file detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml --input ~/test.jpg --opts MODEL.WEIGHTS  detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;注意上述代码需要在 detectron2 的 git 仓库外面执行，否则会报错。&lt;/strong&gt;&lt;br&gt;测试时输入支持单张图片、多张图片、单个图片文件夹、网络摄像头以及视频文件，每种情况参数设置如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 单张图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--input test.jpg&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 多张图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--input test1.jpg test2.jpg test3.jpg&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 单个图片文件夹&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--input imgs/*.jpg&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 网络摄像头&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--webcame&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 视频文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--video-input test.mp4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;``–opts MODEL.WEIGHTS&lt;code&gt;表示测试用的模型参数，可以是一个本地目录，也可以是一个&lt;/code&gt;detectron2://`开头的一个模型路径，这时会先下载模型到本地再测试:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 使用本地的模型参数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--opts MODEL.WEIGHTS ./model_final_f10217.pkl&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 使用网络模型地址&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--opts MODEL.WEIGHTS ./model_final_f10217.pkl&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;模型的名字可以在 &lt;a href=&#34;https://github.com/facebookresearch/detectron2/blob/master/MODEL_ZOO.md&#34;&gt;Model Zoo&lt;/a&gt; 查看。&lt;/p&gt;
+&lt;h3 id=&#34;训练&#34;&gt;&lt;a href=&#34;#训练&#34; class=&#34;headerlink&#34; title=&#34;训练&#34;&gt;&lt;/a&gt;训练&lt;/h3&gt;&lt;p&gt;训练代码参考 &lt;code&gt;tools/train_net.py&lt;/code&gt;，目前Detection看。&lt;/p&gt;
+&lt;h3 id=&#34;一些代码分析&#34;&gt;&lt;a href=&#34;#一些代码分析&#34; class=&#34;headerlink&#34; title=&#34;一些代码分析&#34;&gt;&lt;/a&gt;一些代码分析&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;DefaultTrainer 是针对目前常用的Detection设置而写的一个类，为了不用修改太多就直接复现最佳结果。但另一方面，由于有比较多的假设情况，因此通用性有所降低&lt;/li&gt;
+&lt;li&gt;SimpleTrainer 是 DefaultTrainer 的父类，限制条件更少，对于做新的研究任务，作者推荐继承 SimpleTrainer 来修改&lt;/li&gt;
+&lt;li&gt;代码支持多机多卡多进程，基于 Pytorch 的多级多卡代码写了一些wrapper&lt;/li&gt;
+&lt;li&gt;代码注释很完善，而且其中很多是给用户怎么基于现在代码进行修改来跑新的网络、做新的任务，有些地方说的很细致，这一点很棒&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;一些资源&#34;&gt;&lt;a href=&#34;#一些资源&#34; class=&#34;headerlink&#34; title=&#34;一些资源&#34;&gt;&lt;/a&gt;一些资源&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://detectron2.readthedocs.org/&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/facebookresearch/detectron2&#34;&gt;Git 仓库&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="总结" />
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="Deep Learning" />
+        <category term="Computer Vision" />
+        <category term="Detection" />
+        <category term="Segmentation" />
+        <category term="Detectron2" />
+        <category term="Pytorch" />
+        <updated>2020-03-14T15:21:10.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2020/03/04/wsl-dnc-sync/</id>
+        <title>Windows Subsystem for Linux 切换网络脚本</title>
+        <link rel="alternate" href="http://vra.github.io/2020/03/04/wsl-dnc-sync/"/>
+        <content type="html">&lt;p&gt;在启用/关闭 VPN 的时候， WSL 里面，有时候网络会无法连接。根据&lt;a href=&#34;https://github.com/microsoft/WSL/issues/416&#34;&gt;这里&lt;/a&gt;的讨论，这是由于 WSL 在网络变化的时候，未能正确解析 DNS 导致的。网友在这里也给出了一个解决办法，试了以后是可以的，因此记录下来。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;在 WSL 的命令行执行下面的命令：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; ~&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;wget https://gist.github.com/matthiassb/9c8162d2564777a70e3ae3cbee7d2e95/raw/b204a9faa2b4c8d58df283ddc356086333e43408/dns-sync.sh &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo mv dns-sync.sh /etc/init.d/dns-sync.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo chmod +x /etc/init.d/dns-sync.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;unlink /etc/resolv.conf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果 Gist 访问不了的话，可以从&lt;a href=&#34;https://raw.githubusercontent.com/vra/wsl-dns-sync/master/dns-sync.sh&#34;&gt;这里&lt;/a&gt;下载我fork的一个版本。详细讨论可以参考&lt;a href=&#34;https://gist.github.com/matthiassb/9c8162d2564777a70e3ae3cbee7d2e95&#34;&gt;这里&lt;/a&gt;的讨论。&lt;/p&gt;
+&lt;p&gt;注意：每次切换网络时需要手动执行最后的一句命令：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo service dns-sync.sh start&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://gist.github.com/matthiassb/9c8162d2564777a70e3ae3cbee7d2e95&#34;&gt;https://gist.github.com/matthiassb/9c8162d2564777a70e3ae3cbee7d2e95&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/microsoft/WSL/issues/416&#34;&gt;https://github.com/microsoft/WSL/issues/416&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Linux" />
+        <category term="Windows" />
+        <category term="WSL" />
+        <category term="Trick" />
+        <updated>2020-03-04T13:19:36.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2020/03/04/wsl-ssh-permission-error/</id>
+        <title>Windows Subsystem for Linux 下 SSH permission error 解决</title>
+        <link rel="alternate" href="http://vra.github.io/2020/03/04/wsl-ssh-permission-error/"/>
+        <content type="html">&lt;p&gt;在 Windows SubSystem for Linux (WSL) 下，使用 &lt;code&gt;ssh&lt;/code&gt; 命令的时候报下面的错：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Bad owner or permissions on /home/yunfeng/.ssh/config&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;搜索了一下，发现修改下 &lt;code&gt;config&lt;/code&gt; 文件的权限就可以了：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;chmod 600 ~/.ssh/config&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;参考&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Microsoft/WSL/issues/483&#34;&gt;https://github.com/Microsoft/WSL/issues/483&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Linux" />
+        <category term="Windows" />
+        <category term="SSH" />
+        <category term="WSL" />
+        <category term="Trick" />
+        <updated>2020-03-04T12:26:22.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2020/03/01/arxiv-speedup/</id>
+        <title>加速国内访问 Arxiv 论文的一些方法</title>
+        <link rel="alternate" href="http://vra.github.io/2020/03/01/arxiv-speedup/"/>
+        <content type="html">&lt;p&gt;arxiv 的 PDF 下载速度很慢，下面是一些加速方法。&lt;/p&gt;
+&lt;h2 id=&#34;命令行直接下载&#34;&gt;&lt;a href=&#34;#命令行直接下载&#34; class=&#34;headerlink&#34; title=&#34;命令行直接下载&#34;&gt;&lt;/a&gt;命令行直接下载&lt;/h2&gt;&lt;p&gt;我们知道可以用&lt;code&gt;wget&lt;/code&gt;命令下载一些网络文件， 不过arxiv 上的论文使用&lt;code&gt;wget&lt;/code&gt;下载时需要加参数&lt;code&gt;--user-agent=Lynx&lt;/code&gt;，速度才能较快，下面是使用的例子：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;wget --user-agent=Lynx https://arxiv.org/pdf/1911.05722.pdf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上述命令需要在Linux或者WSL的命令行中执行。&lt;/p&gt;
+&lt;h2 id=&#34;修改网址&#34;&gt;&lt;a href=&#34;#修改网址&#34; class=&#34;headerlink&#34; title=&#34;修改网址&#34;&gt;&lt;/a&gt;修改网址&lt;/h2&gt;&lt;p&gt;一种方法是将&lt;code&gt;https://arxiv.org&lt;/code&gt;改成 &lt;code&gt;http://xxx.itp.ac.cn&lt;/code&gt;，后面内容不变，速度飞快。&lt;br&gt;还有一种方式是将&lt;code&gt;https://arxiv.org&lt;/code&gt;改成&lt;code&gt;http://cn.arxiv.org&lt;/code&gt;，后面网址内容不变，不过这个方法有时候并不work，因此推荐上一种方法。&lt;/p&gt;
+&lt;p&gt;更多方法可以参考知乎上的&lt;a href=&#34;https://www.zhihu.com/question/58912862&#34;&gt;这个问题&lt;/a&gt;。&lt;/p&gt;
+</content>
+        <category term="总结" />
+        <category term="Linux" />
+        <updated>2020-03-01T01:32:12.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2020/03/01/cygwin-rsync/</id>
+        <title>Cygwin 使用rsync 报错解决</title>
+        <link rel="alternate" href="http://vra.github.io/2020/03/01/cygwin-rsync/"/>
+        <content type="html">&lt;p&gt;在 Cygwin 下使用&lt;code&gt;rsync&lt;/code&gt;时，报下面的错误：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;rsync: connection unexpectedly closed (0 bytes received so far) [receiver] &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;rsync error: error &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; rsync protocol data stream (code 12) at io.c(600) [receiver=3.0.5]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;rsync: connection unexpectedly closed (0 bytes received so far) [sender]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;rsync error: error &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; rsync protocol data stream (code 12) at io.c(610) [sender=3.0.8]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;由于&lt;code&gt;rsync&lt;/code&gt;是通过&lt;code&gt;ssh&lt;/code&gt;工具来传数据的，通过&lt;code&gt;which ssh&lt;/code&gt; 查看，发现使用的是 Windows 自带的 SSH，所以报错，因此用 Cygwin 的安装程序重新安装&lt;code&gt;openssh&lt;/code&gt;包，再打开终端，默认使用的&lt;code&gt;ssh&lt;/code&gt;就变成 Cygwin 下的了，此时使用&lt;code&gt;rsync&lt;/code&gt;命令就不再报错了。&lt;/p&gt;
+</content>
+        <category term="Linux" />
+        <category term="Cygwin" />
+        <updated>2020-03-01T01:32:12.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2020/03/01/cygwin-open-gui/</id>
+        <title>Cygwin环境下查看远程服务器的图片</title>
+        <link rel="alternate" href="http://vra.github.io/2020/03/01/cygwin-open-gui/"/>
+        <content type="html">&lt;p&gt;Linux系统下，&lt;code&gt;SSH -X&lt;/code&gt;能够将 ssh 连接到的远程服务器上的图形化显示转发到本地，因此可以方便地查看服务器上的结果。不过在Cygwin下，使用&lt;code&gt;ssh -X&lt;/code&gt;选项并不work。&lt;/p&gt;
+&lt;p&gt;调查后发现是需要用Cygwin的安装文件安装&lt;code&gt;xorg-server&lt;/code&gt; 和 &lt;code&gt;xinit&lt;/code&gt;这两个包，然后在一个终端执行&lt;code&gt;startxwin&lt;/code&gt;，一直开着，在别的终端进行ssh连接与显示，发现就可以了。&lt;/p&gt;
+&lt;p&gt;另外发现Cygwin的一个缺点是，每次安装包都得重新运行一遍安装文件，还是没有&lt;code&gt;apt&lt;/code&gt;来得方便，所以后面试试能否用WSL替代Cygwin来工作。&lt;/p&gt;
+&lt;h2 id=&#34;参考&#34;&gt;&lt;a href=&#34;#参考&#34; class=&#34;headerlink&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;参考&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://unix.stackexchange.com/a/227937&#34;&gt;https://unix.stackexchange.com/a/227937&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Linux" />
+        <category term="Cygwin" />
+        <updated>2020-03-01T01:32:12.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2020/01/01/summary-2019/</id>
+        <title>2019年终总结</title>
+        <link rel="alternate" href="http://vra.github.io/2020/01/01/summary-2019/"/>
+        <content type="html">&lt;h2 id=&#34;2019-大事记录&#34;&gt;&lt;a href=&#34;#2019-大事记录&#34; class=&#34;headerlink&#34; title=&#34;2019 大事记录&#34;&gt;&lt;/a&gt;2019 大事记录&lt;/h2&gt;&lt;p&gt;个人生活上，在2019，我结婚了。领证，订婚，两周后的结婚都是今年重大的事情。有的时候，觉得这些都是重大的神圣时刻，而更多的时候，真正经历其中的时候，发现这些都是由一个个平常普通的事件构成的。生活的大多数美好，是否只有在成为记忆，再次回想的时候，才会展现出来？我不知道，不过确实有些美好是在经历时就能感受到的。&lt;/p&gt;
+&lt;p&gt;今年和家人好友相聚的次数多了，而且内心非常珍惜每一次相聚的机会。大家天南海北，相聚到一起，面对面地坐下聊天，似乎也是非常难得的时刻。因此我将今年的每一次相聚都记录下来，因为这是我所珍视的东西。&lt;/p&gt;
+&lt;p&gt;在上下班的公交上，继续用微信阅读来读书。除了《飞狐外传》，《侠客行》和《越女剑》，别的金庸的小说都看完了。射雕里面的剧情经常浮现出来，仿佛久远的记忆般。神雕居然给我感动到了，原来真正地爱情确实有打动人心的力量。看了《连城诀》，想体验一次雪崩……&lt;/p&gt;
+&lt;p&gt;电影院今年很少去，基本都是在笔记本看完的电影和美剧。有时候，周末的午后，看一部怀旧电影，那这个周末就很满足了。&lt;/p&gt;
+&lt;p&gt;当然，作为一个上班族，今年的大多数时间都是在公司度过的，而其实我对自己这一年的工作表现并不满意。总得来说，沟通做的不够好，思考不够深入，没有解决一些创新性问题或本质问题。希望2020年在这些方面能做更好。&lt;/p&gt;
+&lt;p&gt;下面从几个方面总结下2019这一年。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;和家人好友在一起&#34;&gt;&lt;a href=&#34;#和家人好友在一起&#34; class=&#34;headerlink&#34; title=&#34;和家人好友在一起&#34;&gt;&lt;/a&gt;和家人好友在一起&lt;/h2&gt;&lt;p&gt;年初和高中室友在兰州相聚了。老六调到汉中了，明年也准备结婚了，王斌也见家长了，参和朝哥都挺好。再次来到兰州，还是很有熟悉的感觉，冬天有点冷。&lt;/p&gt;
+&lt;p&gt;年初我和彤彤去了碑刻博物馆，即五塔寺。那会玉兰花刚开始开放花苞， 别的树绿叶还没开始生长，而至今已经有五百多年的五塔寺，和塔周围古老的银杏树，都让人有一种历史的岁月感，所以有感而发写了下面的字：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;春日游五塔寺
+
+长河浅波碧水流，河畔古刹少人游。
+明代初修真觉寺，今朝重建博物楼。
+五塔独立六百载，双杏攀援多少秋。
+志铭碑刻斜阳里，春上玉兰满枝头。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;后面我们还去了雕塑公园，看了玉兰花，不过感觉北京的玉兰，比合肥的玉兰还是不一样的，可能去的有点早了。&lt;/p&gt;
+&lt;p&gt;在海棠盛开的季节，我们去元大都城垣遗址公园看花。那时候，真是游人如织，小月河两边都是拍照的人，海棠花热闹地开放在温暖的春天里。那天我们走到最东边的出口，吃了徽州菜，臭鳜鱼有点太咸了。然后在小月河南边往回走，到家已经很晚了。以后每年都去看海棠。&lt;/p&gt;
+&lt;p&gt;刘旸来北京，我们本科宿舍又聚了一波，政哥也入职百度了，就等策哥博士毕业了。&lt;/p&gt;
+&lt;p&gt;夏天来临的时候，周末我们基本就没出去了，在家度过。我们尝试了煎韭菜盒子，和面包饺子，浆水面，大盘鸡，疙瘩汤，红豆粥，绿豆汤等美食，感觉随便做些饭都比外面吃起来香。一般都是彤彤做饭，我洗锅。&lt;/p&gt;
+&lt;p&gt;暑假和彤彤回家领证订婚，去爬了山，去和舅舅家的两个侄子在河边捞鱼划水打水漂，七月十二庙会，和家人去看了戏，爷爷也在戏场里。婷婷参加了舞蹈班，会在场戏结束后上台表演。她爷爷开着车拉她到戏场，她见到我，很羞涩，半天不说话，好像已经忘了我似的。&lt;/p&gt;
+&lt;p&gt;我们还去了姨娘家。那会大表哥在加拿大出差，二表哥也在陇西单位上班，姨夫也去上班了，姨娘做了好吃的，我们也吃得很好，吃了好多葡萄。每次去姨娘家都是很开心，每年能聚一次就感觉很开心。&lt;/p&gt;
+&lt;p&gt;临走前一天，我和彤彤去了爷爷家，和爷爷聊了挺久的天。 爷爷给彤彤讲家里的事情，我也在回想这些年在爷爷家度过的时光，每年大年第一天第一个去的地方就是爷爷家，以前都是爷爷给我们给红包，一直到研究生毕业。能陪爷爷聊会，整个人会好点吧，一个人过应该也挺不容易的。&lt;/p&gt;
+&lt;p&gt;周浩来百度实习了，我们和孙可一起去吃了烤鱼。&lt;/p&gt;
+&lt;p&gt;俊福来北京办签证，我们一起吃了饭，在融科楼底下的小吊梨汤。我被工作各种事情搞得很慌乱，他中了论文还是挺好的。我想以后我们每年能见一次就挺好的。&lt;/p&gt;
+&lt;p&gt;王如凡请我俩在三里屯的海底捞吃火锅。两个天水老乡在北京相聚了，这次吃饭说了大概有一年多了哈哈。&lt;/p&gt;
+&lt;p&gt;端午节前，永荣哥和晓丽姐来北京学习，我们在西直门商场的云南菜馆聚了一次餐，然后去书店逛了逛。和表哥聊了很多深入的话题，很明显能感觉到表哥是有自己的一套生活理念的，这种理念既有我们家乡的淳朴传统，也结合了进城市发展的知识分子的思考，而这是我所欠缺的。表哥一直以来都是我的榜样，继续向他学习，努力向他看齐。&lt;/p&gt;
+&lt;p&gt;云亮后面也来北京上班了，田明高考志愿报到北邮，也成功被录取，九月也来北京上学了。算了彤彤的话，苗家庄现在有四个人在北京了。周末我们去爬了百望山，然后回家自己煮火锅，简直不要太开心。&lt;/p&gt;
+&lt;p&gt;爬了西山，看日落。和云亮一起爬香山，看红衣，晚秋的香山还是很好看的，不虚此行，不过确实比较累。&lt;/p&gt;
+&lt;p&gt;志超来北京学习，晚上我俩去吃了全聚德，体验极差。我们聊到各自的工作，虽然已经不是初中那会在教室里学习加玩耍的样子，还是说好要努力在未知的世界里奋斗。&lt;/p&gt;
+&lt;p&gt;组内同事聚餐，去了新中关的一家自助铁板烧。肉很好吃，大家也很开心，团队一起嗨，一起庆祝的感觉很棒。&lt;/p&gt;
+&lt;p&gt;和文强，俞飞，杨雯鑫，王如凡去吃了涮肉，攒局的雪铖因为当晚开会所以没来。  那会有些事，不过有同学周六中午就要走了，聚一次也不容易，因此我起点从公司出发，坐地铁然后骑共享单车到店里，进去热得流了一阵汗。文强晚点才到，我们等了很久，差不多九点才上菜，我和文强九点半就坐地铁回去了。 跟大家聚聚还是很开心，不过大家都成了为工作和加班奔波的人了。  &lt;/p&gt;
+&lt;p&gt;后面和彤彤，王斌和周温婧去吃了学院南路的铜锅涮肉。也是等了很久，王斌在实习，开始做 Python 和 C++ 的项目了，以后可以一起讨论技术问题了。 大家还说了2020年博士毕业，顺便在兰州办一个高中同学毕业十周年聚会，想想挺不错的。&lt;/p&gt;
+&lt;p&gt;抓住2019的尾巴，和来北京出差的小爱聚了下。在涮肉点，我们两人吃了三大盘肉，很多菜，而我仿佛说了这一年来最多的一次话。我们从学校、工作聊到小时候，过年的习俗，结婚的习俗，读书，游玩等等。吃完后去天桥拍了照，小爱第二天就回成都了，而我当晚也想了很久，以后的计划。&lt;/p&gt;
+&lt;h2 id=&#34;开源贡献&#34;&gt;&lt;a href=&#34;#开源贡献&#34; class=&#34;headerlink&#34; title=&#34;开源贡献&#34;&gt;&lt;/a&gt;开源贡献&lt;/h2&gt;&lt;p&gt;今年在开源上的贡献比较少，主要做了下面两个小工具，个人感觉 dompare 在一些服务器无图形界面的环境下，还是有一些应用场景的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/vra/dompare&#34;&gt;dompare&lt;/a&gt;: 一个递归比较文件目录的小工具&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/vra/flopth&#34;&gt;flopth&lt;/a&gt;: 计算 pytorch 模型 FLOPs 的工具&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;论文&#34;&gt;&lt;a href=&#34;#论文&#34; class=&#34;headerlink&#34; title=&#34;论文&#34;&gt;&lt;/a&gt;论文&lt;/h2&gt;&lt;p&gt;和组内的同事一起投了两篇论文，坚持每年都能赶1-2次论文。另外感觉论文阅读还是不够，没有养成定期阅读的习惯，靠心血来潮读一读，总是不行的。&lt;/p&gt;
+&lt;h2 id=&#34;书籍阅读&#34;&gt;&lt;a href=&#34;#书籍阅读&#34; class=&#34;headerlink&#34; title=&#34;书籍阅读&#34;&gt;&lt;/a&gt;书籍阅读&lt;/h2&gt;&lt;p&gt;在上班的公交上，我还是用微信读书 app 来阅读书籍。周末有时候也会在上面花费很多时间在上面。除了信息流中很多低俗的内容外，别的方面都挺好，我甚至觉得这个 app 可能是这几年对我帮助最大的一个手机程序。下面记录今年看的书，作为对年初目标的「清算」。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;《列奥拉多·达·芬奇传》: 达芬奇的手稿和绘画为主，写得很清晰&lt;/li&gt;
+&lt;li&gt;《鹿鼎记》&lt;/li&gt;
+&lt;li&gt;《卓有成效的管理者》&lt;/li&gt;
+&lt;li&gt;《青年变革者：梁启超（1873-1898）》:说实话条理有点乱&lt;/li&gt;
+&lt;li&gt;《非暴力沟通》&lt;/li&gt;
+&lt;li&gt;《你一定爱读的极简欧洲史》&lt;/li&gt;
+&lt;li&gt;《活着》&lt;/li&gt;
+&lt;li&gt;《我们仨》&lt;/li&gt;
+&lt;li&gt;《连城诀》:有种「暴力美学」的感觉&lt;/li&gt;
+&lt;li&gt;《人生》&lt;/li&gt;
+&lt;li&gt;《2001：太空漫游》:猿人观察降临物那部分写得太好了&lt;/li&gt;
+&lt;li&gt;《海蒂》: 很治愈&lt;/li&gt;
+&lt;li&gt;《我可以咬你一口吗》&lt;/li&gt;
+&lt;li&gt;《鱼乐·忆顾城》&lt;/li&gt;
+&lt;li&gt;《梁启超传（全集）》&lt;/li&gt;
+&lt;li&gt;《不忍细看的五代十国史》&lt;/li&gt;
+&lt;li&gt;《丰乳肥臀》&lt;/li&gt;
+&lt;li&gt;《乡村教师》&lt;/li&gt;
+&lt;li&gt;《早晨从中午开始》&lt;/li&gt;
+&lt;li&gt;《雪山飞狐》&lt;/li&gt;
+&lt;li&gt;《杜甫诗选》&lt;/li&gt;
+&lt;li&gt;《碧血剑》&lt;/li&gt;
+&lt;li&gt;《神雕侠侣》:本来以为杨过和小龙女的故事没法打动到我，没想到最后居然落泪了，真情写的好，你是能感觉出来的&lt;/li&gt;
+&lt;li&gt;《倚天屠龙记》&lt;/li&gt;
+&lt;li&gt;《白马啸西风》&lt;/li&gt;
+&lt;li&gt;《一本书读完人类一战的历史》&lt;/li&gt;
+&lt;li&gt;《邓小平时代》&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;电影&#34;&gt;&lt;a href=&#34;#电影&#34; class=&#34;headerlink&#34; title=&#34;电影&#34;&gt;&lt;/a&gt;电影&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;《好莱坞往事》: 喜欢怀旧的那种感觉，以及小李在剧中的中年危机下的痛哭&lt;/li&gt;
+&lt;li&gt;《爱尔兰人》&lt;/li&gt;
+&lt;li&gt;《硅谷 第六季》:非常 exciting&lt;/li&gt;
+&lt;li&gt;《蜘蛛侠2》&lt;/li&gt;
+&lt;li&gt;《小丑》&lt;/li&gt;
+&lt;li&gt;《流浪地球》&lt;/li&gt;
+&lt;li&gt;《速度与激情：特别行动》&lt;/li&gt;
+&lt;li&gt;《复仇者联盟4：终局之战》: 感觉要比3感情上弱些，搞笑气氛多了&lt;/li&gt;
+&lt;li&gt;《湮灭》&lt;/li&gt;
+&lt;li&gt;《雷霆沙赞》&lt;/li&gt;
+&lt;li&gt;《布达佩斯大饭店》:非常有意思，看完感觉很爽，&lt;/li&gt;
+&lt;li&gt;《中国新疆 反恐前沿》&lt;/li&gt;
+&lt;li&gt;《切尔诺贝利》&lt;/li&gt;
+&lt;li&gt;《完美陌生人》&lt;/li&gt;
+&lt;li&gt;《性爱自修室 第一季》:治好你我的「恐同症」&lt;/li&gt;
+&lt;li&gt;《玩具总动员 1-4》: 非常超出预期的电影，本来以为后面会越来越次，结果每一部都不落窠臼，有新意，能引发人的思考&lt;/li&gt;
+&lt;li&gt;《走进比尔：解码比尔·盖茨》&lt;/li&gt;
+&lt;li&gt;《城市之光》： 爱情很美，搞笑的地方也很搞笑&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;胡思乱想&#34;&gt;&lt;a href=&#34;#胡思乱想&#34; class=&#34;headerlink&#34; title=&#34;胡思乱想&#34;&gt;&lt;/a&gt;胡思乱想&lt;/h2&gt;&lt;p&gt;平常有时候会胡乱地想一些东西，但是很多时候思考是漫无目的的，针对性地深入思考某个问题，还需要锻炼，下面记录一些自己不成熟，没缘由的想法，或许写着写着就慢慢地变得有条理了。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;手机和移动互联网的存在，减少了男女对对对方的需要，因为以前很多男女一起干的事情，现在都可以用手机来干了;而且手机上的应用和游戏占据了很多人的空余时间，没时间来想人际交往，所以会造成单身人口的增加，进而造成生育率的降低。&lt;/li&gt;
+&lt;li&gt;还是关于手机和互联网，现在的游戏和手机太好玩，很容易沉迷，很多时间都被占据了，别的各方面的诱惑也太多，没有时间来思考人生或专业研究，而要有所大成，必须花费大量的时间和心血到上面，所以现在的我们是不是很少能达到前互联网时代的人那样高的成就？ &lt;/li&gt;
+&lt;li&gt;看了比尔·盖茨的纪录片，再次燃起了想要一个墙那样高的藏书架的愿望，年初淘了几本旧书，后面没有再积攒，目前藏书可能还是个位数，明年争取淘到50本值得收藏的书，书架，还是先等等再买吧。&lt;/li&gt;
+&lt;li&gt;去大觉寺，法源寺，百望山和陶然亭，看到很多碑刻，上面的字有些能看懂，有些看不懂，不过这样，读起来也很有意思。想学学繁体字，把每个碑刻上的文字转换成文本来阅读。&lt;/li&gt;
+&lt;li&gt;想去合肥的大蜀山旁的小湖边再看一次玉兰花的盛开。&lt;/li&gt;
+&lt;li&gt;有时候会想，我到底适合做什么呢，做什么才能体现人生的价值呢（暂且不考虑买房买车这种物质上的实现）？去小学当个老师，是不是比在大公司做一个toB的产品，有更高的社会价值？&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="年终总结" />
+        <category term="2019" />
+        <updated>2020-01-01T01:32:12.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/12/19/opencv-bgr-yuv-conversion/</id>
+        <title>OpenCV Code Snippets——BGR与YUV转换</title>
+        <link rel="alternate" href="http://vra.github.io/2019/12/19/opencv-bgr-yuv-conversion/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;OpenCV BGR 图 转 YUV 图的代码，网上没有比较完整的示例，使用的时候搜索比较费劲。这里写一个代码片段和例子，方便查找。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;C-代码&#34;&gt;&lt;a href=&#34;#C-代码&#34; class=&#34;headerlink&#34; title=&#34;C++ 代码&#34;&gt;&lt;/a&gt;C++ 代码&lt;/h2&gt;&lt;p&gt;在 Ubuntu 16.04 自己从源码编译的OpenCV 4.1.0 上测试通过，具体如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;49&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// file name: convert.cpp&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;opencv2/opencv.hpp&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// BGR 转 YUV&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;BGR2YUV&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;keyword&#34;&gt;const&lt;/span&gt; cv::Mat bgrImg, cv::Mat &amp;amp;y, cv::Mat &amp;amp;u, cv::Mat &amp;amp;v)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::Mat out;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;cvtColor&lt;/span&gt;(bgrImg, out, cv::COLOR_BGR2YUV);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bgr&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::bgr channel[&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;split&lt;/span&gt;(out, channel);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    y = channel[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    u = channel[&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    v = channel[&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// YUV 转 BGR&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;YUV2BGR&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;keyword&#34;&gt;const&lt;/span&gt; cv::Mat y, &lt;span class=&#34;keyword&#34;&gt;const&lt;/span&gt; cv::Mat u, &lt;span class=&#34;keyword&#34;&gt;const&lt;/span&gt; cv::Mat v, cv::Mat&amp;amp; bgrImg)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    std::vector&amp;lt;cv::Mat&amp;gt; inChannels;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    inChannels.&lt;span class=&#34;built_in&#34;&gt;push_back&lt;/span&gt;(y);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    inChannels.&lt;span class=&#34;built_in&#34;&gt;push_back&lt;/span&gt;(u);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    inChannels.&lt;span class=&#34;built_in&#34;&gt;push_back&lt;/span&gt;(v);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;// 合并3个单独的 channel 进一个矩阵&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::Mat yuvImg;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;merge&lt;/span&gt;(inChannels, yuvImg);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;cvtColor&lt;/span&gt;(yuvImg, bgrImg, cv::COLOR_YUV2BGR);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 使用例子&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::Mat origImg = cv::&lt;span class=&#34;built_in&#34;&gt;imread&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;test.png&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::Mat y, u, v;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;built_in&#34;&gt;BGR2YUV&lt;/span&gt;(origImg, y, u, v);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::Mat bgrImg;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;built_in&#34;&gt;YUV2BGR&lt;/span&gt;(y, u, v, bgrImg);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;imshow&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;origImg&amp;quot;&lt;/span&gt;, origImg);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;imshow&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;Y channel&amp;quot;&lt;/span&gt;, y);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;imshow&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;U channel&amp;quot;&lt;/span&gt;, u);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;imshow&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;V channel&amp;quot;&lt;/span&gt;, v);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;imshow&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;converted bgrImg&amp;quot;&lt;/span&gt;, bgrImg);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv::&lt;span class=&#34;built_in&#34;&gt;waitKey&lt;/span&gt;(&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在命令行用下面的命令来运行，查看代码有无问题：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;g++ -o convert convert.cpp  --std=c++11 `pkg-config --cflags --libs opencv`&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;./convert&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;Python-实现&#34;&gt;&lt;a href=&#34;#Python-实现&#34; class=&#34;headerlink&#34; title=&#34;Python 实现&#34;&gt;&lt;/a&gt;Python 实现&lt;/h2&gt;&lt;p&gt;在 &lt;code&gt;pip&lt;/code&gt; 安装的 OpenCV 4.1.2 上测试通过，具体如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# file name: convert.py&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; cv2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;bgr2yuv&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;img&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    yuv_img = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    y, u, v = cv2.split(yuv_img)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; y, u, v&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;yuv2bgr&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;y, u, v&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    yuv_img = cv2.merge([y, u, v])&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    bgr_img = cv2.cvtColor(yuv_img, cv2.COLOR_YUV2BGR)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; bgr_img&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;():&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    orig_img = cv2.imread(&lt;span class=&#34;string&#34;&gt;&amp;#x27;test.png&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    y, u, v = bgr2yuv(orig_img)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    bgr_img = yuv2bgr(y, u, v)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv2.imshow(&lt;span class=&#34;string&#34;&gt;&amp;#x27;orig_img&amp;#x27;&lt;/span&gt;, orig_img)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv2.imshow(&lt;span class=&#34;string&#34;&gt;&amp;#x27;Y channel&amp;#x27;&lt;/span&gt;, y)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv2.imshow(&lt;span class=&#34;string&#34;&gt;&amp;#x27;U channel&amp;#x27;&lt;/span&gt;, u)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv2.imshow(&lt;span class=&#34;string&#34;&gt;&amp;#x27;V channel&amp;#x27;&lt;/span&gt;, v)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv2.imshow(&lt;span class=&#34;string&#34;&gt;&amp;#x27;bgr_img&amp;#x27;&lt;/span&gt;, bgr_img)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cv2.waitKey(&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; __name__ == &lt;span class=&#34;string&#34;&gt;&amp;#x27;__main__&amp;#x27;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    main()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;通过下面的命令来执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 convert.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;我的博客即将同步至腾讯云+社区，邀请大家一同入驻：&lt;a href=&#34;https://cloud.tencent.com/developer/support-plan?invite_code=3obyzp09lomco&#34;&gt;https://cloud.tencent.com/developer/support-plan?invite_code=3obyzp09lomco&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="总结" />
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="C++" />
+        <category term="OpenCV" />
+        <updated>2019-12-19T15:16:39.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/12/16/always-blue/</id>
+        <title>Always blue——关于《硅谷》电视剧的一些想法</title>
+        <link rel="alternate" href="http://vra.github.io/2019/12/16/always-blue/"/>
+        <content type="html">&lt;h2 id=&#34;Chapter-1&#34;&gt;&lt;a href=&#34;#Chapter-1&#34; class=&#34;headerlink&#34; title=&#34;Chapter 1&#34;&gt;&lt;/a&gt;Chapter 1&lt;/h2&gt;&lt;p&gt;美剧硅谷完结了。&lt;br&gt;忘了从什么时候开始看的这部剧，只记得在研究生的那几年，和庆哥一起看过，周围貌似没有别的人在看。去年第五季等了很久，看完后以为没有下一季了，偶然在网上看到居然还有第六季，于是赶紧开始看，最后五六集实在是太精彩了，看得大呼过瘾。第七集，却又很伤感，那些演员们陪伴我们的欢笑时光，终究要结束了。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;Chater-2&#34;&gt;&lt;a href=&#34;#Chater-2&#34; class=&#34;headerlink&#34; title=&#34;Chater 2&#34;&gt;&lt;/a&gt;Chater 2&lt;/h2&gt;&lt;p&gt;为什么《硅谷》让我这么着迷呢，我想可能有这些原因。&lt;br&gt;首先是主角是一帮程序员，梦想着 ”Make the world a better place”, 这恰恰与许多人的想法一样。&lt;br&gt;另外很多程序员的日常梗被搬上屏幕，并且被夸张地演绎出来，极具喜感。&lt;br&gt;还有跌宕起伏的剧情，充满讽刺又倍感真实的场景。&lt;/p&gt;
+&lt;h2 id=&#34;Chapter-3&#34;&gt;&lt;a href=&#34;#Chapter-3&#34; class=&#34;headerlink&#34; title=&#34;Chapter 3&#34;&gt;&lt;/a&gt;Chapter 3&lt;/h2&gt;&lt;p&gt;我总结了我感觉最搞笑的一些场景，作为对那些美好时光的纪念。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;大头当上了斯坦福大学校长，xswl&lt;/li&gt;
+&lt;li&gt;“This guy f*cks”&lt;/li&gt;
+&lt;li&gt;Tab和Space之争，其实还挺想Ritchard和那个FB的妹子在一起的，另外这是妹子的GitHub: &lt;a href=&#34;https://github.com/Stitchpunk&#34;&gt;https://github.com/Stitchpunk&lt;/a&gt;，虽然是个fake帐号，不过已经1.9k follower了～&lt;/li&gt;
+&lt;li&gt;Jared 拿假枪打Ritchard屁股&lt;/li&gt;
+&lt;li&gt;Ritchard 踹门踹破了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;Chapter-4&#34;&gt;&lt;a href=&#34;#Chapter-4&#34; class=&#34;headerlink&#34; title=&#34;Chapter 4&#34;&gt;&lt;/a&gt;Chapter 4&lt;/h2&gt;&lt;p&gt;彩蛋，一些技术细节和代码截屏&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Bill Gates 居然来客串了!&lt;/li&gt;
+&lt;li&gt;Boolmberg Emily Chang&lt;/li&gt;
+&lt;li&gt;伪纪录片&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;Chapter-5&#34;&gt;&lt;a href=&#34;#Chapter-5&#34; class=&#34;headerlink&#34; title=&#34;Chapter 5&#34;&gt;&lt;/a&gt;Chapter 5&lt;/h2&gt;&lt;p&gt;一些网站&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Hooli 官网： &lt;a href=&#34;http://hooli.xyz/&#34;&gt;http://hooli.xyz&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Pied Piper 官网： &lt;a href=&#34;http://www.piedpiper.com/&#34;&gt;http://www.piedpiper.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="杂项" />
+        <category term="Programmer" />
+        <updated>2019-12-16T15:22:03.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/10/11/install-tmux-from-source/</id>
+        <title>从源代码编译安装tmux</title>
+        <link rel="alternate" href="http://vra.github.io/2019/10/11/install-tmux-from-source/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;为了使用新版tmux的特性，需要在Ubuntu 16.04上安装高版本的tmux，没有找到现成的ppa，因此搜到了一个从源代码安装的脚本，这里记录下来。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;安装&#34;&gt;&lt;a href=&#34;#安装&#34; class=&#34;headerlink&#34; title=&#34;安装&#34;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;p&gt;tmux的源代码在GitHub上，地址是 &lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;https://github.com/tmux/tmux&lt;/a&gt;，可以在Release页面下载源代码然后进行编译，已编译tmux 2.9为例，具体操作如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install -y libevent-dev libncurses-dev make automake&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /tmp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;wget https://github.com/tmux/tmux/archive/2.9.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;tar xvzf 2.9.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; tmux-2.9/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bash autogen.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;./configure &amp;amp;&amp;amp; make&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo make install&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; ..&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;rm -rf ./tmux-2.9*&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;Done，在命令行查看tmux版本，如果是2.9就说明okay了。**另外记得关掉所有的tmux session，重新打开后环境的修改才会生效。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;tmux -V&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;tmux 2.9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;参考：&#34;&gt;&lt;a href=&#34;#参考：&#34; class=&#34;headerlink&#34; title=&#34;参考：&#34;&gt;&lt;/a&gt;参考：&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://gist.github.com/japrescott/aa15cb024fe38ea36849f5f62c3314a3&#34;&gt;https://gist.github.com/japrescott/aa15cb024fe38ea36849f5f62c3314a3&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Linux" />
+        <category term="tmux" />
+        <updated>2019-10-11T09:16:13.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/09/10/colorful-logging/</id>
+        <title>Python 彩色命令行输出</title>
+        <link rel="alternate" href="http://vra.github.io/2019/09/10/colorful-logging/"/>
+        <content type="html">&lt;p&gt;效果：&lt;br&gt;&lt;img src=&#34;/imgs/coloredlogs-demo.png&#34;&gt;&lt;br&gt;下面描述如何来实现。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;安装coloredlogs:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip3 install --user coloredlogs&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;就可以了，使用示例：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; logging&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; coloredlogs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;FIELD_STYLES = &lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    asctime=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;green&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    hostname=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;magenta&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    levelname=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;green&amp;#x27;&lt;/span&gt;, bold=coloredlogs.CAN_USE_BOLD_FONT),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    filename=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;magenta&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    name=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;blue&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    threadName=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;green&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LEVEL_STYLES = &lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    debug=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;green&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    info=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;cyan&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    warning=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;yellow&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    error=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;red&amp;#x27;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    critical=&lt;span class=&#34;built_in&#34;&gt;dict&lt;/span&gt;(color=&lt;span class=&#34;string&#34;&gt;&amp;#x27;red&amp;#x27;&lt;/span&gt;, bold=coloredlogs.CAN_USE_BOLD_FONT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger = logging.getLogger(&lt;span class=&#34;string&#34;&gt;&amp;#x27;tos&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;coloredlogs.install(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    level=&lt;span class=&#34;string&#34;&gt;&amp;quot;DEBUG&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    fmt=&lt;span class=&#34;string&#34;&gt;&amp;quot;[%(levelname)s] [%(asctime)s] [%(filename)s:%(lineno)d] %(message)s&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    level_styles=LEVEL_STYLES,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    field_styles=FIELD_STYLES)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.debug(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is Debug mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.info(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is info mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.warn(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is warn mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.error(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is error mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;logger.critical(&lt;span class=&#34;string&#34;&gt;&amp;#x27;This is critical mode&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="coloredlogs" />
+        <updated>2019-09-10T08:06:21.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/09/07/install-pip2/</id>
+        <title>你不应该知道的知识之如何在Ubuntu 16.04上安装Pip2</title>
+        <link rel="alternate" href="http://vra.github.io/2019/09/07/install-pip2/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;虽然2020年官方就不支持Python2系列了，不过有时你还是会用到Python2，这时候为了安装某个包(如numpy)，你需要&lt;code&gt;pip2&lt;/code&gt;。而&lt;code&gt;pip2&lt;/code&gt;一般比较新的系统是没带的。下面记录如何安装它。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;命令&#34;&gt;&lt;a href=&#34;#命令&#34; class=&#34;headerlink&#34; title=&#34;命令&#34;&gt;&lt;/a&gt;命令&lt;/h2&gt;&lt;p&gt;很简单，两行命令搞定：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;wget https://bootstrap.pypa.io/get-pip.py&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo python2.7 get-pip.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;使用时输入&lt;code&gt;pip2&lt;/code&gt;即可：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip2 -V&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+</content>
+        <category term="Python" />
+        <category term="Ubuntu" />
+        <category term="Pip" />
+        <updated>2019-09-07T14:27:02.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/09/07/install-old-version-of-python/</id>
+        <title>你不应该知道的知识之如何安装老版本的Python</title>
+        <link rel="alternate" href="http://vra.github.io/2019/09/07/install-old-version-of-python/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;由于某些奇怪的原因（如项目中要用某个用Python3.4编译的库），你可能需要安装官方停止支持的Python版本（如Python2.5, Python2.6, Python3.3, Python 3.4或者更老的版本），&lt;br&gt;直接通过&lt;code&gt;sudo apt install python3.4&lt;/code&gt;是没法安装的，因为Ubuntu 16.04移除了对Python3.4的支持。&lt;br&gt;作为不应该知道的知识的一部分，这里详细记录下在Ubuntu 16.04下安装旧版本的Python的方式，如果在2029年，因项目你需要安装Python3.4，或许本文可以帮到你。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;具体步骤&#34;&gt;&lt;a href=&#34;#具体步骤&#34; class=&#34;headerlink&#34; title=&#34;具体步骤&#34;&gt;&lt;/a&gt;具体步骤&lt;/h2&gt;&lt;p&gt;为了使用&lt;code&gt;add-apt-repository&lt;/code&gt;，需要先安装下面的包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install software-properties-common&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;增加&lt;code&gt;deadsnakes&lt;/code&gt; PPA (名字好评)&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo add-apt-repository ppa:deadsnakes/ppa&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;apt&lt;/code&gt;安装pythonx.y:&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install python3.4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+如果需要安装&lt;code&gt;libpython3.4&lt;/code&gt;，可以使用类似下面的命令：&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install libpython3.4 libpython3.4-dev libpython3.4-minimal&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="Ubuntu" />
+        <updated>2019-09-07T14:12:13.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/05/07/my-dot-file/</id>
+        <title>my-dot-file</title>
+        <link rel="alternate" href="http://vra.github.io/2019/05/07/my-dot-file/"/>
+        <content type="html">&lt;h2 id=&#34;oh-my-zsh&#34;&gt;&lt;a href=&#34;#oh-my-zsh&#34; class=&#34;headerlink&#34; title=&#34;oh-my-zsh&#34;&gt;&lt;/a&gt;oh-my-zsh&lt;/h2&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sh -c &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;subst&#34;&gt;$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&lt;/span&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;修改SHELL为zsh&#34;&gt;&lt;a href=&#34;#修改SHELL为zsh&#34; class=&#34;headerlink&#34; title=&#34;修改SHELL为zsh&#34;&gt;&lt;/a&gt;修改SHELL为zsh&lt;/h2&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo usermod -s /bin/zsh $(whoami)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;安装fzf&#34;&gt;&lt;a href=&#34;#安装fzf&#34; class=&#34;headerlink&#34; title=&#34;安装fzf&#34;&gt;&lt;/a&gt;安装fzf&lt;/h2&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; --depth 1 https://github.com/junegunn/fzf.git ~/.fzf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;~/.fzf/install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;git-alias设置&#34;&gt;&lt;a href=&#34;#git-alias设置&#34; class=&#34;headerlink&#34; title=&#34;git alias设置&#34;&gt;&lt;/a&gt;git alias设置&lt;/h2&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.st status&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.a add  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.p push &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.pu pull&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.ci commit&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.br branch&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.unstage &lt;span class=&#34;string&#34;&gt;&amp;#x27;reset HEAD&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.last &lt;span class=&#34;string&#34;&gt;&amp;#x27;log -1&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.co checkout&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global alias.lg &lt;span class=&#34;string&#34;&gt;&amp;quot;log --color --graph --pretty=format:&amp;#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&amp;lt;%an&amp;gt;%Creset&amp;#x27; --abbrev-commit&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+        <category term="Linux" />
+        <category term="总计" />
+        <updated>2019-05-07T08:58:13.000Z</updated>
+    </entry>
+</feed>

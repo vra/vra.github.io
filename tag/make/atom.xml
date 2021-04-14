@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;make&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2016-04-10T15:11:55.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2016/04/10/make-introduction/</id>
+        <title>A Simple Introduction to Make</title>
+        <link rel="alternate" href="http://vra.github.io/2016/04/10/make-introduction/"/>
+        <content type="html">&lt;p&gt;GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program’s source files.&lt;br&gt;Make gets its knowledge of how to build your program from a file called the makefile, which lists each of the non-source files and how to compute it from other files. When you write a program, you should write a makefile for it, so that it is possible to use Make to build and install the program.&lt;br&gt;I will introduce some basic skills about using make.  &lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;Format-of-make&#34;&gt;&lt;a href=&#34;#Format-of-make&#34; class=&#34;headerlink&#34; title=&#34;Format of make&#34;&gt;&lt;/a&gt;Format of make&lt;/h2&gt;&lt;p&gt;The format of make rule is:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;target: prerequisite&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;built_in&#34;&gt;command&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;target&lt;/code&gt; is the output or middle objects. &lt;code&gt;prerequisite&lt;/code&gt; is the requiring files for target. When &lt;code&gt;prerequisite&lt;/code&gt; files have update, then when you execute &lt;code&gt;make&lt;/code&gt; command, the utility will generate target. the &lt;code&gt;command&lt;/code&gt; indicates how to generate &lt;code&gt;target&lt;/code&gt;. &lt;code&gt;command&lt;/code&gt; can be any shell commands. But generally, &lt;code&gt;commmand&lt;/code&gt; contains the compiling commands. A example of make command:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;file: file.c file.h&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	gcc -o file file.c file.h&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;There can be many targets in make file, but the first target will be executed when type &lt;code&gt;make&lt;/code&gt;.&lt;br&gt;##Define variables&lt;br&gt;We can define variables and use it in Makefile. for example:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;OBJ = file.o&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;file: $(OBJ)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	gcc -o file $(OBJ)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$(OBJ): file.c file.h&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	gcc -c file.c file.h&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;In this example, we define &lt;code&gt;OBJ&lt;/code&gt; as &lt;code&gt;file.o&lt;/code&gt; and use it later to replace &lt;code&gt;file.o&lt;/code&gt;.&lt;br&gt;It can be quite useful if there are many objects files in target or prerequisite.&lt;br&gt;Sometimes we can move object files or head files to other directories, at this time, we can define variables to reduce our typing. For example, you have &lt;code&gt;*.h&lt;/code&gt; file in &lt;code&gt;lib&lt;/code&gt; directory in current path, you can write like this:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;LIB = lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;file: file.c $(LIB)/file.h&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	gcc -o file file.c $(LIB)/file.h&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;Phony-target&#34;&gt;&lt;a href=&#34;#Phony-target&#34; class=&#34;headerlink&#34; title=&#34;Phony target&#34;&gt;&lt;/a&gt;Phony target&lt;/h2&gt;&lt;p&gt;Phony target is a kind of label in make. It’s similar to target, but it has no prerequisite for most time, and we can append it to &lt;code&gt;make&lt;/code&gt; command to execute command defined in it. For example:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;.PHONY: clean&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;clean: &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	rm *.o file&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;When we type &lt;code&gt;make clean&lt;/code&gt; in command line, &lt;code&gt;rm *.o file&lt;/code&gt; will be executed.&lt;br&gt;NOTE: in order to avoid phony target has the same name with file in directory, we add &lt;code&gt;.PHONY clean&lt;/code&gt; to make sure that clean command must be executed.&lt;br&gt;Sometimes phony target can have prerequisite, and place it as the first target, then this phony target will be execute. This is very helpful when you want generate several executable files and you just want type a &lt;code&gt;make&lt;/code&gt;. For example:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;all: prog1 prog2 prog3  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;.PHONY: all  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;prog1: prog1.o utils.o  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	cc -o prog1 prog1.o utils.o  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;prog2: prog2.o  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	cc -o prog2 prog2.o  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;prog3: prog3.o sort.o utils.o  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	cc -o prog3 prog3.o sort.o utils.o &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;Automatic-variables&#34;&gt;&lt;a href=&#34;#Automatic-variables&#34; class=&#34;headerlink&#34; title=&#34;Automatic variables&#34;&gt;&lt;/a&gt;Automatic variables&lt;/h2&gt;&lt;p&gt;There are some default variables in each make rule. We can use it to simplify our work. There are some useful automatic variables:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;variable&#34;&gt;$@&lt;/span&gt;: The file name of the target of the rule&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$%: The target member name, when the target is an archive member&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$&amp;lt;: The name of the first prerequisite&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$?: The names of all the prerequisites that are newer than the target, with spaces between them&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$^: The names of all the prerequisites, with spaces between them&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;For example, if we have a makefile like this:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;CC=gcc&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;CFLAG=I.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;DEPS=hellomake.h&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;%.o: %.c $(DEPS)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	$(CC) -c -o &lt;span class=&#34;variable&#34;&gt;$@&lt;/span&gt; $&amp;lt; $(CFLAG)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Where &lt;code&gt;$@&lt;/code&gt; indicates the &lt;code&gt;.o&lt;/code&gt; file and &lt;code&gt;@&amp;lt;&lt;/code&gt; indicates the corresponding &lt;code&gt;.c&lt;/code&gt; file.&lt;/p&gt;
+&lt;h2 id=&#34;Other-skills&#34;&gt;&lt;a href=&#34;#Other-skills&#34; class=&#34;headerlink&#34; title=&#34;Other skills&#34;&gt;&lt;/a&gt;Other skills&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;   comments begin with &lt;code&gt;#&lt;/code&gt;, just like shell&lt;/li&gt;
+&lt;li&gt;   the comment begin with &lt;code&gt;@&lt;/code&gt; will not be display, so we can echo like this:&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;@&lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;#x27;Compiling begin...&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;   We can choose make file using &lt;code&gt;-f&lt;/code&gt; options: &lt;code&gt;make -f myMakefile&lt;/code&gt; will choose &lt;code&gt;myMakefile&lt;/code&gt; as rule file.&lt;/li&gt;
+&lt;li&gt;   Adding &lt;code&gt;-n&lt;/code&gt; in make will not do make really, just test if all things are okay.&lt;/li&gt;
+&lt;li&gt;   We can use &lt;code&gt;include&lt;/code&gt; to add other makefiles into here, for example: &lt;code&gt;include Makefile1 Makefile2&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;   Add &lt;code&gt;-&lt;/code&gt; in front of a command will ignore the errors occurring when execute it. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;Reference&#34;&gt;&lt;a href=&#34;#Reference&#34; class=&#34;headerlink&#34; title=&#34;Reference:&#34;&gt;&lt;/a&gt;Reference:&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;   &lt;a href=&#34;https://www.gnu.org/software/make/manual/html_node/&#34;&gt;https://www.gnu.org/software/make/manual/html_node/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;   &lt;a href=&#34;http://blog.csdn.net/haoel/article/details/2886&#34;&gt;http://blog.csdn.net/haoel/article/details/2886&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;   &lt;a href=&#34;http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/&#34;&gt;http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Linux" />
+        <category term="Make" />
+        <updated>2016-04-10T15:11:55.000Z</updated>
+    </entry>
+</feed>

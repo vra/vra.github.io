@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;libtorch&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2021-03-21T10:19:28.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/</id>
+        <title>C++中使用pytorch保存的tensor</title>
+        <link rel="alternate" href="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;最近在学习Libtorch——即Pytorch的C++版本，需要使用 Pytorch 导出的 tensor 以便对模型进行 debug。下面是转换代码，总体原理是将 tensor 转换为二进制数据，再在 C++ 里面读入。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;下面是 Pytorch 中的导出 tensor 示例：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; io&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; torch&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;save_tensor&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;device&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    my_tensor = torch.rand(&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;).to(device);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;[python] my_tensor: &amp;quot;&lt;/span&gt;, my_tensor)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    f = io.BytesIO()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    torch.save(my_tensor, f, _use_new_zipfile_serialization=&lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;open&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;#x27;my_tensor_%s.pt&amp;#x27;&lt;/span&gt; % device, &lt;span class=&#34;string&#34;&gt;&amp;quot;wb&amp;quot;&lt;/span&gt;) &lt;span class=&#34;keyword&#34;&gt;as&lt;/span&gt; out_f:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;comment&#34;&gt;# Copy the BytesIO stream to the output file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        out_f.write(f.getbuffer())&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; __name__ == &lt;span class=&#34;string&#34;&gt;&amp;#x27;__main__&amp;#x27;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    save_tensor(&lt;span class=&#34;string&#34;&gt;&amp;#x27;cpu&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里以导出 cpu tensor 为例，cuda tensor 也是同理。&lt;/p&gt;
+&lt;p&gt;在 C++ 中的调用示例如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;torch/torch.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;std::vector&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt; &lt;span class=&#34;title&#34;&gt;get_the_bytes&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(std::string filename)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;std::ifstream &lt;span class=&#34;title&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(filename, std::ios::binary)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;std::vector&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt; &lt;span class=&#34;title&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;params&#34;&gt;        (std::istreambuf_iterator&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt;(input)),&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;params&#34;&gt;        (std::istreambuf_iterator&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt;()))&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    input.&lt;span class=&#34;built_in&#34;&gt;close&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; bytes;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    std::vector&amp;lt;&lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;&amp;gt; f = &lt;span class=&#34;built_in&#34;&gt;get_the_bytes&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;my_tensor_cpu.pt&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    torch::IValue x = torch::&lt;span class=&#34;built_in&#34;&gt;pickle_load&lt;/span&gt;(f);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    torch::Tensor my_tensor = x.&lt;span class=&#34;built_in&#34;&gt;toTensor&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;[cpp] my_tensor: &amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; my_tensor &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;注意事项：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;torch的Python和C++版本需要保持一致，否则转换可能不成功.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;题外话&#34;&gt;&lt;a href=&#34;#题外话&#34; class=&#34;headerlink&#34; title=&#34;题外话&#34;&gt;&lt;/a&gt;题外话&lt;/h2&gt;&lt;p&gt;最近在学习Libtorch——即Pytorch的C++版本，发现使用起来异常的丝滑，写C++有了Python的体验，妙不可言。&lt;br&gt;后面会更新一些关于libtorch使用的文章，敬请关注。&lt;/p&gt;
+&lt;h2 id=&#34;参考&#34;&gt;&lt;a href=&#34;#参考&#34; class=&#34;headerlink&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;参考&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://discuss.pytorch.org/t/how-to-load-python-tensor-in-c/88813&#34;&gt;https://discuss.pytorch.org/t/how-to-load-python-tensor-in-c/88813&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Python" />
+        <category term="C++" />
+        <category term="Pytorch" />
+        <category term="Libtorch" />
+        <updated>2021-03-21T10:19:28.000Z</updated>
+    </entry>
+</feed>

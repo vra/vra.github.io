@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;venv&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2021-01-03T01:56:04.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2021/01/03/venv-intro/</id>
+        <title>python虚拟环境管理工具venv教程</title>
+        <link rel="alternate" href="http://vra.github.io/2021/01/03/venv-intro/"/>
+        <content type="html">&lt;h3 id=&#34;0-概述&#34;&gt;&lt;a href=&#34;#0-概述&#34; class=&#34;headerlink&#34; title=&#34;0. 概述&#34;&gt;&lt;/a&gt;0. 概述&lt;/h3&gt;&lt;p&gt;Python有各种各样的系统包和第三方开发的包，让我们的开发变得异常容易。不过也引入了一个问题，不同代码需要的包版本可能是不一样的，所以常常回出现这种情况，为了代码B修改了依赖包的版本，代码B能work了，之前使用的代码A就没法正常工作了。因此常常需要对不同的代码设置不同的Python虚拟环境。&lt;a href=&#34;https://docs.python.org/zh-cn/3/tutorial/venv.html&#34;&gt;venv&lt;/a&gt;是Python自带的虚拟环境管理工具，使用很方便，这里简单记录一下使用方法。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;需要注意的是，venv 工具没法创建不同版本的python环境，也就是如果你用python3.5没法创建python3.6的虚拟环境。如果想要使用不同python版本的虚拟环境，请安装 virtual env包。&lt;/p&gt;
+&lt;h3 id=&#34;1-安装&#34;&gt;&lt;a href=&#34;#1-安装&#34; class=&#34;headerlink&#34; title=&#34;1. 安装&#34;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;p&gt;python3.6及以上已经默认安装，python3.5需要通过系统的包管理工具安装：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install python3-venv&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;2-创建虚拟环境&#34;&gt;&lt;a href=&#34;#2-创建虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;2. 创建虚拟环境&#34;&gt;&lt;/a&gt;2. 创建虚拟环境&lt;/h3&gt;&lt;p&gt;在&lt;code&gt;~/test_env&lt;/code&gt;目录下创建虚拟环境：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 -m venv test_env&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;3-启用虚拟环境&#34;&gt;&lt;a href=&#34;#3-启用虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;3. 启用虚拟环境&#34;&gt;&lt;/a&gt;3. 启用虚拟环境&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt; ~/test_env/bin/activate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到，命令行的提示符前面会出现括号，里面是虚拟环境名称。&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;pip&lt;/code&gt;安装需要的包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip install tensorflow&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意这里不需要root权限，因此无需添加&lt;code&gt;sudo&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;安装的包会放在&lt;code&gt;~/test_env/lib/pythonx.x/site-packages&lt;/code&gt; 目录下。&lt;/p&gt;
+&lt;h3 id=&#34;4-退出虚拟环境&#34;&gt;&lt;a href=&#34;#4-退出虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;4. 退出虚拟环境&#34;&gt;&lt;/a&gt;4. 退出虚拟环境&lt;/h3&gt;&lt;p&gt;退出虚拟的python环境，在命令行执行下面的命令即可：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;deactivate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="venv" />
+        <updated>2021-01-03T01:56:04.000Z</updated>
+    </entry>
+</feed>

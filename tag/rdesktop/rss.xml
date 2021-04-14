@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;rdesktop&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 18 Feb 2017 19:33:13 +0800</pubDate>
+        <lastBuildDate>Sat, 18 Feb 2017 19:33:13 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2017/02/18/rdesktop-share-file/</guid>
+            <title>使用rdesktop来在Windows和Linux之间共享数据</title>
+            <link>http://vra.github.io/2017/02/18/rdesktop-share-file/</link>
+            <category>Linux</category>
+            <category>rdesktop</category>
+            <category>RDP</category>
+            <category>Windows</category>
+            <pubDate>Sat, 18 Feb 2017 19:33:13 +0800</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;&lt;a href=&#34;http://www.rdesktop.org/&#34;&gt;rdesktop&lt;/a&gt;是一个开源的远程桌面客户端，用来从Linux机器连接到Windows机器。它遵循RDP协议（Remote Desktop Protocol），并且操作简洁，功能比较完备。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h3 id=&#34;安装&#34;&gt;&lt;a href=&#34;#安装&#34; class=&#34;headerlink&#34; title=&#34;安装&#34;&gt;&lt;/a&gt;安装&lt;/h3&gt;&lt;p&gt;在Debian发行版上，可以直接用&lt;code&gt;apt-get&lt;/code&gt;命令安装:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install rdesktop&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;别的发行版的安装方式请参看rdesktop项目的GitHub页面:&lt;a href=&#34;https://github.com/rdesktop/rdesktop&#34;&gt;https://github.com/rdesktop/rdesktop&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;连接&#34;&gt;&lt;a href=&#34;#连接&#34; class=&#34;headerlink&#34; title=&#34;连接&#34;&gt;&lt;/a&gt;连接&lt;/h3&gt;&lt;p&gt;最简单的情况，如果你要连接到的Windows机器的IP地址是a.b.c.d, 需要以用户username登录，则可以这样运行rdesktop命令：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;rdesktop -u username a.b.c.d&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果你想直接在命令里面使用用户的登录密码，则使用&lt;code&gt;-p&lt;/code&gt;选项：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;rdesktop -u username a.b.c.d -p my-password&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果你想设置登录后的窗口的大小，则采用&lt;code&gt;-g&lt;/code&gt;选项：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;rdesktop -u username a.b.c.d -p my-password -g 1200x900&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;登录后你会感觉字体显示比较怪，看着很不舒服，可以使用&lt;code&gt;-x&lt;/code&gt;选项来是字体变得光滑:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;rdesktop -u username a.b.c.d -p my-password -g 1200x900 -x 0x80&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中&lt;code&gt;0x80&lt;/code&gt;还可以改为&lt;code&gt;0x81&lt;/code&gt;, &lt;code&gt;0x8F&lt;/code&gt;,分别表示LAN default mode， broadband default mode 和 modem default mode,为不同的”RDP5 experience”。&lt;br&gt;以上就是基本的连接选项，也可以通过运行&lt;code&gt;rdesktop -h&lt;/code&gt;命令来查看所有选项。  &lt;/p&gt;
+&lt;h3 id=&#34;共享文件&#34;&gt;&lt;a href=&#34;#共享文件&#34; class=&#34;headerlink&#34; title=&#34;共享文件&#34;&gt;&lt;/a&gt;共享文件&lt;/h3&gt;&lt;p&gt;一个常见的需求是在Windows和Linux系统上共享文件。Samba服务可以解决这个问题，但配置比较复杂。这里我们采用rdesktop来完成这个任务。&lt;br&gt;首先在Linux系统下创建一个目录，例如:&lt;code&gt;/home/username/Pictures&lt;/code&gt;，然后在连接的时候采用&lt;code&gt;-r disk&lt;/code&gt;选项来进行文件的共享：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;rdesktop -u username a.b.c.d -p my-password -g 1200x900 -x 0x80 -r sound:&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt; -r disk:LinuxPictures=/home/username/Pictures&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样在连接到Windows的时候，会在文件资源管理器里面，显示&lt;code&gt;LinuxPictures&lt;/code&gt;目录。&lt;br&gt;这里有两个地方需要注意：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;命令中Linux目录的路径必须采用绝对路径，否则会出错。如上例中，将&lt;code&gt;/home/username/Pictures&lt;/code&gt;改成&lt;code&gt;~/Pictures&lt;/code&gt;则会报错。&lt;/li&gt;
+&lt;li&gt;为了正常工作，需要同时设置&lt;code&gt;-r sound:local&lt;/code&gt;，虽然看起来好像没什么关系。关于这个问题的讨论见&lt;a href=&#34;http://askubuntu.com/questions/74713/how-can-i-copy-paste-files-via-rdp-in-kubuntu&#34;&gt;这里&lt;/a&gt;和&lt;a href=&#34;https://github.com/FreeRDP/Remmina/issues/243&#34;&gt;这里&lt;/a&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;设置好之后，就可以在Windows和Linux之间通过Pictures目录传输和共享文件了。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

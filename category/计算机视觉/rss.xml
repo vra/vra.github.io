@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;计算机视觉&#34; category</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 25 Apr 2015 10:37:40 +0800</pubDate>
+        <lastBuildDate>Sat, 25 Apr 2015 10:37:40 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2015/04/25/opencv-linux-install/</guid>
+            <title>OpenCV配置——在Linux中使用OpenCV</title>
+            <link>http://vra.github.io/2015/04/25/opencv-linux-install/</link>
+            <pubDate>Sat, 25 Apr 2015 10:37:40 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;这篇博客介绍在Linux中的gcc和g++编译环境下如何使用cmake来编译OpenCV源代码。我基本是按照OpenCV官方的&lt;a href=&#34;http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html&#34;&gt;说明文档&lt;/a&gt;，一步步地进行的，所以表述不清楚的地方还请参照原文。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;1-编译环境&#34;&gt;&lt;a href=&#34;#1-编译环境&#34; class=&#34;headerlink&#34; title=&#34;1. 编译环境&#34;&gt;&lt;/a&gt;1. 编译环境&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;  操作系统：Ubuntu 14.10&lt;/li&gt;
+&lt;li&gt;  gcc 版本: 4.9.1&lt;/li&gt;
+&lt;li&gt;  cmake 版本： 2.8.12.2&lt;/li&gt;
+&lt;li&gt;  opencv版本： 2.4.10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-依赖包安装&#34;&gt;&lt;a href=&#34;#2-依赖包安装&#34; class=&#34;headerlink&#34; title=&#34;2. 依赖包安装&#34;&gt;&lt;/a&gt;2. 依赖包安装&lt;/h2&gt;&lt;p&gt;依赖包包括在编译的时候要用到一些软件，像gcc，cmake；还有一些是下载opencv需要的工具，像Git；还有一些编译opencv所必需的，像ffmpeg 或libav ；还有一些是可选的包等等。可以通过下面几条命令来安装这些依赖包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install build-essential &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;运行完这三条命令，依赖包就安装好了！&lt;/p&gt;
+&lt;h2 id=&#34;3-获取OpenCV源代码&#34;&gt;&lt;a href=&#34;#3-获取OpenCV源代码&#34; class=&#34;headerlink&#34; title=&#34;3. 获取OpenCV源代码&#34;&gt;&lt;/a&gt;3. 获取OpenCV源代码&lt;/h2&gt;&lt;p&gt;官方网站上给了2种获取源代码的方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; 从&lt;a href=&#34;http://sourceforge.net/projects/opencvlibrary/&#34;&gt;Sourceforge&lt;/a&gt;上获取最新的稳定版(lastest staable)的OpenCV，下载完解压即可。&lt;/li&gt;
+&lt;li&gt;从&lt;a href=&#34;http://github.com/itseez/opencv&#34;&gt;github&lt;/a&gt;上下载最前沿的版本。也可以在命令行下载：&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/Itseez/opencv.git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;4-用cmake编译OpenCV&#34;&gt;&lt;a href=&#34;#4-用cmake编译OpenCV&#34; class=&#34;headerlink&#34; title=&#34;4. 用cmake编译OpenCV&#34;&gt;&lt;/a&gt;4. 用cmake编译OpenCV&lt;/h2&gt;&lt;p&gt;下载完源代码后，就可以用cmake来编译OpenCV了。&lt;br&gt;解压下载得到的opencv包，然后进入包目录，在下面进行操作。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; 创建release目录，然后将进入该目录，下面编译都是针对Release版来进行编译的：&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;mkdir release&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; ~/release&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt; 执行cmake命令：&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt; ..&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 上面的&lt;code&gt;CMAKE_BUILD_TYPE =RELEASE&lt;/code&gt;指明编译的版本是Release版，&lt;code&gt;CMAKE_INSTALL_PREFIX=/usr/local&lt;/code&gt;指明编译后的可执行程序的存放目录。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt; 执行make和install：&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;make    &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo make install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt; 如果没有出错的话，OpenCV的整个编译过程就完成了！ 如果有错误，那就复制错误内容，到网上查找解决办法，一般来说这是个很痛苦的过程，所以希望你有好运气，一次编译就能过：)&lt;/p&gt;
+&lt;h2 id=&#34;5-在gcc-g-编译时使用opencv&#34;&gt;&lt;a href=&#34;#5-在gcc-g-编译时使用opencv&#34; class=&#34;headerlink&#34; title=&#34;5. 在gcc/g++编译时使用opencv&#34;&gt;&lt;/a&gt;5. 在gcc/g++编译时使用opencv&lt;/h2&gt;&lt;p&gt;在g++里面编译使用了opencv库的程序时，只需要在后面添加&lt;code&gt;pkg-config opencv --cflags --libs&lt;/code&gt;即可，如下例子：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;g++ -o main main.cpp`pkg-config opencv --cflags --libs`&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;以上就是Linux环境下使用OpenCV的一些总结。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2015/04/22/opencv-vs-config/</guid>
+            <title>OpenCV配置——在Visual Studio中使用OpenCV</title>
+            <link>http://vra.github.io/2015/04/22/opencv-vs-config/</link>
+            <pubDate>Wed, 22 Apr 2015 23:01:24 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&lt;a href=&#34;http://opencv.org/&#34;&gt;OpenCV&lt;/a&gt;是图像领域经常会用到的工具库函数的集合，有C/C++,Java和Python等语言的接口，并且适用于Windows，Linux，Mac OS桌面开发平台和Android 和IOS移动开发平台。目前已经出了1.x系列和2.x系列，3.0 Beta版也已经出了。OpenCV配置起来还是挺费事的，虽然网上已经有很多很全面也很有用的参考文章，我还是打算把自己配置的过程写下来，以后肯定还会配置这个东西，希望到时候有个方便的参考。&lt;/p&gt;
+&lt;p&gt;这篇文章记录在Windows平台上，如何安装OpenCV并且在Visual Studio 的C/C++开发环境中使用之。&lt;/p&gt;
+&lt;p&gt;我用的是Windows 7，Visual tudio 2012 Ultimate。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;下载OpenCV包&#34;&gt;&lt;a href=&#34;#下载OpenCV包&#34; class=&#34;headerlink&#34; title=&#34;下载OpenCV包&#34;&gt;&lt;/a&gt;下载OpenCV包&lt;/h2&gt;&lt;p&gt;在&lt;a href=&#34;http://opencv.org/downloads.html&#34;&gt;opencv下载&lt;/a&gt; 页面上，下载想要安装的版本。据说3.x系列会修改较多的API名称等，所以建议下载比较新的版本。我下的是2.4.10。下载之后将文件解压。&lt;/p&gt;
+&lt;p&gt;解压后会看到看到两个文件夹：&lt;code&gt;build&lt;/code&gt;和&lt;code&gt;source&lt;/code&gt;，&lt;code&gt;build&lt;/code&gt;文件夹下面是已经编译好的库文件和可执行文件，而&lt;code&gt;source&lt;/code&gt;文件夹下面是未编译的源文件。我们在写程序时用到的是一些编译好的lib和dll文件，所以只要在程序中添加了头文件，调用了相应的函数，然程序运行时能找到相应的库文件（包括动态库文件即&lt;code&gt;.dll&lt;/code&gt;文件和静态库文件，即&lt;code&gt;.lib&lt;/code&gt;文件）就可以了。所以针对这个情况，大概做以下几个步骤就可以了。&lt;/p&gt;
+&lt;h2 id=&#34;添加环境变量&#34;&gt;&lt;a href=&#34;#添加环境变量&#34; class=&#34;headerlink&#34; title=&#34;添加环境变量&#34;&gt;&lt;/a&gt;添加环境变量&lt;/h2&gt;&lt;p&gt;添加环境变量是为了让程序在运行时能找到函数对应的动态链接库（&lt;code&gt;dll&lt;/code&gt;）。&lt;strong&gt;要注意的是，OpenCV对于32位程序和64位程序有不同的dll目录，并且对于不同的版本的VS，也有不同的dll文件目录。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;build&lt;/code&gt;目录下，&lt;code&gt;x86&lt;/code&gt;下面包含了32位程序所需的&lt;code&gt;dll&lt;/code&gt;文件，&lt;code&gt;x64&lt;/code&gt;目录下面包含了64位程序所需&lt;code&gt;dll&lt;/code&gt;文件。在这个两个目录下，都有&lt;code&gt;vc10&lt;/code&gt;,&lt;code&gt;vc11&lt;/code&gt;,&lt;code&gt;vc12&lt;/code&gt;三个文件夹，分别是针对&lt;code&gt;vs2010&lt;/code&gt;,&lt;code&gt;vs2012&lt;/code&gt;和&lt;code&gt;vs2013&lt;/code&gt;。为了使32位程序和64位程序都能编写通过，我一般将两者目录下的和VS版本对应的文件夹下的&lt;code&gt;bin&lt;/code&gt;目录都加入PATH变量中。所以在PATH环境变量中增加如下内容：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;;D:\program_file\opencv\build\x86\vc11\bin;D:\program_file\opencv\build\x64\vc11\bin&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中build前面的位置是我安装opencv的目录，安装位置不同前面部分也应改为相应的目录。&lt;/p&gt;
+&lt;h2 id=&#34;生成独立的OpenCV配置属性表&#34;&gt;&lt;a href=&#34;#生成独立的OpenCV配置属性表&#34; class=&#34;headerlink&#34; title=&#34;生成独立的OpenCV配置属性表&#34;&gt;&lt;/a&gt;生成独立的OpenCV配置属性表&lt;/h2&gt;&lt;p&gt;我们的目标是通过操作生成一个单独的OpenCV配置属性表，然后将其导出保存起来，将来在需要用到OpenCV的程序中，直接导入这个保存的属性表即可。&lt;br&gt;下面几步都是在VS开发环境里面进行。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个空项目，通过视图-&amp;gt;属性管理器找到属性管理器页面。每个项目都可以有四个编译情况，分别是：&lt;code&gt;Debug|win32&lt;/code&gt;、&lt;code&gt;Release|win32&lt;/code&gt;、&lt;code&gt;Debug|x64&lt;/code&gt;、&lt;code&gt;Release|x64&lt;/code&gt;，基本步骤都类似，下面针对&lt;code&gt;Debug|win32&lt;/code&gt;来说。&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;Debug|win32&lt;/code&gt;文件夹上右击，选择添加新项目属性表，在弹出的对话框里，给这个表取名为OpenCV_Debug_32.props，然后点击添加。&lt;/li&gt;
+&lt;li&gt;双击新建的属性表，就会弹出熟悉的MFC复古风格的属性设置页了。&lt;/li&gt;
+&lt;li&gt;在属性页上，点击C/C++-&amp;gt;常规-&amp;gt;附加库包含目录，在这里添加OpenCV安装路径下的include目录，具体如下：&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;D:\program_file\opencv\build\include&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 同样的，build前面是opencv的安装路径，按实际情况选择。&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;在属性页上，点击链接器-&amp;gt;常规-&amp;gt;附加库目录，在这里添加OpenCV安装路径下的lib目录。注意：对不同编译情况和不同版本的VS，lib文件夹目录不同。对于VS2012下面的&lt;code&gt;Debug|win32&lt;/code&gt;模式，lib文件夹目录为：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;D:\program_file\opencv\build\x86\vc11\lib&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;其中&lt;code&gt;x86&lt;/code&gt;目录表示是针对&lt;code&gt;win32&lt;/code&gt;的，&lt;code&gt;vc11&lt;/code&gt;表示是适用于&lt;code&gt;VS2012&lt;/code&gt;的。&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;在属性页上，点击链接器-&amp;gt;输入-&amp;gt;附加依赖项，在里面添加附加依赖的lib文件：&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;opencv_calib3d2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_contrib2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_core2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_features2d2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_flann2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_gpu2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_highgui2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_imgproc2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_legacy2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_ml2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_nonfree2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_objdetect2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_ocl2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_photo2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_stitching2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_superres2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_ts2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_video2411d.lib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;opencv_videostab2411d.lib&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 注意：对于不同的版本，要将后面的2411改为相应的版本号；对于Debug版本，后面有个字母d,而对于Release版本，则没有d，应根据实际情况添加。&lt;br&gt; 7. 添加好之后，点击属性页面板右下角的应用，确定。&lt;br&gt; 8. 在&lt;code&gt;Debug|win32&lt;/code&gt;文件夹上右击，选择保存，该属性表就保存好了。&lt;br&gt; 9. 在该项目目录下面找到这个属性表，保存到一个安全的地方，下次在要用OpenCV的工程里，找出属性管理器，右键，选择添加现有属性表即可。&lt;br&gt;我将四种情况所需的属性表和添加的附加依赖库的列表都放到了github上，或许能帮到你（注意只适用于VS2012）。&lt;/p&gt;
+&lt;p&gt;整个配置过程就是这样了，配置好之后就可以安心的使用OpenCV 了！&lt;/p&gt;
+&lt;p&gt;最后，测试一下，做个图像处理的“Hello World”:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#include &amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#include &amp;lt;string&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#include &amp;lt;opencv2\opencv.hpp&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;using namespace std;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;using namespace cv;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;int main()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	Mat img = imread(&lt;span class=&#34;string&#34;&gt;&amp;quot;lena.jpg&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (img.empty())&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;error&amp;quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;built_in&#34;&gt;return&lt;/span&gt; -1;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	imshow(&lt;span class=&#34;string&#34;&gt;&amp;quot;lena&amp;quot;&lt;/span&gt;, img);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	waitKey();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;built_in&#34;&gt;return&lt;/span&gt; 0;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;出来的图像：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/uploads/2015/04/lena.png&#34;&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

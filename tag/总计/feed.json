@@ -1,0 +1,19 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Yunfeng's Simple Blog • All posts by \"总计\" tag",
+    "description": "Love, Life, Linux",
+    "home_page_url": "http://vra.github.io",
+    "items": [
+        {
+            "id": "http://vra.github.io/2019/05/07/my-dot-file/",
+            "url": "http://vra.github.io/2019/05/07/my-dot-file/",
+            "title": "my-dot-file",
+            "date_published": "2019-05-07T08:58:13.000Z",
+            "content_html": "<h2 id=\"oh-my-zsh\"><a href=\"#oh-my-zsh\" class=\"headerlink\" title=\"oh-my-zsh\"></a>oh-my-zsh</h2><figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">sh -c <span class=\"string\">&quot;<span class=\"subst\">$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)</span>&quot;</span></span><br></pre></td></tr></table></figure>\n\n<h2 id=\"修改SHELL为zsh\"><a href=\"#修改SHELL为zsh\" class=\"headerlink\" title=\"修改SHELL为zsh\"></a>修改SHELL为zsh</h2><figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">sudo usermod -s /bin/zsh $(whoami)</span><br></pre></td></tr></table></figure>\n\n<h2 id=\"安装fzf\"><a href=\"#安装fzf\" class=\"headerlink\" title=\"安装fzf\"></a>安装fzf</h2><figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">git <span class=\"built_in\">clone</span> --depth 1 https://github.com/junegunn/fzf.git ~/.fzf</span><br><span class=\"line\">~/.fzf/install</span><br></pre></td></tr></table></figure>\n\n<h2 id=\"git-alias设置\"><a href=\"#git-alias设置\" class=\"headerlink\" title=\"git alias设置\"></a>git alias设置</h2><figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br><span class=\"line\">5</span><br><span class=\"line\">6</span><br><span class=\"line\">7</span><br><span class=\"line\">8</span><br><span class=\"line\">9</span><br><span class=\"line\">10</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">git config --global alias.st status</span><br><span class=\"line\">git config --global alias.a add  </span><br><span class=\"line\">git config --global alias.p push </span><br><span class=\"line\">git config --global alias.pu pull</span><br><span class=\"line\">git config --global alias.ci commit</span><br><span class=\"line\">git config --global alias.br branch</span><br><span class=\"line\">git config --global alias.unstage <span class=\"string\">&#x27;reset HEAD&#x27;</span></span><br><span class=\"line\">git config --global alias.last <span class=\"string\">&#x27;log -1&#x27;</span></span><br><span class=\"line\">git config --global alias.co checkout</span><br><span class=\"line\">git config --global alias.lg <span class=\"string\">&quot;log --color --graph --pretty=format:&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27; --abbrev-commit&quot;</span></span><br></pre></td></tr></table></figure>",
+            "tags": [
+                "Linux",
+                "总计"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;neovim&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2019-03-13T05:36:51.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2019/03/13/ubuntu-install-neovim/</id>
+        <title>Ubuntu安装NeoVim:一种最简单的方法</title>
+        <link rel="alternate" href="http://vra.github.io/2019/03/13/ubuntu-install-neovim/"/>
+        <content type="html">&lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;NeoVim&lt;/a&gt;是Vim的一个拓展版本，用起来比Vim爽一些。下面简要记录下在Ubuntu 16.04上安装NeoVim的过程，其实比较简单。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;为了使用&lt;code&gt;add-apt-repository&lt;/code&gt;，需要先安装下面的包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install software-properties-common&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后选择stable或者unstable版本进行安装，见下。&lt;/p&gt;
+&lt;h2 id=&#34;安装stable版本-version-0-2-2&#34;&gt;&lt;a href=&#34;#安装stable版本-version-0-2-2&#34; class=&#34;headerlink&#34; title=&#34;安装stable版本, version=0.2.2&#34;&gt;&lt;/a&gt;安装stable版本, version=0.2.2&lt;/h2&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo add-apt-repository ppa:neovim-ppa/stable&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt update&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install -y neovim&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;安装unstable版本-version-0-4-0-dev&#34;&gt;&lt;a href=&#34;#安装unstable版本-version-0-4-0-dev&#34; class=&#34;headerlink&#34; title=&#34;安装unstable版本, version=0.4.0-dev&#34;&gt;&lt;/a&gt;安装unstable版本, version=0.4.0-dev&lt;/h2&gt;&lt;p&gt;因为某些插件只支持&lt;code&gt;0.3&lt;/code&gt;及以上的版本，因此为了使用插件需要安装unstable版本：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo add-apt-repository ppa:neovim-ppa/unstable&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt update&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install -y neovim&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;安装后就可以使用了，用命令&lt;code&gt;nvim&lt;/code&gt;即可打开Neovim，建议继续阅读&lt;a href=&#34;http://vra.github.io/2019/03/12/vim-plug-intro/&#34;&gt;vim-plug&lt;/a&gt;来了解NeoVim的插件安装工具。&lt;/p&gt;
+&lt;h2 id=&#34;参考&#34;&gt;&lt;a href=&#34;#参考&#34; class=&#34;headerlink&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;参考&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://launchpad.net/~neovim-ppa/+archive/ubuntu/stable&#34;&gt;https://launchpad.net/~neovim-ppa/+archive/ubuntu/stable&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable&#34;&gt;https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="总结" />
+        <category term="Linux" />
+        <category term="Ubuntu" />
+        <category term="Vim" />
+        <category term="NeoVim" />
+        <updated>2019-03-13T05:36:51.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/03/12/vim-plug-intro/</id>
+        <title>vim-plug：简洁高效的Vim插件管理工具</title>
+        <link rel="alternate" href="http://vra.github.io/2019/03/12/vim-plug-intro/"/>
+        <content type="html">&lt;p&gt;今天无意中发现了这个&lt;a href=&#34;https://github.com/junegunn/vim-plug&#34;&gt;vim-plug&lt;/a&gt;这个简洁又高效的Vim插件管理工具，试了下，安装插件简直没法再容易，大大减小了配置难度，对于我这种既想要Vim及插件强大的功能但又不想花费太多时间到配置上的懒人来说，Vim-plug简直就是神器了。&lt;br&gt;借用作者的原话，Vim-plugin有下面的优点：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Easier to setup: Single file. No boilerplate code required.&lt;/li&gt;
+&lt;li&gt;Easier to use: Concise, intuitive syntax&lt;/li&gt;
+&lt;li&gt;Super-fast parallel installation/update (with any of +job, +python, +python3, +ruby, or Neovim)&lt;/li&gt;
+&lt;li&gt;Creates shallow clones to minimize disk space usage and download time&lt;/li&gt;
+&lt;li&gt;On-demand loading for faster startup time&lt;/li&gt;
+&lt;li&gt;Can review and rollback updates&lt;/li&gt;
+&lt;li&gt;Branch/tag/commit support&lt;/li&gt;
+&lt;li&gt;Post-update hooks&lt;/li&gt;
+&lt;li&gt;Support for externally managed plugins&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;既然配置又简单，功能又强大，为甚不小小折腾一番，提高工作效率呢？下面我以在Vim中安装一个Python的检查器为例，对Vim-plugin的使用进行说明。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;实验环境：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ubuntu 16.04&lt;/li&gt;
+&lt;li&gt;Python 3.5&lt;/li&gt;
+&lt;li&gt;Vim 8.1.946&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;别的操作系统和Vim版本（如NeoVim）的教程请参考&lt;a href=&#34;https://github.com/junegunn/vim-plug&#34;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;1-安装&#34;&gt;&lt;a href=&#34;#1-安装&#34; class=&#34;headerlink&#34; title=&#34;1. 安装&#34;&gt;&lt;/a&gt;1. 安装&lt;/h2&gt;&lt;p&gt;安装vim-plug很简单，下载&lt;a href=&#34;https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim&#34;&gt;plugin.vim&lt;/a&gt;到&lt;code&gt;~/.vim/autoload&lt;/code&gt;目录即可，可以使用下面的一行命令来下载：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;curl -fLo ~/.vim/&lt;span class=&#34;built_in&#34;&gt;autoload&lt;/span&gt;/plug.vim --create-dirs \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;2-使用&#34;&gt;&lt;a href=&#34;#2-使用&#34; class=&#34;headerlink&#34; title=&#34;2. 使用&#34;&gt;&lt;/a&gt;2. 使用&lt;/h2&gt;&lt;p&gt;vim-plu通过在&lt;code&gt;~/.vimrc&lt;/code&gt;中增加&lt;code&gt;call plugin#begin()&lt;/code&gt;和&lt;code&gt;call plugin#end()&lt;/code&gt;来定义和管理插件，插件以&lt;code&gt;Plug &amp;#39;github_url&amp;#39;&lt;/code&gt;形式来描述, 格式如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight vim&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;call&lt;/span&gt; plug#begin()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;# 完整的GitHub仓库地址&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Plug &lt;span class=&#34;string&#34;&gt;&amp;#x27;https://github.com/junegunn/vim-github-dashboard.git&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;# 简写形式，只写username/repo即可&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Plug &lt;span class=&#34;string&#34;&gt;&amp;#x27;junegunn/fzf&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;call&lt;/span&gt; plug#end()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;配置文件写好后，重新打开Vim,在命令模式下输入&lt;code&gt;:PlugInstall&lt;/code&gt;即可安装配置文件中设置的插件。&lt;br&gt;就这样，大功告成了，下面要做的就是探索各种强大或神奇的Vim插件了，这个可以通过搜索引擎搜索或在GitHub搜索或者找博客和文章发现自己想要的。&lt;/p&gt;
+&lt;p&gt;下面可以&lt;a href=&#34;https://github.com/w0rp/ale&#34;&gt;ALE&lt;/a&gt;这个代码检查工具为例，进行vim-plug的简单示范。&lt;/p&gt;
+&lt;h2 id=&#34;Vim-plug-安装ALE对Python代码进行检查&#34;&gt;&lt;a href=&#34;#Vim-plug-安装ALE对Python代码进行检查&#34; class=&#34;headerlink&#34; title=&#34;Vim-plug 安装ALE对Python代码进行检查&#34;&gt;&lt;/a&gt;Vim-plug 安装ALE对Python代码进行检查&lt;/h2&gt;&lt;p&gt;找到ALE的GitHub地址：&lt;code&gt;https://github.com/w0rp/ale&lt;/code&gt;，以简写形式加入到&lt;code&gt;.vimrc&lt;/code&gt;中：&lt;/p&gt;
+&lt;figure class=&#34;highlight vim&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;call&lt;/span&gt; plug#begin()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Plug &lt;span class=&#34;string&#34;&gt;&amp;#x27;W0rp/ale&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;call&lt;/span&gt; plug#end()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;g:ale_linters&lt;/span&gt; = &amp;#123;&lt;span class=&#34;string&#34;&gt;&amp;#x27;python&amp;#x27;&lt;/span&gt;: [&lt;span class=&#34;string&#34;&gt;&amp;#x27;flake8&amp;#x27;&lt;/span&gt;]&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;最后的&lt;code&gt;let&lt;/code&gt;语句是Vimscript的语法，这行表示对Python的代码检查工具，我们采用flake8这个Python包，因此需要用pip安装下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip3 install --user flake8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;保存&lt;code&gt;.vimrc&lt;/code&gt;后，打开Vim，在命令模式下，输入&lt;code&gt;:PlugInstall&lt;/code&gt;，会出现一个新panel，上面显示安装的输出，包括从GitHub下载文件等等，如果发现比较慢，请多等会…&lt;br&gt;等安装完成后，打开一个Python文件，你那不符合规范的地方就被标出来了，光标移动到提示的那行，底下会出现报错的原因，可以根据提示信息修改你的代码，下面是一个效果图：&lt;br&gt;&lt;img src=&#34;/imgs/vim-plug-ale.png&#34; alt=&#34;ALE报错信息&#34;&gt;&lt;/p&gt;
+</content>
+        <category term="总结" />
+        <category term="Linux" />
+        <category term="Vim" />
+        <category term="NeoVim" />
+        <updated>2019-03-12T14:20:26.000Z</updated>
+    </entry>
+</feed>

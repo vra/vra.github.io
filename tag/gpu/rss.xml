@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;gpu&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 21 Jul 2017 00:19:36 +0800</pubDate>
+        <lastBuildDate>Fri, 21 Jul 2017 00:19:36 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2017/07/21/install-amax-k40/</guid>
+            <title>Amax K40 Linux GPU服务器重装记录</title>
+            <link>http://vra.github.io/2017/07/21/install-amax-k40/</link>
+            <category>总结</category>
+            <category>Linux</category>
+            <category>GPU</category>
+            <category>Amax</category>
+            <category>BIOS</category>
+            <category>UEFI</category>
+            <category>VNC</category>
+            <category>Ubuntu</category>
+            <pubDate>Fri, 21 Jul 2017 00:19:36 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;因为这台GPU服务器闲置了很久，经过这两天的安装，现在基本能用了。整个过程其实挺坎坷的，因此记录下此次安装过程中遇到的坑，后面好参考。服务器从原先的OpenSuse换成了Ubuntu 16.04 LTS 发行版。  &lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h3 id=&#34;安装系统遇到的问题&#34;&gt;&lt;a href=&#34;#安装系统遇到的问题&#34; class=&#34;headerlink&#34; title=&#34;安装系统遇到的问题&#34;&gt;&lt;/a&gt;安装系统遇到的问题&lt;/h3&gt;&lt;p&gt;安装系统整个流程是这样的：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;下载Ubuntu镜像，从科大的源上下载&lt;/li&gt;
+&lt;li&gt;制作启动U盘，采用软碟通来制作&lt;/li&gt;
+&lt;li&gt;插入U盘到机器，进入BIOS设置，选择Legacy模式，并将U盘的启动顺序放在最前面&lt;/li&gt;
+&lt;li&gt;启动从U盘启动，进入安装Ubuntu的图形界面，进行重新划分盘然后在盘上安装系统&lt;/li&gt;
+&lt;li&gt;安装好后，重启系统，拔掉U盘，进入BIOS，调整硬盘&lt;code&gt;ST2000*&lt;/code&gt;的启动顺序，使之排在最前面&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;其中遇到两个问题。第一个问题是在上述3步骤的时候，选择Legacy还是UEFI。这里Legacy表示选择经典的BIOS启动，BIOS简单来说就是主板上一块固话的flash芯片，它在开机后会最先启动，然后按照里面写好的步骤把主要硬件挨个检查一遍，然后去硬盘找引导程序，然后把引导权交给它，然后就进系统了。UEFI则是一种新的启动方式，Legacy的启动方式要用MBR磁盘格式，UEFI启动方式要用GPT磁盘格式。&lt;strong&gt;如果你安装系统时候用的是Legacy，进入系统时选择UEFI则会报错，反过来也是，因此要保持装系统和进系统时两者的一致。&lt;/strong&gt; &lt;strong&gt;我们的机器是因为比较老旧，所以只支持Legacy，所以选择的时候选择Legacy。&lt;/strong&gt;&lt;br&gt;第二个问题是在上述第4步中划分盘的时候，底下的” device for bootloader installation”这个输入框该如何选择。刚开始我们选择了划分好的某个分区，如/dev/sdd1，但是有问题，安装后总有错。后来查看网上的资料，发现都是采用没加下标的盘符，如/dev/sdd。&lt;strong&gt;因此在划分盘的时候，在盘开始的位置留一些空间，然后这里选择没下标的盘符，如/dev/sdd，即可。&lt;/strong&gt;   &lt;/p&gt;
+&lt;h3 id=&#34;挂载硬盘的问题&#34;&gt;&lt;a href=&#34;#挂载硬盘的问题&#34; class=&#34;headerlink&#34; title=&#34;挂载硬盘的问题&#34;&gt;&lt;/a&gt;挂载硬盘的问题&lt;/h3&gt;&lt;p&gt;安装好系统后，默认挂载的只有装系统时候的那块盘上的分区，像别的硬盘上的分区如果要开启自动挂载的话，需要在/etc/fstab里面写入记录。&lt;br&gt;fstab的记录的格式是这样的：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# format &amp;lt;file system&amp;gt; &amp;lt;mount point&amp;gt;   &amp;lt;type&amp;gt;  &amp;lt;options&amp;gt;       &amp;lt;dump&amp;gt;  &amp;lt;pass&amp;gt;, for example,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sdc /data2 ext4  defaults 0 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中细节可以参考我写的&lt;a href=&#34;https://vra.github.io/2014/12/14/fstab-automount-windows-partitions/&#34;&gt;这篇博客&lt;/a&gt;。其中type这个参数不好确定，需要用&lt;code&gt;blkid&lt;/code&gt;命令来查看，如下面两种格式：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ sudo blkid&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sda1: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;d0dbd540-305b-493d-b42b-f9d92f3388d7&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;ext4&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sda2: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;9a9946ab-43b4-454a-9993-b59fb4860139&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;ext4&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sda3: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;479416ea-cbf0-42ef-9f19-827f0524128a&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;swap&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sdb1: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;89e6c107-62bd-4e7a-807d-5b5024f272b5&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;ext4&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sdc: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;117d0fa5-cffb-45ff-8758-9dc23063bcf8&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;ext2&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sdd: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;887d5d9a-fbb3-4036-ad97-11b072cff277&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;ext4&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sde: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;61ae41de-1fca-4d4e-bdb3-e45f8d9777ec&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;ext3&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sdf: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;5d23d7a7-b572-4973-846c-7cf23d1a915f&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;ext4&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;/dev/sdg: UUID=&lt;span class=&#34;string&#34;&gt;&amp;quot;088ccdbd-ad9d-4bf1-994c-7bd11b714c7a&amp;quot;&lt;/span&gt; TYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;ext4&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ sudo blkid -o value -s TYPE /dev/sda1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ext4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;知道这个参数之后，就修改/etc/fstab，增加要挂载的硬盘分区，然后重启即可。&lt;strong&gt;主要挂载如果参数有错的话，开机启动会报错，进入安全模式，须将其修改后再启动。所以备份原先的fstab是很有必要的。&lt;/strong&gt;  &lt;/p&gt;
+&lt;h3 id=&#34;Caffe编译过程中HDF5库路径的问题&#34;&gt;&lt;a href=&#34;#Caffe编译过程中HDF5库路径的问题&#34; class=&#34;headerlink&#34; title=&#34;Caffe编译过程中HDF5库路径的问题&#34;&gt;&lt;/a&gt;Caffe编译过程中HDF5库路径的问题&lt;/h3&gt;&lt;p&gt;在Ubuntu 16.04中，HDF5文件的lib目录不在系统默认的/usr/local/lib或/usr/lib目录下，而是在&lt;code&gt;/usr/lib/x86_64-linux-gnu/hdf5/serial&lt;/code&gt;目录下，所以在Caffe的Makefile.config中的&lt;code&gt;LIBRARY_DIRS&lt;/code&gt;那行后面增加&lt;code&gt; /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial&lt;/code&gt;。同理，其include目录也不在标准目录，而是在&lt;code&gt;/usr/include/hdf5/serial&lt;/code&gt;目录，因此也需要将其加入到&lt;code&gt;INCLUDE_DIRS&lt;/code&gt;这一行，因此这两行的最终结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;93 &lt;span class=&#34;comment&#34;&gt;# Whatever else you find you need goes here.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;94 INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/include /usr/include/hdf5/serial&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;95 LIBRARY_DIRS := $(PYTHON_LIB) /usr/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;修改后再重新编译Caffe即可。&lt;/p&gt;
+&lt;h3 id=&#34;cuDNN6-0和tensorflow&#34;&gt;&lt;a href=&#34;#cuDNN6-0和tensorflow&#34; class=&#34;headerlink&#34; title=&#34;cuDNN6.0和tensorflow&#34;&gt;&lt;/a&gt;cuDNN6.0和tensorflow&lt;/h3&gt;&lt;p&gt;在尝试用pip安装tensorflow的时候，安装后执行&lt;code&gt;import tensorflow as tf&lt;/code&gt;的时候，报错，说是找不到cuddnn.so.5，可是pip安装的是用cuDNN5.*编译的二进制文件，也即当前pypi仓库里面是用的cuDNN5.0。为了能用cuDNN 6.0加速性能，我决定自己编译Tensorflow。之前在Ubuntu 14.04上编译过一次，但由于包太老，bazel安装出现问题。这次编译没错，安装&lt;a href=&#34;https://www.tensorflow.org/install/install_sources&#34;&gt;官方文档&lt;/a&gt;来操作即可。  &lt;/p&gt;
+&lt;h3 id=&#34;VNC-显示不全的问题&#34;&gt;&lt;a href=&#34;#VNC-显示不全的问题&#34; class=&#34;headerlink&#34; title=&#34;VNC 显示不全的问题&#34;&gt;&lt;/a&gt;VNC 显示不全的问题&lt;/h3&gt;&lt;p&gt;这个问题现在还没解决，但是基本可以使用了，只不过在VNC界面打开Terminal的时候会报错，而打开Xterm却没问题，网上找了些资料也没好的解决方法。因此这里先把目前的操作记录下来吧。  &lt;/p&gt;
+&lt;h4 id=&#34;使用Gnome界面&#34;&gt;&lt;a href=&#34;#使用Gnome界面&#34; class=&#34;headerlink&#34; title=&#34;使用Gnome界面&#34;&gt;&lt;/a&gt;使用Gnome界面&lt;/h4&gt;&lt;p&gt;需要安装一下Gnome图像界面的包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install --no-install-recommends ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后编辑~/.vnc/xstartup文件，修改为如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/bin/sh&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# Uncomment the following two lines for normal desktop:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# unset SESSION_MANAGER&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# exec /etc/X11/xinit/xinitrc&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[ -x /etc/vnc/xstartup ] &amp;amp;&amp;amp; &lt;span class=&#34;built_in&#34;&gt;exec&lt;/span&gt; /etc/vnc/xstartup&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[ -r &lt;span class=&#34;variable&#34;&gt;$HOME&lt;/span&gt;/.Xresources ] &amp;amp;&amp;amp; xrdb &lt;span class=&#34;variable&#34;&gt;$HOME&lt;/span&gt;/.Xresources&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;xsetroot -solid grey&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;vncconfig -iconic &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x-terminal-emulator -geometry 80x24+10+10 -ls -title &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$VNCDESKTOP&lt;/span&gt; Desktop&amp;quot;&lt;/span&gt; &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x-window-manager &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gnome-panel &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gnome-settings-daemon &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;metacity &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;nautilus -n &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gnome-terminal &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后关掉之前的VNC连接：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;vncserver -&lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; :1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;重新设置新的连接：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;vncserver -geometry 1840x1020 :1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后再客户端连接服务器，查看是否有问题&lt;/p&gt;
+&lt;h4 id=&#34;安装xfce桌面&#34;&gt;&lt;a href=&#34;#安装xfce桌面&#34; class=&#34;headerlink&#34; title=&#34;安装xfce桌面&#34;&gt;&lt;/a&gt;安装xfce桌面&lt;/h4&gt;&lt;p&gt;这时候需要安装如下的桌面显示包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install xfce4 xfce4-goodies&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后将~/.vnc/xstartup修改为如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;xrdb &lt;span class=&#34;variable&#34;&gt;$HOME&lt;/span&gt;/.Xresources&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;startxfce4 &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后执行和上面同样的kill掉旧连接，建立新连接。&lt;/p&gt;
+&lt;h3 id=&#34;设置静态IP&#34;&gt;&lt;a href=&#34;#设置静态IP&#34; class=&#34;headerlink&#34; title=&#34;设置静态IP&#34;&gt;&lt;/a&gt;设置静态IP&lt;/h3&gt;&lt;p&gt;服务器重装后，IP地址改变了，但是我们还是希望大家使用熟悉的IP地址，所以需要设置一个静态IP地址。这里实现的步骤如下：&lt;br&gt;先是执行&lt;code&gt;sudo ifconfig&lt;/code&gt;来查看以太网网卡的名称，因为后面要用到：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ sudo ifconfig&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;enp4s0f0  Link encap:Ethernet  HWaddr 0c:c4:7a:32:6e:42&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          inet addr:192.168.134.200  Bcast:192.168.104.255  Mask:255.255.255.0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          inet6 addr: 2101:da0:d800:1454:725e:fb01:5ef8:16a5/64 Scope:Global&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          inet6 addr: 2101:da0:d800:1454:2234:4e15:e803:59b9/64 Scope:Global&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          inet6 addr: fe80::ec4:7aff:fe34:2e42/64 Scope:Link&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          RX packets:1764153 errors:0 dropped:0 overruns:0 frame:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          TX packets:1086158 errors:0 dropped:0 overruns:0 carrier:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          collisions:0 txqueuelen:1000&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          RX bytes:2514858243 (2.5 GB)  TX bytes:398311453 (398.3 MB)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          Memory:c7020000-c703ffff&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;enp4s0f1  Link encap:Ethernet  HWaddr 0c:c4:7a:04:6e:43&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          UP BROADCAST MULTICAST  MTU:1500  Metric:1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          RX packets:0 errors:0 dropped:0 overruns:0 frame:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          collisions:0 txqueuelen:1000&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          Memory:c7000000-c701ffff&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;lo        Link encap:Local Loopback&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          inet addr:127.0.0.1  Mask:255.0.0.0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          inet6 addr: ::1/128 Scope:Host&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          UP LOOPBACK RUNNING  MTU:65536  Metric:1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          RX packets:1836 errors:0 dropped:0 overruns:0 frame:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          TX packets:1836 errors:0 dropped:0 overruns:0 carrier:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          collisions:0 txqueuelen:1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          RX bytes:246069 (246.0 KB)  TX bytes:246069 (246.0 KB)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到其中有3个网络接口，第三个&lt;code&gt;lo&lt;/code&gt;应该是本地loop接口，不是网卡，前两个，可以看到第一个数据流量大，而第二个数据流量都是0，所以确定网卡名称为enp4s0f0。然后编辑&lt;code&gt;/etc/network/interfaces&lt;/code&gt;文件，内容如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# interfaces(5) file used by ifup(8) and ifdown(8)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;auto lo&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;iface lo inet loopback&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;auto enp4s0f0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;iface enp4s0f0 inet static&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;address 192.168.134.234&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;netmask 255.255.255.0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gateway 192.168.134.254&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;dns-nameservers 202.38.64.1 202.141.176.93&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中&lt;code&gt;enp4s0f0&lt;/code&gt;根据你的上条命令的结果自行调整。&lt;br&gt;修改完后，执行下面的命令重启网络服务：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl restart networking.service&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;之后重启系统，就会发现IP已经变为你期望的静态IP。  &lt;/p&gt;
+&lt;h3 id=&#34;MatLab-安装&#34;&gt;&lt;a href=&#34;#MatLab-安装&#34; class=&#34;headerlink&#34; title=&#34;MatLab 安装&#34;&gt;&lt;/a&gt;MatLab 安装&lt;/h3&gt;&lt;p&gt;MatLab安装现在还没完成，但已经有一些地方值得记录下来。&lt;br&gt;先是从学校正版软件中心下载ISO文件，然后解压文件，放在某个目录下，修改其中的installer_inputer,主要修改下面这些地方：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;destinationFolder=/usr/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/R2017a&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;fileInstallationKey=xxxx-xxxx-...&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;agreeToLicense=yes&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;outputFile=/tmp/mathworks_yunfeng.log&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mode=silent&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;licensePath=/data/public/2017a/network.lic&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;注意最后一个参数，注释的例子里面都是写的&lt;code&gt;.dat&lt;/code&gt;文件，很误导人，其实在这里写成到&lt;code&gt;network.lic&lt;/code&gt;的绝对路径即可。&lt;/strong&gt;&lt;br&gt;然后退出MatLab目录，在别的目录执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo ./data/public/R2017a_glnxa64_dvd1/install -inputFile /data/public/R2017a_glnxa64_dvd1/installer_input.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里有个问题，2017a是分2个ISO文件的，一个文件执行完后，另一个文件怎么插入呢？网上有ISO文件编译时的说明，但是想想貌似不可行，以后再试试。  &lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2017/02/24/linux-add-disk/</guid>
+            <title>Linux服务器增加硬盘操作记录</title>
+            <link>http://vra.github.io/2017/02/24/linux-add-disk/</link>
+            <category>Linux</category>
+            <category>GPU</category>
+            <category>Amax</category>
+            <category>RAID</category>
+            <category>ext4</category>
+            <pubDate>Fri, 24 Feb 2017 22:19:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;最近我们实验室的GPU服务器数据空间不够用了，老师让我联系公司来增加硬盘。我这里记录一下对Amax公司生产的GPU服务器增加硬盘的步骤。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;机器的参数：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;操作系统：Ubuntu 14.04&lt;/li&gt;
+&lt;li&gt;显卡： Nvidia  Tesla K80&lt;/li&gt;
+&lt;li&gt;机器厂商： Amax&lt;/li&gt;
+&lt;li&gt;是否有RAID: 有&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;配置RAID&#34;&gt;&lt;a href=&#34;#配置RAID&#34; class=&#34;headerlink&#34; title=&#34;配置RAID&#34;&gt;&lt;/a&gt;配置RAID&lt;/h3&gt;&lt;p&gt;RAID(Redundant Array of Independent Disks)，即独立硬盘冗余阵列，是一种管理较大空间硬盘阵列的方法，常见的RAID方式到RAID 0-RAID 6，简单的来讲可以这样理解：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RAID 0: 数据不做备份操作，每块盘都可以存储数据&lt;/li&gt;
+&lt;li&gt;RAID 1: 将一半的磁盘作为镜像磁盘，空间利用率只有50%，但是允许有一半的磁盘坏掉（坏掉后备份盘可以继续使用）&lt;/li&gt;
+&lt;li&gt;RAID 5: 使用1块盘作为备份，别的盘可以正常存取数据&lt;br&gt;关于RAID 各种方式的细节，可以看&lt;a href=&#34;https://www.zhihu.com/question/20131784&#34;&gt;这里&lt;/a&gt;。&lt;br&gt;因为我们想让数据盘尽可能被充分地利用，所以我们采用RAID 0。&lt;br&gt;将硬盘插入到插槽后，开机启动服务器，就可以进入RAID的设置。在设置页面中，选择“Configuration Wizard”开始设置。具体的设置内容可以参看&lt;a href=&#34;https://siliconmechanics.zendesk.com/hc/en-us/articles/205066349-Creating-a-RAID-0-1-5-or-6-through-the-LSI-Web-BIOS&#34;&gt;这篇博客&lt;/a&gt;。  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;对硬盘分区&#34;&gt;&lt;a href=&#34;#对硬盘分区&#34; class=&#34;headerlink&#34; title=&#34;对硬盘分区&#34;&gt;&lt;/a&gt;对硬盘分区&lt;/h3&gt;&lt;p&gt;设置好RAID后，重启进入系统，查看新加的硬盘。&lt;br&gt;通过&lt;code&gt;sudo fdisk -l&lt;/code&gt;可以查看所有连接的系统的硬盘，而&lt;code&gt;df -h&lt;/code&gt;则只显示挂载到系统的硬盘，所以查看前者中有而后者中不存在的硬盘，比如&lt;code&gt;/dev/sdf&lt;/code&gt;，就是我们新加的硬盘。&lt;br&gt;找到新加的硬盘后，我们采用&lt;code&gt;sudo fdisk /dev/sdf&lt;/code&gt;命令来对/dev/sdf硬盘创建分区表，输入该命令后，结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;~ ᐅ sudo fdisk /dev/sdf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Device contains neither a valid DOS partition table， nor Sun， SGI or OSF disklabel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Building a new DOS disklabel with disk identifier 0x083d94fb.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Changes will remain &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; memory only， until you decide to write them.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;After that， of course， the previous content won&lt;span class=&#34;string&#34;&gt;&amp;#x27;t be recoverable.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;The device presents a logical sector size that is smaller than&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;the physical sector size. Aligning to a physical sector (or optimal&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;I/O) size boundary is recommended， or performance may be impacted.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;命令(输入 m 获取帮助)： &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;根据提示，我们输入m，得到如下反馈：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;命令操作&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   a   toggle a bootable flag&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   b   edit bsd disklabel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   c   toggle the dos compatibility flag&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   d   delete a partition&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   l   list known partition types&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   m   &lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt; this menu&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   n   add a new partition&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   o   create a new empty DOS partition table&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   p   &lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt; the partition table&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   q   quit without saving changes&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   s   create a new empty Sun disklabel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   t   change a partition&lt;span class=&#34;string&#34;&gt;&amp;#x27;s system id&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;   u   change display/entry units&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;   v   verify the partition table&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;   w   write table to disk and exit&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;   x   extra functionality (experts only)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;命令(输入 m 获取帮助)： &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到列出了所有可能的选项。我们这里输入n，得到输出：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Partition &lt;span class=&#34;built_in&#34;&gt;type&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   p   primary (0 primary， 0 extended， 4 free)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   e   extended&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Select (default p):   &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;因为我们在新加的硬盘上只创建一个分区，而且新加的盘用作数据盘，不会作为启动分区，所以选Primary 分区和extended分区都没关系。从这里开始，我们所有的操作都可以选择默认，即每次都是按&lt;code&gt;Enter&lt;/code&gt;键到下一步。到所有设置到完成后，fdisk命令会创建分区，大概需要等1分钟。  &lt;/p&gt;
+&lt;h3 id=&#34;格式化硬盘&#34;&gt;&lt;a href=&#34;#格式化硬盘&#34; class=&#34;headerlink&#34; title=&#34;格式化硬盘&#34;&gt;&lt;/a&gt;格式化硬盘&lt;/h3&gt;&lt;p&gt;创建好分区表后，需要格式化硬盘，将Linux的文件系统应用到硬盘上，硬盘才能存储数据。格式化硬盘采用的是&lt;code&gt;mkfs&lt;/code&gt;命令。&lt;br&gt;目前Linux常用的文件格式是ext3和ext4，其中ext4是ext3的后续版本，对后者进行了一些改进，例如最大文件变成16TB、最大子目录数高达64000个等。具体的改进请参考&lt;a href=&#34;https://en.wikipedia.org/wiki/Ext4&#34;&gt;这里&lt;/a&gt;。使用mkfs命令时，可以使用-t 选项制定文件格式。不指定默认的文件格式是ext2。&lt;br&gt;所以我们这里的命令是：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo mkfs -t ext4 /dev/sdf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;对于弹出的问题，选择&lt;code&gt;y&lt;/code&gt;即可，可以看到会写入inode数等操作，进行格式化。  &lt;/p&gt;
+&lt;h3 id=&#34;挂载硬盘&#34;&gt;&lt;a href=&#34;#挂载硬盘&#34; class=&#34;headerlink&#34; title=&#34;挂载硬盘&#34;&gt;&lt;/a&gt;挂载硬盘&lt;/h3&gt;&lt;p&gt;硬盘格式化后，只要挂载到系统就可以正常使用了。接下来的操作就跟插硬盘或U盘到服务器上时的操作一样，先创建一个目录，然后将硬盘挂载到该目录，然后就可以在挂载后的目录里面写入或读出文件了，所有操作都在会在硬盘上进行。具体命令如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo mkdir /data5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo mount /dev/sdf /data5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo chmod -R 777 /data5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意最后一步需要修改文件夹的权限，否则服务器上的其他用户没有读写的权限。  &lt;/p&gt;
+&lt;h3 id=&#34;将挂载信息写入到fstab&#34;&gt;&lt;a href=&#34;#将挂载信息写入到fstab&#34; class=&#34;headerlink&#34; title=&#34;将挂载信息写入到fstab&#34;&gt;&lt;/a&gt;将挂载信息写入到fstab&lt;/h3&gt;&lt;p&gt;如果只执行了挂载操作而不将硬盘的挂载操作写入到&lt;code&gt;/etc/fstab&lt;/code&gt;中，则下次重启的时候，需要手动挂载，而用户对于/data5目录是无法进行读写操作的。所以接下来我们需要将挂载操作命令写入到&lt;code&gt;/etc/fstab&lt;/code&gt;文件中。&lt;br&gt;fstab命令的写法有两种，一种是采用UUID，如：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;UUID=8aeec127-62bd-4e7a-2020-5a5024f27a22 /data1 ext4 defaults 0 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这种格式，其中硬盘对应的UUID号可以通过命令&lt;code&gt;sudo file -sL /dev/sdf&lt;/code&gt;得到。关于fstab命令后面参数的含义，请参见我的&lt;a href=&#34;http://goingthink.wang/2014/12/14/fstab-automount-windows-partitions/&#34;&gt;另一篇博客&lt;/a&gt;。&lt;br&gt;另外一种格式就是用&lt;code&gt;/dev/sdf&lt;/code&gt;来代替UUID，即一条记录如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;/dev/sdf /data5 ext4  defaults 0 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;添加该记录到&lt;code&gt;/etc/fstab&lt;/code&gt;文件后，下次重启，硬盘也会自动挂载。&lt;br&gt;至此，我们的任务就算大功告成了，希望对你有所帮助。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2016/12/18/nvidia-gpu-names/</guid>
+            <title>关于英伟达显卡命名的姿势</title>
+            <link>http://vra.github.io/2016/12/18/nvidia-gpu-names/</link>
+            <category>总结</category>
+            <category>GPU</category>
+            <category>Nvidia</category>
+            <pubDate>Sun, 18 Dec 2016 18:11:11 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;平时在实验中用到GPU的地方比较多，看新闻也总是能看到英伟达又出了什么型号的显卡等等，可是我一直没搞清楚该公司显卡名称的命名关系，今天特地查了下，总结在这里，以便以后翻阅。  &lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;Nvidia的GPU命名有4个层次：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;GPU 架构(microarchitecture), 表示GPU在芯片设计层面上的不同处理方式，包括的内容有计算单元(SIMD)的个数、有无L1,L2缓存、是否有双精度支持等。按时间顺序依次是Tesla, Fermi, Kepler， Maxwell, Pascal。&lt;/li&gt;
+&lt;li&gt;显卡系列：根据使用场景的不同，分成GeForce, Quadro, Tesla。GeForce用于家庭和个人电脑，包括游戏和娱乐等;Quadro用于工业渲染、艺术设计，工作站等场合。而Tesla用于科学计算，深度学习加速等场景。当然这三者的使用场景并没有严格的边界，想GeForce 系列的GTX 1080也可以用来做深度学习实验。&lt;/li&gt;
+&lt;li&gt;芯片型号，例如GT200、GK210、GM104、GF104， K80, M40等。其中第二个字母表示架构，如K40 中的K表示是Kepler架构,P100中的P表示Pascal架构。&lt;/li&gt;
+&lt;li&gt;针对GeForce系列，还有2系列，3系列，200系列，400系列等分类，像GeForce GTX 1080 就是10系列。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;需要注意的地方有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注意区分Tesla GPU架构和Tesla系列。前者已经用的不是很多了，而后者是最近才出的针对深度学习的系列，使用很多，像我们实验室用的K20,K80都是这个系列。&lt;/li&gt;
+&lt;li&gt;描述一个显卡的时候，一般是系列名+芯片型号，如 Tesla K80。 &lt;/li&gt;
+&lt;li&gt;针对GeForce系列，芯片型号一般是显卡型号+具体编号的形式，如 GeForce GT 705,其中GT 是显卡型号。&lt;/li&gt;
+&lt;li&gt;最近新出了一款 TiTan X, 主要要和GeForce GTX Tian X 区分。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考：&#34;&gt;&lt;a href=&#34;#参考：&#34; class=&#34;headerlink&#34; title=&#34;参考：&#34;&gt;&lt;/a&gt;参考：&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://chenrudan.github.io/blog/2015/12/20/introductionofgpuhardware.html&#34;&gt;https://chenrudan.github.io/blog/2015/12/20/introductionofgpuhardware.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.quora.com/What-is-NVIDIA-GPU-micro-architecture&#34;&gt;https://www.quora.com/What-is-NVIDIA-GPU-micro-architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units&#34;&gt;https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2015/09/12/gpu-programming-2/</guid>
+            <title>GPU并行计算和CUDA编程(2)-GPU体系架构概述</title>
+            <link>http://vra.github.io/2015/09/12/gpu-programming-2/</link>
+            <category>C++</category>
+            <category>GPU</category>
+            <category>CUDA</category>
+            <category>计算机视觉</category>
+            <category>并行计算</category>
+            <pubDate>Sat, 12 Sep 2015 23:14:18 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;并行计算&#34;&gt;&lt;a href=&#34;#并行计算&#34; class=&#34;headerlink&#34; title=&#34;并行计算&#34;&gt;&lt;/a&gt;并行计算&lt;/h2&gt;&lt;p&gt;并行计算的定义： 应用多个计算资源来解决&lt;strong&gt;同一个计算问题&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;一些名词&#34;&gt;&lt;a href=&#34;#一些名词&#34; class=&#34;headerlink&#34; title=&#34;一些名词&#34;&gt;&lt;/a&gt;一些名词&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Flynn矩阵：&lt;br&gt;SISD(Single Instruction Single Data),&lt;br&gt;SIMD(Single Instruction Multiple Data),&lt;br&gt;MISD(Multiple Instruction Single Data),&lt;br&gt;MIMD(Multiple Instruction Multiple Data),&lt;br&gt;由 SISD,SIMD，MISD，MIMD组成的矩阵就是Flynn矩阵。从前往后，4种结构越来越复杂。 &lt;/li&gt;
+&lt;li&gt;共享存储和分布式存储   &lt;/li&gt;
+&lt;li&gt;通信和同步  &lt;/li&gt;
+&lt;li&gt;加速比，并行开销，拓展性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;script type=&#34;text/x-mathjax-config&#34;&gt;
+  MathJax.Hub.Config({
+    extensions: [&#34;tex2jax.js&#34;],
+    jax: [&#34;input/TeX&#34;, &#34;output/HTML-CSS&#34;],
+    tex2jax: {
+      inlineMath: [ [&#39;$&#39;,&#39;$&#39;], [&#34;\\(&#34;,&#34;\\)&#34;] ],
+      displayMath: [ [&#39;$$&#39;,&#39;$$&#39;], [&#34;\\[&#34;,&#34;\\]&#34;] ],
+      processEscapes: true
+    },
+    &#34;HTML-CSS&#34;: { availableFonts: [&#34;TeX&#34;] }
+  });
+&lt;/script&gt; 
+&lt;script type=&#34;text/javascript&#34; src=&#34;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&#34;&gt;&lt;/script&gt;
+
+&lt;h3 id=&#34;Amdahl定律&#34;&gt;&lt;a href=&#34;#Amdahl定律&#34; class=&#34;headerlink&#34; title=&#34;Amdahl定律&#34;&gt;&lt;/a&gt;Amdahl定律&lt;/h3&gt;&lt;p&gt;  $$1. speed rate = \frac{1}{1-P} $$&lt;br&gt;其中P是可以并行的部分，即加速比与任务中不可并行部分的大小成正比，如果完全不可并行，即P = 0，则speed rate = 1，即不加速；如果完全可以并行，即P = 1, 则$speed rate = \infty$, 即加速无穷大倍。&lt;br&gt;  $$2. speed rate = \frac{1}{\frac{P}{N} + S} $$&lt;br&gt; 其中N是处理器个数，P是可以并行的部分，S是不可以并行，只能串行的部分。可以看到，当N趋近无穷时，speed rate 只取决于S，即不可并行部分是系统的瓶颈所在。 &lt;/p&gt;
+&lt;h2 id=&#34;GPU结构&#34;&gt;&lt;a href=&#34;#GPU结构&#34; class=&#34;headerlink&#34; title=&#34;GPU结构&#34;&gt;&lt;/a&gt;GPU结构&lt;/h2&gt;&lt;p&gt;CPU和GPU的内部结构的对比图如下：&lt;br&gt;&lt;img src=&#34;/imgs/cpu_gpu_schema.gif&#34;&gt;&lt;br&gt;图中绿色的为ALU（运算逻辑单元，Arithmetic Logic Unit）, 可以看出GPU相比CPU，多了很多ALU，而且ALU占据了内部空间的绝大部分，所以可以看出GPU是对运算很强调的芯片。&lt;/p&gt;
+&lt;p&gt;下图是一个GPU核的结构，图中所有8个ALU共用一个指令单元Fetch/Decode, 而Ctx则是每个ALU独有的存储上下文，所以，只是一种SIMD结构。&lt;br&gt;&lt;img src=&#34;/imgs/gpu-core.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;分支问题&#34;&gt;&lt;a href=&#34;#分支问题&#34; class=&#34;headerlink&#34; title=&#34;分支问题&#34;&gt;&lt;/a&gt;分支问题&lt;/h3&gt;&lt;p&gt;由于每个ALU的Ctx不同，所以有可能会出现分支，这时候8个ALU的指令可能会出现分叉，即各自走了不同的路，没法共享同一个指令了，这种结构就会失效。为了解决这个问题，将所有可能出现的分支用&lt;code&gt;if/else&lt;/code&gt;来表示，让每个ALU都进行判断，如下图所示：&lt;br&gt;&lt;img src=&#34;/imgs/gpu-branch.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;从图中我们可以看到，每个ALU都进行了&lt;code&gt;if/else&lt;/code&gt;的判断，有的ALU走了&lt;code&gt;if&lt;/code&gt;部分，有的ALU走了&lt;code&gt;else&lt;/code&gt;部分，这样8个ALU就可以共用一个Fetch/Decode单元了。但因为每个ALU都要进行判断，所以做了一部分无用功，牺牲了部分性能，性能最差的时候只有1/8的有用功，即只有1个ALU选择&lt;code&gt;if&lt;/code&gt;或选择&lt;code&gt;else&lt;/code&gt;，其他7个ALU都做了无用功，性能只有1/8。  &lt;/p&gt;
+&lt;!--
+### 停滞问题（Stall）
+在GPU处理问题的过程中，可能有的指令需要从别的地方读取数据，比较好似
+--&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2015/09/12/gpu-programming-1/</guid>
+            <title>GPU并行计算和CUDA编程(1)-CPU体系架构概述</title>
+            <link>http://vra.github.io/2015/09/12/gpu-programming-1/</link>
+            <category>C++</category>
+            <category>GPU</category>
+            <category>CUDA</category>
+            <category>计算机视觉</category>
+            <category>并行计算</category>
+            <pubDate>Sat, 12 Sep 2015 21:09:10 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;今天和实验室同学去听了周斌老师讲的《GPU并行计算和CUDA程序开发及优化》（课程主页：&lt;a href=&#34;http://acsa.ustc.edu.cn/HPC2015/nvidia/&#34;&gt;http://acsa.ustc.edu.cn/HPC2015/nvidia/&lt;/a&gt;），觉得老师讲得非常清晰，举了很多恰当的例子，将复杂的计算机中的情景和术语准确地描述成了简单的生活中的场景，使学生很容易就理解了。而我在今天的课程中也学到了很多东西，我想趁热打铁记下来，以后看起来更方便点。 &lt;/p&gt;
+&lt;p&gt;CPU是串行处理器，而GPU是并行处理器。CPU适合处理通用型的问题，如指令执行和数值计算并重，相当于是一个”通才”；而GPU适合运算密集和高度并行的任务，相当于是一个”专才”，将数值并行运算速度发挥到极致。在讨论GPU之前，先来看看CPU的体系架构的一些内容。 &lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;一些概念&#34;&gt;&lt;a href=&#34;#一些概念&#34; class=&#34;headerlink&#34; title=&#34;一些概念&#34;&gt;&lt;/a&gt;一些概念&lt;/h2&gt;&lt;p&gt;CPU的指令分3类，分别是算术、访存和控制。算术包括加减乘除等操作（在计算机中转化为加或乘来做），访存表示对数据寄存器进行读写，控制表示跳转，分支等操作。  &lt;/p&gt;
+&lt;p&gt;CPU程序的最优化目标是：&lt;/p&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&#34;&gt;&lt;/script&gt;
+&lt;p&gt;$$\frac{cycle}{instruction}\times\frac{seconds}{cycle}$$&lt;br&gt;其中前一项是每条指令执行的时钟周期数，简称为CPI（Cycle Per Instruction)，后一项即时钟周期。 &lt;/p&gt;
+&lt;p&gt;CPU的指令顺序是取指-&amp;gt;译码-&amp;gt;执行-&amp;gt;访存-&amp;gt;写回。  &lt;/p&gt;
+&lt;p&gt;为了提高程序执行的效率，CPU里面采用了流水线的设计，将一个任务分割成多个任务片段，在同一时刻，每个任务片段可能处理不同的指令。注意：我们说CPU是串行处理器，是从宏观的角度来说的，底层的流水线实现实际是并行的。此外，流水线使得单个指令的执行周期变长了，因为增加了任务时间段的切割，可能会增加额外的时间开销，但从整体上来讲，效率显然是提高了。 &lt;/p&gt;
+&lt;h2 id=&#34;流水线存在的一些问题&#34;&gt;&lt;a href=&#34;#流水线存在的一些问题&#34; class=&#34;headerlink&#34; title=&#34;流水线存在的一些问题&#34;&gt;&lt;/a&gt;流水线存在的一些问题&lt;/h2&gt;&lt;p&gt;流水线中，可能会出现停滞（stall）的问题，就是对某个任务片段，前面的指令已经执行完了，而后面的指令还没有传过来，出现了停滞。 &lt;/p&gt;
+&lt;p&gt;另外一个问题是可能存在分支，使得流水线不能正常地高速执行了。为了解决分支的问题，提出了两种方法，一种是分支预测（branch prediction），另一种是分支断定（branch predication）。 &lt;/p&gt;
+&lt;p&gt;分支预测就是根据历史记录或基于全局记录来进行预测下一步需要执行哪条命令，然后减少分支的开销。分支预测能达到90%的准确率，但是增加了额外的硬件电路设计上的面积（因为需要记录历史分支数据，需要增加额外的存储器件），也可能会增加延迟。 &lt;/p&gt;
+&lt;p&gt;分支断定就是类似与每次都将所有可能的下一条执行尝试一遍，避免了分支预测。可以这样认为：分支断定就像switch语句，每个选项都进行比较，而分支预测就相当于if/else语句，需要使用分支预测器。 &lt;/p&gt;
+&lt;p&gt;为了提升IPC（CPI的倒数），CPU又使用了超标量的方法，即增加流水线的宽度，相当于同时执行好几条流水线，这样效率又提高了，当然也是以增加芯片面积为代价的。 &lt;/p&gt;
+&lt;h2 id=&#34;指令调度&#34;&gt;&lt;a href=&#34;#指令调度&#34; class=&#34;headerlink&#34; title=&#34;指令调度&#34;&gt;&lt;/a&gt;指令调度&lt;/h2&gt;&lt;p&gt;因为有些指令之间是有依赖关系的，比如A指令是把加的结果写入到R1,B指令是读取R1中的数，所以B指令必须等A指令完成之后才能来执行。一般来讲，Read—After-Write（RAW）模式的语句之间有依赖关系，而别的，像WAW,WAR都是没依赖关系的。&lt;br&gt;为了解决指令依赖的问题，提出了2种方案：1是寄存器重命名，即将涉及冲突的寄存器重命名为不同的寄存器，就解决了依赖问题；2是乱序执行，即将所有指令放到一个重拍缓冲区（ROB，Recorder Buffer）中，根据一定的算法，重新执行各语句，使得各语句之间无依赖关系。 &lt;/p&gt;
+&lt;h2 id=&#34;缓存机制&#34;&gt;&lt;a href=&#34;#缓存机制&#34; class=&#34;headerlink&#34; title=&#34;缓存机制&#34;&gt;&lt;/a&gt;缓存机制&lt;/h2&gt;&lt;p&gt;CPU的缓存机制利用了1.时间临近性和空间临近性。&lt;/p&gt;
+&lt;h2 id=&#34;CPU内部的并行性&#34;&gt;&lt;a href=&#34;#CPU内部的并行性&#34; class=&#34;headerlink&#34; title=&#34;CPU内部的并行性&#34;&gt;&lt;/a&gt;CPU内部的并行性&lt;/h2&gt;&lt;p&gt;CPU内部也有并行计算，体现在下面3个层次：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;指令级，如超标量就是通过增加流水线达到并行效果。&lt;/li&gt;
+&lt;li&gt;数据级，如矢量运算。如下面代码：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; (&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; i = &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&#34;number&#34;&gt;5&lt;/span&gt;; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	C[i] = A[i] + B[i];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 执行的时候可以通过矢量运算，将循环运算并行地计算，如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;C[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;] = A[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;] + B[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;C[&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;] = A[&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;] + B[&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;C[&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;] = A[&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;] + B[&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;C[&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;] = A[&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;] + B[&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;C[&lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;] = A[&lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;] + B[&lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;线程级别的并行。每个CPU有1-2个活动线程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;多核相关&#34;&gt;&lt;a href=&#34;#多核相关&#34; class=&#34;headerlink&#34; title=&#34;多核相关&#34;&gt;&lt;/a&gt;多核相关&lt;/h2&gt;&lt;p&gt;CPU多核之间，只共享最后一级缓存。&lt;br&gt;多核之间数据的访问安全等问题，需要有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;锁&lt;/li&gt;
+&lt;li&gt;一致性： 谁的数据是正确的&lt;/li&gt;
+&lt;li&gt;同一性： 哪个数据是正确的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;其他&#34;&gt;&lt;a href=&#34;#其他&#34; class=&#34;headerlink&#34; title=&#34;其他&#34;&gt;&lt;/a&gt;其他&lt;/h2&gt;&lt;p&gt;尽管在IEEE的规范中，浮点数使用64bit空间来存储，但在CPU中，浮点数的精度是拓展到80bit来计算的，所以CPU中浮点数精度比GPU（64bit）中要高。 &lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

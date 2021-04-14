@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;apache&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Tue, 19 Jul 2016 16:44:59 +0800</pubDate>
+        <lastBuildDate>Tue, 19 Jul 2016 16:44:59 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2016/07/19/django-apache-deploy/</guid>
+            <title>在Apache上部署Django项目</title>
+            <link>http://vra.github.io/2016/07/19/django-apache-deploy/</link>
+            <category>Python</category>
+            <category>Django</category>
+            <category>Apache</category>
+            <category>Web编程</category>
+            <pubDate>Tue, 19 Jul 2016 16:44:59 +0800</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;0-概述&#34;&gt;&lt;a href=&#34;#0-概述&#34; class=&#34;headerlink&#34; title=&#34;0.概述&#34;&gt;&lt;/a&gt;0.概述&lt;/h3&gt;&lt;p&gt;Django是一个基于Python的web开发框架，在实际生产环境中部署的时候，还需要用Apache容器来部署。这里记录下如何在Debian系统中用Aapche和&lt;a href=&#34;https://pypi.python.org/pypi/mod_wsgi&#34;&gt;mod_wsgi模块&lt;/a&gt;来部署Django项目。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;1-系统信息&#34;&gt;&lt;a href=&#34;#1-系统信息&#34; class=&#34;headerlink&#34; title=&#34;1.系统信息&#34;&gt;&lt;/a&gt;1.系统信息&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ uname -a  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Linux iZ284ov0vfwZ 3.2.0-4-amd64 &lt;span class=&#34;comment&#34;&gt;#1 SMP Debian 3.2.81-1 x86_64 GNU/Linux  &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ lsb_release -a  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;No LSB modules are available.  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Distributor ID: Debian  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Description:    Debian GNU/Linux 7.11 (wheezy) &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Release:        7.11  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Codename:       wheezy  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ sudo apachectl -v  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Server version: Apache/2.2.22 (Debian)  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Server built:   Aug 18 2015 09:49:50  &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;我用的是Debian发行版，Apache的配置与别的发行版有较大不同，这里以Debian为例进行说明，别的发行版需要进行一定的修改。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-安装Django和Apache&#34;&gt;&lt;a href=&#34;#2-安装Django和Apache&#34; class=&#34;headerlink&#34; title=&#34;2. 安装Django和Apache&#34;&gt;&lt;/a&gt;2. 安装Django和Apache&lt;/h3&gt;&lt;p&gt;Django可以通过如下命令安装:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install Django==1.9.0 &lt;span class=&#34;comment&#34;&gt;#设置版本号为1.9.0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; Apache通过不同发行版的包管理命令安装。在debian下，是:&lt;br&gt; &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install apache2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-安装mod-wsgi模块&#34;&gt;&lt;a href=&#34;#3-安装mod-wsgi模块&#34; class=&#34;headerlink&#34; title=&#34;3. 安装mod_wsgi模块&#34;&gt;&lt;/a&gt;3. 安装mod_wsgi模块&lt;/h3&gt;&lt;p&gt;mod_wsgi可以通过pip安装，但是需要提前在系统安装&lt;code&gt;apache-dev&lt;/code&gt;包，但是在Debian发行版上，这个包名叫&lt;code&gt;apache2-prefork-dev&lt;/code&gt;，详情参考&lt;a href=&#34;http://stackoverflow.com/a/16869017/2932001&#34;&gt;这里&lt;/a&gt;。通过如下命令安装&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install apache2-prefork-dev&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;此外，还需要安装&lt;code&gt;python-dev&lt;/code&gt;包，如果要使用python3,则需要安装&lt;code&gt;python3-dev&lt;/code&gt;包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install python-dev&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 如果要使用python3，则安装如下包&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#sudo apt-get install python3-dev&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后pip 安装mod_wsgi:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install mod_wsgi&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;此外也可以自己编译mod_wsgi：首先从&lt;a href=&#34;https://github.com/GrahamDumpleton/mod_wsgi/releases&#34;&gt;这里&lt;/a&gt;下载文件包，然后解压，编译。假设版本是4.5.3，全部命令如下:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;wget https://github.com/GrahamDumpleton/mod_wsgi/archive/4.5.3.tar.gz  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;tar -xvf 4.5.3.tar.gz  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; mod_wsgi-4.5.3  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;./configure  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;make  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo make install  &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果要使用python3,则&lt;code&gt;./configure&lt;/code&gt;那条命令改为&lt;code&gt;./configure --with-python=/usr/bin/python3.4&lt;/code&gt;。&lt;br&gt;如果没有报错，那么mod_wsgi就编译好了!&lt;br&gt;&lt;strong&gt;编译好后，会在apache的模块目录&lt;code&gt;/usr/lib/apache2/modules/&lt;/code&gt;生成mod_wsgi.so文件。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-Apache配置文件目录结构&#34;&gt;&lt;a href=&#34;#4-Apache配置文件目录结构&#34; class=&#34;headerlink&#34; title=&#34;4.Apache配置文件目录结构&#34;&gt;&lt;/a&gt;4.Apache配置文件目录结构&lt;/h3&gt;&lt;p&gt;Apache的配置文件目录是&lt;code&gt;/etc/apache2&lt;/code&gt;，该目录下的文件结构如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- apache2.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- conf-available&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- conf-enabled&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- envvars&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- magic&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- mods-available&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- mods-enabled&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- ports.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|-- sites-available&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;`-- sites-enabled&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中&lt;code&gt;apache2.conf&lt;/code&gt;是主配置文件，里面包括系统的设置，如Timeout的时长、Log的等级和格式等。&lt;code&gt;ports.conf&lt;/code&gt;文件配置了监听的端口号，以及是否启用SSL。&lt;code&gt;envvars&lt;/code&gt;和&lt;code&gt;magic&lt;/code&gt;里面设置了一些环境变量相关的东西，我没怎么看过。&lt;br&gt;剩下的6个目录两两一对，&lt;code&gt;availabel&lt;/code&gt;文件夹里面是所有的配置，而&lt;code&gt;enabled&lt;/code&gt;目录里面则是启用的配置。而&lt;code&gt;conf&lt;/code&gt;、&lt;code&gt;mods&lt;/code&gt;和&lt;code&gt;sites&lt;/code&gt;可以分别通过命令&lt;code&gt;a2enconf&lt;/code&gt;、&lt;code&gt;a2enmod&lt;/code&gt;、&lt;code&gt;a2ensite&lt;/code&gt;来启用，启用后会在&lt;code&gt;enabled&lt;/code&gt;目录下生成一个软链接，指向&lt;code&gt;available&lt;/code&gt;目录下的同名文件。&lt;br&gt;在&lt;code&gt;apache2.conf&lt;/code&gt;这个文件最后，是一些&lt;code&gt;IncludeOptional&lt;/code&gt; 语句，用来将&lt;code&gt;conf-enabled&lt;/code&gt;、&lt;code&gt;mods-enabled&lt;/code&gt;、&lt;code&gt;sites-enabled&lt;/code&gt;目录下的配置文件包含到主配置文件中。这样的好处是每个配置文件配置一个条目，比较清晰明了,易于查错。    &lt;/p&gt;
+&lt;h3 id=&#34;5-启用wsgi模块&#34;&gt;&lt;a href=&#34;#5-启用wsgi模块&#34; class=&#34;headerlink&#34; title=&#34;5. 启用wsgi模块&#34;&gt;&lt;/a&gt;5. 启用wsgi模块&lt;/h3&gt;&lt;p&gt;我们需要在&lt;code&gt;mods-available&lt;/code&gt;目录下新建&lt;code&gt;mod_wsgi&lt;/code&gt;的load文件，具体操作如下:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /etc/apache2/mod-available  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo &lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot; LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; wsgi.load  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo a2enmod wsgi &lt;span class=&#34;comment&#34;&gt;# 启用wgsi配置&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo service apache2 restart &lt;span class=&#34;comment&#34;&gt;# 重启Apache2服务&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;6-托管Django站点&#34;&gt;&lt;a href=&#34;#6-托管Django站点&#34; class=&#34;headerlink&#34; title=&#34;6. 托管Django站点&#34;&gt;&lt;/a&gt;6. 托管Django站点&lt;/h3&gt;&lt;p&gt;假设Django项目的&lt;code&gt;wsgi.py&lt;/code&gt;文件的路径是&lt;code&gt;/home/yunfeng/Dev/git/mysite/mysite/wsgi.py&lt;/code&gt;，我们需要下面几步来完成Apache对Django项目的托管：&lt;/p&gt;
+&lt;h4 id=&#34;1-修改Django项目中的wsgi-py和settings-py文件&#34;&gt;&lt;a href=&#34;#1-修改Django项目中的wsgi-py和settings-py文件&#34; class=&#34;headerlink&#34; title=&#34;1. 修改Django项目中的wsgi.py和settings.py文件&#34;&gt;&lt;/a&gt;1. 修改Django项目中的&lt;code&gt;wsgi.py&lt;/code&gt;和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/h4&gt;&lt;p&gt;修改&lt;code&gt;wsgi.py&lt;/code&gt;文件，增加如代码中说明的那几行：&lt;/p&gt;
+&lt;figure class=&#34;highlight py&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;                                                                                                                                                           &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;WSGI config for travel_record project.                                                                                                                        &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;                                                                                                                                                              &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;It exposes the WSGI callable as a module-level variable named ``application``.                                                                                &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;                                                                                                                                                              &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;For more information on this file, see                                                                                                                        &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/                                                                                                  &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;                                                                                                                                                           &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; os                                                                                                                                                     &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 增加下面这几行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; sys                                                                                                                                                    &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; os.path &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; dirname, abspath                                                                                                                    &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; django.core.wsgi &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; get_wsgi_application                                                                                                             &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;PROJECT_DIR = dirname(dirname(abspath(__file__)))                                                                                                             &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sys.path.insert(&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;, PROJECT_DIR)                                                                                                                               &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                                                                                                                                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#os.environ.setdefault(&amp;quot;DJANGO_SETTINGS_MODULE&amp;quot;, &amp;quot;travel_record.settings&amp;quot;)                                                                                    &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;os.environ[&lt;span class=&#34;string&#34;&gt;&amp;quot;DJANGO_SETTINGS_MODULE&amp;quot;&lt;/span&gt;] = &lt;span class=&#34;string&#34;&gt;&amp;quot;travel_record.settings&amp;quot;&lt;/span&gt;                                                                                               &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 增加结束&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                                                                                                                                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;application = get_wsgi_application()       &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;增加的这几行代码做了2件事：1.将Django项目的的路径加入到系统路径中，使得Apache服务器可以找到&lt;code&gt;wsgi.py&lt;/code&gt;文件；2. 修改&lt;code&gt;os.environ&lt;/code&gt;的值，使得多个Django项目同时被Apache托管的时候不会出现串扰的问题。&lt;br&gt;接下来修改&lt;code&gt;settings.py&lt;/code&gt;文件，主要修改的地方有3个：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将&lt;code&gt;DEBUG=True&lt;/code&gt;改为&lt;code&gt;DEBUG=False&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将&lt;code&gt;ALLOWEND_HOSTS&lt;/code&gt;里面写上服务器的访问域名或IP地址&lt;/li&gt;
+&lt;li&gt;将&lt;code&gt;TEMPALTES&lt;/code&gt;中的&lt;code&gt;DIRS&lt;/code&gt;改写成指向模板目录的绝对路径&lt;br&gt;Django项目里面需要修改的就这2个文件，下面的内容都是在&lt;code&gt;/etc/apache2&lt;/code&gt;目录下进行操作。  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;2-在-etc-apache2-sites-available目录下增加网站的配置文件&#34;&gt;&lt;a href=&#34;#2-在-etc-apache2-sites-available目录下增加网站的配置文件&#34; class=&#34;headerlink&#34; title=&#34;2. 在/etc/apache2/sites-available目录下增加网站的配置文件&#34;&gt;&lt;/a&gt;2. 在/etc/apache2/sites-available目录下增加网站的配置文件&lt;/h4&gt;&lt;p&gt;参照该目录下的&lt;code&gt;000-default.conf&lt;/code&gt;和Django的教程，写出配置文件mysite.conf如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;  &amp;lt;VirtualHost *:8000&amp;gt;                                                                                                                                         &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    ErrorLog &lt;span class=&#34;variable&#34;&gt;$&amp;#123;APACHE_LOG_DIR&amp;#125;&lt;/span&gt;/error.log                                                                                                                      &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    CustomLog &lt;span class=&#34;variable&#34;&gt;$&amp;#123;APACHE_LOG_DIR&amp;#125;&lt;/span&gt;/access.log combined                                                                                                           &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                                                                                                                                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    WSGIScriptAlias / /home/yunfeng/Dev/git/mysite/mysite/wsgi.py                                                                               &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    Alias /static/ /home/yunfeng/Dev/git/mysite/mysite/static/                                                                                  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    Alias /media/ /home/yunfeng/Dev/git/mysite/mysite/media/                                                                                  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;Directory /home/yunfeng/Dev/git/mysite/mysite&amp;gt;                                                                                             &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;lt;Files wsgi.py&amp;gt;                                                                                                                                       &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    		Order deny,allow  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    		Allow from all  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;lt;/Files&amp;gt;                                                                                                                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;/Directory&amp;gt;                                                                                                                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;Directory /home/yunfeng/Dev/git/mysite/mysite/static/&amp;gt;                                                                                     &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	Order deny,allow  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	Allow from all  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;/Directory&amp;gt;                                                                                                                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;Directory /home/yunfeng/Dev/git/mysite/mysite/static/&amp;gt;                                                                                     &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	Order deny,allow  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	Allow from all  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;/Directory&amp;gt;                                                                                                                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;/VirtualHost&amp;gt;       &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;整个配置文件是包含在&lt;code&gt;VirtualHost&lt;/code&gt;的尖括号里面的一些设置，尖括号开始的地方，&lt;code&gt;*:8000&lt;/code&gt;表示你希望的项目监听的端口号。&lt;br&gt;&lt;code&gt;ErrorLog&lt;/code&gt;和&lt;code&gt;CustomLog&lt;/code&gt;设置错误日志和访问日志的路径和格式。&lt;br&gt;&lt;code&gt;WSGIScriptAlias&lt;/code&gt;设置wsgi文件的路径，&lt;code&gt;Alias&lt;/code&gt;语句托管网站的&lt;code&gt;static&lt;/code&gt;和&lt;code&gt;media&lt;/code&gt;目录。&lt;br&gt;然后是&lt;code&gt;&amp;lt;Directory&amp;gt;&lt;/code&gt;标签，用来设置文件和目录的访问权限。&lt;strong&gt;注意对于版本小于2.4的Apache，需要将&lt;code&gt;&amp;lt;Directory&amp;gt;&lt;/code&gt;标签中的&lt;code&gt;Order deny,allow&lt;/code&gt;和&lt;code&gt;Allow from all&lt;/code&gt;改为&lt;code&gt;Require all granted&lt;/code&gt;。&lt;/strong&gt;&lt;br&gt;修改完后，执行下面的命令启用这个网站:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo a2ensite mysite.conf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h4 id=&#34;3-修改-etc-apache2目录下的ports-conf文件&#34;&gt;&lt;a href=&#34;#3-修改-etc-apache2目录下的ports-conf文件&#34; class=&#34;headerlink&#34; title=&#34;3. 修改/etc/apache2目录下的ports.conf文件&#34;&gt;&lt;/a&gt;3. 修改/etc/apache2目录下的ports.conf文件&lt;/h4&gt;&lt;p&gt;增加针对新建站点的端口号的监听：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Listen 80&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#增加下面这条语句&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Listen 8000&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;执行完这3个步骤后，就可以重启Apache服务器，访问站点了：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo service apache2 restart&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;访问站点，如果出现错误的话，可以在Django项目的&lt;code&gt;settings.py&lt;/code&gt;中启用DEBUG模式，查看输出，进行相应的修改。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

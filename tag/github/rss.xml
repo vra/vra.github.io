@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;github&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 31 Mar 2017 09:47:23 +0800</pubDate>
+        <lastBuildDate>Fri, 31 Mar 2017 09:47:23 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2017/03/31/tsn-usage/</guid>
+            <title>TSN Usage——如何编译和使用temporal-segment-networks</title>
+            <link>http://vra.github.io/2017/03/31/tsn-usage/</link>
+            <category>Caffe</category>
+            <category>CUDA</category>
+            <category>OpenCV</category>
+            <category>CNN</category>
+            <category>Action Recongnition</category>
+            <category>TSN</category>
+            <category>GitHub</category>
+            <pubDate>Fri, 31 Mar 2017 09:47:23 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&lt;a href=&#34;https://github.com/yjxiong/temporal-segment-networks&#34;&gt;TSN&lt;/a&gt;是”temporal-segment-networks”的简称，是视频动作识别任务里面当前最好的方法。虽然这个结构是在ECCV2016的论文里面提出来的，代码也放出来挺长时间了，但是这个项目里面集合了Caffe， OpenCV，CUDA，CUDNN等几大神坑项目，不同版本之间的依赖、选择等问题很麻烦，因此我之前编译了好几次都没有能够编译成功。这次花了近一天的时间来重新编译了一下整个项目，虽然还是有些问题，例如MPI编译没有通过，CUDA8貌似不支持，CuDNN v5好像也不支持，但最后总算是编译通过，可以运行了。所以记录一下整个的过程，期望对自己和别人能够有所帮助。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h3 id=&#34;1-OpenCV编译&#34;&gt;&lt;a href=&#34;#1-OpenCV编译&#34; class=&#34;headerlink&#34; title=&#34;1. OpenCV编译&#34;&gt;&lt;/a&gt;1. OpenCV编译&lt;/h3&gt;&lt;p&gt;因为TSN这个项目里面有提取光流的code，其中利用的是OpenCV里面的利用GPU来提取光流的代码，所以需要用到OpenCV。虽然可以使用系统已经编译好的，但是在编译dense_flow的时候发现还依赖&lt;a href=&#34;https://github.com/opencv/opencv_contrib&#34;&gt;opencv_contrib&lt;/a&gt;中的库，所以为了避免重新编译系统的OpenCV影响别的用户，我自己编译了一个新的版本的OpenCV，放在自己的目录下。&lt;br&gt;因为我们服务器上已经装过了3.1.0版本的OpenCV(可以通过&lt;code&gt;pkg-config --modversion opencv&lt;/code&gt;命令来查看OpenCV的版本)，所以为了避免编译时寻找include目录中的文件的时候报错，这里在自己的目录下安装3.1.0版本的OpenCV和外部的库（因为dense_flow代码需要用到额外的库）。&lt;/p&gt;
+&lt;h4 id=&#34;1-下载最新版本的OpenCV-和-opencv-contrib-确保两个库都切换到3-1-0这个分支&#34;&gt;&lt;a href=&#34;#1-下载最新版本的OpenCV-和-opencv-contrib-确保两个库都切换到3-1-0这个分支&#34; class=&#34;headerlink&#34; title=&#34;1. 下载最新版本的OpenCV 和 opencv_contrib, 确保两个库都切换到3.1.0这个分支:&#34;&gt;&lt;/a&gt;1. 下载最新版本的OpenCV 和 opencv_contrib, 确保两个库都切换到3.1.0这个分支:&lt;/h4&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /data5/yunfeng/Dev/git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/opencv/opencv.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; opencv&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git checkout 3.1.0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; ../&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/opencv/opencv_contrib.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; opencv_contrib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git checkout 3.1.0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h5 id=&#34;2-利用cmake和make命令来编译OpenCV&#34;&gt;&lt;a href=&#34;#2-利用cmake和make命令来编译OpenCV&#34; class=&#34;headerlink&#34; title=&#34;2. 利用cmake和make命令来编译OpenCV&#34;&gt;&lt;/a&gt;2. 利用cmake和make命令来编译OpenCV&lt;/h5&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; ../opencv&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mkdir release; &lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; release&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cmake -D OPENCV_EXTRA_MODULES_PATH=/data5/yunfeng/Dev/opencv_contrib/modules -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 -D CMAKE_INSTALL_PREFIX=/data5/yunfeng/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt; -D CUDA_TOOLKIT_ROOT_DIR=/usr/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/cuda-7.5 ..&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;make -j40&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;make install -j40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里有几个地方需要注意:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;编译OpenCV的同时编译opencv_contrib，需要在cmake里面设置&lt;code&gt;-D OPENCV_EXTRA_MODULES_PATH=/path/to/opencv_contrib/modules&lt;/code&gt;, 其中参数的值就是到opencv_contrib仓库的modules子目录的绝对路径&lt;/li&gt;
+&lt;li&gt;通过设置&lt;code&gt;-D CUDA_FAST_MATH=1&lt;/code&gt; 和 &lt;code&gt;-D WITH_CUBLAS=1&lt;/code&gt;来启用CUDA和CUBLAS&lt;/li&gt;
+&lt;li&gt;通过设置&lt;code&gt;-D CMAKE_INSTALL_PREFIX=/path/to/local&lt;/code&gt;来设置编译生成的lib和bin目录存放的位置，如果不设置的话默认是在&lt;code&gt;/usr/local&lt;/code&gt;目录里面，因此需要管理员权限才能执行最后的&lt;code&gt;make install&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;通过设置&lt;code&gt;-D CUDA_TOOLKIT_ROOT_DIR=/path/to/cuda&lt;/code&gt;来设置CUDA的路径，不设置话cmake会在系统目录里面寻找，如果系统有多个CUDA版本的话，找到的可能不是我们需要的，所以还是显式地写到参数列表里比较稳妥&lt;/li&gt;
+&lt;li&gt;此外还可以设置&lt;code&gt;-D CUDNN_INCLUDE=&amp;quot;/path/to/cuda/include&amp;quot;&lt;/code&gt; 和&lt;code&gt;-D CUDNN_LIBRARY=&amp;quot;/path/to/cuda/lib64&amp;quot;&lt;/code&gt; 来设置CuDNN的路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;cmake的时候报错：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;-- ICV: Downloading ippicv_linux_20151201.tgz...&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;CMake Error at 3rdparty/ippicv/downloader.cmake:73 (file):&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  file DOWNLOAD HASH mismatch&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; file: [/path/to/opencv/3rdparty/ippicv/downloads/linux-808b791a6eac9ed78d32a7666804320e/ippicv_linux_20151201.tgz]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      expected &lt;span class=&#34;built_in&#34;&gt;hash&lt;/span&gt;: [808b791a6eac9ed78d32a7666804320e]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        actual &lt;span class=&#34;built_in&#34;&gt;hash&lt;/span&gt;: [f166287239920c4a16e6f8870e15ef79]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个问题可以通过直接在&lt;a href=&#34;https://github.com/Itseez/opencv_3rdparty/tree/ippicv/master_20151201/ippicv&#34;&gt;这里&lt;/a&gt;下载ippicv_linux_20151201.tgz 文件，并放置到&lt;code&gt;opencv/3rdparty/ippicv/downloads/linux-808b791a6eac9ed78d32a7666804320e/&lt;/code&gt;目录下，然后重新运行cmake即可。  &lt;/p&gt;
+&lt;h3 id=&#34;2-编译TSN&#34;&gt;&lt;a href=&#34;#2-编译TSN&#34; class=&#34;headerlink&#34; title=&#34;2. 编译TSN&#34;&gt;&lt;/a&gt;2. 编译TSN&lt;/h3&gt;&lt;p&gt;TSN代码里面包含3个submodule，分别是opencv2.4.12, 提取光流的dense_flow和修改过的caffe caffe-action。我们这里已经编译过OpenCV，所以接下来编译dense_flow和caffe-action, 作者给出的&lt;code&gt;build_all.sh&lt;/code&gt;执行会有些问题，我们可以参照这个文件的内容，自己一步步地编译各个部分。  &lt;/p&gt;
+&lt;h4 id=&#34;1-编译dense-flow&#34;&gt;&lt;a href=&#34;#1-编译dense-flow&#34; class=&#34;headerlink&#34; title=&#34;1. 编译dense_flow&#34;&gt;&lt;/a&gt;1. 编译dense_flow&lt;/h4&gt;&lt;p&gt;dense_flow依赖于libzip-dev这个包，可以通过系统的包管理器安装。我本来是想自己编译的，但是编译后，在make dense_flow 的时候还是报错，最后还是让管理员老师装了这个包。&lt;br&gt;装完依赖后，开始执行cmake，使用&lt;code&gt;OpenCV_DIR&lt;/code&gt;参数来设置OpenCV目录，指向我们自己刚才编译的OpenCV。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /data5/yunfeng/Dev/git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; --recursive https://github.com/yjxiong/temporal-segment-networks tsn&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; tsn&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; lib/dense_flow&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mkdir build; &lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; build&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;OpenCV_DIR=/data5/yunfeng/Dev/opencv/release cmake -D CUDA_TOOLKIT_ROOT_DIR=/usr/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/cuda-7.5 ..&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;make -j40&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;make install -j40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果&lt;code&gt;libzip-dev&lt;/code&gt;这个包是自己安装的，且没有放在系统目录下，你需要增加几个选项来执行cmake，像下面这样：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;OpenCV_DIR=/data10/yunfeng/Dev/git/opencv/release cmake -D CUDA_TOOLKIT_ROOT_DIR=/data1/yunfeng/cuda -D LIBZIP_LIBRARY=/data1/yunfeng/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/lib -D LIBZIP_INCLUDE_DIR_ZIP=/data1/yunfeng/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/include -D LIBZIP_INCLUDE_DIR_ZIPCONF=/data1/yunfeng/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/lib/libzip/include ..&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;2-编译caffe-action&#34;&gt;&lt;a href=&#34;#2-编译caffe-action&#34; class=&#34;headerlink&#34; title=&#34;2. 编译caffe-action&#34;&gt;&lt;/a&gt;2. 编译caffe-action&lt;/h4&gt;&lt;p&gt;作者原来的代码是通过MPI来并行运行的，所以需要通过如下的cmake命令来编译caffe:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;OpenCV_DIR=/data5/yunfeng/Dev/opencv/release cmake -DUSE_MPI=ON -D CUDA_TOOLKIT_ROOT_DIR=/usr/&lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt;/cuda-7.5 -DMPI_CXX_COMPILER=&lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/bin/mpicxx&amp;quot;&lt;/span&gt; ..&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;make -j40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;但是这样编译的时候，CuDNN会报错，没有办法，我就用常规的make来编译了caffe-action:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; lib/caffe-action&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cp Makefile.config.example Makefile.config&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;vim Makefile.config &lt;span class=&#34;comment&#34;&gt;# change the settings&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;make -j40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样整个工程就编译完了，好像也不是很复杂，但是出现问题解决不了的时候还是挺令人烦躁的。&lt;/p&gt;
+&lt;h3 id=&#34;3-Troubleshoot&#34;&gt;&lt;a href=&#34;#3-Troubleshoot&#34; class=&#34;headerlink&#34; title=&#34;3. Troubleshoot&#34;&gt;&lt;/a&gt;3. Troubleshoot&lt;/h3&gt;&lt;p&gt;这里列出来一些编译和使用这个项目过程中常出现的问题，大多和OpenCV, Caffe, CUDA和CuDNN相关&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在使用OpenCV的CommandLineParser的时候，总提示” FATAL [default] Check failed: [video_stream.isOpened()] Cannot open video stream “true” for optical flow extraction.”,这是因为作者原来的代码&lt;code&gt;tsn/tools/build_of.py&lt;/code&gt;文件里面，使用OpenCV的CommandLineParser的时候，参数是以空格分隔的，如&lt;code&gt;-f &amp;#123;&amp;#125; -x &amp;#123;&amp;#125; -y &amp;#123;&amp;#125; -i &amp;#123;&amp;#125; -b 20 -t 1 -d &amp;#123;&amp;#125; -s 1 -o &amp;#123;&amp;#125; -w &amp;#123;&amp;#125; -h &amp;#123;&amp;#125;&lt;/code&gt;, 但是新版的OpenCV里面都是用等号&lt;code&gt;=&lt;/code&gt;来分割的，不知道是不是某个版本修改了接口还是怎么回事，将空格改成等号即可，如&lt;code&gt;-f=&amp;#123;&amp;#125; -x=&amp;#123;&amp;#125; -y=&amp;#123;&amp;#125; -i=&amp;#123;&amp;#125; -b=20 -t=1 -d=&amp;#123;&amp;#125; -s=1 -o=&amp;#123;&amp;#125; -w=&amp;#123;&amp;#125; -h=&amp;#123;&amp;#125;&lt;/code&gt;。  &lt;/li&gt;
+&lt;li&gt;在使用CUDA8来编译项目的时候，会提示”libnppi.so: undefined reference to `nppGetMaxThreadsPerSM”, 网上的回答也很少，可能是CUDA8出来没多久，讨论还不是很多吧。所以我暂时认为这个项目不支持CUDA8。  &lt;/li&gt;
+&lt;li&gt;使用OpenCV2.4.12编译的时候，会提示”/usr/include/opencv2/nonfree/features2d.hpp:81:5: error: ‘AlgorithmInfo’ does not name a type AlgorithmInfo* info() const;”。这是因为我们服务器上已经装了OpenCV3.1.0，所以在编译的时候，会找系统目录下的头文件，而3版本的头文件和2版本的头文件不一致，导致出现这个问题。按理来说，这个问题可以通过修改头文件寻找路径，使得编译器使用2版本的头文件即可，但是我不知道怎么在cmake的时候指定头文件。。所以没办法，还是采用了3版本的OpenCV来编译。有关的讨论见&lt;a href=&#34;https://github.com/arrenglover/openfabmap/issues/14&#34;&gt;https://github.com/arrenglover/openfabmap/issues/14&lt;/a&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;速记&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2015-03-21T03:29:52.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2015/03/21/leisun-phd-note/</id>
+        <title>听孙雷博士论文答辩记录</title>
+        <link rel="alternate" href="http://vra.github.io/2015/03/21/leisun-phd-note/"/>
+        <content type="html">&lt;p&gt;任务目标：自然场景图片中的文字提取&lt;/p&gt;
+&lt;p&gt;答辩人：孙雷&lt;/p&gt;
+&lt;p&gt;答辩时间：2015.3.21早上9：00&lt;/p&gt;
+&lt;p&gt;答辩老师：霍强，李厚强，俞能海，汪勇，刘老师，还有另外一位老师&lt;/p&gt;
+&lt;p&gt;下面听答辩的学生有董政，我，研一的联合培养的记录员师兄，还有一位从ubc回国到合工大任教的博士师兄。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;主要工作：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.提出CER：Color-enhanced ER(Extremal Region)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;优点：相比MSER，对低对比度的图像很鲁棒&lt;/p&gt;
+&lt;p&gt;相关背景：&lt;/p&gt;
+&lt;p&gt;候选文字区域提取：ER&lt;/p&gt;
+&lt;p&gt;MSER：最大平稳极值区域&lt;/p&gt;
+&lt;p&gt;CER：将MSER中的极值改为一个特定阈值，使得对低对比度图像更鲁棒&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.提出“分治”的方法来归类特征，使得训练速率大幅提升&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;具体方法：&lt;/p&gt;
+&lt;p&gt;a.将图片按照字体大小和个数，分为Thin（比较瘦长的字符，如i，t，一般是一个字符），Square（比较方的字符，一般是一到两个字符），Long（水平方向上比较长，一般是多个字符）三大类&lt;/p&gt;
+&lt;p&gt;b.Square和Long下面根据训练时间长短又细分为几类&lt;/p&gt;
+&lt;p&gt;c.每个类之间可以互补，解决有些类训练样本不足的问题&lt;/p&gt;
+&lt;p&gt;d.训练时正样本使用“假数据”，即一部分不是从自然场景中获取的数据，而是使用标准图像来做正样本&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;答辩老师argue的地方：&lt;/p&gt;
+&lt;p&gt;a.可以将图片的横纵坐标作为参数，进行机器学习，而不是使用分治的方法，将分类固定下来（即老师说的“Hard”），转Hard为Soft&lt;/p&gt;
+&lt;p&gt;b.或许可以使用CNN，达到更好的效果&lt;/p&gt;
+&lt;p&gt;(我的一点看法：其实“分治”这种方法对实际应用来说，是一个很好的解决方案，既缩短了时间，又不至于太麻烦；而几位答辩老师却认为这是在学术上不严谨或者说这种方法不是最佳方法，这也体现了学术和工程的分歧。)&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3.使用浅层神经网络训练，得到了与深度神经网络类似的性能&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为什么不使用深度神经网络：&lt;/p&gt;
+&lt;p&gt;a.不平衡分类：有的类数据多，有的类数据少，而深度神经网络一般解决平衡分类的问题&lt;/p&gt;
+&lt;p&gt;b.歧义性：有的特征即可以认为是正样本，也可认为是负样本，如图片中的“I”，可以认为是字符“I”，也可能是砖块之间的缝隙&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2015/03/example_picture.jpg&#34;&gt;&lt;img src=&#34;/uploads/2015/03/example_picture.jpg&#34; alt=&#34;example_picture&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4.算法缺陷：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;a.对竖着的文字和环形文字暂时无法处理&lt;/p&gt;
+&lt;p&gt;b.只是改进的了MSER，没有从根本上解决ER的问题&lt;/p&gt;
+&lt;p&gt;c.对部分艺术字处理不好，还有些艺术字没有加入到训练样本中&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. 听不懂乱记的东西&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;a.采用了组件树&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;（end）&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</content>
+        <category term="速记" />
+        <updated>2015-03-21T03:29:52.000Z</updated>
+    </entry>
+</feed>

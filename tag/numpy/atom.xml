@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;numpy&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2020-12-26T03:26:36.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2020/12/26/numcpp-intro/</id>
+        <title>NumPy的C++替代NumCpp使用教程</title>
+        <link rel="alternate" href="http://vra.github.io/2020/12/26/numcpp-intro/"/>
+        <content type="html">&lt;p&gt;NumPy提供了很多开箱即用的函数，用处非常大，所以写C++的时候，让人无比怀念，要是有一个替代版本，就太好了。最近搜索发现， &lt;a href=&#34;https://github.com/dpilger26/NumCpp&#34;&gt;NumCpp&lt;/a&gt; 这是我想要的，而且因为是 &lt;code&gt;Header-only&lt;/code&gt;的库，因此使用时不需要编译，直接添加到头文件包含目录即可，使用很方便。不过NumCpp使用了boost库，需要进行一些下载和配置，这里记录一下。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;总结下来下面是需要下载的东西，我写成了几行代码，在Ubuntu下测试是可以执行的：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;mkdir includes&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/dpilger26/NumCpp.git &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mv NumCpp/include includes/NumCpp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;wget https://dl.bintray.com/boostorg/release/1.75.0/&lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;/boost_1_75_0.zip&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;unzip boost_1_75_0.zip&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mv boost_1_75_0/boost includes/NumCpp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里我们创建了一个&lt;code&gt;includes&lt;/code&gt;目录，用来存放NumCpp和Boost库的头文件，这里以现在 (2020-12-26) 最新的Boost 1.75.0 为例，后面boost库肯定会更新，可以从这里找到最新boost的下载地址：&lt;a href=&#34;https://www.boost.org/users/download&#34;&gt;https://www.boost.org/users/download&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;执行上面的命令后，就可以使用了NumCpp了，下面是一个使用示例：&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 文件名：test_num_cpp.cpp&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;quot;NumCpp.hpp&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; a = &amp;#123;&amp;#123;&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;&amp;#125;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; b = &amp;#123;&amp;#123;&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;&amp;#125;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nc::NdArray&amp;lt;&lt;span class=&#34;keyword&#34;&gt;float&lt;/span&gt;&amp;gt; c = a * b;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        std::cout &amp;lt;&amp;lt; c[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;] &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个例子里面，简单地调用NumCpp最基本的类 &lt;code&gt;nc::NdArray&lt;/code&gt;来进行两个2维数组的矩阵乘操作。&lt;br&gt;详细的教程参考：&lt;a href=&#34;https://github.com/dpilger26/NumCpp&#34;&gt;https://github.com/dpilger26/NumCpp&lt;/a&gt;.&lt;br&gt;接下来就是编译C++代码，这里以Linux下g++编译为例说明，需要注意的有2个点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NumCpp只支持C++14以及以上版本，所以编译时需要加&lt;code&gt;--std=c++14&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;需要将NumCpp所在的目录添加到头文件包含指令&lt;code&gt;-I&lt;/code&gt;里&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具体如下:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;g++ test_num_cpp.cpp --std=c++14 -Iincludes/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;编译完后运行生成的可执行文件:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;./a.out&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+        <category term="C++" />
+        <category term="NumPy" />
+        <category term="NumCpp" />
+        <updated>2020-12-26T03:26:36.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2019/03/18/numpy-array-contiguous/</id>
+        <title>从Numpy中的ascontiguousarray说起</title>
+        <link rel="alternate" href="http://vra.github.io/2019/03/18/numpy-array-contiguous/"/>
+        <content type="html">&lt;h2 id=&#34;1-概述&#34;&gt;&lt;a href=&#34;#1-概述&#34; class=&#34;headerlink&#34; title=&#34;1. 概述&#34;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;在使用Numpy的时候，有时候会遇到下面的错误：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;AttributeError: incompatible shape &lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; a non-contiguous array&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;看报错的字面意思，好像是不连续数组的shape不兼容。&lt;/p&gt;
+&lt;p&gt;有的时候，在看别人代码时会时不时看到&lt;code&gt;ascontiguous()&lt;/code&gt;这样的一个函数，查&lt;a href=&#34;https://docs.scipy.org/doc/numpy/reference/generated/numpy.ascontiguousarray.html&#34;&gt;文档&lt;/a&gt;会发现函数说明只有一句话：“Return a contiguous array (ndim &amp;gt;= 1) in memory (C order).”&lt;/p&gt;
+&lt;p&gt;光靠这些信息，似乎没能道出Numpy里面contiguous array和non-contiguous array有什么区别，以及为什么需要进行&lt;code&gt;ascontiguous&lt;/code&gt;操作？带着这些疑问，我搜了比较多的资料，在stack overflow上发现一个比较详细的&lt;a href=&#34;https://stackoverflow.com/questions/26998223/what-is-the-difference-between-contiguous-and-non-contiguous-arrays&#34;&gt;回答&lt;/a&gt;，简单明白地将Numpy里面的数组的连续性问题解释清楚了，因此这里翻译过来，希望能帮助到别的有同样疑问的小伙伴。&lt;/p&gt;
+&lt;h2 id=&#34;2-额外知识：-C-order-vs-Fortran-order&#34;&gt;&lt;a href=&#34;#2-额外知识：-C-order-vs-Fortran-order&#34; class=&#34;headerlink&#34; title=&#34;2. 额外知识： C order vs Fortran order&#34;&gt;&lt;/a&gt;2. 额外知识： C order vs Fortran order&lt;/h2&gt;&lt;p&gt;所谓&lt;code&gt;C order&lt;/code&gt;，指的是行优先的顺序（Row-major Order)，即内存中同行的存在一起，而&lt;code&gt;Fortran Order&lt;/code&gt;则指的是列优先的顺序（Column-major Order)，即内存中同列的存在一起。这种命名方式是根据C语言和Fortran语言中数组在内存中的存储方式不同而来的。Pascal, C，C++，Python都是行优先存储的，而Fortran，MatLab是列优先存储的。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;3-译文&#34;&gt;&lt;a href=&#34;#3-译文&#34; class=&#34;headerlink&#34; title=&#34;3. 译文&#34;&gt;&lt;/a&gt;3. 译文&lt;/h2&gt;&lt;p&gt;所谓&lt;code&gt;contiguous array&lt;/code&gt;，指的是数组在内存中存放的地址也是连续的（注意内存地址实际是一维的），即访问数组中的下一个元素，直接移动到内存中的下一个地址就可以。&lt;/p&gt;
+&lt;p&gt;考虑一个2维数组&lt;code&gt;arr = np.arange(12).reshape(3,4)&lt;/code&gt;。这个数组看起来结构是这样的：&lt;br&gt;&lt;img src=&#34;/imgs/numpy_ascontiguous_2.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在计算机的内存里，数组&lt;code&gt;arr&lt;/code&gt;实际存储是像下图所示的：&lt;br&gt;&lt;img src=&#34;/imgs/numpy_ascontiguous_3.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这意味着&lt;code&gt;arr&lt;/code&gt;是&lt;code&gt;C连续的&lt;/code&gt;（&lt;code&gt;C contiguous&lt;/code&gt;)的，因为在内存是行优先的，即某个元素在内存中的下一个位置存储的是它同行的下一个值。&lt;/p&gt;
+&lt;p&gt;如果想要向下移动一列，则只需要跳过3个块既可（例如，从0到4只需要跳过1,2和3）。&lt;/p&gt;
+&lt;p&gt;上述数组的转置&lt;code&gt;arr.T&lt;/code&gt;则没有了C连续特性，因为同一行中的相邻元素现在并不是在内存中相邻存储的了:&lt;br&gt;&lt;img src=&#34;/imgs/numpy_ascontiguous_1.png&#34;&gt;&lt;br&gt;这时候&lt;code&gt;arr.T&lt;/code&gt;变成了&lt;code&gt;Fortran 连续的&lt;/code&gt;（&lt;code&gt;Fortran contiguous&lt;/code&gt;），因为相邻列中的元素在内存中相邻存储的了。&lt;/p&gt;
+&lt;p&gt;从性能上来说，获取内存中相邻的地址比不相邻的地址速度要快很多（从RAM读取一个数值的时候可以连着一起读一块地址中的数值，并且可以保存在Cache中）。这意味着对连续数组的操作会快很多。&lt;/p&gt;
+&lt;p&gt;由于&lt;code&gt;arr&lt;/code&gt;是C连续的，因此对其进行行操作比进行列操作速度要快，例如，通常来说&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;np.&lt;span class=&#34;built_in&#34;&gt;sum&lt;/span&gt;(arr, axis=&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;comment&#34;&gt;# 按行求和&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;会比&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;np.&lt;span class=&#34;built_in&#34;&gt;sum&lt;/span&gt;(arr, axis=&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;) &lt;span class=&#34;comment&#34;&gt;# 按列求和&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;稍微快些。&lt;/p&gt;
+&lt;p&gt;同理，在&lt;code&gt;arr.T&lt;/code&gt;上，列操作比行操作会快些。&lt;/p&gt;
+&lt;h2 id=&#34;4-补充&#34;&gt;&lt;a href=&#34;#4-补充&#34; class=&#34;headerlink&#34; title=&#34;4. 补充&#34;&gt;&lt;/a&gt;4. 补充&lt;/h2&gt;&lt;p&gt;Numpy中，随机初始化的数组默认都是C连续的，经过不规则的&lt;code&gt;slice&lt;/code&gt;操作，则会改变连续性，可能会变成既不是C连续，也不是Fortran连续的。&lt;/p&gt;
+&lt;p&gt;Numpy可以通过&lt;code&gt;.flags&lt;/code&gt;熟悉查看一个数组是C连续还是Fortran连续的&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; numpy &lt;span class=&#34;keyword&#34;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr = np.arange(&lt;span class=&#34;number&#34;&gt;12&lt;/span&gt;).reshape(&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr.flags&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  C_CONTIGUOUS : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  F_CONTIGUOUS : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  OWNDATA : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  WRITEABLE : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  ALIGNED : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  WRITEBACKIFCOPY : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  UPDATEIFCOPY : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;从输出可以看到数组&lt;code&gt;arr&lt;/code&gt;是C连续的。&lt;/p&gt;
+&lt;p&gt;对&lt;code&gt;arr&lt;/code&gt;进行按列的&lt;code&gt;slice&lt;/code&gt;操作，不改变每行的值，则还是C连续的：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;array([[ &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       [ &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;5&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;6&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;7&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       [ &lt;span class=&#34;number&#34;&gt;8&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;9&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;10&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;11&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr1 = arr[:&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, :]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;array([[ &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       [ &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;5&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;6&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;7&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       [ &lt;span class=&#34;number&#34;&gt;8&lt;/span&gt;,  &lt;span class=&#34;number&#34;&gt;9&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;10&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;11&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr1.flags&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  C_CONTIGUOUS : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  F_CONTIGUOUS : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  OWNDATA : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  WRITEABLE : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  ALIGNED : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  WRITEBACKIFCOPY : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  UPDATEIFCOPY : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果进行在行上的&lt;code&gt;slice&lt;/code&gt;，则会改变连续性，成为既不C连续，也不Fortran连续的：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr1 = arr[:, &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;:&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr1.flags&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  C_CONTIGUOUS : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  F_CONTIGUOUS : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  OWNDATA : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  WRITEABLE : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  ALIGNED : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  WRITEBACKIFCOPY : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  UPDATEIFCOPY : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;此时利用&lt;code&gt;ascontiguousarray&lt;/code&gt;函数，可以将其变为连续的：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr2 = np.ascontiguousarray(arr1)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;arr2.flags&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  C_CONTIGUOUS : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  F_CONTIGUOUS : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  OWNDATA : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  WRITEABLE : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  ALIGNED : &lt;span class=&#34;literal&#34;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  WRITEBACKIFCOPY : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  UPDATEIFCOPY : &lt;span class=&#34;literal&#34;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以这样认为，&lt;code&gt;ascontiguousarray&lt;/code&gt;函数将一个内存不连续存储的数组转换为内存连续存储的数组，使得运行速度更快。&lt;/p&gt;
+</content>
+        <category term="总结" />
+        <category term="Python" />
+        <category term="Numpy" />
+        <updated>2019-03-18T15:02:58.000Z</updated>
+    </entry>
+</feed>

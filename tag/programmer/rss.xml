@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;programmer&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 16 Dec 2019 23:22:03 +0800</pubDate>
+        <lastBuildDate>Mon, 16 Dec 2019 23:22:03 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2019/12/16/always-blue/</guid>
+            <title>Always blue——关于《硅谷》电视剧的一些想法</title>
+            <link>http://vra.github.io/2019/12/16/always-blue/</link>
+            <category>杂项</category>
+            <category>Programmer</category>
+            <pubDate>Mon, 16 Dec 2019 23:22:03 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;Chapter-1&#34;&gt;&lt;a href=&#34;#Chapter-1&#34; class=&#34;headerlink&#34; title=&#34;Chapter 1&#34;&gt;&lt;/a&gt;Chapter 1&lt;/h2&gt;&lt;p&gt;美剧硅谷完结了。&lt;br&gt;忘了从什么时候开始看的这部剧，只记得在研究生的那几年，和庆哥一起看过，周围貌似没有别的人在看。去年第五季等了很久，看完后以为没有下一季了，偶然在网上看到居然还有第六季，于是赶紧开始看，最后五六集实在是太精彩了，看得大呼过瘾。第七集，却又很伤感，那些演员们陪伴我们的欢笑时光，终究要结束了。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;Chater-2&#34;&gt;&lt;a href=&#34;#Chater-2&#34; class=&#34;headerlink&#34; title=&#34;Chater 2&#34;&gt;&lt;/a&gt;Chater 2&lt;/h2&gt;&lt;p&gt;为什么《硅谷》让我这么着迷呢，我想可能有这些原因。&lt;br&gt;首先是主角是一帮程序员，梦想着 ”Make the world a better place”, 这恰恰与许多人的想法一样。&lt;br&gt;另外很多程序员的日常梗被搬上屏幕，并且被夸张地演绎出来，极具喜感。&lt;br&gt;还有跌宕起伏的剧情，充满讽刺又倍感真实的场景。&lt;/p&gt;
+&lt;h2 id=&#34;Chapter-3&#34;&gt;&lt;a href=&#34;#Chapter-3&#34; class=&#34;headerlink&#34; title=&#34;Chapter 3&#34;&gt;&lt;/a&gt;Chapter 3&lt;/h2&gt;&lt;p&gt;我总结了我感觉最搞笑的一些场景，作为对那些美好时光的纪念。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;大头当上了斯坦福大学校长，xswl&lt;/li&gt;
+&lt;li&gt;“This guy f*cks”&lt;/li&gt;
+&lt;li&gt;Tab和Space之争，其实还挺想Ritchard和那个FB的妹子在一起的，另外这是妹子的GitHub: &lt;a href=&#34;https://github.com/Stitchpunk&#34;&gt;https://github.com/Stitchpunk&lt;/a&gt;，虽然是个fake帐号，不过已经1.9k follower了～&lt;/li&gt;
+&lt;li&gt;Jared 拿假枪打Ritchard屁股&lt;/li&gt;
+&lt;li&gt;Ritchard 踹门踹破了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;Chapter-4&#34;&gt;&lt;a href=&#34;#Chapter-4&#34; class=&#34;headerlink&#34; title=&#34;Chapter 4&#34;&gt;&lt;/a&gt;Chapter 4&lt;/h2&gt;&lt;p&gt;彩蛋，一些技术细节和代码截屏&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Bill Gates 居然来客串了!&lt;/li&gt;
+&lt;li&gt;Boolmberg Emily Chang&lt;/li&gt;
+&lt;li&gt;伪纪录片&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;Chapter-5&#34;&gt;&lt;a href=&#34;#Chapter-5&#34; class=&#34;headerlink&#34; title=&#34;Chapter 5&#34;&gt;&lt;/a&gt;Chapter 5&lt;/h2&gt;&lt;p&gt;一些网站&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Hooli 官网： &lt;a href=&#34;http://hooli.xyz/&#34;&gt;http://hooli.xyz&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Pied Piper 官网： &lt;a href=&#34;http://www.piedpiper.com/&#34;&gt;http://www.piedpiper.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

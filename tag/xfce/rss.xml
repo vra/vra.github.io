@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;xfce&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 28 Jul 2017 20:37:49 +0800</pubDate>
+        <lastBuildDate>Fri, 28 Jul 2017 20:37:49 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2017/07/28/vnc-troubeshoot/</guid>
+            <title>VNC使用总结</title>
+            <link>http://vra.github.io/2017/07/28/vnc-troubeshoot/</link>
+            <category>总结</category>
+            <category>Linux</category>
+            <category>Ubuntu</category>
+            <category>Vnc</category>
+            <category>Xfce</category>
+            <category>Gnome</category>
+            <pubDate>Fri, 28 Jul 2017 20:37:49 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;这是一些使用VNC连接服务器的总结，这些操作都是在Ubuntu操作系统下进行的。&lt;br&gt;&lt;img src=&#34;https://lh6.ggpht.com/RcRUeZKNRYaCfoNGMe8Ic8OORBN-_pXgNyNtvNfSQ-5DFl-7CTuTYC2m96BbbV5IQU0=w300&#34;&gt;&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;VNC使用-Gnome桌面系统&#34;&gt;&lt;a href=&#34;#VNC使用-Gnome桌面系统&#34; class=&#34;headerlink&#34; title=&#34;VNC使用 Gnome桌面系统&#34;&gt;&lt;/a&gt;VNC使用 Gnome桌面系统&lt;/h3&gt;&lt;p&gt;安装Gnome桌面：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install --no-install-recommends ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal     &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后修改你的&lt;code&gt;~/.vnc/xstarup&lt;/code&gt;文件为如下内容：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/bin/sh&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# Uncomment the following two lines for normal desktop:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# unset SESSION_MANAGER&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# exec /etc/X11/xinit/xinitrc&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[ -x /etc/vnc/xstartup ] &amp;amp;&amp;amp; &lt;span class=&#34;built_in&#34;&gt;exec&lt;/span&gt; /etc/vnc/xstartup&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[ -r &lt;span class=&#34;variable&#34;&gt;$HOME&lt;/span&gt;/.Xresources ] &amp;amp;&amp;amp; xrdb &lt;span class=&#34;variable&#34;&gt;$HOME&lt;/span&gt;/.Xresources&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;xsetroot -solid grey&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;vncconfig -iconic &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x-terminal-emulator -geometry 80x24+10+10 -ls -title &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$VNCDESKTOP&lt;/span&gt; Desktop&amp;quot;&lt;/span&gt; &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x-window-manager &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gnome-panel &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gnome-settings-daemon &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;metacity &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;nautilus -n &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gnome-terminal &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;使用Xfce桌面&#34;&gt;&lt;a href=&#34;#使用Xfce桌面&#34; class=&#34;headerlink&#34; title=&#34;使用Xfce桌面&#34;&gt;&lt;/a&gt;使用Xfce桌面&lt;/h3&gt;&lt;p&gt;如果要使用xfce桌面的话，通过如下命令来安装：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install xfce4 xfce4-goodies       &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后将&lt;code&gt;~/.vnc/xstartup&lt;/code&gt;改为如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;xrdb &lt;span class=&#34;variable&#34;&gt;$HOME&lt;/span&gt;/.Xresources&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;startxfce4 &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;打开gnome-terminal显示“Input-Output-Error”&#34;&gt;&lt;a href=&#34;#打开gnome-terminal显示“Input-Output-Error”&#34; class=&#34;headerlink&#34; title=&#34;打开gnome-terminal显示“Input/Output Error”&#34;&gt;&lt;/a&gt;打开gnome-terminal显示“Input/Output Error”&lt;/h3&gt;&lt;p&gt;从&lt;a href=&#34;https://bbs.archlinux.org/viewtopic.php?id=218510&#34;&gt;这里&lt;/a&gt;了解到，可以使用&lt;code&gt;journalctl -xe&lt;/code&gt;查看报错，我在查看是发现下面的错误信息：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;org.gnome.Terminal[4882]: Non UTF-8 locale (ANSI_X3.4-1968) is not supported!&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;从这里看到，应该是locale设置不对然后导致的错误，即Gnome-Terminal只支持UTF-8的编码。所以这里只需要将locale设置合适即可。有下面两种方法：&lt;/p&gt;
+&lt;h4 id=&#34;1-修改-bashrc或-zshrc&#34;&gt;&lt;a href=&#34;#1-修改-bashrc或-zshrc&#34; class=&#34;headerlink&#34; title=&#34;1. 修改.bashrc或.zshrc&#34;&gt;&lt;/a&gt;1. 修改.bashrc或.zshrc&lt;/h4&gt;&lt;p&gt;在.bashrc或.zshrc里面增加如下内容：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# set LC&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LANG=en_US.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LANGUAGE=&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_CTYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_NUMERIC=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_TIME=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_COLLATE=&lt;span class=&#34;string&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_MONETARY=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_MESSAGES=&lt;span class=&#34;string&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_PAPER=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_NAME=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_ADDRESS=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_TELEPHONE=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_MEASUREMENT=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_IDENTIFICATION=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;LC_ALL=&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LANG&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LANGUAGE=&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_CTYPE&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_NUMERIC&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_TIME&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_COLLATE&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_MONETARY&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_MESSAGES&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_PAPER&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_NAME&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_ADDRESS&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_TELEPHONE&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_MEASUREMENT&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_IDENTIFICATION&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; LC_ALL=&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后source下，删除之前的VNC会话，重新建立会话，查看是否正确。  &lt;/p&gt;
+&lt;h4 id=&#34;2-修改系统的locale设置&#34;&gt;&lt;a href=&#34;#2-修改系统的locale设置&#34; class=&#34;headerlink&#34; title=&#34;2. 修改系统的locale设置&#34;&gt;&lt;/a&gt;2. 修改系统的locale设置&lt;/h4&gt;&lt;p&gt;如果你是管理员的话，可以修改系统的locale设置，使得所有用户都能正确地使用VNC。具体的代码如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LANG=en_US.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LANGUAGE=&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_CTYPE=&lt;span class=&#34;string&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_NUMERIC=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_TIME=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_COLLATE=&lt;span class=&#34;string&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_MONETARY=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_MESSAGES=&lt;span class=&#34;string&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_PAPER=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_NAME=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_ADDRESS=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_TELEPHONE=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_MEASUREMENT=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_IDENTIFICATION=zh_CN.UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo update-locale LC_ALL=&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样操作后同样需要重新建立VNC会话。  &lt;/p&gt;
+&lt;h3 id=&#34;VNC连过去后，命令行字体挤在一起，看不清楚&#34;&gt;&lt;a href=&#34;#VNC连过去后，命令行字体挤在一起，看不清楚&#34; class=&#34;headerlink&#34; title=&#34;VNC连过去后，命令行字体挤在一起，看不清楚&#34;&gt;&lt;/a&gt;VNC连过去后，命令行字体挤在一起，看不清楚&lt;/h3&gt;&lt;p&gt;这个原因也是因为locale设置的不对，设置了中文字体导致的问题，所以同样地，按照上面所说的更改locale的方法，更新locale即可。 &lt;/p&gt;
+&lt;h3 id=&#34;VNC中，按Tab不自动补全，而是跳转到别的Terminal窗口&#34;&gt;&lt;a href=&#34;#VNC中，按Tab不自动补全，而是跳转到别的Terminal窗口&#34; class=&#34;headerlink&#34; title=&#34;VNC中，按Tab不自动补全，而是跳转到别的Terminal窗口&#34;&gt;&lt;/a&gt;VNC中，按Tab不自动补全，而是跳转到别的Terminal窗口&lt;/h3&gt;&lt;p&gt;这个问题的解决方法是实验室师兄提供的，打开&lt;code&gt;~/.config/xfce4/xfce-perchaannel-xml/xfce4-keyboard-shortcuts.xml&lt;/code&gt;文件，将其中的&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;property&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;name&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;symbol&#34;&gt;&amp;amp;lt;&lt;/span&gt;Super&lt;span class=&#34;symbol&#34;&gt;&amp;amp;gt;&lt;/span&gt;Tab&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;type&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;string&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;value&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;switch_window_key&amp;quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;修改为&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;property&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;name&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;symbol&#34;&gt;&amp;amp;lt;&lt;/span&gt;Super&lt;span class=&#34;symbol&#34;&gt;&amp;amp;gt;&lt;/span&gt;Tab&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;type&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;empty&amp;quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后用&lt;code&gt;vncserver -kill :portid&lt;/code&gt; kill掉连接，再用&lt;code&gt;vncserver -geometry 1920x1080 :portid&lt;/code&gt;来新建连接。  &lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;gcc&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 03 Dec 2017 23:48:55 +0800</pubDate>
+        <lastBuildDate>Sun, 03 Dec 2017 23:48:55 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2017/12/03/ubuntu-core-dump-debug/</guid>
+            <title>在ubuntu中进行core dump调试</title>
+            <link>http://vra.github.io/2017/12/03/ubuntu-core-dump-debug/</link>
+            <category>Linux</category>
+            <category>Ubuntu</category>
+            <category>gdb</category>
+            <category>gcc</category>
+            <category>g++</category>
+            <pubDate>Sun, 03 Dec 2017 23:48:55 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;在Linux环境下执行程序的时候，有的时候会出现段错误（‘segment fault’），同时显示core dumped,就像下面这样：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;[1]    15428 segmentation fault (core dumped)  ./a.out&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;下面是我网上找到的段错误的定义和说明：  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;A segmentation fault (often shortened to segfault) is a particular error condition that can occur during the operation of computer software. In short, a segmentation fault occurs when a program attempts to access a memory location that it is not allowed to access, or attempts to access a memory location in a way that is not allowed (e.g., attempts to write to a read-only location, or to overwrite part of the operating system). Systems based on processors like the Motorola 68000 tend to refer to these events as Address or Bus errors.
+
+Segmentation is one approach to memory management and protection in the operating system. It has been superseded by paging for most purposes, but much of the terminology of segmentation is still used, &amp;quot;segmentation fault&amp;quot; being an example. Some operating systems still have segmentation at some logical level although paging is used as the main memory management policy.
+
+On Unix-like operating systems, a process that accesses invalid memory receives the SIGSEGV signal. On Microsoft Windows, a process that accesses invalid memory receives the STATUS_ACCESS_VIOLATION exception.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;简单理解就是访问了不该访问的内存就会产生段错误。&lt;br&gt;而core dump是一种将出错时的调用堆栈等信息写入到一个文件中，方便后面调试。Ubuntu下需要进行一些设置才能正确地调试core dump，下面是详细的说明。  &lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;ulimit-设置&#34;&gt;&lt;a href=&#34;#ulimit-设置&#34; class=&#34;headerlink&#34; title=&#34;ulimit 设置&#34;&gt;&lt;/a&gt;ulimit 设置&lt;/h3&gt;&lt;p&gt;ulimit是对shell启动进程所占系统资源进行限制的一个工具，详细的使用说明可以看&lt;a href=&#34;https://www.ibm.com/developerworks/cn/linux/l-cn-ulimit/&#34;&gt;这里&lt;/a&gt;。在这里我们需要对ulimit进行设置，因为在Ubuntu下，默认的core 文件的大小是0，可以通过执行&lt;code&gt;ulimit -a&lt;/code&gt;查看所有的选项设置值：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ &lt;span class=&#34;built_in&#34;&gt;ulimit&lt;/span&gt; -a&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-t: cpu time (seconds)              unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-f: file size (blocks)              unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-d: data seg size (kbytes)          unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-s: stack size (kbytes)             8192&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-c: core file size (blocks)         0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-m: resident &lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; size (kbytes)      unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-u: processes                       2063144&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-n: file descriptors                1024&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-l: locked-in-memory size (kbytes)  64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-v: address space (kbytes)          unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-x: file locks                      unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-i: pending signals                 2063144&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-q: bytes &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; POSIX msg queues       819200&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-e: max nice                        0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-r: max rt priority                 0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-N 15:                              unlimited&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到上面的结果中&lt;code&gt;-c: core file size (blocks)&lt;/code&gt; 那项的值是0，因此在段错误发生core dump的时候，默认也不会生成core文件。&lt;br&gt;那应该怎么修改core文件的大小呢？&lt;code&gt;ulimit&lt;/code&gt;的值都可以通过&lt;code&gt;ulimit -k v&lt;/code&gt;的形式来设置，其中&lt;code&gt;-k&lt;/code&gt;就是上面结果中的第一列，而&lt;code&gt;v&lt;/code&gt;就是设置的值，最大可以设置为&lt;code&gt;unlimited&lt;/code&gt;，所以我们可以这样来设置:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;ulimit&lt;/span&gt; -c unlimited&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;再用 &lt;code&gt;ulimit -a&lt;/code&gt;查看，发现对&lt;code&gt;-c&lt;/code&gt;的修改已经生效了：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ &lt;span class=&#34;built_in&#34;&gt;ulimit&lt;/span&gt; -a&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-t: cpu time (seconds)              unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-f: file size (blocks)              unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-d: data seg size (kbytes)          unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-s: stack size (kbytes)             8192&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-c: core file size (blocks)         unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-m: resident &lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; size (kbytes)      unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-u: processes                       2063144&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-n: file descriptors                1024&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-l: locked-in-memory size (kbytes)  64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-v: address space (kbytes)          unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-x: file locks                      unlimited&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-i: pending signals                 2063144&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-q: bytes &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; POSIX msg queues       819200&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-e: max nice                        0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-r: max rt priority                 0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;-N 15:                              unlimited&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code&gt;注意：新开一个Shell的时候，ulimit选项都恢复了默认选项，需要重新设置该值
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;设置core-pattern&#34;&gt;&lt;a href=&#34;#设置core-pattern&#34; class=&#34;headerlink&#34; title=&#34;设置core_pattern&#34;&gt;&lt;/a&gt;设置&lt;code&gt;core_pattern&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;出了上面的ulimit设置，我们还需要设置&lt;code&gt;core_pattern&lt;/code&gt;，即发送core dump后，对core文件执行什么操作，这个可以通过查看&lt;code&gt;/proc/sys/kernel/core_pattern&lt;/code&gt;文件来得到，在Ubuntu 16.04上面，上述文件内容如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ cat /proc/sys/kernel/core_pattern&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;|/usr/share/apport/apport %p %s %c %P&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中的&lt;code&gt;l&lt;/code&gt;表示执行后面的命令，而后面的&lt;code&gt;apport&lt;/code&gt;是Ubuntu的bug反馈的工具，因此在Ubuntu下，默认的core dump 段错误处理机制是将其作为一个bug，进行bug检查，如果是bug的话就进行上报。&lt;br&gt;在这种设定下，我们没法用gdb来调试我们程序的错误。&lt;br&gt;因此这里我们得修改&lt;code&gt;core_pattern&lt;/code&gt;的内容，将其修改为&lt;code&gt;core&lt;/code&gt;即可。但是没有找到修改&lt;code&gt;core_pattern&lt;/code&gt;文件的方式，因为它本身不是一个实体的文件，所以这里有个小技巧来实现这个功能：暂停&lt;code&gt;apport&lt;/code&gt;服务：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo service apport stop&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后查看&lt;code&gt;core_pattern&lt;/code&gt;的内容：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ cat /proc/sys/kernel/core_pattern&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;core&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到这里的操作以及改成&lt;code&gt;core&lt;/code&gt;，即生成core文件。  &lt;/p&gt;
+&lt;h3 id=&#34;gcc-g-设置debug模式&#34;&gt;&lt;a href=&#34;#gcc-g-设置debug模式&#34; class=&#34;headerlink&#34; title=&#34;gcc/g++设置debug模式&#34;&gt;&lt;/a&gt;gcc/g++设置debug模式&lt;/h3&gt;&lt;p&gt;除了上面的两项设置，这里还需要在编译代码的时候通过加&lt;code&gt;-g&lt;/code&gt;参数来启用debug模式，这样会在生成的可执行文件中加入调试信息：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;g++ -g xxx.cpp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gcc -g xxx.c&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;采用gdb来调试程序&#34;&gt;&lt;a href=&#34;#采用gdb来调试程序&#34; class=&#34;headerlink&#34; title=&#34;采用gdb来调试程序&#34;&gt;&lt;/a&gt;采用gdb来调试程序&lt;/h3&gt;&lt;p&gt;完成上面的设置之后，就可以使用gdb来调试了，当程序发生段错误，而且core文件也生成后，通过执行下面的命令来开始调试：&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;gdb .&amp;#x2F;a.out core&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中&lt;code&gt;./a.out&lt;/code&gt;是到可执行文件的路径，而&lt;code&gt;core&lt;/code&gt;是core dump生成的文件。&lt;br&gt;之后执行在gdb调试环境里面执行&lt;code&gt;bt&lt;/code&gt;命令，即可定位到报错的位置，然后再根据报错信息，利用搜索引擎查找解决方法。下面是我的一个调试现场信息：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ gdb ./build/tools/caffe.bin core&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Copyright (C) 2016 Free Software Foundation, Inc.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;License GPLv3+: GNU GPL version 3 or later &amp;lt;http://gnu.org/licenses/gpl.html&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;This is free software: you are free to change and redistribute it.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;There is NO WARRANTY, to the extent permitted by law.  Type &lt;span class=&#34;string&#34;&gt;&amp;quot;show copying&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;and &lt;span class=&#34;string&#34;&gt;&amp;quot;show warranty&amp;quot;&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; details.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;This GDB was configured as &lt;span class=&#34;string&#34;&gt;&amp;quot;x86_64-linux-gnu&amp;quot;&lt;/span&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Type &lt;span class=&#34;string&#34;&gt;&amp;quot;show configuration&amp;quot;&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; configuration details.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;For bug reporting instructions, please see:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;http://www.gnu.org/software/gdb/bugs/&amp;gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Find the GDB manual and other documentation resources online at:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;http://www.gnu.org/software/gdb/documentation/&amp;gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;For &lt;span class=&#34;built_in&#34;&gt;help&lt;/span&gt;, &lt;span class=&#34;built_in&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;help&amp;quot;&lt;/span&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Type &lt;span class=&#34;string&#34;&gt;&amp;quot;apropos word&amp;quot;&lt;/span&gt; to search &lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; commands related to &lt;span class=&#34;string&#34;&gt;&amp;quot;word&amp;quot;&lt;/span&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Reading symbols from ./build/tools/caffe.bin...(no debugging symbols found)...&lt;span class=&#34;keyword&#34;&gt;done&lt;/span&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[New LWP 38035]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[Thread debugging using libthread_db enabled]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Using host libthread_db library &lt;span class=&#34;string&#34;&gt;&amp;quot;/lib/x86_64-linux-gnu/libthread_db.so.1&amp;quot;&lt;/span&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Core was generated by `./build/tools/caffe.bin&lt;span class=&#34;string&#34;&gt;&amp;#x27;.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;Program terminated with signal SIGSEGV, Segmentation fault.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#0  0x00007f99b6ff5f66 in google::protobuf::Arena::AllocateAligned(std::type_info const*, unsigned long) () from /usr/local/lib/libopencv_dnn.so.3.3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;(gdb) bt&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#0  0x00007f99b6ff5f66 in google::protobuf::Arena::AllocateAligned(std::type_info const*, unsigned long) () from /usr/local/lib/libopencv_dnn.so.3.3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#1  0x00007f99b6ff5f89 in google::protobuf::Arena::AddListNode(void*, void (*)(void*)) () from /usr/local/lib/libopencv_dnn.so.3.3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#2  0x00007f99b70473ae in google::protobuf::FileDescriptorProto::New(google::protobuf::Arena*) const [clone .localalias.409] () from /usr/local/lib/libopencv_dnn.so.3.3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#3  0x00007f99b6147038 in google::protobuf::MessageLite::ParseFromArray(void const*, int) () from /usr/lib/x86_64-linux-gnu/libprotobuf.so.9&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#4  0x00007f99b61901b6 in google::protobuf::EncodedDescriptorDatabase::Add(void const*, int) () from /usr/lib/x86_64-linux-gnu/libprotobuf.so.9&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#5  0x00007f99b61519b8 in google::protobuf::DescriptorPool::InternalAddGeneratedFile(void const*, int) () from /usr/lib/x86_64-linux-gnu/libprotobuf.so.9&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#6  0x00007f99b618048c in google::protobuf::protobuf_AddDesc_google_2fprotobuf_2fdescriptor_2eproto() () from /usr/lib/x86_64-linux-gnu/libprotobuf.so.9&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#7  0x00007f99b7e346ba in call_init (l=&amp;lt;optimized out&amp;gt;, argc=argc@entry=1, argv=argv@entry=0x7ffe8743a4d8, env=env@entry=0x7ffe8743a4e8) at dl-init.c:72&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#8  0x00007f99b7e347cb in call_init (env=0x7ffe8743a4e8, argv=0x7ffe8743a4d8, argc=1, l=&amp;lt;optimized out&amp;gt;) at dl-init.c:30&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#9  _dl_init (main_map=0x7f99b804b168, argc=1, argv=0x7ffe8743a4d8, env=0x7ffe8743a4e8) at dl-init.c:120&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#10 0x00007f99b7e24c6a in _dl_start_user () from /lib64/ld-linux-x86-64.so.2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#11 0x0000000000000001 in ?? ()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#12 0x00007ffe8743c1cb in ?? ()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;#13 0x0000000000000000 in ?? ()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;(gdb) &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;参考&#34;&gt;&lt;a href=&#34;#参考&#34; class=&#34;headerlink&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;参考&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ibm.com/developerworks/cn/linux/l-gccrtl/index.html&#34;&gt;https://www.ibm.com/developerworks/cn/linux/l-gccrtl/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ibm.com/developerworks/cn/linux/l-cn-ulimit/&#34;&gt;https://www.ibm.com/developerworks/cn/linux/l-cn-ulimit/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

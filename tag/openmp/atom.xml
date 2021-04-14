@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;openmp&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2016-06-17T13:49:56.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2016/06/17/openmp-begin/</id>
+        <title>OpenMP并行编程简介</title>
+        <link rel="alternate" href="http://vra.github.io/2016/06/17/openmp-begin/"/>
+        <content type="html">&lt;p&gt;在这学期的并行计算课程中，老师讲了OpenMP,MPI，CUDA这3种并行计算编程模型，我打算把相关的知识点记录下来，便于以后用到的时候查阅。  &lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.openmp.org/wp-content/uploads/openmp-menu-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;OpenMP是基于共享存储体系的基于线程的并行编程模型。一个共享存储的进程由多个线程组成，而OpenMP就是基于已有线程的共享编程范例。&lt;br&gt;在OpenMP中，线程的并行化是由编程人员控制的，不是自动编程模型，而是外部变成模型。&lt;br&gt;OpenMP采用&lt;strong&gt;Fork-Join&lt;/strong&gt;并行执行模型。即程序开始于一个单独的主线程，主线程会一直串行地执行，遇到第一个并行域，通过如下过程完成并行操作：  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Fork: 主线程创建一系列并行的线程，由这些线程来完成并行域的代码。  &lt;/li&gt;
+&lt;li&gt;当所有并行线程完成代码的执行后，它们或被同步或被中断，最后只剩下主线程在执行。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;那么并行代码块是如何创建的呢？在OpenMP中，通过编译制导语句（即像&lt;code&gt;#pragma&lt;/code&gt;开头的语句）来构造并行域，在原本的串行代码中，在可并行代码块周围添加编译制导语句并修改相应的代码，就可以完成并行的功能。&lt;br&gt;运行OpenMP代码不需要安装任何额外的库或工具，标准的C/C++代码编译器执行环境就可以执行。&lt;br&gt;下面是一个简单的OpenMP的例子：&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;//file name: test_openmp.c&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;omp.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; argc, &lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;** argv)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; num_thread = &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	omp_set_num_threads(num_thread);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;pragma&lt;/span&gt; omp parallel&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; id = omp_get_thread_num();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;built_in&#34;&gt;printf&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;hello from thread%d\n&amp;quot;&lt;/span&gt;,id);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;通过&lt;code&gt;gcc --openmp test_openmp.c&lt;/code&gt;来编译，运行生成的可执行文件，得到结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hello from thread0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hello from thread3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hello from thread1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hello from thread2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到，各个线程执行的顺序是无序的。  &lt;/p&gt;
+&lt;h2 id=&#34;核心知识&#34;&gt;&lt;a href=&#34;#核心知识&#34; class=&#34;headerlink&#34; title=&#34;核心知识&#34;&gt;&lt;/a&gt;核心知识&lt;/h2&gt;&lt;p&gt;下面记录使用OpenMP的一些核心点。  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;包含头文件&lt;code&gt;omp.h&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;所有并行块由&lt;code&gt;#pragma omp&lt;/code&gt;开头的编译制导语句来开始，在代码块周围要有大括号&lt;/li&gt;
+&lt;li&gt;常见的编译制导语句有&lt;code&gt;#pragma omp prallel&lt;/code&gt;, 表示最基本的循环&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#pragma omp parallel for&lt;/code&gt;:并行部分包含一个for循环;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#pragma omp critical&lt;/code&gt;:并行部分的代码一次只能由一个线程执行，相当于取消了并行化&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#pragma omp barrier&lt;/code&gt;: 同步并行线程，让线程等待，直到所有的线程都执行到该行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#pragma omp section&lt;/code&gt;: 将并行块内部的代码划分给线程组中的各个线程，一般会在内部嵌套几个独立的&lt;code&gt;section&lt;/code&gt;语句，可以使用&lt;code&gt;nowait&lt;/code&gt;来停止等待 &lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;omp_set_num_threads&lt;/code&gt;函数来手动设置线程数。可以看到线程数是在程序编写过程中指定的&lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;omp_get_thread_num&lt;/code&gt;来获取当前线程的编号&lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;omp_get_num_threads&lt;/code&gt;来获取线程总数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;一个例子&#34;&gt;&lt;a href=&#34;#一个例子&#34; class=&#34;headerlink&#34; title=&#34;一个例子&#34;&gt;&lt;/a&gt;一个例子&lt;/h2&gt;&lt;p&gt;这里举一个更完善的例子来说明。  &lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;51&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;52&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;53&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;54&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;55&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;56&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;57&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;58&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;59&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;60&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;61&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;62&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;63&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;65&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;66&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;67&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;68&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;69&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;70&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;71&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;72&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;73&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;time.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;math.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;omp.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;meta-string&#34;&gt;&amp;lt;sys/time.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; argc, &lt;span class=&#34;keyword&#34;&gt;char&lt;/span&gt;** argv)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;timeval&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;start&lt;/span&gt;, &lt;span class=&#34;title&#34;&gt;end&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;built_in&#34;&gt;gettimeofday&lt;/span&gt;(&amp;amp;start, &lt;span class=&#34;literal&#34;&gt;NULL&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (argc != &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;USAGE: num_primer &amp;lt;num_of_thread&amp;gt; &amp;lt;integer&amp;gt;&amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;-1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; num_thread = &lt;span class=&#34;built_in&#34;&gt;atoi&lt;/span&gt;(argv[&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; n = &lt;span class=&#34;built_in&#34;&gt;atoi&lt;/span&gt;(argv[&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;num of thread: &amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; num_thread &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot; n: &amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; n &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;* num_primer = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;[num_thread];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; (&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; i = &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;; i &amp;lt; num_thread; ++i)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		num_primer[i] = &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;built_in&#34;&gt;omp_set_num_threads&lt;/span&gt;(num_thread);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;pragma&lt;/span&gt; omp parallel shared(n, num_primer)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; id = &lt;span class=&#34;built_in&#34;&gt;omp_get_thread_num&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; (&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; i = id + &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;; i &amp;lt; n + &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;; i = i + num_thread)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;			&lt;span class=&#34;keyword&#34;&gt;bool&lt;/span&gt; has_factor = &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;			&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;meta-keyword&#34;&gt;pragma&lt;/span&gt; omp parallel shared(n, i, num_primer, has_factor)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;			&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;				&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; (&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; j = &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;; j &amp;lt; &lt;span class=&#34;built_in&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;&lt;/span&gt;(&lt;span class=&#34;built_in&#34;&gt;sqrt&lt;/span&gt;(i)) + &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;; ++j)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;				&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;					&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (i % j == &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;					&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;						has_factor = &lt;span class=&#34;literal&#34;&gt;true&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;						&lt;span class=&#34;keyword&#34;&gt;break&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;					&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;				&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;				&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (!has_factor)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;				&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;					++num_primer[id];&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;					std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;id: &amp;quot;&lt;/span&gt;&amp;lt;&amp;lt; id &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;, primer:&amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;				&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;			&amp;#125;&lt;span class=&#34;comment&#34;&gt;//pragma&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#125;&lt;span class=&#34;comment&#34;&gt;//pragma&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;comment&#34;&gt;//add all primers&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; sum_num_primer = &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; (&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; i = &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;; i &amp;lt; num_thread; ++i)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		sum_num_primer += num_primer[i];	&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	std::cout &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot;The number of primers between 0 and &amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; n &amp;lt;&amp;lt; &lt;span class=&#34;string&#34;&gt;&amp;quot; is: &amp;quot;&lt;/span&gt; &amp;lt;&amp;lt; sum_num_primer &amp;lt;&amp;lt; std::endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;built_in&#34;&gt;gettimeofday&lt;/span&gt;(&amp;amp;end, &lt;span class=&#34;literal&#34;&gt;NULL&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;keyword&#34;&gt;double&lt;/span&gt; time_gap = (end.tv_sec - start.tv_sec) * &lt;span class=&#34;number&#34;&gt;1000000u&lt;/span&gt; + end.tv_usec - start.tv_usec;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;built_in&#34;&gt;printf&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;Time cost: %.2lf s.\n&amp;quot;&lt;/span&gt;, time_gap / &lt;span class=&#34;number&#34;&gt;100000&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;参考文献&#34;&gt;&lt;a href=&#34;#参考文献&#34; class=&#34;headerlink&#34; title=&#34;参考文献&#34;&gt;&lt;/a&gt;参考文献&lt;/h2&gt;&lt;p&gt;并行计算——结构，算法，编程（第3版），陈国良&lt;/p&gt;
+</content>
+        <category term="并行计算" />
+        <category term="C/C++" />
+        <category term="OpenMP" />
+        <updated>2016-06-17T13:49:56.000Z</updated>
+    </entry>
+</feed>

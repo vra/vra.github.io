@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;ext4&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 24 Feb 2017 22:19:15 +0800</pubDate>
+        <lastBuildDate>Fri, 24 Feb 2017 22:19:15 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2017/02/24/linux-add-disk/</guid>
+            <title>Linux服务器增加硬盘操作记录</title>
+            <link>http://vra.github.io/2017/02/24/linux-add-disk/</link>
+            <category>Linux</category>
+            <category>GPU</category>
+            <category>Amax</category>
+            <category>RAID</category>
+            <category>ext4</category>
+            <pubDate>Fri, 24 Feb 2017 22:19:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;最近我们实验室的GPU服务器数据空间不够用了，老师让我联系公司来增加硬盘。我这里记录一下对Amax公司生产的GPU服务器增加硬盘的步骤。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;机器的参数：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;操作系统：Ubuntu 14.04&lt;/li&gt;
+&lt;li&gt;显卡： Nvidia  Tesla K80&lt;/li&gt;
+&lt;li&gt;机器厂商： Amax&lt;/li&gt;
+&lt;li&gt;是否有RAID: 有&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;配置RAID&#34;&gt;&lt;a href=&#34;#配置RAID&#34; class=&#34;headerlink&#34; title=&#34;配置RAID&#34;&gt;&lt;/a&gt;配置RAID&lt;/h3&gt;&lt;p&gt;RAID(Redundant Array of Independent Disks)，即独立硬盘冗余阵列，是一种管理较大空间硬盘阵列的方法，常见的RAID方式到RAID 0-RAID 6，简单的来讲可以这样理解：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RAID 0: 数据不做备份操作，每块盘都可以存储数据&lt;/li&gt;
+&lt;li&gt;RAID 1: 将一半的磁盘作为镜像磁盘，空间利用率只有50%，但是允许有一半的磁盘坏掉（坏掉后备份盘可以继续使用）&lt;/li&gt;
+&lt;li&gt;RAID 5: 使用1块盘作为备份，别的盘可以正常存取数据&lt;br&gt;关于RAID 各种方式的细节，可以看&lt;a href=&#34;https://www.zhihu.com/question/20131784&#34;&gt;这里&lt;/a&gt;。&lt;br&gt;因为我们想让数据盘尽可能被充分地利用，所以我们采用RAID 0。&lt;br&gt;将硬盘插入到插槽后，开机启动服务器，就可以进入RAID的设置。在设置页面中，选择“Configuration Wizard”开始设置。具体的设置内容可以参看&lt;a href=&#34;https://siliconmechanics.zendesk.com/hc/en-us/articles/205066349-Creating-a-RAID-0-1-5-or-6-through-the-LSI-Web-BIOS&#34;&gt;这篇博客&lt;/a&gt;。  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;对硬盘分区&#34;&gt;&lt;a href=&#34;#对硬盘分区&#34; class=&#34;headerlink&#34; title=&#34;对硬盘分区&#34;&gt;&lt;/a&gt;对硬盘分区&lt;/h3&gt;&lt;p&gt;设置好RAID后，重启进入系统，查看新加的硬盘。&lt;br&gt;通过&lt;code&gt;sudo fdisk -l&lt;/code&gt;可以查看所有连接的系统的硬盘，而&lt;code&gt;df -h&lt;/code&gt;则只显示挂载到系统的硬盘，所以查看前者中有而后者中不存在的硬盘，比如&lt;code&gt;/dev/sdf&lt;/code&gt;，就是我们新加的硬盘。&lt;br&gt;找到新加的硬盘后，我们采用&lt;code&gt;sudo fdisk /dev/sdf&lt;/code&gt;命令来对/dev/sdf硬盘创建分区表，输入该命令后，结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;~ ᐅ sudo fdisk /dev/sdf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Device contains neither a valid DOS partition table， nor Sun， SGI or OSF disklabel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Building a new DOS disklabel with disk identifier 0x083d94fb.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Changes will remain &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; memory only， until you decide to write them.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;After that， of course， the previous content won&lt;span class=&#34;string&#34;&gt;&amp;#x27;t be recoverable.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;The device presents a logical sector size that is smaller than&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;the physical sector size. Aligning to a physical sector (or optimal&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;I/O) size boundary is recommended， or performance may be impacted.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;命令(输入 m 获取帮助)： &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;根据提示，我们输入m，得到如下反馈：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;命令操作&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   a   toggle a bootable flag&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   b   edit bsd disklabel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   c   toggle the dos compatibility flag&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   d   delete a partition&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   l   list known partition types&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   m   &lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt; this menu&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   n   add a new partition&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   o   create a new empty DOS partition table&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   p   &lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt; the partition table&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   q   quit without saving changes&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   s   create a new empty Sun disklabel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   t   change a partition&lt;span class=&#34;string&#34;&gt;&amp;#x27;s system id&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;   u   change display/entry units&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;   v   verify the partition table&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;   w   write table to disk and exit&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;   x   extra functionality (experts only)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;命令(输入 m 获取帮助)： &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到列出了所有可能的选项。我们这里输入n，得到输出：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Partition &lt;span class=&#34;built_in&#34;&gt;type&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   p   primary (0 primary， 0 extended， 4 free)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   e   extended&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Select (default p):   &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;因为我们在新加的硬盘上只创建一个分区，而且新加的盘用作数据盘，不会作为启动分区，所以选Primary 分区和extended分区都没关系。从这里开始，我们所有的操作都可以选择默认，即每次都是按&lt;code&gt;Enter&lt;/code&gt;键到下一步。到所有设置到完成后，fdisk命令会创建分区，大概需要等1分钟。  &lt;/p&gt;
+&lt;h3 id=&#34;格式化硬盘&#34;&gt;&lt;a href=&#34;#格式化硬盘&#34; class=&#34;headerlink&#34; title=&#34;格式化硬盘&#34;&gt;&lt;/a&gt;格式化硬盘&lt;/h3&gt;&lt;p&gt;创建好分区表后，需要格式化硬盘，将Linux的文件系统应用到硬盘上，硬盘才能存储数据。格式化硬盘采用的是&lt;code&gt;mkfs&lt;/code&gt;命令。&lt;br&gt;目前Linux常用的文件格式是ext3和ext4，其中ext4是ext3的后续版本，对后者进行了一些改进，例如最大文件变成16TB、最大子目录数高达64000个等。具体的改进请参考&lt;a href=&#34;https://en.wikipedia.org/wiki/Ext4&#34;&gt;这里&lt;/a&gt;。使用mkfs命令时，可以使用-t 选项制定文件格式。不指定默认的文件格式是ext2。&lt;br&gt;所以我们这里的命令是：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo mkfs -t ext4 /dev/sdf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;对于弹出的问题，选择&lt;code&gt;y&lt;/code&gt;即可，可以看到会写入inode数等操作，进行格式化。  &lt;/p&gt;
+&lt;h3 id=&#34;挂载硬盘&#34;&gt;&lt;a href=&#34;#挂载硬盘&#34; class=&#34;headerlink&#34; title=&#34;挂载硬盘&#34;&gt;&lt;/a&gt;挂载硬盘&lt;/h3&gt;&lt;p&gt;硬盘格式化后，只要挂载到系统就可以正常使用了。接下来的操作就跟插硬盘或U盘到服务器上时的操作一样，先创建一个目录，然后将硬盘挂载到该目录，然后就可以在挂载后的目录里面写入或读出文件了，所有操作都在会在硬盘上进行。具体命令如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo mkdir /data5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo mount /dev/sdf /data5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo chmod -R 777 /data5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意最后一步需要修改文件夹的权限，否则服务器上的其他用户没有读写的权限。  &lt;/p&gt;
+&lt;h3 id=&#34;将挂载信息写入到fstab&#34;&gt;&lt;a href=&#34;#将挂载信息写入到fstab&#34; class=&#34;headerlink&#34; title=&#34;将挂载信息写入到fstab&#34;&gt;&lt;/a&gt;将挂载信息写入到fstab&lt;/h3&gt;&lt;p&gt;如果只执行了挂载操作而不将硬盘的挂载操作写入到&lt;code&gt;/etc/fstab&lt;/code&gt;中，则下次重启的时候，需要手动挂载，而用户对于/data5目录是无法进行读写操作的。所以接下来我们需要将挂载操作命令写入到&lt;code&gt;/etc/fstab&lt;/code&gt;文件中。&lt;br&gt;fstab命令的写法有两种，一种是采用UUID，如：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;UUID=8aeec127-62bd-4e7a-2020-5a5024f27a22 /data1 ext4 defaults 0 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这种格式，其中硬盘对应的UUID号可以通过命令&lt;code&gt;sudo file -sL /dev/sdf&lt;/code&gt;得到。关于fstab命令后面参数的含义，请参见我的&lt;a href=&#34;http://goingthink.wang/2014/12/14/fstab-automount-windows-partitions/&#34;&gt;另一篇博客&lt;/a&gt;。&lt;br&gt;另外一种格式就是用&lt;code&gt;/dev/sdf&lt;/code&gt;来代替UUID，即一条记录如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;/dev/sdf /data5 ext4  defaults 0 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;添加该记录到&lt;code&gt;/etc/fstab&lt;/code&gt;文件后，下次重启，硬盘也会自动挂载。&lt;br&gt;至此，我们的任务就算大功告成了，希望对你有所帮助。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

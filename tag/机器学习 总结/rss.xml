@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;机器学习 总结&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 12 Dec 2015 13:43:42 +0800</pubDate>
+        <lastBuildDate>Sat, 12 Dec 2015 13:43:42 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2015/12/12/machine-learning-summary/</guid>
+            <title>机器学习笔记-总结</title>
+            <link>http://vra.github.io/2015/12/12/machine-learning-summary/</link>
+            <category>机器学习 总结</category>
+            <pubDate>Sat, 12 Dec 2015 13:43:42 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;机器学习笔记是我这学期在上”统计学习”这门课时学习到的内容的一个总结.因为过往很多学过的知识,现在大多都已经忘掉了,而统计机器学习的内容则很重要,我可不能再上过就忘掉,所以在复习的时候把这些内容都记录下来,以便以后查阅.&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;基本概念&#34;&gt;&lt;a href=&#34;#基本概念&#34; class=&#34;headerlink&#34; title=&#34;基本概念&#34;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;学习：一个系统在完成一项任务T的时候,使用了数据E,使得在评判标准P下,性能获得了提升,这就是学习  &lt;/li&gt;
+&lt;li&gt;统计学习的对象是数据,关于统计学习的基本假设是：同类数据服从一定的统计规律性,即数据都是独立同分布的  &lt;/li&gt;
+&lt;li&gt;统计学习中的问题可以分为4大类,分别是 &lt;ul&gt;
+&lt;li&gt;监督学习：解决&lt;strong&gt;预测&lt;/strong&gt;问题, 根据预测变量是否连续,分为回归问题和分类问题&lt;/li&gt;
+&lt;li&gt;非监督学习：解决&lt;strong&gt;分析&lt;/strong&gt;型问题, 分为聚类(.如图像分割).,密度估计和关联分析三类&lt;/li&gt;
+&lt;li&gt;半监督学习：问题中既有分析的部分,又有预测的部分,主要有主动学习(.先分析,出现问题时向人要数据(.如分类label).).&lt;/li&gt;
+&lt;li&gt;增强学习：在合适过程中,根据反馈做新的判断,主动增强自身的学习,典型应用：机器人足球&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;统计学习的基本步骤&lt;/li&gt;
+&lt;li&gt;获取数据(.即E).&lt;/li&gt;
+&lt;li&gt;确定用什么样的数学模型,所有模型构成假设空间&lt;/li&gt;
+&lt;li&gt;有了一组模型后,确定策略,即如何来找到最优的模型&lt;/li&gt;
+&lt;li&gt;写出模型选择策略的算法&lt;/li&gt;
+&lt;li&gt;通过学习得到最优模型&lt;/li&gt;
+&lt;li&gt;用学习到的模型来在新的数据上进行分析和预测&lt;/li&gt;
+&lt;li&gt;学习的三大要素：模型,策略,算法.模型是知识的集合,策略是模型选择的准则,算法就是学习的具体方法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;模型的种类&#34;&gt;&lt;a href=&#34;#模型的种类&#34; class=&#34;headerlink&#34; title=&#34;模型的种类&#34;&gt;&lt;/a&gt;模型的种类&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;线性模型(Linear model)：y=ax+b,算法实例：线性回归(Linear regression)&lt;/li&gt;
+&lt;li&gt;对数线性(Log-linear model)：算法实例：逻辑斯蒂回归(Logistic regression)&lt;/li&gt;
+&lt;li&gt;稀疏模型(Sparse model)：形式也是y=ax+b,但a很稀疏,算法实例：稀疏分解(Sparese decomposition)&lt;/li&gt;
+&lt;li&gt;非线性核方法(Non-linear by kernel),利用核技巧将非线性问题转化为线性问题,实例：支持向量机(SVM, support vector machine)&lt;/li&gt;
+&lt;li&gt;层级非线性(Layered nonlinear)：实例：神经网络(Neural Network)&lt;/li&gt;
+&lt;li&gt;图模型(Graphic model)：将数据看作随机变量的话,它们之间的依赖关系可用图来表示,实例：贝叶斯网络(Bayes network)&lt;/li&gt;
+&lt;li&gt;树模型(Tree model)：对输入变量进行分块处理,每个子块有可以使用别的机器学习算法,实例：决策树(Decision tree),提升数(Boosting tree)&lt;/li&gt;
+&lt;li&gt;混合模型(Mixture model)：实例：聚类(Clustering)&lt;br&gt;上述模型中,1-5为非概率模型,6,8为概率模型,7为混合类型,概率模型和非概率模型可能都有.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;学习的策略&#34;&gt;&lt;a href=&#34;#学习的策略&#34; class=&#34;headerlink&#34; title=&#34;学习的策略&#34;&gt;&lt;/a&gt;学习的策略&lt;/h2&gt;&lt;p&gt;策略是模型选择的准则,为了量化模型的好坏,我们定义了损失函数和风险函数&lt;br&gt;损失函数(Loss function)：也叫代价函数(Cost function),用来度量模型对于&lt;strong&gt;一个&lt;/strong&gt;输入&lt;code&gt;X&lt;/code&gt;产生的预测值&lt;code&gt;f(x)&lt;/code&gt;与真实值&lt;code&gt;Y&lt;/code&gt;之间的差异的大小.常见的损失函数有:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;0-1 损失函数(0-1 loss function)&lt;br&gt;&lt;img src=&#34;/imgs/01loss.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;平方损失函数(Square loss function)&lt;br&gt;&lt;img src=&#34;/imgs/pingfang.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;绝对值损失函数(Absolute loss function)&lt;br&gt;&lt;img src=&#34;/imgs/jueduizhi.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;对数损失函数(Log loss function)&lt;br&gt;&lt;img src=&#34;/imgs/duishu.png&#34;&gt;&lt;br&gt;风险函数是损失函数的期望,即将模型的输入输出&lt;code&gt;XY&lt;/code&gt;作为随机变量,风险函数就是模型&lt;code&gt;f(X)&lt;/code&gt;关于联合分布&lt;code&gt;P(X,Y)&lt;/code&gt;的平均意义下的损失.风险函数的值越小,表示模型预测结果越准确,这种模型就越好,所以机器学习的目的就是最小化风险函数(Rish miniization).需要注意的是：&lt;code&gt;P(X,Y)&lt;/code&gt;是未知的&lt;br&gt;如果给定数据集,我们可以计算在该数据集上的平均损失,这个损失定义为经验风险.经验风险在数据量足够大的时候,能很好的近似期望风险,但在数据量较少的时候误差会比较大.&lt;br&gt;在经验风险的基础上,加上表示模型复杂度的正则化项,则构成结构风险.结构风险能有效的防止过拟合,因为结构风险要求经验风险和模型复杂度同时都小.  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;经典机器学习算法&#34;&gt;&lt;a href=&#34;#经典机器学习算法&#34; class=&#34;headerlink&#34; title=&#34;经典机器学习算法&#34;&gt;&lt;/a&gt;经典机器学习算法&lt;/h2&gt;&lt;p&gt;分类算法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;K近邻(KNN, K Nearest Neighbor)&lt;/li&gt;
+&lt;li&gt;朴素贝叶斯(Naive Bayes)&lt;/li&gt;
+&lt;li&gt;支持向量机(SVM, Support Vector Machine)&lt;/li&gt;
+&lt;li&gt;AdaBoost &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;聚类算法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;K-Means &lt;/li&gt;
+&lt;li&gt;期望最大化(EM, Expectation Maximization)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;回归算法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;脊回归(Ridge regression)&lt;/li&gt;
+&lt;li&gt;Lasso回归(The Least Absolute Shrinkage and Selectionator Operator)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;关联分析算法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先验算法(Aprior)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;降维算法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;主成份分析法(PCA, Principal Component Analysis)&lt;/li&gt;
+&lt;li&gt;局部线性嵌入(Locally linear embedding)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;欠拟合-under-fitting-和过拟合-over-ftting&#34;&gt;&lt;a href=&#34;#欠拟合-under-fitting-和过拟合-over-ftting&#34; class=&#34;headerlink&#34; title=&#34;欠拟合(under-fitting)和过拟合(over-ftting)&#34;&gt;&lt;/a&gt;欠拟合(under-fitting)和过拟合(over-ftting)&lt;/h2&gt;&lt;p&gt;在训练模型的时候,有的时候需要选择不同的复杂度(.如不同参数的个数).来训练,不同的复杂度体现了模型对训练数据的拟合程度.&lt;br&gt;如果参数过少,模型过于简单,则模型不能很好的拟合训练数据,这种情况称为欠拟合,很显然,欠拟合因为连训练数据的规律都没有学习到,所以对于预测,性能肯定不会太好.&lt;br&gt;另一方面,如果参数太多,模型过于复杂,则对训练数据可以做到特别好的拟合,但由于训练数据是有噪声和误差的,这种情况会将训练数据的噪声和误差都考虑进来,在测试集上性能反而会下降.下面是训练误差和测试误差与模型复杂度的关系&lt;br&gt;&lt;img src=&#34;/imgs/overfitting.gif&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;交叉验证-Cross-Validation&#34;&gt;&lt;a href=&#34;#交叉验证-Cross-Validation&#34; class=&#34;headerlink&#34; title=&#34;交叉验证(Cross Validation)&#34;&gt;&lt;/a&gt;交叉验证(Cross Validation)&lt;/h2&gt;&lt;p&gt;学习的最终目的是预测,即学习一个模型,使得对未知数据能很好地预测.在实际操作中,一般将数据集分为3部分：训练集,验证集和测试集.为了验证在训练集上学习到的模型好坏,需要现在验证集上进行验证.实际中数据总是不充足的,所以需要重复使用数据,采用交叉验证的方法.最常用的交叉验证方法是S折交叉验证方法.&lt;br&gt;S折交叉验证方法(S-fold cross validation)：随机地将数据切分为S个互不相交的子集,然后利用S-1个子集的数据训练模型,利用余下的1个子集作为测试集.测试集的选择有S中情况,所以这种验证可以进行S次.对每个模型,都进行S次训练和验证,然后求出平均测试误差,将平均测试误差最小的模型作为最优模型.&lt;br&gt;当数据量特别少的时候,我们将每个数据分为一个子集,即如果有N个数据,则S=N,这种方法称为留一交叉验证(Leave-one-out cross validation).&lt;/p&gt;
+&lt;h2 id=&#34;判别模型-Discriminative-model-和生成模型-generative-model&#34;&gt;&lt;a href=&#34;#判别模型-Discriminative-model-和生成模型-generative-model&#34; class=&#34;headerlink&#34; title=&#34;判别模型(Discriminative model)和生成模型(generative model)&#34;&gt;&lt;/a&gt;判别模型(Discriminative model)和生成模型(generative model)&lt;/h2&gt;&lt;p&gt;生成式方法：对于某个给定的输入&lt;code&gt;X&lt;/code&gt;,先学习得到联合分布&lt;code&gt;P(X,Y)&lt;/code&gt;,再计算&lt;code&gt;P(Y|X)&lt;/code&gt;,也即该方法考虑给定输入&lt;code&gt;X&lt;/code&gt;,输出&lt;code&gt;Y&lt;/code&gt;是怎么生成的,要求得到一个关于整体的信息,即对&lt;code&gt;P(X,Y)&lt;/code&gt;进行建模.&lt;br&gt;生成式方法应用更广,适用于各种机器学习问题,而且收敛速度快,而且对于有隐变量的情况,也适用.但由于需要建模&lt;code&gt;XY&lt;/code&gt;的联合分布,所以不能进行降维处理.&lt;br&gt;常见的生成式模型有朴素贝叶斯法和隐马尔科夫模型.&lt;br&gt;判别式方法：对于某个给定的输入&lt;code&gt;X&lt;/code&gt;,直接给出预测值&lt;code&gt;f(X)&lt;/code&gt;或&lt;code&gt;P(Y|X)&lt;/code&gt;.该方法关注的是对于给定的输入&lt;code&gt;X&lt;/code&gt;,应该预测什么样的输出&lt;code&gt;Y&lt;/code&gt;,而不用去考虑数据整体的分布这些信息,即对&lt;code&gt;P(Y|X)&lt;/code&gt;建模.&lt;br&gt;常见的判别模型有KNN,感知机,决策树,逻辑斯蒂回归,最大熵模型,SVM,AdaBoost,条件随机场等.&lt;br&gt;判别式方法只能用于分类和回归问题,可以对&lt;code&gt;X&lt;/code&gt;进行降维处理.  &lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

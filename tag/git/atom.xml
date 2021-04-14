@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;git&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2019-03-10T04:23:54.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2019/03/10/git-reject-large-file-when-commit/</id>
+        <title>Git禁止大文件提交到仓库中</title>
+        <link rel="alternate" href="http://vra.github.io/2019/03/10/git-reject-large-file-when-commit/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;Git提交的时候，有的时候很容易将目录下的非源代码的文件（如二进制文件、模型等）提交到Git仓库里，给后续的使用造成麻烦。那么有没有一种方法来限制提交到Git的文件的大小呢，答案是Yes，下面我来大概介绍下吧。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;原理是利用Git的&lt;a href=&#34;https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90&#34;&gt;钩子&lt;/a&gt;来在&lt;code&gt;commit&lt;/code&gt;之前执行一个脚本，在这个脚本里对提交的文件大小进行检查。&lt;/p&gt;
+&lt;p&gt;具体操作是：修改仓库下的&lt;code&gt;.git/hooks/pre-commit&lt;/code&gt;为如下内容（如果没有这个文件请新建）：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/bin/sh&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hard_limit=$(git config hooks.filesizehardlimit)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;soft_limit=$(git config hooks.filesizesoftlimit)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;: &lt;span class=&#34;variable&#34;&gt;$&amp;#123;hard_limit:=10000000&amp;#125;&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 10M&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;: &lt;span class=&#34;variable&#34;&gt;$&amp;#123;soft_limit:=1000000&amp;#125;&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 1M&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;list_new_or_modified_files()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    git diff --staged --name-status|sed -e &lt;span class=&#34;string&#34;&gt;&amp;#x27;/^D/ d; /^D/! s/.\s\+//&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;unmunge()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt; result=&lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$&amp;#123;1#\&amp;quot;&amp;#125;&lt;/span&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    result=&lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$&amp;#123;result%\&amp;quot;&amp;#125;&lt;/span&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    env &lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; -e &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$result&lt;/span&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;check_file_size()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    n=0 &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;read&lt;/span&gt; -r munged_filename&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;do&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        f=&lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;subst&#34;&gt;$(unmunge &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$munged_filename&lt;/span&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        h=$(git ls-files -s &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$f&lt;/span&gt;&amp;quot;&lt;/span&gt;|cut -d&lt;span class=&#34;string&#34;&gt;&amp;#x27; &amp;#x27;&lt;/span&gt; -f 2)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        s=$(git cat-file -s &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$h&lt;/span&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; [ &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$s&lt;/span&gt;&amp;quot;&lt;/span&gt; -gt &lt;span class=&#34;variable&#34;&gt;$hard_limit&lt;/span&gt; ]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;then&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            env &lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; -E 1&amp;gt;&amp;amp;2 &lt;span class=&#34;string&#34;&gt;&amp;quot;ERROR: hard size limit (&lt;span class=&#34;variable&#34;&gt;$hard_limit&lt;/span&gt;) exceeded: &lt;span class=&#34;variable&#34;&gt;$munged_filename&lt;/span&gt; (&lt;span class=&#34;variable&#34;&gt;$s&lt;/span&gt;)&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            n=$((n+&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;elif&lt;/span&gt; [ &lt;span class=&#34;string&#34;&gt;&amp;quot;&lt;span class=&#34;variable&#34;&gt;$s&lt;/span&gt;&amp;quot;&lt;/span&gt; -gt &lt;span class=&#34;variable&#34;&gt;$soft_limit&lt;/span&gt; ]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;then&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            env &lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; -E 1&amp;gt;&amp;amp;2 &lt;span class=&#34;string&#34;&gt;&amp;quot;WARNING: soft size limit (&lt;span class=&#34;variable&#34;&gt;$soft_limit&lt;/span&gt;) exceeded: &lt;span class=&#34;variable&#34;&gt;$munged_filename&lt;/span&gt; (&lt;span class=&#34;variable&#34;&gt;$s&lt;/span&gt;)&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;fi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;done&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    [ &lt;span class=&#34;variable&#34;&gt;$n&lt;/span&gt; -eq 0 ] &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;list_new_or_modified_files | check_file_size&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里设置了&lt;code&gt;soft_limit&lt;/code&gt;和&lt;code&gt;hard_limit&lt;/code&gt;，默认的大小分别是1M和10M，当提交的某个文件超过1M时，会显示警告；当超过10M时，会显示错误，导致commit失败。&lt;/p&gt;
+&lt;p&gt;此外，可以通过&lt;code&gt;git config&lt;/code&gt;命令来设置&lt;code&gt;soft_limit&lt;/code&gt;和&lt;code&gt;hard_limit&lt;/code&gt;的值：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git config hooks.filesizehardlimit 20000000&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config hooks.filesizesoftlimit 2000000&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;请根据自己的使用情况酌情修改具体的数值。&lt;/p&gt;
+&lt;p&gt;需要注意的是，&lt;code&gt;.git&lt;/code&gt;目录下的文件Git是没有跟踪的，因此在别的电脑或目录下&lt;code&gt;git clone&lt;/code&gt;仓库后，&lt;code&gt;pre-commit&lt;/code&gt;文件并不会被自动clone进来，需要手动添加。&lt;/p&gt;
+&lt;p&gt;我在&lt;a href=&#34;https://gist.github.com/vra/ae91ade1e15ce31b42f6366a91d1ac17&#34;&gt;GitHub Gist&lt;/a&gt;上提交了这个文件，有需要的小伙伴可以直接下载使用。&lt;/p&gt;
+&lt;h2 id=&#34;参考&#34;&gt;&lt;a href=&#34;#参考&#34; class=&#34;headerlink&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;参考&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/39576257/how-to-limit-file-size-on-commit&#34;&gt;https://stackoverflow.com/questions/39576257/how-to-limit-file-size-on-commit&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="总结" />
+        <category term="Linux" />
+        <category term="Git" />
+        <updated>2019-03-10T04:23:54.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2018/05/20/git-remove-large-file/</id>
+        <title>删除Git仓库中的大文件</title>
+        <link rel="alternate" href="http://vra.github.io/2018/05/20/git-remove-large-file/"/>
+        <content type="html">&lt;p&gt;Git是用来管理源代码的一个工具，很多时候，我们不想让Git来跟踪较大的二进制文件。但是如果不小心将某个文件加入到Git的缓存区后，不管后面怎么删除这个大文件，Git始终都保存有这个文件的历史记录，因此项目会很大。拿下面例子来说，我们有个500M的文件&lt;code&gt;cnn.model&lt;/code&gt;，通过下面的命令加入到git暂存区或提交到远端（提交时自动执行git gc命令，生成pack文件）：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ git add cnn.model&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ git commit -m &lt;span class=&#34;string&#34;&gt;&amp;quot;add file cnn.model&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ git push&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;经过这步操作，用&lt;code&gt;du -sh .&lt;/code&gt;命令查看项目大小的话，发现足足有1000多M，因为本地文件&lt;code&gt;cnn.model&lt;/code&gt;以及&lt;code&gt;.git&lt;/code&gt;目录中的object也有一份这个文件的记录。&lt;br&gt;即使使用&lt;code&gt;git rm&lt;/code&gt;命令删除当前的&lt;code&gt;cnn.model&lt;/code&gt;文件，&lt;code&gt;.git&lt;/code&gt;目录中还是记录有这个大文件的记录，因此后面别人clone这个项目后，项目还是很大。因此这里需要使用&lt;code&gt;git filter-branch&lt;/code&gt;命令来删除&lt;code&gt;.git&lt;/code&gt;目录中的文件记录：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ git filter-branch --index-filter &lt;span class=&#34;string&#34;&gt;&amp;#x27;git rm -r --cached --ignore-unmatch &amp;lt;file/dir&amp;gt;&amp;#x27;&lt;/span&gt; -- --all&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这是在你已知大文件的名字和目录情况下的删除过程。如果过了很久或者是有很多大文件，我们需要有一系列的命令来找出大文件，然后对其进行过滤。下面详细阐述整个过程。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;识别出大文件对象&#34;&gt;&lt;a href=&#34;#识别出大文件对象&#34; class=&#34;headerlink&#34; title=&#34;识别出大文件对象&#34;&gt;&lt;/a&gt;识别出大文件对象&lt;/h2&gt;&lt;p&gt;Git中会对大文件进行打包，生成git pack格式的&lt;code&gt;.pack&lt;/code&gt;文件以及对应的同名的&lt;code&gt;.idx&lt;/code&gt;文件，存放在&lt;code&gt;.git/object/pack&lt;/code&gt;目录中。通常来说，Git仓库的大文件都是&lt;code&gt;.pack&lt;/code&gt;格式的，存放在这个目录中。  &lt;/p&gt;
+&lt;p&gt;我们可以使用&lt;code&gt;git verify-pack -v &amp;lt;SHA-1-code&amp;gt;.idx&lt;/code&gt;命令来查看打包文件&lt;code&gt;*.pack&lt;/code&gt;的内容，如下面是该命令的一个示例输出：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ git verify-pack -v .git/objects/pack/pack-2a54c6297dea8fa7feaa30b9738459765bb369a5.idx &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;e18ab3d3c2bd2132c65c321dfa8e369756e61326 commit 177 123 12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;518876ca5a6f11241e71619a8d677f56863f3e2f blob   6170464 6115358 135&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;a9ab211dafe06646f182a6f791627f3baf8dd02f tree   44 54 6115493&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;non delta: 3 objects&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;.git/objects/pack/pack-2a54c6297dea8fa7feaa30b9738459765bb369a5.pack: ok&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到这个pack压缩包中有3个文件，对应输出的2-4行，每行的格式如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;SHA-1 &lt;span class=&#34;built_in&#34;&gt;type&lt;/span&gt; size size-in-packfile offset-in-packfile&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;因此我们可以根据每行的第3项的值，即文件的大小对压缩包中的文件进行排序，然后根据大小排序找出大文件。具体的命令如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git verify-pack -v .git/objects/pack/&amp;lt;SHA-1-code&amp;gt;.idx | sort -k 3 -n |tail -n 20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上述命令会对对应的压缩文件进行分析，找出其中最大的20个文件。下面是一个示例输出：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git verify-pack -v .git/objects/pack/pack-318f6bd223ffc6f1cd5675946e9fe7fe11bbaa16.idx | sort -k 3 -n |tail -n 20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18c8efee82a9088820da7b742047a1039e78c2f7 blob   8510 2439 481190&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;a2b1d917c473e4bbd95d7b35bf01fc16e03e9bfc blob   10780 3355 4354&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;be6f843c0c6aace758b2657d6c143218b4506544 blob   10923 2158 516005&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;180ce52e5fc4a1dc2aa304d01a16305bf61c3b1b blob   11186 1223 518163&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16ee0f99c0cedd18a93d0bcbf8e37eae2c97d8b4 blob   13025 3549 488959&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;fac08c493bc1bb4f603d606ac229446a8e0aac04 blob   13595 7857 53828 1 11900fd25b384500e3248576a624e24b67133834&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ffe06ba2393aeaba8aa43a634ff0f76394e80aef blob   24063 3100 466731&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8203b8c755cc96f3959c79212ae6b45e016e5492 blob   27626 10859 392665 1 ab395d21c693443302aecad6566dd8fb756a40c4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26140b3267d8a81a7e2f3ba72d32dbc63ebd0be3 blob   29333 10427 403524 2 8203b8c755cc96f3959c79212ae6b45e016e5492&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;222b644716ff079e4a55a151f23d9c98319f1493 blob   29551 12303 454428 1 48db793a769f3d5865a2c6a67519aaeb2cfed8d3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;50a2cd63d7e9a38e057943abece20bd32724227d blob   30168 12908 441520 1 48db793a769f3d5865a2c6a67519aaeb2cfed8d3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;04423baf437c3ac7252d001f5113322ec5328402 blob   32074 11800 42028 1 11900fd25b384500e3248576a624e24b67133834&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9f0eaf7e016a0833a60113270c86db80ed41c385 blob   54208 24360 107858 1 11900fd25b384500e3248576a624e24b67133834&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;a5fa94cead7a74652e41bf92ad7e9b330d496014 blob   84612 14134 61685&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3dbb3684ac8c2009ad2a8e40f24f7475d9a8c1b2 blob   98788 32039 75819 1 11900fd25b384500e3248576a624e24b67133834&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ab395d21c693443302aecad6566dd8fb756a40c4 blob   142360 11036 381629&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11900fd25b384500e3248576a624e24b67133834 blob   200923 31670 10358&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;48db793a769f3d5865a2c6a67519aaeb2cfed8d3 blob   398805 27569 413951&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bb0319cbbe1760601316c35629009ae2a0ef2fdc blob   460738 148159 233470 1 705d521f9a03ec7ce061653afaf664ab32724dac&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;705d521f9a03ec7ce061653afaf664ab32724dac blob   1268611 100610 132218&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中每行是一个Git的对象（Object)。&lt;/p&gt;
+&lt;h2 id=&#34;找出Git对象对应的文件名&#34;&gt;&lt;a href=&#34;#找出Git对象对应的文件名&#34; class=&#34;headerlink&#34; title=&#34;找出Git对象对应的文件名&#34;&gt;&lt;/a&gt;找出Git对象对应的文件名&lt;/h2&gt;&lt;p&gt;由于上述步骤得到的Git对象只有一长串的SHA-1的值，而没有具体的对应的在文件系统中的文件名字，因此我们需要找出Git对象对应的文件名。&lt;br&gt;我们可以使用&lt;code&gt;git rev-list &amp;lt;commit-id&amp;gt;&lt;/code&gt;来达到此功能。 这个命令用来显示某次提交前的所有的提交对象（commit object），而加了&lt;code&gt;--objects&lt;/code&gt;则用来显示某次提交时所有的Git对象。使用&lt;code&gt;--all&lt;/code&gt;则显示所有的提交，而不是某次特定的提交下的对象信息。因此用下面的命令可以查看Git对象和对应的文件路径：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git rev-list --objects --all |grep &amp;lt;SHA-1-code&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;以上个步骤中输出的最后一个文件为例，执行这条的命令（注意SHA-1的值只用输入前6位即可）：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ git rev-list --objects --all |grep 705d52&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;705d521f9a03ec7ce061653afaf664ab32724dac data/model-400M.caffemodel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看出，这个Git对象对应的文件路径是&lt;code&gt;data/model-4000M.caffemodel&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;找出修改这个文件的所有commit&#34;&gt;&lt;a href=&#34;#找出修改这个文件的所有commit&#34; class=&#34;headerlink&#34; title=&#34;找出修改这个文件的所有commit&#34;&gt;&lt;/a&gt;找出修改这个文件的所有commit&lt;/h2&gt;&lt;p&gt;我们需要从commit历史中找到所有修改该文件的commit然后修改这些commit。这里我们使用&lt;code&gt;git log&lt;/code&gt;来操作，具体如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;log&lt;/span&gt; --pretty=online -- &amp;lt;file-name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;以&lt;code&gt;data/model-400M.caffemodel&lt;/code&gt;文件为例，这个命令的具体形式为：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ git &lt;span class=&#34;built_in&#34;&gt;log&lt;/span&gt; --pretty=oneline -- data/model-400M.caffemodel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32a9f5f8136c9b011d785bdd08dd24cd0e1d0d1b first commit&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;重写所有修改这个文件的提交&#34;&gt;&lt;a href=&#34;#重写所有修改这个文件的提交&#34; class=&#34;headerlink&#34; title=&#34;重写所有修改这个文件的提交&#34;&gt;&lt;/a&gt;重写所有修改这个文件的提交&lt;/h2&gt;&lt;p&gt;找到所有修改这个对象的commit后，我们找到最早的修改，然后使用&lt;code&gt;git filter-branch&lt;/code&gt;命令来操作，具体如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ git filter-branch --index-filter &lt;span class=&#34;string&#34;&gt;&amp;#x27;git rm --cached --ignore-unmatch data/model-400M.caffemodel&amp;#x27;&lt;/span&gt; -- 32a9f5 &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;也可以将这步和上面一步合在一起，直接从所有提交中删除这个对象：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ git filter-branch --index-filter &lt;span class=&#34;string&#34;&gt;&amp;#x27;git rm --cached --ignore-unmatch data/model-400M.caffemodel&amp;#x27;&lt;/span&gt; -- --all&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;必要的时候，需要用&lt;code&gt;-f&lt;/code&gt;选项来强制地进行删除：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git filter-branch -f --index-filter &lt;span class=&#34;string&#34;&gt;&amp;#x27;git rm --cached --ignore-unmatch data/model-400M.caffemodel&amp;#x27;&lt;/span&gt; -- --all&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;删除引用并重新打包&#34;&gt;&lt;a href=&#34;#删除引用并重新打包&#34; class=&#34;headerlink&#34; title=&#34;删除引用并重新打包&#34;&gt;&lt;/a&gt;删除引用并重新打包&lt;/h2&gt;&lt;p&gt;这里需要删除&lt;code&gt;.git/refs&lt;/code&gt;目录下的一些引用文件并重新打包，具体命令如下，比较固定：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ rm -Rf .git/refs/original&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ rm -Rf .git/logs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ git gc&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;之后可以用&lt;code&gt;du -sh &lt;/code&gt;等命令查看项目目录的大小。&lt;br&gt;如果&lt;code&gt;git push&lt;/code&gt;提示冲突的话，需要用&lt;code&gt;git push -f&lt;/code&gt;命令来强制推送代码到远端。虽然不建议用&lt;code&gt;-f&lt;/code&gt;选项，但是特殊情况特殊处理~&lt;/p&gt;
+&lt;h2 id=&#34;参考&#34;&gt;&lt;a href=&#34;#参考&#34; class=&#34;headerlink&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;参考&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Pro Git 第9.7.3节&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/19573031/cant-push-to-github-because-of-large-file-which-i-already-deleted&#34;&gt;https://stackoverflow.com/questions/19573031/cant-push-to-github-because-of-large-file-which-i-already-deleted&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Linux" />
+        <category term="Git" />
+        <updated>2018-05-20T00:51:22.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2017/05/24/git-tutorial/</id>
+        <title>git使用总结</title>
+        <link rel="alternate" href="http://vra.github.io/2017/05/24/git-tutorial/"/>
+        <content type="html">&lt;p&gt;我一直觉得Git是一个很有用的工具，但是要熟练地掌握其各个功能，还是挺不容易的。我之前打算在实验室分享一下Git的使用，所以写了个PPT，现在放到这里，希望对大家游泳，也希望我自己在遗忘掉某些功能的时候，能来这里查查。另外显示PDF的Hexo插件是&lt;a href=&#34;https://github.com/superalsrk/hexo-pdf&#34;&gt;hexo-pdf&lt;/a&gt;。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;如果内嵌的PDF加载较慢的话，请访问&lt;a href=&#34;/imgs/git_tutorial.pdf&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+
+
+	&lt;div class=&#34;row&#34;&gt;
+    &lt;embed src=&#34;../../../../pdf/git_tutorial.pdf&#34; width=&#34;100%&#34; height=&#34;550&#34; type=&#34;application/pdf&#34;&gt;
+	&lt;/div&gt;
+
+
+
+</content>
+        <category term="Linux" />
+        <category term="Git" />
+        <updated>2017-05-24T14:56:26.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2017/04/19/deploy-git/</id>
+        <title>搭建自己的Git服务器</title>
+        <link rel="alternate" href="http://vra.github.io/2017/04/19/deploy-git/"/>
+        <content type="html">&lt;p&gt;相信很多人都对GitHub和GitLab很熟悉了，这些基于Git版本控制的在线代码托管平台由于丰富的内容，简洁的操作和集成一体化以及风靡全球了。今天我好奇，想了解下如何搭建自己的Git服务器，于是查了一些资料，记录下整个的流程。&lt;br&gt;&lt;img src=&#34;/imgs/git_logo.png&#34;&gt;&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;为什么要用自己的Git服务器？&#34;&gt;&lt;a href=&#34;#为什么要用自己的Git服务器？&#34; class=&#34;headerlink&#34; title=&#34;为什么要用自己的Git服务器？&#34;&gt;&lt;/a&gt;为什么要用自己的Git服务器？&lt;/h3&gt;&lt;p&gt;想了想，有下面的优势：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;免费的私有仓库&lt;/li&gt;
+&lt;li&gt;完全的对项目的控制&lt;/li&gt;
+&lt;li&gt;了解GitHub和GitLab等背后的运作原理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;准备&#34;&gt;&lt;a href=&#34;#准备&#34; class=&#34;headerlink&#34; title=&#34;准备&#34;&gt;&lt;/a&gt;准备&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;一台可以通过域名或网址访问的服务器&lt;/li&gt;
+&lt;li&gt;服务器上安装有ssh, git等工具，可以通过下面命令来安装:&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install  openssh git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;创建git用户&#34;&gt;&lt;a href=&#34;#创建git用户&#34; class=&#34;headerlink&#34; title=&#34;创建git用户&#34;&gt;&lt;/a&gt;创建git用户&lt;/h3&gt;&lt;p&gt;为了访问的便捷，我们使用git用户的身份来创建代码仓库，当然任何用户都是可以的，只不过在git clone的时候，将git@server改成别的用户名即可。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo adduser git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;上传公钥&#34;&gt;&lt;a href=&#34;#上传公钥&#34; class=&#34;headerlink&#34; title=&#34;上传公钥&#34;&gt;&lt;/a&gt;上传公钥&lt;/h3&gt;&lt;p&gt;为了git clone 仓库的时候免去输入git用户密码的烦恼，我们这里发送客户端的用户的ssh公钥到git用户的&lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt;文件，具体执行下面这条命令即可:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh-copy-id -i git@114.215.66.43&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;修改git用户的登录权限&#34;&gt;&lt;a href=&#34;#修改git用户的登录权限&#34; class=&#34;headerlink&#34; title=&#34;修改git用户的登录权限&#34;&gt;&lt;/a&gt;修改git用户的登录权限&lt;/h3&gt;&lt;p&gt;因为git用户是专门用来上传代码的，所以禁用git用户的登录权限，将git用户的登录shell改为&lt;code&gt;/usr/bin/git-shell&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo vi /etc/passwd &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# change shell of git to /usr/bin/git-shell&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;创建裸仓库&#34;&gt;&lt;a href=&#34;#创建裸仓库&#34; class=&#34;headerlink&#34; title=&#34;创建裸仓库&#34;&gt;&lt;/a&gt;创建裸仓库&lt;/h3&gt;&lt;p&gt;因为git仓库不需要再服务器上更新，而是通过远程push进行更新，所以我们建立一个裸仓库即可，裸仓库即没有项目代码而只有git元数据的仓库，注意裸仓库后缀都是git。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;su -l git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mkdir -p ~/src/my-repo.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git init --bare my-repo.git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样服务器端的操作就完成了。&lt;/p&gt;
+&lt;h3 id=&#34;客户端操作&#34;&gt;&lt;a href=&#34;#客户端操作&#34; class=&#34;headerlink&#34; title=&#34;客户端操作&#34;&gt;&lt;/a&gt;客户端操作&lt;/h3&gt;&lt;p&gt;客户端就按正常的git 操作来克隆刚才创建的仓库：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; git@114.215.66.43:/home/git/src/my-repo.git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;后面就跟正常的操作完全一样了，演示一个简单的例子：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; my-repo&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; README &amp;gt;&amp;gt; README&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git add README&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git commit -m &lt;span class=&#34;string&#34;&gt;&amp;quot;add README&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git push origin master&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+        <category term="Linux" />
+        <category term="Git" />
+        <updated>2017-04-19T13:58:08.000Z</updated>
+    </entry>
+</feed>

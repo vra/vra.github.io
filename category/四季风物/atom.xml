@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;四季风物&#34; category</title>
+    <link href="http://vra.github.io" />
+    <updated>2014-12-31T04:42:52.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2014/12/31/some-new-poems/</id>
+        <title>一些新看到的诗词</title>
+        <link rel="alternate" href="http://vra.github.io/2014/12/31/some-new-poems/"/>
+        <content type="html">&lt;p&gt;&lt;span style=&#34;color: #000000;&#34;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #000000;&#34;&gt;今天是2014年的最后一天。昨天无聊的时候，翻着手机里面的照片，看到了玩么么答游戏时，不会的题目的截屏。其中大多数是诗词这个类别的题目，于是我便百度了这些诗词的完整的内容。因为这些诗词都是我之前不知道的，所以记录下来，用手敲一遍可能会对记忆有帮助吧，说不定以后就能融为自身的一部分呢。所以就抄录如下了。&lt;/span&gt;&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;p&gt;&lt;span style=&#34;color: #000000;&#34;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;span style=&#34;color: #000000;&#34;&gt;
+&lt;span style=&#34;color: #008080;&#34;&gt;摊破浣溪沙&lt;/span&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #008080;&#34;&gt; 李璟&lt;/span&gt;
+&lt;span style=&#34;color: #008080;&#34;&gt; 手卷真珠上玉钩，依前春恨锁重楼。风里落花谁是主？思悠悠。&lt;/span&gt;
+&lt;span style=&#34;color: #008080;&#34;&gt; 青鸟不传云外信，丁香空结雨中愁。回首绿波三楚暮，接天流。&lt;/span&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;代赠&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;李商隐&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;楼上黄昏欲望休&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;玉梯横绝月如钩&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;芭蕉不展丁香结&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;同向春风各自愁&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;宿骆氏亭寄怀崔雍崔衮&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;李商隐&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;竹坞无尘水槛清&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;相思迢递隔重城&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;秋阴不散霜飞晚&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;留得枯荷听雨声&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;采桑子·塞上咏雪花&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;纳兰性德&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;非关癖爱轻模样，冷处偏佳。别有根芽，不是人间富贵花。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;谢娘别后谁能惜，漂泊天涯。寒月悲笳，万里西风瀚海沙。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;节妇吟&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;张籍&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;君知妾有夫，赠妾双明珠。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;感君缠绵意，系在红罗襦。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;妾家高楼连苑起，良人执戟明光里。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;知君用心同明月，事夫誓拟同生死。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;还君明珠双泪垂，恨不相逢未嫁时。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;浣溪沙&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;纳兰性德&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;谁念西风独自凉，萧萧黄叶闭疏窗。沉思往事立残阳。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;被酒莫惊春睡重，赌书消得泼茶香，当时只道是寻常。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;踏莎行&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;姜夔&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;&lt;em&gt;自沔东来，丁未元日至金陵，江上感梦而作。&lt;/em&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;燕燕轻盈，莺莺娇软，分明又向华胥见。夜长争得薄情知？春初早被相思染。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;别后书辞，别时针线，离魂暗逐郎行远。淮南皓月冷千山，冥冥归去无人管。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;送柴侍御&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;王昌龄&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;沅水通波接武冈&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;送君不觉有离伤&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;青山一道同云雨&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;明月何曾是两乡&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;积雨辋川庄作&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;王维&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;积雨空林烟火迟，蒸藜炊黍饷东葘。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;漠漠水田飞白鹭，阴阴夏木啭黄鹂。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;山中习静观朝槿，松下清斋折露葵。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;野老与人争席罢，海鸥何事更相疑。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;木兰花&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;晏殊&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;燕鸿过后莺归去，细算浮生千万绪。长于春梦几多时， 散似秋云无觅处。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;闻琴解佩神仙侣，挽断罗衣留不住。劝君莫作独醒人，烂醉花间应有数。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;八至&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;李冶&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;至近至远东西&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;至深至浅清溪&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;至高至明日月&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;至亲至疏夫妻&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;论诗三十首·其四&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;元好问&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;一语天然万古新&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;豪华落尽见真淳&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;南窗白日羲皇上&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;未害渊明是晋人&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;题龙阳县青草湖&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;唐温如&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;西风吹老洞庭波&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;一夜湘君白发多&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;醉后不知天在水&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;满船清梦压星河&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;听蜀僧濬弹琴&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;李白&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;蜀僧抱绿绮，西下峨眉峰。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;为我一挥手，如听万壑松。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;客心洗流水，余响入霜钟。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt; 不觉碧山暮，秋云暗几重。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;春江花月夜&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;杨广（隋炀帝）&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;暮江平不动&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;春花满正开&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;流波将月去&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;潮水带星来&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;和子由渑池怀旧&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;苏轼&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;人生到处知何似，应似飞鸿踏雪泥。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;泥上偶然留指爪，鸿飞那复计东西。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;老僧已死成新塔，坏壁无由见旧题。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;往日崎岖还记否，路长人困蹇驴嘶。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #000000;&#34;&gt;最后这首是苏轼和苏辙的，我也找到了苏辙的原诗，记录如下。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;怀渑池寄子瞻兄&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;苏辙&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;相携话别郑原上， 共道长途怕雪泥。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt; 归骑还寻大梁陌， 行人已度古崤西。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;曾为县吏民知否？旧宿僧房壁共题。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;遥想独游佳味少，无方骓马但鸣嘶。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #000000;&#34;&gt;最后，今天是2014年的最后一天，找到了谢灵运的《岁暮》，借此警戒，希望未来日子能过得充实。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;岁暮&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;谢灵运&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;殷忧不能寐， 苦此夜难颓。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;明月照积雪， 朔风劲且哀。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt;运往无淹物，年视觉已催。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #008080;&#34;&gt; &lt;/span&gt;&lt;/p&gt;
+</content>
+        <updated>2014-12-31T04:42:52.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2014/10/19/e7-a7-8b-e5-a4-a9-e7-9a-84-e8-af-97/</id>
+        <title>秋天的诗</title>
+        <link rel="alternate" href="http://vra.github.io/2014/10/19/e7-a7-8b-e5-a4-a9-e7-9a-84-e8-af-97/"/>
+        <content type="html">&lt;p&gt;震落了清晨满披着的露珠，&lt;br&gt;伐木声丁丁地飘出幽谷。&lt;br&gt;放下饱食过稻香的镰刀，&lt;br&gt;用背篓来装竹篱间肥硕的瓜果。&lt;br&gt;秋天栖息在农家里。&lt;br&gt;向江面的冷雾撒下圆圆的网，&lt;br&gt;收起青鳊鱼似的乌桕叶的影子。&lt;br&gt;芦蓬上满载着白霜，&lt;br&gt;轻轻摇着归泊的小桨。&lt;br&gt;秋天游戏在渔船上。&lt;br&gt;草野在蟋蟀声中更寥阔了。&lt;br&gt;溪水因枯涸见石更清洌了。&lt;br&gt;牛背上的笛声何处去了，&lt;br&gt;那满流着夏夜的香与热的笛孔？&lt;br&gt;秋天梦寐在牧羊女的眼里。&lt;/p&gt;
+&lt;p&gt;——–秋天，何其芳&lt;/p&gt;
+&lt;p&gt;每年到秋天都会想起这首初中学的诗，虽然在城市里、在校园里没有农人家，没有渔船更无牧羊女，只有银杏叶渐渐变黄而摇落，晚樱树的叶子经霜变红变黄而色彩斑斓。&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/10/7427ea21079d13a655072d.jpg&#34;&gt;&lt;img src=&#34;/uploads/2014/10/7427ea21079d13a655072d.jpg&#34; alt=&#34;7427ea21079d13a655072d&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+        <updated>2014-10-19T12:07:53.000Z</updated>
+    </entry>
+</feed>

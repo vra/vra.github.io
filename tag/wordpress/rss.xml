@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;wordpress&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 13 Dec 2014 22:50:50 +0800</pubDate>
+        <lastBuildDate>Sat, 13 Dec 2014 22:50:50 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2014/12/13/debian-wordpress/</guid>
+            <title>在Debian下搭建基于Apache-Php-MySQL的wordpress博客</title>
+            <link>http://vra.github.io/2014/12/13/debian-wordpress/</link>
+            <category>Linux</category>
+            <category>Wordpress</category>
+            <pubDate>Sat, 13 Dec 2014 22:50:50 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;wordpress是一个流行的博客搭建框架,为不会html,css和js的人提供了搭建博客的便捷方式.我这里是在我的笔记本上搭建了一个wordpress博客,这里把详细的搭建过程写出来.&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;我的系统信息如下:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_001.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_001.png&#34; alt=&#34;Selection_001&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;具体的操作过程如下描述.&lt;/p&gt;
+&lt;p&gt;1.安装apache2服务器&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_003.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_003.png&#34; alt=&#34;Selection_003&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其中apache2-doc是apache服务器的说明和配置文件,libapache2-mod-php5是apache的php模块库文件.&lt;/p&gt;
+&lt;p&gt;安装成功后,重启apache2服务器,&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_0012.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_0012.png&#34; alt=&#34;Selection_001&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;此时在浏览器地址栏里面输入&lt;a href=&#34;http://localhost,则会看到如下的页面,提示我们apache2服务器已经安装成功/&#34;&gt;http://localhost,则会看到如下的页面,提示我们apache2服务器已经安装成功&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_0021.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_0021.png&#34; alt=&#34;Selection_002&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2.关于apache2的配置信息:&lt;/p&gt;
+&lt;p&gt;a.apache2的配置文件目录是/etc/apache2.在debian下,配置文件被打散分到了该目录下的几个子文件夹中.可以看该目录下的文件:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_002.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_002.png&#34; alt=&#34;Selection_002&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其中apache2.conf 是主配置文件,该目录下还有ports.conf文件用来配置服务器的监听端口.此外mod-enabled和sites-enabled和conf-enabled子目录下分别有一个.conf文件,详细的配置说明可以看相应的说明.&lt;/p&gt;
+&lt;p&gt;b.apache2安装时会创建一个叫做www-data的用户,所有apache相关的进程都由该用户来启动执行.可以在浏览器里面访问localhost的时候,用top命令查看:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_0031.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_0031.png&#34; alt=&#34;Selection_003&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;上图中第5条记录即为apache2服务器的进程开销情况.&lt;/p&gt;
+&lt;p&gt;c.apache2的默认网页和脚本存放目录为/var/www/html,在该目录下存放的网页(除了index页面)都可以通过&lt;a href=&#34;http://localhost/filename%E8%AE%BF%E9%97%AE%E5%88%B0,%E5%A6%82%E8%AF%A5%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%9C%89%E4%B8%AAaboutme.html,%E5%88%99%E5%8F%AF%E4%BB%A5%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E8%BE%93%E5%85%A5http://localhost/aboutme.html%E8%AE%BF%E9%97%AE&#34;&gt;http://localhost/filename访问到,如该目录下有个aboutme.html,则可以在浏览器里输入http://localhost/aboutme.html访问&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;3.安装php:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_007.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_007.png&#34; alt=&#34;Selection_007&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其中php5-mysql是php和mysql数据库的接口,为了使用mysql数据库必须安装这个包.&lt;/p&gt;
+&lt;p&gt;安装完成后,可以通过如下方法检查php的安装是否成功:&lt;/p&gt;
+&lt;p&gt;a.在/var/www/html目录下,编写如下内容的文件phpinfo.php:&lt;/p&gt;
+&lt;pre&gt;&amp;lt;?php phpinfo(); ?&amp;gt;&lt;/pre&gt;
+&lt;p&gt;然后在浏览器中访问该页面:&lt;a href=&#34;http://localhost/phpinfo.php,%E5%A6%82%E6%9E%9C%E5%87%BA%E7%8E%B0%E5%A6%82%E4%B8%8B%E9%A1%B5%E9%9D%A2,%E5%88%99%E8%AF%B4%E6%98%8Ephp%E5%AE%89%E8%A3%85%E5%B7%B2%E7%BB%8F%E6%88%90%E5%8A%9F&#34;&gt;http://localhost/phpinfo.php,如果出现如下页面,则说明php安装已经成功&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_008.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_008.png&#34; alt=&#34;Selection_008&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;往下拉一下网页右侧滚动条,就可以看到下面是php支持的各个模块和组件.看起来相当多.&lt;/p&gt;
+&lt;p&gt;4.安装mysql:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_009.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_009.png&#34; alt=&#34;Selection_009&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后,刷新刚才的phpinfo页面,往下拉到中间位置的时候,可以看到mysql和mysqli,说明msyql也已经安装成功了.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_010.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_010.png&#34; alt=&#34;Selection_010&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;5.下载wordpress压缩文件:&lt;/p&gt;
+&lt;p&gt;访问&lt;a href=&#34;http://cn.wordpress.org,如下图所示.在右侧中间位置有压缩包供下载,点击下载即可/&#34;&gt;http://cn.wordpress.org,如下图所示.在右侧中间位置有压缩包供下载,点击下载即可&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_011.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_011.png&#34; alt=&#34;Selection_011&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;也可复制该链接地址,用wget下载(感觉好像用wget下载比较快):&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_012.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_012.png&#34; alt=&#34;Selection_012&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载后解压该文件:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_0131.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_0131.png&#34; alt=&#34;Selection_013&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压后的文件放在wordpress文件夹下,可以看看里面的内容:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_0041.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_0041.png&#34; alt=&#34;Selection_004&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;可以看到大多都是以wp开头的文件或文件夹,这些文件夹保存了配置博客的脚本和展示给访问者的页面框架,而其他的信息则保存在数据库中.&lt;/p&gt;
+&lt;p&gt;因为我们默认的网页存放目录是/var/www/html,所以要将该文件夹内文件移动到该目录下才生效,所以执行如下移动操作:&lt;/p&gt;
+&lt;pre&gt;mv -R wordpress /var/www/html&lt;/pre&gt;
+&lt;p&gt;该操作会用wordpress目录替换原来的html目录.&lt;/p&gt;
+&lt;p&gt;现在在浏览器中打开&lt;a href=&#34;http://localhost,就会看到开始wordpress的配置的页面了/&#34;&gt;http://localhost,就会看到开始wordpress的配置的页面了&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_0161.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_0161.png&#34; alt=&#34;Selection_016&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;然后按照步提示,在mysql创建相应的wordpress数据库,整个博客就算搭建完成了!&lt;/p&gt;
+&lt;p&gt;下面是我搭建的博客(随便从网上抄了点内容…):&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;/uploads/2014/12/Selection_0171.png&#34;&gt;&lt;img src=&#34;/uploads/2014/12/Selection_0171.png&#34; alt=&#34;Selection_017&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;(-完-)&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

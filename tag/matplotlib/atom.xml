@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;matplotlib&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2017-06-13T02:45:53.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2017/06/13/mpl-backend/</id>
+        <title>matplotlib的backend浅析</title>
+        <link rel="alternate" href="http://vra.github.io/2017/06/13/mpl-backend/"/>
+        <content type="html">&lt;p&gt;在服务器使用&lt;code&gt;matplotlib&lt;/code&gt;的时候，可能是因为没有装图形化和显示相关的包的原因，总是会出现&lt;code&gt;backend&lt;/code&gt;相关的错误。所以我调查了下matplotlib中的backend的含义，以及如何处理相关的错误。&lt;br&gt;&lt;img src=&#34;http://matplotlib.org/1.3.0/_static/logo2.png&#34; alt=&#34;matplotlib&#34;&gt;&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+
+&lt;h3 id=&#34;matplotlib中的backend&#34;&gt;&lt;a href=&#34;#matplotlib中的backend&#34; class=&#34;headerlink&#34; title=&#34;matplotlib中的backend&#34;&gt;&lt;/a&gt;matplotlib中的backend&lt;/h3&gt;&lt;p&gt;matplotlib中，frontend就是我们写的python代码，而backend就是负责显示我们代码所写图形的底层代码。因为不同使用环境下硬件情况不同，所以后端是跟具体的硬件和显示条件相关的。&lt;/p&gt;
+&lt;h3 id=&#34;backend的类别&#34;&gt;&lt;a href=&#34;#backend的类别&#34; class=&#34;headerlink&#34; title=&#34;backend的类别&#34;&gt;&lt;/a&gt;backend的类别&lt;/h3&gt;&lt;p&gt;backend又分为两类，一类是&lt;code&gt;interface backend&lt;/code&gt;，又叫做&lt;code&gt;interactive backend&lt;/code&gt;，这一类是表示跟显示到屏幕相关的后端；另一类是&lt;code&gt;hardcopy backend&lt;/code&gt;，又叫做&lt;code&gt;non-interactive backend&lt;/code&gt;，这一类是写入到文件相关的后端。下面两图分别是non-interactive backend和interactive backend的具体值：&lt;br&gt;&lt;img src=&#34;/imgs/non-iteractive-backend.png&#34; alt=&#34;non-interactive backend&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/iteractive-backend.png&#34; alt=&#34;interactive backend&#34;&gt;&lt;br&gt;在python中，可以通过如下的命令来获取当前机器支持的这两种后端：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; matplotlib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;matplotlib.rcsetup.interactive_bk &lt;span class=&#34;comment&#34;&gt;# 获取 interactive backend&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;matplotlib.rcsetup.non_interactive_bk &lt;span class=&#34;comment&#34;&gt;# 获取 non-interactive backend&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;matplotlib.rcsetup.all_backends &lt;span class=&#34;comment&#34;&gt;# 获取 所有 backend&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在我们实验室的GPU服务器上，得到的结果如下：&lt;/p&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/avw1ng2fbxp5fdk8b2cncpbp0.js&#34; id=&#34;asciicast-avw1ng2fbxp5fdk8b2cncpbp0&#34; async&gt;&lt;/script&gt;
+
+
+&lt;h3 id=&#34;设置backend&#34;&gt;&lt;a href=&#34;#设置backend&#34; class=&#34;headerlink&#34; title=&#34;设置backend&#34;&gt;&lt;/a&gt;设置backend&lt;/h3&gt;&lt;p&gt;有4种方式可以来设置matplotlib的backend，而且下列越后面的设置方式，优先级越高，也就是后面的设置会覆盖前面的设置。  &lt;/p&gt;
+&lt;h4 id=&#34;1-通过设置matplotlibrc的配置文件来设置&#34;&gt;&lt;a href=&#34;#1-通过设置matplotlibrc的配置文件来设置&#34; class=&#34;headerlink&#34; title=&#34;1. 通过设置matplotlibrc的配置文件来设置&#34;&gt;&lt;/a&gt;1. 通过设置&lt;code&gt;matplotlibrc&lt;/code&gt;的配置文件来设置&lt;/h4&gt;&lt;p&gt;注意&lt;code&gt;matplotlibrc&lt;/code&gt;文件不一定在你的家目录下，可以通过如下命令来获取其存放位置:&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; matplotlib&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;matplotlib.get_configdir()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;u&amp;#x27;/home/yunfeng/.config/matplotlib&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;得到配置文件路径后，打开这个文件，写入如下一行来设置backend:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;backend : WXAgg   &lt;span class=&#34;comment&#34;&gt;# use wxpython with antigrain (agg) rendering&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中&lt;code&gt;WXAgg&lt;/code&gt;可以换成任意的你的系统支持的backend类型。&lt;br&gt;&lt;strong&gt;注意：在backend的名字中是不区分大小写的，所以&lt;code&gt;Qt4Agg&lt;/code&gt;和&lt;code&gt;qt4agg&lt;/code&gt;是等价的。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;2-通过MPLBACKEND环境变量来设置backend&#34;&gt;&lt;a href=&#34;#2-通过MPLBACKEND环境变量来设置backend&#34; class=&#34;headerlink&#34; title=&#34;2. 通过MPLBACKEND环境变量来设置backend&#34;&gt;&lt;/a&gt;2. 通过&lt;code&gt;MPLBACKEND&lt;/code&gt;环境变量来设置backend&lt;/h4&gt;&lt;p&gt;下面两种方式都可以:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 方式1. 先export MPLBACKEND在执行python文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ &lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; MPLBACKEN=&lt;span class=&#34;string&#34;&gt;&amp;#x27;Agg&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ python works.py&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 方式2. 在python命令前加MPLBACKEND=&amp;#x27;XXX&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ MPLBACKEND=&lt;span class=&#34;string&#34;&gt;&amp;#x27;Agg&amp;#x27;&lt;/span&gt; python works.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h4 id=&#34;3-通过-d选项来设置&#34;&gt;&lt;a href=&#34;#3-通过-d选项来设置&#34; class=&#34;headerlink&#34; title=&#34;3. 通过-d选项来设置&#34;&gt;&lt;/a&gt;3. 通过&lt;code&gt;-d&lt;/code&gt;选项来设置&lt;/h4&gt;&lt;p&gt;使用方法如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ python script.py -dbackend&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;因为这种方式很容易和脚本内部的参数解析冲突，所以不建议使用这种方式，而是通过&lt;code&gt;MPLBACKEND&lt;/code&gt;参数的方式2来设置。&lt;/p&gt;
+&lt;h4 id=&#34;4-通过matplotlib-use-函数来设置&#34;&gt;&lt;a href=&#34;#4-通过matplotlib-use-函数来设置&#34; class=&#34;headerlink&#34; title=&#34;4. 通过matplotlib.use()函数来设置&#34;&gt;&lt;/a&gt;4. 通过&lt;code&gt;matplotlib.use()&lt;/code&gt;函数来设置&lt;/h4&gt;&lt;p&gt;使用方式如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; matplotlib &lt;span class=&#34;keyword&#34;&gt;as&lt;/span&gt; mpl&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mpl.use(&lt;span class=&#34;string&#34;&gt;&amp;#x27;Agg&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;再次提醒下，注意这4种方式的优先级：4&amp;gt;3&amp;gt;2&amp;gt;1，后面的设置会覆盖前面的设置。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;解决问题&#34;&gt;&lt;a href=&#34;#解决问题&#34; class=&#34;headerlink&#34; title=&#34;解决问题&#34;&gt;&lt;/a&gt;解决问题&lt;/h3&gt;&lt;h4 id=&#34;1-GPU集群执行import-matplotlib-pyplot-as-plt的错误&#34;&gt;&lt;a href=&#34;#1-GPU集群执行import-matplotlib-pyplot-as-plt的错误&#34; class=&#34;headerlink&#34; title=&#34;1. GPU集群执行import matplotlib.pyplot as plt的错误&#34;&gt;&lt;/a&gt;1. GPU集群执行&lt;code&gt;import matplotlib.pyplot as plt&lt;/code&gt;的错误&lt;/h4&gt;&lt;p&gt;错误信息可能如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;** (test_net_multi.py:23890): WARNING **: Could not open X display&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;(test_net_multi.py:23890): Gdk-CRITICAL **: gdk_cursor_new_for_display: assertion &lt;span class=&#34;string&#34;&gt;&amp;#x27;GDK_IS_DISPLAY (display)&amp;#x27;&lt;/span&gt; failed&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Traceback (most recent call last):&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;./tools/test_net_multi.py&amp;quot;&lt;/span&gt;, line 13, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    from fast_rcnn.test_multi import test_net&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/data2/yunfeng/Lab/RstarCNN/tools/../lib/fast_rcnn/__init__.py&amp;quot;&lt;/span&gt;, line 9, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    from . import train&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/data2/yunfeng/Lab/RstarCNN/tools/../lib/fast_rcnn/train.py&amp;quot;&lt;/span&gt;, line 15, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    import caffe&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/data2/yunfeng/Lab/RstarCNN/tools/../caffe-fast-rcnn/python/caffe/__init__.py&amp;quot;&lt;/span&gt;, line 1, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    from .pycaffe import Net, SGDSolver&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/data2/yunfeng/Lab/RstarCNN/tools/../caffe-fast-rcnn/python/caffe/pycaffe.py&amp;quot;&lt;/span&gt;, line 14, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    import caffe.io&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/data2/yunfeng/Lab/RstarCNN/tools/../caffe-fast-rcnn/python/caffe/io.py&amp;quot;&lt;/span&gt;, line 2, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    import skimage.io&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/skimage/io/__init__.py&amp;quot;&lt;/span&gt;, line 15, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    reset_plugins()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/skimage/io/manage_plugins.py&amp;quot;&lt;/span&gt;, line 93, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; reset_plugins&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    _load_preferred_plugins()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/skimage/io/manage_plugins.py&amp;quot;&lt;/span&gt;, line 73, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; _load_preferred_plugins&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    _set_plugin(p_type, preferred_plugins[&lt;span class=&#34;string&#34;&gt;&amp;#x27;all&amp;#x27;&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/skimage/io/manage_plugins.py&amp;quot;&lt;/span&gt;, line 85, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; _set_plugin&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    use_plugin(plugin, kind=plugin_type)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/skimage/io/manage_plugins.py&amp;quot;&lt;/span&gt;, line 255, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; use_plugin&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    _load(name)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/skimage/io/manage_plugins.py&amp;quot;&lt;/span&gt;, line 299, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; _load&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    fromlist=[modname])&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/skimage/io/_plugins/matplotlib_plugin.py&amp;quot;&lt;/span&gt;, line 3, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    import matplotlib.pyplot as plt&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/matplotlib/pyplot.py&amp;quot;&lt;/span&gt;, line 114, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    _backend_mod, new_figure_manager, draw_if_interactive, _show = pylab_setup()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/matplotlib/backends/__init__.py&amp;quot;&lt;/span&gt;, line 32, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; pylab_setup&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    globals(),locals(),[backend_name],0)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/matplotlib/backends/backend_gtk3agg.py&amp;quot;&lt;/span&gt;, line 11, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    from . import backend_gtk3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  File &lt;span class=&#34;string&#34;&gt;&amp;quot;/usr/lib64/python2.7/site-packages/matplotlib/backends/backend_gtk3.py&amp;quot;&lt;/span&gt;, line 58, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    cursors.MOVE          : Gdk.Cursor.new(Gdk.CursorType.FLEUR),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;TypeError: constructor returned NULL&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这是因为服务器没有装显示相关的包，可以通过在上述第2种方式来设置&lt;code&gt;MPLBACKEN=&amp;#39;Agg&amp;#39;&lt;/code&gt;即可解决这个问题，因为Agg是non-interactive backend，所以不会要求显示图片，所以也不会再报错了。举个例子，如果你的TorqueServer的配置文件如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -N  v_test_60k&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -o  /home/yunfeng/logs/v_test_60k.out&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -e  /home/yunfeng/logs/v_test_60k.err&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -l nodes=1:gpus=2:D&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -r y&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;$PBS_O_WORKDIR&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; Time is `date`&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; Directory is &lt;span class=&#34;variable&#34;&gt;$PWD&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; This job runs on following nodes:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat &lt;span class=&#34;variable&#34;&gt;$PBS_NODEFILE&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /data10/yunfeng/Dev/tsn&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;python v_test_60k.py 2&amp;gt;&amp;amp;1 |tee ~/logs/v_test_60k.log&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在python执行那行行首，增加&lt;code&gt;MPLBACKEND=Agg&lt;/code&gt;，即改为如下内容：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -N  v_test_60k&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -o  /home/yunfeng/logs/v_test_60k.out&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -e  /home/yunfeng/logs/v_test_60k.err&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -l nodes=1:gpus=2:D&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PBS    -r y&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;$PBS_O_WORKDIR&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; Time is `date`&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; Directory is &lt;span class=&#34;variable&#34;&gt;$PWD&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;echo&lt;/span&gt; This job runs on following nodes:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat &lt;span class=&#34;variable&#34;&gt;$PBS_NODEFILE&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /data10/yunfeng/Dev/tsn&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;MPLBACKEND=Agg python v_test_60k.py 2&amp;gt;&amp;amp;1 |tee ~/logs/v_test_60k.log&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h4 id=&#34;2-GPU服务器上使用matplotlib显示图片&#34;&gt;&lt;a href=&#34;#2-GPU服务器上使用matplotlib显示图片&#34; class=&#34;headerlink&#34; title=&#34;2. GPU服务器上使用matplotlib显示图片&#34;&gt;&lt;/a&gt;2. GPU服务器上使用matplotlib显示图片&lt;/h4&gt;&lt;p&gt;由于服务器没有安装图形化显示界面，所以使用默认的matplotlib设置会有一些问题，图片没法正常显示。解决方法是在python文件中增加如下两行：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; matplotlib &lt;span class=&#34;keyword&#34;&gt;as&lt;/span&gt; mpl&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mpl.use(&lt;span class=&#34;string&#34;&gt;&amp;#x27;Qt4Agg&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在Jupyter notebook和VNC连过去后，这种设置都可以正确地显示图片。&lt;br&gt;&lt;strong&gt;注意，这两行必须在&lt;code&gt;import matplotlib.pyplot as plt&lt;/code&gt;之前插入，否则在plt引入后，上面的设置就没有效果了。&lt;/strong&gt;&lt;br&gt;至于为什么是&lt;code&gt;Qt4Agg&lt;/code&gt;，我是一个个后端一一试出来的，应该跟服务器安装的显示包有关系，但是我暂时还没弄懂该如何查看。&lt;/p&gt;
+&lt;h3 id=&#34;参考&#34;&gt;&lt;a href=&#34;#参考&#34; class=&#34;headerlink&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;参考&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;http://matplotlib.org/1.3.0/faq/usage_faq.html&#34;&gt;http://matplotlib.org/1.3.0/faq/usage_faq.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="matplotlib" />
+        <updated>2017-06-13T02:45:53.000Z</updated>
+    </entry>
+</feed>

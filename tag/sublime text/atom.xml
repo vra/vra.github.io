@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;sublime text&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2015-06-02T12:47:10.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2015/06/02/sublime-text-summary-3/</id>
+        <title>Sublime Text 使用技巧3</title>
+        <link rel="alternate" href="http://vra.github.io/2015/06/02/sublime-text-summary-3/"/>
+        <content type="html">&lt;h2 id=&#34;主题管理插件Themr&#34;&gt;&lt;a href=&#34;#主题管理插件Themr&#34; class=&#34;headerlink&#34; title=&#34;主题管理插件Themr&#34;&gt;&lt;/a&gt;主题管理插件Themr&lt;/h2&gt;&lt;p&gt;这个插件用命令的形式来管理、设置主题Theme，省去了点击按钮的繁琐操作，对喜爱简单操作的用户来说很有用。&lt;br&gt;安装方式：&lt;strong&gt;Package Control Install&lt;/strong&gt;-&amp;gt;输入&lt;strong&gt;Themr&lt;/strong&gt;安装即可。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;文件和文件夹的不显示&#34;&gt;&lt;a href=&#34;#文件和文件夹的不显示&#34; class=&#34;headerlink&#34; title=&#34;文件和文件夹的不显示&#34;&gt;&lt;/a&gt;文件和文件夹的不显示&lt;/h2&gt;&lt;p&gt;之前提到过，Sublime Text可以打开一个文件夹，并将文件夹中所有内容列出到左侧。我们可以进行设置，使一些文件夹和文件不显示出来。具体做法如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;先将文件夹保存为&lt;code&gt;sublime-project&lt;/code&gt;: &lt;strong&gt;Project-&amp;gt;Save Project As…&lt;/strong&gt;，选择保存位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重新打开保存的sublime-project文件，就弹出了文件列表和一个配置文件，在配置文件里面添加下面语句：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;string&#34;&gt;&amp;quot;folders&amp;quot;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	[&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;			&lt;span class=&#34;comment&#34;&gt;//added part&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;			&lt;span class=&#34;string&#34;&gt;&amp;quot;folder_exclude_patterns&amp;quot;&lt;/span&gt;:[&lt;span class=&#34;string&#34;&gt;&amp;quot;figures&amp;quot;&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;			&lt;span class=&#34;string&#34;&gt;&amp;quot;file_exclude_patterns&amp;quot;&lt;/span&gt;:[&lt;span class=&#34;string&#34;&gt;&amp;quot;*.md&amp;quot;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;保存后，可以看到，文件列表里面&lt;code&gt;figures&lt;/code&gt;文件夹已经不见了，所有&lt;code&gt;md&lt;/code&gt;格式的文件也步显示了。&lt;br&gt;注意：设置了不显示后，使用&lt;strong&gt;Ctrl-P&lt;/strong&gt;命令搜索内容的时候，被屏蔽的文件夹和文件中的内容是搜不到的。&lt;/p&gt;
+&lt;p&gt;上面这种方法只能设置当前打开的项目的情况，如果要对所有的工程都屏蔽某一类文件，则可以在&lt;strong&gt;Preferences-&amp;gt;Settings-User&lt;/strong&gt;中添加上面两条语句，则对所有项目都适用。&lt;/p&gt;
+&lt;h2 id=&#34;快速书写CSS代码的插件hayaku&#34;&gt;&lt;a href=&#34;#快速书写CSS代码的插件hayaku&#34; class=&#34;headerlink&#34; title=&#34;快速书写CSS代码的插件hayaku&#34;&gt;&lt;/a&gt;快速书写CSS代码的插件hayaku&lt;/h2&gt;&lt;p&gt;这个插件可以帮助你快速地书写css代码，可以使用简单的几个字母组合就能写出很长的css格式代码，如&lt;code&gt;ml10&lt;/code&gt;会被解析成&lt;code&gt;margin-left:10px;&lt;/code&gt;。&lt;br&gt;安装方法：搜索&lt;strong&gt;hayaku&lt;/strong&gt;进行安装即可。&lt;/p&gt;
+&lt;h2 id=&#34;Sublime-Text-3中的代码提示SublimeLinter，注意与Sublime-Text-2中很不相同&#34;&gt;&lt;a href=&#34;#Sublime-Text-3中的代码提示SublimeLinter，注意与Sublime-Text-2中很不相同&#34; class=&#34;headerlink&#34; title=&#34;Sublime Text 3中的代码提示SublimeLinter，注意与Sublime Text 2中很不相同&#34;&gt;&lt;/a&gt;Sublime Text 3中的代码提示SublimeLinter，注意与Sublime Text 2中很不相同&lt;/h2&gt;&lt;p&gt;Sublime Text 3中的代码提示插件&lt;strong&gt;SublimeLinter&lt;/strong&gt;改进较大，安装方式也不一样，安装&lt;strong&gt;SublimeLinter&lt;/strong&gt;后单独安装针对每一种语言的&lt;code&gt;linter&lt;/code&gt;，可以先安装&lt;strong&gt;SublimeLinter&lt;/strong&gt;，然后看&lt;code&gt;Readme&lt;/code&gt;文档查看如何安装剩余的部分。&lt;br&gt;关掉代码提示可以在&lt;code&gt;Ctrl-Shift-P&lt;/code&gt;搜&lt;strong&gt;SublimeLinter:Toggle&lt;/strong&gt; 来设置开启或关闭&lt;/p&gt;
+&lt;h2 id=&#34;颜色提示插件Color-Hightlight&#34;&gt;&lt;a href=&#34;#颜色提示插件Color-Hightlight&#34; class=&#34;headerlink&#34; title=&#34;颜色提示插件Color Hightlight&#34;&gt;&lt;/a&gt;颜色提示插件Color Hightlight&lt;/h2&gt;&lt;p&gt;在编写代码时，颜色的标记常常和颜色对应不上，给出一个颜色标记&lt;code&gt;#955278&lt;/code&gt;，很难一下子想象到对应的是什么颜色。于是，&lt;strong&gt;Color Hightlight&lt;/strong&gt;出现了。安装了这个插件之后，只要点击代码中的颜色标记，就会在该标记上显示对应的颜色，确实很有用的～&lt;br&gt;安装：搜索&lt;strong&gt;Color Hightlight&lt;/strong&gt;安装即可。&lt;/p&gt;
+&lt;h2 id=&#34;取色器插件ColorPicker&#34;&gt;&lt;a href=&#34;#取色器插件ColorPicker&#34; class=&#34;headerlink&#34; title=&#34;取色器插件ColorPicker&#34;&gt;&lt;/a&gt;取色器插件ColorPicker&lt;/h2&gt;&lt;p&gt;这个插件可以获取颜色，然后直接在代码中使用。启动插件的快捷键：&lt;code&gt;Ctrl-Shift-c&lt;/code&gt;。面板出来后一看就知道咋用了。&lt;/p&gt;
+</content>
+        <category term="Sublime Text" />
+        <updated>2015-06-02T12:47:10.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2015/05/29/sublime-text-summary-2/</id>
+        <title>Sublime Text 使用技巧2</title>
+        <link rel="alternate" href="http://vra.github.io/2015/05/29/sublime-text-summary-2/"/>
+        <content type="html">&lt;h2 id=&#34;1-安装包管理工具Package-Control&#34;&gt;&lt;a href=&#34;#1-安装包管理工具Package-Control&#34; class=&#34;headerlink&#34; title=&#34;1. 安装包管理工具Package Control&#34;&gt;&lt;/a&gt;1. 安装包管理工具Package Control&lt;/h2&gt;&lt;p&gt;包管理工具是安装插件的一个简单有效的方法，安装完Package Control后，就可以用&lt;strong&gt;Ctrl-Shift-P&lt;/strong&gt; 快捷键来安装插件了。&lt;br&gt;包管理器的安装方式:用_Ctrl-`_快捷键打开命令行，然后在命令行中输入如下代码：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; urllib2,os,hashlib; h = &lt;span class=&#34;string&#34;&gt;&amp;#x27;eb2297e1a458f27d836c04bb0cbaf282&amp;#x27;&lt;/span&gt; + &lt;span class=&#34;string&#34;&gt;&amp;#x27;d0e7a3098092775ccb37ca9d6b2e4b7d&amp;#x27;&lt;/span&gt;; pf = &lt;span class=&#34;string&#34;&gt;&amp;#x27;Package Control.sublime-package&amp;#x27;&lt;/span&gt;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;not&lt;/span&gt; os.path.exists(ipp) &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;None&lt;/span&gt;; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &lt;span class=&#34;string&#34;&gt;&amp;#x27;http://packagecontrol.io/&amp;#x27;&lt;/span&gt; + pf.replace(&lt;span class=&#34;string&#34;&gt;&amp;#x27; &amp;#x27;&lt;/span&gt;, &lt;span class=&#34;string&#34;&gt;&amp;#x27;%20&amp;#x27;&lt;/span&gt;)).read(); dh = hashlib.sha256(by).hexdigest(); &lt;span class=&#34;built_in&#34;&gt;open&lt;/span&gt;( os.path.join( ipp, pf), &lt;span class=&#34;string&#34;&gt;&amp;#x27;wb&amp;#x27;&lt;/span&gt; ).write(by) &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; dh == h &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;None&lt;/span&gt;; &lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;#x27;Error validating download (got %s instead of %s), please try manual install&amp;#x27;&lt;/span&gt; % (dh, h) &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; dh != h &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;#x27;Please restart Sublime Text to finish installation&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后按回车，之后重启Sublime Text 2，如果在&lt;strong&gt;Preferences-&amp;gt;Package Setttings&lt;/strong&gt;菜单里出现&lt;strong&gt;Package Control&lt;/strong&gt;，就说明安装成功了。如果使用的是Sublime Text 3，可以看着&lt;a href=&#34;https://packagecontrol.io/installation&#34;&gt;这个链接&lt;/a&gt;。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;2-安装插件Terminal&#34;&gt;&lt;a href=&#34;#2-安装插件Terminal&#34; class=&#34;headerlink&#34; title=&#34;2. 安装插件Terminal&#34;&gt;&lt;/a&gt;2. 安装插件Terminal&lt;/h2&gt;&lt;p&gt;这个插件用来打开一个命令终端，而且这个命令终端的路径就是当前编辑文件或项目所在路径，所以这条命令非常实用，可以在Sublime Text 2里面编辑好文件后，立即在命令行里面编译什么的，很方便。&lt;br&gt;安装方法：用&lt;strong&gt;Ctrl-Shift-P&lt;/strong&gt;打开窗口，输入&lt;strong&gt;Package Control Install&lt;/strong&gt;，按回车，再输入&lt;strong&gt;Terminal&lt;/strong&gt;，回车之后就开始安装，可以通过左下角的小字查看进度。&lt;/p&gt;
+&lt;h2 id=&#34;3-安装主题Theme&#34;&gt;&lt;a href=&#34;#3-安装主题Theme&#34; class=&#34;headerlink&#34; title=&#34;3. 安装主题Theme&#34;&gt;&lt;/a&gt;3. 安装主题Theme&lt;/h2&gt;&lt;p&gt;在包安装界面，输入&lt;strong&gt;Theme&lt;/strong&gt;，即可看到所有的主题，选择自己喜欢的下载。下载后，修改&lt;strong&gt;Preferences-&amp;gt;Settings-User&lt;/strong&gt;，在打开的文件中加入下面一行:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;theme&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;Nexus.sublime-theme&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;保存配置文件，主题立即改变。&lt;/p&gt;
+&lt;h2 id=&#34;4-SublimeLinter：代码检查插件&#34;&gt;&lt;a href=&#34;#4-SublimeLinter：代码检查插件&#34; class=&#34;headerlink&#34; title=&#34;4. SublimeLinter：代码检查插件&#34;&gt;&lt;/a&gt;4. SublimeLinter：代码检查插件&lt;/h2&gt;&lt;p&gt;SublimeLinter据说是一个很好用的代码检查插件，但没用过，所以就只是记录下……&lt;/p&gt;
+&lt;h2 id=&#34;5-SFTP插件&#34;&gt;&lt;a href=&#34;#5-SFTP插件&#34; class=&#34;headerlink&#34; title=&#34;5. SFTP插件&#34;&gt;&lt;/a&gt;5. SFTP插件&lt;/h2&gt;&lt;p&gt;sftp是一个在Sublime Text 2里面可以直接登陆sftp和ftp账号的插件，登陆还可以浏览、修改账号上的内容，有了sftp，就再也不需要FileZilla了~&lt;br&gt;&lt;strong&gt;突然惊喜地发现，SFTP插件也支持SSH，所以以后freeshell可以比较随意地登了。&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; 安装：插件安装，搜索sftp，安装即可。&lt;/li&gt;
+&lt;li&gt; 安装后，按&lt;strong&gt;Ctrl-Shift-P&lt;/strong&gt;，输入sftp，可以看到有&lt;code&gt;Browser Server&lt;/code&gt;，&lt;code&gt;Delete Server&lt;/code&gt;，&lt;code&gt;Edit Server&lt;/code&gt;，&lt;code&gt;Setup Server&lt;/code&gt;等命令，首先选择&lt;strong&gt;Setup Server&lt;/strong&gt;来增加第一个连接。修改默认的配置文件并保存，即为一个连接。配置文件主要有如下内容：&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;// sftp, ftp or ftps&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;type&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;sftp&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;host&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;ssh.freeshell.ustc.edu.cn&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;port&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;88888&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;remote_path&amp;quot;&lt;/span&gt;: &lt;span class=&#34;string&#34;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt; 其中&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; &lt;code&gt;type&lt;/code&gt;表示连接的会话协议类型，&lt;strong&gt;注意ssh设置成sftp即可进行连接&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt; &lt;code&gt;host&lt;/code&gt;是要连接的主机名&lt;/li&gt;
+&lt;li&gt; &lt;code&gt;user&lt;/code&gt;是要进行连接的用户名&lt;/li&gt;
+&lt;li&gt; &lt;code&gt;password&lt;/code&gt;是用户的密码&lt;/li&gt;
+&lt;li&gt; &lt;code&gt;port&lt;/code&gt;是进行连接的端口，ftp默认是22端口&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;6-论文还没改完，去写论文了，下次再写&#34;&gt;&lt;a href=&#34;#6-论文还没改完，去写论文了，下次再写&#34; class=&#34;headerlink&#34; title=&#34;6. 论文还没改完，去写论文了，下次再写~&#34;&gt;&lt;/a&gt;6. 论文还没改完，去写论文了，下次再写~&lt;/h2&gt;</content>
+        <category term="Sublime Text" />
+        <updated>2015-05-29T09:33:14.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2015/05/27/sublime-text-summary-1/</id>
+        <title>Sublime Text 使用技巧1</title>
+        <link rel="alternate" href="http://vra.github.io/2015/05/27/sublime-text-summary-1/"/>
+        <content type="html">&lt;p&gt;Sublime Text 是一款功能很强大的编辑器，用起来很爽，界面也很华丽。但我看了一系列的学习视频时候，才发现为我对Sublime Text 2的许多功能还是不了解，这里记录下来，记性不好，只能通过别的方法来补充了。下面是一些小技巧。&lt;/p&gt;
+&lt;h2 id=&#34;1-打开文件夹并保存为sulime-project&#34;&gt;&lt;a href=&#34;#1-打开文件夹并保存为sulime-project&#34; class=&#34;headerlink&#34; title=&#34;1.打开文件夹并保存为sulime-project&#34;&gt;&lt;/a&gt;1.打开文件夹并保存为sulime-project&lt;/h2&gt;&lt;p&gt;将整个文件夹拖进打开着的Sublime Text 中，然后在工具栏上选择&lt;strong&gt;View-&amp;gt;Side Bar-&amp;gt;Show Side Bar&lt;/strong&gt;，即可看到打开的文件夹了。也可以用快捷键&lt;code&gt;Ctrl-K,Ctrl-B&lt;/code&gt;来完成该操作。 要将打开的文件夹保存为sublime-project，在工具栏上选择**Project-&amp;gt;Save Project As…**然后在打开的对话框中填写保存的项目名，后缀是&lt;code&gt;sublime-project&lt;/code&gt;。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;2-设置首选项&#34;&gt;&lt;a href=&#34;#2-设置首选项&#34; class=&#34;headerlink&#34; title=&#34;2.设置首选项&#34;&gt;&lt;/a&gt;2.设置首选项&lt;/h2&gt;&lt;p&gt;Sublime Text里面有许多的默认选项，如字体大小、tab缩进几个空格等，这些设置都是以类似Json的文本格式保存的。默认的设置文件可以这样打开：工具栏上选择&lt;strong&gt;Preferences-&amp;gt;Settings-Defaults&lt;/strong&gt;。在Window 7上，这个设置文件是只读的（视频教程里面用的是Mac，可以修改），因此用户可以设置自己的首选项，工具栏上选择&lt;strong&gt;Preferences&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Settings-User&lt;/strong&gt;，设置文件就会打开。建议先读懂默认设置里面的每一项设置的内容（每一项设置的内容都有非常详尽的注释，保证一看就懂），然后再复制到用户设置文件里面修改。&lt;/p&gt;
+&lt;h2 id=&#34;3-设置外观&#34;&gt;&lt;a href=&#34;#3-设置外观&#34; class=&#34;headerlink&#34; title=&#34;3.设置外观&#34;&gt;&lt;/a&gt;3.设置外观&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt; 设置配色方案 默认的配色方案有许多，可以通过&lt;strong&gt;Preferences-&amp;gt;Color Scheme&lt;/strong&gt;来选择。除了默认的方案，还可以通过&lt;code&gt;Package Control&lt;/code&gt;命令安装喜欢的命令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt; 设置显示布局 可以将窗口划分为许多小窗口，通过&lt;strong&gt;View-&amp;gt;Layout&lt;/strong&gt;，选择自己想要的布局，有&lt;code&gt;Single&lt;/code&gt;，&lt;code&gt;Columns:2&lt;/code&gt;，&lt;code&gt;Columns:3&lt;/code&gt;，&lt;code&gt;Columns:4&lt;/code&gt;，&lt;code&gt;Rows:2&lt;/code&gt;，&lt;code&gt;Rows:2&lt;/code&gt;，&lt;code&gt;Grid:4&lt;/code&gt;几种选项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;4-多行选择&#34;&gt;&lt;a href=&#34;#4-多行选择&#34; class=&#34;headerlink&#34; title=&#34;4.多行选择&#34;&gt;&lt;/a&gt;4.多行选择&lt;/h2&gt;&lt;p&gt;多行选择是将多个行选定，然后对这些行一起执行操作，对HTML里面的标签操作很方便。选定多个行的方式是：按住&lt;code&gt;Ctrl&lt;/code&gt;键，然后在想要操作的行的某个位置点击，即选定该位置。&lt;/p&gt;
+&lt;h2 id=&#34;5-插件Emmet的使用&#34;&gt;&lt;a href=&#34;#5-插件Emmet的使用&#34; class=&#34;headerlink&#34; title=&#34;5.插件Emmet的使用&#34;&gt;&lt;/a&gt;5.插件Emmet的使用&lt;/h2&gt;&lt;p&gt;看了介绍，Emmet真是个提高效率的很有用的工具。Emmet利用HTML和CSS代码里面的规范的标签和较多的重复性内容，使用简单的标记方法来简洁地进行代码书写。可以通过&lt;code&gt;Package Control&lt;/code&gt; 来搜索Emmet来安装。下面简要地介绍下Emmet的一些标记规则,全部规则见&lt;a href=&#34;http://www.cnblogs.com/matchless/archive/2013/04/10/3010628.html&#34;&gt;这篇博客&lt;/a&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;#&lt;/code&gt;：代表&lt;code&gt;id&lt;/code&gt;，例如&lt;/p&gt;
+&lt;p&gt; &lt;code&gt;div#nav&lt;/code&gt;&lt;br&gt; 效果为&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;id&lt;/span&gt; = &lt;span class=&#34;string&#34;&gt;&amp;quot;nav&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;.&lt;/code&gt; 代表&lt;code&gt;class&lt;/code&gt;，例如&lt;br&gt; &lt;code&gt;div.nav  &lt;/code&gt;&lt;br&gt; 效果为&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;clas&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;nav&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;代表包含，即子标签，如&lt;br&gt; &lt;code&gt;div&amp;gt;p&amp;gt;span  &lt;/code&gt;&lt;br&gt; 效果为&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;+&lt;/code&gt;代表相邻标签，即&lt;br&gt; &lt;code&gt;div&amp;gt;p+span  &lt;/code&gt;&lt;br&gt; 代表&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;*&lt;/code&gt;代表多个标签，如&lt;br&gt; &lt;code&gt;ul&amp;gt;li*3  &lt;/code&gt;&lt;br&gt; 代表&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;#123;&amp;#125;&lt;/code&gt;代表文本内容，如&lt;br&gt; &lt;code&gt;ul&amp;gt;li*3&amp;gt;a&amp;#123;Link&amp;#125;  &lt;/code&gt;&lt;br&gt; 代表&lt;/p&gt;
+ &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Link&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Link&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Link&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Sublime Text" />
+        <updated>2015-05-27T06:10:16.000Z</updated>
+    </entry>
+</feed>

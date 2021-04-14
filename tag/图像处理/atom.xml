@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;图像处理&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2016-04-07T15:15:03.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2016/04/07/cool-certificate/</id>
+        <title>cool-certificate, 一个好玩的证书生成工具</title>
+        <link rel="alternate" href="http://vra.github.io/2016/04/07/cool-certificate/"/>
+        <content type="html">&lt;p&gt;前几天同学发过来一张无人机驾驶证的照片，瞬间觉得很高大上，仔细一询问，原来是用软件生成的图片，网址是：&lt;a href=&#34;http://wx.znl.cn/app/index.php?i=120&amp;amp;c=entry&amp;amp;id=1&amp;amp;do=index&amp;amp;m=bi_pic&#34;&gt;http://wx.znl.cn/app/index.php?i=120&amp;amp;c=entry&amp;amp;id=1&amp;amp;do=index&amp;amp;m=bi_pic&lt;/a&gt;。 当访问该网站的时候，用户输入用户名，然后就生成包含用户名的驾照照片。我接着想能不能自己做一个类似这样的东西呢，经过思考发现，其实操作比较简单，即将用户姓名写入到图像上的合适位置即可。因为我之前已经有一些用Python 的Django框架做小的网站的经验，而且Python PIL模块可以完成这个任务，所以我立即想到， 能不能结合两者，建立一个网站，让用户输入姓名，然后将用户姓名传入到后台，后台调用PIL函数，将名字写到图片的相应位置上，然后返回给用户呢？经过思考我发现这种思路是可行的，而且工作量貌似也不是很大，所以今天早上开始做了做，在无人机驾照的基础上又增加了2个有趣的证件：潜水证和超级帅哥证，今晚终于作出了一个粗糙的结果（网站页面使用了原始和简单的HTML标签），可以在&lt;a href=&#34;http://115.28.30.25:8001/&#34;&gt;这里&lt;/a&gt;访问。代码已经上传到&lt;a href=&#34;https://github.com/vra/cool_certificate&#34;&gt;github上&lt;/a&gt;了。下面记下来实现过程中的一些思考。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;整体实现流程&#34;&gt;&lt;a href=&#34;#整体实现流程&#34; class=&#34;headerlink&#34; title=&#34;整体实现流程&#34;&gt;&lt;/a&gt;整体实现流程&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;   用Django实现网站前端和后端，展示页面给用户，读取用户输入&lt;/li&gt;
+&lt;li&gt;   当用户输入后，利用POST方法返回用户名到服务器端&lt;/li&gt;
+&lt;li&gt;   对特定的证件和已给的用户，利用PIL中的ImageFont模块来在证件照片的相应用户名空当处写上用户名,然后保存处理后的图片。用户名应该写在哪里需要手工确定（我用Windows 的画图工具中找到具体的位置坐标）&lt;/li&gt;
+&lt;li&gt;   将生成的图片返回给网站页面&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实现的一些细节问题&#34;&gt;&lt;a href=&#34;#实现的一些细节问题&#34; class=&#34;headerlink&#34; title=&#34;实现的一些细节问题&#34;&gt;&lt;/a&gt;实现的一些细节问题&lt;/h2&gt;&lt;h3 id=&#34;将文字写到图片上&#34;&gt;&lt;a href=&#34;#将文字写到图片上&#34; class=&#34;headerlink&#34; title=&#34;将文字写到图片上&#34;&gt;&lt;/a&gt;将文字写到图片上&lt;/h3&gt;&lt;p&gt;这里使用PIL（Python Image Library）来做，利用了其中的ImageFont模块，核心的代码段如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;img = Image.&lt;span class=&#34;built_in&#34;&gt;open&lt;/span&gt;(img_path)                                                                                                                                                   draw = ImageDraw.Draw(img)                                                                                                                                               &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   font = ImageFont.truetype(font_path, font_size)                                                                                                                          &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   &lt;span class=&#34;comment&#34;&gt;#&lt;span class=&#34;doctag&#34;&gt;NOTE:&lt;/span&gt; django get parameter as unicode, so don&amp;#x27;t need to encode to unicode.                                                                                                  draw.text(word_pos, name, word_color, font=font)                                                                                                                         &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   img.save(out_img_path)                                       &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;One things you must notice is that Django return stirng in the unicode format, so you dont’t have to do &lt;code&gt;unicode(name, &amp;#39;utf-8&amp;#39;)&lt;/code&gt; anymore.&lt;br&gt;用户输入姓名时，生成包含姓名的证件图片，保存在本地。&lt;br&gt;在实际操作中发现，有些字体不支持部分中文，所以我在网上下了&lt;code&gt;Aria Unicode&lt;/code&gt;字体，经测试发现能显示所有中文字体。  &lt;/p&gt;
+&lt;h3 id=&#34;Django返回处理图片的格式&#34;&gt;&lt;a href=&#34;#Django返回处理图片的格式&#34; class=&#34;headerlink&#34; title=&#34;Django返回处理图片的格式&#34;&gt;&lt;/a&gt;Django返回处理图片的格式&lt;/h3&gt;&lt;p&gt;我最初想的是用户点击确定按钮后，跳转到新的页面，在这个页面上单独显示处理后的照片，所以response类型设置成&lt;code&gt;image/jpeg&lt;/code&gt;即可。但实际操作中出现问题，只返回照片似乎有一些问题，所以我修改实现，在传给Template的时候，传递一个参数&lt;code&gt;done&lt;/code&gt;, 如果当前没有增加用户姓名，则该值为0,否则为1。在Template中，如果值为0,则展示未处理的模板图片;如果值为1,则显示处理后的图片。&lt;/p&gt;
+&lt;h3 id=&#34;静态文件目录的设置&#34;&gt;&lt;a href=&#34;#静态文件目录的设置&#34; class=&#34;headerlink&#34; title=&#34;静态文件目录的设置&#34;&gt;&lt;/a&gt;静态文件目录的设置&lt;/h3&gt;&lt;p&gt;Django将CSS,JS和Image图片都看作静态文件，推荐在app目录下建立&lt;code&gt;static&lt;/code&gt;目录来保存这些文件。这里需要进行一定的设置，将保存模板图片和生成图片的目录&lt;code&gt;imgs&lt;/code&gt;增加到&lt;code&gt;static&lt;/code&gt;目录下，设置代码如下:&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# in settings.py&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;SITE_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)),&lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;#x27;&lt;/span&gt;)                                                                                                      &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;STATIC_ROOT = os.path.join(SITE_ROOT,&lt;span class=&#34;string&#34;&gt;&amp;#x27;static&amp;#x27;&lt;/span&gt;)                                                                                                                               &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;STATIC_URL = &lt;span class=&#34;string&#34;&gt;&amp;#x27;/static/&amp;#x27;&lt;/span&gt;                                                                                                                                                      &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                                                                                                                                                                             &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#最后关键部分需要添加上STATICFILE_DIRS的配置                                                                                                                                 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;STATICFILES_DIRS = (                                                                                                                                                         &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    (&lt;span class=&#34;string&#34;&gt;&amp;quot;css&amp;quot;&lt;/span&gt;, os.path.join(STATIC_ROOT,&lt;span class=&#34;string&#34;&gt;&amp;#x27;css&amp;#x27;&lt;/span&gt;)),                                                                                                                                &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    (&lt;span class=&#34;string&#34;&gt;&amp;quot;js&amp;quot;&lt;/span&gt;, os.path.join(STATIC_ROOT,&lt;span class=&#34;string&#34;&gt;&amp;#x27;js&amp;#x27;&lt;/span&gt;)),                                                                                                                                  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    (&lt;span class=&#34;string&#34;&gt;&amp;quot;imgs&amp;quot;&lt;/span&gt;, os.path.join(STATIC_ROOT,&lt;span class=&#34;string&#34;&gt;&amp;#x27;imgs&amp;#x27;&lt;/span&gt;)),                                                                                                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;)                                              &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;经过这样设置，在调用&lt;code&gt;imgs&lt;/code&gt;目录下的图片时就可以这样调用了：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;img src = &lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;#123;% static &amp;quot;&lt;/span&gt;imgs/feiji.jpg&lt;span class=&#34;string&#34;&gt;&amp;quot;%&amp;#125;&amp;quot;&lt;/span&gt;&amp;gt; &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+        <category term="Python" />
+        <category term="图像处理" />
+        <category term="工具" />
+        <category term="PIL" />
+        <updated>2016-04-07T15:15:03.000Z</updated>
+    </entry>
+</feed>

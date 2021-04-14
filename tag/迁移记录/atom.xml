@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;迁移记录&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2019-02-27T10:12:24.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2019/02/27/mv-to-next/</id>
+        <title>Move to NexT——博客迁移记录2019</title>
+        <link rel="alternate" href="http://vra.github.io/2019/02/27/mv-to-next/"/>
+        <content type="html">&lt;p&gt;这个博客以前是采用Disqus作为评论系统，之前Disqus还是偶尔能访问，最近是怎么着都没法访问了。写东西很多时候还是希望能得到反馈，因此为了更愉快的博客交流，我调查了下常见的还活着的的评论系统，最后发现了Valine。配置后发现真的是简单又好用，有任何想说的小伙伴都可以轻轻松松留言了，给有创造力的工程师们点赞！而且由于Hexo的NexT主题默认支持Valine配置（而之前使用的Jacman并不支持），所以也将博客的主题改成NexT了。于是从蓝花花变成了白花花～&lt;/p&gt;
+&lt;p&gt;后面说下这个博客经历的几次迁移记录，从2013-2019。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;2013-2015年6月，科大博客上的Wordpress站点&#34;&gt;&lt;a href=&#34;#2013-2015年6月，科大博客上的Wordpress站点&#34; class=&#34;headerlink&#34; title=&#34;2013-2015年6月，科大博客上的Wordpress站点&#34;&gt;&lt;/a&gt;2013-2015年6月，科大博客上的Wordpress站点&lt;/h2&gt;&lt;p&gt;2013年，我大三的时候，偶然看到USTC LUG 社团建了一个&lt;a href=&#34;https://lug.ustc.edu.cn/wiki/lug/services/blog?s%5B%5D=blog&#34;&gt;科大博客&lt;/a&gt;的网站，域名是&lt;code&gt;blog.ustc.edu.cn&lt;/code&gt;，上面可以放在校师生的博客或者主页。于是我申请了一个账号，建了一个域名为&lt;code&gt;vra.blog.ustc.edu.cn&lt;/code&gt;的Wordpress博客。由于社团已经配置好了Wordpress服务，也提供了几个默认的主题，而且Wordpress可视化的操作也比较容易，因此在不想学习的时候，就在上面写一些比较个人化的文字和技术记录。当自己写的博文在web上被加载出来的时候，内心还是很激动的。&lt;br&gt;渐渐地，也写了一些关于C++，Linux的内容，也有几个关系比较好的同学也在上面搭建了自己的博客，分享自己的技术和人文方面的东西，所以当时感觉这个科大博客会越做越好的。&lt;br&gt;然而后面由于维护成本较高，而LUG里面也没有像&lt;a href=&#34;https://ring0.me/&#34;&gt;boj&lt;/a&gt;师兄那样一人顶十人的战斗力了，因此科大博客也发出通知，后面会关停科大博客。而也是在LUG的某次分享上，我听到了Hexo这个静态博客框架，因此在本科毕业后，我将科大博客上的内容迁移到GitHub Pages上，采用了Hexo框架，具体的说明可以见&lt;a href=&#34;https://vra.github.io/2015/06/02/blog-transfer-record/&#34;&gt;这篇博文&lt;/a&gt;。&lt;br&gt;由科大博客从开始到兴盛到关闭，作为一个见证者，我觉得还是挺遗憾的。不过在学校办这种服务性的项目，确实是不容易的，一方面大家都有繁重的学业压力，还有能够获取的资源也是不够的。还是很感谢LUG的小伙伴无私的奉献，给我们创造了无数个激动的时刻。&lt;/p&gt;
+&lt;h2 id=&#34;2015年6月-2019年2月，-Hexo-on-GitHub-Pages-with-Jacman-theme&#34;&gt;&lt;a href=&#34;#2015年6月-2019年2月，-Hexo-on-GitHub-Pages-with-Jacman-theme&#34; class=&#34;headerlink&#34; title=&#34;2015年6月-2019年2月， Hexo on GitHub Pages with Jacman theme&#34;&gt;&lt;/a&gt;2015年6月-2019年2月， Hexo on GitHub Pages with Jacman theme&lt;/h2&gt;&lt;p&gt;采用Hexo静态博客框架后，我也尝试过不同的Host地址，GitHub Pages，Gitcaffe的配置，也自己买过几个域名。后来发现还是用&lt;code&gt;vra.github.io&lt;/code&gt;这个域名吧，稍微剪短点，也比较通用。&lt;br&gt;一个比较麻烦的问题是，静态博客的评论系统一直没有比较好的解决方案，而评论系统的一再更改也是一部血泪史。&lt;br&gt;一开始使用Disqus，结果Disqus被blocked，访问不了了。&lt;br&gt;然后使用多说，使用没多久多说关停了。&lt;br&gt;后面使用gitment，但是时不时会有问题，每次需要重新登录GitHub账号。  &lt;/p&gt;
+&lt;h2 id=&#34;2019年2月，-Hexo-on-GitHub-Pages-with-NexT-theme&#34;&gt;&lt;a href=&#34;#2019年2月，-Hexo-on-GitHub-Pages-with-NexT-theme&#34; class=&#34;headerlink&#34; title=&#34;2019年2月， Hexo on GitHub Pages with NexT theme&#34;&gt;&lt;/a&gt;2019年2月， Hexo on GitHub Pages with NexT theme&lt;/h2&gt;&lt;p&gt;由于没有完善的评论系统，因此博客很少能听到有效的反馈。因此从18年夏天开始，我也在&lt;a href=&#34;https://www.zhihu.com/people/yunfeng-87/columns&#34;&gt;知乎专栏&lt;/a&gt;上分享自己的学习总结，希望能够帮助到更多的人。&lt;br&gt;最近搜了下发现Valine挺好用的，于是今天借这个机会重新配置了下，发现确实简单好用，工具越来越好用，生活真实越来越美好了，所以保持探索的心还是很重要的，说不定那天就能找到令人兴奋的作品呢^-^&lt;/p&gt;
+</content>
+        <category term="总结" />
+        <category term="迁移记录" />
+        <updated>2019-02-27T10:12:24.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://vra.github.io/2018/10/21/begin-agin-2018/</id>
+        <title>Begin Again</title>
+        <link rel="alternate" href="http://vra.github.io/2018/10/21/begin-agin-2018/"/>
+        <content type="html">&lt;p&gt;自从今年七月份工作后，就一直没有更新过博客，之前坚持了一年多的每个月写一篇博客的记录也被打断了，一方面是因为工作太忙了，另一方面是因为自己做的都是一些项目相关的东西，没什么可以写的，只有论文分享比较合适，不过我也没有看太多论文……这周末将之前的MarkDown文件整理了下，将七牛云上没法访问的图片迁移到了Hexo项目的&lt;code&gt;img&lt;/code&gt;目录下（具体做法可以参考&lt;a href=&#34;https://github.com/qiniu/qshell/issues/188#issuecomment-430862857&#34;&gt;这里&lt;/a&gt;），因为GitHub的学生优惠也到期了，没法创建私有仓库，所以以后会将blog的源文件托管到GitLab.com上，一切准备妥当，Begin Again!&lt;/p&gt;
+</content>
+        <category term="总结" />
+        <category term="迁移记录" />
+        <updated>2018-10-21T05:44:42.000Z</updated>
+    </entry>
+</feed>

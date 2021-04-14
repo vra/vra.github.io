@@ -1,0 +1,19 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Yunfeng's Simple Blog • All posts by \"tmux\" tag",
+    "description": "Love, Life, Linux",
+    "home_page_url": "http://vra.github.io",
+    "items": [
+        {
+            "id": "http://vra.github.io/2019/10/11/install-tmux-from-source/",
+            "url": "http://vra.github.io/2019/10/11/install-tmux-from-source/",
+            "title": "从源代码编译安装tmux",
+            "date_published": "2019-10-11T09:16:13.000Z",
+            "content_html": "<h2 id=\"概述\"><a href=\"#概述\" class=\"headerlink\" title=\"概述\"></a>概述</h2><p>为了使用新版tmux的特性，需要在Ubuntu 16.04上安装高版本的tmux，没有找到现成的ppa，因此搜到了一个从源代码安装的脚本，这里记录下来。</p>\n<span id=\"more\"></span>\n\n<h2 id=\"安装\"><a href=\"#安装\" class=\"headerlink\" title=\"安装\"></a>安装</h2><p>tmux的源代码在GitHub上，地址是 <a href=\"https://github.com/tmux/tmux\">https://github.com/tmux/tmux</a>，可以在Release页面下载源代码然后进行编译，已编译tmux 2.9为例，具体操作如下：</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br><span class=\"line\">5</span><br><span class=\"line\">6</span><br><span class=\"line\">7</span><br><span class=\"line\">8</span><br><span class=\"line\">9</span><br><span class=\"line\">10</span><br><span class=\"line\">11</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">sudo apt-get update</span><br><span class=\"line\">sudo apt-get install -y libevent-dev libncurses-dev make automake</span><br><span class=\"line\"><span class=\"built_in\">cd</span> /tmp</span><br><span class=\"line\">wget https://github.com/tmux/tmux/archive/2.9.tar.gz</span><br><span class=\"line\">tar xvzf 2.9.tar.gz</span><br><span class=\"line\"><span class=\"built_in\">cd</span> tmux-2.9/</span><br><span class=\"line\">bash autogen.sh</span><br><span class=\"line\">./configure &amp;&amp; make</span><br><span class=\"line\">sudo make install</span><br><span class=\"line\"><span class=\"built_in\">cd</span> ..</span><br><span class=\"line\">rm -rf ./tmux-2.9*</span><br></pre></td></tr></table></figure>\n\n<p>Done，在命令行查看tmux版本，如果是2.9就说明okay了。**另外记得关掉所有的tmux session，重新打开后环境的修改才会生效。</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">tmux -V</span><br><span class=\"line\">tmux 2.9</span><br></pre></td></tr></table></figure>\n\n<h2 id=\"参考：\"><a href=\"#参考：\" class=\"headerlink\" title=\"参考：\"></a>参考：</h2><ol>\n<li><a href=\"https://gist.github.com/japrescott/aa15cb024fe38ea36849f5f62c3314a3\">https://gist.github.com/japrescott/aa15cb024fe38ea36849f5f62c3314a3</a></li>\n</ol>\n",
+            "tags": [
+                "Linux",
+                "tmux"
+            ]
+        }
+    ]
+}

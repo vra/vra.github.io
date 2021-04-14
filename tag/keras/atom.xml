@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;keras&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2018-03-18T10:35:41.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/</id>
+        <title>Keras Callback之RemoteMonitor</title>
+        <link rel="alternate" href="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/"/>
+        <content type="html">&lt;h3 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;Keras提供了一系列的回调函数，用来在训练网络的过程中，查看网络的内部信息，或者控制网络训练的过程。&lt;code&gt;BaseLogger&lt;/code&gt;、&lt;code&gt;ProgbarLogger&lt;/code&gt;用来在命令行输出Log信息（默认会调用）， &lt;code&gt;EarlyStopping&lt;/code&gt;、&lt;code&gt;ReduceLROnPlateu&lt;/code&gt;分别用来提前终止训练和自动调整学习率，改变网络训练过程；而今天要介绍的&lt;code&gt;RemoteMonitor&lt;/code&gt;则用来&lt;strong&gt;实时&lt;/strong&gt;输出网络训练过程中的结果变化情况，包括训练集准确率(&lt;code&gt;accu&lt;/code&gt;)、训练集损失值(&lt;code&gt;loss&lt;/code&gt;)、验证集准确率(&lt;code&gt;val_acc&lt;/code&gt;)、验证集损失值(&lt;code&gt;val_loss&lt;/code&gt;)，用户也可以自己修改需要显示的数据。一图胜千言，看看下面的结果图吧：&lt;br&gt;&lt;img src=&#34;/imgs/keras_viz.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这个图是在浏览器中打开得到，Keras使用了Flask搭建了一个简单的服务器，然后采用D3.js来可视化数据。下面详细介绍可视化的过程吧&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;安装依赖&#34;&gt;&lt;a href=&#34;#安装依赖&#34; class=&#34;headerlink&#34; title=&#34;安装依赖&#34;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;首先，你得安装Keras: &lt;code&gt;sudo pip install keras&lt;/code&gt;或者没有管理员权限的话，执行：&lt;code&gt;pip install --user keras&lt;/code&gt;，下同&lt;/li&gt;
+&lt;li&gt;安装Flask网络框架： &lt;code&gt;sudo pip install Flask&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安装gevent,gevent是一个并发框架，可以监听网络训练，并将结果传回网络服务，安装命令：&lt;code&gt;sudo pip install gevent&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;下载-Hualos&#34;&gt;&lt;a href=&#34;#下载-Hualos&#34; class=&#34;headerlink&#34; title=&#34;下载 Hualos&#34;&gt;&lt;/a&gt;下载 Hualos&lt;/h3&gt;&lt;p&gt;这是Keras作者写的Keras可视化的项目，其中包括了D3.js这些数据可视化库，也有一个简单的Flask app，即api.py文件，来运行我们的网络参数可视化。具体安装过程如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/fchollet/hualos.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; hualos&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;python api.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样网络服务器就建立了，该服务会监听&lt;code&gt;http://localhost:9000&lt;/code&gt;端口，你打开浏览器访问该网址，会看到一个初始的页面，我们接下来要做的是在训练网络的时候增加回调函数RemoteMonitor，将网络参数显示到该网址的页面上。&lt;/p&gt;
+&lt;h3 id=&#34;在Keras训练网络中加入RemoteMonitor回调函数&#34;&gt;&lt;a href=&#34;#在Keras训练网络中加入RemoteMonitor回调函数&#34; class=&#34;headerlink&#34; title=&#34;在Keras训练网络中加入RemoteMonitor回调函数&#34;&gt;&lt;/a&gt;在Keras训练网络中加入RemoteMonitor回调函数&lt;/h3&gt;&lt;p&gt;这一步只需要在keras的代码里面增加3行即可：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 1. import RemoteMonitor&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; keras.callbacks &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; RemoteMonitor&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 2. 创建RemoteMonitor对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;remote = RemoteMonitor()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 3. 在model.fit中增加回调函数设置&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.fit(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	...,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	...,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	callbacks=[remote]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;我修改了&lt;a href=&#34;https://github.com/fchollet/keras/blob/master/examples/mnist_cnn.py&#34;&gt;https://github.com/fchollet/keras/blob/master/examples/mnist_cnn.py&lt;/a&gt;，增加了以上3行，整个文件如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;51&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;52&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;53&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;54&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;55&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;56&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;57&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;58&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;59&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;60&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;61&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;62&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;63&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;65&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;66&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;67&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;68&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;69&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;70&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;71&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;72&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;73&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;74&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt; &lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;#x27;&amp;#x27;Trains a simple convnet on the MNIST dataset.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;Gets to 99.25% test accuracy after 12 epochs&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;(there is still a lot of margin for parameter tuning).&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;16 seconds per epoch on a GRID K520 GPU.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;#x27;&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; __future__ &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; print_function&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; keras&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; keras.datasets &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; mnist&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; keras.models &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; Sequential&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; keras.layers &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; Dense, Dropout, Flatten&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; keras.layers &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; Conv2D, MaxPooling2D&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; keras &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; backend &lt;span class=&#34;keyword&#34;&gt;as&lt;/span&gt; K&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; keras.callbacks &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; RemoteMonitor&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;batch_size = &lt;span class=&#34;number&#34;&gt;128&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;num_classes = &lt;span class=&#34;number&#34;&gt;10&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;epochs = &lt;span class=&#34;number&#34;&gt;40&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# input image dimensions&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;img_rows, img_cols = &lt;span class=&#34;number&#34;&gt;28&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;28&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# the data, shuffled and split between train and test sets&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;(x_train, y_train), (x_test, y_test) = mnist.load_data()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; K.image_data_format() == &lt;span class=&#34;string&#34;&gt;&amp;#x27;channels_first&amp;#x27;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    x_train = x_train.reshape(x_train.shape[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;], &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, img_rows, img_cols)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    x_test = x_test.reshape(x_test.shape[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;], &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, img_rows, img_cols)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    input_shape = (&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, img_rows, img_cols)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    x_train = x_train.reshape(x_train.shape[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;], img_rows, img_cols, &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    x_test = x_test.reshape(x_test.shape[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;], img_rows, img_cols, &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    input_shape = (img_rows, img_cols, &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x_train = x_train.astype(&lt;span class=&#34;string&#34;&gt;&amp;#x27;float32&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x_test = x_test.astype(&lt;span class=&#34;string&#34;&gt;&amp;#x27;float32&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x_train /= &lt;span class=&#34;number&#34;&gt;255&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x_test /= &lt;span class=&#34;number&#34;&gt;255&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;#x27;x_train shape:&amp;#x27;&lt;/span&gt;, x_train.shape)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(x_train.shape[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;], &lt;span class=&#34;string&#34;&gt;&amp;#x27;train samples&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(x_test.shape[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;], &lt;span class=&#34;string&#34;&gt;&amp;#x27;test samples&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# convert class vectors to binary class matrices&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;y_train = keras.utils.to_categorical(y_train, num_classes)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;y_test = keras.utils.to_categorical(y_test, num_classes)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model = Sequential()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.add(Conv2D(&lt;span class=&#34;number&#34;&gt;32&lt;/span&gt;, kernel_size=(&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                 activation=&lt;span class=&#34;string&#34;&gt;&amp;#x27;relu&amp;#x27;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                 input_shape=input_shape))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.add(Conv2D(&lt;span class=&#34;number&#34;&gt;64&lt;/span&gt;, (&lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;), activation=&lt;span class=&#34;string&#34;&gt;&amp;#x27;relu&amp;#x27;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.add(MaxPooling2D(pool_size=(&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;)))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.add(Dropout(&lt;span class=&#34;number&#34;&gt;0.25&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.add(Flatten())&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.add(Dense(&lt;span class=&#34;number&#34;&gt;128&lt;/span&gt;, activation=&lt;span class=&#34;string&#34;&gt;&amp;#x27;relu&amp;#x27;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.add(Dropout(&lt;span class=&#34;number&#34;&gt;0.5&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.add(Dense(num_classes, activation=&lt;span class=&#34;string&#34;&gt;&amp;#x27;softmax&amp;#x27;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.&lt;span class=&#34;built_in&#34;&gt;compile&lt;/span&gt;(loss=keras.losses.categorical_crossentropy,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;              optimizer=keras.optimizers.Adadelta(),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;              metrics=[&lt;span class=&#34;string&#34;&gt;&amp;#x27;accuracy&amp;#x27;&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;remote = RemoteMonitor()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;model.fit(x_train, y_train,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          batch_size=batch_size,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          epochs=epochs,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          verbose=&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          validation_data=(x_test, y_test),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          callbacks=[remote]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        )&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;score = model.evaluate(x_test, y_test, verbose=&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;#x27;Test loss:&amp;#x27;&lt;/span&gt;, score[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;#x27;Test accuracy:&amp;#x27;&lt;/span&gt;, score[&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意15、64和70行是我新加的。&lt;br&gt;修改完文件后，在命令行运行该文件，在浏览器打开&lt;code&gt;http://localhost:9000&lt;/code&gt;网址，就可以看到你训练时的参数了。注意结果是每个epoch输出一次。&lt;/p&gt;
+</content>
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="Deep Learning" />
+        <category term="Keras" />
+        <category term="TensorFlow" />
+        <updated>2018-03-18T10:35:41.000Z</updated>
+    </entry>
+</feed>

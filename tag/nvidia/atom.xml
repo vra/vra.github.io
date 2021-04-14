@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;nvidia&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2016-12-18T10:11:11.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2016/12/18/nvidia-gpu-names/</id>
+        <title>关于英伟达显卡命名的姿势</title>
+        <link rel="alternate" href="http://vra.github.io/2016/12/18/nvidia-gpu-names/"/>
+        <content type="html">&lt;p&gt;平时在实验中用到GPU的地方比较多，看新闻也总是能看到英伟达又出了什么型号的显卡等等，可是我一直没搞清楚该公司显卡名称的命名关系，今天特地查了下，总结在这里，以便以后翻阅。  &lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;Nvidia的GPU命名有4个层次：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;GPU 架构(microarchitecture), 表示GPU在芯片设计层面上的不同处理方式，包括的内容有计算单元(SIMD)的个数、有无L1,L2缓存、是否有双精度支持等。按时间顺序依次是Tesla, Fermi, Kepler， Maxwell, Pascal。&lt;/li&gt;
+&lt;li&gt;显卡系列：根据使用场景的不同，分成GeForce, Quadro, Tesla。GeForce用于家庭和个人电脑，包括游戏和娱乐等;Quadro用于工业渲染、艺术设计，工作站等场合。而Tesla用于科学计算，深度学习加速等场景。当然这三者的使用场景并没有严格的边界，想GeForce 系列的GTX 1080也可以用来做深度学习实验。&lt;/li&gt;
+&lt;li&gt;芯片型号，例如GT200、GK210、GM104、GF104， K80, M40等。其中第二个字母表示架构，如K40 中的K表示是Kepler架构,P100中的P表示Pascal架构。&lt;/li&gt;
+&lt;li&gt;针对GeForce系列，还有2系列，3系列，200系列，400系列等分类，像GeForce GTX 1080 就是10系列。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;需要注意的地方有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注意区分Tesla GPU架构和Tesla系列。前者已经用的不是很多了，而后者是最近才出的针对深度学习的系列，使用很多，像我们实验室用的K20,K80都是这个系列。&lt;/li&gt;
+&lt;li&gt;描述一个显卡的时候，一般是系列名+芯片型号，如 Tesla K80。 &lt;/li&gt;
+&lt;li&gt;针对GeForce系列，芯片型号一般是显卡型号+具体编号的形式，如 GeForce GT 705,其中GT 是显卡型号。&lt;/li&gt;
+&lt;li&gt;最近新出了一款 TiTan X, 主要要和GeForce GTX Tian X 区分。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考：&#34;&gt;&lt;a href=&#34;#参考：&#34; class=&#34;headerlink&#34; title=&#34;参考：&#34;&gt;&lt;/a&gt;参考：&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://chenrudan.github.io/blog/2015/12/20/introductionofgpuhardware.html&#34;&gt;https://chenrudan.github.io/blog/2015/12/20/introductionofgpuhardware.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.quora.com/What-is-NVIDIA-GPU-micro-architecture&#34;&gt;https://www.quora.com/What-is-NVIDIA-GPU-micro-architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units&#34;&gt;https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="总结" />
+        <category term="GPU" />
+        <category term="Nvidia" />
+        <updated>2016-12-18T10:11:11.000Z</updated>
+    </entry>
+</feed>

@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;matlab&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2015-05-31T12:59:42.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2015/05/31/matlab-plot/</id>
+        <title>如何用matlab画稍微美观点的图</title>
+        <link rel="alternate" href="http://vra.github.io/2015/05/31/matlab-plot/"/>
+        <content type="html">&lt;p&gt;本科毕设论文写作过程中，老师指出我用matlab画的图太丑，需要好好改改。于是我这几天参考网上资料，对画图的一些细节进行了设置，得到的图确实比以前好了些。而且我matlab用的不多，很多东西这次用过，下次碰可能要过很长时间，许多之前记得的东西都忘了，所以写下来是很有必要的。另外我现在画的图也只是比之前稍微好点，所以就起了这样一个题目。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+
+&lt;h2 id=&#34;1-设置plot&#34;&gt;&lt;a href=&#34;#1-设置plot&#34; class=&#34;headerlink&#34; title=&#34;1. 设置plot&#34;&gt;&lt;/a&gt;1. 设置plot&lt;/h2&gt;&lt;p&gt;参考内容：&lt;a href=&#34;http://www.mathworks.com/help/matlab/ref/plot.html&#34;&gt;http://www.mathworks.com/help/matlab/ref/plot.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;设置曲线形式-LineSpec&#34;&gt;&lt;a href=&#34;#设置曲线形式-LineSpec&#34; class=&#34;headerlink&#34; title=&#34;设置曲线形式(LineSpec)&#34;&gt;&lt;/a&gt;设置曲线形式(LineSpec)&lt;/h3&gt;&lt;p&gt;曲线形式包括3个部分，分别是&lt;code&gt;Line Style&lt;/code&gt;，&lt;code&gt;marker symbol&lt;/code&gt;和&lt;code&gt;color&lt;/code&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Line style&lt;/code&gt;表示曲线的类别，有4类：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;-：实线(Solid line)，也是默认的格式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;–:虚线(dashed line)，也就是——这种格式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;::点线(dotted line),也就是将引号:横过来的格式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;-.:点虚线(Dash-dot line),就是虚线和点交替出现,-.-.-.-.,不过点是在中间，跟虚线相平的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;marker symbol表示数据点的标记形式，有如下几类，直接复制过来了：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;o Circle&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ul&gt;
+&lt;li&gt;Plus sign&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ul&gt;
+&lt;li&gt;Asterisk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;. Point&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;x Cross&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;s Square&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;d Diamond&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;^ Upward-pointing triangle&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;v Downward-pointing triangle&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;gt;&lt;/code&gt; Right-pointing triangle&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&amp;lt; Left-pointing triangle&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;p Pentagram&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;h Hexagram&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;color表示颜色设置，matlab画图里面所有的颜色都是这几种：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;y yellow&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;m magenta,品红&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;c cyan,青色&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;r red&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;g green&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;b blue&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;w white&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;k black&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;需要主要的有2点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;这三个选项可以省略任意一个或多个，当省略&lt;code&gt;line style&lt;/code&gt;且设定了&lt;code&gt;marker symbol&lt;/code&gt;时，这时候得到的只有数据点，没有曲线。&lt;/li&gt;
+&lt;li&gt;如果Y值是一个矩阵的时候，如果设定了&lt;code&gt;color&lt;/code&gt;选项，怎对所有曲线，颜色都是设定的那种颜色；如果没设定&lt;code&gt;color&lt;/code&gt;,则曲线颜色按上面所示颜色顺序依次往下选择。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;设置曲线宽度-LineWidth&#34;&gt;&lt;a href=&#34;#设置曲线宽度-LineWidth&#34; class=&#34;headerlink&#34; title=&#34;设置曲线宽度:LineWidth&#34;&gt;&lt;/a&gt;设置曲线宽度:LineWidth&lt;/h3&gt;&lt;p&gt;曲线宽度设置好也是很重要的，默认的曲线太细，不美观，我们可以使用LineWidth来设置，其单位为点的大小,比如&lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;plot&lt;/span&gt;(x,y,&lt;span class=&#34;string&#34;&gt;&amp;#x27;LineWidth&amp;#x27;&lt;/span&gt;,&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;表示线宽是两倍的点大小。&lt;/p&gt;
+&lt;h3 id=&#34;设置标记大小-MarkerSize&#34;&gt;&lt;a href=&#34;#设置标记大小-MarkerSize&#34; class=&#34;headerlink&#34; title=&#34;设置标记大小:MarkerSize&#34;&gt;&lt;/a&gt;设置标记大小:MarkerSize&lt;/h3&gt;&lt;p&gt;标记大小表示前面设定的&lt;code&gt;marker symbol&lt;/code&gt;的大小，单位为点的大小。&lt;/p&gt;
+&lt;h3 id=&#34;设置标记边缘颜色-MarkerEdgeColor&#34;&gt;&lt;a href=&#34;#设置标记边缘颜色-MarkerEdgeColor&#34; class=&#34;headerlink&#34; title=&#34;设置标记边缘颜色:MarkerEdgeColor&#34;&gt;&lt;/a&gt;设置标记边缘颜色:MarkerEdgeColor&lt;/h3&gt;&lt;p&gt;标记边缘颜色就是标记周围一圈的颜色。&lt;/p&gt;
+&lt;h3 id=&#34;标记填充颜色-MarkerFaceColor&#34;&gt;&lt;a href=&#34;#标记填充颜色-MarkerFaceColor&#34; class=&#34;headerlink&#34; title=&#34;标记填充颜色:MarkerFaceColor&#34;&gt;&lt;/a&gt;标记填充颜色:MarkerFaceColor&lt;/h3&gt;&lt;p&gt;标记填充颜色。&lt;/p&gt;
+&lt;h2 id=&#34;2-设置网格Grid&#34;&gt;&lt;a href=&#34;#2-设置网格Grid&#34; class=&#34;headerlink&#34; title=&#34;2. 设置网格Grid&#34;&gt;&lt;/a&gt;2. 设置网格Grid&lt;/h2&gt;&lt;p&gt;参考内容：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mathworks.com/help/matlab/ref/gca.html&#34;&gt;http://www.mathworks.com/help/matlab/ref/gca.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mathworks.com/help/matlab/ref/grid.html&#34;&gt;http://www.mathworks.com/help/matlab/ref/grid.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mathworks.com/help/matlab/ref/axes-properties.html#prop_MinorGridLineStyle&#34;&gt;http://www.mathworks.com/help/matlab/ref/axes-properties.html#prop_MinorGridLineStyle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mathworks.com/help/matlab/ref/axes-properties.html#prop_GridAlpha&#34;&gt;http://www.mathworks.com/help/matlab/ref/axes-properties.html#prop_GridAlpha&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;显示-隐藏网格&#34;&gt;&lt;a href=&#34;#显示-隐藏网格&#34; class=&#34;headerlink&#34; title=&#34;显示/隐藏网格&#34;&gt;&lt;/a&gt;显示/隐藏网格&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;grid on：显示网格&lt;/li&gt;
+&lt;li&gt;grid off：隐藏网格&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;得到当前坐标轴Axis&#34;&gt;&lt;a href=&#34;#得到当前坐标轴Axis&#34; class=&#34;headerlink&#34; title=&#34;得到当前坐标轴Axis&#34;&gt;&lt;/a&gt;得到当前坐标轴Axis&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ax = gca;&lt;/code&gt;:得到当前坐标轴，其中&lt;code&gt;gca&lt;/code&gt;意为get current axis，实际是一个函数，只不过后面没加括号而已。&lt;br&gt;得到坐标轴后，就可以对图像进行一系列的设置。&lt;/p&gt;
+&lt;h3 id=&#34;设置网格线类型-GridLineStyle&#34;&gt;&lt;a href=&#34;#设置网格线类型-GridLineStyle&#34; class=&#34;headerlink&#34; title=&#34;设置网格线类型:GridLineStyle&#34;&gt;&lt;/a&gt;设置网格线类型:GridLineStyle&lt;/h3&gt;&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ax= gca;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ax.GridLineStyle = &lt;span class=&#34;string&#34;&gt;&amp;#x27;:&amp;#x27;&lt;/span&gt;; &lt;span class=&#34;comment&#34;&gt;%设置网格线为点线&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;设置网格线透明度：GridAlpha&#34;&gt;&lt;a href=&#34;#设置网格线透明度：GridAlpha&#34; class=&#34;headerlink&#34; title=&#34;设置网格线透明度：GridAlpha&#34;&gt;&lt;/a&gt;设置网格线透明度：GridAlpha&lt;/h3&gt;&lt;p&gt;默认透明度是0.15，可以使用GridAlpha来设置&lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ax = gca;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ax.GridAlpha = &lt;span class=&#34;number&#34;&gt;0.5&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;%设置透明度为0.5&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;3-设置坐标轴&#34;&gt;&lt;a href=&#34;#3-设置坐标轴&#34; class=&#34;headerlink&#34; title=&#34;3. 设置坐标轴&#34;&gt;&lt;/a&gt;3. 设置坐标轴&lt;/h2&gt;&lt;h3 id=&#34;设置坐标轴范围&#34;&gt;&lt;a href=&#34;#设置坐标轴范围&#34; class=&#34;headerlink&#34; title=&#34;设置坐标轴范围&#34;&gt;&lt;/a&gt;设置坐标轴范围&lt;/h3&gt;&lt;p&gt;可以用&lt;code&gt;axis([xStart xEnd yStart yEnd])&lt;/code&gt;这样一条命令来设置坐标轴的范围。&lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;axis([&lt;span class=&#34;number&#34;&gt;0.1&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0.6&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0.5&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0.8&lt;/span&gt;]);&lt;span class=&#34;comment&#34;&gt;%x轴从0.1到0.6，y轴从0.5到0.8&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;设置坐标轴跨度&#34;&gt;&lt;a href=&#34;#设置坐标轴跨度&#34; class=&#34;headerlink&#34; title=&#34;设置坐标轴跨度&#34;&gt;&lt;/a&gt;设置坐标轴跨度&lt;/h3&gt;&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;set(gca, &lt;span class=&#34;string&#34;&gt;&amp;#x27;xtick&amp;#x27;&lt;/span&gt;,[xStart:xStep:xEnd]):设置x轴步长，从xStart开始，从xEnd结束，步长是xStep。&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;set(gca, &lt;span class=&#34;string&#34;&gt;&amp;#x27;ytick&amp;#x27;&lt;/span&gt;,[yStart:yStep:yEnd]):同X轴。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;4-设置图标题和图中文字&#34;&gt;&lt;a href=&#34;#4-设置图标题和图中文字&#34; class=&#34;headerlink&#34; title=&#34;4. 设置图标题和图中文字&#34;&gt;&lt;/a&gt;4. 设置图标题和图中文字&lt;/h2&gt;&lt;p&gt;参考内容：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.mathworks.com/help/matlab/ref/legend.html&#34;&gt;http://www.mathworks.com/help/matlab/ref/legend.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;设置图片标题：legend&#34;&gt;&lt;a href=&#34;#设置图片标题：legend&#34; class=&#34;headerlink&#34; title=&#34;设置图片标题：legend&#34;&gt;&lt;/a&gt;设置图片标题：legend&lt;/h3&gt;&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;legend&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;#x27;figure1&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;设置x-y轴坐标：x-ylabel&#34;&gt;&lt;a href=&#34;#设置x-y轴坐标：x-ylabel&#34; class=&#34;headerlink&#34; title=&#34;设置x/y轴坐标：x/ylabel&#34;&gt;&lt;/a&gt;设置x/y轴坐标：x/ylabel&lt;/h3&gt;&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;xlabel(&lt;span class=&#34;string&#34;&gt;&amp;#x27;\alpha&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ylabel(&lt;span class=&#34;string&#34;&gt;&amp;#x27;soccer&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;设置图中文字：text&#34;&gt;&lt;a href=&#34;#设置图中文字：text&#34; class=&#34;headerlink&#34; title=&#34;设置图中文字：text&#34;&gt;&lt;/a&gt;设置图中文字：text&lt;/h3&gt;&lt;p&gt;使用方法：text(xPos, yPos,’str’)&lt;/p&gt;
+&lt;figure class=&#34;highlight matlab&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt; = &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt; : &lt;span class=&#34;number&#34;&gt;10&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	text(x(&lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt;)+&lt;span class=&#34;number&#34;&gt;0.1&lt;/span&gt;, y(&lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt;)+&lt;span class=&#34;number&#34;&gt;0.3&lt;/span&gt;, num2str(y(&lt;span class=&#34;built_in&#34;&gt;i&lt;/span&gt;))); &lt;span class=&#34;comment&#34;&gt;%num2str：将数字转换为字符&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;上面代码表示在(x+0.1, y+0.3)处显示y的值&lt;/p&gt;
+</content>
+        <category term="学习总结" />
+        <category term="matlab" />
+        <updated>2015-05-31T12:59:42.000Z</updated>
+    </entry>
+</feed>

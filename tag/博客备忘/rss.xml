@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;博客备忘&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Tue, 02 Jun 2015 20:27:40 +0800</pubDate>
+        <lastBuildDate>Tue, 02 Jun 2015 20:27:40 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2015/06/02/blog-transfer-record/</guid>
+            <title>博客迁移记录</title>
+            <link>http://vra.github.io/2015/06/02/blog-transfer-record/</link>
+            <category>博客备忘</category>
+            <pubDate>Tue, 02 Jun 2015 20:27:40 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;前几天，我把原先部署在科大lug服务器上的wordpress&lt;a href=&#34;http://vra.blog.ustc.edu.cn/&#34;&gt;博客&lt;/a&gt;迁移到了github上，也就是现在这个网站。&lt;/p&gt;
+&lt;h2 id=&#34;2015-7-31日更新&#34;&gt;&lt;a href=&#34;#2015-7-31日更新&#34; class=&#34;headerlink&#34; title=&#34;2015-7-31日更新&#34;&gt;&lt;/a&gt;2015-7-31日更新&lt;/h2&gt;&lt;p&gt;前一段时间，我的Ubuntu系统突然出现问题，开机进入系统后，只显示桌面，侧边烂和其他内容都不显示，重启好几次也没用，这时候啥都干不了了，系统里面的内容也没法备份。没办法我就重装了个Debian系统，而原先系统的内容全部丢失T_T，连同我的保存在本地的markdown格式的博客内容。  &lt;/p&gt;
+&lt;p&gt;我原本以为github上也许有md格式的博客内容，然而并没有，只有转化为&lt;code&gt;html&lt;/code&gt;格式的内容。所以我只能从html文件里面手动恢复出md格式的文件，然后再贴到网上，这几乎花费了我一整天的时间，所以以后要吸取教训，要么进行备份，要么采用多站共同部署的方法（如在gitcafe上同样部署一份博客内容），保证内容不丢失。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;首先推广下我们学校的LUG服务&#34;&gt;&lt;a href=&#34;#首先推广下我们学校的LUG服务&#34; class=&#34;headerlink&#34; title=&#34;首先推广下我们学校的LUG服务,:)&#34;&gt;&lt;/a&gt;首先推广下我们学校的LUG服务,:)&lt;/h2&gt;&lt;p&gt;中科大LUG协会主页：&lt;a href=&#34;http://lug.ustc.edu.cn/&#34;&gt;http://lug.ustc.edu.cn&lt;/a&gt;由校园里技术实力很强的一些学生和已经离校工作或去别的地方深造的技术大牛组成，为本校学生和外校人员提供了许多很有用的服务，包括&lt;a href=&#34;http://mirrors.ustc.edu.cn/&#34;&gt;开源软件镜像网站mirrors&lt;/a&gt;,Linux 虚拟主机&lt;a href=&#34;http://freeshell.ustc.edu.cn/&#34;&gt;freeshell&lt;/a&gt;，&lt;a href=&#34;https://blog.ustc.edu.cn/&#34;&gt;科大博客&lt;/a&gt;，代码托管站点&lt;a href=&#34;https://gitlab.lug.ustc.edu.cn/&#34;&gt;gitlab&lt;/a&gt;等等。这些服务的主机主要是靠学校提供或实验室捐赠，大多都比较老旧，而且维护人员都是边进行学业边维护的。在如此艰难的情境下还是为我们提供了高质量的服务，真的很感谢USTC LUG的同学们！&lt;/p&gt;
+&lt;h2 id=&#34;wordpress博客的一些问题&#34;&gt;&lt;a href=&#34;#wordpress博客的一些问题&#34; class=&#34;headerlink&#34; title=&#34;wordpress博客的一些问题&#34;&gt;&lt;/a&gt;wordpress博客的一些问题&lt;/h2&gt;&lt;p&gt;我在使用科大博客的时候，发现了一些wordpress存在的问题，而且由于我对网站开发这方面不是很懂，所以没法解决，每次都用很笨的办法搞定，很浪费时间，有的时候也没法可想。我遇到的问题有下面几个&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;HTML转义字符的问题&lt;br&gt;在博客中的代码段的标签符号，如&amp;lt;，&amp;gt;，&amp;amp;都会被转义为相应的标记。被这个问题困扰了很久，但都没找到好的解决方法。&lt;/li&gt;
+&lt;li&gt;使用markdown插件编辑代码时，``` 标记转化为代码的时候总是会多出来一个` ，代码段看起来很丑。&lt;/li&gt;
+&lt;li&gt;wordpress插件和主题经常需要更新，比较烦。。。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;wordpress是动态博客框架，而我的博客内容大多是一些平时学习总结，做个静态的博客即可，既加快了访问速度，又省去了wordpress庞大的框架。&lt;/p&gt;
+&lt;h2 id=&#34;结缘Hexo&#34;&gt;&lt;a href=&#34;#结缘Hexo&#34; class=&#34;headerlink&#34; title=&#34;结缘Hexo&#34;&gt;&lt;/a&gt;结缘Hexo&lt;/h2&gt;&lt;p&gt;在这学期的LuG小聚活动中，有一次有一个同学讲了关于静态博客Hexo的内容，发现Hexo优点多多，框架轻巧，部署简单，界面美观，而且有插件能方便地迁入或迁出。于是渐渐地，心向往之。&lt;/p&gt;
+&lt;h2 id=&#34;迁移&#34;&gt;&lt;a href=&#34;#迁移&#34; class=&#34;headerlink&#34; title=&#34;迁移&#34;&gt;&lt;/a&gt;迁移&lt;/h2&gt;&lt;p&gt;前几天我打算写点关于Sublime Text编辑器使用总结的博客，在wordpress里面写的时候，上面提到的问题又困扰我来了，没办法，我试着在网上找了些在github上部署hexo的资料，尝试这把博客内容都迁移到github上。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将Hexo部署到github上&lt;/li&gt;
+&lt;li&gt;通过插件将wordpress内容迁移过来&lt;/li&gt;
+&lt;li&gt;调整迁移过程中出现问题的博客内容&lt;/li&gt;
+&lt;li&gt;换了一个pacman的主题&lt;/li&gt;
+&lt;li&gt;又换了个jacman的主题，由心灵手巧、多才多艺的女票设计了博客的logo&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;于是，这个网站就建好了～&lt;/p&gt;
+&lt;h2 id=&#34;hexo的问题&#34;&gt;&lt;a href=&#34;#hexo的问题&#34; class=&#34;headerlink&#34; title=&#34;hexo的问题&#34;&gt;&lt;/a&gt;hexo的问题&lt;/h2&gt;&lt;p&gt;Hexo的博客内容都是以markdown文件保存在本地，所以就没法在别的系统或环境下修改博客了。我尝试了修改github.io的respository内容，但都会在下次在本地部署时被覆盖掉，所以对于使用双系统的情况，就没法在多处修改博客内容了。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

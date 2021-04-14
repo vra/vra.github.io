@@ -1,0 +1,19 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Yunfeng's Simple Blog • All posts by \"asciinema\" tag",
+    "description": "Love, Life, Linux",
+    "home_page_url": "http://vra.github.io",
+    "items": [
+        {
+            "id": "http://vra.github.io/2016/11/14/test-asciinema/",
+            "url": "http://vra.github.io/2016/11/14/test-asciinema/",
+            "title": "在Hexo博客里面插入asciinema终端记录视频",
+            "date_published": "2016-11-14T07:33:47.000Z",
+            "content_html": "<h2 id=\"概述\"><a href=\"#概述\" class=\"headerlink\" title=\"概述\"></a>概述</h2><p>前几天发现了一个很有意思的记录终端操作的工具<a href=\"https://asciinema.org/\">asciinema</a>,使用起来异常简单功能却很强大，很佩服开发者的想象力和创造力。<br>今天我在想，能否在Hexo博客里面插入asciinema录的视频呢？Google了一下，发现真的已经有人做出了该功能的插件<a href=\"https://github.com/narongdejsrn/hexo-tag-asciinema\">hexo-tag-asciinema</a>,安装了下果然可以在博客里面插入asciinema，而且一个超级简单的命令即可完成。像下面就是一个例子(用C++编写一个简单的HelloWorld程序)：</p>\n<script type=\"text/javascript\" src=\"https://asciinema.org/a/92655.js\" id=\"asciicast-92655\" async></script>\n\n<p>下面详细介绍每个步骤。</p>\n<span id=\"more\"></span>\n\n<h2 id=\"asciinema安装\"><a href=\"#asciinema安装\" class=\"headerlink\" title=\"asciinema安装\"></a>asciinema安装</h2><p>参照<a href=\"https://asciinema.org/docs/installation\">这里</a>的教程,常见的asciinema的安装方式有下面2种：</p>\n<ol>\n<li>通过系统的包管理软件安装<br>Debian:<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">sudo apt-get install asciinema</span><br></pre></td></tr></table></figure>\nUbuntu:<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">sudo apt-add-repository ppa:zanchey/asciinema</span><br><span class=\"line\">sudo apt-get update</span><br><span class=\"line\">sudo apt-get install asciinema</span><br></pre></td></tr></table></figure></li>\n</ol>\n<p>2.通过pip3安装，需要先安装python3</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">sudo pip3 install asciinema</span><br></pre></td></tr></table></figure>\n\n<h2 id=\"asciinema使用\"><a href=\"#asciinema使用\" class=\"headerlink\" title=\"asciinema使用\"></a>asciinema使用</h2><p>安装好后，打开终端,输入<code>asciinema rec</code> 开始记录，按<code>Ctrl-D</code>结束记录。<br>结束记录后，会让你选择是否需要上传数据，如果选择<code>Y</code>,则会给出一个URL，点击该URL即可访问你刚才录的视频。<br>另外，你也可以在asciinema官网上注册帐号，这样你所有记录的数据都可以保存在上面，你可以通过<code>asciinema auth</code>来验证帐号。</p>\n<h2 id=\"在Hexo里面插入asciinema的视频\"><a href=\"#在Hexo里面插入asciinema的视频\" class=\"headerlink\" title=\"在Hexo里面插入asciinema的视频\"></a>在Hexo里面插入asciinema的视频</h2><p>假设你已经在本地安装好了Hexo博客系统而且已经通过asciinema录制好了视频<strong>并上传到asciinema网站上</strong>。<br>首先是通过<code>npm</code>安装<a href=\"https://github.com/narongdejsrn/hexo-tag-asciinema\">hexo-tag-asciinema</a>:</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">npm install --save hexo-tag-asciinema </span><br></pre></td></tr></table></figure>\n<p>然后在Hexo博客的<code>markdown</code>文件里面，使用下面的命令来插入视频:</p>\n<figure class=\"highlight js\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">&#123;% asciinema video_id %&#125;</span><br></pre></td></tr></table></figure>\n<p>其中<code>video_id</code>是你上传的视频的编号，比如你视频所在的页面是<code>https://asciinema.org/a/41100</code>, 那在<code>video_id</code>那里填<code>41100</code>。<br>然后保存markdown文件，执行<code>npm install</code>安装必要的包，再<code>hexo deploy</code>部署你的博客，就可以看到效果了。</p>\n",
+            "tags": [
+                "Linux",
+                "asciinema"
+            ]
+        }
+    ]
+}

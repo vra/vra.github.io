@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;迁移记录&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 27 Feb 2019 18:12:24 +0800</pubDate>
+        <lastBuildDate>Wed, 27 Feb 2019 18:12:24 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2019/02/27/mv-to-next/</guid>
+            <title>Move to NexT——博客迁移记录2019</title>
+            <link>http://vra.github.io/2019/02/27/mv-to-next/</link>
+            <category>总结</category>
+            <category>迁移记录</category>
+            <pubDate>Wed, 27 Feb 2019 18:12:24 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;这个博客以前是采用Disqus作为评论系统，之前Disqus还是偶尔能访问，最近是怎么着都没法访问了。写东西很多时候还是希望能得到反馈，因此为了更愉快的博客交流，我调查了下常见的还活着的的评论系统，最后发现了Valine。配置后发现真的是简单又好用，有任何想说的小伙伴都可以轻轻松松留言了，给有创造力的工程师们点赞！而且由于Hexo的NexT主题默认支持Valine配置（而之前使用的Jacman并不支持），所以也将博客的主题改成NexT了。于是从蓝花花变成了白花花～&lt;/p&gt;
+&lt;p&gt;后面说下这个博客经历的几次迁移记录，从2013-2019。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;2013-2015年6月，科大博客上的Wordpress站点&#34;&gt;&lt;a href=&#34;#2013-2015年6月，科大博客上的Wordpress站点&#34; class=&#34;headerlink&#34; title=&#34;2013-2015年6月，科大博客上的Wordpress站点&#34;&gt;&lt;/a&gt;2013-2015年6月，科大博客上的Wordpress站点&lt;/h2&gt;&lt;p&gt;2013年，我大三的时候，偶然看到USTC LUG 社团建了一个&lt;a href=&#34;https://lug.ustc.edu.cn/wiki/lug/services/blog?s%5B%5D=blog&#34;&gt;科大博客&lt;/a&gt;的网站，域名是&lt;code&gt;blog.ustc.edu.cn&lt;/code&gt;，上面可以放在校师生的博客或者主页。于是我申请了一个账号，建了一个域名为&lt;code&gt;vra.blog.ustc.edu.cn&lt;/code&gt;的Wordpress博客。由于社团已经配置好了Wordpress服务，也提供了几个默认的主题，而且Wordpress可视化的操作也比较容易，因此在不想学习的时候，就在上面写一些比较个人化的文字和技术记录。当自己写的博文在web上被加载出来的时候，内心还是很激动的。&lt;br&gt;渐渐地，也写了一些关于C++，Linux的内容，也有几个关系比较好的同学也在上面搭建了自己的博客，分享自己的技术和人文方面的东西，所以当时感觉这个科大博客会越做越好的。&lt;br&gt;然而后面由于维护成本较高，而LUG里面也没有像&lt;a href=&#34;https://ring0.me/&#34;&gt;boj&lt;/a&gt;师兄那样一人顶十人的战斗力了，因此科大博客也发出通知，后面会关停科大博客。而也是在LUG的某次分享上，我听到了Hexo这个静态博客框架，因此在本科毕业后，我将科大博客上的内容迁移到GitHub Pages上，采用了Hexo框架，具体的说明可以见&lt;a href=&#34;https://vra.github.io/2015/06/02/blog-transfer-record/&#34;&gt;这篇博文&lt;/a&gt;。&lt;br&gt;由科大博客从开始到兴盛到关闭，作为一个见证者，我觉得还是挺遗憾的。不过在学校办这种服务性的项目，确实是不容易的，一方面大家都有繁重的学业压力，还有能够获取的资源也是不够的。还是很感谢LUG的小伙伴无私的奉献，给我们创造了无数个激动的时刻。&lt;/p&gt;
+&lt;h2 id=&#34;2015年6月-2019年2月，-Hexo-on-GitHub-Pages-with-Jacman-theme&#34;&gt;&lt;a href=&#34;#2015年6月-2019年2月，-Hexo-on-GitHub-Pages-with-Jacman-theme&#34; class=&#34;headerlink&#34; title=&#34;2015年6月-2019年2月， Hexo on GitHub Pages with Jacman theme&#34;&gt;&lt;/a&gt;2015年6月-2019年2月， Hexo on GitHub Pages with Jacman theme&lt;/h2&gt;&lt;p&gt;采用Hexo静态博客框架后，我也尝试过不同的Host地址，GitHub Pages，Gitcaffe的配置，也自己买过几个域名。后来发现还是用&lt;code&gt;vra.github.io&lt;/code&gt;这个域名吧，稍微剪短点，也比较通用。&lt;br&gt;一个比较麻烦的问题是，静态博客的评论系统一直没有比较好的解决方案，而评论系统的一再更改也是一部血泪史。&lt;br&gt;一开始使用Disqus，结果Disqus被blocked，访问不了了。&lt;br&gt;然后使用多说，使用没多久多说关停了。&lt;br&gt;后面使用gitment，但是时不时会有问题，每次需要重新登录GitHub账号。  &lt;/p&gt;
+&lt;h2 id=&#34;2019年2月，-Hexo-on-GitHub-Pages-with-NexT-theme&#34;&gt;&lt;a href=&#34;#2019年2月，-Hexo-on-GitHub-Pages-with-NexT-theme&#34; class=&#34;headerlink&#34; title=&#34;2019年2月， Hexo on GitHub Pages with NexT theme&#34;&gt;&lt;/a&gt;2019年2月， Hexo on GitHub Pages with NexT theme&lt;/h2&gt;&lt;p&gt;由于没有完善的评论系统，因此博客很少能听到有效的反馈。因此从18年夏天开始，我也在&lt;a href=&#34;https://www.zhihu.com/people/yunfeng-87/columns&#34;&gt;知乎专栏&lt;/a&gt;上分享自己的学习总结，希望能够帮助到更多的人。&lt;br&gt;最近搜了下发现Valine挺好用的，于是今天借这个机会重新配置了下，发现确实简单好用，工具越来越好用，生活真实越来越美好了，所以保持探索的心还是很重要的，说不定那天就能找到令人兴奋的作品呢^-^&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2018/10/21/begin-agin-2018/</guid>
+            <title>Begin Again</title>
+            <link>http://vra.github.io/2018/10/21/begin-agin-2018/</link>
+            <category>总结</category>
+            <category>迁移记录</category>
+            <pubDate>Sun, 21 Oct 2018 13:44:42 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;自从今年七月份工作后，就一直没有更新过博客，之前坚持了一年多的每个月写一篇博客的记录也被打断了，一方面是因为工作太忙了，另一方面是因为自己做的都是一些项目相关的东西，没什么可以写的，只有论文分享比较合适，不过我也没有看太多论文……这周末将之前的MarkDown文件整理了下，将七牛云上没法访问的图片迁移到了Hexo项目的&lt;code&gt;img&lt;/code&gt;目录下（具体做法可以参考&lt;a href=&#34;https://github.com/qiniu/qshell/issues/188#issuecomment-430862857&#34;&gt;这里&lt;/a&gt;），因为GitHub的学生优惠也到期了，没法创建私有仓库，所以以后会将blog的源文件托管到GitLab.com上，一切准备妥当，Begin Again!&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

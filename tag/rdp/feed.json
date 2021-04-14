@@ -1,0 +1,21 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Yunfeng's Simple Blog • All posts by \"rdp\" tag",
+    "description": "Love, Life, Linux",
+    "home_page_url": "http://vra.github.io",
+    "items": [
+        {
+            "id": "http://vra.github.io/2017/02/18/rdesktop-share-file/",
+            "url": "http://vra.github.io/2017/02/18/rdesktop-share-file/",
+            "title": "使用rdesktop来在Windows和Linux之间共享数据",
+            "date_published": "2017-02-18T11:33:13.000Z",
+            "content_html": "<h3 id=\"概述\"><a href=\"#概述\" class=\"headerlink\" title=\"概述\"></a>概述</h3><p><a href=\"http://www.rdesktop.org/\">rdesktop</a>是一个开源的远程桌面客户端，用来从Linux机器连接到Windows机器。它遵循RDP协议（Remote Desktop Protocol），并且操作简洁，功能比较完备。</p>\n<span id=\"more\"></span>\n\n<h3 id=\"安装\"><a href=\"#安装\" class=\"headerlink\" title=\"安装\"></a>安装</h3><p>在Debian发行版上，可以直接用<code>apt-get</code>命令安装:</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">sudo apt-get install rdesktop</span><br></pre></td></tr></table></figure>\n<p>别的发行版的安装方式请参看rdesktop项目的GitHub页面:<a href=\"https://github.com/rdesktop/rdesktop\">https://github.com/rdesktop/rdesktop</a>。</p>\n<h3 id=\"连接\"><a href=\"#连接\" class=\"headerlink\" title=\"连接\"></a>连接</h3><p>最简单的情况，如果你要连接到的Windows机器的IP地址是a.b.c.d, 需要以用户username登录，则可以这样运行rdesktop命令：</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">rdesktop -u username a.b.c.d</span><br></pre></td></tr></table></figure>\n<p>如果你想直接在命令里面使用用户的登录密码，则使用<code>-p</code>选项：</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">rdesktop -u username a.b.c.d -p my-password</span><br></pre></td></tr></table></figure>\n<p>如果你想设置登录后的窗口的大小，则采用<code>-g</code>选项：</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">rdesktop -u username a.b.c.d -p my-password -g 1200x900</span><br></pre></td></tr></table></figure>\n<p>登录后你会感觉字体显示比较怪，看着很不舒服，可以使用<code>-x</code>选项来是字体变得光滑:</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">rdesktop -u username a.b.c.d -p my-password -g 1200x900 -x 0x80</span><br></pre></td></tr></table></figure>\n<p>其中<code>0x80</code>还可以改为<code>0x81</code>, <code>0x8F</code>,分别表示LAN default mode， broadband default mode 和 modem default mode,为不同的”RDP5 experience”。<br>以上就是基本的连接选项，也可以通过运行<code>rdesktop -h</code>命令来查看所有选项。  </p>\n<h3 id=\"共享文件\"><a href=\"#共享文件\" class=\"headerlink\" title=\"共享文件\"></a>共享文件</h3><p>一个常见的需求是在Windows和Linux系统上共享文件。Samba服务可以解决这个问题，但配置比较复杂。这里我们采用rdesktop来完成这个任务。<br>首先在Linux系统下创建一个目录，例如:<code>/home/username/Pictures</code>，然后在连接的时候采用<code>-r disk</code>选项来进行文件的共享：</p>\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">rdesktop -u username a.b.c.d -p my-password -g 1200x900 -x 0x80 -r sound:<span class=\"built_in\">local</span> -r disk:LinuxPictures=/home/username/Pictures</span><br></pre></td></tr></table></figure>\n<p>这样在连接到Windows的时候，会在文件资源管理器里面，显示<code>LinuxPictures</code>目录。<br>这里有两个地方需要注意：</p>\n<ol>\n<li>命令中Linux目录的路径必须采用绝对路径，否则会出错。如上例中，将<code>/home/username/Pictures</code>改成<code>~/Pictures</code>则会报错。</li>\n<li>为了正常工作，需要同时设置<code>-r sound:local</code>，虽然看起来好像没什么关系。关于这个问题的讨论见<a href=\"http://askubuntu.com/questions/74713/how-can-i-copy-paste-files-via-rdp-in-kubuntu\">这里</a>和<a href=\"https://github.com/FreeRDP/Remmina/issues/243\">这里</a>。</li>\n</ol>\n<p>设置好之后，就可以在Windows和Linux之间通过Pictures目录传输和共享文件了。</p>\n",
+            "tags": [
+                "Linux",
+                "rdesktop",
+                "RDP",
+                "Windows"
+            ]
+        }
+    ]
+}

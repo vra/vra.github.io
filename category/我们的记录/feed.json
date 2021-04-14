@@ -1,0 +1,16 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Yunfeng's Simple Blog • All posts by \"我们的记录\" category",
+    "description": "Love, Life, Linux",
+    "home_page_url": "http://vra.github.io",
+    "items": [
+        {
+            "id": "http://vra.github.io/2014/12/13/our-record/",
+            "url": "http://vra.github.io/2014/12/13/our-record/",
+            "title": "记录我们的点点滴滴",
+            "date_published": "2014-12-13T14:51:48.000Z",
+            "content_html": "<p>还记得你初次敲代码时专注的模样</p>\n<span id=\"more\"></span>\n<p><img src=\"/uploads/2014/12/first-coding.jpg\"></p>\n<p>程序的崩溃也曾令人发狂</p>\n<p><img src=\"/uploads/2014/12/crash.jpg\"></p>\n<p>从开始的Hello world，到不甚完美的大段程序</p>\n<p><img src=\"/uploads/2014/12/ruinian.jpg\"></p>\n<p>从变量未声明的error</p>\n<p><img src=\"/uploads/2014/12/error.jpg\"></p>\n<p>到细心关怀的草稿</p>\n<p><img src=\"/uploads/2014/12/note.jpg\"></p>\n<p>完成了加减乘除的计算器</p>\n<p><img src=\"/uploads/2014/12/chu.jpg\"></p>\n<p>还有一元二次方程的解法</p>\n<p><img src=\"/uploads/2014/12/solve-function.jpg\"></p>\n<p>我知道以后的路还很长</p>\n<p>但我也知道我们美好的记忆比道路还要长</p>\n<p>我们要看着我们的脚印</p>\n<p>走在阳光灿烂里</p>\n<p>&nbsp;</p>\n",
+            "tags": []
+        }
+    ]
+}

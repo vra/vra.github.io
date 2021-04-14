@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;asciinema&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2016-11-14T07:33:47.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2016/11/14/test-asciinema/</id>
+        <title>在Hexo博客里面插入asciinema终端记录视频</title>
+        <link rel="alternate" href="http://vra.github.io/2016/11/14/test-asciinema/"/>
+        <content type="html">&lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;前几天发现了一个很有意思的记录终端操作的工具&lt;a href=&#34;https://asciinema.org/&#34;&gt;asciinema&lt;/a&gt;,使用起来异常简单功能却很强大，很佩服开发者的想象力和创造力。&lt;br&gt;今天我在想，能否在Hexo博客里面插入asciinema录的视频呢？Google了一下，发现真的已经有人做出了该功能的插件&lt;a href=&#34;https://github.com/narongdejsrn/hexo-tag-asciinema&#34;&gt;hexo-tag-asciinema&lt;/a&gt;,安装了下果然可以在博客里面插入asciinema，而且一个超级简单的命令即可完成。像下面就是一个例子(用C++编写一个简单的HelloWorld程序)：&lt;/p&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/92655.js&#34; id=&#34;asciicast-92655&#34; async&gt;&lt;/script&gt;
+
+&lt;p&gt;下面详细介绍每个步骤。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+
+&lt;h2 id=&#34;asciinema安装&#34;&gt;&lt;a href=&#34;#asciinema安装&#34; class=&#34;headerlink&#34; title=&#34;asciinema安装&#34;&gt;&lt;/a&gt;asciinema安装&lt;/h2&gt;&lt;p&gt;参照&lt;a href=&#34;https://asciinema.org/docs/installation&#34;&gt;这里&lt;/a&gt;的教程,常见的asciinema的安装方式有下面2种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过系统的包管理软件安装&lt;br&gt;Debian:&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install asciinema&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+Ubuntu:&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-add-repository ppa:zanchey/asciinema&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install asciinema&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2.通过pip3安装，需要先安装python3&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip3 install asciinema&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;asciinema使用&#34;&gt;&lt;a href=&#34;#asciinema使用&#34; class=&#34;headerlink&#34; title=&#34;asciinema使用&#34;&gt;&lt;/a&gt;asciinema使用&lt;/h2&gt;&lt;p&gt;安装好后，打开终端,输入&lt;code&gt;asciinema rec&lt;/code&gt; 开始记录，按&lt;code&gt;Ctrl-D&lt;/code&gt;结束记录。&lt;br&gt;结束记录后，会让你选择是否需要上传数据，如果选择&lt;code&gt;Y&lt;/code&gt;,则会给出一个URL，点击该URL即可访问你刚才录的视频。&lt;br&gt;另外，你也可以在asciinema官网上注册帐号，这样你所有记录的数据都可以保存在上面，你可以通过&lt;code&gt;asciinema auth&lt;/code&gt;来验证帐号。&lt;/p&gt;
+&lt;h2 id=&#34;在Hexo里面插入asciinema的视频&#34;&gt;&lt;a href=&#34;#在Hexo里面插入asciinema的视频&#34; class=&#34;headerlink&#34; title=&#34;在Hexo里面插入asciinema的视频&#34;&gt;&lt;/a&gt;在Hexo里面插入asciinema的视频&lt;/h2&gt;&lt;p&gt;假设你已经在本地安装好了Hexo博客系统而且已经通过asciinema录制好了视频&lt;strong&gt;并上传到asciinema网站上&lt;/strong&gt;。&lt;br&gt;首先是通过&lt;code&gt;npm&lt;/code&gt;安装&lt;a href=&#34;https://github.com/narongdejsrn/hexo-tag-asciinema&#34;&gt;hexo-tag-asciinema&lt;/a&gt;:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm install --save hexo-tag-asciinema &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后在Hexo博客的&lt;code&gt;markdown&lt;/code&gt;文件里面，使用下面的命令来插入视频:&lt;/p&gt;
+&lt;figure class=&#34;highlight js&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;% asciinema video_id %&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中&lt;code&gt;video_id&lt;/code&gt;是你上传的视频的编号，比如你视频所在的页面是&lt;code&gt;https://asciinema.org/a/41100&lt;/code&gt;, 那在&lt;code&gt;video_id&lt;/code&gt;那里填&lt;code&gt;41100&lt;/code&gt;。&lt;br&gt;然后保存markdown文件，执行&lt;code&gt;npm install&lt;/code&gt;安装必要的包，再&lt;code&gt;hexo deploy&lt;/code&gt;部署你的博客，就可以看到效果了。&lt;/p&gt;
+</content>
+        <category term="Linux" />
+        <category term="asciinema" />
+        <updated>2016-11-14T07:33:47.000Z</updated>
+    </entry>
+</feed>

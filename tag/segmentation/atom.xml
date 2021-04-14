@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://vra.github.io</id>
+    <title>Yunfeng&#39;s Simple Blog • Posts by &#34;segmentation&#34; tag</title>
+    <link href="http://vra.github.io" />
+    <updated>2020-03-14T15:21:10.000Z</updated>
+    <category term="杂项" />
+    <category term="Programmer" />
+    <category term="总结" />
+    <category term="Linux" />
+    <category term="Python" />
+    <category term="迁移记录" />
+    <category term="博客备忘" />
+    <category term="C++" />
+    <category term="DeepLearning" />
+    <category term="Caffe" />
+    <category term="Deep Learning" />
+    <category term="lmdb" />
+    <category term="leveldb" />
+    <category term="Tensorflow" />
+    <category term="coloredlogs" />
+    <category term="图像处理" />
+    <category term="工具" />
+    <category term="PIL" />
+    <category term="学习总结" />
+    <category term="C++17" />
+    <category term="Cygwin" />
+    <category term="Wordpress" />
+    <category term="Git" />
+    <category term="Computer Vision" />
+    <category term="Detection" />
+    <category term="Segmentation" />
+    <category term="Detectron2" />
+    <category term="Pytorch" />
+    <category term="Django" />
+    <category term="Apache" />
+    <category term="Web编程" />
+    <category term="Unit Test" />
+    <category term="GPU" />
+    <category term="CUDA" />
+    <category term="计算机视觉" />
+    <category term="并行计算" />
+    <category term="Amax" />
+    <category term="BIOS" />
+    <category term="UEFI" />
+    <category term="VNC" />
+    <category term="Ubuntu" />
+    <category term="Pip" />
+    <category term="tmux" />
+    <category term="Keras" />
+    <category term="TensorFlow" />
+    <category term="速记" />
+    <category term="RAID" />
+    <category term="ext4" />
+    <category term="Vim" />
+    <category term="Emacs" />
+    <category term="机器学习 总结" />
+    <category term="Make" />
+    <category term="markdown" />
+    <category term="matlab" />
+    <category term="Docker" />
+    <category term="NPM" />
+    <category term="matplotlib" />
+    <category term="总计" />
+    <category term="3D CNN" />
+    <category term="Action Recogntion" />
+    <category term="NumPy" />
+    <category term="NumCpp" />
+    <category term="Numpy" />
+    <category term="Nvidia" />
+    <category term="OpenCV" />
+    <category term="C/C++" />
+    <category term="OpenMP" />
+    <category term="OpenPyxl" />
+    <category term="Paper Reading" />
+    <category term="Action Recognition" />
+    <category term="Attention" />
+    <category term="CNN" />
+    <category term="C3D" />
+    <category term="Motion" />
+    <category term="UCF101" />
+    <category term="Kinetics" />
+    <category term="PyQt5" />
+    <category term="Qt" />
+    <category term="rdesktop" />
+    <category term="RDP" />
+    <category term="Windows" />
+    <category term="Siamese Network" />
+    <category term="深度学习" />
+    <category term="Shell" />
+    <category term="SSH" />
+    <category term="Sublime Text" />
+    <category term="年终总结" />
+    <category term="2016" />
+    <category term="2019" />
+    <category term="2020" />
+    <category term="asciinema" />
+    <category term="Libtorch" />
+    <category term="Action Recongnition" />
+    <category term="TSN" />
+    <category term="GitHub" />
+    <category term="gdb" />
+    <category term="gcc" />
+    <category term="g++" />
+    <category term="NeoVim" />
+    <category term="venv" />
+    <category term="Vnc" />
+    <category term="Xfce" />
+    <category term="Gnome" />
+    <category term="Paper" />
+    <category term="WSL" />
+    <category term="Trick" />
+    <category term="2017" />
+    <category term="Spark" />
+    <entry>
+        <id>http://vra.github.io/2020/03/14/detectron2-usage/</id>
+        <title>detectron2 使用总结</title>
+        <link rel="alternate" href="http://vra.github.io/2020/03/14/detectron2-usage/"/>
+        <content type="html">&lt;h3 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;detectron2 大部分代码都需要GPU&lt;/li&gt;
+&lt;li&gt;detectron2 主要是用于检测和分割的代码框架，像分类这种任务的代码暂时没有&lt;/li&gt;
+&lt;li&gt;官方示例有一些是基于Colab的，需要科学上网才能访问&lt;h3 id=&#34;安装依赖&#34;&gt;&lt;a href=&#34;#安装依赖&#34; class=&#34;headerlink&#34; title=&#34;安装依赖&#34;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install -U torch==1.4+cu100 torchvision==0.5+cu100 -f https://download.pytorch.org/whl/torch_stable.html&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install cython pyyaml==5.1 --ingnore-installed&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 安装 cocoapi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install -U &lt;span class=&#34;string&#34;&gt;&amp;#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+其中cocoapi 需要从GitHub下载代码，如果安装太慢，可以先clone下代码，再进&lt;code&gt;PythonAPI&lt;/code&gt;子目录，运行&lt;code&gt;setup.py&lt;/code&gt;安装:&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/cocodataset/cocoapi.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; cocoapi/PythonAPI&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo python3 setup.py install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;安装-detectron2&#34;&gt;&lt;a href=&#34;#安装-detectron2&#34; class=&#34;headerlink&#34; title=&#34;安装 detectron2&#34;&gt;&lt;/a&gt;安装 detectron2&lt;/h3&gt;&lt;p&gt;这里直接安装编译好的二进制文件。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu100/index.html&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果文件下载太慢或者超时，可以手动在浏览器里面下载好文件，再用下面的命令安装（假设下载的&lt;code&gt;whl&lt;/code&gt;文件是&lt;code&gt;xxx.whl&lt;/code&gt;):&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo pip install xxx.whl&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;安装完后，打开 Python 命令行，执行下面的命令，如果不报错，说明安装成功：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; detectron2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;测试&#34;&gt;&lt;a href=&#34;#测试&#34; class=&#34;headerlink&#34; title=&#34;测试&#34;&gt;&lt;/a&gt;测试&lt;/h3&gt;&lt;p&gt;为了测试，需要下载 detectron2 的源代码，基于 &lt;code&gt;demo/demo.py&lt;/code&gt; 进行简单的测试：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/facebookresearch/detectron2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;python3  detectron2/demo/demo.py --config-file detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml --input ~/test.jpg --opts MODEL.WEIGHTS  detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;注意上述代码需要在 detectron2 的 git 仓库外面执行，否则会报错。&lt;/strong&gt;&lt;br&gt;测试时输入支持单张图片、多张图片、单个图片文件夹、网络摄像头以及视频文件，每种情况参数设置如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 单张图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--input test.jpg&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 多张图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--input test1.jpg test2.jpg test3.jpg&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 单个图片文件夹&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--input imgs/*.jpg&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 网络摄像头&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--webcame&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 视频文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--video-input test.mp4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;``–opts MODEL.WEIGHTS&lt;code&gt;表示测试用的模型参数，可以是一个本地目录，也可以是一个&lt;/code&gt;detectron2://`开头的一个模型路径，这时会先下载模型到本地再测试:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 使用本地的模型参数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--opts MODEL.WEIGHTS ./model_final_f10217.pkl&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 使用网络模型地址&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;--opts MODEL.WEIGHTS ./model_final_f10217.pkl&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;模型的名字可以在 &lt;a href=&#34;https://github.com/facebookresearch/detectron2/blob/master/MODEL_ZOO.md&#34;&gt;Model Zoo&lt;/a&gt; 查看。&lt;/p&gt;
+&lt;h3 id=&#34;训练&#34;&gt;&lt;a href=&#34;#训练&#34; class=&#34;headerlink&#34; title=&#34;训练&#34;&gt;&lt;/a&gt;训练&lt;/h3&gt;&lt;p&gt;训练代码参考 &lt;code&gt;tools/train_net.py&lt;/code&gt;，目前Detection看。&lt;/p&gt;
+&lt;h3 id=&#34;一些代码分析&#34;&gt;&lt;a href=&#34;#一些代码分析&#34; class=&#34;headerlink&#34; title=&#34;一些代码分析&#34;&gt;&lt;/a&gt;一些代码分析&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;DefaultTrainer 是针对目前常用的Detection设置而写的一个类，为了不用修改太多就直接复现最佳结果。但另一方面，由于有比较多的假设情况，因此通用性有所降低&lt;/li&gt;
+&lt;li&gt;SimpleTrainer 是 DefaultTrainer 的父类，限制条件更少，对于做新的研究任务，作者推荐继承 SimpleTrainer 来修改&lt;/li&gt;
+&lt;li&gt;代码支持多机多卡多进程，基于 Pytorch 的多级多卡代码写了一些wrapper&lt;/li&gt;
+&lt;li&gt;代码注释很完善，而且其中很多是给用户怎么基于现在代码进行修改来跑新的网络、做新的任务，有些地方说的很细致，这一点很棒&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;一些资源&#34;&gt;&lt;a href=&#34;#一些资源&#34; class=&#34;headerlink&#34; title=&#34;一些资源&#34;&gt;&lt;/a&gt;一些资源&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://detectron2.readthedocs.org/&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/facebookresearch/detectron2&#34;&gt;Git 仓库&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="总结" />
+        <category term="Linux" />
+        <category term="Python" />
+        <category term="Deep Learning" />
+        <category term="Computer Vision" />
+        <category term="Detection" />
+        <category term="Segmentation" />
+        <category term="Detectron2" />
+        <category term="Pytorch" />
+        <updated>2020-03-14T15:21:10.000Z</updated>
+    </entry>
+</feed>

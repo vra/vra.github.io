@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Yunfeng&#39;s Simple Blog • Posts by &#34;unit test&#34; tag</title>
+        <link>http://vra.github.io</link>
+        <description>Love, Life, Linux</description>
+        <language>zh-CN</language>
+        <pubDate>Tue, 02 Feb 2021 22:43:43 +0800</pubDate>
+        <lastBuildDate>Tue, 02 Feb 2021 22:43:43 +0800</lastBuildDate>
+        <category>杂项</category>
+        <category>Programmer</category>
+        <category>总结</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>迁移记录</category>
+        <category>博客备忘</category>
+        <category>C++</category>
+        <category>DeepLearning</category>
+        <category>Caffe</category>
+        <category>Deep Learning</category>
+        <category>lmdb</category>
+        <category>leveldb</category>
+        <category>Tensorflow</category>
+        <category>coloredlogs</category>
+        <category>图像处理</category>
+        <category>工具</category>
+        <category>PIL</category>
+        <category>学习总结</category>
+        <category>C++17</category>
+        <category>Cygwin</category>
+        <category>Wordpress</category>
+        <category>Git</category>
+        <category>Computer Vision</category>
+        <category>Detection</category>
+        <category>Segmentation</category>
+        <category>Detectron2</category>
+        <category>Pytorch</category>
+        <category>Django</category>
+        <category>Apache</category>
+        <category>Web编程</category>
+        <category>Unit Test</category>
+        <category>GPU</category>
+        <category>CUDA</category>
+        <category>计算机视觉</category>
+        <category>并行计算</category>
+        <category>Amax</category>
+        <category>BIOS</category>
+        <category>UEFI</category>
+        <category>VNC</category>
+        <category>Ubuntu</category>
+        <category>Pip</category>
+        <category>tmux</category>
+        <category>Keras</category>
+        <category>TensorFlow</category>
+        <category>速记</category>
+        <category>RAID</category>
+        <category>ext4</category>
+        <category>Vim</category>
+        <category>Emacs</category>
+        <category>机器学习 总结</category>
+        <category>Make</category>
+        <category>markdown</category>
+        <category>matlab</category>
+        <category>Docker</category>
+        <category>NPM</category>
+        <category>matplotlib</category>
+        <category>总计</category>
+        <category>3D CNN</category>
+        <category>Action Recogntion</category>
+        <category>NumPy</category>
+        <category>NumCpp</category>
+        <category>Numpy</category>
+        <category>Nvidia</category>
+        <category>OpenCV</category>
+        <category>C/C++</category>
+        <category>OpenMP</category>
+        <category>OpenPyxl</category>
+        <category>Paper Reading</category>
+        <category>Action Recognition</category>
+        <category>Attention</category>
+        <category>CNN</category>
+        <category>C3D</category>
+        <category>Motion</category>
+        <category>UCF101</category>
+        <category>Kinetics</category>
+        <category>PyQt5</category>
+        <category>Qt</category>
+        <category>rdesktop</category>
+        <category>RDP</category>
+        <category>Windows</category>
+        <category>Siamese Network</category>
+        <category>深度学习</category>
+        <category>Shell</category>
+        <category>SSH</category>
+        <category>Sublime Text</category>
+        <category>年终总结</category>
+        <category>2016</category>
+        <category>2019</category>
+        <category>2020</category>
+        <category>asciinema</category>
+        <category>Libtorch</category>
+        <category>Action Recongnition</category>
+        <category>TSN</category>
+        <category>GitHub</category>
+        <category>gdb</category>
+        <category>gcc</category>
+        <category>g++</category>
+        <category>NeoVim</category>
+        <category>venv</category>
+        <category>Vnc</category>
+        <category>Xfce</category>
+        <category>Gnome</category>
+        <category>Paper</category>
+        <category>WSL</category>
+        <category>Trick</category>
+        <category>2017</category>
+        <category>Spark</category>
+        <item>
+            <guid isPermalink="true">http://vra.github.io/2021/02/02/doctest-intro/</guid>
+            <title>doctest 用法简介</title>
+            <link>http://vra.github.io/2021/02/02/doctest-intro/</link>
+            <category>Python</category>
+            <category>Unit Test</category>
+            <pubDate>Tue, 02 Feb 2021 22:43:43 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;概述&#34;&gt;&lt;a href=&#34;#概述&#34; class=&#34;headerlink&#34; title=&#34;概述&#34;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://docs.python.org/3/library/doctest.html&#34;&gt;doctest&lt;/a&gt; 是 python 系统库中用于交互式会话例子测试的工具，用于搜索以 &lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 开头的语句，并且将其作为Python命令，对结果进行测试。&lt;/p&gt;
+&lt;p&gt;这个工具可以方便地用于检测自己写的库是否有bug，例如某些函数功能可能发生改变，借此工具可以方便地对代码中的示例语句进行测试。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;基本用法&#34;&gt;&lt;a href=&#34;#基本用法&#34; class=&#34;headerlink&#34; title=&#34;基本用法&#34;&gt;&lt;/a&gt;基本用法&lt;/h2&gt;&lt;p&gt;假如我们有一个 Python 脚本 &lt;code&gt;foo.py&lt;/code&gt;, 其中有一些 &lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 命令：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# file name: foo.py&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;My square function.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;Usage:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;a = my_square(4)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;b = my_square(3)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;a + b&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;25&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;my_square&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;num&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; num * num&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;为了测试我们的 docstring 中的示例用法（即以&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 开头的命令）是否跟代码实现相符合，可以使用下面的命令来操作：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 -m doctest foo.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;没有报错的话默认是没有输出的，如果要看中间的执行信息，可以增加 &lt;code&gt;-v&lt;/code&gt; 参数:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 -m doctest -v foo.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;另外针对只有运行命令记录，没有 python 语句的情况，可以把把命令记录保存到 &lt;code&gt;.txt&lt;/code&gt; 文件中，然后使用同样的调用命令。例如把下面的内容保存到 &lt;code&gt;foo.txt&lt;/code&gt; 文件中：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt;&amp;gt; a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt;&amp;gt; a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;那么就可以使用下面的命令调用&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 -m doctest -v foo.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;输出结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting nothing&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1 items passed all tests:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; foo.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; 1 items.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 passed and 0 failed.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Test passed.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;可以看到 &lt;code&gt;doctest&lt;/code&gt; 会对文件中的每一行进行读取，然后计算期望的值和实际的值是否一样，如果不一样就会报错。例如我们尝试修改上面的 &lt;code&gt;foo.txt&lt;/code&gt; 为下面的内容:&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt;&amp;gt; a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt;&amp;gt; a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;即故意把2+3的结果修改为6，执行 &lt;code&gt;doctest&lt;/code&gt; 命令，结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting nothing&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;**********************************************************************&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;File &lt;span class=&#34;string&#34;&gt;&amp;quot;foo.txt&amp;quot;&lt;/span&gt;, line 2, &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; foo.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Failed example:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expected:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Got:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;**********************************************************************&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1 items had failures:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   1 of   2 &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; foo.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; 1 items.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1 passed and 1 failed.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;***Test Failed*** 1 failures.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到，测试出错了，而且出错的详细信息也列出来了。&lt;/p&gt;
+&lt;p&gt;另一种使用的方法是在 python 脚本中增加 &lt;code&gt;doctest.testmod()&lt;/code&gt; 函数调用，方法如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# file-name: foo.py&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;example usage:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;a, b = 2, 3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;span class=&#34;meta&#34;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;a+b&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; __name__ == &lt;span class=&#34;string&#34;&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; doctest&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    doctest.testmod()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;使用下面的命令来执行脚本:&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 foo.py -v&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;输出结果如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a, b = 2, 3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting nothing&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Trying:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    a+b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Expecting:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1 items passed all tests:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; __main__&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 tests &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; 1 items.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2 passed and 0 failed.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Test passed.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;对于 &lt;code&gt;.txt&lt;/code&gt; 文件的测试，使用 &lt;code&gt;doctest.testfile()&lt;/code&gt; 函数：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; doctest&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;doctest.testfile(&lt;span class=&#34;string&#34;&gt;&amp;quot;example.txt&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;一些使用注意点&#34;&gt;&lt;a href=&#34;#一些使用注意点&#34; class=&#34;headerlink&#34; title=&#34;一些使用注意点&#34;&gt;&lt;/a&gt;一些使用注意点&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 缩进多个层次对结果没有影响，&lt;code&gt;doctest&lt;/code&gt; 测试之前会对每行前面的空格进行删除。&lt;/li&gt;
+&lt;li&gt;doctest 也可以对Error 进行测试，如果想要测试各种特殊case导致的错误的话，doctest是个不错的工具&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
