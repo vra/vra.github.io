@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>cool-certificate, 一个好玩的证书生成工具 | Yunfeng&#39;s Simple Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前几天同学发过来一张无人机驾驶证的照片，瞬间觉得很高大上，仔细一询问，原来是用软件生成的图片，网址是：http:&#x2F;&#x2F;wx.znl.cn&#x2F;app&#x2F;index.php?i&#x3D;120&amp;c&#x3D;entry&amp;id&#x3D;1&amp;do&#x3D;index&amp;m&#x3D;bi_pic。 当访问该网站的时候，用户输入用户名，然后就生成包含用户名的驾照照片。我接着想能不能自己做一个类似这样的东西呢，经过思考发现，其实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cool-certificate, 一个好玩的证书生成工具">
+<meta property="og:url" content="http://vra.github.io/2016/04/07/cool-certificate/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="前几天同学发过来一张无人机驾驶证的照片，瞬间觉得很高大上，仔细一询问，原来是用软件生成的图片，网址是：http:&#x2F;&#x2F;wx.znl.cn&#x2F;app&#x2F;index.php?i&#x3D;120&amp;c&#x3D;entry&amp;id&#x3D;1&amp;do&#x3D;index&amp;m&#x3D;bi_pic。 当访问该网站的时候，用户输入用户名，然后就生成包含用户名的驾照照片。我接着想能不能自己做一个类似这样的东西呢，经过思考发现，其实">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-04-07T15:15:03.000Z">
+<meta property="article:modified_time" content="2021-08-20T15:48:00.998Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="图像处理">
+<meta property="article:tag" content="工具">
+<meta property="article:tag" content="PIL">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-cool-certificate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/07/cool-certificate/" class="article-date">
+  <time datetime="2016-04-07T15:15:03.000Z" itemprop="datePublished">2016-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      cool-certificate, 一个好玩的证书生成工具
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天同学发过来一张无人机驾驶证的照片，瞬间觉得很高大上，仔细一询问，原来是用软件生成的图片，网址是：<a target="_blank" rel="noopener" href="http://wx.znl.cn/app/index.php?i=120&amp;c=entry&amp;id=1&amp;do=index&amp;m=bi_pic">http://wx.znl.cn/app/index.php?i=120&amp;c=entry&amp;id=1&amp;do=index&amp;m=bi_pic</a>。 当访问该网站的时候，用户输入用户名，然后就生成包含用户名的驾照照片。我接着想能不能自己做一个类似这样的东西呢，经过思考发现，其实操作比较简单，即将用户姓名写入到图像上的合适位置即可。因为我之前已经有一些用Python 的Django框架做小的网站的经验，而且Python PIL模块可以完成这个任务，所以我立即想到， 能不能结合两者，建立一个网站，让用户输入姓名，然后将用户姓名传入到后台，后台调用PIL函数，将名字写到图片的相应位置上，然后返回给用户呢？经过思考我发现这种思路是可行的，而且工作量貌似也不是很大，所以今天早上开始做了做，在无人机驾照的基础上又增加了2个有趣的证件：潜水证和超级帅哥证，今晚终于作出了一个粗糙的结果（网站页面使用了原始和简单的HTML标签），可以在<a target="_blank" rel="noopener" href="http://115.28.30.25:8001/">这里</a>访问。代码已经上传到<a target="_blank" rel="noopener" href="https://github.com/vra/cool_certificate">github上</a>了。下面记下来实现过程中的一些思考。</p>
+<span id="more"></span>
+
+<h2 id="整体实现流程"><a href="#整体实现流程" class="headerlink" title="整体实现流程"></a>整体实现流程</h2><ol>
+<li>   用Django实现网站前端和后端，展示页面给用户，读取用户输入</li>
+<li>   当用户输入后，利用POST方法返回用户名到服务器端</li>
+<li>   对特定的证件和已给的用户，利用PIL中的ImageFont模块来在证件照片的相应用户名空当处写上用户名,然后保存处理后的图片。用户名应该写在哪里需要手工确定（我用Windows 的画图工具中找到具体的位置坐标）</li>
+<li>   将生成的图片返回给网站页面</li>
+</ol>
+<h2 id="实现的一些细节问题"><a href="#实现的一些细节问题" class="headerlink" title="实现的一些细节问题"></a>实现的一些细节问题</h2><h3 id="将文字写到图片上"><a href="#将文字写到图片上" class="headerlink" title="将文字写到图片上"></a>将文字写到图片上</h3><p>这里使用PIL（Python Image Library）来做，利用了其中的ImageFont模块，核心的代码段如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = Image.<span class="built_in">open</span>(img_path)                                                                                                                                                   draw = ImageDraw.Draw(img)                                                                                                                                               </span><br><span class="line">   font = ImageFont.truetype(font_path, font_size)                                                                                                                          </span><br><span class="line">   <span class="comment">#<span class="doctag">NOTE:</span> django get parameter as unicode, so don&#x27;t need to encode to unicode.                                                                                                  draw.text(word_pos, name, word_color, font=font)                                                                                                                         </span></span><br><span class="line">   img.save(out_img_path)                                       </span><br></pre></td></tr></table></figure>
+<p>One things you must notice is that Django return stirng in the unicode format, so you dont’t have to do <code>unicode(name, &#39;utf-8&#39;)</code> anymore.<br>用户输入姓名时，生成包含姓名的证件图片，保存在本地。<br>在实际操作中发现，有些字体不支持部分中文，所以我在网上下了<code>Aria Unicode</code>字体，经测试发现能显示所有中文字体。  </p>
+<h3 id="Django返回处理图片的格式"><a href="#Django返回处理图片的格式" class="headerlink" title="Django返回处理图片的格式"></a>Django返回处理图片的格式</h3><p>我最初想的是用户点击确定按钮后，跳转到新的页面，在这个页面上单独显示处理后的照片，所以response类型设置成<code>image/jpeg</code>即可。但实际操作中出现问题，只返回照片似乎有一些问题，所以我修改实现，在传给Template的时候，传递一个参数<code>done</code>, 如果当前没有增加用户姓名，则该值为0,否则为1。在Template中，如果值为0,则展示未处理的模板图片;如果值为1,则显示处理后的图片。</p>
+<h3 id="静态文件目录的设置"><a href="#静态文件目录的设置" class="headerlink" title="静态文件目录的设置"></a>静态文件目录的设置</h3><p>Django将CSS,JS和Image图片都看作静态文件，推荐在app目录下建立<code>static</code>目录来保存这些文件。这里需要进行一定的设置，将保存模板图片和生成图片的目录<code>imgs</code>增加到<code>static</code>目录下，设置代码如下:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># in settings.py</span></span><br><span class="line">SITE_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)),<span class="string">&#x27;&#x27;</span>)                                                                                                      </span><br><span class="line">STATIC_ROOT = os.path.join(SITE_ROOT,<span class="string">&#x27;static&#x27;</span>)                                                                                                                               </span><br><span class="line">STATIC_URL = <span class="string">&#x27;/static/&#x27;</span>                                                                                                                                                      </span><br><span class="line">                                                                                                                                                                             </span><br><span class="line"><span class="comment">#最后关键部分需要添加上STATICFILE_DIRS的配置                                                                                                                                 </span></span><br><span class="line">STATICFILES_DIRS = (                                                                                                                                                         </span><br><span class="line">    (<span class="string">&quot;css&quot;</span>, os.path.join(STATIC_ROOT,<span class="string">&#x27;css&#x27;</span>)),                                                                                                                                </span><br><span class="line">    (<span class="string">&quot;js&quot;</span>, os.path.join(STATIC_ROOT,<span class="string">&#x27;js&#x27;</span>)),                                                                                                                                  </span><br><span class="line">    (<span class="string">&quot;imgs&quot;</span>, os.path.join(STATIC_ROOT,<span class="string">&#x27;imgs&#x27;</span>)),                                                                                                                              </span><br><span class="line">)                                              </span><br></pre></td></tr></table></figure>
+<p>经过这样设置，在调用<code>imgs</code>目录下的图片时就可以这样调用了：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&lt;img src = <span class="string">&quot;&#123;% static &quot;</span>imgs/feiji.jpg<span class="string">&quot;%&#125;&quot;</span>&gt; </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2016/04/07/cool-certificate/" data-id="ckskjzqlw000nzu216g1r8dpu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PIL/" rel="tag">PIL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/10/make-introduction/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          A Simple Introduction to Make
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/29/markdown-note/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">markdown易错点总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime-Text/">Sublime Text</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%9B%E5%AD%A3%E9%A3%8E%E7%89%A9/">四季风物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">学习总结</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/OpenCV/">OpenCV</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%91%E4%BB%AC%E7%9A%84%E8%AE%B0%E5%BD%95/">我们的记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%9D%E8%8A%B1%E5%A4%95%E6%8B%BE/">朝花夕拾</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9F%E8%AE%B0/">速记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/" rel="tag">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2017/" rel="tag">2017</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2019/" rel="tag">2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3D-CNN/" rel="tag">3D CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recognition/" rel="tag">Action Recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recogntion/" rel="tag">Action Recogntion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recongnition/" rel="tag">Action Recongnition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Amax/" rel="tag">Amax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Attention/" rel="tag">Attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BIOS/" rel="tag">BIOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-17/" rel="tag">C++17</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C3D/" rel="tag">C3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/" rel="tag">Computer Vision</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Detection/" rel="tag">Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Detectron2/" rel="tag">Detectron2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/" rel="tag">GPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gnome/" rel="tag">Gnome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinetics/" rel="tag">Kinetics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Libtorch/" rel="tag">Libtorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Make/" rel="tag">Make</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/" rel="tag">Motion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NeoVim/" rel="tag">NeoVim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NumCpp/" rel="tag">NumCpp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NumPy/" rel="tag">NumPy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nvidia/" rel="tag">Nvidia</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenMP/" rel="tag">OpenMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenPyxl/" rel="tag">OpenPyxl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/" rel="tag">PIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/" rel="tag">Paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pip/" rel="tag">Pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programmer/" rel="tag">Programmer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAID/" rel="tag">RAID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RDP/" rel="tag">RDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/" rel="tag">Segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Siamese-Network/" rel="tag">Siamese Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text/" rel="tag">Sublime Text</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TSN/" rel="tag">TSN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCF101/" rel="tag">UCF101</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UEFI/" rel="tag">UEFI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unit-Test/" rel="tag">Unit Test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vnc/" rel="tag">Vnc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E7%BC%96%E7%A8%8B/" rel="tag">Web编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wordpress/" rel="tag">Wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xfce/" rel="tag">Xfce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asciinema/" rel="tag">asciinema</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coloredlogs/" rel="tag">coloredlogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/" rel="tag">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leveldb/" rel="tag">leveldb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lmdb/" rel="tag">lmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matlab/" rel="tag">matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rdesktop/" rel="tag">rdesktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/" rel="tag">venv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" rel="tag">博客备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="tag">学习总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" rel="tag">并行计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E8%AE%A1/" rel="tag">总计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" rel="tag">机器学习 总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" rel="tag">迁移记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9F%E8%AE%B0/" rel="tag">速记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 10.91px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 10.91px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17.27px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 11.82px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 11.82px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 16.36px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 10.91px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 15.45px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 13.64px;">GPU</a> <a href="/tags/Git/" style="font-size: 12.73px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 10.91px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/OpenCV/" style="font-size: 11.82px;">OpenCV</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 10.91px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19.09px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 10.91px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 10.91px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 11.82px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Trick/" style="font-size: 10.91px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 16.36px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 12.73px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 10.91px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 10.91px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 11.82px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 13.64px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 12.73px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18.18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10.91px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 10.91px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/21/torch-tensor-python-to-cpp/">C++中使用pytorch保存的tensor</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/02/doctest-intro/">doctest 用法简介</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/23/cpp-summary-stringview/">C++中的string_view</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/03/venv-intro/">python虚拟环境管理工具venv教程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/02/summary-2020/">2020年终总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yunfeng Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
