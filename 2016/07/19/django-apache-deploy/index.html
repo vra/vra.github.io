@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>在Apache上部署Django项目 | Yunfeng&#39;s Simple Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="0.概述Django是一个基于Python的web开发框架，在实际生产环境中部署的时候，还需要用Apache容器来部署。这里记录下如何在Debian系统中用Aapche和mod_wsgi模块来部署Django项目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Apache上部署Django项目">
+<meta property="og:url" content="http://vra.github.io/2016/07/19/django-apache-deploy/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="0.概述Django是一个基于Python的web开发框架，在实际生产环境中部署的时候，还需要用Apache容器来部署。这里记录下如何在Debian系统中用Aapche和mod_wsgi模块来部署Django项目。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-07-19T08:44:59.000Z">
+<meta property="article:modified_time" content="2021-08-20T15:48:01.028Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="Apache">
+<meta property="article:tag" content="Web编程">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-django-apache-deploy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/19/django-apache-deploy/" class="article-date">
+  <time datetime="2016-07-19T08:44:59.000Z" itemprop="datePublished">2016-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Apache上部署Django项目
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0-概述"><a href="#0-概述" class="headerlink" title="0.概述"></a>0.概述</h3><p>Django是一个基于Python的web开发框架，在实际生产环境中部署的时候，还需要用Apache容器来部署。这里记录下如何在Debian系统中用Aapche和<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/mod_wsgi">mod_wsgi模块</a>来部署Django项目。</p>
+<span id="more"></span>
+<h3 id="1-系统信息"><a href="#1-系统信息" class="headerlink" title="1.系统信息"></a>1.系统信息</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ uname -a  </span><br><span class="line">Linux iZ284ov0vfwZ 3.2.0-4-amd64 <span class="comment">#1 SMP Debian 3.2.81-1 x86_64 GNU/Linux  </span></span><br><span class="line">$ lsb_release -a  </span><br><span class="line">No LSB modules are available.  </span><br><span class="line">Distributor ID: Debian  </span><br><span class="line">Description:    Debian GNU/Linux 7.11 (wheezy) </span><br><span class="line">Release:        7.11  </span><br><span class="line">Codename:       wheezy  </span><br><span class="line">$ sudo apachectl -v  </span><br><span class="line">Server version: Apache/2.2.22 (Debian)  </span><br><span class="line">Server built:   Aug 18 2015 09:49:50  </span><br></pre></td></tr></table></figure>
+<p><strong>我用的是Debian发行版，Apache的配置与别的发行版有较大不同，这里以Debian为例进行说明，别的发行版需要进行一定的修改。</strong></p>
+<h3 id="2-安装Django和Apache"><a href="#2-安装Django和Apache" class="headerlink" title="2. 安装Django和Apache"></a>2. 安装Django和Apache</h3><p>Django可以通过如下命令安装:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install Django==1.9.0 <span class="comment">#设置版本号为1.9.0</span></span><br></pre></td></tr></table></figure>
+<p> Apache通过不同发行版的包管理命令安装。在debian下，是:<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install apache2</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-安装mod-wsgi模块"><a href="#3-安装mod-wsgi模块" class="headerlink" title="3. 安装mod_wsgi模块"></a>3. 安装mod_wsgi模块</h3><p>mod_wsgi可以通过pip安装，但是需要提前在系统安装<code>apache-dev</code>包，但是在Debian发行版上，这个包名叫<code>apache2-prefork-dev</code>，详情参考<a target="_blank" rel="noopener" href="http://stackoverflow.com/a/16869017/2932001">这里</a>。通过如下命令安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install apache2-prefork-dev</span><br></pre></td></tr></table></figure>
+<p>此外，还需要安装<code>python-dev</code>包，如果要使用python3,则需要安装<code>python3-dev</code>包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install python-dev</span><br><span class="line"><span class="comment"># 如果要使用python3，则安装如下包</span></span><br><span class="line"><span class="comment">#sudo apt-get install python3-dev</span></span><br></pre></td></tr></table></figure>
+<p>然后pip 安装mod_wsgi:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install mod_wsgi</span><br></pre></td></tr></table></figure>
+<p>此外也可以自己编译mod_wsgi：首先从<a target="_blank" rel="noopener" href="https://github.com/GrahamDumpleton/mod_wsgi/releases">这里</a>下载文件包，然后解压，编译。假设版本是4.5.3，全部命令如下:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/GrahamDumpleton/mod_wsgi/archive/4.5.3.tar.gz  </span><br><span class="line">tar -xvf 4.5.3.tar.gz  </span><br><span class="line"><span class="built_in">cd</span> mod_wsgi-4.5.3  </span><br><span class="line">./configure  </span><br><span class="line">make  </span><br><span class="line">sudo make install  </span><br></pre></td></tr></table></figure>
+<p>如果要使用python3,则<code>./configure</code>那条命令改为<code>./configure --with-python=/usr/bin/python3.4</code>。<br>如果没有报错，那么mod_wsgi就编译好了!<br><strong>编译好后，会在apache的模块目录<code>/usr/lib/apache2/modules/</code>生成mod_wsgi.so文件。</strong></p>
+<h3 id="4-Apache配置文件目录结构"><a href="#4-Apache配置文件目录结构" class="headerlink" title="4.Apache配置文件目录结构"></a>4.Apache配置文件目录结构</h3><p>Apache的配置文件目录是<code>/etc/apache2</code>，该目录下的文件结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|-- apache2.conf</span><br><span class="line">|-- conf-available</span><br><span class="line">|-- conf-enabled</span><br><span class="line">|-- envvars</span><br><span class="line">|-- magic</span><br><span class="line">|-- mods-available</span><br><span class="line">|-- mods-enabled</span><br><span class="line">|-- ports.conf</span><br><span class="line">|-- sites-available</span><br><span class="line">`-- sites-enabled</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其中<code>apache2.conf</code>是主配置文件，里面包括系统的设置，如Timeout的时长、Log的等级和格式等。<code>ports.conf</code>文件配置了监听的端口号，以及是否启用SSL。<code>envvars</code>和<code>magic</code>里面设置了一些环境变量相关的东西，我没怎么看过。<br>剩下的6个目录两两一对，<code>availabel</code>文件夹里面是所有的配置，而<code>enabled</code>目录里面则是启用的配置。而<code>conf</code>、<code>mods</code>和<code>sites</code>可以分别通过命令<code>a2enconf</code>、<code>a2enmod</code>、<code>a2ensite</code>来启用，启用后会在<code>enabled</code>目录下生成一个软链接，指向<code>available</code>目录下的同名文件。<br>在<code>apache2.conf</code>这个文件最后，是一些<code>IncludeOptional</code> 语句，用来将<code>conf-enabled</code>、<code>mods-enabled</code>、<code>sites-enabled</code>目录下的配置文件包含到主配置文件中。这样的好处是每个配置文件配置一个条目，比较清晰明了,易于查错。    </p>
+<h3 id="5-启用wsgi模块"><a href="#5-启用wsgi模块" class="headerlink" title="5. 启用wsgi模块"></a>5. 启用wsgi模块</h3><p>我们需要在<code>mods-available</code>目录下新建<code>mod_wsgi</code>的load文件，具体操作如下:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/apache2/mod-available  </span><br><span class="line">sudo <span class="built_in">echo</span> <span class="string">&quot; LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so&quot;</span> &gt;&gt; wsgi.load  </span><br><span class="line">sudo a2enmod wsgi <span class="comment"># 启用wgsi配置</span></span><br><span class="line">sudo service apache2 restart <span class="comment"># 重启Apache2服务</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-托管Django站点"><a href="#6-托管Django站点" class="headerlink" title="6. 托管Django站点"></a>6. 托管Django站点</h3><p>假设Django项目的<code>wsgi.py</code>文件的路径是<code>/home/yunfeng/Dev/git/mysite/mysite/wsgi.py</code>，我们需要下面几步来完成Apache对Django项目的托管：</p>
+<h4 id="1-修改Django项目中的wsgi-py和settings-py文件"><a href="#1-修改Django项目中的wsgi-py和settings-py文件" class="headerlink" title="1. 修改Django项目中的wsgi.py和settings.py文件"></a>1. 修改Django项目中的<code>wsgi.py</code>和<code>settings.py</code>文件</h4><p>修改<code>wsgi.py</code>文件，增加如代码中说明的那几行：</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;                                                                                                                                                           </span></span><br><span class="line"><span class="string">WSGI config for travel_record project.                                                                                                                        </span></span><br><span class="line"><span class="string">                                                                                                                                                              </span></span><br><span class="line"><span class="string">It exposes the WSGI callable as a module-level variable named ``application``.                                                                                </span></span><br><span class="line"><span class="string">                                                                                                                                                              </span></span><br><span class="line"><span class="string">For more information on this file, see                                                                                                                        </span></span><br><span class="line"><span class="string">https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/                                                                                                  </span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>                                                                                                                                                           </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os                                                                                                                                                     </span><br><span class="line"></span><br><span class="line"><span class="comment">## 增加下面这几行</span></span><br><span class="line"><span class="keyword">import</span> sys                                                                                                                                                    </span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> dirname, abspath                                                                                                                    </span><br><span class="line"><span class="keyword">from</span> django.core.wsgi <span class="keyword">import</span> get_wsgi_application                                                                                                             </span><br><span class="line">PROJECT_DIR = dirname(dirname(abspath(__file__)))                                                                                                             </span><br><span class="line">sys.path.insert(<span class="number">0</span>, PROJECT_DIR)                                                                                                                               </span><br><span class="line">                                                                                                                                                              </span><br><span class="line"><span class="comment">#os.environ.setdefault(&quot;DJANGO_SETTINGS_MODULE&quot;, &quot;travel_record.settings&quot;)                                                                                    </span></span><br><span class="line">os.environ[<span class="string">&quot;DJANGO_SETTINGS_MODULE&quot;</span>] = <span class="string">&quot;travel_record.settings&quot;</span>                                                                                               </span><br><span class="line"><span class="comment">## 增加结束</span></span><br><span class="line">                                                                                                                                                              </span><br><span class="line">application = get_wsgi_application()       </span><br></pre></td></tr></table></figure>
+<p>增加的这几行代码做了2件事：1.将Django项目的的路径加入到系统路径中，使得Apache服务器可以找到<code>wsgi.py</code>文件；2. 修改<code>os.environ</code>的值，使得多个Django项目同时被Apache托管的时候不会出现串扰的问题。<br>接下来修改<code>settings.py</code>文件，主要修改的地方有3个：</p>
+<ol>
+<li>将<code>DEBUG=True</code>改为<code>DEBUG=False</code></li>
+<li>将<code>ALLOWEND_HOSTS</code>里面写上服务器的访问域名或IP地址</li>
+<li>将<code>TEMPALTES</code>中的<code>DIRS</code>改写成指向模板目录的绝对路径<br>Django项目里面需要修改的就这2个文件，下面的内容都是在<code>/etc/apache2</code>目录下进行操作。  </li>
+</ol>
+<h4 id="2-在-etc-apache2-sites-available目录下增加网站的配置文件"><a href="#2-在-etc-apache2-sites-available目录下增加网站的配置文件" class="headerlink" title="2. 在/etc/apache2/sites-available目录下增加网站的配置文件"></a>2. 在/etc/apache2/sites-available目录下增加网站的配置文件</h4><p>参照该目录下的<code>000-default.conf</code>和Django的教程，写出配置文件mysite.conf如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">  &lt;VirtualHost *:8000&gt;                                                                                                                                         </span><br><span class="line">    ErrorLog <span class="variable">$&#123;APACHE_LOG_DIR&#125;</span>/error.log                                                                                                                      </span><br><span class="line">    CustomLog <span class="variable">$&#123;APACHE_LOG_DIR&#125;</span>/access.log combined                                                                                                           </span><br><span class="line">                                                                                                                                                              </span><br><span class="line">    WSGIScriptAlias / /home/yunfeng/Dev/git/mysite/mysite/wsgi.py                                                                               </span><br><span class="line"></span><br><span class="line">    Alias /static/ /home/yunfeng/Dev/git/mysite/mysite/static/                                                                                  </span><br><span class="line">    Alias /media/ /home/yunfeng/Dev/git/mysite/mysite/media/                                                                                  </span><br><span class="line"></span><br><span class="line">    &lt;Directory /home/yunfeng/Dev/git/mysite/mysite&gt;                                                                                             </span><br><span class="line">        &lt;Files wsgi.py&gt;                                                                                                                                       </span><br><span class="line">    		Order deny,allow  </span><br><span class="line">    		Allow from all  </span><br><span class="line">        &lt;/Files&gt;                                                                                                                                              </span><br><span class="line">    &lt;/Directory&gt;                                                                                                                                              </span><br><span class="line"></span><br><span class="line">    &lt;Directory /home/yunfeng/Dev/git/mysite/mysite/static/&gt;                                                                                     </span><br><span class="line">    	Order deny,allow  </span><br><span class="line">    	Allow from all  </span><br><span class="line">    &lt;/Directory&gt;                                                                                                                                              </span><br><span class="line">	</span><br><span class="line">    &lt;Directory /home/yunfeng/Dev/git/mysite/mysite/static/&gt;                                                                                     </span><br><span class="line">    	Order deny,allow  </span><br><span class="line">    	Allow from all  </span><br><span class="line">    &lt;/Directory&gt;                                                                                                                                              </span><br><span class="line">&lt;/VirtualHost&gt;       </span><br></pre></td></tr></table></figure>
+<p>整个配置文件是包含在<code>VirtualHost</code>的尖括号里面的一些设置，尖括号开始的地方，<code>*:8000</code>表示你希望的项目监听的端口号。<br><code>ErrorLog</code>和<code>CustomLog</code>设置错误日志和访问日志的路径和格式。<br><code>WSGIScriptAlias</code>设置wsgi文件的路径，<code>Alias</code>语句托管网站的<code>static</code>和<code>media</code>目录。<br>然后是<code>&lt;Directory&gt;</code>标签，用来设置文件和目录的访问权限。<strong>注意对于版本小于2.4的Apache，需要将<code>&lt;Directory&gt;</code>标签中的<code>Order deny,allow</code>和<code>Allow from all</code>改为<code>Require all granted</code>。</strong><br>修改完后，执行下面的命令启用这个网站:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo a2ensite mysite.conf</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-修改-etc-apache2目录下的ports-conf文件"><a href="#3-修改-etc-apache2目录下的ports-conf文件" class="headerlink" title="3. 修改/etc/apache2目录下的ports.conf文件"></a>3. 修改/etc/apache2目录下的ports.conf文件</h4><p>增加针对新建站点的端口号的监听：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Listen 80</span><br><span class="line"><span class="comment">#增加下面这条语句</span></span><br><span class="line">Listen 8000</span><br></pre></td></tr></table></figure>
+
+<p>执行完这3个步骤后，就可以重启Apache服务器，访问站点了：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service apache2 restart</span><br></pre></td></tr></table></figure>
+<p>访问站点，如果出现错误的话，可以在Django项目的<code>settings.py</code>中启用DEBUG模式，查看输出，进行相应的修改。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2016/07/19/django-apache-deploy/" data-id="ckt5x05zy001npn21fhwm2oym" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E7%BC%96%E7%A8%8B/" rel="tag">Web编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/14/test-asciinema/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          在Hexo博客里面插入asciinema终端记录视频
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/17/openmp-begin/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">OpenMP并行编程简介</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+  <section id="comments" class="vcomment">
+  </section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime-Text/">Sublime Text</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%9B%E5%AD%A3%E9%A3%8E%E7%89%A9/">四季风物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">学习总结</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/OpenCV/">OpenCV</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%91%E4%BB%AC%E7%9A%84%E8%AE%B0%E5%BD%95/">我们的记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%9D%E8%8A%B1%E5%A4%95%E6%8B%BE/">朝花夕拾</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9F%E8%AE%B0/">速记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/" rel="tag">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2017/" rel="tag">2017</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2019/" rel="tag">2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3D-CNN/" rel="tag">3D CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recognition/" rel="tag">Action Recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recogntion/" rel="tag">Action Recogntion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recongnition/" rel="tag">Action Recongnition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Amax/" rel="tag">Amax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Attention/" rel="tag">Attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BIOS/" rel="tag">BIOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-17/" rel="tag">C++17</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C3D/" rel="tag">C3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/" rel="tag">Computer Vision</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Detection/" rel="tag">Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Detectron2/" rel="tag">Detectron2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/" rel="tag">GPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gnome/" rel="tag">Gnome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinetics/" rel="tag">Kinetics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Libtorch/" rel="tag">Libtorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Make/" rel="tag">Make</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/" rel="tag">Motion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NeoVim/" rel="tag">NeoVim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NumCpp/" rel="tag">NumCpp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NumPy/" rel="tag">NumPy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nvidia/" rel="tag">Nvidia</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenMP/" rel="tag">OpenMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenPyxl/" rel="tag">OpenPyxl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/" rel="tag">PIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/" rel="tag">Paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pip/" rel="tag">Pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programmer/" rel="tag">Programmer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAID/" rel="tag">RAID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RDP/" rel="tag">RDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/" rel="tag">Segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Siamese-Network/" rel="tag">Siamese Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text/" rel="tag">Sublime Text</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TSN/" rel="tag">TSN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCF101/" rel="tag">UCF101</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UEFI/" rel="tag">UEFI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unit-Test/" rel="tag">Unit Test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vnc/" rel="tag">Vnc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E7%BC%96%E7%A8%8B/" rel="tag">Web编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wordpress/" rel="tag">Wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xfce/" rel="tag">Xfce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asciinema/" rel="tag">asciinema</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coloredlogs/" rel="tag">coloredlogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/" rel="tag">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leveldb/" rel="tag">leveldb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lmdb/" rel="tag">lmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matlab/" rel="tag">matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rdesktop/" rel="tag">rdesktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/" rel="tag">venv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" rel="tag">博客备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="tag">学习总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" rel="tag">并行计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E8%AE%A1/" rel="tag">总计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" rel="tag">机器学习 总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" rel="tag">迁移记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9F%E8%AE%B0/" rel="tag">速记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 11px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 11px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 12px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 12px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 16px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 11px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 14px;">GPU</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 11px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/OpenCV/" style="font-size: 12px;">OpenCV</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 11px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 12px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 11px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 12px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Trick/" style="font-size: 11px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 16px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 14px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 11px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 11px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 12px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 15px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 13px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 11px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 11px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/09/04/cpp-time-count/">C++ 耗时统计代码片段</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/28/vim-learn/">VIM 查漏补缺</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/21/pytorch-cross-entropy/">Pytorch使用交叉熵损失时的一个坑</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/21/blog-list/">我关注的一些独立技术博客</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/21/torch-tensor-python-to-cpp/">C++中使用pytorch保存的tensor</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yunfeng Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+      el: '.vcomment',
+      notify: notify,
+      verify: verify,
+      appId: "EiUA70pL48Wjd8yCEOAvIoK8-gzGzoHsz",
+      appKey: "f6Q5F1wJURp4kCML7IwdhiRh",
+      placeholder: "欢迎留言交流~~",
+      pageSize: '10',
+      avatar: 'mm',
+      lang: 'zh-cn',
+      visitor: 'true'
+    });
+  </script>
+
+
+  </div>
+</body>
+</html>

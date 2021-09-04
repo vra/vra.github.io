@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Linux服务器增加硬盘操作记录 | Yunfeng&#39;s Simple Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概述最近我们实验室的GPU服务器数据空间不够用了，老师让我联系公司来增加硬盘。我这里记录一下对Amax公司生产的GPU服务器增加硬盘的步骤。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux服务器增加硬盘操作记录">
+<meta property="og:url" content="http://vra.github.io/2017/02/24/linux-add-disk/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="概述最近我们实验室的GPU服务器数据空间不够用了，老师让我联系公司来增加硬盘。我这里记录一下对Amax公司生产的GPU服务器增加硬盘的步骤。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-02-24T14:19:15.000Z">
+<meta property="article:modified_time" content="2021-08-20T15:48:01.040Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="GPU">
+<meta property="article:tag" content="Amax">
+<meta property="article:tag" content="RAID">
+<meta property="article:tag" content="ext4">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux-add-disk" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/24/linux-add-disk/" class="article-date">
+  <time datetime="2017-02-24T14:19:15.000Z" itemprop="datePublished">2017-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux服务器增加硬盘操作记录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>最近我们实验室的GPU服务器数据空间不够用了，老师让我联系公司来增加硬盘。我这里记录一下对Amax公司生产的GPU服务器增加硬盘的步骤。</p>
+<span id="more"></span>
+<p>机器的参数：</p>
+<ol>
+<li>操作系统：Ubuntu 14.04</li>
+<li>显卡： Nvidia  Tesla K80</li>
+<li>机器厂商： Amax</li>
+<li>是否有RAID: 有</li>
+</ol>
+<h3 id="配置RAID"><a href="#配置RAID" class="headerlink" title="配置RAID"></a>配置RAID</h3><p>RAID(Redundant Array of Independent Disks)，即独立硬盘冗余阵列，是一种管理较大空间硬盘阵列的方法，常见的RAID方式到RAID 0-RAID 6，简单的来讲可以这样理解：</p>
+<ol>
+<li>RAID 0: 数据不做备份操作，每块盘都可以存储数据</li>
+<li>RAID 1: 将一半的磁盘作为镜像磁盘，空间利用率只有50%，但是允许有一半的磁盘坏掉（坏掉后备份盘可以继续使用）</li>
+<li>RAID 5: 使用1块盘作为备份，别的盘可以正常存取数据<br>关于RAID 各种方式的细节，可以看<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20131784">这里</a>。<br>因为我们想让数据盘尽可能被充分地利用，所以我们采用RAID 0。<br>将硬盘插入到插槽后，开机启动服务器，就可以进入RAID的设置。在设置页面中，选择“Configuration Wizard”开始设置。具体的设置内容可以参看<a target="_blank" rel="noopener" href="https://siliconmechanics.zendesk.com/hc/en-us/articles/205066349-Creating-a-RAID-0-1-5-or-6-through-the-LSI-Web-BIOS">这篇博客</a>。  </li>
+</ol>
+<h3 id="对硬盘分区"><a href="#对硬盘分区" class="headerlink" title="对硬盘分区"></a>对硬盘分区</h3><p>设置好RAID后，重启进入系统，查看新加的硬盘。<br>通过<code>sudo fdisk -l</code>可以查看所有连接的系统的硬盘，而<code>df -h</code>则只显示挂载到系统的硬盘，所以查看前者中有而后者中不存在的硬盘，比如<code>/dev/sdf</code>，就是我们新加的硬盘。<br>找到新加的硬盘后，我们采用<code>sudo fdisk /dev/sdf</code>命令来对/dev/sdf硬盘创建分区表，输入该命令后，结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~ ᐅ sudo fdisk /dev/sdf</span><br><span class="line">Device contains neither a valid DOS partition table， nor Sun， SGI or OSF disklabel</span><br><span class="line">Building a new DOS disklabel with disk identifier 0x083d94fb.</span><br><span class="line">Changes will remain <span class="keyword">in</span> memory only， until you decide to write them.</span><br><span class="line">After that， of course， the previous content won<span class="string">&#x27;t be recoverable.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The device presents a logical sector size that is smaller than</span></span><br><span class="line"><span class="string">the physical sector size. Aligning to a physical sector (or optimal</span></span><br><span class="line"><span class="string">I/O) size boundary is recommended， or performance may be impacted.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">命令(输入 m 获取帮助)： </span></span><br></pre></td></tr></table></figure>
+<p>根据提示，我们输入m，得到如下反馈：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">命令操作</span><br><span class="line">   a   toggle a bootable flag</span><br><span class="line">   b   edit bsd disklabel</span><br><span class="line">   c   toggle the dos compatibility flag</span><br><span class="line">   d   delete a partition</span><br><span class="line">   l   list known partition types</span><br><span class="line">   m   <span class="built_in">print</span> this menu</span><br><span class="line">   n   add a new partition</span><br><span class="line">   o   create a new empty DOS partition table</span><br><span class="line">   p   <span class="built_in">print</span> the partition table</span><br><span class="line">   q   quit without saving changes</span><br><span class="line">   s   create a new empty Sun disklabel</span><br><span class="line">   t   change a partition<span class="string">&#x27;s system id</span></span><br><span class="line"><span class="string">   u   change display/entry units</span></span><br><span class="line"><span class="string">   v   verify the partition table</span></span><br><span class="line"><span class="string">   w   write table to disk and exit</span></span><br><span class="line"><span class="string">   x   extra functionality (experts only)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">命令(输入 m 获取帮助)： </span></span><br></pre></td></tr></table></figure>
+<p>可以看到列出了所有可能的选项。我们这里输入n，得到输出：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Partition <span class="built_in">type</span>:</span><br><span class="line">   p   primary (0 primary， 0 extended， 4 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p):   </span><br></pre></td></tr></table></figure>
+<p>因为我们在新加的硬盘上只创建一个分区，而且新加的盘用作数据盘，不会作为启动分区，所以选Primary 分区和extended分区都没关系。从这里开始，我们所有的操作都可以选择默认，即每次都是按<code>Enter</code>键到下一步。到所有设置到完成后，fdisk命令会创建分区，大概需要等1分钟。  </p>
+<h3 id="格式化硬盘"><a href="#格式化硬盘" class="headerlink" title="格式化硬盘"></a>格式化硬盘</h3><p>创建好分区表后，需要格式化硬盘，将Linux的文件系统应用到硬盘上，硬盘才能存储数据。格式化硬盘采用的是<code>mkfs</code>命令。<br>目前Linux常用的文件格式是ext3和ext4，其中ext4是ext3的后续版本，对后者进行了一些改进，例如最大文件变成16TB、最大子目录数高达64000个等。具体的改进请参考<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ext4">这里</a>。使用mkfs命令时，可以使用-t 选项制定文件格式。不指定默认的文件格式是ext2。<br>所以我们这里的命令是：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sdf</span><br></pre></td></tr></table></figure>
+<p>对于弹出的问题，选择<code>y</code>即可，可以看到会写入inode数等操作，进行格式化。  </p>
+<h3 id="挂载硬盘"><a href="#挂载硬盘" class="headerlink" title="挂载硬盘"></a>挂载硬盘</h3><p>硬盘格式化后，只要挂载到系统就可以正常使用了。接下来的操作就跟插硬盘或U盘到服务器上时的操作一样，先创建一个目录，然后将硬盘挂载到该目录，然后就可以在挂载后的目录里面写入或读出文件了，所有操作都在会在硬盘上进行。具体命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkdir /data5</span><br><span class="line">sudo mount /dev/sdf /data5</span><br><span class="line">sudo chmod -R 777 /data5</span><br></pre></td></tr></table></figure>
+<p>注意最后一步需要修改文件夹的权限，否则服务器上的其他用户没有读写的权限。  </p>
+<h3 id="将挂载信息写入到fstab"><a href="#将挂载信息写入到fstab" class="headerlink" title="将挂载信息写入到fstab"></a>将挂载信息写入到fstab</h3><p>如果只执行了挂载操作而不将硬盘的挂载操作写入到<code>/etc/fstab</code>中，则下次重启的时候，需要手动挂载，而用户对于/data5目录是无法进行读写操作的。所以接下来我们需要将挂载操作命令写入到<code>/etc/fstab</code>文件中。<br>fstab命令的写法有两种，一种是采用UUID，如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">UUID=8aeec127-62bd-4e7a-2020-5a5024f27a22 /data1 ext4 defaults 0 0</span><br></pre></td></tr></table></figure>
+<p>这种格式，其中硬盘对应的UUID号可以通过命令<code>sudo file -sL /dev/sdf</code>得到。关于fstab命令后面参数的含义，请参见我的<a target="_blank" rel="noopener" href="http://goingthink.wang/2014/12/14/fstab-automount-windows-partitions/">另一篇博客</a>。<br>另外一种格式就是用<code>/dev/sdf</code>来代替UUID，即一条记录如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/dev/sdf /data5 ext4  defaults 0 0</span><br></pre></td></tr></table></figure>
+<p>添加该记录到<code>/etc/fstab</code>文件后，下次重启，硬盘也会自动挂载。<br>至此，我们的任务就算大功告成了，希望对你有所帮助。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2017/02/24/linux-add-disk/" data-id="ckt5x060g003apn214zdxht9x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Amax/" rel="tag">Amax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GPU/" rel="tag">GPU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAID/" rel="tag">RAID</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ext4/" rel="tag">ext4</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/27/vim-text-tricks/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vim 文本操作总结备忘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/18/rdesktop-share-file/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用rdesktop来在Windows和Linux之间共享数据</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+  <section id="comments" class="vcomment">
+  </section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime-Text/">Sublime Text</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%9B%E5%AD%A3%E9%A3%8E%E7%89%A9/">四季风物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">学习总结</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/OpenCV/">OpenCV</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%91%E4%BB%AC%E7%9A%84%E8%AE%B0%E5%BD%95/">我们的记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%9D%E8%8A%B1%E5%A4%95%E6%8B%BE/">朝花夕拾</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9F%E8%AE%B0/">速记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/" rel="tag">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2017/" rel="tag">2017</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2019/" rel="tag">2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3D-CNN/" rel="tag">3D CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recognition/" rel="tag">Action Recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recogntion/" rel="tag">Action Recogntion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recongnition/" rel="tag">Action Recongnition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Amax/" rel="tag">Amax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Attention/" rel="tag">Attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BIOS/" rel="tag">BIOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-17/" rel="tag">C++17</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C3D/" rel="tag">C3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/" rel="tag">Computer Vision</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Detection/" rel="tag">Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Detectron2/" rel="tag">Detectron2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/" rel="tag">GPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gnome/" rel="tag">Gnome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinetics/" rel="tag">Kinetics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Libtorch/" rel="tag">Libtorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Make/" rel="tag">Make</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/" rel="tag">Motion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NeoVim/" rel="tag">NeoVim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NumCpp/" rel="tag">NumCpp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NumPy/" rel="tag">NumPy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nvidia/" rel="tag">Nvidia</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenMP/" rel="tag">OpenMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenPyxl/" rel="tag">OpenPyxl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/" rel="tag">PIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/" rel="tag">Paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pip/" rel="tag">Pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programmer/" rel="tag">Programmer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAID/" rel="tag">RAID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RDP/" rel="tag">RDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/" rel="tag">Segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Siamese-Network/" rel="tag">Siamese Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text/" rel="tag">Sublime Text</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TSN/" rel="tag">TSN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCF101/" rel="tag">UCF101</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UEFI/" rel="tag">UEFI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unit-Test/" rel="tag">Unit Test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vnc/" rel="tag">Vnc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E7%BC%96%E7%A8%8B/" rel="tag">Web编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wordpress/" rel="tag">Wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xfce/" rel="tag">Xfce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asciinema/" rel="tag">asciinema</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coloredlogs/" rel="tag">coloredlogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/" rel="tag">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leveldb/" rel="tag">leveldb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lmdb/" rel="tag">lmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matlab/" rel="tag">matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rdesktop/" rel="tag">rdesktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/" rel="tag">venv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" rel="tag">博客备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="tag">学习总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" rel="tag">并行计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E8%AE%A1/" rel="tag">总计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" rel="tag">机器学习 总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" rel="tag">迁移记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9F%E8%AE%B0/" rel="tag">速记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 11px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 11px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 12px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 12px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 16px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 11px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 14px;">GPU</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 11px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/OpenCV/" style="font-size: 12px;">OpenCV</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 11px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 12px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 11px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 12px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Trick/" style="font-size: 11px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 16px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 14px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 11px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 11px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 12px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 15px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 13px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 11px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 11px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/09/04/cpp-time-count/">C++ 耗时统计代码片段</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/28/vim-learn/">VIM 查漏补缺</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/21/pytorch-cross-entropy/">Pytorch使用交叉熵损失时的一个坑</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/21/blog-list/">我关注的一些独立技术博客</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/21/torch-tensor-python-to-cpp/">C++中使用pytorch保存的tensor</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yunfeng Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+      el: '.vcomment',
+      notify: notify,
+      verify: verify,
+      appId: "EiUA70pL48Wjd8yCEOAvIoK8-gzGzoHsz",
+      appKey: "f6Q5F1wJURp4kCML7IwdhiRh",
+      placeholder: "欢迎留言交流~~",
+      pageSize: '10',
+      avatar: 'mm',
+      lang: 'zh-cn',
+      visitor: 'true'
+    });
+  </script>
+
+
+  </div>
+</body>
+</html>
