@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8">
   
-
   
   <title>Yunfeng&#39;s Simple Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Love, Life, Linux">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yunfeng&#39;s Simple Blog">
@@ -17,17 +16,24 @@
 <meta property="article:author" content="Yunfeng Wang">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
   
   
 <link rel="stylesheet" href="/css/style.css">
 
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
@@ -41,6 +47,10 @@
         <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
       </h1>
       
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Love, Life, Linux</a>
+        </h2>
+      
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
@@ -50,28 +60,27 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="/about">About</a>
-        
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
       </div>
     </div>
   </div>
 </header>
+
       <div class="outer">
         <section id="main">
   
-    <article id="post-wsl-ssh-permission-error" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-detectron2-usage" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2020/03/04/wsl-ssh-permission-error/" class="article-date">
-  <time datetime="2020-03-04T12:26:22.000Z" itemprop="datePublished">2020-03-04</time>
+    <a href="/2020/03/14/detectron2-usage/" class="article-date">
+  <time class="dt-published" datetime="2020-03-14T15:21:10.000Z" itemprop="datePublished">2020-03-14</time>
 </a>
     
   </div>
@@ -82,13 +91,130 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/04/wsl-ssh-permission-error/">Windows Subsystem for Linux 下 SSH permission error 解决</a>
+      <a class="p-name article-title" href="/2020/03/14/detectron2-usage/">detectron2 使用总结</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol>
+<li>detectron2 大部分代码都需要GPU</li>
+<li>detectron2 主要是用于检测和分割的代码框架，像分类这种任务的代码暂时没有</li>
+<li>官方示例有一些是基于Colab的，需要科学上网才能访问<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install -U torch==1.4+cu100 torchvision==0.5+cu100 -f https://download.pytorch.org/whl/torch_stable.html</span><br><span class="line">sudo pip install cython pyyaml==5.1 --ingnore-installed</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 cocoapi</span></span><br><span class="line">sudo pip install -U <span class="string">&#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#x27;</span></span><br></pre></td></tr></table></figure>
+其中cocoapi 需要从GitHub下载代码，如果安装太慢，可以先clone下代码，再进<code>PythonAPI</code>子目录，运行<code>setup.py</code>安装:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/cocodataset/cocoapi.git</span><br><span class="line"><span class="built_in">cd</span> cocoapi/PythonAPI</span><br><span class="line">sudo python3 setup.py install</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="安装-detectron2"><a href="#安装-detectron2" class="headerlink" title="安装 detectron2"></a>安装 detectron2</h3><p>这里直接安装编译好的二进制文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu100/index.html</span><br></pre></td></tr></table></figure>
+<p>如果文件下载太慢或者超时，可以手动在浏览器里面下载好文件，再用下面的命令安装（假设下载的<code>whl</code>文件是<code>xxx.whl</code>):</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install xxx.whl</span><br></pre></td></tr></table></figure>
+<p>安装完后，打开 Python 命令行，执行下面的命令，如果不报错，说明安装成功：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> detectron2</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>为了测试，需要下载 detectron2 的源代码，基于 <code>demo/demo.py</code> 进行简单的测试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/facebookresearch/detectron2</span><br><span class="line">python3  detectron2/demo/demo.py --config-file detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml --input ~/test.jpg --opts MODEL.WEIGHTS  detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl</span><br></pre></td></tr></table></figure>
+<p><strong>注意上述代码需要在 detectron2 的 git 仓库外面执行，否则会报错。</strong><br>测试时输入支持单张图片、多张图片、单个图片文件夹、网络摄像头以及视频文件，每种情况参数设置如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单张图片</span></span><br><span class="line">--input test.jpg</span><br><span class="line"><span class="comment"># 多张图片</span></span><br><span class="line">--input test1.jpg test2.jpg test3.jpg</span><br><span class="line"><span class="comment"># 单个图片文件夹</span></span><br><span class="line">--input imgs/*.jpg</span><br><span class="line"><span class="comment"># 网络摄像头</span></span><br><span class="line">--webcame</span><br><span class="line"><span class="comment"># 视频文件</span></span><br><span class="line">--video-input test.mp4</span><br></pre></td></tr></table></figure>
+
+<p>``–opts MODEL.WEIGHTS<code>表示测试用的模型参数，可以是一个本地目录，也可以是一个</code>detectron2://`开头的一个模型路径，这时会先下载模型到本地再测试:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用本地的模型参数</span></span><br><span class="line">--opts MODEL.WEIGHTS ./model_final_f10217.pkl</span><br><span class="line"><span class="comment"># 使用网络模型地址</span></span><br><span class="line">--opts MODEL.WEIGHTS ./model_final_f10217.pkl</span><br></pre></td></tr></table></figure>
+<p>模型的名字可以在 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/detectron2/blob/master/MODEL_ZOO.md">Model Zoo</a> 查看。</p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>训练代码参考 <code>tools/train_net.py</code>，目前Detection看。</p>
+<h3 id="一些代码分析"><a href="#一些代码分析" class="headerlink" title="一些代码分析"></a>一些代码分析</h3><ol>
+<li>DefaultTrainer 是针对目前常用的Detection设置而写的一个类，为了不用修改太多就直接复现最佳结果。但另一方面，由于有比较多的假设情况，因此通用性有所降低</li>
+<li>SimpleTrainer 是 DefaultTrainer 的父类，限制条件更少，对于做新的研究任务，作者推荐继承 SimpleTrainer 来修改</li>
+<li>代码支持多机多卡多进程，基于 Pytorch 的多级多卡代码写了一些wrapper</li>
+<li>代码注释很完善，而且其中很多是给用户怎么基于现在代码进行修改来跑新的网络、做新的任务，有些地方说的很细致，这一点很棒</li>
+</ol>
+<h3 id="一些资源"><a href="#一些资源" class="headerlink" title="一些资源"></a>一些资源</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://detectron2.readthedocs.org/">文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/detectron2">Git 仓库</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2020/03/14/detectron2-usage/" data-id="ckt5a9s7n001kj121eryr9mnh" data-title="detectron2 使用总结" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/" rel="tag">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Detection/" rel="tag">Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Detectron2/" rel="tag">Detectron2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/" rel="tag">Segmentation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-wsl-dnc-sync" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/04/wsl-dnc-sync/" class="article-date">
+  <time class="dt-published" datetime="2020-03-04T13:19:36.000Z" itemprop="datePublished">2020-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/04/wsl-dnc-sync/">Windows Subsystem for Linux 切换网络脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在启用/关闭 VPN 的时候， WSL 里面，有时候网络会无法连接。根据<a target="_blank" rel="noopener" href="https://github.com/microsoft/WSL/issues/416">这里</a>的讨论，这是由于 WSL 在网络变化的时候，未能正确解析 DNS 导致的。网友在这里也给出了一个解决办法，试了以后是可以的，因此记录下来。</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/03/04/wsl-dnc-sync/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2020/03/04/wsl-dnc-sync/" data-id="ckt5a9sag00ftj1210olyboj3" data-title="Windows Subsystem for Linux 切换网络脚本" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-wsl-ssh-permission-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/04/wsl-ssh-permission-error/" class="article-date">
+  <time class="dt-published" datetime="2020-03-04T12:26:22.000Z" itemprop="datePublished">2020-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/04/wsl-ssh-permission-error/">Windows Subsystem for Linux 下 SSH permission error 解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p>在 Windows SubSystem for Linux (WSL) 下，使用 <code>ssh</code> 命令的时候报下面的错：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Bad owner or permissions on /home/yunfeng/.ssh/config</span><br></pre></td></tr></table></figure>
@@ -103,7 +229,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/04/wsl-ssh-permission-error/" data-id="ckskzddio0071tv21f1z2h1e7" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/03/04/wsl-ssh-permission-error/" data-id="ckt5a9sag00fsj121gnfr83gc" data-title="Windows Subsystem for Linux 下 SSH permission error 解决" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
@@ -114,11 +241,12 @@
 </article>
 
 
+
   
-    <article id="post-arxiv-speedup" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-arxiv-speedup" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/03/01/arxiv-speedup/" class="article-date">
-  <time datetime="2020-03-01T01:32:12.000Z" itemprop="datePublished">2020-03-01</time>
+  <time class="dt-published" datetime="2020-03-01T01:32:12.000Z" itemprop="datePublished">2020-03-01</time>
 </a>
     
   </div>
@@ -129,13 +257,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/arxiv-speedup/">加速国内访问 Arxiv 论文的一些方法</a>
+      <a class="p-name article-title" href="/2020/03/01/arxiv-speedup/">加速国内访问 Arxiv 论文的一些方法</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p>arxiv 的 PDF 下载速度很慢，下面是一些加速方法。</p>
 <h2 id="命令行直接下载"><a href="#命令行直接下载" class="headerlink" title="命令行直接下载"></a>命令行直接下载</h2><p>我们知道可以用<code>wget</code>命令下载一些网络文件， 不过arxiv 上的论文使用<code>wget</code>下载时需要加参数<code>--user-agent=Lynx</code>，速度才能较快，下面是使用的例子：</p>
@@ -147,7 +275,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/01/arxiv-speedup/" data-id="ckskzddg70006tv21g4lm5zk4" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/03/01/arxiv-speedup/" data-id="ckt5a9s6v0001j1216ps77v7e" data-title="加速国内访问 Arxiv 论文的一些方法" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -158,11 +287,12 @@
 </article>
 
 
+
   
-    <article id="post-cygwin-open-gui" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-cygwin-open-gui" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/03/01/cygwin-open-gui/" class="article-date">
-  <time datetime="2020-03-01T01:32:12.000Z" itemprop="datePublished">2020-03-01</time>
+  <time class="dt-published" datetime="2020-03-01T01:32:12.000Z" itemprop="datePublished">2020-03-01</time>
 </a>
     
   </div>
@@ -173,13 +303,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/cygwin-open-gui/">Cygwin环境下查看远程服务器的图片</a>
+      <a class="p-name article-title" href="/2020/03/01/cygwin-open-gui/">Cygwin环境下查看远程服务器的图片</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p>Linux系统下，<code>SSH -X</code>能够将 ssh 连接到的远程服务器上的图形化显示转发到本地，因此可以方便地查看服务器上的结果。不过在Cygwin下，使用<code>ssh -X</code>选项并不work。</p>
 <p>调查后发现是需要用Cygwin的安装文件安装<code>xorg-server</code> 和 <code>xinit</code>这两个包，然后在一个终端执行<code>startxwin</code>，一直开着，在别的终端进行ssh连接与显示，发现就可以了。</p>
@@ -191,7 +321,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/01/cygwin-open-gui/" data-id="ckskzddgl0011tv21dqsv5pof" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/03/01/cygwin-open-gui/" data-id="ckt5a9s7g0012j121erf31jsu" data-title="Cygwin环境下查看远程服务器的图片" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
@@ -202,11 +333,12 @@
 </article>
 
 
+
   
-    <article id="post-cygwin-rsync" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-cygwin-rsync" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/03/01/cygwin-rsync/" class="article-date">
-  <time datetime="2020-03-01T01:32:12.000Z" itemprop="datePublished">2020-03-01</time>
+  <time class="dt-published" datetime="2020-03-01T01:32:12.000Z" itemprop="datePublished">2020-03-01</time>
 </a>
     
   </div>
@@ -217,13 +349,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/cygwin-rsync/">Cygwin 使用rsync 报错解决</a>
+      <a class="p-name article-title" href="/2020/03/01/cygwin-rsync/">Cygwin 使用rsync 报错解决</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p>在 Cygwin 下使用<code>rsync</code>时，报下面的错误：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rsync: connection unexpectedly closed (0 bytes received so far) [receiver] </span><br><span class="line">rsync error: error <span class="keyword">in</span> rsync protocol data stream (code 12) at io.c(600) [receiver=3.0.5]</span><br><span class="line">rsync: connection unexpectedly closed (0 bytes received so far) [sender]</span><br><span class="line">rsync error: error <span class="keyword">in</span> rsync protocol data stream (code 12) at io.c(610) [sender=3.0.8]</span><br></pre></td></tr></table></figure>
@@ -232,7 +364,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/01/cygwin-rsync/" data-id="ckskzddgm0012tv213855em2n" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/03/01/cygwin-rsync/" data-id="ckt5a9s7i0015j121hrve4593" data-title="Cygwin 使用rsync 报错解决" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
@@ -243,11 +376,12 @@
 </article>
 
 
+
   
-    <article id="post-summary-2019" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-summary-2019" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/01/01/summary-2019/" class="article-date">
-  <time datetime="2020-01-01T01:32:12.000Z" itemprop="datePublished">2020-01-01</time>
+  <time class="dt-published" datetime="2020-01-01T01:32:12.000Z" itemprop="datePublished">2020-01-01</time>
 </a>
     
   </div>
@@ -258,13 +392,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/01/summary-2019/">2019年终总结</a>
+      <a class="p-name article-title" href="/2020/01/01/summary-2019/">2019年终总结</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="2019-大事记录"><a href="#2019-大事记录" class="headerlink" title="2019 大事记录"></a>2019 大事记录</h2><p>个人生活上，在2019，我结婚了。领证，订婚，两周后的结婚都是今年重大的事情。有的时候，觉得这些都是重大的神圣时刻，而更多的时候，真正经历其中的时候，发现这些都是由一个个平常普通的事件构成的。生活的大多数美好，是否只有在成为记忆，再次回想的时候，才会展现出来？我不知道，不过确实有些美好是在经历时就能感受到的。</p>
 <p>今年和家人好友相聚的次数多了，而且内心非常珍惜每一次相聚的机会。大家天南海北，相聚到一起，面对面地坐下聊天，似乎也是非常难得的时刻。因此我将今年的每一次相聚都记录下来，因为这是我所珍视的东西。</p>
@@ -280,7 +414,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/01/01/summary-2019/" data-id="ckskzddif0063tv2111dwerza" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/01/01/summary-2019/" data-id="ckt5a9s8x006aj1216p8sdxf8" data-title="2019年终总结" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2019/" rel="tag">2019</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
@@ -291,11 +426,12 @@
 </article>
 
 
+
   
-    <article id="post-opencv-bgr-yuv-conversion" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-opencv-bgr-yuv-conversion" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2019/12/19/opencv-bgr-yuv-conversion/" class="article-date">
-  <time datetime="2019-12-19T15:16:39.000Z" itemprop="datePublished">2019-12-19</time>
+  <time class="dt-published" datetime="2019-12-19T15:16:39.000Z" itemprop="datePublished">2019-12-19</time>
 </a>
     
   </div>
@@ -306,13 +442,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/opencv-bgr-yuv-conversion/">OpenCV Code Snippets——BGR与YUV转换</a>
+      <a class="p-name article-title" href="/2019/12/19/opencv-bgr-yuv-conversion/">OpenCV Code Snippets——BGR与YUV转换</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>OpenCV BGR 图 转 YUV 图的代码，网上没有比较完整的示例，使用的时候搜索比较费劲。这里写一个代码片段和例子，方便查找。</p>
         
@@ -323,7 +459,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/12/19/opencv-bgr-yuv-conversion/" data-id="ckskzddhp004atv218nahd84i" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/12/19/opencv-bgr-yuv-conversion/" data-id="ckt5a9s8c0048j121as49e1s5" data-title="OpenCV Code Snippets——BGR与YUV转换" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -334,11 +471,12 @@
 </article>
 
 
+
   
-    <article id="post-always-blue" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-always-blue" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2019/12/16/always-blue/" class="article-date">
-  <time datetime="2019-12-16T15:22:03.000Z" itemprop="datePublished">2019-12-16</time>
+  <time class="dt-published" datetime="2019-12-16T15:22:03.000Z" itemprop="datePublished">2019-12-16</time>
 </a>
     
   </div>
@@ -349,13 +487,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/always-blue/">Always blue——关于《硅谷》电视剧的一些想法</a>
+      <a class="p-name article-title" href="/2019/12/16/always-blue/">Always blue——关于《硅谷》电视剧的一些想法</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h2><p>美剧硅谷完结了。<br>忘了从什么时候开始看的这部剧，只记得在研究生的那几年，和庆哥一起看过，周围貌似没有别的人在看。去年第五季等了很久，看完后以为没有下一季了，偶然在网上看到居然还有第六季，于是赶紧开始看，最后五六集实在是太精彩了，看得大呼过瘾。第七集，却又很伤感，那些演员们陪伴我们的欢笑时光，终究要结束了。</p>
         
@@ -366,7 +504,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/12/16/always-blue/" data-id="ckskzddg10001tv214mwwgjax" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/12/16/always-blue/" data-id="ckt5a9s710006j121eoc1g6hm" data-title="Always blue——关于《硅谷》电视剧的一些想法" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programmer/" rel="tag">Programmer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li></ul>
@@ -377,11 +516,12 @@
 </article>
 
 
+
   
-    <article id="post-install-tmux-from-source" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-install-tmux-from-source" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2019/10/11/install-tmux-from-source/" class="article-date">
-  <time datetime="2019-10-11T09:16:13.000Z" itemprop="datePublished">2019-10-11</time>
+  <time class="dt-published" datetime="2019-10-11T09:16:13.000Z" itemprop="datePublished">2019-10-11</time>
 </a>
     
   </div>
@@ -392,13 +532,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/11/install-tmux-from-source/">从源代码编译安装tmux</a>
+      <a class="p-name article-title" href="/2019/10/11/install-tmux-from-source/">从源代码编译安装tmux</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>为了使用新版tmux的特性，需要在Ubuntu 16.04上安装高版本的tmux，没有找到现成的ppa，因此搜到了一个从源代码安装的脚本，这里记录下来。</p>
         
@@ -409,7 +549,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/10/11/install-tmux-from-source/" data-id="ckskzddh90033tv21gii2akoy" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/10/11/install-tmux-from-source/" data-id="ckt5a9s810035j121h94ifrxv" data-title="从源代码编译安装tmux" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li></ul>
@@ -420,98 +561,13 @@
 </article>
 
 
-  
-    <article id="post-colorful-logging" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/10/colorful-logging/" class="article-date">
-  <time datetime="2019-09-10T08:06:21.000Z" itemprop="datePublished">2019-09-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/10/colorful-logging/">Python 彩色命令行输出</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>效果：<br><img src="/imgs/coloredlogs-demo.png"><br>下面描述如何来实现。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/10/colorful-logging/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/09/10/colorful-logging/" data-id="ckskzddge000ltv218fnod0xv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coloredlogs/" rel="tag">coloredlogs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-install-pip2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/07/install-pip2/" class="article-date">
-  <time datetime="2019-09-07T14:27:02.000Z" itemprop="datePublished">2019-09-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/07/install-pip2/">你不应该知道的知识之如何在Ubuntu 16.04上安装Pip2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>虽然2020年官方就不支持Python2系列了，不过有时你还是会用到Python2，这时候为了安装某个包(如numpy)，你需要<code>pip2</code>。而<code>pip2</code>一般比较新的系统是没带的。下面记录如何安装它。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/07/install-pip2/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/09/07/install-pip2/" data-id="ckskzddh90032tv21euhp5abe" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pip/" rel="tag">Pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
 
   
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">下一页 &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -551,7 +607,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a></li></ul>
     </div>
   </div>
 
@@ -564,6 +620,14 @@
       <ul>
         
           <li>
+            <a href="/2021/09/04/cpp-time-count/">C++ 耗时统计代码片段</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/28/vim-learn-md/">vim-learn.md</a>
+          </li>
+        
+          <li>
             <a href="/2021/08/21/pytorch-cross-entropy/">Pytorch使用交叉熵损失时的一个坑</a>
           </li>
         
@@ -573,14 +637,6 @@
         
           <li>
             <a href="/2021/03/21/torch-tensor-python-to-cpp/">C++中使用pytorch保存的tensor</a>
-          </li>
-        
-          <li>
-            <a href="/2021/02/02/doctest-intro/">doctest 用法简介</a>
-          </li>
-        
-          <li>
-            <a href="/2021/01/23/cpp-summary-stringview/">C++中的string_view</a>
           </li>
         
       </ul>
@@ -595,11 +651,13 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
+      
       &copy; 2021 Yunfeng Wang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
+
     </div>
     <nav id="mobile-nav">
   
@@ -607,24 +665,22 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="/about" class="mobile-nav-link">About</a>
-  
 </nav>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
 
 
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
 
 
 <script src="/js/script.js"></script>
+
 
 
 

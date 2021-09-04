@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8">
   
-
   
   <title>Yunfeng&#39;s Simple Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Love, Life, Linux">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yunfeng&#39;s Simple Blog">
@@ -17,17 +16,24 @@
 <meta property="article:author" content="Yunfeng Wang">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
   
   
 <link rel="stylesheet" href="/css/style.css">
 
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
@@ -41,6 +47,10 @@
         <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
       </h1>
       
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Love, Life, Linux</a>
+        </h2>
+      
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
@@ -50,28 +60,27 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="/about">About</a>
-        
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
       </div>
     </div>
   </div>
 </header>
+
       <div class="outer">
         <section id="main">
   
-    <article id="post-pytorch-cross-entropy" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-cpp-time-count" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/08/21/pytorch-cross-entropy/" class="article-date">
-  <time datetime="2021-08-20T23:03:13.000Z" itemprop="datePublished">2021-08-21</time>
+    <a href="/2021/09/04/cpp-time-count/" class="article-date">
+  <time class="dt-published" datetime="2021-09-04T03:44:38.000Z" itemprop="datePublished">2021-09-04</time>
 </a>
     
   </div>
@@ -82,13 +91,97 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/21/pytorch-cross-entropy/">Pytorch使用交叉熵损失时的一个坑</a>
+      <a class="p-name article-title" href="/2021/09/04/cpp-time-count/">C++ 耗时统计代码片段</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>C++ 耗时统计代码片段</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> std::chrono::milliseconds ms;</span><br><span class="line"><span class="keyword">using</span> clk = std::chrono::system_clock;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_my_work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// work code here</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> begin_time = clk::<span class="built_in">now</span>();</span><br><span class="line">    <span class="built_in">do_my_work</span>();</span><br><span class="line">	<span class="keyword">auto</span> end_time = clk::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> duration_nn = std::chrono::duration_cast&lt;ms&gt;(end_time - begin_time);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;timecost: &quot;</span> &lt;&lt; (<span class="keyword">double</span>)duration_nn.<span class="built_in">count</span>() &lt;&lt; <span class="string">&quot; ms&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2021/09/04/cpp-time-count/" data-id="ckt5a9s7e000yj1218vakdgdn" data-title="C++ 耗时统计代码片段" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-vim-learn-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/28/vim-learn-md/" class="article-date">
+  <time class="dt-published" datetime="2021-08-28T14:56:29.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/08/28/vim-learn-md/">vim-learn.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>命令<br>shift-v： 选择一整行</p>
+<p><code>*</code>：向下搜索光标所在的词<br><code>#</code>：向上搜索光标所在的词</p>
+<p><code>w</code>: 移动到下一个单词<br><code>b</code>: 移动到上一个单词<br><code>F</code>: 搜索当前行光标前的字母<br><code>&lt;n&gt;G</code>: 移动到第n行行首<br><code>ctrl-e</code>: 屏幕向下移动，效果同<code>j</code></p>
+<p><code>dgg</code>: 删除文档开头到当前行的内容<br><code>dG</code>: 删除当前行到文档末尾的内容<br><code>ggdG</code>: 删除文档所有内容</p>
+<p><code>dip</code>: 删除当前行所在段落(到下一个空行)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2021/08/28/vim-learn-md/" data-id="ckt5a9s94006zj121gzae4kfp" data-title="vim-learn.md" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-pytorch-cross-entropy" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/21/pytorch-cross-entropy/" class="article-date">
+  <time class="dt-published" datetime="2021-08-20T23:03:13.000Z" itemprop="datePublished">2021-08-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/08/21/pytorch-cross-entropy/">Pytorch使用交叉熵损失时的一个坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p>在Pytorch里面使用交叉熵loss函数的时候，发现结果最是比较差，通过搜索才发现这样一段话：</p>
 <blockquote>
@@ -103,7 +196,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/21/pytorch-cross-entropy/" data-id="ckskzddi30051tv216a4b1pby" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/21/pytorch-cross-entropy/" data-id="ckt5a9s8m0052j1218qywhfyo" data-title="Pytorch使用交叉熵损失时的一个坑" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -114,11 +208,12 @@
 </article>
 
 
+
   
-    <article id="post-blog-list" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-blog-list" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/08/21/blog-list/" class="article-date">
-  <time datetime="2021-08-20T16:25:39.000Z" itemprop="datePublished">2021-08-21</time>
+  <time class="dt-published" datetime="2021-08-20T16:25:39.000Z" itemprop="datePublished">2021-08-21</time>
 </a>
     
   </div>
@@ -129,13 +224,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/21/blog-list/">我关注的一些独立技术博客</a>
+      <a class="p-name article-title" href="/2021/08/21/blog-list/">我关注的一些独立技术博客</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p>这里列出了我平时关注的一些技术博客列表，希望给看到这个页面的你一些新的知识来源：</p>
 <ol>
@@ -155,7 +250,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/21/blog-list/" data-id="ckskzddg80008tv217kf12mdv" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/21/blog-list/" data-id="ckt5a9s74000aj1216hdyfogd" data-title="我关注的一些独立技术博客" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
@@ -166,11 +262,12 @@
 </article>
 
 
+
   
-    <article id="post-torch-tensor-python-to-cpp" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-torch-tensor-python-to-cpp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/03/21/torch-tensor-python-to-cpp/" class="article-date">
-  <time datetime="2021-03-21T10:19:28.000Z" itemprop="datePublished">2021-03-21</time>
+  <time class="dt-published" datetime="2021-03-21T10:19:28.000Z" itemprop="datePublished">2021-03-21</time>
 </a>
     
   </div>
@@ -181,13 +278,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/21/torch-tensor-python-to-cpp/">C++中使用pytorch保存的tensor</a>
+      <a class="p-name article-title" href="/2021/03/21/torch-tensor-python-to-cpp/">C++中使用pytorch保存的tensor</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在学习Libtorch——即Pytorch的C++版本，需要使用 Pytorch 导出的 tensor 以便对模型进行 debug。下面是转换代码，总体原理是将 tensor 转换为二进制数据，再在 C++ 里面读入。</p>
         
@@ -198,7 +295,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/" data-id="ckskzddih006etv219fc30v4n" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/" data-id="ckt5a9s8z006gj1212b5j6gae" data-title="C++中使用pytorch保存的tensor" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Libtorch/" rel="tag">Libtorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -209,11 +307,12 @@
 </article>
 
 
+
   
-    <article id="post-doctest-intro" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-doctest-intro" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/02/02/doctest-intro/" class="article-date">
-  <time datetime="2021-02-02T14:43:43.000Z" itemprop="datePublished">2021-02-02</time>
+  <time class="dt-published" datetime="2021-02-02T14:43:43.000Z" itemprop="datePublished">2021-02-02</time>
 </a>
     
   </div>
@@ -224,13 +323,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/02/doctest-intro/">doctest 用法简介</a>
+      <a class="p-name article-title" href="/2021/02/02/doctest-intro/">doctest 用法简介</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/doctest.html">doctest</a> 是 python 系统库中用于交互式会话例子测试的工具，用于搜索以 <code>&gt;&gt;&gt;</code> 开头的语句，并且将其作为Python命令，对结果进行测试。</p>
 <p>这个工具可以方便地用于检测自己写的库是否有bug，例如某些函数功能可能发生改变，借此工具可以方便地对代码中的示例语句进行测试。</p>
@@ -242,7 +341,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/02/02/doctest-intro/" data-id="ckskzddgx001wtv218f667nx7" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/02/02/doctest-intro/" data-id="ckt5a9s7r001yj12139c8dvef" data-title="doctest 用法简介" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unit-Test/" rel="tag">Unit Test</a></li></ul>
@@ -253,11 +353,12 @@
 </article>
 
 
+
   
-    <article id="post-cpp-summary-stringview" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-cpp-summary-stringview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/01/23/cpp-summary-stringview/" class="article-date">
-  <time datetime="2021-01-23T07:40:39.000Z" itemprop="datePublished">2021-01-23</time>
+  <time class="dt-published" datetime="2021-01-23T07:40:39.000Z" itemprop="datePublished">2021-01-23</time>
 </a>
     
   </div>
@@ -268,13 +369,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/23/cpp-summary-stringview/">C++中的string_view</a>
+      <a class="p-name article-title" href="/2021/01/23/cpp-summary-stringview/">C++中的string_view</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p>C++17标准库里面引入了轻量级的只读字符串表示类型<code>string_view</code>，用来替代<code>const char*</code> 和<code>const string&amp;</code>，在传入函数的时候减小内存开销(因为<code>string_view</code>类只包含字符串的指针和字符串的长度值，开销小于<code>string</code>类型)。</p>
         
@@ -285,7 +386,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/23/cpp-summary-stringview/" data-id="ckskzddgj000wtv214mhv1o3d" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/23/cpp-summary-stringview/" data-id="ckt5a9s7e000wj1215q4z6ezj" data-title="C++中的string_view" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-17/" rel="tag">C++17</a></li></ul>
@@ -296,11 +398,12 @@
 </article>
 
 
+
   
-    <article id="post-venv-intro" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-venv-intro" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/01/03/venv-intro/" class="article-date">
-  <time datetime="2021-01-03T01:56:04.000Z" itemprop="datePublished">2021-01-03</time>
+  <time class="dt-published" datetime="2021-01-03T01:56:04.000Z" itemprop="datePublished">2021-01-03</time>
 </a>
     
   </div>
@@ -311,13 +414,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/03/venv-intro/">python虚拟环境管理工具venv教程</a>
+      <a class="p-name article-title" href="/2021/01/03/venv-intro/">python虚拟环境管理工具venv教程</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h3 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h3><p>Python有各种各样的系统包和第三方开发的包，让我们的开发变得异常容易。不过也引入了一个问题，不同代码需要的包版本可能是不一样的，所以常常回出现这种情况，为了代码B修改了依赖包的版本，代码B能work了，之前使用的代码A就没法正常工作了。因此常常需要对不同的代码设置不同的Python虚拟环境。<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/tutorial/venv.html">venv</a>是Python自带的虚拟环境管理工具，使用很方便，这里简单记录一下使用方法。</p>
         
@@ -328,7 +431,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/03/venv-intro/" data-id="ckskzddil006stv218znnglnv" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/03/venv-intro/" data-id="ckt5a9s93006vj121b2jydivv" data-title="python虚拟环境管理工具venv教程" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/venv/" rel="tag">venv</a></li></ul>
@@ -339,11 +443,12 @@
 </article>
 
 
+
   
-    <article id="post-summary-2020" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-summary-2020" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/01/02/summary-2020/" class="article-date">
-  <time datetime="2021-01-02T01:06:13.000Z" itemprop="datePublished">2021-01-02</time>
+  <time class="dt-published" datetime="2021-01-02T01:06:13.000Z" itemprop="datePublished">2021-01-02</time>
 </a>
     
   </div>
@@ -354,13 +459,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/02/summary-2020/">2020年终总结</a>
+      <a class="p-name article-title" href="/2021/01/02/summary-2020/">2020年终总结</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="2020流水记录"><a href="#2020流水记录" class="headerlink" title="2020流水记录"></a>2020流水记录</h2><p>新的一年又开始了，记录一下2020年发生的一些事情，作为对这不平凡的一年的简单的回顾。</p>
 <p>1月14日，农历腊月二十，我和彤彤在我家结婚了，作为主人翁参与其中，是一种很神奇却很美好的感觉，结婚的大小事情都是爸妈和村里的亲戚邻居一起来做的，很感谢爸妈亲戚邻居们的付出，让寒冬里面的腊月二十热闹而温暖。</p>
@@ -374,7 +479,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/02/summary-2020/" data-id="ckskzddig0066tv21dr8abp55" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/02/summary-2020/" data-id="ckt5a9s8x0066j1214uq8bki4" data-title="2020年终总结" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
@@ -385,11 +491,12 @@
 </article>
 
 
+
   
-    <article id="post-numcpp-intro" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-numcpp-intro" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/12/26/numcpp-intro/" class="article-date">
-  <time datetime="2020-12-26T03:26:36.000Z" itemprop="datePublished">2020-12-26</time>
+  <time class="dt-published" datetime="2020-12-26T03:26:36.000Z" itemprop="datePublished">2020-12-26</time>
 </a>
     
   </div>
@@ -400,13 +507,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/26/numcpp-intro/">NumPy的C++替代NumCpp使用教程</a>
+      <a class="p-name article-title" href="/2020/12/26/numcpp-intro/">NumPy的C++替代NumCpp使用教程</a>
     </h1>
   
 
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p>NumPy提供了很多开箱即用的函数，用处非常大，所以写C++的时候，让人无比怀念，要是有一个替代版本，就太好了。最近搜索发现， <a target="_blank" rel="noopener" href="https://github.com/dpilger26/NumCpp">NumCpp</a> 这是我想要的，而且因为是 <code>Header-only</code>的库，因此使用时不需要编译，直接添加到头文件包含目录即可，使用很方便。不过NumCpp使用了boost库，需要进行一些下载和配置，这里记录一下。</p>
         
@@ -417,7 +524,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/12/26/numcpp-intro/" data-id="ckskzddhm0042tv21309z8ae0" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/12/26/numcpp-intro/" data-id="ckt5a9s8b0043j121125a9cts" data-title="NumPy的C++替代NumCpp使用教程" class="article-share-link">分享</a>
+      
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NumCpp/" rel="tag">NumCpp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NumPy/" rel="tag">NumPy</a></li></ul>
@@ -428,125 +536,13 @@
 </article>
 
 
-  
-    <article id="post-detectron2-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/14/detectron2-usage/" class="article-date">
-  <time datetime="2020-03-14T15:21:10.000Z" itemprop="datePublished">2020-03-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/14/detectron2-usage/">detectron2 使用总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol>
-<li>detectron2 大部分代码都需要GPU</li>
-<li>detectron2 主要是用于检测和分割的代码框架，像分类这种任务的代码暂时没有</li>
-<li>官方示例有一些是基于Colab的，需要科学上网才能访问<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install -U torch==1.4+cu100 torchvision==0.5+cu100 -f https://download.pytorch.org/whl/torch_stable.html</span><br><span class="line">sudo pip install cython pyyaml==5.1 --ingnore-installed</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 cocoapi</span></span><br><span class="line">sudo pip install -U <span class="string">&#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#x27;</span></span><br></pre></td></tr></table></figure>
-其中cocoapi 需要从GitHub下载代码，如果安装太慢，可以先clone下代码，再进<code>PythonAPI</code>子目录，运行<code>setup.py</code>安装:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/cocodataset/cocoapi.git</span><br><span class="line"><span class="built_in">cd</span> cocoapi/PythonAPI</span><br><span class="line">sudo python3 setup.py install</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="安装-detectron2"><a href="#安装-detectron2" class="headerlink" title="安装 detectron2"></a>安装 detectron2</h3><p>这里直接安装编译好的二进制文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu100/index.html</span><br></pre></td></tr></table></figure>
-<p>如果文件下载太慢或者超时，可以手动在浏览器里面下载好文件，再用下面的命令安装（假设下载的<code>whl</code>文件是<code>xxx.whl</code>):</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install xxx.whl</span><br></pre></td></tr></table></figure>
-<p>安装完后，打开 Python 命令行，执行下面的命令，如果不报错，说明安装成功：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> detectron2</span><br></pre></td></tr></table></figure>
-
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>为了测试，需要下载 detectron2 的源代码，基于 <code>demo/demo.py</code> 进行简单的测试：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/facebookresearch/detectron2</span><br><span class="line">python3  detectron2/demo/demo.py --config-file detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml --input ~/test.jpg --opts MODEL.WEIGHTS  detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl</span><br></pre></td></tr></table></figure>
-<p><strong>注意上述代码需要在 detectron2 的 git 仓库外面执行，否则会报错。</strong><br>测试时输入支持单张图片、多张图片、单个图片文件夹、网络摄像头以及视频文件，每种情况参数设置如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单张图片</span></span><br><span class="line">--input test.jpg</span><br><span class="line"><span class="comment"># 多张图片</span></span><br><span class="line">--input test1.jpg test2.jpg test3.jpg</span><br><span class="line"><span class="comment"># 单个图片文件夹</span></span><br><span class="line">--input imgs/*.jpg</span><br><span class="line"><span class="comment"># 网络摄像头</span></span><br><span class="line">--webcame</span><br><span class="line"><span class="comment"># 视频文件</span></span><br><span class="line">--video-input test.mp4</span><br></pre></td></tr></table></figure>
-
-<p>``–opts MODEL.WEIGHTS<code>表示测试用的模型参数，可以是一个本地目录，也可以是一个</code>detectron2://`开头的一个模型路径，这时会先下载模型到本地再测试:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用本地的模型参数</span></span><br><span class="line">--opts MODEL.WEIGHTS ./model_final_f10217.pkl</span><br><span class="line"><span class="comment"># 使用网络模型地址</span></span><br><span class="line">--opts MODEL.WEIGHTS ./model_final_f10217.pkl</span><br></pre></td></tr></table></figure>
-<p>模型的名字可以在 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/detectron2/blob/master/MODEL_ZOO.md">Model Zoo</a> 查看。</p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>训练代码参考 <code>tools/train_net.py</code>，目前Detection看。</p>
-<h3 id="一些代码分析"><a href="#一些代码分析" class="headerlink" title="一些代码分析"></a>一些代码分析</h3><ol>
-<li>DefaultTrainer 是针对目前常用的Detection设置而写的一个类，为了不用修改太多就直接复现最佳结果。但另一方面，由于有比较多的假设情况，因此通用性有所降低</li>
-<li>SimpleTrainer 是 DefaultTrainer 的父类，限制条件更少，对于做新的研究任务，作者推荐继承 SimpleTrainer 来修改</li>
-<li>代码支持多机多卡多进程，基于 Pytorch 的多级多卡代码写了一些wrapper</li>
-<li>代码注释很完善，而且其中很多是给用户怎么基于现在代码进行修改来跑新的网络、做新的任务，有些地方说的很细致，这一点很棒</li>
-</ol>
-<h3 id="一些资源"><a href="#一些资源" class="headerlink" title="一些资源"></a>一些资源</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://detectron2.readthedocs.org/">文档</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/detectron2">Git 仓库</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/14/detectron2-usage/" data-id="ckskzddgt001itv217ey4g4w5" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/" rel="tag">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Detection/" rel="tag">Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Detectron2/" rel="tag">Detectron2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/" rel="tag">Segmentation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-wsl-dnc-sync" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/04/wsl-dnc-sync/" class="article-date">
-  <time datetime="2020-03-04T13:19:36.000Z" itemprop="datePublished">2020-03-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/04/wsl-dnc-sync/">Windows Subsystem for Linux 切换网络脚本</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在启用/关闭 VPN 的时候， WSL 里面，有时候网络会无法连接。根据<a target="_blank" rel="noopener" href="https://github.com/microsoft/WSL/issues/416">这里</a>的讨论，这是由于 WSL 在网络变化的时候，未能正确解析 DNS 导致的。网友在这里也给出了一个解决办法，试了以后是可以的，因此记录下来。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/03/04/wsl-dnc-sync/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/04/wsl-dnc-sync/" data-id="ckskzddio006ztv217xqo8dny" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
 
   
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -586,7 +582,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a></li></ul>
     </div>
   </div>
 
@@ -599,6 +595,14 @@
       <ul>
         
           <li>
+            <a href="/2021/09/04/cpp-time-count/">C++ 耗时统计代码片段</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/28/vim-learn-md/">vim-learn.md</a>
+          </li>
+        
+          <li>
             <a href="/2021/08/21/pytorch-cross-entropy/">Pytorch使用交叉熵损失时的一个坑</a>
           </li>
         
@@ -608,14 +612,6 @@
         
           <li>
             <a href="/2021/03/21/torch-tensor-python-to-cpp/">C++中使用pytorch保存的tensor</a>
-          </li>
-        
-          <li>
-            <a href="/2021/02/02/doctest-intro/">doctest 用法简介</a>
-          </li>
-        
-          <li>
-            <a href="/2021/01/23/cpp-summary-stringview/">C++中的string_view</a>
           </li>
         
       </ul>
@@ -630,11 +626,13 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
+      
       &copy; 2021 Yunfeng Wang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
+
     </div>
     <nav id="mobile-nav">
   
@@ -642,24 +640,22 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="/about" class="mobile-nav-link">About</a>
-  
 </nav>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
 
 
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
 
 
 <script src="/js/script.js"></script>
+
 
 
 
