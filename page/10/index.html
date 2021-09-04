@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   
+
   
   <title>Yunfeng&#39;s Simple Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Love, Life, Linux">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yunfeng&#39;s Simple Blog">
@@ -16,24 +17,17 @@
 <meta property="article:author" content="Yunfeng Wang">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.png">
   
   
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
@@ -47,10 +41,6 @@
         <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
       </h1>
       
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Love, Life, Linux</a>
-        </h2>
-      
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
@@ -60,27 +50,28 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
+          <a class="main-nav-link" href="/about">About</a>
+        
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
       </div>
     </div>
   </div>
 </header>
-
       <div class="outer">
         <section id="main">
   
-    <article id="post-cpp-new-and-delete" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-cpp-new-and-delete" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/01/25/cpp-new-and-delete/" class="article-date">
-  <time class="dt-published" datetime="2015-01-25T07:36:25.000Z" itemprop="datePublished">2015-01-25</time>
+  <time datetime="2015-01-25T07:36:25.000Z" itemprop="datePublished">2015-01-25</time>
 </a>
     
   <div class="article-category">
@@ -95,13 +86,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2015/01/25/cpp-new-and-delete/">C++学习总结3——动态创建对象及其撤销</a>
+      <a class="article-title" href="/2015/01/25/cpp-new-and-delete/">C++学习总结3——动态创建对象及其撤销</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>这里的动态创建对象，特指在程序中通过new命令创建对象；而撤销，特指通过delete命令来删除对象并释放其内存空间。</p>
 <h2 id="new和delete的基本用法"><a href="#new和delete的基本用法" class="headerlink" title="new和delete的基本用法"></a>new和delete的基本用法</h2><p><code>new</code>命令会在堆区域分配创建一个对象，而后返回此对象的地址。<br><code>delete</code>命令会释放指针指向的对象所占用的内存空间，而此后指针指向的地址是没有意义的，为了避免错误，一般来说，应该在delete后立即将指针置为NULL。</p>
@@ -116,8 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2015/01/25/cpp-new-and-delete/" data-id="ckt5a9s7d000tj121aq1zez9z" data-title="C++学习总结3——动态创建对象及其撤销" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2015/01/25/cpp-new-and-delete/" data-id="ckt5whudk000tb6217hdr4w2u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="tag">学习总结</a></li></ul>
@@ -128,12 +118,11 @@
 </article>
 
 
-
   
-    <article id="post-cpp-memory-mode" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-cpp-memory-mode" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/01/25/cpp-memory-mode/" class="article-date">
-  <time class="dt-published" datetime="2015-01-25T03:31:31.000Z" itemprop="datePublished">2015-01-25</time>
+  <time datetime="2015-01-25T03:31:31.000Z" itemprop="datePublished">2015-01-25</time>
 </a>
     
   <div class="article-category">
@@ -148,13 +137,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2015/01/25/cpp-memory-mode/">C++学习总结2——C++内存模型</a>
+      <a class="article-title" href="/2015/01/25/cpp-memory-mode/">C++学习总结2——C++内存模型</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>为了更直观的理解这部分内容，使用如下的程序实例进行说明：</p>
         
@@ -165,8 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2015/01/25/cpp-memory-mode/" data-id="ckt5a9s7c000rj1214lm0eg8l" data-title="C++学习总结2——C++内存模型" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2015/01/25/cpp-memory-mode/" data-id="ckt5whudi000rb621d7je0071" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="tag">学习总结</a></li></ul>
@@ -177,12 +165,11 @@
 </article>
 
 
-
   
-    <article id="post-cpp-concepts" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-cpp-concepts" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/01/24/cpp-concepts/" class="article-date">
-  <time class="dt-published" datetime="2015-01-24T09:15:14.000Z" itemprop="datePublished">2015-01-24</time>
+  <time datetime="2015-01-24T09:15:14.000Z" itemprop="datePublished">2015-01-24</time>
 </a>
     
   <div class="article-category">
@@ -197,13 +184,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2015/01/24/cpp-concepts/">C++学习总结1——几个基本概念</a>
+      <a class="article-title" href="/2015/01/24/cpp-concepts/">C++学习总结1——几个基本概念</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>最近我在做毕设。写程序的时候，总是被C++里面的指针搞得头昏脑胀。刚开始的时候还有些浮躁，不想静下心来仔细看看指针使用的细节。过了几天发现只在Visual Studio里面调试怎么也搞不定，只好硬着头皮，重新学习指针的用法。在看书和看别人写的博客后，感觉学到了许多新的东西，不光是关于指针，还有其他一些以前我不太清楚的内容。这些知识如果不常用或不记录下来的话，肯定会忘掉的，所以我就把它们都写下来，避免以后犯同样的错误。</p>
         
@@ -214,8 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2015/01/24/cpp-concepts/" data-id="ckt5a9s7b000qj1211nznhhkm" data-title="C++学习总结1——几个基本概念" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2015/01/24/cpp-concepts/" data-id="ckt5whudg000pb621a6khcck6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="tag">学习总结</a></li></ul>
@@ -226,12 +212,11 @@
 </article>
 
 
-
   
-    <article id="post-some-new-poems" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-some-new-poems" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/12/31/some-new-poems/" class="article-date">
-  <time class="dt-published" datetime="2014-12-31T04:42:52.000Z" itemprop="datePublished">2014-12-31</time>
+  <time datetime="2014-12-31T04:42:52.000Z" itemprop="datePublished">2014-12-31</time>
 </a>
     
   <div class="article-category">
@@ -246,13 +231,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/12/31/some-new-poems/">一些新看到的诗词</a>
+      <a class="article-title" href="/2014/12/31/some-new-poems/">一些新看到的诗词</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p><span style="color: #000000;"> </span></p>
 <p><span style="color: #000000;">今天是2014年的最后一天。昨天无聊的时候，翻着手机里面的照片，看到了玩么么答游戏时，不会的题目的截屏。其中大多数是诗词这个类别的题目，于是我便百度了这些诗词的完整的内容。因为这些诗词都是我之前不知道的，所以记录下来，用手敲一遍可能会对记忆有帮助吧，说不定以后就能融为自身的一部分呢。所以就抄录如下了。</span></p>
@@ -264,8 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2014/12/31/some-new-poems/" data-id="ckt5a9s8o005cj1210zb857d2" data-title="一些新看到的诗词" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2014/12/31/some-new-poems/" data-id="ckt5whuf2005db6210vaifunx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -274,12 +258,11 @@
 </article>
 
 
-
   
-    <article id="post-test" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/12/15/test/" class="article-date">
-  <time class="dt-published" datetime="2014-12-15T13:11:14.000Z" itemprop="datePublished">2014-12-15</time>
+  <time datetime="2014-12-15T13:11:14.000Z" itemprop="datePublished">2014-12-15</time>
 </a>
     
   <div class="article-category">
@@ -294,21 +277,20 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/12/15/test/">测试文章</a>
+      <a class="article-title" href="/2014/12/15/test/">测试文章</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>哈哈哈哈哈哈哈</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2014/12/15/test/" data-id="ckt5a9s8y006cj121cyd04wjb" data-title="测试文章" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2014/12/15/test/" data-id="ckt5whufb006bb6214d24h80n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -317,12 +299,11 @@
 </article>
 
 
-
   
-    <article id="post-devices-partition-filesystem" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-devices-partition-filesystem" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/12/15/devices-partition-filesystem/" class="article-date">
-  <time class="dt-published" datetime="2014-12-15T06:57:56.000Z" itemprop="datePublished">2014-12-15</time>
+  <time datetime="2014-12-15T06:57:56.000Z" itemprop="datePublished">2014-12-15</time>
 </a>
     
   <div class="article-category">
@@ -337,13 +318,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/12/15/devices-partition-filesystem/">设备文件,分区和文件系统辨析</a>
+      <a class="article-title" href="/2014/12/15/devices-partition-filesystem/">设备文件,分区和文件系统辨析</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>在写上一篇博客时,我发现我没搞清楚块设备(block device),分区(partion)和文件系统(filesystem)这几个概念之间的关系,今早查了一些资料才慢慢理解了它们之间的关系,所以我想写出来,看看我能不能将一个问题描述清楚.下面我依次描述设备文件,分区和文件系统这三个概念.</p>
         
@@ -354,8 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2014/12/15/devices-partition-filesystem/" data-id="ckt5a9s7o001nj1217az49itk" data-title="设备文件,分区和文件系统辨析" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2014/12/15/devices-partition-filesystem/" data-id="ckt5whudw001rb621cg61d83l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
@@ -366,12 +346,11 @@
 </article>
 
 
-
   
-    <article id="post-fstab-automount-windows-partitions" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-fstab-automount-windows-partitions" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/12/14/fstab-automount-windows-partitions/" class="article-date">
-  <time class="dt-published" datetime="2014-12-14T13:14:47.000Z" itemprop="datePublished">2014-12-14</time>
+  <time datetime="2014-12-14T13:14:47.000Z" itemprop="datePublished">2014-12-14</time>
 </a>
     
   <div class="article-category">
@@ -386,13 +365,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/12/14/fstab-automount-windows-partitions/">Linux下通过修改fstab来自动挂载Windows 分区</a>
+      <a class="article-title" href="/2014/12/14/fstab-automount-windows-partitions/">Linux下通过修改fstab来自动挂载Windows 分区</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>我电脑装的是Windows和Linux双系统,以前在Linux下,要打开Windows系统的C盘或D盘,总是要输入密码,很麻烦,而且麻烦了很长时间.</p>
 <p>后来有一天浩哥看到了,说可以在Linux开机时自动挂载Windows分区,修改<code>/etc/fstab</code>这个文件,可以采用每个分区的UUID.后来校长也看到了我每次麻烦的操作,说是确实可以搞,而且他已经搞定了.我想我也得搞搞了.</p>
@@ -404,8 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2014/12/14/fstab-automount-windows-partitions/" data-id="ckt5a9s7s0023j121h1r37321" data-title="Linux下通过修改fstab来自动挂载Windows 分区" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2014/12/14/fstab-automount-windows-partitions/" data-id="ckt5whue3002db6216ouc9xiq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
@@ -416,12 +394,11 @@
 </article>
 
 
-
   
-    <article id="post-debian-discuz" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-debian-discuz" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/12/14/debian-discuz/" class="article-date">
-  <time class="dt-published" datetime="2014-12-14T07:22:52.000Z" itemprop="datePublished">2014-12-14</time>
+  <time datetime="2014-12-14T07:22:52.000Z" itemprop="datePublished">2014-12-14</time>
 </a>
     
   <div class="article-category">
@@ -436,13 +413,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/12/14/debian-discuz/">Debian 下搭建Discuz!论坛</a>
+      <a class="article-title" href="/2014/12/14/debian-discuz/">Debian 下搭建Discuz!论坛</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p><a target="_blank" rel="noopener" href="http://www.discuz.net/">Discuz!</a>是一个用PHP编写的论坛框架,像<a target="_blank" rel="noopener" href="http://bt.neu6.edu.cn/" title="六维">六维</a>以及我们学校少年班学院的<a target="_blank" rel="noopener" href="https://gewu.ustc.edu.cn/">格物致知论坛</a>都是搭建在Discuz!上面的,看论坛页面左下角,都写着”Powered by Discuz!_xxx”,_其中xxx表示Discuz!的版本号.因为我们实验室师兄用内网搭建了个服务器管理的论坛,而且我之前也尝试过搭建wordpress博客(详细过程可以看我<a target="_blank" rel="noopener" href="https://vra.blog.ustc.edu.cn/debian-wordpress/">这篇博客</a>)而且成功了(其实没什么技术含量….),估计这个过程也差不多,所以我就想试试Discuz!能否搞定.但我们学校有规定,不能用freeshell搭建网络论坛的,所以我就在我电脑上试着搞搞Discuz!玩玩.</p>
         
@@ -453,8 +430,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2014/12/14/debian-discuz/" data-id="ckt5a9s7i0017j1217cebd7jz" data-title="Debian 下搭建Discuz!论坛" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2014/12/14/debian-discuz/" data-id="ckt5whudp0017b6214fmx1vk1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
@@ -465,12 +441,11 @@
 </article>
 
 
-
   
-    <article id="post-our-record" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-our-record" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/12/13/our-record/" class="article-date">
-  <time class="dt-published" datetime="2014-12-13T14:51:48.000Z" itemprop="datePublished">2014-12-13</time>
+  <time datetime="2014-12-13T14:51:48.000Z" itemprop="datePublished">2014-12-13</time>
 </a>
     
   <div class="article-category">
@@ -485,13 +460,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/12/13/our-record/">记录我们的点点滴滴</a>
+      <a class="article-title" href="/2014/12/13/our-record/">记录我们的点点滴滴</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>还记得你初次敲代码时专注的模样</p>
         
@@ -502,8 +477,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2014/12/13/our-record/" data-id="ckt5a9s8g004oj1215tis6cm1" data-title="记录我们的点点滴滴" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2014/12/13/our-record/" data-id="ckt5whuer004pb621fgc95j9i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -512,12 +486,11 @@
 </article>
 
 
-
   
-    <article id="post-debian-wordpress" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-debian-wordpress" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/12/13/debian-wordpress/" class="article-date">
-  <time class="dt-published" datetime="2014-12-13T14:50:50.000Z" itemprop="datePublished">2014-12-13</time>
+  <time datetime="2014-12-13T14:50:50.000Z" itemprop="datePublished">2014-12-13</time>
 </a>
     
   <div class="article-category">
@@ -532,13 +505,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/12/13/debian-wordpress/">在Debian下搭建基于Apache-Php-MySQL的wordpress博客</a>
+      <a class="article-title" href="/2014/12/13/debian-wordpress/">在Debian下搭建基于Apache-Php-MySQL的wordpress博客</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>wordpress是一个流行的博客搭建框架,为不会html,css和js的人提供了搭建博客的便捷方式.我这里是在我的笔记本上搭建了一个wordpress博客,这里把详细的搭建过程写出来.</p>
         
@@ -549,8 +522,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2014/12/13/debian-wordpress/" data-id="ckt5a9s7l001bj12185gd8o10" data-title="在Debian下搭建基于Apache-Php-MySQL的wordpress博客" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2014/12/13/debian-wordpress/" data-id="ckt5whuds001bb6219fbq8440" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wordpress/" rel="tag">Wordpress</a></li></ul>
@@ -561,13 +533,12 @@
 </article>
 
 
-
   
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/9/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -651,13 +622,11 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      
       &copy; 2021 Yunfeng Wang<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
-
     </div>
     <nav id="mobile-nav">
   
@@ -665,22 +634,24 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
+    <a href="/about" class="mobile-nav-link">About</a>
+  
 </nav>
     
 
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
 <script src="/js/script.js"></script>
-
 
 
 

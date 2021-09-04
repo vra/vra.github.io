@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   
+
   
   <title>GPU并行计算和CUDA编程(1)-CPU体系架构概述 | Yunfeng&#39;s Simple Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="今天和实验室同学去听了周斌老师讲的《GPU并行计算和CUDA程序开发及优化》（课程主页：http:&#x2F;&#x2F;acsa.ustc.edu.cn&#x2F;HPC2015&#x2F;nvidia&#x2F;），觉得老师讲得非常清晰，举了很多恰当的例子，将复杂的计算机中的情景和术语准确地描述成了简单的生活中的场景，使学生很容易就理解了。而我在今天的课程中也学到了很多东西，我想趁热打铁记下来，以后看起来更方便点。  CPU是串行处理器，而G">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GPU并行计算和CUDA编程(1)-CPU体系架构概述">
@@ -23,24 +24,17 @@
 <meta property="article:tag" content="并行计算">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.png">
   
   
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
@@ -54,10 +48,6 @@
         <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
       </h1>
       
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Love, Life, Linux</a>
-        </h2>
-      
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
@@ -67,25 +57,26 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
+          <a class="main-nav-link" href="/about">About</a>
+        
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
       </div>
     </div>
   </div>
 </header>
-
       <div class="outer">
-        <section id="main"><article id="post-gpu-programming-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-gpu-programming-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/09/12/gpu-programming-1/" class="article-date">
-  <time class="dt-published" datetime="2015-09-12T13:09:10.000Z" itemprop="datePublished">2015-09-12</time>
+  <time datetime="2015-09-12T13:09:10.000Z" itemprop="datePublished">2015-09-12</time>
 </a>
     
   </div>
@@ -95,14 +86,14 @@
       <header class="article-header">
         
   
-    <h1 class="p-name article-title" itemprop="headline name">
+    <h1 class="article-title" itemprop="name">
       GPU并行计算和CUDA编程(1)-CPU体系架构概述
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>今天和实验室同学去听了周斌老师讲的《GPU并行计算和CUDA程序开发及优化》（课程主页：<a target="_blank" rel="noopener" href="http://acsa.ustc.edu.cn/HPC2015/nvidia/">http://acsa.ustc.edu.cn/HPC2015/nvidia/</a>），觉得老师讲得非常清晰，举了很多恰当的例子，将复杂的计算机中的情景和术语准确地描述成了简单的生活中的场景，使学生很容易就理解了。而我在今天的课程中也学到了很多东西，我想趁热打铁记下来，以后看起来更方便点。 </p>
 <p>CPU是串行处理器，而GPU是并行处理器。CPU适合处理通用型的问题，如指令执行和数值计算并重，相当于是一个”通才”；而GPU适合运算密集和高度并行的任务，相当于是一个”专才”，将数值并行运算速度发挥到极致。在讨论GPU之前，先来看看CPU的体系架构的一些内容。 </p>
@@ -142,8 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2015/09/12/gpu-programming-1/" data-id="ckt5a9s7x002sj12140dbdcqr" data-title="GPU并行计算和CUDA编程(1)-CPU体系架构概述" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2015/09/12/gpu-programming-1/" data-id="ckt5whue5002ob621cqfrej35" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GPU/" rel="tag">GPU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" rel="tag">并行计算</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li></ul>
@@ -155,7 +145,7 @@
 <nav id="article-nav">
   
     <a href="/2015/09/12/gpu-programming-2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           GPU并行计算和CUDA编程(2)-GPU体系架构概述
@@ -165,7 +155,7 @@
   
   
     <a href="/2015/07/04/grunt-configure/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">初探Grunt</div>
     </a>
   
@@ -173,7 +163,6 @@
 
   
 </article>
-
 
 </section>
         
@@ -256,13 +245,11 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      
       &copy; 2021 Yunfeng Wang<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
-
     </div>
     <nav id="mobile-nav">
   
@@ -270,22 +257,24 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
+    <a href="/about" class="mobile-nav-link">About</a>
+  
 </nav>
     
 
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
 <script src="/js/script.js"></script>
-
 
 
 

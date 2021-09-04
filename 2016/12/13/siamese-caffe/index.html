@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   
+
   
   <title>Caffe中的Siamese网络 | Yunfeng&#39;s Simple Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Siamese原意是”泰国的，泰国人”，而与之相关的一个比较常见的词是”Siamese twin”， 意思是是”连体双胞胎”，所以Siamemse Network是从这个意思转变而来，指的是结构非常相似的两路网络，分别训练，但共享各个层的参数，在最后有一个连接的部分。Siamese网络对于相似性比较的场景比较有效。此外Siamese因为共享参数，所以能减少训练过程中的参数个数。这里的slides讲">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Caffe中的Siamese网络">
@@ -23,24 +24,17 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://vra.github.io/imgs/prototxt.jpg">
   
-    <link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.png">
   
   
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
@@ -54,10 +48,6 @@
         <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
       </h1>
       
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Love, Life, Linux</a>
-        </h2>
-      
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
@@ -67,25 +57,26 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
+          <a class="main-nav-link" href="/about">About</a>
+        
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
       </div>
     </div>
   </div>
 </header>
-
       <div class="outer">
-        <section id="main"><article id="post-siamese-caffe" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-siamese-caffe" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/13/siamese-caffe/" class="article-date">
-  <time class="dt-published" datetime="2016-12-13T13:05:01.000Z" itemprop="datePublished">2016-12-13</time>
+  <time datetime="2016-12-13T13:05:01.000Z" itemprop="datePublished">2016-12-13</time>
 </a>
     
   </div>
@@ -95,14 +86,14 @@
       <header class="article-header">
         
   
-    <h1 class="p-name article-title" itemprop="headline name">
+    <h1 class="article-title" itemprop="name">
       Caffe中的Siamese网络
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>Siamese原意是”泰国的，泰国人”，而与之相关的一个比较常见的词是”Siamese twin”， 意思是是”连体双胞胎”，所以Siamemse Network是从这个意思转变而来，指的是结构非常相似的两路网络，分别训练，<strong>但共享各个层的参数</strong>，在最后有一个连接的部分。Siamese网络对于相似性比较的场景比较有效。此外Siamese因为共享参数，所以能减少训练过程中的参数个数。<a target="_blank" rel="noopener" href="http://vision.ia.ac.cn/zh/senimar/reports/Siamese-Network-Architecture-and-Applications-in-Computer-Vision.pdf">这里</a>的slides讲解了Siamese网络在深度学习中的应用。这里我参照Caffe中的<a target="_blank" rel="noopener" href="https://github.com/BVLC/caffe/tree/master/examples/siamese">Siamese文档</a>， 以LeNet为例，简单地总结下Caffe中Siamese网络的prototxt文件的写法。 </p>
 <span id="more"></span>
@@ -134,8 +125,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2016/12/13/siamese-caffe/" data-id="ckt5a9s8n0058j121dr5v9gfq" data-title="Caffe中的Siamese网络" class="article-share-link">分享</a>
-      
+      <a data-url="http://vra.github.io/2016/12/13/siamese-caffe/" data-id="ckt5whuf10059b6212wgp0ht6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Siamese-Network/" rel="tag">Siamese Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
@@ -147,7 +137,7 @@
 <nav id="article-nav">
   
     <a href="/2016/12/18/nvidia-gpu-names/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           关于英伟达显卡命名的姿势
@@ -157,7 +147,7 @@
   
   
     <a href="/2016/11/14/test-asciinema/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">在Hexo博客里面插入asciinema终端记录视频</div>
     </a>
   
@@ -165,7 +155,6 @@
 
   
 </article>
-
 
 </section>
         
@@ -248,13 +237,11 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      
       &copy; 2021 Yunfeng Wang<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
-
     </div>
     <nav id="mobile-nav">
   
@@ -262,22 +249,24 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
+    <a href="/about" class="mobile-nav-link">About</a>
+  
 </nav>
     
 
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
 <script src="/js/script.js"></script>
-
 
 
 
