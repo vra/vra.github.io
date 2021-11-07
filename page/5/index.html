@@ -68,6 +68,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-paper-what" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/14/paper-what/" class="article-date">
+  <time datetime="2018-04-14T14:14:00.000Z" itemprop="datePublished">2018-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/14/paper-what/">What Makes a Video a Video Analyzing Temporal Information in Video Understanding Models and Datasets 论文阅读</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>论文链接：<a target="_blank" rel="noopener" href="http://ai.stanford.edu/~dahuang/papers/cvpr18-fb.pdf">点击查看PDF</a><br>作者主页：<a target="_blank" rel="noopener" href="http://ai.stanford.edu/~dahuang/">De-An Huang</a></p>
+<p>论文主要目的：显式地用量化的方法来分析motion对于视频理解的作用有多大，在整个视频分析过程中起到了多大的效果。这也是我了解的第一篇用量化的方法来探讨motion信息的贡献的论文，文中逐类的分析motion带来的性能增益（图4）也是第一次见到。</p>
+<p>这篇论文的出发点是分析在某个网络结构（例如C3D）上训练好的模型在对测试视频进行分类的时候，是否真正地用到了运动信息（motion），或者说运动信息真正起到了作用。一个简单的验证实验是在在测试视频中选一帧，然后重复N次构成一个clip（如在C3D中，N=16）。作者实验发现这种情况性能下降了25%。但这25%的性能下降不光是motion丢失带来的，作者认为这里还引入了另外两个问题：（1）改变了视频帧的时间上分布（temporal distribution），因为训练时使用的是16帧的clip，而测试采用采样过的帧构成的clip，训练和测试数据的分布不一致。（2）可能将视频中最重要的帧，对视频分类最有用的帧给丢掉了。</p>
+<p>为了解决上面提到的两个问题，这篇论文提出了两个针对性的框架：首先是在低帧率（例如相比C3D中采用的16帧的clip，这里采用1帧的clip）的情况下，基于cycleGAN的类别无关（class-agnostic）的时域生成器（temporal generator, 英文不好，暂时这样翻译了，如果有更准确的翻译请告知）来生成帧，构成视频输入到训练好的网络中。为了使得训练收敛，作者采用了perceptual loss。第二个框架是运动不变（motion-invariant）的关键帧选择器，通过选择一个关键帧进行视频分类的任务。</p>
+<p>具体实验是采用C3D模型，在UCF101和Kinetics这两个数据集上进行。通过使用作者提出的两个框架，使得在UCF101上，单帧clip相比16帧的clip的性能下降从25%减小到6%，在Kinetics上性能下降从15%减小到5%。同时作者用实验表明，40%的UCF101测试视频（split1）和35%的Kinetics测试视频不需要motion信息就能达到平均的分类性能。此外，在使用了作者提出的两个框架后，采用4帧的clip就能达到原来16帧的clip下的性能。至于引入的额外的计算开销作者在论文中没有进行讨论。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/04/14/paper-what/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2018/04/14/paper-what/" data-id="ckvp700g3004wl965fvk45q8x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Action-Recogntion/" rel="tag">Action Recogntion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C3D/" rel="tag">C3D</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kinetics/" rel="tag">Kinetics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Motion/" rel="tag">Motion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UCF101/" rel="tag">UCF101</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-note-closer-look-3d" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/23/note-closer-look-3d/" class="article-date">
@@ -102,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/03/23/note-closer-look-3d/" data-id="ckvngepwa0046u26571dj1rzh" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/03/23/note-closer-look-3d/" data-id="ckvp700g2004rl965drld3zly" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D-CNN/" rel="tag">3D CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Action-Recogntion/" rel="tag">Action Recogntion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li></ul>
@@ -150,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/" data-id="ckvngepvv0036u2656llhdkhg" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/" data-id="ckvp700fl0039l9655nz4fgzv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li></ul>
@@ -197,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/27/linux-cmdline-edit-shortcuts/" data-id="ckvngepw2003fu2651q8p4or3" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/27/linux-cmdline-edit-shortcuts/" data-id="ckvp700fn003il965dcssbjru" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>
@@ -244,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/20/paper-attentional-pooling/" data-id="ckvngepwg004uu265cz8d04ll" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/20/paper-attentional-pooling/" data-id="ckvp700g50059l9658ho4c9dm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Action-Recognition/" rel="tag">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention/" rel="tag">Attention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
@@ -291,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/13/pyqt5-code-snippets/" data-id="ckvngepwi0055u265asu01gog" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/13/pyqt5-code-snippets/" data-id="ckvp700g50057l965hdbx7g8k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li></ul>
@@ -338,7 +389,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/13/ubuntu-chinese/" data-id="ckvngepx2006ou2657w1aesfd" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/13/ubuntu-chinese/" data-id="ckvp700gl006ol965gw071wyl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
@@ -385,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/05/summary-2017/" data-id="ckvngepyf00fou2655hwk80wy" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/05/summary-2017/" data-id="ckvp700ie00fvl96527ck55ob" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2017/" rel="tag">2017</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
@@ -438,7 +489,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/11/caffe-tensorflow-log/" data-id="ckvngepur000iu265g861hpei" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/11/caffe-tensorflow-log/" data-id="ckvp700eo000xl9650boa59b2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li></ul>
@@ -485,66 +536,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/04/opencv-custom/" data-id="ckvngepwf004ru265460vby3u" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/04/opencv-custom/" data-id="ckvp700fx004jl9652fkp5kni" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-ubuntu-core-dump-debug" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/03/ubuntu-core-dump-debug/" class="article-date">
-  <time datetime="2017-12-03T15:48:55.000Z" itemprop="datePublished">2017-12-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/03/ubuntu-core-dump-debug/">在ubuntu中进行core dump调试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Linux环境下执行程序的时候，有的时候会出现段错误（‘segment fault’），同时显示core dumped,就像下面这样：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[1]    15428 segmentation fault (core dumped)  ./a.out</span><br></pre></td></tr></table></figure>
-<p>下面是我网上找到的段错误的定义和说明：  </p>
-<pre><code>A segmentation fault (often shortened to segfault) is a particular error condition that can occur during the operation of computer software. In short, a segmentation fault occurs when a program attempts to access a memory location that it is not allowed to access, or attempts to access a memory location in a way that is not allowed (e.g., attempts to write to a read-only location, or to overwrite part of the operating system). Systems based on processors like the Motorola 68000 tend to refer to these events as Address or Bus errors.
-
-Segmentation is one approach to memory management and protection in the operating system. It has been superseded by paging for most purposes, but much of the terminology of segmentation is still used, &quot;segmentation fault&quot; being an example. Some operating systems still have segmentation at some logical level although paging is used as the main memory management policy.
-
-On Unix-like operating systems, a process that accesses invalid memory receives the SIGSEGV signal. On Microsoft Windows, a process that accesses invalid memory receives the STATUS_ACCESS_VIOLATION exception.
-</code></pre>
-<p>简单理解就是访问了不该访问的内存就会产生段错误。<br>而core dump是一种将出错时的调用堆栈等信息写入到一个文件中，方便后面调试。Ubuntu下需要进行一些设置才能正确地调试core dump，下面是详细的说明。  </p>
-        
-          <p class="article-more-link">
-            <a href="/2017/12/03/ubuntu-core-dump-debug/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/03/ubuntu-core-dump-debug/" data-id="ckvngepx2006tu2655aw0dayk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/" rel="tag">gdb</a></li></ul>
 
     </footer>
   </div>
@@ -592,7 +587,7 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 11.11px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 11.11px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17.78px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 12.22px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 12.22px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 16.67px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 11.11px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16.67px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 14.44px;">GPU</a> <a href="/tags/Git/" style="font-size: 14.44px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 11.11px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/OpenCV/" style="font-size: 12.22px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 10px;">OpenGL</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 11.11px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 18.89px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 12.22px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 11.11px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 12.22px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Trick/" style="font-size: 11.11px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 16.67px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 14.44px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 11.11px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 11.11px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 12.22px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/macOS/" style="font-size: 10px;">macOS</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/neovim/" style="font-size: 10px;">neovim</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 15.56px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14.44px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 13.33px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18.89px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 11.11px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 12.22px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" style="font-size: 11.11px;">错误汇总</a>
+      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 11px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 11px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 12px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 12px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 16px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 11px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 14px;">GPU</a> <a href="/tags/Git/" style="font-size: 14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 11px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/OpenCV/" style="font-size: 12px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 10px;">OpenGL</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 11px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 12px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 11px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 12px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Trick/" style="font-size: 11px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 16px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 14px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 11px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 11px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 12px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/macOS/" style="font-size: 10px;">macOS</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/neovim/" style="font-size: 10px;">neovim</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 15px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 13px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 11px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 12px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" style="font-size: 11px;">错误汇总</a>
     </div>
   </div>
 
@@ -614,6 +609,10 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
       <ul>
         
           <li>
+            <a href="/2021/11/07/detect-unused-function-and-variable-in-python/">检测Python代码中没有用到的函数和变量</a>
+          </li>
+        
+          <li>
             <a href="/2021/11/06/neovim-jedi-error/">neovim/vim 中遇到jedi-vim 插件报错解决</a>
           </li>
         
@@ -627,10 +626,6 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
         
           <li>
             <a href="/2021/09/04/back-to-landscape/">back-to-landscape——博客迁移记录2021</a>
-          </li>
-        
-          <li>
-            <a href="/2021/09/04/cpp-time-count/">C++ 耗时统计代码片段</a>
           </li>
         
       </ul>
