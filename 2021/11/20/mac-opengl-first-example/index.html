@@ -5,16 +5,21 @@
   
 
   
-  <title>归档: 2015/12 | Yunfeng&#39;s Simple Blog</title>
+  <title>Mac上如何运行OpenGL:第一个例子 | Yunfeng&#39;s Simple Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Love, Life, Linux">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yunfeng&#39;s Simple Blog">
-<meta property="og:url" content="http://vra.github.io/archives/2015/12/index.html">
+  <meta name="description" content="概述搜索发现，OpengGL在mac下其实运行还是比较容易的，这里做一个简单的总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac上如何运行OpenGL:第一个例子">
+<meta property="og:url" content="http://vra.github.io/2021/11/20/mac-opengl-first-example/index.html">
 <meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
-<meta property="og:description" content="Love, Life, Linux">
+<meta property="og:description" content="概述搜索发现，OpengGL在mac下其实运行还是比较容易的，这里做一个简单的总结。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-20T00:33:37.000Z">
+<meta property="article:modified_time" content="2021-11-20T00:46:09.432Z">
 <meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="macOS">
+<meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
@@ -66,40 +71,80 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/12/machine-learning-summary/" class="archive-article-date">
-  <time datetime="2015-12-12T05:43:42.000Z" itemprop="datePublished">12月 12</time>
+        <section id="main"><article id="post-mac-opengl-first-example" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/11/20/mac-opengl-first-example/" class="article-date">
+  <time datetime="2021-11-20T00:33:37.000Z" itemprop="datePublished">2021-11-20</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/12/machine-learning-summary/">机器学习笔记-总结</a>
+    <h1 class="article-title" itemprop="name">
+      Mac上如何运行OpenGL:第一个例子
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>搜索发现，OpengGL在mac下其实运行还是比较容易的，这里做一个简单的总结。</p>
+<span id="more"></span>
 
+<h2 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h2><p>安装依赖项:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install glfw3 glew cmake</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写OpenGL代码"><a href="#编写OpenGL代码" class="headerlink" title="编写OpenGL代码"></a>编写OpenGL代码</h2><p>编写OpenGL代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"> &lt;iostream&gt;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GL/glew.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    GLFWwindow* window;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Initialize the library */</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">glfwInit</span>())</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create a windowed mode window and its OpenGL context */</span></span><br><span class="line">    window = <span class="built_in">glfwCreateWindow</span>(<span class="number">640</span>, <span class="number">480</span>, <span class="string">&quot;Hello World&quot;</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (!window)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">glfwTerminate</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Make the window&#x27;s context current */</span></span><br><span class="line">    <span class="built_in">glfwMakeContextCurrent</span>(window);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Loop until the user closes the window */</span></span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">glfwWindowShouldClose</span>(window))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/* Render here */</span></span><br><span class="line">        <span class="comment">/* Swap front and back buffers */</span></span><br><span class="line">        <span class="built_in">glfwSwapBuffers</span>(window);</span><br><span class="line">        <span class="comment">/* Poll for and process events */</span></span><br><span class="line">        <span class="built_in">glfwPollEvents</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">glfwTerminate</span>();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h2 id="编写CMake-配置文件"><a href="#编写CMake-配置文件" class="headerlink" title="编写CMake 配置文件"></a>编写CMake 配置文件</h2><p>为了简单可复现，这里我们直接编写<code>CMakeLists.txt</code>, 内容如下：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>)</span><br><span class="line"><span class="keyword">project</span>(opengl_first_example)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(/usr/local/<span class="keyword">include</span>)</span><br><span class="line"><span class="keyword">link_directories</span>(/usr/local/Cellar/glew/<span class="number">2.2</span>.<span class="number">0</span>_1/lib)</span><br><span class="line"><span class="keyword">link_directories</span>(/usr/local/Cellar/glfw/<span class="number">3.3</span>.<span class="number">4</span>/lib)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> GLEW GLFW)</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要修改其中第5行和第6行路径中的glew和glfw为你自己电脑安装的版本</strong></p>
+<h2 id="编译执行代码"><a href="#编译执行代码" class="headerlink" title="编译执行代码"></a>编译执行代码</h2><p>编译代码，使用CMake的常规流程:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake .. </span><br><span class="line">make -j8 </span><br></pre></td></tr></table></figure>
+<p>编译完成后运行生成的可执行文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./opengl_first_example</span><br></pre></td></tr></table></figure>
+<p>可以看到一个图窗弹出来，说明OpenGL调用成功了.</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/153550789">https://zhuanlan.zhihu.com/p/153550789</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2021/11/20/mac-opengl-first-example/" data-id="ckw73bxod003o9hs6doaab0tg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/macOS/" rel="tag">macOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/07/detect-unused-function-and-variable-in-python/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">检测Python代码中没有用到的函数和变量</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+  <section id="comments" class="vcomment">
+  </section>
 
 </section>
         
