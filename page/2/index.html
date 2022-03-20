@@ -68,6 +68,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cpp-time-count" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/04/cpp-time-count/" class="article-date">
+  <time datetime="2021-09-04T03:44:38.000Z" itemprop="datePublished">2021-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/04/cpp-time-count/">C++ 耗时统计代码片段</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>C++ 耗时统计代码片段</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> std::chrono::milliseconds ms;</span><br><span class="line"><span class="keyword">using</span> clk = std::chrono::system_clock;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_my_work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// work code here</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> begin_time = clk::<span class="built_in">now</span>();</span><br><span class="line">    <span class="built_in">do_my_work</span>();</span><br><span class="line">	<span class="keyword">auto</span> end_time = clk::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> duration_nn = std::chrono::duration_cast&lt;ms&gt;(end_time - begin_time);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;timecost: &quot;</span> &lt;&lt; (<span class="keyword">double</span>)duration_nn.<span class="built_in">count</span>() &lt;&lt; <span class="string">&quot; ms&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2021/09/04/cpp-time-count/" data-id="cl0zcd8tx0012fcs65qx3egmw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-vim-learn" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/08/28/vim-learn/" class="article-date">
@@ -99,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/28/vim-learn/" data-id="cl0z7vzpr007evys6cpvr3s97" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/28/vim-learn/" data-id="cl0zcd8w5007hfcs62e5m5846" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>
@@ -150,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/21/pytorch-cross-entropy/" data-id="cl0z7vzp9005hvys6ao7v0cxl" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/21/pytorch-cross-entropy/" data-id="cl0zcd8vq005ufcs60wi1a2zq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -206,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/21/blog-list/" data-id="cl0z7vzmu000avys68jgdbwhx" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/21/blog-list/" data-id="cl0zcd8tc000afcs6hdos22v6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
@@ -253,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/" data-id="cl0z7vzpo0070vys6gjel6utw" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/" data-id="cl0zcd8w20072fcs619ky4sio" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Libtorch/" rel="tag">Libtorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -301,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/02/02/doctest-intro/" data-id="cl0z7vznr0024vys69r3w3pe8" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/02/02/doctest-intro/" data-id="cl0zcd8u7002afcs66rducn16" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unit-Test/" rel="tag">Unit Test</a></li></ul>
@@ -348,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/23/cpp-summary-stringview/" data-id="cl0z7vznf000yvys666j97mnm" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/23/cpp-summary-stringview/" data-id="cl0zcd8tu000yfcs60r3ubo4x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-17/" rel="tag">C++17</a></li></ul>
@@ -395,7 +438,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/03/venv-intro/" data-id="cl0z7vzpr007dvys6azpr2i2a" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/03/venv-intro/" data-id="cl0zcd8w5007jfcs67y200jao" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/venv/" rel="tag">venv</a></li></ul>
@@ -445,7 +488,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/02/summary-2020/" data-id="cl0z7vzpm006mvys6exd45ge6" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/02/summary-2020/" data-id="cl0zcd8w1006xfcs6ag1c3442" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
@@ -492,84 +535,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/12/26/numcpp-intro/" data-id="cl0z7vzor004jvys65ttddgmw" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/12/26/numcpp-intro/" data-id="cl0zcd8v3004lfcs6hapud1qy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NumCpp/" rel="tag">NumCpp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NumPy/" rel="tag">NumPy</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-detectron2-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/14/detectron2-usage/" class="article-date">
-  <time datetime="2020-03-14T15:21:10.000Z" itemprop="datePublished">2020-03-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/14/detectron2-usage/">detectron2 使用总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol>
-<li>detectron2 大部分代码都需要GPU</li>
-<li>detectron2 主要是用于检测和分割的代码框架，像分类这种任务的代码暂时没有</li>
-<li>官方示例有一些是基于Colab的，需要科学上网才能访问<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install -U torch==1.4+cu100 torchvision==0.5+cu100 -f https://download.pytorch.org/whl/torch_stable.html</span><br><span class="line">sudo pip install cython pyyaml==5.1 --ingnore-installed</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 cocoapi</span></span><br><span class="line">sudo pip install -U <span class="string">&#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#x27;</span></span><br></pre></td></tr></table></figure>
-其中cocoapi 需要从GitHub下载代码，如果安装太慢，可以先clone下代码，再进<code>PythonAPI</code>子目录，运行<code>setup.py</code>安装:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/cocodataset/cocoapi.git</span><br><span class="line"><span class="built_in">cd</span> cocoapi/PythonAPI</span><br><span class="line">sudo python3 setup.py install</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="安装-detectron2"><a href="#安装-detectron2" class="headerlink" title="安装 detectron2"></a>安装 detectron2</h3><p>这里直接安装编译好的二进制文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu100/index.html</span><br></pre></td></tr></table></figure>
-<p>如果文件下载太慢或者超时，可以手动在浏览器里面下载好文件，再用下面的命令安装（假设下载的<code>whl</code>文件是<code>xxx.whl</code>):</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip install xxx.whl</span><br></pre></td></tr></table></figure>
-<p>安装完后，打开 Python 命令行，执行下面的命令，如果不报错，说明安装成功：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> detectron2</span><br></pre></td></tr></table></figure>
-
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>为了测试，需要下载 detectron2 的源代码，基于 <code>demo/demo.py</code> 进行简单的测试：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/facebookresearch/detectron2</span><br><span class="line">python3  detectron2/demo/demo.py --config-file detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml --input ~/test.jpg --opts MODEL.WEIGHTS  detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl</span><br></pre></td></tr></table></figure>
-<p><strong>注意上述代码需要在 detectron2 的 git 仓库外面执行，否则会报错。</strong><br>测试时输入支持单张图片、多张图片、单个图片文件夹、网络摄像头以及视频文件，每种情况参数设置如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单张图片</span></span><br><span class="line">--input test.jpg</span><br><span class="line"><span class="comment"># 多张图片</span></span><br><span class="line">--input test1.jpg test2.jpg test3.jpg</span><br><span class="line"><span class="comment"># 单个图片文件夹</span></span><br><span class="line">--input imgs/*.jpg</span><br><span class="line"><span class="comment"># 网络摄像头</span></span><br><span class="line">--webcame</span><br><span class="line"><span class="comment"># 视频文件</span></span><br><span class="line">--video-input test.mp4</span><br></pre></td></tr></table></figure>
-
-<p>``–opts MODEL.WEIGHTS<code>表示测试用的模型参数，可以是一个本地目录，也可以是一个</code>detectron2://`开头的一个模型路径，这时会先下载模型到本地再测试:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用本地的模型参数</span></span><br><span class="line">--opts MODEL.WEIGHTS ./model_final_f10217.pkl</span><br><span class="line"><span class="comment"># 使用网络模型地址</span></span><br><span class="line">--opts MODEL.WEIGHTS ./model_final_f10217.pkl</span><br></pre></td></tr></table></figure>
-<p>模型的名字可以在 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/detectron2/blob/master/MODEL_ZOO.md">Model Zoo</a> 查看。</p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>训练代码参考 <code>tools/train_net.py</code>，目前Detection看。</p>
-<h3 id="一些代码分析"><a href="#一些代码分析" class="headerlink" title="一些代码分析"></a>一些代码分析</h3><ol>
-<li>DefaultTrainer 是针对目前常用的Detection设置而写的一个类，为了不用修改太多就直接复现最佳结果。但另一方面，由于有比较多的假设情况，因此通用性有所降低</li>
-<li>SimpleTrainer 是 DefaultTrainer 的父类，限制条件更少，对于做新的研究任务，作者推荐继承 SimpleTrainer 来修改</li>
-<li>代码支持多机多卡多进程，基于 Pytorch 的多级多卡代码写了一些wrapper</li>
-<li>代码注释很完善，而且其中很多是给用户怎么基于现在代码进行修改来跑新的网络、做新的任务，有些地方说的很细致，这一点很棒</li>
-</ol>
-<h3 id="一些资源"><a href="#一些资源" class="headerlink" title="一些资源"></a>一些资源</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://detectron2.readthedocs.org/">文档</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/detectron2">Git 仓库</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/14/detectron2-usage/" data-id="cl0z7vznp001qvys6gnqi6y87" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/" rel="tag">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Detection/" rel="tag">Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Detectron2/" rel="tag">Detectron2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/" rel="tag">Segmentation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
 
     </footer>
   </div>
@@ -639,6 +608,10 @@
       <ul>
         
           <li>
+            <a href="/2022/03/20/cpp-read-binary-file-from-python/">从Python传递参数到C++</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/20/pytorch-cross-to-onnx/">Pytorch模型转ONNX时cross操作不支持的解决方法</a>
           </li>
         
@@ -652,10 +625,6 @@
         
           <li>
             <a href="/2021/11/20/mac-opengl-first-example/">Mac上如何运行OpenGL:第一个例子</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/07/detect-unused-function-and-variable-in-python/">检测Python代码中没有用到的函数和变量</a>
           </li>
         
       </ul>
