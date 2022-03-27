@@ -15,7 +15,7 @@
 <meta property="og:description" content="0. 概述git log 是查看git提交记录的一个命令，它有非常多的控制参数和选项，合理使用的话，可以达到任何的精准控制目的。这里列一些日常使用可能会用到的用法，全部的用法，请在命令行git help log查看。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-26T12:59:55.000Z">
-<meta property="article:modified_time" content="2022-03-27T10:42:52.457Z">
+<meta property="article:modified_time" content="2022-03-27T13:58:54.807Z">
 <meta property="article:author" content="Yunfeng Wang">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Git">
@@ -113,7 +113,37 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> -Sxchunked_array -p -2</span><br></pre></td></tr></table></figure>
 <h4 id="1-3-3-过滤提交信息中的关键字"><a href="#1-3-3-过滤提交信息中的关键字" class="headerlink" title="1.3.3. 过滤提交信息中的关键字"></a>1.3.3. 过滤提交信息中的关键字</h4><p>此外还可以利用<code>--grep</code>选项来对commit内容进行过滤，比如我们想搜索所有包含<code>fix</code>的提交：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> --grep fix</span><br></pre></td></tr></table></figure>
-<h4 id="1-3-4-过滤日期"><a href="#1-3-4-过滤日期" class="headerlink" title="1.3.4. 过滤日期"></a>1.3.4. 过滤日期</h4><p>另一个很有用的选项是根据日期来过滤提交。日期过滤有好多形式，比如今年以来的提交，最近一周的提交，git提供了详细的控制命令，具体如下表:<br>|关键词|说明|例子|<br>|—|—|—|<br>|after=<xxx>|从xxx到现在的所有提交|after=”2020-01-01”|<br>|since=<xxx>|从xxx到现在的所有提交，与after同义|since=”2020-01-01”|<br>|before=<xxx>|xxx之前的所有提交|before=”2020-01-01”|<br>|until=<xxx>|xxx之前的所有提交，与before同义|until=”2020-01-01”|</p>
+<h4 id="1-3-4-过滤日期"><a href="#1-3-4-过滤日期" class="headerlink" title="1.3.4. 过滤日期"></a>1.3.4. 过滤日期</h4><p>另一个很有用的选项是根据日期来过滤提交。日期过滤有好多形式，比如今年以来的提交，最近一周的提交，git提供了详细的控制命令，具体如下表:</p>
+<table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>after=<xxx></td>
+<td>从xxx到现在的所有提交</td>
+<td>after=”2020-01-01”</td>
+</tr>
+<tr>
+<td>since=<xxx></td>
+<td>从xxx到现在的所有提交，与after同义</td>
+<td>since=”2020-01-01”</td>
+</tr>
+<tr>
+<td>before=<xxx></td>
+<td>xxx之前的所有提交</td>
+<td>before=”2020-01-01”</td>
+</tr>
+<tr>
+<td>until=<xxx></td>
+<td>xxx之前的所有提交，与before同义</td>
+<td>until=”2020-01-01”</td>
+</tr>
+</tbody></table>
+<p>日期格式如下：</p>
 <table>
 <thead>
 <tr>
@@ -224,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/03/26/git-log/" data-id="cl195kwcp002tz8s699pb6485" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/03/26/git-log/" data-id="cl19clnos002j4hs61wrrhr1r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
