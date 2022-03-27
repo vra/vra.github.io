@@ -68,6 +68,152 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-mac-opengl-load-error" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/11/04/mac-opengl-load-error/" class="article-date">
+  <time datetime="2021-11-04T12:03:02.000Z" itemprop="datePublished">2021-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/04/mac-opengl-load-error/">Mac 下 Unable to load OpenGL library 的解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在Mac上使用Pyrender时，出现了OpenGL无法加载的错误，具体复现情况如下:<br>打开Python的REPL, 输入下面的命令(前提是安装pyrender):</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pyrender</span><br></pre></td></tr></table></figure>
+<p>报下面的错：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">raise ImportError(<span class="string">&quot;Unable to load OpenGL library&quot;</span>, *err.args)</span><br><span class="line">ImportError: (<span class="string">&#x27;Unable to load OpenGL library&#x27;</span>, <span class="string">&quot;dlopen(OpenGL, 0x000A): tried: &#x27;OpenGL&#x27; (no such file), &#x27;/usr/local/lib/OpenGL&#x27; (no such file), &#x27;/usr/lib/OpenGL&#x27; (no such file), &#x27;/usr/local/lib/OpenGL&#x27; (no such file), &#x27;/usr/lib/OpenGL&#x27; (no such file)&quot;</span>, <span class="string">&#x27;OpenGL&#x27;</span>, None)</span><br></pre></td></tr></table></figure>
+<p>这里记录一下解决的办法。</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/11/04/mac-opengl-load-error/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2021/11/04/mac-opengl-load-error/" data-id="cl195kwd7003uz8s6aal7aksy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/macOS/" rel="tag">macOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" rel="tag">错误汇总</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-git-copy-from-another-branch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/25/git-copy-from-another-branch/" class="article-date">
+  <time datetime="2021-09-25T02:46:43.000Z" itemprop="datePublished">2021-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/25/git-copy-from-another-branch/">git 从别的分支复制文件或目录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有时候我们需要从别的分支复制文件或者目录，这里总结一些简单的命令供查看。</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/09/25/git-copy-from-another-branch/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2021/09/25/git-copy-from-another-branch/" data-id="cl195kwcn002mz8s62kxx2nga" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-back-to-landscape" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/04/back-to-landscape/" class="article-date">
+  <time datetime="2021-09-04T15:46:21.000Z" itemprop="datePublished">2021-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/04/back-to-landscape/">back-to-landscape——博客迁移记录2021</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>2019年的时候，写了一篇<a href="https://vra.github.io/2019/02/27/mv-to-next/">博客</a>来记录博客历史的迁移记录，这两年又经过工作变化、硬盘损坏，博客也是几经变迁。</p>
+<p>尝试了基于Go的hugo框架，总体美观度和Hexo还是没法比，因此还是切换回了Hexo，换用了默认的landscape主题，重心放到有效的内容的记录上。评论系统还是采用valine，而在landscape下，设置valine还比Next复杂一些，我从<a target="_blank" rel="noopener" href="http://hypo1986.com/blog/2019/06/10/hexo-landscape-add-valine/">这里</a> 看到除了配置landscape项目，还需要在ejs文件里面设置，这里记录下。</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/09/04/back-to-landscape/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2021/09/04/back-to-landscape/" data-id="cl195kwbr0008z8s612kveijn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" rel="tag">迁移记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-cpp-time-count" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/09/04/cpp-time-count/" class="article-date">
@@ -95,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/09/04/cpp-time-count/" data-id="cl10bq3bk0017n421eu5fdf2p" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/09/04/cpp-time-count/" data-id="cl195kwcb0012z8s686ilde4z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -142,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/28/vim-learn/" data-id="cl10bq3dp007fn4212e4rgf35" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/28/vim-learn/" data-id="cl195kweh007qz8s635rkeouf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>
@@ -193,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/21/pytorch-cross-entropy/" data-id="cl10bq3d8005mn4218w3j29b9" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/21/pytorch-cross-entropy/" data-id="cl195kwdt005oz8s693eo7h8t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -249,7 +395,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/21/blog-list/" data-id="cl10bq3aw0008n4217caw007s" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/21/blog-list/" data-id="cl195kwbs000az8s62gxrb0sm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
@@ -296,7 +442,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/" data-id="cl10bq3dm0076n4214izzf8mq" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/" data-id="cl195kwe8007fz8s6249c1dk9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Libtorch/" rel="tag">Libtorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -344,7 +490,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/02/02/doctest-intro/" data-id="cl10bq3bt0024n4212dua8qhj" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/02/02/doctest-intro/" data-id="cl195kwci001yz8s6a727f4z4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unit-Test/" rel="tag">Unit Test</a></li></ul>
@@ -391,154 +537,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/23/cpp-summary-stringview/" data-id="cl10bq3bi0010n4218bbgbayg" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/23/cpp-summary-stringview/" data-id="cl195kwca0010z8s6ccjsbq45" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-17/" rel="tag">C++17</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-venv-intro" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/03/venv-intro/" class="article-date">
-  <time datetime="2021-01-03T01:56:04.000Z" itemprop="datePublished">2021-01-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/03/venv-intro/">python虚拟环境管理工具venv教程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h3><p>Python有各种各样的系统包和第三方开发的包，让我们的开发变得异常容易。不过也引入了一个问题，不同代码需要的包版本可能是不一样的，所以常常回出现这种情况，为了代码B修改了依赖包的版本，代码B能work了，之前使用的代码A就没法正常工作了。因此常常需要对不同的代码设置不同的Python虚拟环境。<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/tutorial/venv.html">venv</a>是Python自带的虚拟环境管理工具，使用很方便，这里简单记录一下使用方法。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/01/03/venv-intro/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/03/venv-intro/" data-id="cl10bq3do007cn421agzdgs0o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/venv/" rel="tag">venv</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-summary-2020" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/02/summary-2020/" class="article-date">
-  <time datetime="2021-01-02T01:06:13.000Z" itemprop="datePublished">2021-01-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/02/summary-2020/">2020年终总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="2020流水记录"><a href="#2020流水记录" class="headerlink" title="2020流水记录"></a>2020流水记录</h2><p>新的一年又开始了，记录一下2020年发生的一些事情，作为对这不平凡的一年的简单的回顾。</p>
-<p>1月14日，农历腊月二十，我和彤彤在我家结婚了，作为主人翁参与其中，是一种很神奇却很美好的感觉，结婚的大小事情都是爸妈和村里的亲戚邻居一起来做的，很感谢爸妈亲戚邻居们的付出，让寒冬里面的腊月二十热闹而温暖。</p>
-<p>关于结婚几天发生的事情，我写了一些流水账记录，不过后面没有完全写完，等有空了再回忆回忆，完全写完再发出来吧，也算是给自己一个交代。</p>
-<p>总之非常感谢所有人的帮助和支持。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/01/02/summary-2020/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/02/summary-2020/" data-id="cl10bq3dk006qn421f881ftfv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-numcpp-intro" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/12/26/numcpp-intro/" class="article-date">
-  <time datetime="2020-12-26T03:26:36.000Z" itemprop="datePublished">2020-12-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/26/numcpp-intro/">NumPy的C++替代NumCpp使用教程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>NumPy提供了很多开箱即用的函数，用处非常大，所以写C++的时候，让人无比怀念，要是有一个替代版本，就太好了。最近搜索发现， <a target="_blank" rel="noopener" href="https://github.com/dpilger26/NumCpp">NumCpp</a> 这是我想要的，而且因为是 <code>Header-only</code>的库，因此使用时不需要编译，直接添加到头文件包含目录即可，使用很方便。不过NumCpp使用了boost库，需要进行一些下载和配置，这里记录一下。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/12/26/numcpp-intro/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/12/26/numcpp-intro/" data-id="cl10bq3cn004kn421dz26gj2t" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NumCpp/" rel="tag">NumCpp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NumPy/" rel="tag">NumPy</a></li></ul>
 
     </footer>
   </div>
@@ -586,7 +588,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 10.91px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 10.91px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17.27px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 11.82px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 11.82px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 15.45px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 10.91px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16.36px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 13.64px;">GPU</a> <a href="/tags/Git/" style="font-size: 13.64px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 10.91px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/ONNX/" style="font-size: 10px;">ONNX</a> <a href="/tags/OpenCV/" style="font-size: 11.82px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 11.82px;">OpenGL</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 10.91px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19.09px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 12.73px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 10.91px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 11.82px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Torchscript/" style="font-size: 10px;">Torchscript</a> <a href="/tags/Trick/" style="font-size: 10.91px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 15.45px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 13.64px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 10.91px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 10.91px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 11.82px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/macOS/" style="font-size: 10.91px;">macOS</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/neovim/" style="font-size: 10px;">neovim</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 12.73px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18.18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10.91px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 11.82px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" style="font-size: 10.91px;">错误汇总</a>
+      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 10.91px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 10.91px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17.27px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 11.82px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 11.82px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 15.45px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 10.91px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16.36px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 13.64px;">GPU</a> <a href="/tags/Git/" style="font-size: 15.45px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 10.91px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/ONNX/" style="font-size: 10px;">ONNX</a> <a href="/tags/OpenCV/" style="font-size: 11.82px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 11.82px;">OpenGL</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 10.91px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19.09px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 12.73px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 10.91px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 11.82px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Torchscript/" style="font-size: 10px;">Torchscript</a> <a href="/tags/Trick/" style="font-size: 10.91px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 15.45px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 13.64px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 10.91px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 10.91px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 11.82px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/macOS/" style="font-size: 10.91px;">macOS</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/neovim/" style="font-size: 10px;">neovim</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 12.73px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18.18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10.91px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 11.82px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" style="font-size: 10.91px;">错误汇总</a>
     </div>
   </div>
 
@@ -608,23 +610,23 @@
       <ul>
         
           <li>
+            <a href="/2022/03/26/git-change-log-date-format/">git log 修改提交日期显示格式</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/git-show-first-added-time/">Git显示文件首次被跟踪的日期</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/git-log/">git log 常见参数总结</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/20/cpp-read-binary-file-from-python/">从Python传递参数到C++</a>
           </li>
         
           <li>
             <a href="/2022/03/20/pytorch-cross-to-onnx/">Pytorch模型转ONNX时cross操作不支持的解决方法</a>
-          </li>
-        
-          <li>
-            <a href="/2021/12/31/summary-2021/">2021年终总结</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/21/mac-opengl-red/">Mac OpenGL入门：显示颜色</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/20/mac-opengl-first-example/">Mac上如何运行OpenGL:第一个例子</a>
           </li>
         
       </ul>

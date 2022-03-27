@@ -68,6 +68,148 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-keras-callbacks-remote-monitor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/18/keras-callbacks-remote-monitor/" class="article-date">
+  <time datetime="2018-03-18T10:35:41.000Z" itemprop="datePublished">2018-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/18/keras-callbacks-remote-monitor/">Keras Callback之RemoteMonitor</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Keras提供了一系列的回调函数，用来在训练网络的过程中，查看网络的内部信息，或者控制网络训练的过程。<code>BaseLogger</code>、<code>ProgbarLogger</code>用来在命令行输出Log信息（默认会调用）， <code>EarlyStopping</code>、<code>ReduceLROnPlateu</code>分别用来提前终止训练和自动调整学习率，改变网络训练过程；而今天要介绍的<code>RemoteMonitor</code>则用来<strong>实时</strong>输出网络训练过程中的结果变化情况，包括训练集准确率(<code>accu</code>)、训练集损失值(<code>loss</code>)、验证集准确率(<code>val_acc</code>)、验证集损失值(<code>val_loss</code>)，用户也可以自己修改需要显示的数据。一图胜千言，看看下面的结果图吧：<br><img src="/imgs/keras_viz.png"></p>
+<p>这个图是在浏览器中打开得到，Keras使用了Flask搭建了一个简单的服务器，然后采用D3.js来可视化数据。下面详细介绍可视化的过程吧</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/03/18/keras-callbacks-remote-monitor/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/" data-id="cl195kwd0003jz8s6gpxy26y5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-linux-cmdline-edit-shortcuts" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/27/linux-cmdline-edit-shortcuts/" class="article-date">
+  <time datetime="2018-01-27T08:55:35.000Z" itemprop="datePublished">2018-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/27/linux-cmdline-edit-shortcuts/">Linux 命令行文本操作快捷键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>可能有些人不知道，Linux命令行也有一些方便文本操作的快捷键，如跳到行首的快捷键是<code>Ctrl-a</code>,，跳到行尾的快捷键是<code>Ctrl-e</code>,删除光标所在处的字符的快捷键是<code>Ctrl-d</code>。 虽然这些快捷键很多时候都可以被小键盘的左右移动键、Home和End键替代，但是对于比较长的命令的修改，快捷键的操作还是比较快的。因为我平时用Vim比较多，而Linux命令行绑定的是Emacs的快捷键方式，虽然可以通过在命令行执行<code>set -o vi</code>修改为Vim的快捷键方式，但是这样会影响常用的像<code>Ctrl-p</code>，<code>Ctrl-n</code>等操作，因此我还是打算将这些难记的<strong>文本操作快捷键</strong>总结下来，让自己多练习，以后能更熟练地使用。注意这里我只列了文本操作的快捷键，像别的历史命令查询<code>Ctrl-r</code>和清屏操作<code>Ctrl-l</code>等快捷操作，大家可以参考我写的<a href="https://vra.github.io/2017/10/29/linux-skills/">这篇博客</a>。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/01/27/linux-cmdline-edit-shortcuts/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2018/01/27/linux-cmdline-edit-shortcuts/" data-id="cl195kwd0003lz8s64fxcb0js" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-paper-attentional-pooling" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/20/paper-attentional-pooling/" class="article-date">
+  <time datetime="2018-01-20T14:25:58.000Z" itemprop="datePublished">2018-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/20/paper-attentional-pooling/">Attentional Pooling for Action Recognition 论文阅读笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是2017年NIPS上的一篇做动作识别的论文，作者提出了second-order pooling的低秩近似attentional pooling，用其来代替CNN网络结构最后pooling层中常用的mean pooling或者max pooling, 在MPII, HICO和HMDB51三个动作识别数据集上进行了实验，都取得了很好的结果。此外作者还尝试了加入pose关键点的信息，再次提高了性能。下面我详细说明我对这篇论文的理解。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/01/20/paper-attentional-pooling/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2018/01/20/paper-attentional-pooling/" data-id="cl195kwdq005dz8s6b095anhd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Action-Recognition/" rel="tag">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention/" rel="tag">Attention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-pyqt5-code-snippets" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/13/pyqt5-code-snippets/" class="article-date">
@@ -99,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/13/pyqt5-code-snippets/" data-id="cl10bq3d4005gn421cvbvccwt" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/13/pyqt5-code-snippets/" data-id="cl195kwdu005uz8s6dadv7e5x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li></ul>
@@ -146,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/13/ubuntu-chinese/" data-id="cl10bq3dl0072n421fouahk81" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/13/ubuntu-chinese/" data-id="cl195kwe70078z8s674wqce6w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
@@ -193,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/05/summary-2017/" data-id="cl10bq3fq00h5n421ezry65ut" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/05/summary-2017/" data-id="cl195kwga00hvz8s6ascjgh9z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2017/" rel="tag">2017</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
@@ -246,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/11/caffe-tensorflow-log/" data-id="cl10bq3b3000ln421cnah0wl0" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/11/caffe-tensorflow-log/" data-id="cl195kwbw000lz8s602nx5835" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li></ul>
@@ -293,7 +435,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/04/opencv-custom/" data-id="cl10bq3cq004un4210pff3dqo" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/04/opencv-custom/" data-id="cl195kwdf0051z8s670rldojs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li></ul>
@@ -349,7 +491,7 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/03/ubuntu-core-dump-debug/" data-id="cl10bq3dn0079n4214qwh08dc" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/03/ubuntu-core-dump-debug/" data-id="cl195kwe9007gz8s69pifejoa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/" rel="tag">gdb</a></li></ul>
@@ -396,151 +538,10 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/02/argparse-usage/" data-id="cl10bq3aq0003n421bkrh69p2" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/02/argparse-usage/" data-id="cl195kwbg0001z8s6gez12fjj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-py-faster-rcnn-update" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/15/py-faster-rcnn-update/" class="article-date">
-  <time datetime="2017-11-14T16:00:28.000Z" itemprop="datePublished">2017-11-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/15/py-faster-rcnn-update/">更新Faster-RCNN代码到最新版的caffe</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为CuDNN函数接口更新的原因，以前用低版本写的项目在新版本的CuDNN环境下编译就会出问题。例如，<a target="_blank" rel="noopener" href="https://github.com/rbgirshick/py-faster-rcnn">py-faster-rcnn</a>代码在最新版的CuDNN6上面编译时就会报错。<br>解决这个问题的一个方法是禁用CUDNN，即修改<code>Makefile.config</code>里面的第5行，在前面加<code>#</code>。这种方法没法使用CuDNN加速，不推荐。这里我们使用一种比较土的方法，即将使用了旧的CuDNN函数的文件都换成新的caffe里面的文件即可。  </p>
-        
-          <p class="article-more-link">
-            <a href="/2017/11/15/py-faster-rcnn-update/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/11/15/py-faster-rcnn-update/" data-id="cl10bq3d2005en421aild5lw6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-linux-skills" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/29/linux-skills/" class="article-date">
-  <time datetime="2017-10-29T09:20:39.000Z" itemprop="datePublished">2017-10-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/29/linux-skills/">Linux 小技巧总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这里列举了我常用的一些Linux命令行下的技巧，希望对大家有帮助。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/10/29/linux-skills/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/10/29/linux-skills/" data-id="cl10bq3cd003ln421127i6gwb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-caffe-lmdb-leveldb" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/01/caffe-lmdb-leveldb/" class="article-date">
-  <time datetime="2017-10-01T09:50:28.000Z" itemprop="datePublished">2017-10-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/01/caffe-lmdb-leveldb/">Caffe中lmdb和leveldb格式数据的读取</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Caffe里面的一种数据存储和读取方式是使用数据库格式，将数据保存到特定的一个数据库文件中，然后在代码里面整个读入这个数据库文件。Caffe支持的数据库格式包括lmdb和leveldb，可能很多人是因为caffe才知道这两个库的，但其实这两个库也是非常出名的工具。下面就展示下在Caffe里面用Python接口调用生成的LMDB或者LEVELDB格式的文件的代码吧。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/10/01/caffe-lmdb-leveldb/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/10/01/caffe-lmdb-leveldb/" data-id="cl10bq3b1000jn42191zq07vp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leveldb/" rel="tag">leveldb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lmdb/" rel="tag">lmdb</a></li></ul>
 
     </footer>
   </div>
@@ -588,7 +589,7 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 10.91px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 10.91px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17.27px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 11.82px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 11.82px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 15.45px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 10.91px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16.36px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 13.64px;">GPU</a> <a href="/tags/Git/" style="font-size: 13.64px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 10.91px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/ONNX/" style="font-size: 10px;">ONNX</a> <a href="/tags/OpenCV/" style="font-size: 11.82px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 11.82px;">OpenGL</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 10.91px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19.09px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 12.73px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 10.91px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 11.82px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Torchscript/" style="font-size: 10px;">Torchscript</a> <a href="/tags/Trick/" style="font-size: 10.91px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 15.45px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 13.64px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 10.91px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 10.91px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 11.82px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/macOS/" style="font-size: 10.91px;">macOS</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/neovim/" style="font-size: 10px;">neovim</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 12.73px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18.18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10.91px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 11.82px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" style="font-size: 10.91px;">错误汇总</a>
+      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 10.91px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 10.91px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17.27px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 11.82px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 11.82px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 15.45px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 10.91px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16.36px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 13.64px;">GPU</a> <a href="/tags/Git/" style="font-size: 15.45px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 10.91px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/ONNX/" style="font-size: 10px;">ONNX</a> <a href="/tags/OpenCV/" style="font-size: 11.82px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 11.82px;">OpenGL</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 10.91px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19.09px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 12.73px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 10.91px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 11.82px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Torchscript/" style="font-size: 10px;">Torchscript</a> <a href="/tags/Trick/" style="font-size: 10.91px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 15.45px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 13.64px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 10.91px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 10.91px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 11.82px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/macOS/" style="font-size: 10.91px;">macOS</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/neovim/" style="font-size: 10px;">neovim</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 12.73px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18.18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10.91px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 11.82px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" style="font-size: 10.91px;">错误汇总</a>
     </div>
   </div>
 
@@ -610,23 +611,23 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
       <ul>
         
           <li>
+            <a href="/2022/03/26/git-change-log-date-format/">git log 修改提交日期显示格式</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/git-show-first-added-time/">Git显示文件首次被跟踪的日期</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/git-log/">git log 常见参数总结</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/20/cpp-read-binary-file-from-python/">从Python传递参数到C++</a>
           </li>
         
           <li>
             <a href="/2022/03/20/pytorch-cross-to-onnx/">Pytorch模型转ONNX时cross操作不支持的解决方法</a>
-          </li>
-        
-          <li>
-            <a href="/2021/12/31/summary-2021/">2021年终总结</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/21/mac-opengl-red/">Mac OpenGL入门：显示颜色</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/20/mac-opengl-first-example/">Mac上如何运行OpenGL:第一个例子</a>
           </li>
         
       </ul>
