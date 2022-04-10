@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-03-27T15:26:00.883Z</updated>
+  <updated>2022-04-10T10:01:44.653Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git 删除远程分支</title>
+    <link href="http://vra.github.io/2022/04/10/git-delete-branch/"/>
+    <id>http://vra.github.io/2022/04/10/git-delete-branch/</id>
+    <published>2022-04-10T09:55:35.000Z</published>
+    <updated>2022-04-10T10:01:44.653Z</updated>
+    
+    <content type="html"><![CDATA[<p>Git可以方便地删除本地的某个分支。具体操作是：</p><ol><li>切换到别的分支</li><li>执行<code>git branch -d &lt;name-of-branch-to-delete&gt;</code></li></ol><p>比如我想删除当前的<code>dev-tmp</code>分支:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git branch -d dev-tmp</span><br></pre></td></tr></table></figure><p>上面的命令只删除了本地的分支，如果要删除远端的分支，该怎么操作呢？答案是用带有<code>--delete</code>选项的<code>git push</code>命令，例如：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push --delete dev-tmp</span><br></pre></td></tr></table></figure><p>可以删除远端的<code>dev-tmp</code>分支。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Git可以方便地删除本地的某个分支。具体操作是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;切换到别的分支&lt;/li&gt;
+&lt;li&gt;执行&lt;code&gt;git branch -d &amp;lt;name-of-branch-to-delete&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;比如我想删除</summary>
+      
+    
+    
+    
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Xcode无法安装ios程序的一种情况记录</title>
+    <link href="http://vra.github.io/2022/04/06/ios-cannot-install/"/>
+    <id>http://vra.github.io/2022/04/06/ios-cannot-install/</id>
+    <published>2022-04-06T06:06:46.000Z</published>
+    <updated>2022-04-10T09:55:05.439Z</updated>
+    
+    <content type="html"><![CDATA[<p>在用Xcode调试ios代码的时候，发现代码可以正常编译，但是安装到手机的时候，提示”App installation failed: Could not write to the device”。在网上找了很多回答，都没能解决。后来发现原因是在要复制到ios的目录中添加了一个软链接，导致出错。删除软链接后，安装正常。这应该是一个比较少见的原因，记录一下。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在用Xcode调试ios代码的时候，发现代码可以正常编译，但是安装到手机的时候，提示”App installation failed: Could not write to the device”。在网上找了很多回答，都没能解决。后来发现原因是在要复制到ios的目录中添加了</summary>
+      
+    
+    
+    
+    
+    <category term="iOS" scheme="http://vra.github.io/tags/iOS/"/>
+    
+    <category term="Mac" scheme="http://vra.github.io/tags/Mac/"/>
+    
+  </entry>
   
   <entry>
     <title>数字永存的一些想法</title>
@@ -126,9 +179,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
@@ -199,9 +252,9 @@
     
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
-    <category term="OpenGL" scheme="http://vra.github.io/tags/OpenGL/"/>
-    
     <category term="Mac" scheme="http://vra.github.io/tags/Mac/"/>
+    
+    <category term="OpenGL" scheme="http://vra.github.io/tags/OpenGL/"/>
     
   </entry>
   
@@ -268,9 +321,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="错误汇总" scheme="http://vra.github.io/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
     
@@ -297,9 +350,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="macOS" scheme="http://vra.github.io/tags/macOS/"/>
     
@@ -324,9 +377,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -375,9 +428,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
@@ -458,53 +511,6 @@
     
     
     <category term="杂谈" scheme="http://vra.github.io/tags/%E6%9D%82%E8%B0%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++中使用pytorch保存的tensor</title>
-    <link href="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/"/>
-    <id>http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/</id>
-    <published>2021-03-21T10:19:28.000Z</published>
-    <updated>2021-08-20T15:48:01.062Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在学习Libtorch——即Pytorch的C++版本，需要使用 Pytorch 导出的 tensor 以便对模型进行 debug。下面是转换代码，总体原理是将 tensor 转换为二进制数据，再在 C++ 里面读入。</p><span id="more"></span><p>下面是 Pytorch 中的导出 tensor 示例：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_tensor</span>(<span class="params">device</span>):</span></span><br><span class="line">    my_tensor = torch.rand(<span class="number">3</span>, <span class="number">3</span>).to(device);</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[python] my_tensor: &quot;</span>, my_tensor)</span><br><span class="line">    f = io.BytesIO()</span><br><span class="line">    torch.save(my_tensor, f, _use_new_zipfile_serialization=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;my_tensor_%s.pt&#x27;</span> % device, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> out_f:</span><br><span class="line">        <span class="comment"># Copy the BytesIO stream to the output file</span></span><br><span class="line">        out_f.write(f.getbuffer())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    save_tensor(<span class="string">&#x27;cpu&#x27;</span>)</span><br></pre></td></tr></table></figure><p>这里以导出 cpu tensor 为例，cuda tensor 也是同理。</p><p>在 C++ 中的调用示例如下：</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::vector&lt;<span class="keyword">char</span>&gt; <span class="title">get_the_bytes</span><span class="params">(std::string filename)</span> </span>&#123;</span><br><span class="line">    <span class="function">std::ifstream <span class="title">input</span><span class="params">(filename, std::ios::binary)</span></span>;</span><br><span class="line">    <span class="function">std::vector&lt;<span class="keyword">char</span>&gt; <span class="title">bytes</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        (std::istreambuf_iterator&lt;<span class="keyword">char</span>&gt;(input)),</span></span></span><br><span class="line"><span class="params"><span class="function">        (std::istreambuf_iterator&lt;<span class="keyword">char</span>&gt;()))</span></span>;</span><br><span class="line"></span><br><span class="line">    input.<span class="built_in">close</span>();</span><br><span class="line">    <span class="keyword">return</span> bytes;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::vector&lt;<span class="keyword">char</span>&gt; f = <span class="built_in">get_the_bytes</span>(<span class="string">&quot;my_tensor_cpu.pt&quot;</span>);</span><br><span class="line">    torch::IValue x = torch::<span class="built_in">pickle_load</span>(f);</span><br><span class="line">    torch::Tensor my_tensor = x.<span class="built_in">toTensor</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;[cpp] my_tensor: &quot;</span> &lt;&lt; my_tensor &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>注意事项：</p><ol><li>torch的Python和C++版本需要保持一致，否则转换可能不成功.</li></ol><h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>最近在学习Libtorch——即Pytorch的C++版本，发现使用起来异常的丝滑，写C++有了Python的体验，妙不可言。<br>后面会更新一些关于libtorch使用的文章，敬请关注。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol><li><a href="https://discuss.pytorch.org/t/how-to-load-python-tensor-in-c/88813">https://discuss.pytorch.org/t/how-to-load-python-tensor-in-c/88813</a></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;最近在学习Libtorch——即Pytorch的C++版本，需要使用 Pytorch 导出的 tensor 以便对模型进行 debug。下面是转换代码，总体原理是将 tensor 转换为二进制数据，再在 C++ 里面读入。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="C++" scheme="http://vra.github.io/tags/C/"/>
-    
-    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
-    
-    <category term="Libtorch" scheme="http://vra.github.io/tags/Libtorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>doctest 用法简介</title>
-    <link href="http://vra.github.io/2021/02/02/doctest-intro/"/>
-    <id>http://vra.github.io/2021/02/02/doctest-intro/</id>
-    <published>2021-02-02T14:43:43.000Z</published>
-    <updated>2021-08-20T15:48:01.022Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><a href="https://docs.python.org/3/library/doctest.html">doctest</a> 是 python 系统库中用于交互式会话例子测试的工具，用于搜索以 <code>&gt;&gt;&gt;</code> 开头的语句，并且将其作为Python命令，对结果进行测试。</p><p>这个工具可以方便地用于检测自己写的库是否有bug，例如某些函数功能可能发生改变，借此工具可以方便地对代码中的示例语句进行测试。</p><span id="more"></span><h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>假如我们有一个 Python 脚本 <code>foo.py</code>, 其中有一些 <code>&gt;&gt;&gt;</code> 命令：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># file name: foo.py</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">My square function.</span></span><br><span class="line"><span class="string">Usage:</span></span><br><span class="line"><span class="string"><span class="meta">&gt;&gt;&gt; </span>a = my_square(4)</span></span><br><span class="line"><span class="string"><span class="meta">&gt;&gt;&gt; </span>b = my_square(3)</span></span><br><span class="line"><span class="string"><span class="meta">&gt;&gt;&gt; </span>a + b</span></span><br><span class="line"><span class="string">25</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_square</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="keyword">return</span> num * num</span><br></pre></td></tr></table></figure><p>为了测试我们的 docstring 中的示例用法（即以<code>&gt;&gt;&gt;</code> 开头的命令）是否跟代码实现相符合，可以使用下面的命令来操作：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m doctest foo.py</span><br></pre></td></tr></table></figure><p>没有报错的话默认是没有输出的，如果要看中间的执行信息，可以增加 <code>-v</code> 参数:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m doctest -v foo.py</span><br></pre></td></tr></table></figure><p>另外针对只有运行命令记录，没有 python 语句的情况，可以把把命令记录保存到 <code>.txt</code> 文件中，然后使用同样的调用命令。例如把下面的内容保存到 <code>foo.txt</code> 文件中：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt; a, b = 2, 3</span><br><span class="line">&gt;&gt;&gt; a+b</span><br><span class="line">5</span><br></pre></td></tr></table></figure><p>那么就可以使用下面的命令调用</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m doctest -v foo.txt</span><br></pre></td></tr></table></figure><p>输出结果如下：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Trying:</span><br><span class="line">    a, b = 2, 3</span><br><span class="line">Expecting nothing</span><br><span class="line">ok</span><br><span class="line">Trying:</span><br><span class="line">    a+b</span><br><span class="line">Expecting:</span><br><span class="line">    5</span><br><span class="line">ok</span><br><span class="line">1 items passed all tests:</span><br><span class="line">   2 tests <span class="keyword">in</span> foo.txt</span><br><span class="line">2 tests <span class="keyword">in</span> 1 items.</span><br><span class="line">2 passed and 0 failed.</span><br><span class="line">Test passed.</span><br></pre></td></tr></table></figure><p>可以看到 <code>doctest</code> 会对文件中的每一行进行读取，然后计算期望的值和实际的值是否一样，如果不一样就会报错。例如我们尝试修改上面的 <code>foo.txt</code> 为下面的内容:</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt; a, b = 2, 3</span><br><span class="line">&gt;&gt;&gt; a+b</span><br><span class="line">6</span><br></pre></td></tr></table></figure><p>即故意把2+3的结果修改为6，执行 <code>doctest</code> 命令，结果如下：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Trying:</span><br><span class="line">    a, b = 2, 3</span><br><span class="line">Expecting nothing</span><br><span class="line">ok</span><br><span class="line">Trying:</span><br><span class="line">    a+b</span><br><span class="line">Expecting:</span><br><span class="line">    6</span><br><span class="line">**********************************************************************</span><br><span class="line">File <span class="string">&quot;foo.txt&quot;</span>, line 2, <span class="keyword">in</span> foo.txt</span><br><span class="line">Failed example:</span><br><span class="line">    a+b</span><br><span class="line">Expected:</span><br><span class="line">    6</span><br><span class="line">Got:</span><br><span class="line">    5</span><br><span class="line">**********************************************************************</span><br><span class="line">1 items had failures:</span><br><span class="line">   1 of   2 <span class="keyword">in</span> foo.txt</span><br><span class="line">2 tests <span class="keyword">in</span> 1 items.</span><br><span class="line">1 passed and 1 failed.</span><br><span class="line">***Test Failed*** 1 failures.</span><br></pre></td></tr></table></figure><p>可以看到，测试出错了，而且出错的详细信息也列出来了。</p><p>另一种使用的方法是在 python 脚本中增加 <code>doctest.testmod()</code> 函数调用，方法如下：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># file-name: foo.py</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">example usage:</span></span><br><span class="line"><span class="string"><span class="meta">&gt;&gt;&gt; </span>a, b = 2, 3</span></span><br><span class="line"><span class="string"><span class="meta">&gt;&gt;&gt; </span>a+b</span></span><br><span class="line"><span class="string">5</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">import</span> doctest</span><br><span class="line">    doctest.testmod()</span><br></pre></td></tr></table></figure><p>使用下面的命令来执行脚本:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 foo.py -v</span><br></pre></td></tr></table></figure><p>输出结果如下：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Trying:</span><br><span class="line">    a, b = 2, 3</span><br><span class="line">Expecting nothing</span><br><span class="line">ok</span><br><span class="line">Trying:</span><br><span class="line">    a+b</span><br><span class="line">Expecting:</span><br><span class="line">    5</span><br><span class="line">ok</span><br><span class="line">1 items passed all tests:</span><br><span class="line">   2 tests <span class="keyword">in</span> __main__</span><br><span class="line">2 tests <span class="keyword">in</span> 1 items.</span><br><span class="line">2 passed and 0 failed.</span><br><span class="line">Test passed.</span><br></pre></td></tr></table></figure><p>对于 <code>.txt</code> 文件的测试，使用 <code>doctest.testfile()</code> 函数：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> doctest</span><br><span class="line">doctest.testfile(<span class="string">&quot;example.txt&quot;</span>)</span><br></pre></td></tr></table></figure><h2 id="一些使用注意点"><a href="#一些使用注意点" class="headerlink" title="一些使用注意点"></a>一些使用注意点</h2><ol><li><code>&gt;&gt;&gt;</code> 缩进多个层次对结果没有影响，<code>doctest</code> 测试之前会对每行前面的空格进行删除。</li><li>doctest 也可以对Error 进行测试，如果想要测试各种特殊case导致的错误的话，doctest是个不错的工具</li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://docs.python.org/3/library/doctest.html&quot;&gt;doctest&lt;/a&gt; 是 python 系统库中用于交互式会话例子测试的工具，用于搜索以 &lt;code&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 开头的语句，并且将其作为Python命令，对结果进行测试。&lt;/p&gt;
-&lt;p&gt;这个工具可以方便地用于检测自己写的库是否有bug，例如某些函数功能可能发生改变，借此工具可以方便地对代码中的示例语句进行测试。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="Unit Test" scheme="http://vra.github.io/tags/Unit-Test/"/>
     
   </entry>
   
