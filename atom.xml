@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-04-10T10:01:44.653Z</updated>
+  <updated>2022-04-14T05:19:40.511Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -17,13 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>kinematics和dynamics含义辨析</title>
+    <link href="http://vra.github.io/2022/04/13/kinematics-vs-dynamics/"/>
+    <id>http://vra.github.io/2022/04/13/kinematics-vs-dynamics/</id>
+    <published>2022-04-13T03:10:14.000Z</published>
+    <updated>2022-04-14T05:19:40.511Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Kinematics is the study of how things move, while dynamics is the study of forces and motion. Kinematics is the study of motion. It is concerned with what happens to a body when it is at rest and in uniform motion. Dynamics is the study of forces and their effect on moving bodies.</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Kinematics is the study of how things move, while dynamics is the study of forces and motion. Kinematics is the study of mot</summary>
+      
+    
+    
+    
+    
+    <category term="misc" scheme="http://vra.github.io/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
     <title>git 删除远程分支</title>
     <link href="http://vra.github.io/2022/04/10/git-delete-branch/"/>
     <id>http://vra.github.io/2022/04/10/git-delete-branch/</id>
     <published>2022-04-10T09:55:35.000Z</published>
-    <updated>2022-04-10T10:01:44.653Z</updated>
+    <updated>2022-04-14T05:18:46.308Z</updated>
     
-    <content type="html"><![CDATA[<p>Git可以方便地删除本地的某个分支。具体操作是：</p><ol><li>切换到别的分支</li><li>执行<code>git branch -d &lt;name-of-branch-to-delete&gt;</code></li></ol><p>比如我想删除当前的<code>dev-tmp</code>分支:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git branch -d dev-tmp</span><br></pre></td></tr></table></figure><p>上面的命令只删除了本地的分支，如果要删除远端的分支，该怎么操作呢？答案是用带有<code>--delete</code>选项的<code>git push</code>命令，例如：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push --delete dev-tmp</span><br></pre></td></tr></table></figure><p>可以删除远端的<code>dev-tmp</code>分支。</p>]]></content>
+    <content type="html"><![CDATA[<p>Git可以方便地删除本地的某个分支。具体操作是：</p><ol><li>切换到别的分支</li><li>执行<code>git branch -d &lt;name-of-branch-to-delete&gt;</code></li></ol><p>比如我想删除当前的<code>dev-tmp</code>分支:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git branch -d dev-tmp</span><br></pre></td></tr></table></figure><p>上面的命令只删除了本地的分支，如果要删除远端的分支，该怎么操作呢？答案是用带有<code>--delete</code>选项的<code>git push</code>命令，例如：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete dev-tmp</span><br></pre></td></tr></table></figure><p>可以删除远端的<code>dev-tmp</code>分支。</p>]]></content>
     
     
       
@@ -179,9 +202,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
@@ -321,9 +344,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="错误汇总" scheme="http://vra.github.io/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
     
@@ -350,9 +373,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="macOS" scheme="http://vra.github.io/tags/macOS/"/>
     
@@ -377,9 +400,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -428,11 +451,11 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -487,30 +510,6 @@
     <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
     
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我关注的一些独立技术博客</title>
-    <link href="http://vra.github.io/2021/08/21/blog-list/"/>
-    <id>http://vra.github.io/2021/08/21/blog-list/</id>
-    <published>2021-08-20T16:25:39.000Z</published>
-    <updated>2021-08-20T16:29:39.792Z</updated>
-    
-    <content type="html"><![CDATA[<p>这里列出了我平时关注的一些技术博客列表，希望给看到这个页面的你一些新的知识来源：</p><ol><li><a href="https://ruanyifeng.com/">https://ruanyifeng.com/</a> 阮一峰的网络日志，应该不需要我介绍他是谁了吧</li><li><a href="https://ring0.me/">https://ring0.me/</a> 科大师兄的网站</li><li><a href="http://blog.devtang.com/">http://blog.devtang.com/</a> </li><li><a href="https://www.yejianye.com/">https://www.yejianye.com/</a></li><li><a href="https://ewind.us/">https://ewind.us/</a></li><li><a href="https://www.barretlee.com/entry/">https://www.barretlee.com/entry/</a></li><li><a href="https://www.hahack.com/">https://www.hahack.com/</a></li></ol><p>另外发现，最近大家不怎么更新自己的博客了，至于为什么，我想了几个可能的原因。</p><p>一个是缺少来自用户的反馈，或者激励。大部分博客，来自读者的反馈少，不像知乎，微信公众号，有方便及时的用户反馈和激励（点赞，在看，收藏)，反馈少对作者写作的积极性应该还是很有很大影响的。</p><p>另一个是写博客还是有一定成本的。自己搭建的博客，需要自己维护环境，不像公众号和知乎，打开网页就能写，实时保存草稿。</p><p>在中文互联网越来越碎片化和圈地化的今天，希望独立的技术博客能给我们带来新的思路，新的启发，新的激动人心的东西。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;这里列出了我平时关注的一些技术博客列表，希望给看到这个页面的你一些新的知识来源：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://ruanyifeng.com/&quot;&gt;https://ruanyifeng.com/&lt;/a&gt; 阮一峰的网络日志，应该不需要我介绍他是谁了</summary>
-      
-    
-    
-    
-    
-    <category term="杂谈" scheme="http://vra.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
