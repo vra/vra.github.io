@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-04-14T05:19:40.511Z</updated>
+  <updated>2022-05-16T14:26:19.510Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python Multiprocessing使用Queue的例子</title>
+    <link href="http://vra.github.io/2022/05/16/python-multiprocessing-queue-example/"/>
+    <id>http://vra.github.io/2022/05/16/python-multiprocessing-queue-example/</id>
+    <published>2022-05-16T14:10:55.000Z</published>
+    <updated>2022-05-16T14:26:19.510Z</updated>
+    
+    <content type="html"><![CDATA[<p>对于一些计算密集性的任务，使用Python的多进程能显著缩短运行的时间。例如对10个元素进行相同的操作，通过Python的<code>multiprocessing</code> 包可以进行并行化，实测能有数倍的速度提升。这里写一个简单的例子，将所有的结果写入队列，等队列拿到10个结果后，将结果写入文件。</p><span id="more"></span><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Queue, Process, Pool</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_queue</span>(<span class="params">q, i</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Begin process (<span class="subst">&#123;os.getpid()&#125;</span>)&#x27;</span>)</span><br><span class="line">    cur_value = i * i</span><br><span class="line"></span><br><span class="line">    q.put(cur_value)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_queue</span>(<span class="params">q, num_sample</span>):</span></span><br><span class="line">    val_list = []</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        v = q.get(<span class="literal">True</span>)</span><br><span class="line">        val_list.append(v)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(val_list) &gt;= num_sample:</span><br><span class="line">            np.save(<span class="string">&#x27;data.npy&#x27;</span>, np.array(val_list))</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    NUM_PROCESS = <span class="number">10</span></span><br><span class="line">    q = Queue(NUM_PROCESS)</span><br><span class="line">    pws = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(NUM_PROCESS):</span><br><span class="line">        pw = Process(target=write_queue, args=(q, i))</span><br><span class="line">        pws.append(pw)</span><br><span class="line"></span><br><span class="line">    pr = Process(target=read_queue, args=(q, NUM_PROCESS))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> pw <span class="keyword">in</span> pws:</span><br><span class="line">        pw.start()</span><br><span class="line"></span><br><span class="line">    pr.start()</span><br><span class="line">    <span class="keyword">for</span> pw <span class="keyword">in</span> pws:</span><br><span class="line">        pw.join()</span><br><span class="line"></span><br><span class="line">    pr.terminate()</span><br><span class="line"></span><br><span class="line">    data = np.load(<span class="string">&#x27;data.npy&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;对于一些计算密集性的任务，使用Python的多进程能显著缩短运行的时间。例如对10个元素进行相同的操作，通过Python的&lt;code&gt;multiprocessing&lt;/code&gt; 包可以进行并行化，实测能有数倍的速度提升。这里写一个简单的例子，将所有的结果写入队列，等队列拿到10个结果后，将结果写入文件。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="多进程" scheme="http://vra.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>kinematics和dynamics含义辨析</title>
@@ -482,34 +505,6 @@
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Vim" scheme="http://vra.github.io/tags/Vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pytorch使用交叉熵损失时的一个坑</title>
-    <link href="http://vra.github.io/2021/08/21/pytorch-cross-entropy/"/>
-    <id>http://vra.github.io/2021/08/21/pytorch-cross-entropy/</id>
-    <published>2021-08-20T23:03:13.000Z</published>
-    <updated>2021-08-20T23:25:14.412Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Pytorch里面使用交叉熵loss函数的时候，发现结果最是比较差，通过搜索才发现这样一段话：</p><blockquote><p>You should pass raw logits to nn.CrossEntropyLoss, since the function itself applies F.log_softmax and nn.NLLLoss() on the input.</p></blockquote><p>也就是用交叉熵损失的时候，不能在网络的最后用 <code>log_softmax</code> 或者 <code>Softmax</code>层，因为交叉熵损失相当与是 <code>log_softmax</code> + <code>NLLLos</code>的组合。</p><p>如果网络最后用了Softmax层的话，需要使用 <code>NLLLoss</code> 或者 <code>MSE loss</code>。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ol><li><a href="https://discuss.pytorch.org/t/logsoftmax-vs-softmax/21386/9">https://discuss.pytorch.org/t/logsoftmax-vs-softmax/21386/9</a></li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在Pytorch里面使用交叉熵loss函数的时候，发现结果最是比较差，通过搜索才发现这样一段话：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;You should pass raw logits to nn.CrossEntropyLoss, since the functio</summary>
-      
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
-    
-    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
   </entry>
   
