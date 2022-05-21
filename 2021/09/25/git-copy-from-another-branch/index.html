@@ -97,19 +97,19 @@
 <span id="more"></span>
 
 <p>假设我们的当前分支为<code>branch1</code>, 想要复制文件或者目录的分支为<code>branch2</code>, 两个分支下文件结构是不同的，具体如下：<br>branch1: </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">├── README.md</span><br><span class="line">├── cpp</span><br><span class="line">│   ├── include</span><br><span class="line">│   │   └── test.hpp</span><br><span class="line">│   └── src</span><br><span class="line">│       └── test.cpp</span><br><span class="line">└── python</span><br><span class="line">    └── setup.py</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">├── README.md</span><br><span class="line">├── cpp</span><br><span class="line">│   ├── include</span><br><span class="line">│   │   └── test.hpp</span><br><span class="line">│   └── src</span><br><span class="line">│       └── test.cpp</span><br><span class="line">└── python</span><br><span class="line">    └── setup.py</span><br></pre></td></tr></table></figure>
 <p>branch2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">├── README.md</span><br><span class="line">└── java</span><br><span class="line">    └── test.java</span><br><span class="line">    └── main.java</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">├── README.md</span><br><span class="line">└── java</span><br><span class="line">    └── test.java</span><br><span class="line">    └── main.java</span><br></pre></td></tr></table></figure>
 
 <p>假设我们当前在<code>branch1</code>, 目录为仓库根目录，想要复制<code>branch2</code> 的 java/test.java` 到当前目录，执行下面的语句:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout branch2 -- java/test.java</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch2 -- java/test.java</span><br></pre></td></tr></table></figure>
 <p><strong>⚠️注意：这里还是会创建一个<code>java</code>目录，而不是把<code>test.java</code>放到根目录下。</strong></p>
 <p>如果当前进入了<code>cpp</code> 子目录，后面的路径也需要改成相对路径:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout branch2 -- ../java/test.java</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch2 -- ../java/test.java</span><br></pre></td></tr></table></figure>
 <p>如果想要复制整个目录，也是一样的:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout branch2 -- java</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch2 -- java</span><br></pre></td></tr></table></figure>
 <p>此外还可以利用提交的hash值来复制文件，这样就会复制当次提交时候的文件内容:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout 941b6dd java/test.java</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 941b6dd java/test.java</span><br></pre></td></tr></table></figure>
 <p>参考：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://www.tutsway.com/how-to-copy-file-or-folder-from-one-branch-to-another-in-git.php">https://www.tutsway.com/how-to-copy-file-or-folder-from-one-branch-to-another-in-git.php</a></li>
@@ -118,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/09/25/git-copy-from-another-branch/" data-id="cl3fxe7a4002x20s69t6t0f1d" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/09/25/git-copy-from-another-branch/" data-id="cl3fxfxou002wags651ay4zmc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>

@@ -7,12 +7,12 @@
   
   <title>Git显示文件首次被跟踪的日期 | Yunfeng&#39;s Simple Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概述在使用Git的时候，想要显示某个文件首次被跟踪的时间，可以用下面的命令： git log --format&#x3D;%ad &#x2F;path&#x2F;to&#x2F;file |tail -1 管道操作前的命令是以默认日期格式显示所有包含这个文件的所有提交记录，从上往下依次为最新的最早的提交。管道操作后面的命令是提取前面的输出中最后一条记录，即最早的提交，这正是我们需要的。 各种关于git log的用法，参考上一篇博文。">
+  <meta name="description" content="概述在使用Git的时候，想要显示某个文件首次被跟踪的时间，可以用下面的命令： 1git log --format&#x3D;%ad &#x2F;path&#x2F;to&#x2F;file |tail -1 管道操作前的命令是以默认日期格式显示所有包含这个文件的所有提交记录，从上往下依次为最新的最早的提交。管道操作后面的命令是提取前面的输出中最后一条记录，即最早的提交，这正是我们需要的。 各种关于git log的用法，参考上一篇博文。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git显示文件首次被跟踪的日期">
 <meta property="og:url" content="http://vra.github.io/2022/03/26/git-show-first-added-time/index.html">
 <meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
-<meta property="og:description" content="概述在使用Git的时候，想要显示某个文件首次被跟踪的时间，可以用下面的命令： git log --format&#x3D;%ad &#x2F;path&#x2F;to&#x2F;file |tail -1 管道操作前的命令是以默认日期格式显示所有包含这个文件的所有提交记录，从上往下依次为最新的最早的提交。管道操作后面的命令是提取前面的输出中最后一条记录，即最早的提交，这正是我们需要的。 各种关于git log的用法，参考上一篇博文。">
+<meta property="og:description" content="概述在使用Git的时候，想要显示某个文件首次被跟踪的时间，可以用下面的命令： 1git log --format&#x3D;%ad &#x2F;path&#x2F;to&#x2F;file |tail -1 管道操作前的命令是以默认日期格式显示所有包含这个文件的所有提交记录，从上往下依次为最新的最早的提交。管道操作后面的命令是提取前面的输出中最后一条记录，即最早的提交，这正是我们需要的。 各种关于git log的用法，参考上一篇博文。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-26T13:15:45.000Z">
 <meta property="article:modified_time" content="2022-03-26T13:34:22.116Z">
@@ -93,14 +93,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在使用Git的时候，想要显示某个文件首次被跟踪的时间，可以用下面的命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> --format=%ad /path/to/file |tail -1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --format=%ad /path/to/file |tail -1</span><br></pre></td></tr></table></figure>
 <p>管道操作前的命令是以默认日期格式显示所有包含这个文件的所有提交记录，从上往下依次为最新的最早的提交。管道操作后面的命令是提取前面的输出中最后一条记录，即最早的提交，这正是我们需要的。</p>
 <p>各种关于git log的用法，参考上一篇博文。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/03/26/git-show-first-added-time/" data-id="cl3fxe7a9003720s6g2qd88ad" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/03/26/git-show-first-added-time/" data-id="cl3fxfxp20037ags67fd0641d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>

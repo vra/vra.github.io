@@ -99,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/02/27/openpyxl-tutorial/" data-id="cl3fxe7bd005n20s6cmry5rjs" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/02/27/openpyxl-tutorial/" data-id="cl3fxfxq5005jags65t9oe9bm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenPyxl/" rel="tag">OpenPyxl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
@@ -147,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/02/27/mv-to-next/" data-id="cl3fxe7au004r20s62ifpboox" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/02/27/mv-to-next/" data-id="cl3fxfxq00052ags66g8pa41s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" rel="tag">迁移记录</a></li></ul>
@@ -194,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/01/22/summary-2018/" data-id="cl3fxe7bu007f20s60hj885as" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/01/22/summary-2018/" data-id="cl3fxfxqo007oags6393f7y7n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
@@ -237,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/10/21/begin-agin-2018/" data-id="cl3fxe791000820s6251m61qd" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/10/21/begin-agin-2018/" data-id="cl3fxfxns000aags6a8rb0r2t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" rel="tag">迁移记录</a></li></ul>
@@ -276,9 +276,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Git是用来管理源代码的一个工具，很多时候，我们不想让Git来跟踪较大的二进制文件。但是如果不小心将某个文件加入到Git的缓存区后，不管后面怎么删除这个大文件，Git始终都保存有这个文件的历史记录，因此项目会很大。拿下面例子来说，我们有个500M的文件<code>cnn.model</code>，通过下面的命令加入到git暂存区或提交到远端（提交时自动执行git gc命令，生成pack文件）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git add cnn.model</span><br><span class="line">$ git commit -m <span class="string">&quot;add file cnn.model&quot;</span></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add cnn.model</span><br><span class="line">$ git commit -m <span class="string">&quot;add file cnn.model&quot;</span></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
 <p>经过这步操作，用<code>du -sh .</code>命令查看项目大小的话，发现足足有1000多M，因为本地文件<code>cnn.model</code>以及<code>.git</code>目录中的object也有一份这个文件的记录。<br>即使使用<code>git rm</code>命令删除当前的<code>cnn.model</code>文件，<code>.git</code>目录中还是记录有这个大文件的记录，因此后面别人clone这个项目后，项目还是很大。因此这里需要使用<code>git filter-branch</code>命令来删除<code>.git</code>目录中的文件记录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git filter-branch --index-filter <span class="string">&#x27;git rm -r --cached --ignore-unmatch &lt;file/dir&gt;&#x27;</span> -- --all</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git filter-branch --index-filter <span class="string">&#x27;git rm -r --cached --ignore-unmatch &lt;file/dir&gt;&#x27;</span> -- --all</span><br></pre></td></tr></table></figure>
 <p>这是在你已知大文件的名字和目录情况下的删除过程。如果过了很久或者是有很多大文件，我们需要有一系列的命令来找出大文件，然后对其进行过滤。下面详细阐述整个过程。</p>
         
           <p class="article-more-link">
@@ -288,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/05/20/git-remove-large-file/" data-id="cl3fxe7a9003420s6at3v30qk" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/05/20/git-remove-large-file/" data-id="cl3fxfxp5003pags6f7677ukr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
@@ -335,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/04/18/mirrors-speedup/" data-id="cl3fxe7at004m20s63jvt0y9y" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/04/18/mirrors-speedup/" data-id="cl3fxfxpn004pags6ctzwhkx4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pip/" rel="tag">Pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
@@ -386,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/04/14/paper-what/" data-id="cl3fxe7be005r20s67wg47am5" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/04/14/paper-what/" data-id="cl3fxfxq90063ags6h62kf1cd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Action-Recogntion/" rel="tag">Action Recogntion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C3D/" rel="tag">C3D</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kinetics/" rel="tag">Kinetics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Motion/" rel="tag">Motion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UCF101/" rel="tag">UCF101</a></li></ul>
@@ -436,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/03/23/note-closer-look-3d/" data-id="cl3fxe7b3005120s6dnxe8af8" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/03/23/note-closer-look-3d/" data-id="cl3fxfxpx004zags6hdwn93au" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D-CNN/" rel="tag">3D CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Action-Recogntion/" rel="tag">Action Recogntion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li></ul>
@@ -484,7 +484,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/" data-id="cl3fxe7ao004220s6862z1xru" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/" data-id="cl3fxfxpb003wags6b65cb5f7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li></ul>
@@ -531,7 +531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/27/linux-cmdline-edit-shortcuts/" data-id="cl3fxe7ap004520s63eo9ev63" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/27/linux-cmdline-edit-shortcuts/" data-id="cl3fxfxpd0046ags6e0d4e5q7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>

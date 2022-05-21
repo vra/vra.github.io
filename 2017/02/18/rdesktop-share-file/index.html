@@ -98,19 +98,19 @@
 <span id="more"></span>
 
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在Debian发行版上，可以直接用<code>apt-get</code>命令安装:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install rdesktop</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install rdesktop</span><br></pre></td></tr></table></figure>
 <p>别的发行版的安装方式请参看rdesktop项目的GitHub页面:<a target="_blank" rel="noopener" href="https://github.com/rdesktop/rdesktop">https://github.com/rdesktop/rdesktop</a>。</p>
 <h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>最简单的情况，如果你要连接到的Windows机器的IP地址是a.b.c.d, 需要以用户username登录，则可以这样运行rdesktop命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d</span><br></pre></td></tr></table></figure>
 <p>如果你想直接在命令里面使用用户的登录密码，则使用<code>-p</code>选项：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d -p my-password</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d -p my-password</span><br></pre></td></tr></table></figure>
 <p>如果你想设置登录后的窗口的大小，则采用<code>-g</code>选项：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d -p my-password -g 1200x900</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d -p my-password -g 1200x900</span><br></pre></td></tr></table></figure>
 <p>登录后你会感觉字体显示比较怪，看着很不舒服，可以使用<code>-x</code>选项来是字体变得光滑:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d -p my-password -g 1200x900 -x 0x80</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d -p my-password -g 1200x900 -x 0x80</span><br></pre></td></tr></table></figure>
 <p>其中<code>0x80</code>还可以改为<code>0x81</code>, <code>0x8F</code>,分别表示LAN default mode， broadband default mode 和 modem default mode,为不同的”RDP5 experience”。<br>以上就是基本的连接选项，也可以通过运行<code>rdesktop -h</code>命令来查看所有选项。  </p>
 <h3 id="共享文件"><a href="#共享文件" class="headerlink" title="共享文件"></a>共享文件</h3><p>一个常见的需求是在Windows和Linux系统上共享文件。Samba服务可以解决这个问题，但配置比较复杂。这里我们采用rdesktop来完成这个任务。<br>首先在Linux系统下创建一个目录，例如:<code>/home/username/Pictures</code>，然后在连接的时候采用<code>-r disk</code>选项来进行文件的共享：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d -p my-password -g 1200x900 -x 0x80 -r sound:<span class="built_in">local</span> -r disk:LinuxPictures=/home/username/Pictures</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -u username a.b.c.d -p my-password -g 1200x900 -x 0x80 -r sound:<span class="built_in">local</span> -r disk:LinuxPictures=/home/username/Pictures</span><br></pre></td></tr></table></figure>
 <p>这样在连接到Windows的时候，会在文件资源管理器里面，显示<code>LinuxPictures</code>目录。<br>这里有两个地方需要注意：</p>
 <ol>
 <li>命令中Linux目录的路径必须采用绝对路径，否则会出错。如上例中，将<code>/home/username/Pictures</code>改成<code>~/Pictures</code>则会报错。</li>
@@ -121,7 +121,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/02/18/rdesktop-share-file/" data-id="cl3fxe7bh006d20s6afme2f98" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/02/18/rdesktop-share-file/" data-id="cl3fxfxqc006jags6b4ykh4wh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RDP/" rel="tag">RDP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rdesktop/" rel="tag">rdesktop</a></li></ul>

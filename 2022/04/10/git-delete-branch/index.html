@@ -7,12 +7,12 @@
   
   <title>git 删除远程分支 | Yunfeng&#39;s Simple Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git可以方便地删除本地的某个分支。具体操作是：  切换到别的分支 执行git branch -d &lt;name-of-branch-to-delete&gt;  比如我想删除当前的dev-tmp分支: git checkout mastergit branch -d dev-tmp  上面的命令只删除了本地的分支，如果要删除远端的分支，该怎么操作呢？答案是用带有--delete选项的git">
+  <meta name="description" content="Git可以方便地删除本地的某个分支。具体操作是：  切换到别的分支 执行git branch -d &lt;name-of-branch-to-delete&gt;  比如我想删除当前的dev-tmp分支: 12git checkout mastergit branch -d dev-tmp  上面的命令只删除了本地的分支，如果要删除远端的分支，该怎么操作呢？答案是用带有--delete选项的gi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git 删除远程分支">
 <meta property="og:url" content="http://vra.github.io/2022/04/10/git-delete-branch/index.html">
 <meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
-<meta property="og:description" content="Git可以方便地删除本地的某个分支。具体操作是：  切换到别的分支 执行git branch -d &lt;name-of-branch-to-delete&gt;  比如我想删除当前的dev-tmp分支: git checkout mastergit branch -d dev-tmp  上面的命令只删除了本地的分支，如果要删除远端的分支，该怎么操作呢？答案是用带有--delete选项的git">
+<meta property="og:description" content="Git可以方便地删除本地的某个分支。具体操作是：  切换到别的分支 执行git branch -d &lt;name-of-branch-to-delete&gt;  比如我想删除当前的dev-tmp分支: 12git checkout mastergit branch -d dev-tmp  上面的命令只删除了本地的分支，如果要删除远端的分支，该怎么操作呢？答案是用带有--delete选项的gi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-10T09:55:35.000Z">
 <meta property="article:modified_time" content="2022-04-14T05:18:46.308Z">
@@ -98,16 +98,16 @@
 <li>执行<code>git branch -d &lt;name-of-branch-to-delete&gt;</code></li>
 </ol>
 <p>比如我想删除当前的<code>dev-tmp</code>分支:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git branch -d dev-tmp</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git branch -d dev-tmp</span><br></pre></td></tr></table></figure>
 
 <p>上面的命令只删除了本地的分支，如果要删除远端的分支，该怎么操作呢？答案是用带有<code>--delete</code>选项的<code>git push</code>命令，例如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete dev-tmp</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete dev-tmp</span><br></pre></td></tr></table></figure>
 <p>可以删除远端的<code>dev-tmp</code>分支。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/04/10/git-delete-branch/" data-id="cl3fxe7af003h20s6bf2o4kks" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/04/10/git-delete-branch/" data-id="cl3fxfxp00031ags6hsij8v47" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>

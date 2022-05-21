@@ -98,12 +98,12 @@
 <span id="more"></span>
 
 <p>为了使用<code>add-apt-repository</code>，需要先安装下面的包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install software-properties-common</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install software-properties-common</span><br></pre></td></tr></table></figure>
 
 <p>在Ubuntu的<a target="_blank" rel="noopener" href="https://launchpad.net/">包管理网站</a>上，有一个专门的PPA，维护了从Python2.3到Python3.8的二进制包，可以直接增加PPA源后安装Python:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:deadsnakes/ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y python3.7</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:deadsnakes/ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y python3.7</span><br></pre></td></tr></table></figure>
 <p>如果想要安装别的版本的Python，将上面的<code>3.7</code>改成对应的版本号即可：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install -y python3.6</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y python3.6</span><br></pre></td></tr></table></figure>
 
 <p>安装好对应的版本后，可以配合<a target="_blank" rel="noopener" href="https://docs.pipenv.org/en/latest/">Pipenv</a>一起使用，实现多版本Python的管理和包安装。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
@@ -114,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/05/03/ubuntu-install-python3-6-python3-7/" data-id="cl3fxe7c9008120s6bchbdehj" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/05/03/ubuntu-install-python3-6-python3-7/" data-id="cl3fxfxqv007zags6hpm9ftsw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>

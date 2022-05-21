@@ -7,12 +7,12 @@
   
   <title>关闭Caffe和TensorFlow运行时的日志输出 | Yunfeng&#39;s Simple Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简言之2条命令即可： # 在命令行下# Caffe$ GLOG_minloglevel&#x3D;2 caffe-command# Tensorflow$ TF_CPP_MIN_LOG_LEVEL&#x3D;3 tensorflow-command 或者在python文件中，import caffe或tensorflow之前，执行如下的语句： # 在Python文件中# Caffeimport osos.envrio">
+  <meta name="description" content="简言之2条命令即可： 12345# 在命令行下# Caffe$ GLOG_minloglevel&#x3D;2 caffe-command# Tensorflow$ TF_CPP_MIN_LOG_LEVEL&#x3D;3 tensorflow-command 或者在python文件中，import caffe或tensorflow之前，执行如下的语句： 12345678# 在Python文件中# Caffeimpor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关闭Caffe和TensorFlow运行时的日志输出">
 <meta property="og:url" content="http://vra.github.io/2017/12/11/caffe-tensorflow-log/index.html">
 <meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
-<meta property="og:description" content="简言之2条命令即可： # 在命令行下# Caffe$ GLOG_minloglevel&#x3D;2 caffe-command# Tensorflow$ TF_CPP_MIN_LOG_LEVEL&#x3D;3 tensorflow-command 或者在python文件中，import caffe或tensorflow之前，执行如下的语句： # 在Python文件中# Caffeimport osos.envrio">
+<meta property="og:description" content="简言之2条命令即可： 12345# 在命令行下# Caffe$ GLOG_minloglevel&#x3D;2 caffe-command# Tensorflow$ TF_CPP_MIN_LOG_LEVEL&#x3D;3 tensorflow-command 或者在python文件中，import caffe或tensorflow之前，执行如下的语句： 12345678# 在Python文件中# Caffeimpor">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-12-11T03:38:45.000Z">
 <meta property="article:modified_time" content="2021-08-20T15:48:01.029Z">
@@ -93,9 +93,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>简言之2条命令即可：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在命令行下</span></span><br><span class="line"><span class="comment"># Caffe</span></span><br><span class="line">$ GLOG_minloglevel=2 caffe-command</span><br><span class="line"><span class="comment"># Tensorflow</span></span><br><span class="line">$ TF_CPP_MIN_LOG_LEVEL=3 tensorflow-command</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在命令行下</span></span><br><span class="line"><span class="comment"># Caffe</span></span><br><span class="line">$ GLOG_minloglevel=2 caffe-command</span><br><span class="line"><span class="comment"># Tensorflow</span></span><br><span class="line">$ TF_CPP_MIN_LOG_LEVEL=3 tensorflow-command</span><br></pre></td></tr></table></figure>
 <p>或者在python文件中，<strong>import caffe或tensorflow之前</strong>，执行如下的语句：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在Python文件中</span></span><br><span class="line"><span class="comment"># Caffe</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.envrion[<span class="string">&#x27;GLOG_minloglevel&#x27;</span>] = <span class="string">&#x27;2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Tensorflow</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.envrion[<span class="string">&#x27;TF_CPP_MIN_LOG_LEVEL&#x27;</span>] = <span class="string">&#x27;3&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在Python文件中</span></span><br><span class="line"><span class="comment"># Caffe</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.envrion[<span class="string">&#x27;GLOG_minloglevel&#x27;</span>] = <span class="string">&#x27;2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Tensorflow</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.envrion[<span class="string">&#x27;TF_CPP_MIN_LOG_LEVEL&#x27;</span>] = <span class="string">&#x27;3&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>参考：</p>
 <ol start="0">
@@ -107,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/11/caffe-tensorflow-log/" data-id="cl3fxe79a000l20s67f1o8zr8" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/11/caffe-tensorflow-log/" data-id="cl3fxfxo2000lags63z3e3bir" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li></ul>

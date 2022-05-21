@@ -100,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/09/04/back-to-landscape/" data-id="cl3fxe790000720s6ecr9hltu" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/09/04/back-to-landscape/" data-id="cl3fxfxni0003ags6chrr25wm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" rel="tag">迁移记录</a></li></ul>
@@ -139,11 +139,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>C++ 耗时统计代码片段</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> std::chrono::milliseconds ms;</span><br><span class="line"><span class="keyword">using</span> clk = std::chrono::system_clock;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_my_work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// work code here</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> begin_time = clk::<span class="built_in">now</span>();</span><br><span class="line">    <span class="built_in">do_my_work</span>();</span><br><span class="line">	<span class="keyword">auto</span> end_time = clk::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> duration_nn = std::chrono::duration_cast&lt;ms&gt;(end_time - begin_time);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;timecost: &quot;</span> &lt;&lt; (<span class="keyword">double</span>)duration_nn.<span class="built_in">count</span>() &lt;&lt; <span class="string">&quot; ms&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> std::chrono::milliseconds ms;</span><br><span class="line"><span class="keyword">using</span> clk = std::chrono::system_clock;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_my_work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// work code here</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> begin_time = clk::<span class="built_in">now</span>();</span><br><span class="line">    <span class="built_in">do_my_work</span>();</span><br><span class="line">	<span class="keyword">auto</span> end_time = clk::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> duration_nn = std::chrono::duration_cast&lt;ms&gt;(end_time - begin_time);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;timecost: &quot;</span> &lt;&lt; (<span class="keyword">double</span>)duration_nn.<span class="built_in">count</span>() &lt;&lt; <span class="string">&quot; ms&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/09/04/cpp-time-count/" data-id="cl3fxe79p001b20s67wm5axrd" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/09/04/cpp-time-count/" data-id="cl3fxfxog0015ags63856b6fz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -190,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/28/vim-learn/" data-id="cl3fxe7c9008320s6eo5tddwa" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/28/vim-learn/" data-id="cl3fxfxqv0081ags69aqm5bvq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>
@@ -241,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/21/pytorch-cross-entropy/" data-id="cl3fxe7bg006720s675dr0ska" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/21/pytorch-cross-entropy/" data-id="cl3fxfxq8005xags6b26l2lfg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -297,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/08/21/blog-list/" data-id="cl3fxe792000a20s6g2b445bp" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/08/21/blog-list/" data-id="cl3fxfxnr0007ags67jew0u53" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
@@ -344,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/" data-id="cl3fxe7c1007q20s69ybi0vpf" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/03/21/torch-tensor-python-to-cpp/" data-id="cl3fxfxqn007mags6gqz40fl7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Libtorch/" rel="tag">Libtorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -392,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/02/02/doctest-intro/" data-id="cl3fxe79x002c20s6d2ddb0dr" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/02/02/doctest-intro/" data-id="cl3fxfxop002cags64kx3bwyg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unit-Test/" rel="tag">Unit Test</a></li></ul>
@@ -439,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/23/cpp-summary-stringview/" data-id="cl3fxe79m001120s6ef4xhdmc" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/23/cpp-summary-stringview/" data-id="cl3fxfxoe0012ags6civt5ogf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-17/" rel="tag">C++17</a></li></ul>
@@ -486,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/03/venv-intro/" data-id="cl3fxe7ca008d20s6beuy81a2" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/03/venv-intro/" data-id="cl3fxfxqx0088ags63h2e13v6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/venv/" rel="tag">venv</a></li></ul>
@@ -536,7 +536,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2021/01/02/summary-2020/" data-id="cl3fxe7c1007n20s652c0a6ll" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2021/01/02/summary-2020/" data-id="cl3fxfxqi007iags65zb8aon6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>

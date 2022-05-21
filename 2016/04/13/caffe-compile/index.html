@@ -7,12 +7,12 @@
   
   <title>caffe compilation troubleshooting | Yunfeng&#39;s Simple Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Issue 1When I compile caffe toolkit(actually, a caffe fork: lisa-caffe-public), I always encounter some errors like: Tab found; better use spaceLine should be &lt;&#x3D; 80 charactersMissing space before (">
+  <meta name="description" content="Issue 1When I compile caffe toolkit(actually, a caffe fork: lisa-caffe-public), I always encounter some errors like: 123Tab found; better use spaceLine should be &lt;&#x3D; 80 charactersMissing space befor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="caffe compilation troubleshooting">
 <meta property="og:url" content="http://vra.github.io/2016/04/13/caffe-compile/index.html">
 <meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
-<meta property="og:description" content="Issue 1When I compile caffe toolkit(actually, a caffe fork: lisa-caffe-public), I always encounter some errors like: Tab found; better use spaceLine should be &lt;&#x3D; 80 charactersMissing space before (">
+<meta property="og:description" content="Issue 1When I compile caffe toolkit(actually, a caffe fork: lisa-caffe-public), I always encounter some errors like: 123Tab found; better use spaceLine should be &lt;&#x3D; 80 charactersMissing space befor">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-04-13T10:45:47.000Z">
 <meta property="article:modified_time" content="2021-08-20T15:48:01.050Z">
@@ -93,7 +93,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Issue-1"><a href="#Issue-1" class="headerlink" title="Issue 1"></a>Issue 1</h2><p>When I compile caffe toolkit(actually, a caffe fork: lisa-caffe-public), I always encounter some errors like:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Tab found; better use space</span><br><span class="line">Line should be &lt;= 80 characters</span><br><span class="line">Missing space before ( <span class="keyword">in</span> <span class="keyword">if</span>( </span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Tab found; better use space</span><br><span class="line">Line should be &lt;= 80 characters</span><br><span class="line">Missing space before ( <span class="keyword">in</span> <span class="keyword">if</span>( </span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 <p>At the beginning, I thought these warnings  were caused by gcc/g++, so I googled but found few result about this question.<br>Then I read the manual of gcc. In the manual, I found some useful information:</p>
 <ol>
@@ -107,18 +107,18 @@
 <li>   Adding <code>-Wno-string</code> will not display warning information about <code>string</code>. For example, if <code>-Wno-div-by-zero</code>, then it will not warn if integer division by zero.</li>
 </ol>
 <p>So I try to review Makefile of caffe and comment some lines, but the warning information remain. The knowledge is useful, but can’t solve my problem.<br>After searching and searching, I finally found that it’s <a target="_blank" rel="noopener" href="https://github.com/google/styleguide/tree/gh-pages/cpplint">cpplint</a> that caused errors. Cpplint is automated checker to make sure a C++ file follows Google’s C++ style guide. So I checked the Makefile, and find a line like this:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">EVERYTHING_TARGETS := all py$(PROJECT) <span class="built_in">test</span> warn lint</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EVERYTHING_TARGETS := all py$(PROJECT) <span class="built_in">test</span> warn lint</span><br></pre></td></tr></table></figure>
 <p>Explain: <code>EVERYTHING_TARGETS</code> is target of command <code>make everything</code>. When compile caffe, we can just type <code>make everything</code> then gcc will do everything for us, including <code>make all</code>, <code>make test</code>, <code>make warn</code>, <code>make lint</code>.<br>So finally I got the simplest solution: just remove <code>lint</code> from this line and recompiled it. This time everything went well.</p>
 <h2 id="Issue-2"><a href="#Issue-2" class="headerlink" title="Issue 2"></a>Issue 2</h2><p>When I train network using lisa-caffe-public, I encounter error:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Unknown layer <span class="built_in">type</span>: Python</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unknown layer <span class="built_in">type</span>: Python</span><br></pre></td></tr></table></figure>
 <p>I searched about this question and found the answer <a target="_blank" rel="noopener" href="https://github.com/rbgirshick/fast-rcnn/issues/31">here</a>: <strong>uncomment WITH__PYTHON_LAYER: =1 in Makefile.config and recompile it.</strong><br>lisa-caffe-public is a fork of fast-rcnn, which is a fork of original caffe of BVLC. The developer of fast-rcnn use <code>Python layer</code> in his implementation and lisa’s caffe fork inherits it. In order to run the network correctly, we must use the flag when compiling the source code.  </p>
 <h2 id="Issue-3"><a href="#Issue-3" class="headerlink" title="Issue 3"></a>Issue 3</h2><p>Error message like this:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fatal error: caffe/proto/caffe.pb.h: No such file or directory</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal error: caffe/proto/caffe.pb.h: No such file or directory</span><br></pre></td></tr></table></figure>
 <p>caffe.pb.h is a header file generated by Google Protocol Buffer. <a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-cn-gpb/">Here</a> is a tutorial about it.  We must first generate it use commands below:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ protoc src/caffe/proto/caffe.proto --cpp_out=.</span><br><span class="line">$ mkdir include/caffe/proto</span><br><span class="line">$ mv src/caffe/proto/caffe.pb.h include/caffe/proto</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ protoc src/caffe/proto/caffe.proto --cpp_out=.</span><br><span class="line">$ mkdir include/caffe/proto</span><br><span class="line">$ mv src/caffe/proto/caffe.pb.h include/caffe/proto</span><br></pre></td></tr></table></figure>
 <p>Then compile again and we have the question solved.<br>Reference from <a target="_blank" rel="noopener" href="https://github.com/NVIDIA/DIGITS/issues/105">here</a></p>
 <h2 id="Issue-4"><a href="#Issue-4" class="headerlink" title="Issue 4"></a>Issue 4</h2><p>Error message like this:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Check failed: proto.SerializeToOstream(&amp;output)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Check failed: proto.SerializeToOstream(&amp;output)</span><br></pre></td></tr></table></figure>
 <p>This error happens when write snapshot to disk. There are three reasons that cause this error:</p>
 <ol>
 <li>The writing directory doesn’t exist</li>
@@ -127,13 +127,13 @@
 </ol>
 <p>You can check these 3 aspects.<br>Reference: <a target="_blank" rel="noopener" href="https://github.com/BVLC/caffe/issues/1394">https://github.com/BVLC/caffe/issues/1394</a></p>
 <h2 id="Issue-5"><a href="#Issue-5" class="headerlink" title="Issue 5"></a>Issue 5</h2><p>When use <a target="_blank" rel="noopener" href="https://github.com/rbgirshick/fast-rcnn">fast R-CNN</a>, got error like this:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Floating point exception(core dumped).</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Floating point exception(core dumped).</span><br></pre></td></tr></table></figure>
 <p>It’s like something about box size. the solution is add <code>filter_roidb</code> function in <code>lib/fast_rcnn/train.py</code> file, like <a target="_blank" rel="noopener" href="https://github.com/rbgirshick/py-faster-rcnn/blob/d66cc2bff142ca07f521db06ca3e9e10dbc8df20/lib/fast_rcnn/train.py#L127">here</a>.<br>Reference: <a target="_blank" rel="noopener" href="https://github.com/rbgirshick/py-faster-rcnn/issues/159">https://github.com/rbgirshick/py-faster-rcnn/issues/159</a></p>
 <h2 id="Issue-6"><a href="#Issue-6" class="headerlink" title="Issue 6"></a>Issue 6</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2016/04/13/caffe-compile/" data-id="cl3fxe799000j20s624pnachu" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2016/04/13/caffe-compile/" data-id="cl3fxfxnz000fags61eigc2os" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li></ul>

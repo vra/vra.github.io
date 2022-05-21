@@ -102,7 +102,7 @@
 <li>针对系统所有用户的配置文件，，所在路径为<code>/etc/ssh/ssh_config</code><br>参数重要性的顺序也是1&gt;2&gt;3，即越近的配置重要性越高。这里主要讲述第2种情况下的配置方式，即针对<code>~/.ssh/config</code>文件的写法进行说明。  </li>
 </ol>
 <p>一个示例的文件如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># configuration 1</span></span><br><span class="line">Host cluster</span><br><span class="line">	HostName 192.168.11.11</span><br><span class="line">	User tom</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># configuration 2</span></span><br><span class="line">Host=aliyun</span><br><span class="line">	Hostname=202.44.2.2</span><br><span class="line">	User tom</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># configuration 1</span></span><br><span class="line">Host cluster</span><br><span class="line">	HostName 192.168.11.11</span><br><span class="line">	User tom</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># configuration 2</span></span><br><span class="line">Host=aliyun</span><br><span class="line">	Hostname=202.44.2.2</span><br><span class="line">	User tom</span><br></pre></td></tr></table></figure>
 <p>主要的规则如下：</p>
 <ol>
 <li>每项配置都是<code>参数名 参数值</code>或<code>参数值=参数名</code>的形式，其中参数名不区分大小写，而参数值区分大小写，如上面的参数名<code>HostName</code>和<code>Hostname</code>是同一个参数</li>
@@ -111,11 +111,11 @@
 <li>同一个Host的配置内部，<code>参数名 参数值</code>和<code>参数值=参数名</code>的形式可以混用，如上例#2配置所示<br>下面详细展开常见的参数类型。</li>
 </ol>
 <h2 id="常见参数类型"><a href="#常见参数类型" class="headerlink" title="常见参数类型"></a>常见参数类型</h2><h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><p>类似昵称，用于标识某个特定的配置，在ssh命令中使用，例如我们想要ssh连接到上例中的#1配置的主机，则在命令行执行如下命令即可：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh cluster</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh cluster</span><br></pre></td></tr></table></figure>
 <p>一个最有用的场景是使用scp在不同主机间传数据。没有配置之间，你得写很长的参数，如</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp a.txt tom@192.168.11.11:~/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp a.txt tom@192.168.11.11:~/</span><br></pre></td></tr></table></figure>
 <p>尤其是IP地址记忆起来好麻烦啊。配置过上例中的文件后，这个任务可以简化成这样：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp a.txt cluster:~/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp a.txt cluster:~/</span><br></pre></td></tr></table></figure>
 <p>省略了用户名和IP地址，方便多了。  </p>
 <h3 id="HostName"><a href="#HostName" class="headerlink" title="HostName"></a>HostName</h3><p>需要ssh连接过去的主机名，一般是IP地址，也可以用<code>%h</code>来替代命令行参数，这种情况由于我用的不多，所以没有深入了解，具体情况可以参考参考链接。  </p>
 <h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><p>登录主机的用户名</p>
@@ -131,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/07/09/ssh-config/" data-id="cl3fxe7bq006r20s6fg9i59pe" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/07/09/ssh-config/" data-id="cl3fxfxqc006nags64mfg2eii" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>

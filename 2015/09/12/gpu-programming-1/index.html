@@ -116,9 +116,9 @@
 <li>指令级，如超标量就是通过增加流水线达到并行效果。</li>
 <li>数据级，如矢量运算。如下面代码：</li>
 </ol>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	C[i] = A[i] + B[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	C[i] = A[i] + B[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> 执行的时候可以通过矢量运算，将循环运算并行地计算，如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">C[<span class="number">0</span>] = A[<span class="number">0</span>] + B[<span class="number">0</span>];</span><br><span class="line">C[<span class="number">1</span>] = A[<span class="number">1</span>] + B[<span class="number">1</span>];</span><br><span class="line">C[<span class="number">2</span>] = A[<span class="number">2</span>] + B[<span class="number">2</span>];</span><br><span class="line">C[<span class="number">3</span>] = A[<span class="number">3</span>] + B[<span class="number">3</span>];</span><br><span class="line">C[<span class="number">4</span>] = A[<span class="number">4</span>] + B[<span class="number">4</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C[<span class="number">0</span>] = A[<span class="number">0</span>] + B[<span class="number">0</span>];</span><br><span class="line">C[<span class="number">1</span>] = A[<span class="number">1</span>] + B[<span class="number">1</span>];</span><br><span class="line">C[<span class="number">2</span>] = A[<span class="number">2</span>] + B[<span class="number">2</span>];</span><br><span class="line">C[<span class="number">3</span>] = A[<span class="number">3</span>] + B[<span class="number">3</span>];</span><br><span class="line">C[<span class="number">4</span>] = A[<span class="number">4</span>] + B[<span class="number">4</span>];</span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>线程级别的并行。每个CPU有1-2个活动线程。</li>
 </ol>
@@ -133,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2015/09/12/gpu-programming-1/" data-id="cl3fxe7ae003c20s69i7sb5e3" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2015/09/12/gpu-programming-1/" data-id="cl3fxfxp2003aags62wxjbm4w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GPU/" rel="tag">GPU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" rel="tag">并行计算</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li></ul>

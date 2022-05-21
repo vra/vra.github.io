@@ -100,23 +100,23 @@
 
 <h2 id="asciinema安装"><a href="#asciinema安装" class="headerlink" title="asciinema安装"></a>asciinema安装</h2><p>参照<a target="_blank" rel="noopener" href="https://asciinema.org/docs/installation">这里</a>的教程,常见的asciinema的安装方式有下面2种：</p>
 <ol>
-<li>通过系统的包管理软件安装<br>Debian:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install asciinema</span><br></pre></td></tr></table></figure>
-Ubuntu:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-add-repository ppa:zanchey/asciinema</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install asciinema</span><br></pre></td></tr></table></figure></li>
+<li>通过系统的包管理软件安装<br>Debian:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install asciinema</span><br></pre></td></tr></table></figure>
+Ubuntu:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-add-repository ppa:zanchey/asciinema</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install asciinema</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>2.通过pip3安装，需要先安装python3</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pip3 install asciinema</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip3 install asciinema</span><br></pre></td></tr></table></figure>
 
 <h2 id="asciinema使用"><a href="#asciinema使用" class="headerlink" title="asciinema使用"></a>asciinema使用</h2><p>安装好后，打开终端,输入<code>asciinema rec</code> 开始记录，按<code>Ctrl-D</code>结束记录。<br>结束记录后，会让你选择是否需要上传数据，如果选择<code>Y</code>,则会给出一个URL，点击该URL即可访问你刚才录的视频。<br>另外，你也可以在asciinema官网上注册帐号，这样你所有记录的数据都可以保存在上面，你可以通过<code>asciinema auth</code>来验证帐号。</p>
 <h2 id="在Hexo里面插入asciinema的视频"><a href="#在Hexo里面插入asciinema的视频" class="headerlink" title="在Hexo里面插入asciinema的视频"></a>在Hexo里面插入asciinema的视频</h2><p>假设你已经在本地安装好了Hexo博客系统而且已经通过asciinema录制好了视频<strong>并上传到asciinema网站上</strong>。<br>首先是通过<code>npm</code>安装<a target="_blank" rel="noopener" href="https://github.com/narongdejsrn/hexo-tag-asciinema">hexo-tag-asciinema</a>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-tag-asciinema </span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-tag-asciinema </span><br></pre></td></tr></table></figure>
 <p>然后在Hexo博客的<code>markdown</code>文件里面，使用下面的命令来插入视频:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;% asciinema video_id %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asciinema video_id %&#125;</span><br></pre></td></tr></table></figure>
 <p>其中<code>video_id</code>是你上传的视频的编号，比如你视频所在的页面是<code>https://asciinema.org/a/41100</code>, 那在<code>video_id</code>那里填<code>41100</code>。<br>然后保存markdown文件，执行<code>npm install</code>安装必要的包，再<code>hexo deploy</code>部署你的博客，就可以看到效果了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2016/11/14/test-asciinema/" data-id="cl3fxe7c1007p20s62p1l5ccz" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2016/11/14/test-asciinema/" data-id="cl3fxfxqi007kags611zwg8xr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/asciinema/" rel="tag">asciinema</a></li></ul>

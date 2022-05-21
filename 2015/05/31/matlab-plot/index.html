@@ -166,7 +166,7 @@
 <li>如果Y值是一个矩阵的时候，如果设定了<code>color</code>选项，怎对所有曲线，颜色都是设定的那种颜色；如果没设定<code>color</code>,则曲线颜色按上面所示颜色顺序依次往下选择。</li>
 </ol>
 <h3 id="设置曲线宽度-LineWidth"><a href="#设置曲线宽度-LineWidth" class="headerlink" title="设置曲线宽度:LineWidth"></a>设置曲线宽度:LineWidth</h3><p>曲线宽度设置好也是很重要的，默认的曲线太细，不美观，我们可以使用LineWidth来设置，其单位为点的大小,比如</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 
 <p>表示线宽是两倍的点大小。</p>
 <h3 id="设置标记大小-MarkerSize"><a href="#设置标记大小-MarkerSize" class="headerlink" title="设置标记大小:MarkerSize"></a>设置标记大小:MarkerSize</h3><p>标记大小表示前面设定的<code>marker symbol</code>的大小，单位为点的大小。</p>
@@ -184,31 +184,31 @@
 <li>grid off：隐藏网格</li>
 </ol>
 <h3 id="得到当前坐标轴Axis"><a href="#得到当前坐标轴Axis" class="headerlink" title="得到当前坐标轴Axis"></a>得到当前坐标轴Axis</h3><p><code>ax = gca;</code>:得到当前坐标轴，其中<code>gca</code>意为get current axis，实际是一个函数，只不过后面没加括号而已。<br>得到坐标轴后，就可以对图像进行一系列的设置。</p>
-<h3 id="设置网格线类型-GridLineStyle"><a href="#设置网格线类型-GridLineStyle" class="headerlink" title="设置网格线类型:GridLineStyle"></a>设置网格线类型:GridLineStyle</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">ax= gca;</span><br><span class="line">ax.GridLineStyle = <span class="string">&#x27;:&#x27;</span>; <span class="comment">%设置网格线为点线</span></span><br></pre></td></tr></table></figure>
+<h3 id="设置网格线类型-GridLineStyle"><a href="#设置网格线类型-GridLineStyle" class="headerlink" title="设置网格线类型:GridLineStyle"></a>设置网格线类型:GridLineStyle</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ax= gca;</span><br><span class="line">ax.GridLineStyle = <span class="string">&#x27;:&#x27;</span>; <span class="comment">%设置网格线为点线</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="设置网格线透明度：GridAlpha"><a href="#设置网格线透明度：GridAlpha" class="headerlink" title="设置网格线透明度：GridAlpha"></a>设置网格线透明度：GridAlpha</h3><p>默认透明度是0.15，可以使用GridAlpha来设置</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">ax = gca;</span><br><span class="line">ax.GridAlpha = <span class="number">0.5</span> <span class="comment">%设置透明度为0.5</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ax = gca;</span><br><span class="line">ax.GridAlpha = <span class="number">0.5</span> <span class="comment">%设置透明度为0.5</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="3-设置坐标轴"><a href="#3-设置坐标轴" class="headerlink" title="3. 设置坐标轴"></a>3. 设置坐标轴</h2><h3 id="设置坐标轴范围"><a href="#设置坐标轴范围" class="headerlink" title="设置坐标轴范围"></a>设置坐标轴范围</h3><p>可以用<code>axis([xStart xEnd yStart yEnd])</code>这样一条命令来设置坐标轴的范围。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">axis([<span class="number">0.1</span> <span class="number">0.6</span> <span class="number">0.5</span> <span class="number">0.8</span>]);<span class="comment">%x轴从0.1到0.6，y轴从0.5到0.8</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axis([<span class="number">0.1</span> <span class="number">0.6</span> <span class="number">0.5</span> <span class="number">0.8</span>]);<span class="comment">%x轴从0.1到0.6，y轴从0.5到0.8</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="设置坐标轴跨度"><a href="#设置坐标轴跨度" class="headerlink" title="设置坐标轴跨度"></a>设置坐标轴跨度</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">set(gca, <span class="string">&#x27;xtick&#x27;</span>,[xStart:xStep:xEnd]):设置x轴步长，从xStart开始，从xEnd结束，步长是xStep。</span><br><span class="line">set(gca, <span class="string">&#x27;ytick&#x27;</span>,[yStart:yStep:yEnd]):同X轴。</span><br></pre></td></tr></table></figure>
+<h3 id="设置坐标轴跨度"><a href="#设置坐标轴跨度" class="headerlink" title="设置坐标轴跨度"></a>设置坐标轴跨度</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set(gca, <span class="string">&#x27;xtick&#x27;</span>,[xStart:xStep:xEnd]):设置x轴步长，从xStart开始，从xEnd结束，步长是xStep。</span><br><span class="line">set(gca, <span class="string">&#x27;ytick&#x27;</span>,[yStart:yStep:yEnd]):同X轴。</span><br></pre></td></tr></table></figure>
 
 <h2 id="4-设置图标题和图中文字"><a href="#4-设置图标题和图中文字" class="headerlink" title="4. 设置图标题和图中文字"></a>4. 设置图标题和图中文字</h2><p>参考内容：</p>
 <p><a target="_blank" rel="noopener" href="http://www.mathworks.com/help/matlab/ref/legend.html">http://www.mathworks.com/help/matlab/ref/legend.html</a></p>
-<h3 id="设置图片标题：legend"><a href="#设置图片标题：legend" class="headerlink" title="设置图片标题：legend"></a>设置图片标题：legend</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;figure1&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="设置图片标题：legend"><a href="#设置图片标题：legend" class="headerlink" title="设置图片标题：legend"></a>设置图片标题：legend</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;figure1&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
-<h3 id="设置x-y轴坐标：x-ylabel"><a href="#设置x-y轴坐标：x-ylabel" class="headerlink" title="设置x/y轴坐标：x/ylabel"></a>设置x/y轴坐标：x/ylabel</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">xlabel(<span class="string">&#x27;\alpha&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;soccer&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="设置x-y轴坐标：x-ylabel"><a href="#设置x-y轴坐标：x-ylabel" class="headerlink" title="设置x/y轴坐标：x/ylabel"></a>设置x/y轴坐标：x/ylabel</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xlabel(<span class="string">&#x27;\alpha&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;soccer&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
 <h3 id="设置图中文字：text"><a href="#设置图中文字：text" class="headerlink" title="设置图中文字：text"></a>设置图中文字：text</h3><p>使用方法：text(xPos, yPos,’str’)</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">10</span></span><br><span class="line">	text(x(<span class="built_in">i</span>)+<span class="number">0.1</span>, y(<span class="built_in">i</span>)+<span class="number">0.3</span>, num2str(y(<span class="built_in">i</span>))); <span class="comment">%num2str：将数字转换为字符</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">10</span></span><br><span class="line">	text(x(<span class="built_in">i</span>)+<span class="number">0.1</span>, y(<span class="built_in">i</span>)+<span class="number">0.3</span>, num2str(y(<span class="built_in">i</span>))); <span class="comment">%num2str：将数字转换为字符</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>上面代码表示在(x+0.1, y+0.3)处显示y的值</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2015/05/31/matlab-plot/" data-id="cl3fxe7at004k20s6c23phe2v" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2015/05/31/matlab-plot/" data-id="cl3fxfxpl004iags689888aiw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matlab/" rel="tag">matlab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="tag">学习总结</a></li></ul>

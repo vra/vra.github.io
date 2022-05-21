@@ -7,12 +7,12 @@
   
   <title>Windows Subsystem for Linux 下 SSH permission error 解决 | Yunfeng&#39;s Simple Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在 Windows SubSystem for Linux (WSL) 下，使用 ssh 命令的时候报下面的错： Bad owner or permissions on &#x2F;home&#x2F;yunfeng&#x2F;.ssh&#x2F;config 搜索了一下，发现修改下 config 文件的权限就可以了： chmod 600 ~&#x2F;.ssh&#x2F;config  参考  https:&#x2F;&#x2F;github.com&#x2F;Microsoft&#x2F;W">
+  <meta name="description" content="在 Windows SubSystem for Linux (WSL) 下，使用 ssh 命令的时候报下面的错： 1Bad owner or permissions on &#x2F;home&#x2F;yunfeng&#x2F;.ssh&#x2F;config 搜索了一下，发现修改下 config 文件的权限就可以了： 1chmod 600 ~&#x2F;.ssh&#x2F;config  参考  https:&#x2F;&#x2F;github.com&#x2F;Microsoft">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows Subsystem for Linux 下 SSH permission error 解决">
 <meta property="og:url" content="http://vra.github.io/2020/03/04/wsl-ssh-permission-error/index.html">
 <meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
-<meta property="og:description" content="在 Windows SubSystem for Linux (WSL) 下，使用 ssh 命令的时候报下面的错： Bad owner or permissions on &#x2F;home&#x2F;yunfeng&#x2F;.ssh&#x2F;config 搜索了一下，发现修改下 config 文件的权限就可以了： chmod 600 ~&#x2F;.ssh&#x2F;config  参考  https:&#x2F;&#x2F;github.com&#x2F;Microsoft&#x2F;W">
+<meta property="og:description" content="在 Windows SubSystem for Linux (WSL) 下，使用 ssh 命令的时候报下面的错： 1Bad owner or permissions on &#x2F;home&#x2F;yunfeng&#x2F;.ssh&#x2F;config 搜索了一下，发现修改下 config 文件的权限就可以了： 1chmod 600 ~&#x2F;.ssh&#x2F;config  参考  https:&#x2F;&#x2F;github.com&#x2F;Microsoft">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-04T12:26:22.000Z">
 <meta property="article:modified_time" content="2021-08-20T15:48:01.015Z">
@@ -96,9 +96,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>在 Windows SubSystem for Linux (WSL) 下，使用 <code>ssh</code> 命令的时候报下面的错：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Bad owner or permissions on /home/yunfeng/.ssh/config</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bad owner or permissions on /home/yunfeng/.ssh/config</span><br></pre></td></tr></table></figure>
 <p>搜索了一下，发现修改下 <code>config</code> 文件的权限就可以了：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 600 ~/.ssh/config</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 ~/.ssh/config</span><br></pre></td></tr></table></figure>
 
 <p>参考</p>
 <ol>
@@ -108,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/04/wsl-ssh-permission-error/" data-id="cl3fxe7ek00iz20s618nz4p5k" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/03/04/wsl-ssh-permission-error/" data-id="cl3fxfxt100j5ags6gtrr9rpv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
