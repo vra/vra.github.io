@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-05-22T06:33:10.828Z</updated>
+  <updated>2022-05-28T01:50:56.052Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python importlib用法小结</title>
+    <link href="http://vra.github.io/2022/05/28/python-importlib-usage/"/>
+    <id>http://vra.github.io/2022/05/28/python-importlib-usage/</id>
+    <published>2022-05-27T23:31:46.000Z</published>
+    <updated>2022-05-28T01:50:56.052Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用Python的时候，大部分时候引入包，都是通过<code>import</code> 语句，比如<code>import numpy as np</code>。有时候为了更复杂的需求，我们需要用<strong>程序化</strong>的方式来引入包 (Programmatic Importing), 比如根据输入不同，选择执行两个不同包里面的同名函数，这时候就需要用到<code>importlib</code>这个库了。这里先从一个简单例子开始，逐渐深入地讲一下这个库的用法。</p><span id="more"></span><h2 id="import-module用法"><a href="#import-module用法" class="headerlink" title="import_module用法"></a>import_module用法</h2><p><code>importlib</code>是Python3.1增加的系统库，其中最常用的函数是其中的<code>import_module</code>，功能是用程序语句的方式替代<code>import</code>语句，用法如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 与 import time 效果一样</span></span><br><span class="line">time = importlib.import_module(<span class="string">&#x27;time&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(time.time())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 与 import os.path as path 效果一样</span></span><br><span class="line">path = importlib.import_module(<span class="string">&#x27;os.path&#x27;</span>)</span><br><span class="line">path.join(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)  <span class="comment"># results: &#x27;a/b&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 相对引入, 一级目录，与 import os.path as path 效果一样</span></span><br><span class="line">path = importlib.import_module(<span class="string">&#x27;.path&#x27;</span>, package=<span class="string">&#x27;os&#x27;</span>)</span><br><span class="line">path.join(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)  <span class="comment"># results: &#x27;a/b&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 相对引入，二级目录，与 import os.path as path 效果一样</span></span><br><span class="line">path = importlib.import_module(<span class="string">&#x27;..path&#x27;</span>, package=<span class="string">&#x27;os.time&#x27;</span>)</span><br><span class="line">path.join(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)  <span class="comment"># results: &#x27;a/b&#x27;</span></span><br></pre></td></tr></table></figure><p>注意最后的例子中，相对引入时需要在前面增加<code>.</code>或者<code>..</code>来表示相对目录，如果直接使用<code>importlib.import_module(&#39;path&#39;, package=&#39;os&#39;)</code>会报错。</p><p>如果光看这几个例子的话，貌似跟<code>import</code> 没什么区别，而且语句变得更复杂了，有点多此一举的感觉。</p><p>其实不是的，<strong>个人认为，<code>importlib</code>的强大之处是将<code>import</code>语句中写死的字面值改成了<code>import_module</code>函数中的参数，因此可以通过修改参数在外部用变量来控制实际import的包或者模块，大大地增加了灵活性。</strong> 下面会举一个稍微实用一些的例子。</p><h2 id="一个实际例子"><a href="#一个实际例子" class="headerlink" title="一个实际例子"></a>一个实际例子</h2><p>假设我们在设计一个深度学习工具库，里面包含了N个网络模型（ResNet50, HRNet, MobileNet等等），每个模型的实现都有一个<code>load_model</code>的函数。由于计算设备的性能不同，需要调用的网络结构也会变化，我们需要根据外部传入的参数来判断实际load哪一个模型。</p><p>虽然采用<code>import</code>语句+<code>if-else</code>判断也能完成这个需求，举例实现如下:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">model_name, <span class="built_in">input</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> model_name == <span class="string">&#x27;resnet_50&#x27;</span>:</span><br><span class="line">        <span class="keyword">from</span> resnet_50.model <span class="keyword">import</span> load_model</span><br><span class="line">    <span class="keyword">elif</span> model_name == <span class="string">&#x27;hrnet&#x27;</span>:</span><br><span class="line">        <span class="keyword">from</span> hrnet.model <span class="keyword">import</span> load_model</span><br><span class="line">    <span class="keyword">elif</span> model_name == <span class="string">&#x27;moblienet&#x27;</span>:</span><br><span class="line">        <span class="keyword">from</span> mobilenet.model <span class="keyword">import</span> load_model</span><br><span class="line"></span><br><span class="line">    model = load_model()</span><br><span class="line">    output = model(<span class="built_in">input</span>)</span><br><span class="line">    <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure><p>这种写法存在下面的两个问题：</p><ol><li>写法很冗余, N个模型的话需要添加2N条语句</li><li>新增模型时需要修改调用处的代码，添加对应的import语句，不符合模块化的要求。</li></ol><p>这时候采用<code>importlib</code>就能比较简洁地解决这个问题:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">model_name, <span class="built_in">input</span></span>):</span></span><br><span class="line">    load_model = importlib.import_module(<span class="string">&#x27;load_model&#x27;</span>, package=<span class="string">&#x27;&#123;&#125;.model&#x27;</span>.<span class="built_in">format</span>(model_name))</span><br><span class="line"></span><br><span class="line">    model = load_model()</span><br><span class="line">    output = model(<span class="built_in">input</span>)</span><br><span class="line">    <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure><p>可以看到在这种场景下<code>importlib</code>确实能大大简化代码。</p><p>了解这些内容，日常使用这个库就没什么问题了（好像<code>importlib</code>针对普通用户场景的函数貌似就只有<code>import_module</code>这一个），别的一些进阶的概念<del>在下个部分展开说一下</del>(由于不太懂，暂时不展开了)。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol><li><a href="https://docs.python.org/3/library/importlib.html">https://docs.python.org/3/library/importlib.html</a></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;在使用Python的时候，大部分时候引入包，都是通过&lt;code&gt;import&lt;/code&gt; 语句，比如&lt;code&gt;import numpy as np&lt;/code&gt;。有时候为了更复杂的需求，我们需要用&lt;strong&gt;程序化&lt;/strong&gt;的方式来引入包 (Programmatic Importing), 比如根据输入不同，选择执行两个不同包里面的同名函数，这时候就需要用到&lt;code&gt;importlib&lt;/code&gt;这个库了。这里先从一个简单例子开始，逐渐深入地讲一下这个库的用法。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>python的列表推导式和生成器表达式对比</title>
@@ -115,9 +136,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="多进程" scheme="http://vra.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
     
@@ -309,9 +330,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
@@ -332,9 +353,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
@@ -458,37 +479,6 @@
     <category term="错误汇总" scheme="http://vra.github.io/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
     
     <category term="neovim" scheme="http://vra.github.io/tags/neovim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mac 下 Unable to load OpenGL library 的解决办法</title>
-    <link href="http://vra.github.io/2021/11/04/mac-opengl-load-error/"/>
-    <id>http://vra.github.io/2021/11/04/mac-opengl-load-error/</id>
-    <published>2021-11-04T12:03:02.000Z</published>
-    <updated>2021-11-06T05:12:33.608Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在Mac上使用Pyrender时，出现了OpenGL无法加载的错误，具体复现情况如下:<br>打开Python的REPL, 输入下面的命令(前提是安装pyrender):</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyrender</span><br></pre></td></tr></table></figure><p>报下面的错：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raise ImportError(<span class="string">&quot;Unable to load OpenGL library&quot;</span>, *err.args)</span><br><span class="line">ImportError: (<span class="string">&#x27;Unable to load OpenGL library&#x27;</span>, <span class="string">&quot;dlopen(OpenGL, 0x000A): tried: &#x27;OpenGL&#x27; (no such file), &#x27;/usr/local/lib/OpenGL&#x27; (no such file), &#x27;/usr/lib/OpenGL&#x27; (no such file), &#x27;/usr/local/lib/OpenGL&#x27; (no such file), &#x27;/usr/lib/OpenGL&#x27; (no such file)&quot;</span>, <span class="string">&#x27;OpenGL&#x27;</span>, None)</span><br></pre></td></tr></table></figure><p>这里记录一下解决的办法。</p><span id="more"></span><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>解决办法比较简单，首先找到<code>OpenGL</code>的安装目录:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> python3 -c <span class="string">&quot;import OpenGL; print(OpenGL.__path__)&quot;</span></span><br><span class="line"> <span class="comment"># 输出路径</span></span><br><span class="line">[<span class="string">&#x27;/usr/local/lib/python3.7/site-packages/OpenGL&#x27;</span>]</span><br></pre></td></tr></table></figure><p>有了包路径后，修改包目录下的<code>platform/ctypesloader.py</code>文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/<span class="built_in">local</span>/lib/python3.7/site-packages/OpenGL/platform/ctypesloader.py</span><br></pre></td></tr></table></figure><p>将第35行注释掉，添加新的一行代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原先的代码</span></span><br><span class="line"><span class="comment">#fullName = util.find_library( name )</span></span><br><span class="line"><span class="comment"># 新的代码</span></span><br><span class="line">fullName = <span class="string">&#x27;/System/Library/Frameworks/OpenGL.framework/OpenGL&#x27;</span></span><br></pre></td></tr></table></figure><p>然后就可以正常运行了。<br>注意：不用确认路径<code>/System/Library/Frameworks/OpenGL.framework/OpenGL</code>是否存在，只需原样修改代码即可.</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol><li><a href="https://stackoverflow.com/questions/63475461/unable-to-import-opengl-gl-in-python-on-macos/64021312#64021312">https://stackoverflow.com/questions/63475461/unable-to-import-opengl-gl-in-python-on-macos/64021312#64021312</a></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;在Mac上使用Pyrender时，出现了OpenGL无法加载的错误，具体复现情况如下:&lt;br&gt;打开Python的REPL, 输入下面的命令(前提是安装pyrender):&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pyrender&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;报下面的错：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;raise ImportError(&lt;span class=&quot;string&quot;&gt;&amp;quot;Unable to load OpenGL library&amp;quot;&lt;/span&gt;, *err.args)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ImportError: (&lt;span class=&quot;string&quot;&gt;&amp;#x27;Unable to load OpenGL library&amp;#x27;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&amp;quot;dlopen(OpenGL, 0x000A): tried: &amp;#x27;OpenGL&amp;#x27; (no such file), &amp;#x27;/usr/local/lib/OpenGL&amp;#x27; (no such file), &amp;#x27;/usr/lib/OpenGL&amp;#x27; (no such file), &amp;#x27;/usr/local/lib/OpenGL&amp;#x27; (no such file), &amp;#x27;/usr/lib/OpenGL&amp;#x27; (no such file)&amp;quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&amp;#x27;OpenGL&amp;#x27;&lt;/span&gt;, None)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;这里记录一下解决的办法。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="macOS" scheme="http://vra.github.io/tags/macOS/"/>
-    
-    <category term="OpenGL" scheme="http://vra.github.io/tags/OpenGL/"/>
-    
-    <category term="错误汇总" scheme="http://vra.github.io/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
     
   </entry>
   

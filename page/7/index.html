@@ -68,6 +68,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-keras-callbacks-remote-monitor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/18/keras-callbacks-remote-monitor/" class="article-date">
+  <time datetime="2018-03-18T10:35:41.000Z" itemprop="datePublished">2018-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/18/keras-callbacks-remote-monitor/">Keras Callback之RemoteMonitor</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Keras提供了一系列的回调函数，用来在训练网络的过程中，查看网络的内部信息，或者控制网络训练的过程。<code>BaseLogger</code>、<code>ProgbarLogger</code>用来在命令行输出Log信息（默认会调用）， <code>EarlyStopping</code>、<code>ReduceLROnPlateu</code>分别用来提前终止训练和自动调整学习率，改变网络训练过程；而今天要介绍的<code>RemoteMonitor</code>则用来<strong>实时</strong>输出网络训练过程中的结果变化情况，包括训练集准确率(<code>accu</code>)、训练集损失值(<code>loss</code>)、验证集准确率(<code>val_acc</code>)、验证集损失值(<code>val_loss</code>)，用户也可以自己修改需要显示的数据。一图胜千言，看看下面的结果图吧：<br><img src="/imgs/keras_viz.png"></p>
+<p>这个图是在浏览器中打开得到，Keras使用了Flask搭建了一个简单的服务器，然后采用D3.js来可视化数据。下面详细介绍可视化的过程吧</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/03/18/keras-callbacks-remote-monitor/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/" data-id="cl3p7veu9003t4j21ayia4nd7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-linux-cmdline-edit-shortcuts" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/27/linux-cmdline-edit-shortcuts/" class="article-date">
@@ -99,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/27/linux-cmdline-edit-shortcuts/" data-id="cl3gxbezp0046xks60nz4a4cs" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/27/linux-cmdline-edit-shortcuts/" data-id="cl3p7veuc00454j217lpgc74f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>
@@ -146,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/20/paper-attentional-pooling/" data-id="cl3gxbf0e005jxks6cxd4a2a8" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/20/paper-attentional-pooling/" data-id="cl3p7veuz005u4j21fksmh1xz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Action-Recognition/" rel="tag">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention/" rel="tag">Attention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
@@ -193,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/13/pyqt5-code-snippets/" data-id="cl3gxbf0h005vxks6fmffbun2" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/13/pyqt5-code-snippets/" data-id="cl3p7vev000634j21c361gtju" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li></ul>
@@ -240,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/13/ubuntu-chinese/" data-id="cl3gxbf12007txks64jap9k4x" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/13/ubuntu-chinese/" data-id="cl3p7vevk007w4j218vog04g4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
@@ -287,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2018/01/05/summary-2017/" data-id="cl3gxbf0t0071xks639cg97kv" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2018/01/05/summary-2017/" data-id="cl3p7vevd007g4j21af0n3ypq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2017/" rel="tag">2017</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
@@ -340,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/11/caffe-tensorflow-log/" data-id="cl3gxbeye000jxks6e9c6eutr" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/11/caffe-tensorflow-log/" data-id="cl3p7vet4000l4j21ens94uaj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li></ul>
@@ -387,7 +435,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/04/opencv-custom/" data-id="cl3gxbf0c0059xks6bl9nh3k7" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/04/opencv-custom/" data-id="cl3p7veuv005d4j217rqk9xpf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li></ul>
@@ -443,7 +491,7 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/03/ubuntu-core-dump-debug/" data-id="cl3gxbf12007vxks69ivh7m5k" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/03/ubuntu-core-dump-debug/" data-id="cl3p7vevo00814j211cdk5le0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/" rel="tag">gdb</a></li></ul>
@@ -490,57 +538,10 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/12/02/argparse-usage/" data-id="cl3gxbey7000axks6gy328jio" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2017/12/02/argparse-usage/" data-id="cl3p7vet2000d4j2182851ben" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-py-faster-rcnn-update" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/15/py-faster-rcnn-update/" class="article-date">
-  <time datetime="2017-11-14T16:00:28.000Z" itemprop="datePublished">2017-11-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/15/py-faster-rcnn-update/">更新Faster-RCNN代码到最新版的caffe</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为CuDNN函数接口更新的原因，以前用低版本写的项目在新版本的CuDNN环境下编译就会出问题。例如，<a target="_blank" rel="noopener" href="https://github.com/rbgirshick/py-faster-rcnn">py-faster-rcnn</a>代码在最新版的CuDNN6上面编译时就会报错。<br>解决这个问题的一个方法是禁用CUDNN，即修改<code>Makefile.config</code>里面的第5行，在前面加<code>#</code>。这种方法没法使用CuDNN加速，不推荐。这里我们使用一种比较土的方法，即将使用了旧的CuDNN函数的文件都换成新的caffe里面的文件即可。  </p>
-        
-          <p class="article-more-link">
-            <a href="/2017/11/15/py-faster-rcnn-update/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2017/11/15/py-faster-rcnn-update/" data-id="cl3gxbf0f005pxks6ciw885v4" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
 
     </footer>
   </div>
@@ -610,6 +611,10 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
       <ul>
         
           <li>
+            <a href="/2022/05/28/python-importlib-usage/">python importlib用法小结</a>
+          </li>
+        
+          <li>
             <a href="/2022/05/22/python-list-comprehension-vs-generator-expression/">python的列表推导式和生成器表达式对比</a>
           </li>
         
@@ -623,10 +628,6 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
         
           <li>
             <a href="/2022/05/19/cpp-raii/">C++的RAII到底指的是什么</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/16/python-multiprocessing-queue-example/">Python Multiprocessing使用Queue的例子</a>
           </li>
         
       </ul>
