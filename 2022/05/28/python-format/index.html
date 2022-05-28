@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Python 字符串的format用法 | Yunfeng&#39;s Simple Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 引入我有一个朋友，某天突然问我：你知道下面的Python语句什么含义，结果是多少吗？ 1&amp;#x27;&amp;#123;:😄^+#20_x&amp;#125;&amp;#x27;.format(12345) 我一看，十脸懵逼，吓得赶紧学了学Python的Format字符串的用法，总算明白了这个语句的含义。你想了解这个语句到底是什么鬼吗，欢迎跟我一起学。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 字符串的format用法">
+<meta property="og:url" content="http://vra.github.io/2022/05/28/python-format/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 引入我有一个朋友，某天突然问我：你知道下面的Python语句什么含义，结果是多少吗？ 1&amp;#x27;&amp;#123;:😄^+#20_x&amp;#125;&amp;#x27;.format(12345) 我一看，十脸懵逼，吓得赶紧学了学Python的Format字符串的用法，总算明白了这个语句的含义。你想了解这个语句到底是什么鬼吗，欢迎跟我一起学。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-28T02:57:49.000Z">
+<meta property="article:modified_time" content="2022-05-28T07:06:38.873Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="总结">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Yunfeng&#39;s Simple Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Yunfeng&#39;s Simple Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vra.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python-format" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/28/python-format/" class="article-date">
+  <time datetime="2022-05-28T02:57:49.000Z" itemprop="datePublished">2022-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python 字符串的format用法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-引入"><a href="#1-引入" class="headerlink" title="1. 引入"></a>1. 引入</h2><p>我有一个朋友，某天突然问我：你知道下面的Python语句什么含义，结果是多少吗？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#123;:😄^+#20_x&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">12345</span>)</span><br></pre></td></tr></table></figure>
+<p>我一看，十脸懵逼，吓得赶紧学了学Python的Format字符串的用法，总算明白了这个语句的含义。你想了解这个语句到底是什么鬼吗，欢迎跟我一起学。</p>
+<span id="more"></span>
+
+<h2 id="2-整体说明"><a href="#2-整体说明" class="headerlink" title="2. 整体说明"></a>2. 整体说明</h2><p>Python的Format语法，可以用在两个场景：一个是<code>&#123;&#125;</code>.format中，另一个是f-string中，`f{xxx}’中，只不过后者支持外部定义的变量:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .format way 1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello &#123;&#125;!&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;World&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># .format way 2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello &#123;name&#125;!&#x27;</span>.<span class="built_in">format</span>(name=<span class="string">&#x27;World&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># f-string</span></span><br><span class="line">name = <span class="string">&#x27;World&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;Hello <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>为了应对更复杂的使用场景，Python设计了一套全面的语法，来涵盖所有的使用情况。具体来说，这套语法将一个Format 语句分成五部分，分别是:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&#123;&quot;</span> [字段名称部分] [<span class="string">&quot;!&quot;</span> 格式转换部分] [<span class="string">&quot;:&quot;</span> 格式规范部分] <span class="string">&quot;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+<p> 也就是左大括号和右大括号以及中间的核心三个部分, 其中方括号中的内容是可选的，也就是说最简单的format语法就是<code>&#123;&#125;</code>.format(‘xxx’)，会打印format后的第一个内容。</p>
+<p> 下面分开看看核心的三个部分。</p>
+<h2 id="字段名称部分"><a href="#字段名称部分" class="headerlink" title="字段名称部分"></a>字段名称部分</h2><p> 这一部分是用来定位要进行操作的变量。大括号中的编号对应这实际传入的参数，例如:<br> 采用关键字形式：<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;My name is &#123;name&#125;, I am &#123;age&#125; years old&#x27;</span>.<span class="built_in">format</span>(name=<span class="string">&#x27;Root&#x27;</span>, age=<span class="number">100</span>)</span><br><span class="line"><span class="comment"># My name is Root, I am 100 years old</span></span><br></pre></td></tr></table></figure><br> 这里的<code>&#123;name&#125;</code>对应format后面的关键字形式的参数name。</p>
+<p> 另一种是使用参数序号：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;My name is &#123;0&#125;, I am &#123;1&#125; years old&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;Root&#x27;</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment"># My name is Root, I am 100 years old</span></span><br></pre></td></tr></table></figure>
+<p> 这里的<code>&#123;0&#125;</code>对应<code>Root</code>, <code>&#123;1&#125;</code> 对应100，如果有更多的参数的话，编号按顺序往下继续。</p>
+<p> 注意这里的<code>&#123;idx&#125;</code>在字符串中可以出现任意次，且出现的顺序是任意的：<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#123;5&#125; &#123;5&#125; &#123;2&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>)</span><br><span class="line"><span class="comment"># f f c</span></span><br></pre></td></tr></table></figure></p>
+<p>如果下标越界的话，会报错:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#123;5&#125; &#123;5&#125; &#123;2&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">IndexError: Replacement index <span class="number">5</span> out of <span class="built_in">range</span> <span class="keyword">for</span> positional args <span class="built_in">tuple</span></span><br></pre></td></tr></table></figure>
+
+<p>另外一个特性是，可以忽略括号中的编号，这时候就按照从0开始的顺序来读取输入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下面的命令等效于 &#x27;My name is &#123;0&#125;, I am &#123;1&#125; years old&#x27;.format(&#x27;Root&#x27;, 100)</span></span><br><span class="line"><span class="string">&#x27;My name is &#123;&#125;, I am &#123;&#125; years old&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;Root&#x27;</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment"># My name is Root, I am 100 years old</span></span><br></pre></td></tr></table></figure>
+
+<p> 如果对复杂如列表或者字典，也可以使用下标或者属性来操作:<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 列表例子</span></span><br><span class="line">friends = [<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>]</span><br><span class="line"><span class="string">&#x27;&#123;0[0]&#125;&#x27;</span>.<span class="built_in">format</span>(friends)</span><br><span class="line"><span class="comment"># &#x27;foo`</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 字典例子</span></span><br><span class="line">info = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Root&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">100</span>&#125;</span><br><span class="line"><span class="string">&#x27;&#123;0[name]&#125;&#x27;</span>.<span class="built_in">format</span>(info)</span><br><span class="line"><span class="comment"># &#x27;Root&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 属性对象例子</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line">Person = namedtuple(<span class="string">&#x27;Person&#x27;</span>, [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>])</span><br><span class="line">p = Person(<span class="string">&#x27;Root&#x27;</span>, <span class="number">100</span>)</span><br><span class="line"><span class="string">&#x27;&#123;0.name&#125;&#x27;</span>.<span class="built_in">format</span>(p)</span><br><span class="line"><span class="comment"># &#x27;Root</span></span><br><span class="line">通过这些设置，能满足常见的需求。</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-格式转换部分"><a href="#3-格式转换部分" class="headerlink" title="3. 格式转换部分"></a>3. 格式转换部分</h2><p>这部分比较简单，在格式规范转换之前执行，通过感叹号加转换符号[r, s, a]之一，将原先的类型转换为字符串的类型，其中<code>!a</code> 表示对输入对象进行ascii()函数的调用，<code>!s</code>表示对输入对象进行str()函数的调用，而<code>!r</code>则调用repr()函数。</p>
+<h2 id="4-格式规范部分"><a href="#4-格式规范部分" class="headerlink" title="4 格式规范部分"></a>4 格式规范部分</h2><p>这部分是format格式中的大头，包含很多项设置，但都是可选的，例如上面的例子中我们都没有设置这部分。关于这部分的规范下面我们一一道来。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">format_spec     ::=  [[fill]align][sign][#][0][width][grouping_option][.precision][type]</span><br><span class="line">fill            ::=  &lt;any character&gt;</span><br><span class="line">align           ::=  &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;=&quot; | &quot;^&quot;</span><br><span class="line">sign            ::=  &quot;+&quot; | &quot;-&quot; | &quot; &quot;</span><br><span class="line">width           ::=  digit+</span><br><span class="line">grouping_option ::=  &quot;_&quot; | &quot;,&quot;</span><br><span class="line">precision       ::=  digit+</span><br><span class="line">type            ::=  &quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot; | &quot;E&quot; | &quot;f&quot; | &quot;F&quot; | &quot;g&quot; | &quot;G&quot; | &quot;n&quot; | &quot;o&quot; | &quot;s&quot; | &quot;x&quot; | &quot;X&quot; | &quot;%&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="4-1-fill-和align-填充和对齐部分"><a href="#4-1-fill-和align-填充和对齐部分" class="headerlink" title="4.1 fill 和align: 填充和对齐部分"></a>4.1 fill 和align: 填充和对齐部分</h3><p>这部分包括填充和对齐，填充部分是任意的一个字符，如’+’, ‘*’, 或者😄。不设置的话，默认使用空格来填充。对齐方式包括下面四种:</p>
+<ul>
+<li>“&lt;”: 左对齐<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以空格左对齐，长度为10位</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27;3.14      &#x27;</span></span><br><span class="line"><span class="comment"># 以星号左对齐，长度为10位</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:*&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27;3.14******&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“&gt;”：右对齐<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以空格右对齐，长度为10位</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:&gt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27;      3.14&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“=”：只对数值类型使用，表示对齐强制放到正负号和数值之间<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以星号数值对齐，长度为10位</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:*=10&#125;&#x27;</span>.<span class="built_in">format</span>(-<span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27;-*****3.14&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“^”: 居中对齐<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:*^10&#125;&#x27;</span>.<span class="built_in">format</span>(-<span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27;**-3.14***&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-2-sign-符号部分"><a href="#4-2-sign-符号部分" class="headerlink" title="4.2 sign: 符号部分"></a>4.2 sign: 符号部分</h3>这部分有三个选项；<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ <span class="string">&quot;+&quot;</span>: 正负号都加符号</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:+&#125; &#123;1:+&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">3.14</span>, -<span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27;+3.14 -3.14&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“-“: 只有负数前面才加符号<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:-&#125; &#123;1:-&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">3.14</span>, -<span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27;3.14 -3.14&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“ “: 正数前面加空格，负数前面加负号<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0: &#125; &#123;1: &#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">3.14</span>, -<span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27; 3.14 -3.14&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-3-进制表示位"><a href="#4-3-进制表示位" class="headerlink" title="4.3 #: 进制表示位"></a>4.3 #: 进制表示位</h3><p>使用<code>#</code>号结合不同的进制表示符号(下面详细展开)，会在进制前面增加对应的负号，如二进制前增加<code>0b</code>, 八进制前增加<code>0o</code>, 十六进制前增加<code>0x</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二进制</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:#b&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">233</span>)</span><br><span class="line"><span class="string">&#x27;0b11101001&#x27;</span></span><br><span class="line"><span class="comment"># 八进制</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:#o&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">233</span>)</span><br><span class="line"><span class="string">&#x27;0o351&#x27;</span></span><br><span class="line"><span class="comment"># 十进制</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:#d&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">233</span>)</span><br><span class="line"><span class="string">&#x27;233&#x27;</span></span><br><span class="line"><span class="comment"># 十六进制</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:#x&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">233</span>)</span><br><span class="line"><span class="string">&#x27;0xe9</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-width-显示的字符长度"><a href="#4-4-width-显示的字符长度" class="headerlink" title="4.4 width: 显示的字符长度"></a>4.4 width: 显示的字符长度</h3><p>这一部分表示显示多少位字符，包括pad的字符位。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 总长度为10位，不足的部分用默认的符号补齐</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">233</span>)</span><br><span class="line"><span class="string">&#x27;       233&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-5-grouping-option-千位的标识符号"><a href="#4-5-grouping-option-千位的标识符号" class="headerlink" title="4.5 grouping_option: 千位的标识符号"></a>4.5 grouping_option: 千位的标识符号</h3><p>这部分表示千位的标识符号，有<code>,</code>和<code>\_</code>两种选择:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:10,&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">23333333</span>)</span><br><span class="line"><span class="string">&#x27;23,333,333&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:10_&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">23333333</span>)</span><br><span class="line"><span class="string">&#x27;23_333_333&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-6-precision-数值精度"><a href="#4-6-precision-数值精度" class="headerlink" title="4.6 .precision: 数值精度"></a>4.6 .precision: 数值精度</h3><p>这个表示浮点数的精度位数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:.3&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">3.14159</span>)</span><br><span class="line"><span class="string">&#x27;3.14&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-7-type-格式类型"><a href="#4-7-type-格式类型" class="headerlink" title="4.7 type: 格式类型"></a>4.7 type: 格式类型</h3><p>这部分表示最终的展示类型，共有下面这些类:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot; | &quot;E&quot; | &quot;f&quot; | &quot;F&quot; | &quot;g&quot; | &quot;G&quot; | &quot;n&quot; | &quot;o&quot; | &quot;s&quot; | &quot;x&quot; | &quot;X&quot; | &quot;%&quot;</span><br></pre></td></tr></table></figure>
+<p>每种的解释如下:</p>
+<ul>
+<li>“b”: 二进制表示<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:b&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;1000</span></span><br></pre></td></tr></table></figure></li>
+<li>“c”: 只支持整数，将其转换为对应的unicode符号<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:c&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">23</span>)</span><br><span class="line"><span class="string">&#x27;\x17&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“d”: 十进制表示 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:d&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;8&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“e”: 科学计数法，采用小写的e<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:e&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;8.000000e+00&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“E”: 科学计数法，采用大写的E<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:E&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;8.000000E+00</span></span><br></pre></td></tr></table></figure></li>
+<li>“f”: 浮点数表示<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:f&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;8.000000&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“F”: 与”f”基本相同，除了将nan显示为NAN, inf显示为INF<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:F&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;8.000000&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“g”: 通用数据格式<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:g&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;8&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“G”: 通用数据格式<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:G&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;8&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“n”: 数值格式<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:n&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;8&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“o”: 八进制格式<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:o&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;10</span></span><br></pre></td></tr></table></figure></li>
+<li>“s”: 只能对字符串使用,字符串类型，默认输出类型，可以忽略<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:s&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&#x27;www&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;www&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&#x27;www&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;www&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“x”: 十六进制<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:#x&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;0x8&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“X”: 十六进制，符号标识采用大写的X <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:#X&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;0X8&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>“%”: 只对数值类型使用，以百分比的形式显示<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:%&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">8</span>)</span><br><span class="line"><span class="string">&#x27;800.000000%&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0:%&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">0.001</span>)</span><br><span class="line"><span class="string">&#x27;0.100000%&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5-解答开头的神秘符号串"><a href="#5-解答开头的神秘符号串" class="headerlink" title="5. 解答开头的神秘符号串"></a>5. 解答开头的神秘符号串</h2><p>有了上面的知识，我们就可以解开文章开头的的神秘符号串了:</p>
+<ol>
+<li>以笑脸符号作为pad的字符，且居中对齐，总长为20个符号</li>
+<li>在正数前面增加加号</li>
+<li>显示为16进制，并且显示前面的进制标注符号<br>结果如下:</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">&#x27;&#123;:😄^+#20_x&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">12345</span>)</span><br><span class="line"><span class="string">&#x27;😄😄😄😄😄😄+0x3039😄😄😄😄😄😄😄&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-参考"><a href="#6-参考" class="headerlink" title="6. 参考"></a>6. 参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/string.html">https://docs.python.org/3/library/string.html</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2022/05/28/python-format/" data-id="cl3pj575y0061in214kri4t2k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/05/28/python-importlib-usage/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python importlib用法小结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+  <section id="comments" class="vcomment">
+  </section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime-Text/">Sublime Text</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%9B%E5%AD%A3%E9%A3%8E%E7%89%A9/">四季风物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">学习总结</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/OpenCV/">OpenCV</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%91%E4%BB%AC%E7%9A%84%E8%AE%B0%E5%BD%95/">我们的记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%9D%E8%8A%B1%E5%A4%95%E6%8B%BE/">朝花夕拾</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9F%E8%AE%B0/">速记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/" rel="tag">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2017/" rel="tag">2017</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2019/" rel="tag">2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2021/" rel="tag">2021</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3D-CNN/" rel="tag">3D CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recognition/" rel="tag">Action Recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recogntion/" rel="tag">Action Recogntion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Action-Recongnition/" rel="tag">Action Recongnition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Amax/" rel="tag">Amax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Attention/" rel="tag">Attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BIOS/" rel="tag">BIOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-17/" rel="tag">C++17</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C3D/" rel="tag">C3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caffe/" rel="tag">Caffe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/" rel="tag">Computer Vision</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Detection/" rel="tag">Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Detectron2/" rel="tag">Detectron2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/" rel="tag">GPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gnome/" rel="tag">Gnome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinetics/" rel="tag">Kinetics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Libtorch/" rel="tag">Libtorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Make/" rel="tag">Make</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/" rel="tag">Motion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NeoVim/" rel="tag">NeoVim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NumCpp/" rel="tag">NumCpp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NumPy/" rel="tag">NumPy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nvidia/" rel="tag">Nvidia</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONNX/" rel="tag">ONNX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenMP/" rel="tag">OpenMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenPyxl/" rel="tag">OpenPyxl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/" rel="tag">PIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/" rel="tag">Paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pip/" rel="tag">Pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programmer/" rel="tag">Programmer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAID/" rel="tag">RAID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RDP/" rel="tag">RDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/" rel="tag">Segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Siamese-Network/" rel="tag">Siamese Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime-Text/" rel="tag">Sublime Text</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TSN/" rel="tag">TSN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Torchscript/" rel="tag">Torchscript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCF101/" rel="tag">UCF101</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UEFI/" rel="tag">UEFI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unit-Test/" rel="tag">Unit Test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vnc/" rel="tag">Vnc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E7%BC%96%E7%A8%8B/" rel="tag">Web编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wordpress/" rel="tag">Wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xfce/" rel="tag">Xfce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asciinema/" rel="tag">asciinema</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coloredlogs/" rel="tag">coloredlogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/" rel="tag">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leveldb/" rel="tag">leveldb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lmdb/" rel="tag">lmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/" rel="tag">macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matlab/" rel="tag">matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/misc/" rel="tag">misc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neovim/" rel="tag">neovim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rdesktop/" rel="tag">rdesktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/" rel="tag">venv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" rel="tag">博客备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" rel="tag">多进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="tag">学习总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" rel="tag">并行计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E8%AE%A1/" rel="tag">总计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%95%85%E6%83%B3/" rel="tag">技术畅想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%A9%BA%E9%97%B4/" rel="tag">数字空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" rel="tag">机器学习 总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" rel="tag">迁移记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9F%E8%AE%B0/" rel="tag">速记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" rel="tag">错误汇总</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2016/" style="font-size: 10px;">2016</a> <a href="/tags/2017/" style="font-size: 10px;">2017</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/3D-CNN/" style="font-size: 10px;">3D CNN</a> <a href="/tags/Action-Recognition/" style="font-size: 10px;">Action Recognition</a> <a href="/tags/Action-Recogntion/" style="font-size: 10.91px;">Action Recogntion</a> <a href="/tags/Action-Recongnition/" style="font-size: 10px;">Action Recongnition</a> <a href="/tags/Amax/" style="font-size: 10.91px;">Amax</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Attention/" style="font-size: 10px;">Attention</a> <a href="/tags/BIOS/" style="font-size: 10px;">BIOS</a> <a href="/tags/C/" style="font-size: 17.27px;">C++</a> <a href="/tags/C-17/" style="font-size: 10px;">C++17</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/C3D/" style="font-size: 10px;">C3D</a> <a href="/tags/CNN/" style="font-size: 11.82px;">CNN</a> <a href="/tags/CUDA/" style="font-size: 11.82px;">CUDA</a> <a href="/tags/Caffe/" style="font-size: 15.45px;">Caffe</a> <a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/Cygwin/" style="font-size: 10.91px;">Cygwin</a> <a href="/tags/Deep-Learning/" style="font-size: 16.36px;">Deep Learning</a> <a href="/tags/DeepLearning/" style="font-size: 10px;">DeepLearning</a> <a href="/tags/Detection/" style="font-size: 10px;">Detection</a> <a href="/tags/Detectron2/" style="font-size: 10px;">Detectron2</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Emacs/" style="font-size: 10px;">Emacs</a> <a href="/tags/GPU/" style="font-size: 14.55px;">GPU</a> <a href="/tags/Git/" style="font-size: 16.36px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Gnome/" style="font-size: 10px;">Gnome</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/Kinetics/" style="font-size: 10px;">Kinetics</a> <a href="/tags/Libtorch/" style="font-size: 10px;">Libtorch</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 11.82px;">Mac</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Motion/" style="font-size: 10px;">Motion</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/NeoVim/" style="font-size: 10.91px;">NeoVim</a> <a href="/tags/NumCpp/" style="font-size: 10px;">NumCpp</a> <a href="/tags/NumPy/" style="font-size: 10px;">NumPy</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Nvidia/" style="font-size: 10px;">Nvidia</a> <a href="/tags/ONNX/" style="font-size: 10px;">ONNX</a> <a href="/tags/OpenCV/" style="font-size: 11.82px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 11.82px;">OpenGL</a> <a href="/tags/OpenMP/" style="font-size: 10px;">OpenMP</a> <a href="/tags/OpenPyxl/" style="font-size: 10px;">OpenPyxl</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Paper/" style="font-size: 10px;">Paper</a> <a href="/tags/Paper-Reading/" style="font-size: 10px;">Paper Reading</a> <a href="/tags/Pip/" style="font-size: 10.91px;">Pip</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/PyQt5/" style="font-size: 10px;">PyQt5</a> <a href="/tags/Python/" style="font-size: 19.09px;">Python</a> <a href="/tags/Pytorch/" style="font-size: 13.64px;">Pytorch</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/RAID/" style="font-size: 10px;">RAID</a> <a href="/tags/RDP/" style="font-size: 10px;">RDP</a> <a href="/tags/SSH/" style="font-size: 10.91px;">SSH</a> <a href="/tags/Segmentation/" style="font-size: 10px;">Segmentation</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Siamese-Network/" style="font-size: 10px;">Siamese Network</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Sublime-Text/" style="font-size: 11.82px;">Sublime Text</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Torchscript/" style="font-size: 10px;">Torchscript</a> <a href="/tags/Trick/" style="font-size: 10.91px;">Trick</a> <a href="/tags/UCF101/" style="font-size: 10px;">UCF101</a> <a href="/tags/UEFI/" style="font-size: 10px;">UEFI</a> <a href="/tags/Ubuntu/" style="font-size: 15.45px;">Ubuntu</a> <a href="/tags/Unit-Test/" style="font-size: 10px;">Unit Test</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/Vim/" style="font-size: 13.64px;">Vim</a> <a href="/tags/Vnc/" style="font-size: 10px;">Vnc</a> <a href="/tags/WSL/" style="font-size: 10.91px;">WSL</a> <a href="/tags/Web%E7%BC%96%E7%A8%8B/" style="font-size: 10.91px;">Web编程</a> <a href="/tags/Windows/" style="font-size: 11.82px;">Windows</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a> <a href="/tags/Xfce/" style="font-size: 10px;">Xfce</a> <a href="/tags/asciinema/" style="font-size: 10px;">asciinema</a> <a href="/tags/coloredlogs/" style="font-size: 10px;">coloredlogs</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/g/" style="font-size: 10px;">g++</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/leveldb/" style="font-size: 10px;">leveldb</a> <a href="/tags/lmdb/" style="font-size: 10px;">lmdb</a> <a href="/tags/macOS/" style="font-size: 10.91px;">macOS</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/misc/" style="font-size: 10px;">misc</a> <a href="/tags/neovim/" style="font-size: 10px;">neovim</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/venv/" style="font-size: 10px;">venv</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%A4%87%E5%BF%98/" style="font-size: 10px;">博客备忘</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" style="font-size: 10px;">多进程</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">学习总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14.55px;">年终总结</a> <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" style="font-size: 12.73px;">并行计算</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 18.18px;">总结</a> <a href="/tags/%E6%80%BB%E8%AE%A1/" style="font-size: 10px;">总计</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%95%85%E6%83%B3/" style="font-size: 10px;">技术畅想</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%A9%BA%E9%97%B4/" style="font-size: 10px;">数字空间</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">机器学习 总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10.91px;">计算机视觉</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" style="font-size: 11.82px;">迁移记录</a> <a href="/tags/%E9%80%9F%E8%AE%B0/" style="font-size: 10px;">速记</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/" style="font-size: 10.91px;">错误汇总</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/28/python-format/">Python 字符串的format用法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/28/python-importlib-usage/">python importlib用法小结</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/22/python-list-comprehension-vs-generator-expression/">python的列表推导式和生成器表达式对比</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/deepl-showoff/">全世界最准确的翻译DeepL到底有多强? 一个有意思的例子</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/19/pytorch-mps-benchmark/">Pytorch Apple Silicon GPU 训练与测评</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Yunfeng Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+      el: '.vcomment',
+      notify: notify,
+      verify: verify,
+      appId: "EiUA70pL48Wjd8yCEOAvIoK8-gzGzoHsz",
+      appKey: "f6Q5F1wJURp4kCML7IwdhiRh",
+      placeholder: "欢迎留言交流~~",
+      pageSize: '10',
+      avatar: 'mm',
+      lang: 'zh-cn',
+      visitor: 'true'
+    });
+  </script>
+
+
+  </div>
+</body>
+</html>
