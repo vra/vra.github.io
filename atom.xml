@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-05-28T07:06:38.873Z</updated>
+  <updated>2022-05-29T14:29:26.112Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>提高你的信息获取信噪比：RSS in 2022</title>
+    <link href="http://vra.github.io/2022/05/29/rss-2022/"/>
+    <id>http://vra.github.io/2022/05/29/rss-2022/</id>
+    <published>2022-05-29T13:49:39.000Z</published>
+    <updated>2022-05-29T14:29:26.112Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在上学的时候，有一次听boj师兄介绍博客，至今还记得讲座中的一句话，博客能提高获取信息的信噪比。</p><p>在今天网络和社交媒体信息严重过载的情况下，如何集中自己的精力，将时间花到有用的事情上，进而提高工作效率，对我们每个人来说，都很有挑战。</p><p>为了获取真正有用的信息，第一步是过滤信息来源。最近发现基于RSS的信息获取方式是比较高效的，这里大致描述一下我目前采用的信息获取方案。</p><span id="more"></span><h1 id="2-RSS-介绍"><a href="#2-RSS-介绍" class="headerlink" title="2. RSS 介绍"></a>2. RSS 介绍</h1><p>基于RSS的信息获取需要有两个东西，一个是RSS阅读器，另一个就是订阅源。通过订阅，每次订阅源有新内容发表的话，阅读器都可以爬取，因此打开阅读器就能阅读最新的订阅内容，避免了一个个/一次次检查网站的问题，也能最快地看到感兴趣的内容。如果一个订阅源的内容长期不喜欢的话，可以取消订阅，减少噪声。（但这个是不是也会加剧信息茧房现象？)</p><p>RSS阅读器我目前采用的是inoreader，之前也用过feedly，不过都需要科学上网。如果你有更好的方案，欢迎评论指出。</p><p>订阅源就是内容的生产方的RSS链接，一般博客网站都有会RSS标志，点击复制网页，添加到阅读器中即可。</p><p>这里是我的一些订阅源和平时会看的网站，欢迎寻找对你有用的内容.</p><h3 id="2-1-纯粹的技术网站"><a href="#2-1-纯粹的技术网站" class="headerlink" title="2.1 纯粹的技术网站"></a>2.1 纯粹的技术网站</h3><p>hacker news是大家提到比较多的网站，内容挺丰富的。而lobste.rs是一个没怎么被提到但社区和谐、内容优质的computing为主的社区，很喜欢这种纯粹地讨论技术的网站，很多大牛也在其中出没。不过由于采用邀请制，门槛很高，像我们这样的一般人很难参与他们的讨论。</p><h3 id="2-2-知乎上大佬总结的订阅源"><a href="#2-2-知乎上大佬总结的订阅源" class="headerlink" title="2.2 知乎上大佬总结的订阅源"></a>2.2 知乎上大佬总结的订阅源</h3><p><a href="https://zhuanlan.zhihu.com/p/472781319">这里</a>是知乎上大佬总结的优质RSS源，可以根据你的喜爱添加到自己的阅读器。</p><h3 id="2-3-独立博客汇总"><a href="#2-3-独立博客汇总" class="headerlink" title="2.3 独立博客汇总"></a>2.3 独立博客汇总</h3><p><a href="https://github.com/timqian/chinese-independent-blogs">这里</a>是GitHub上开发者总结的中文独立博客列表，很长，但应该是有很多优质内容的，值得一一阅读品味再订阅。阅读个人的独立博客，像是认识跟自己有同样爱好的一个好友，看ta看问题的角度，解决问题的思路，分享的创造，都会带来惊喜。</p><p>最后愿这篇博客对你高效获取信息有所帮助!</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;在上学的时候，有一次听boj师兄介绍博客，至今还记得讲座中的一句话，博客能提高获取信息的信噪比。&lt;/p&gt;
+&lt;p&gt;在今天网络和社交媒体信息严重过载的情况下，如何集中自己的精力，将时间花到有用的事情上，进而提高工作效率，对我们每个人来说，都很有挑战。&lt;/p&gt;
+&lt;p&gt;为了获取真正有用的信息，第一步是过滤信息来源。最近发现基于RSS的信息获取方式是比较高效的，这里大致描述一下我目前采用的信息获取方案。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="RSS" scheme="http://vra.github.io/tags/RSS/"/>
+    
+    <category term="非技术" scheme="http://vra.github.io/tags/%E9%9D%9E%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>Python 字符串的format用法</title>
@@ -33,9 +58,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -54,9 +79,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -452,29 +477,6 @@
     <category term="macOS" scheme="http://vra.github.io/tags/macOS/"/>
     
     <category term="OpenGL" scheme="http://vra.github.io/tags/OpenGL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>检测Python代码中没有用到的函数和变量</title>
-    <link href="http://vra.github.io/2021/11/07/detect-unused-function-and-variable-in-python/"/>
-    <id>http://vra.github.io/2021/11/07/detect-unused-function-and-variable-in-python/</id>
-    <published>2021-11-07T11:57:22.000Z</published>
-    <updated>2021-11-07T12:09:02.560Z</updated>
-    
-    <content type="html"><![CDATA[<p>在重构Python代码的时候，需要统计有哪些函数和变量没有用到，搜索后发现一个简单的工具<a href="https://pypi.org/project/vulture/">vulture</a>，可以完成这个功能。 </p><p>操作也很简单, pip 安装包：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install vulture</span><br></pre></td></tr></table></figure><p>检测代码：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vulture tester.py</span><br></pre></td></tr></table></figure><p>输出大概是这样:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tester.py:19: unused import <span class="string">&#x27;time&#x27;</span> (90% confidence)</span><br><span class="line">tester.py:181: unused variable <span class="string">&#x27;raw_img&#x27;</span> (100% confidence)</span><br><span class="line">tester.py:300: unused method <span class="string">&#x27;run_on_video&#x27;</span> (60% confidence)</span><br><span class="line">tester.py:403: unused method <span class="string">&#x27;render_results&#x27;</span> (60% confidence)</span><br></pre></td></tr></table></figure><p>可以看到，每一行是一个检测结果，包含文件名称，行数，检测结果以及检测的置信度，可以根据这个输出来重构代码。</p><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol><li><a href="https://stackoverflow.com/questions/693070/how-can-you-find-unused-functions-in-python-code">https://stackoverflow.com/questions/693070/how-can-you-find-unused-functions-in-python-code</a></li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在重构Python代码的时候，需要统计有哪些函数和变量没有用到，搜索后发现一个简单的工具&lt;a href=&quot;https://pypi.org/project/vulture/&quot;&gt;vulture&lt;/a&gt;，可以完成这个功能。 &lt;/p&gt;
-&lt;p&gt;操作也很简单, pip 安装包：&lt;/p</summary>
-      
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
