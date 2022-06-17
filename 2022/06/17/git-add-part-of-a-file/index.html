@@ -5,11 +5,11 @@
   
 
   
-  <title>git 只提交一个文件中的部分修改 | Yunfeng&#39;s Simple Blog</title>
+  <title>git 提交文件中的部分修改 | Yunfeng&#39;s Simple Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1. 概述在 Git 提交一个文件的时候，有时候会在同一个文件中，包含两个不同功能的修改，或者一个功能完成了，而别的部分还没有完善不应该进入代码库，这时候如果使用git add file-name的话，会将这个文件中的所有更新都提交，达不到上述的需求。针对这种场景，git 提供了更细粒度的提交命令git add -p，可以分部分提交一个文件中的更新代码块，实测能满足常见的需求。这里简要记录一下如何">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git 只提交一个文件中的部分修改">
+<meta property="og:title" content="git 提交文件中的部分修改">
 <meta property="og:url" content="http://vra.github.io/2022/06/17/git-add-part-of-a-file/index.html">
 <meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
 <meta property="og:description" content="1. 概述在 Git 提交一个文件的时候，有时候会在同一个文件中，包含两个不同功能的修改，或者一个功能完成了，而别的部分还没有完善不应该进入代码库，这时候如果使用git add file-name的话，会将这个文件中的所有更新都提交，达不到上述的需求。针对这种场景，git 提供了更细粒度的提交命令git add -p，可以分部分提交一个文件中的更新代码块，实测能满足常见的需求。这里简要记录一下如何">
@@ -18,10 +18,10 @@
 <meta property="og:image" content="http://vra.github.io/imgs/git_add_part/git_part_add_2.jpg">
 <meta property="og:image" content="http://vra.github.io/imgs/git_add_part/git_part_add_2.jpg">
 <meta property="article:published_time" content="2022-06-17T15:19:36.000Z">
-<meta property="article:modified_time" content="2022-06-17T23:33:15.310Z">
+<meta property="article:modified_time" content="2022-06-17T23:56:04.419Z">
 <meta property="article:author" content="Yunfeng Wang">
-<meta property="article:tag" content="总结">
 <meta property="article:tag" content="Linux">
+<meta property="article:tag" content="总结">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://vra.github.io/imgs/git_add_part/git_hunk_vis.jpg">
@@ -89,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      git 只提交一个文件中的部分修改
+      git 提交文件中的部分修改
     </h1>
   
 
@@ -107,8 +107,8 @@
 <p>所有命令的含义如下:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">y - 将当前的hunk进行提交</span><br><span class="line">n - 不提交当前hunk</span><br><span class="line">q - 退出交互式界面，不提交当前hunk以及后面的所有hunk</span><br><span class="line">a - 提交当前hunk以及后面的所有hunk</span><br><span class="line">d - 不提交当前hunk以及后面的所有hunk，效果与q一样，也会退出交互式界面</span><br><span class="line">g - 选择一个hunk并跳转过去，输入后会列出所有hunk的编号，输入编号就跳转到对应的hunk</span><br><span class="line">/ - 输入一个正则表达式，选择一个包含搜索词的hunk进行跳转</span><br><span class="line">j - 暂时不确定是否保存当前hunk，跳转到下一个没确定的hunk</span><br><span class="line">J - 暂时不确定是否保存当前hunk，跳转到下一个hunk</span><br><span class="line">e - 手动修改hunk块的内容，将`-` 开头的行替换为 ` `则不会删去这行，删除`+`为首的行则不提交这个新增，以`<span class="comment">#`开始的行会被忽略</span></span><br><span class="line">? - 显示帮助信息 </span><br></pre></td></tr></table></figure>
 
-<p>详细阅读上面的说明，就能掌握这个命令的所有用法。</p>
-<p>常见的情况下，使用简单的<code>y</code>和<code>n</code>就能增加或者忽略当前hunk，如果hunk代码块太大，输入<code>s</code>会将其分割为小的hunk，继续进行操作。要退出则输入<code>q</code>。</p>
+<p>详细阅读上面的说明，结合实际的操作，就能掌握这个命令的所有用法。</p>
+<p>简单来说，使用<code>y</code>来提交当前hunk，使用<code>n</code>来忽略当前hunk，如果hunk代码块太大，输入<code>s</code>会将其分割为小的hunk，在上面继续操作，hunk间上下跳转用vim的快捷键<code>k</code> 和<code>j</code>，要退出则输入<code>q</code>。</p>
 <h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1085162/commit-only-part-of-a-file-in-git">https://stackoverflow.com/questions/1085162/commit-only-part-of-a-file-in-git</a></li>
 </ol>
@@ -116,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/06/17/git-add-part-of-a-file/" data-id="cl4j3786e002uq3s6e97paosb" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/06/17/git-add-part-of-a-file/" data-id="cl4j40egq002u3ps65740hlzv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -195,7 +195,7 @@
       <ul>
         
           <li>
-            <a href="/2022/06/17/git-add-part-of-a-file/">git 只提交一个文件中的部分修改</a>
+            <a href="/2022/06/17/git-add-part-of-a-file/">git 提交文件中的部分修改</a>
           </li>
         
           <li>
