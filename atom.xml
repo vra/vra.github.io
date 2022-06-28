@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-06-26T09:00:34.620Z</updated>
+  <updated>2022-06-28T14:42:50.650Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python转换elif语句为列表推导式</title>
+    <link href="http://vra.github.io/2022/06/28/python-list-comprehension-with-elif/"/>
+    <id>http://vra.github.io/2022/06/28/python-list-comprehension-with-elif/</id>
+    <published>2022-06-28T14:32:11.000Z</published>
+    <updated>2022-06-28T14:42:50.650Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>今天才发现，在Python的列表推导式里面，也可以使用多个else，也就是elif的情况，具体来说，可以将下面的一长串的elif 语句转换成一句列表推导式，大大简化代码:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> cond1:</span><br><span class="line">do1</span><br><span class="line"><span class="keyword">elif</span> cond2:</span><br><span class="line">do2</span><br><span class="line"><span class="keyword">elif</span> cond3:</span><br><span class="line">do3</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">do4</span><br></pre></td></tr></table></figure><p>转换成列表推导式如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = [do1 <span class="keyword">if</span> cond1 <span class="keyword">else</span> do2 <span class="keyword">if</span> cond2 <span class="keyword">else</span> do3 <span class="keyword">if</span> cond3 <span class="keyword">else</span> do4][<span class="number">0</span>]</span><br></pre></td></tr></table></figure><p>Python喜爱值+1，代码行数-N。</p><span id="more"></span><h2 id="2-几个例子"><a href="#2-几个例子" class="headerlink" title="2. 几个例子"></a>2. 几个例子</h2><p>原先代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a &gt; <span class="number">10</span>:</span><br><span class="line"><span class="keyword">return</span> <span class="string">&#x27;large&#x27;</span></span><br><span class="line"><span class="keyword">elif</span> a &gt; <span class="number">5</span>:</span><br><span class="line"><span class="keyword">return</span> <span class="string">&#x27;middle&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line"><span class="keyword">return</span> <span class="string">&#x27;small&#x27;</span></span><br></pre></td></tr></table></figure><p>可以转换为下面的形式：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = [<span class="string">&#x27;large&#x27;</span> <span class="keyword">if</span> a &gt; <span class="number">10</span> <span class="keyword">else</span> <span class="string">&#x27;middle&#x27;</span> <span class="keyword">if</span> a &gt; <span class="number">5</span> <span class="keyword">else</span> <span class="string">&#x27;small&#x27;</span>]</span><br></pre></td></tr></table></figure><p>任意多个elif都是可以的，下面的代码验证了两种写法结果是一致的:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span>(<span class="params">a</span>):</span></span><br><span class="line">    <span class="keyword">if</span> a &gt; <span class="number">0.9</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;a&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">0.7</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;b&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">0.5</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;c&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">0.3</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;d&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt;= <span class="number">0.1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;e&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span>(<span class="params">a</span>):</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="string">&#x27;a&#x27;</span> <span class="keyword">if</span> a &gt; <span class="number">0.9</span> <span class="keyword">else</span> <span class="string">&#x27;b&#x27;</span> <span class="keyword">if</span> a &gt; <span class="number">0.7</span> <span class="keyword">else</span> <span class="string">&#x27;c&#x27;</span> <span class="keyword">if</span> a &gt; <span class="number">0.5</span> <span class="keyword">else</span> <span class="string">&#x27;d&#x27;</span> <span class="keyword">if</span> a &gt; <span class="number">0.3</span> <span class="keyword">else</span> <span class="string">&#x27;e&#x27;</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    arr = np.random.rand(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> arr:</span><br><span class="line">        <span class="built_in">print</span>(func1(a) == func2(a))</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;今天才发现，在Python的列表推导式里面，也可以使用多个else，也就是elif的情况，具体来说，可以将下面的一长串的elif 语句转换成一句列表推导式，大大简化代码:&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; cond1:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	do1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;elif&lt;/span&gt; cond2:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	do2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;elif&lt;/span&gt; cond3:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	do3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	do4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;转换成列表推导式如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;res = [do1 &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; cond1 &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; do2 &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; cond2 &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; do3 &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; cond3 &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; do4][&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Python喜爱值+1，代码行数-N。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>Pytorch 拟合多项式的例子</title>
@@ -75,9 +100,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -156,9 +181,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -177,9 +202,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -282,9 +307,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="多进程" scheme="http://vra.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
     
@@ -458,29 +483,6 @@
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>从Python传递参数到C++</title>
-    <link href="http://vra.github.io/2022/03/20/cpp-read-binary-file-from-python/"/>
-    <id>http://vra.github.io/2022/03/20/cpp-read-binary-file-from-python/</id>
-    <published>2022-03-20T13:05:30.000Z</published>
-    <updated>2022-03-20T14:02:56.929Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>有些场景下，需要将Python里面计算得到的参数或者结果传入到C++来进行工程部署。一个常见问题是，Python该以什么格式 (二进制还是文本) 保存这些参数，然后从C++代码里面来读取呢，各有什么优劣？这里我们简单实验一下，并写一些趁手的代码，供查阅。</p><span id="more"></span><h2 id="二进制格式和文本格式对比"><a href="#二进制格式和文本格式对比" class="headerlink" title="二进制格式和文本格式对比"></a>二进制格式和文本格式对比</h2><p>假设我们有一组参数是存储在Numpy的<code>ndarray</code>格式中的，为了在C++中使用，我们需要保存它们到硬盘的文件中。一般有两种保存方法：二进制文件保存和文本文件保存。</p><p>假设我们有一个1024x1024的浮点型参数待保存：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">params = np.random.rand(<span class="number">1024</span>, <span class="number">1024</span>).astype(<span class="string">&#x27;float32&#x27;</span>)</span><br></pre></td></tr></table></figure><p>二进制保存很简单，直接调用Numpy的<code>tofile</code>文件即可：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">params.tofile(<span class="string">&quot;params.bin&quot;</span>)</span><br></pre></td></tr></table></figure><p>如果用文本文件保存，有两种保存方式，分别为调用<code>savetxt</code>函数和将每个值转换为<code>str</code>并用分隔符分开依次存入文件:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文本文件保存方式1</span></span><br><span class="line">np.savetxt(<span class="string">&quot;params_1.txt&quot;</span>, params)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文本文件保存方式2</span></span><br><span class="line">delimiter = <span class="string">&quot; &quot;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;params_2.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> params:</span><br><span class="line">        f.write(<span class="built_in">str</span>(p) + delimiter)</span><br></pre></td></tr></table></figure><p>猜猜看这三种情况分别大小是多少？</p><p>结论如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4.0M params.bin</span><br><span class="line">25M params_1.txt</span><br><span class="line">11M params_2.txt</span><br></pre></td></tr></table></figure><p>可以看到，二进制格式存储空间是最小的，分别是两种文本形式存储空间的16%和36%，存储压缩比例还是比较明显的。</p><p>因此推荐以二进制形式存储, 存储脚本简单总结如下:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># rand默认格式是float64，我们使用float32就可以</span></span><br><span class="line">params = np.random.rand(<span class="number">1024</span>, <span class="number">1024</span>).astype(<span class="string">&quot;float32&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉平成一维，为了在C++里面方便处理</span></span><br><span class="line">params = params.flatten()</span><br><span class="line"></span><br><span class="line">params.tofile(<span class="string">&quot;params.bin&quot;</span>)</span><br></pre></td></tr></table></figure><h2 id="C-读取二进制文件"><a href="#C-读取二进制文件" class="headerlink" title="C++ 读取二进制文件"></a>C++ 读取二进制文件</h2><p>C++ 去读二进制的代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">read_binary</span><span class="params">(<span class="keyword">const</span> std::string &amp;file_path, <span class="keyword">float</span> *data, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">  std::ifstream in_file;</span><br><span class="line">  in_file.<span class="built_in">open</span>(file_path, std::ios::binary | std::ios::in);</span><br><span class="line">  in_file.<span class="built_in">read</span>((<span class="keyword">char</span> *)data, size * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">float</span>));</span><br><span class="line">  in_file.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::string file_path = <span class="string">&quot;params.bin&quot;</span>;</span><br><span class="line">  <span class="keyword">int</span> size = <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用stack上空间来创建数组，有大小限制，不推荐</span></span><br><span class="line">  <span class="comment">// float params[size];</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用new来构建heap上空间, 无大小限制，但需要自己释放内存</span></span><br><span class="line">  <span class="keyword">float</span> *params = <span class="keyword">new</span> <span class="keyword">float</span>[size];</span><br><span class="line">  <span class="built_in">read_binary</span>(file_path, params, size);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 打印前10个参数</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    std::cout &lt;&lt; params[i] &lt;&lt; std::endl;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span>[] params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>注意新建数组的时候，有在栈上或者堆上构建两种方式，栈上构建有大小限制，如果数组维度太大就会报错，如下面的代码:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>运行会报错:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ g++ stack_over.cpp &amp;&amp; ./a.out</span><br><span class="line">[1]    89415 segmentation fault  ./a.out</span><br></pre></td></tr></table></figure><p>因此推荐用堆上创建数组，详见上述代码的注释。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;有些场景下，需要将Python里面计算得到的参数或者结果传入到C++来进行工程部署。一个常见问题是，Python该以什么格式 (二进制还是文本) 保存这些参数，然后从C++代码里面来读取呢，各有什么优劣？这里我们简单实验一下，并写一些趁手的代码，供查阅。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
-    <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
   </entry>
   
