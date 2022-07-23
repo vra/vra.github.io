@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-07-23T03:41:59.850Z</updated>
+  <updated>2022-07-23T16:06:51.950Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -17,13 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>linux-package-vs-package-dev</title>
+    <link href="http://vra.github.io/2022/07/23/linux-package-vs-package-dev/"/>
+    <id>http://vra.github.io/2022/07/23/linux-package-vs-package-dev/</id>
+    <published>2022-07-23T09:40:03.000Z</published>
+    <updated>2022-07-23T16:06:51.950Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-引入"><a href="#1-引入" class="headerlink" title="1. 引入"></a>1. 引入</h2><p>在安装包的时候，有时候需要安装<code>xxx</code>的包，有时候又需要安装<code>xxx-dev</code>的包 (在CentOS系列发行版上则是<code>xxx-devel</code>)。这两类包之间又什么区别呢？</p><span id="more"></span><h2 id="2-结论"><a href="#2-结论" class="headerlink" title="2. 结论"></a>2. 结论</h2><p>不包含<code>-dev</code>的包里面包含的是运行所需要的二进制文件或者连接库文件（如<code>xxx.so</code>），而包含<code>-dev</code>的包则包含包的源码文件（如<code>.h</code>文件），为的是在编译使用了这些库的程序的时候，能找到对应的头文件，否则只有二进制文件或者<code>.so</code>文件，编译时会报代码找不到头文件的错误。</p><p>下面举个例子进行说明。</p><p>我们只使用Python的话，用<code>sudo apt install python</code>即可，安装后就可以正常使用Python。</p><p>如果想要编译一个叫<a href="https://github.com/lxml/lxml">lxml</a>的库，它依赖Python的源码，例如<a href="https://github.com/lxml/lxml/blob/06631bb0677250cb632638a2c89f4d336360965b/src/lxml/includes/etree_defs.h#L5">这里</a>的代码依赖<code>Python.h</code>这个文件，因此我们需要安装<code>python-dev</code>包，把<code>Python.h</code>安装到本地上，这样lxml包才能正常安装。</p><h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ol><li><a href="https://stackoverflow.com/questions/2358801/what-are-devel-packages">https://stackoverflow.com/questions/2358801/what-are-devel-packages</a></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;1-引入&quot;&gt;&lt;a href=&quot;#1-引入&quot; class=&quot;headerlink&quot; title=&quot;1. 引入&quot;&gt;&lt;/a&gt;1. 引入&lt;/h2&gt;&lt;p&gt;在安装包的时候，有时候需要安装&lt;code&gt;xxx&lt;/code&gt;的包，有时候又需要安装&lt;code&gt;xxx-dev&lt;/code&gt;的包 (在CentOS系列发行版上则是&lt;code&gt;xxx-devel&lt;/code&gt;)。这两类包之间又什么区别呢？&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Ubuntu" scheme="http://vra.github.io/tags/Ubuntu/"/>
+    
+    <category term="Debian" scheme="http://vra.github.io/tags/Debian/"/>
+    
+    <category term="CentOS" scheme="http://vra.github.io/tags/CentOS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux小知识:apt install什么时候会出现 Do you want to continue?的提示</title>
     <link href="http://vra.github.io/2022/07/23/ubuntu-when-to-ask-do-you-want-to-continue/"/>
     <id>http://vra.github.io/2022/07/23/ubuntu-when-to-ask-do-you-want-to-continue/</id>
     <published>2022-07-23T03:17:27.000Z</published>
-    <updated>2022-07-23T03:41:59.850Z</updated>
+    <updated>2022-07-23T09:38:32.606Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="1-一个故事"><a href="#1-一个故事" class="headerlink" title="1. 一个故事"></a>1. 一个故事</h2><p>在大约十年以前，大二或大三的夏天，<a href="https://wzhd.org/">子浩</a> 在科大西区活动中心的自习室内，给我帮忙安装Linux系统。当时他问了一个问题，用<code>apt-get install</code> 安装包时，什么时候会弹出<code>Do you want to continue?Y/[n]</code>的提示呢？我当时说应该是包大小超过限制时会有这个提示吧，但我们随即验证了这个假设并不成立，安装一个很小的包也会有这个提示。当时没有得到明确的结论。</p><p>这个问题时不时在脑海中想起，每次想查一下弄个清楚，但始终是没做。这样十年过去了，近日终于又想起来，通过谷歌搜索，终于发现了StackOverflow上已经又同样疑问的人提问了，而且得到了解答。至此这个小疑问算是解决了，我也不用每次念念不忘了。</p><p>具体原因是什么，请见下节。</p><span id="more"></span><h2 id="2-谜底揭晓"><a href="#2-谜底揭晓" class="headerlink" title="2. 谜底揭晓"></a>2. 谜底揭晓</h2><p>根据<a href="https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357">这里</a>的回答，<code>Do you want to continue</code> 的提示会在下面几种情况下出现:</p><ol><li>当除了你要安装包外，有额外的依赖包需要被安装的时候，比如你执行的是<code>sudo apt install aaa</code>, 包 <code>aaa</code> 依赖 <code>bbb</code>，因此<code>bbb</code> 也需要被安装，这时候就会有提示</li><li>当现有包的版本要改变，比如机器上已经安装了<code>bbb-1.0.0</code>，而安装<code>aaa</code>需要安装<code>bbb-2.0.0</code>，这时候就会有提示</li><li>当基础包要被移除的时候，基础包大体意思是系统运行所需的最小软件包集，删除了就会导致系统运行出问题，详细的概念可以参考<a href="https://www.debian.org/doc/debian-policy/ch-binary.html#essential-packages">这里</a></li></ol><h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ol><li><a href="https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357">https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357</a></li><li><a href="https://unix.stackexchange.com/questions/70651/when-does-apt-get-install-ask-me-to-confirm-whether-i-want-to-continue-or-not">https://unix.stackexchange.com/questions/70651/when-does-apt-get-install-ask-me-to-confirm-whether-i-want-to-continue-or-not</a></li></ol>]]></content>
+    <content type="html"><![CDATA[<h2 id="1-一个故事"><a href="#1-一个故事" class="headerlink" title="1. 一个故事"></a>1. 一个故事</h2><p>在大约十年以前，大二或大三的夏天，<a href="https://wzhd.org/">子浩</a> 在科大西区活动中心的自习室内，给我帮忙安装Linux系统。当时他问了一个问题，用<code>apt-get install</code> 安装包时，什么时候会弹出<code>Do you want to continue?Y/[n]</code>的提示呢？我当时说应该是包大小超过限制时会有这个提示吧，但我们随即验证了这个假设并不成立，安装一个很小的包也会有这个提示。当时没有得到明确的结论。</p><p>这个问题时不时在脑海中想起，每次想查一下弄个清楚，但始终是没做。这样十年过去了，近日终于又想起来，通过谷歌搜索，终于发现了StackOverflow上已经又同样疑问的人提问了，而且得到了解答。至此这个小疑问算是解决了，我也不用每次念念不忘了。</p><p>具体原因是什么，请见下节。</p><span id="more"></span><h2 id="2-谜底揭晓"><a href="#2-谜底揭晓" class="headerlink" title="2. 谜底揭晓"></a>2. 谜底揭晓</h2><p>根据<a href="https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357">这里</a>的回答，<code>Do you want to continue</code> 的提示会在下面几种情况下出现:</p><ol><li>当除了你要安装包外，有额外的依赖包需要被安装的时候，比如你执行的是<code>sudo apt install aaa</code>, 包 <code>aaa</code> 依赖 <code>bbb</code>，因此<code>bbb</code> 也需要被安装，这时候就会有提示</li><li>当现有包的版本要改变，比如机器上已经安装了<code>bbb-1.0.0</code>，而安装<code>aaa</code>需要安装<code>bbb-2.0.0</code>，这时候就会有提示</li><li>当基础包要被移除的时候，基础包大体意思是系统运行所需的最小软件包集，删除了就会导致系统运行出问题，详细的概念可以参考<a href="https://www.debian.org/doc/debian-policy/ch-binary.html#essential-packages">这里</a></li></ol><p>常见的情况应该是第一种和第二种，第三种情况应该是只有<code>apt remove</code>才会出现。</p><h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ol><li><a href="https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357">https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357</a></li><li><a href="https://unix.stackexchange.com/questions/70651/when-does-apt-get-install-ask-me-to-confirm-whether-i-want-to-continue-or-not">https://unix.stackexchange.com/questions/70651/when-does-apt-get-install-ask-me-to-confirm-whether-i-want-to-continue-or-not</a></li></ol>]]></content>
     
     
     <summary type="html">&lt;h2 id=&quot;1-一个故事&quot;&gt;&lt;a href=&quot;#1-一个故事&quot; class=&quot;headerlink&quot; title=&quot;1. 一个故事&quot;&gt;&lt;/a&gt;1. 一个故事&lt;/h2&gt;&lt;p&gt;在大约十年以前，大二或大三的夏天，&lt;a href=&quot;https://wzhd.org/&quot;&gt;子浩&lt;/a&gt; 在科大西区活动中心的自习室内，给我帮忙安装Linux系统。当时他问了一个问题，用&lt;code&gt;apt-get install&lt;/code&gt; 安装包时，什么时候会弹出&lt;code&gt;Do you want to continue?Y/[n]&lt;/code&gt;的提示呢？我当时说应该是包大小超过限制时会有这个提示吧，但我们随即验证了这个假设并不成立，安装一个很小的包也会有这个提示。当时没有得到明确的结论。&lt;/p&gt;
@@ -460,31 +485,6 @@
     <category term="数字空间" scheme="http://vra.github.io/tags/%E6%95%B0%E5%AD%97%E7%A9%BA%E9%97%B4/"/>
     
     <category term="技术畅想" scheme="http://vra.github.io/tags/%E6%8A%80%E6%9C%AF%E7%95%85%E6%83%B3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git log 修改提交日期显示格式</title>
-    <link href="http://vra.github.io/2022/03/26/git-change-log-date-format/"/>
-    <id>http://vra.github.io/2022/03/26/git-change-log-date-format/</id>
-    <published>2022-03-26T13:34:49.000Z</published>
-    <updated>2022-03-26T13:54:44.559Z</updated>
-    
-    <content type="html"><![CDATA[<p>git log 默认显示的日期格式是欧美形式的，使用起来不太习惯，还得在大脑中进行一次转换，有点费脑。后来发现有办法可以修改日期显示格式，在git仓库下执行下面的命令即可：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config log.date iso</span><br></pre></td></tr></table></figure><p>如果要对所有的git仓库都起作用，添加<code>--global</code>选项即可。</p><p>另外输入<code>git config</code> 按tab键，可以显示所有的配置选项。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;git log 默认显示的日期格式是欧美形式的，使用起来不太习惯，还得在大脑中进行一次转换，有点费脑。后来发现有办法可以修改日期显示格式，在git仓库下执行下面的命令即可：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td </summary>
-      
-    
-    
-    
-    
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
-    <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
   </entry>
   
