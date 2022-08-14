@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-07-23T16:06:51.950Z</updated>
+  <updated>2022-08-14T04:23:44.047Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>linux-package-vs-package-dev</title>
+    <title>git合并另一个分支的某个文件到当前分支</title>
+    <link href="http://vra.github.io/2022/08/14/git-merge-file-from-another-branch/"/>
+    <id>http://vra.github.io/2022/08/14/git-merge-file-from-another-branch/</id>
+    <published>2022-08-14T03:14:26.000Z</published>
+    <updated>2022-08-14T04:23:44.047Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>使用Git时，有时候不同分支的文件是不同步的，因此如果想要把别的分支的文件改动应用到当前分支，应该怎么操作呢？如果两边都有更新，该如何选择合并呢？这篇小文会对不同情形下的合并进行一个简单的介绍。</p><span id="more"></span><h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p>假设我们当前在分支<code>branch1</code>, 需要将分支<code>branch2</code>上的<code>a.py</code>合并到当前分支。<br>根据<a href="https://vra.github.io/2021/09/25/git-copy-from-another-branch">之前写的这篇文章</a>，我们可以这么操作</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch2 -- a.py</span><br></pre></td></tr></table></figure><h2 id="两边都存在文件"><a href="#两边都存在文件" class="headerlink" title="两边都存在文件"></a>两边都存在文件</h2><p>现在换一个情况，假设分支<code>branch1</code>和<code>branch2</code>都有文件<code>a.py</code>，且分支<code>branch1</code>上的文件包含在<code>branch2</code>的内容里，那么采用上面的命令也还是可以的：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch2 -- a.py</span><br></pre></td></tr></table></figure><p>另外如果只想合并<code>branch2</code>上的文件的一部分更新到<code>branch1</code>，可以在<code>chekcout</code>后面增加<code>-p</code>或者<code>--patch</code>选项，交互式地选择要合并过来的代码块:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -p branch2 -- a.py</span><br></pre></td></tr></table></figure><p>交互式地操作命令同<code>git add -p</code>，可以参考<a href="https://vra.github.io/2022/06/17/git-add-part-of-a-file/">这里的文章</a>。</p><p>更复杂的情况是，分支<code>branch1</code>也有同名文件，且也有更新，如果直接使用<code>git checkout</code>的话，分支<code>branch2</code>上的文件会替代本地的文件，且没有任何提示（毕竟cheeckout的含义就是切换到某个分支）。因此为了保持本地的更新，需要增加<code>-p</code>选项。</p><p>这时候，会出现一种情况，本地的更新和远程的更新被放到一个块(hunk)里面，只能保留其中一个，此时就需要更精细的操作，在交互式环境中采用<code>e</code>命令来手动对hunk进行更新，去掉或增加代码的<code>+</code>或者<code>-</code>，具体可以参考<a href="https://stackoverflow.com/a/6290646">这个回答</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;使用Git时，有时候不同分支的文件是不同步的，因此如果想要把别的分支的文件改动应用到当前分支，应该怎么操作呢？如果两边都有更新，该如何选择合并呢？这篇小文会对不同情形下的合并进行一个简单的介绍。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux中的包名&quot;xxx&quot;和&quot;xxx-dev&quot;有什么区别?</title>
     <link href="http://vra.github.io/2022/07/23/linux-package-vs-package-dev/"/>
     <id>http://vra.github.io/2022/07/23/linux-package-vs-package-dev/</id>
     <published>2022-07-23T09:40:03.000Z</published>
-    <updated>2022-07-23T16:06:51.950Z</updated>
+    <updated>2022-08-14T03:13:41.706Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-引入"><a href="#1-引入" class="headerlink" title="1. 引入"></a>1. 引入</h2><p>在安装包的时候，有时候需要安装<code>xxx</code>的包，有时候又需要安装<code>xxx-dev</code>的包 (在CentOS系列发行版上则是<code>xxx-devel</code>)。这两类包之间又什么区别呢？</p><span id="more"></span><h2 id="2-结论"><a href="#2-结论" class="headerlink" title="2. 结论"></a>2. 结论</h2><p>不包含<code>-dev</code>的包里面包含的是运行所需要的二进制文件或者连接库文件（如<code>xxx.so</code>），而包含<code>-dev</code>的包则包含包的源码文件（如<code>.h</code>文件），为的是在编译使用了这些库的程序的时候，能找到对应的头文件，否则只有二进制文件或者<code>.so</code>文件，编译时会报代码找不到头文件的错误。</p><p>下面举个例子进行说明。</p><p>我们只使用Python的话，用<code>sudo apt install python</code>即可，安装后就可以正常使用Python。</p><p>如果想要编译一个叫<a href="https://github.com/lxml/lxml">lxml</a>的库，它依赖Python的源码，例如<a href="https://github.com/lxml/lxml/blob/06631bb0677250cb632638a2c89f4d336360965b/src/lxml/includes/etree_defs.h#L5">这里</a>的代码依赖<code>Python.h</code>这个文件，因此我们需要安装<code>python-dev</code>包，把<code>Python.h</code>安装到本地上，这样lxml包才能正常安装。</p><h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ol><li><a href="https://stackoverflow.com/questions/2358801/what-are-devel-packages">https://stackoverflow.com/questions/2358801/what-are-devel-packages</a></li></ol>]]></content>
     
@@ -200,9 +223,9 @@
     
     <category term="Computer Vision" scheme="http://vra.github.io/tags/Computer-Vision/"/>
     
-    <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
     <category term="Paper" scheme="http://vra.github.io/tags/Paper/"/>
+    
+    <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
     <category term="Pose Estimation" scheme="http://vra.github.io/tags/Pose-Estimation/"/>
     
@@ -461,30 +484,6 @@
     <category term="iOS" scheme="http://vra.github.io/tags/iOS/"/>
     
     <category term="Mac" scheme="http://vra.github.io/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数字永存的一些想法</title>
-    <link href="http://vra.github.io/2022/03/27/eternal-life/"/>
-    <id>http://vra.github.io/2022/03/27/eternal-life/</id>
-    <published>2022-03-27T14:15:43.000Z</published>
-    <updated>2022-03-27T15:26:00.883Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>自古以来，人类就在思考自己与自然的关系，思考短暂人生与永恒时空的对比。从《论语》中的”子在川上曰，逝者如斯夫，不舍昼夜“，再到苏轼在《赤壁赋》中的“哀吾生之须臾，羡长江之无穷“，都体现了古代智者对人生的生老病死的思考。在漫长的历史中，只有少部分知识精英的思考和言论被记录下来，而大部分人们身上发生的故事，则在历史长河中湮灭了。一个例子是，我连我曾祖父之前的祖先的叫什么名字都不知道。</p><p>另一方面，随着互联网的出现，人类在数字世界里面记录着生活中的一切，朋友圈里面的自拍，与家人朋友的合影，快手上的短视频等等，在记录生活的同时，有意或无意地构建着自己的数字人生。当一个人在现实生活中去世后，他在数字世界里面的资产，包括图片，视频，音频都还存在（但这种存在不是永久的，可能因为保存这些资产的公司的经营而消失），某种程度上是永生在数字世界里。但目前的形式还没有明确的数字空间与真实空间的界限，拍摄的内容也都是2D的，除了观看，没法进行更多的交互。而随着苹果等大公司积极地推动AR技术，虚拟Avatar等技术也越来越成熟，大家也更能接受虚拟的主播，虚拟的歌手，虚拟的朋友。</p><p>随着渲染技术、AI技术以及硬件技术的不断发展，元宇宙的概念被越来越多的人所了解。不管是应用于何种场景，在元宇宙的概念里，现实生活中的人有对应的数字化身。这个数字化身是数字永存的一个核心。</p><p>设想这样一个场景，当一个人在世时构建好完美的3D数字化身，包括穿着的衣服重建，长相，发音，步态识别，以及最重要的，对于问题的思考方式和回应方式，那么在他去世后，当有亲友来到他的纪念室时，通过计算机技术，可以渲染出跟真实长相一样的ta，也能智能地回答问题，甚至声音都一样，那ta可以就算永生了。</p><p>为什么要设想这样一个场景呢？一个想法时想让人类的存在都能被记录，被看见，因为每个人身上都有值得后人纪念记录都闪光点和独有的故事。另一个想法是给后来人一个认清自己从哪里来的机会，避免出现三代以上，一字未知的现象。最后还是希望每个人有重新回忆亲人的机会。</p><h2 id="设想的场景"><a href="#设想的场景" class="headerlink" title="设想的场景"></a>设想的场景</h2><p>设想的场景如下。每个人有一个包含自己数字资产的U盘，由家人保存。同时有专门的数字形象进行展示的场所（比如叫数字永存展览馆），可以进行数字资产的重建和展示。当家人想要了解ta的生活的时候，可以拿着U盘去数字永存展览馆，对ta进行重建，观看他在生活中某天画的画，和家人在一起的画面，劳动的场景，以及对生活的思考。同时结合3D地球重建，可以看ta开车去玩时的路两边的风景，去乐山大佛时的大佛在他身旁展示出来。另外可以告诉他最近的新闻，他也会以他的方式来进行回复，和你一起讨论。</p><h2 id="涉及的技术"><a href="#涉及的技术" class="headerlink" title="涉及的技术"></a>涉及的技术</h2><p>这个场景涉及到的技术其实现在都有一些技术实现了一部分，但距离满足上述的场景还估计有至少有数十年的路要走。具体来说，有下面的子任务：</p><ul><li>听力和发音重建，听力包括能否听得懂方言，普通话，英语等，发音包括口音</li><li>人体重建：包括不同年龄段的头发重建，人脸重建，身体重建，微表情重建</li><li>衣物重建：每个时代有不同的服饰风格，每个人有自己喜欢的衣服，穿过的衣服，也需要重建，才足够真实</li><li>步态识别与重建：每个人走路也是不同的，只有步态重建好了，与数字形象沟通时才足够有真实感</li><li>知识体系重建：了解哪些知识，擅长哪些方面</li><li>思维习惯重建：面对一个问题，ta会怎么回复，这些需要通过日常的对话来重建</li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总之这是一个有点难，有点意义，但可能也会面临很多问题的事情。结合元宇宙，以及最近看的Upload电视剧，和今早一篇微信文章想到的一些点，这里把它记录下来，作为人生的一点思考，一个小的脚注。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;自古以来，人类就在思考自己与自然的关系，思考短暂人生与永恒时空的对比。从《论语》中的”子在川上曰，逝者如斯夫，不舍昼夜“，再到苏轼在《赤壁赋</summary>
-      
-    
-    
-    
-    
-    <category term="数字空间" scheme="http://vra.github.io/tags/%E6%95%B0%E5%AD%97%E7%A9%BA%E9%97%B4/"/>
-    
-    <category term="技术畅想" scheme="http://vra.github.io/tags/%E6%8A%80%E6%9C%AF%E7%95%85%E6%83%B3/"/>
     
   </entry>
   
