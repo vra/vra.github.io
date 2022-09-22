@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-08-14T04:23:44.047Z</updated>
+  <updated>2022-09-22T15:31:31.134Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>简单好用的英文拼写检查工具codespell</title>
+    <link href="http://vra.github.io/2022/09/22/python-spell-checking-codespell/"/>
+    <id>http://vra.github.io/2022/09/22/python-spell-checking-codespell/</id>
+    <published>2022-09-22T15:14:39.000Z</published>
+    <updated>2022-09-22T15:31:31.134Z</updated>
+    
+    <content type="html"><![CDATA[<p>网上冲浪看到了一个简单好用的英语单词拼写检查工具 <a href="https://github.com/codespell-project/codespell">codespell</a>，测试发现真的好用，一键安装&amp;一键开箱使用，没有比这更美好的体验了，下面展开说下流程。</p><span id="more"></span><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>codespell 是用 Python 写的工具，因此直接使用pip安装即可:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install codespell</span><br></pre></td></tr></table></figure><p>输出应该类似如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Collecting codespell</span><br><span class="line">  Downloading codespell-2.2.1-py3-none-any.whl (202 kB)</span><br><span class="line">     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 202.1/202.1 kB 165.1 kB/s eta 0:00:00</span><br><span class="line">Installing collected packages: codespell</span><br><span class="line">Successfully installed codespell-2.2.1</span><br></pre></td></tr></table></figure><p>很简单。</p><h3 id="2-使用"><a href="#2-使用" class="headerlink" title="2. 使用"></a>2. 使用</h3><p>进一个包含英文文本的目录，比如你的源码根目录，或者文档目录，然后执行<code>codespell</code>, 就会检查当前目录下所有的文本，给出可能的拼写错误。</p><p>例如我clone一个我的GitHub 仓库，进去执行<code>codespell</code>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/vra/easybox</span><br><span class="line"><span class="built_in">cd</span> easybox</span><br><span class="line">codespell</span><br></pre></td></tr></table></figure><p>输出结果如下:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./README.md:10: termial ==&gt; terminal</span><br><span class="line">./README.md:53: termial ==&gt; terminal</span><br><span class="line">./easybox/main.py:41: Mimimal ==&gt; Minimal</span><br></pre></td></tr></table></figure><p>可以看到，markdown文件和Python文件中的一些拼写错误都被找出来了。</p><p>除了这么直接使用外，还可以在命令后面增加一些目录和路径的限定，比如<code>*.md</code> 只检查当前目录下的<code>.md</code>文件，<code>folder</code> 只检查文件夹<code>folder</code>下的所有文件，等等，都是Linux下的基本操作。</p><h3 id="3-原理"><a href="#3-原理" class="headerlink" title="3. 原理"></a>3. 原理</h3><p>这个工具的大致原理是将英文单词容易出错的情况写到代码库的数据中，然后在代码中进行匹配，所以不会出现别的工具那样，对变量命名的误判断，这是一个很好的特性。具体实现细节就需要查看<a href="https://github.com/codespell-project/codespell">源码</a>了，有空或许可以分析一下，写一个源码解读哈哈。</p><p>上面这些内容，对于普通人日常使用基本是够用了，关于codespell更多高级的配置选项，请参考GitHub上的<a href="https://github.com/codespell-project/codespell">README</a>文件中的说明。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;网上冲浪看到了一个简单好用的英语单词拼写检查工具 &lt;a href=&quot;https://github.com/codespell-project/codespell&quot;&gt;codespell&lt;/a&gt;，测试发现真的好用，一键安装&amp;amp;一键开箱使用，没有比这更美好的体验了，下面展开说下流程。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="工具" scheme="http://vra.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+    <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
+    
+  </entry>
   
   <entry>
     <title>git合并另一个分支的某个文件到当前分支</title>
@@ -31,9 +54,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -131,9 +154,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -196,9 +219,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -223,9 +246,9 @@
     
     <category term="Computer Vision" scheme="http://vra.github.io/tags/Computer-Vision/"/>
     
-    <category term="Paper" scheme="http://vra.github.io/tags/Paper/"/>
-    
     <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+    <category term="Paper" scheme="http://vra.github.io/tags/Paper/"/>
     
     <category term="Pose Estimation" scheme="http://vra.github.io/tags/Pose-Estimation/"/>
     
@@ -277,9 +300,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -298,9 +321,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -403,9 +426,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="多进程" scheme="http://vra.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
     
@@ -460,30 +483,6 @@
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Xcode无法安装ios程序的一种情况记录</title>
-    <link href="http://vra.github.io/2022/04/06/ios-cannot-install/"/>
-    <id>http://vra.github.io/2022/04/06/ios-cannot-install/</id>
-    <published>2022-04-06T06:06:46.000Z</published>
-    <updated>2022-04-10T09:55:05.439Z</updated>
-    
-    <content type="html"><![CDATA[<p>在用Xcode调试ios代码的时候，发现代码可以正常编译，但是安装到手机的时候，提示”App installation failed: Could not write to the device”。在网上找了很多回答，都没能解决。后来发现原因是在要复制到ios的目录中添加了一个软链接，导致出错。删除软链接后，安装正常。这应该是一个比较少见的原因，记录一下。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在用Xcode调试ios代码的时候，发现代码可以正常编译，但是安装到手机的时候，提示”App installation failed: Could not write to the device”。在网上找了很多回答，都没能解决。后来发现原因是在要复制到ios的目录中添加了</summary>
-      
-    
-    
-    
-    
-    <category term="iOS" scheme="http://vra.github.io/tags/iOS/"/>
-    
-    <category term="Mac" scheme="http://vra.github.io/tags/Mac/"/>
     
   </entry>
   
