@@ -82,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/04/callback-in-ctypes/">在ctypes的C++代码中调用Python函数</a>
+      <a class="article-title" href="/2022/10/04/callback-in-ctypes/">在ctypes的C共享库中调用Python函数</a>
     </h1>
   
 
@@ -90,7 +90,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>ctypes 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中，通过 ctypes 来调用函数，将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。</p>
+        <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/ctypes.html">ctypes</a> 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中，通过 ctypes 来调用函数，将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。</p>
 <p>现在有个更复杂的情况，我想要在C代码中调用Python中的某些函数来完成C代码的计算，比如在C代码的sort函数中，采用Python中定义的函数来进行大小判断。这个在Python中定义的函数在 ctypes 中称为回调函数 (callback function)。也就是说需要把Python函数当作变量传给C语言，想想还是有些难度。 但调查以后发现 ctypes 提供了 <code>CFUNCTYPE</code>来方便地进行回调函数定义，而C语言本身也是支持函数指针的，因此这个功能实现还算简单，具体展开如下。</p>
         
           <p class="article-more-link">
@@ -100,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/10/04/callback-in-ctypes/" data-id="cl8tpc8sb000wj3211gatbjuc" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/10/04/callback-in-ctypes/" data-id="cl8tpfo8m000puz21bgvwf4kc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
@@ -147,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/09/22/python-spell-checking-codespell/" data-id="cl8tpc8uf006uj3213cyleiez" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/09/22/python-spell-checking-codespell/" data-id="cl8tpfoau0073uz21gzaadn9k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
@@ -194,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/08/14/git-merge-file-from-another-branch/" data-id="cl8tpc8t7003lj321foxpao3i" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/08/14/git-merge-file-from-another-branch/" data-id="cl8tpfo9l003buz2173we9sv9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
@@ -241,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/07/23/linux-package-vs-package-dev/" data-id="cl8tpc8tj004cj32198uhca5m" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/07/23/linux-package-vs-package-dev/" data-id="cl8tpfo9x004cuz214w2befeh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
@@ -290,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/07/23/ubuntu-when-to-ask-do-you-want-to-continue/" data-id="cl8tpc8uy008wj321epl93h8l" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/07/23/ubuntu-when-to-ask-do-you-want-to-continue/" data-id="cl8tpfodl00k8uz216kip5ve7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
@@ -333,7 +333,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/06/29/surface-simplification-using-quadric-error-metrics/" data-id="cl8tpc8uv008fj32187zyaect" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/06/29/surface-simplification-using-quadric-error-metrics/" data-id="cl8tpfobb008muz21g3pb44s2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Graphic/" rel="tag">Graphic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -384,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/06/28/python-list-comprehension-with-elif/" data-id="cl8tpc8ue006jj3216ndu7szg" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/06/28/python-list-comprehension-with-elif/" data-id="cl8tpfoas006quz21fzgaf0qe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -431,7 +431,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/06/26/pytorch-fit-polynomial/" data-id="cl8tpc8ug0072j3218x8lbhrg" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/06/26/pytorch-fit-polynomial/" data-id="cl8tpfoay0077uz21eefc4woo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li></ul>
@@ -478,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/06/24/matplotlib-convert-opencv/" data-id="cl8tpc8tr0055j321h00s8ldt" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/06/24/matplotlib-convert-opencv/" data-id="cl8tpfoa2004xuz21a75l884z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
@@ -525,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/06/17/git-add-part-of-a-file/" data-id="cl8tpc8sw002xj321cztlbkxz" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/06/17/git-add-part-of-a-file/" data-id="cl8tpfo9e002uuz21dpmje14g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -598,7 +598,7 @@
       <ul>
         
           <li>
-            <a href="/2022/10/04/callback-in-ctypes/">在ctypes的C++代码中调用Python函数</a>
+            <a href="/2022/10/04/callback-in-ctypes/">在ctypes的C共享库中调用Python函数</a>
           </li>
         
           <li>

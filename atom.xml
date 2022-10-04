@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-10-04T04:29:39.481Z</updated>
+  <updated>2022-10-04T04:32:18.722Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -17,16 +17,16 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>在ctypes的C++代码中调用Python函数</title>
+    <title>在ctypes的C共享库中调用Python函数</title>
     <link href="http://vra.github.io/2022/10/04/callback-in-ctypes/"/>
     <id>http://vra.github.io/2022/10/04/callback-in-ctypes/</id>
     <published>2022-10-04T03:42:22.000Z</published>
-    <updated>2022-10-04T04:29:39.481Z</updated>
+    <updated>2022-10-04T04:32:18.722Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>ctypes 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中，通过 ctypes 来调用函数，将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。</p><p>现在有个更复杂的情况，我想要在C代码中调用Python中的某些函数来完成C代码的计算，比如在C代码的sort函数中，采用Python中定义的函数来进行大小判断。这个在Python中定义的函数在 ctypes 中称为回调函数 (callback function)。也就是说需要把Python函数当作变量传给C语言，想想还是有些难度。 但调查以后发现 ctypes 提供了 <code>CFUNCTYPE</code>来方便地进行回调函数定义，而C语言本身也是支持函数指针的，因此这个功能实现还算简单，具体展开如下。</p><span id="more"></span><h3 id="2-一个最简单例子"><a href="#2-一个最简单例子" class="headerlink" title="2. 一个最简单例子"></a>2. 一个最简单例子</h3><p>先从最简单例子开始，跑通整体流程。假设我们有个回调函数，判断int类型的输入是不是大于0，那么可以在C语言这么写:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my_lib.c</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> (*function_ptr)(<span class="keyword">int</span>) , <span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> function_ptr(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个文件内容很简单，我们定义了一个C函数<code>foo</code>，它调用Python传过来的回调函数，直接返回结果。</p><p>这里使用了C语言的函数指针类型，<code>int (function_ptr)(int)</code>中函数指针变量名是<code>function_ptr</code>, 返回值类型是前面的int，参数类型是后面的int。</p><p>我们在C语言里面只是简单地调用了Python传过来的函数指针，并直接将结果返回，实际使用时其实是需要在Python函数算完后，利用输出进行更多操作，否则直接在Python里面计算函数就可以了，没必要传函数到C，算法结果再返回给Python。</p><p>使用下面的命令来将上述C文件编程成共享库<code>my_lib.so</code>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -o my_lib.so my_lib.c</span><br></pre></td></tr></table></figure><p>这个命令会在当前目录下会生成<code>my_lib.so</code>。</p><p>然后在Python文件中定义这个回调函数的具体实现，以及调用共享库<code>my_lib.so</code>中定义的<code>foo</code>函数：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># file name: ctype_callback_demo.py</span></span><br><span class="line"><span class="keyword">import</span> ctypes <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> cdll</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义回调函数</span></span><br><span class="line"><span class="meta">@c.CFUNCTYPE(<span class="params">c.c_int, c.c_int</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback_func</span>(<span class="params">a</span>):</span></span><br><span class="line">    res = <span class="built_in">int</span>(a &gt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    a = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 载入共享库</span></span><br><span class="line">    lib = cdll.LoadLibrary(<span class="string">&#x27;./my_lib.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用共享库中的foo函数</span></span><br><span class="line">    res = lib.foo(callback_func, a)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125; &gt; 0 = &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(a, res))</span><br></pre></td></tr></table></figure><p>所有 magic 的事情都被 ctypes 这个库给做了，留给我们的都是比较简单的接口。</p><p><code>@c.CFUNCTYPE</code> 这个装饰器就是用来声明回调函数的，装饰器的第一个参数是函数的返回类型，第二个参数开始，就是回调函数自己的参数的类型。如果回调函数没有返回值，那<code>@c.CFUNCTYPE</code>后面的第一个参数设置为<code>None</code>。</p><p>然后执行这个Python脚本，可以得到下面的输出:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python ctype_callback_demo.py</span><br><span class="line">2 &gt; 0 = 1</span><br></pre></td></tr></table></figure><h3 id="3-Numpy-ndarray-类型的参数如何使用"><a href="#3-Numpy-ndarray-类型的参数如何使用" class="headerlink" title="3. Numpy.ndarray 类型的参数如何使用"></a>3. Numpy.ndarray 类型的参数如何使用</h3><p>ctypes 对 Python原生类型支持是没问题的，但我们还会经常用到Numpy的ndarray对象，它们该如何转换为C语言可以识别的类型呢？因为跨语言的类型转换不对的话，结果就会有问题。</p><p>Numpy 提供了 numpy.ndarray.ctypes 属性，可以来完成这个操作。</p><p>比如C文件中，需要一个float 指针类型的输入:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my_lib.c</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> (*function_ptr)(<span class="keyword">float</span>*) , <span class="keyword">float</span>* a)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">function_ptr</span>(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们需要将Numpy.ndarray对象进行转换，传给C函数:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取C的float指针类型</span></span><br><span class="line">c_float_p = ctypes.POINTER(ctypes.c_float)</span><br><span class="line"></span><br><span class="line">data = np.random.rand(<span class="number">3</span>, <span class="number">3</span>).astype(np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将np.ndarray 对象的类型转换为C的float指针类型</span></span><br><span class="line">data_p = data.ctypes.data_as(c_float_p)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用共享库中的foo函数</span></span><br><span class="line">my_lib.foo(data_p)</span><br></pre></td></tr></table></figure><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol><li><a href="https://docs.python.org/3/library/ctypes.html#callback-functions">https://docs.python.org/3/library/ctypes.html#callback-functions</a></li><li><a href="https://stackoverflow.com/questions/3195660/how-to-use-numpy-array-with-ctypes">https://stackoverflow.com/questions/3195660/how-to-use-numpy-array-with-ctypes</a></li></ol>]]></content>
+    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a href="https://docs.python.org/3/library/ctypes.html">ctypes</a> 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中，通过 ctypes 来调用函数，将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。</p><p>现在有个更复杂的情况，我想要在C代码中调用Python中的某些函数来完成C代码的计算，比如在C代码的sort函数中，采用Python中定义的函数来进行大小判断。这个在Python中定义的函数在 ctypes 中称为回调函数 (callback function)。也就是说需要把Python函数当作变量传给C语言，想想还是有些难度。 但调查以后发现 ctypes 提供了 <code>CFUNCTYPE</code>来方便地进行回调函数定义，而C语言本身也是支持函数指针的，因此这个功能实现还算简单，具体展开如下。</p><span id="more"></span><h3 id="2-一个最简单例子"><a href="#2-一个最简单例子" class="headerlink" title="2. 一个最简单例子"></a>2. 一个最简单例子</h3><p>先从最简单例子开始，跑通整体流程。假设我们有个回调函数，判断int类型的输入是不是大于0，那么可以在C语言这么写:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my_lib.c</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> (*function_ptr)(<span class="keyword">int</span>) , <span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> function_ptr(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个文件内容很简单，我们定义了一个C函数<code>foo</code>，它调用Python传过来的回调函数，直接返回结果。</p><p>这里使用了C语言的函数指针类型，<code>int (function_ptr)(int)</code>中函数指针变量名是<code>function_ptr</code>, 返回值类型是前面的int，参数类型是后面的int。</p><p>我们在C语言里面只是简单地调用了Python传过来的函数指针，并直接将结果返回，实际使用时其实是需要在Python函数算完后，利用输出进行更多操作，否则直接在Python里面计算函数就可以了，没必要传函数到C，算法结果再返回给Python。</p><p>使用下面的命令来将上述C文件编程成共享库<code>my_lib.so</code>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -o my_lib.so my_lib.c</span><br></pre></td></tr></table></figure><p>这个命令会在当前目录下会生成<code>my_lib.so</code>。</p><p>然后在Python文件中定义这个回调函数的具体实现，以及调用共享库<code>my_lib.so</code>中定义的<code>foo</code>函数：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># file name: ctype_callback_demo.py</span></span><br><span class="line"><span class="keyword">import</span> ctypes <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> cdll</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义回调函数</span></span><br><span class="line"><span class="meta">@c.CFUNCTYPE(<span class="params">c.c_int, c.c_int</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback_func</span>(<span class="params">a</span>):</span></span><br><span class="line">    res = <span class="built_in">int</span>(a &gt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    a = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 载入共享库</span></span><br><span class="line">    lib = cdll.LoadLibrary(<span class="string">&#x27;./my_lib.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用共享库中的foo函数</span></span><br><span class="line">    res = lib.foo(callback_func, a)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125; &gt; 0 = &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(a, res))</span><br></pre></td></tr></table></figure><p>所有 magic 的事情都被 ctypes 这个库给做了，留给我们的都是比较简单的接口。</p><p><code>@c.CFUNCTYPE</code> 这个装饰器就是用来声明回调函数的，装饰器的第一个参数是函数的返回类型，第二个参数开始，就是回调函数自己的参数的类型。如果回调函数没有返回值，那<code>@c.CFUNCTYPE</code>后面的第一个参数设置为<code>None</code>。</p><p>然后执行这个Python脚本，可以得到下面的输出:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python ctype_callback_demo.py</span><br><span class="line">2 &gt; 0 = 1</span><br></pre></td></tr></table></figure><h3 id="3-Numpy-ndarray-类型的参数如何使用"><a href="#3-Numpy-ndarray-类型的参数如何使用" class="headerlink" title="3. Numpy.ndarray 类型的参数如何使用"></a>3. Numpy.ndarray 类型的参数如何使用</h3><p>ctypes 对 Python原生类型支持是没问题的，但我们还会经常用到Numpy的ndarray对象，它们该如何转换为C语言可以识别的类型呢？因为跨语言的类型转换不对的话，结果就会有问题。</p><p>Numpy 提供了 numpy.ndarray.ctypes 属性，可以来完成这个操作。</p><p>比如C文件中，需要一个float 指针类型的输入:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my_lib.c</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> (*function_ptr)(<span class="keyword">float</span>*) , <span class="keyword">float</span>* a)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">function_ptr</span>(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们需要将Numpy.ndarray对象进行转换，传给C函数:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取C的float指针类型</span></span><br><span class="line">c_float_p = ctypes.POINTER(ctypes.c_float)</span><br><span class="line"></span><br><span class="line">data = np.random.rand(<span class="number">3</span>, <span class="number">3</span>).astype(np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将np.ndarray 对象的类型转换为C的float指针类型</span></span><br><span class="line">data_p = data.ctypes.data_as(c_float_p)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用共享库中的foo函数</span></span><br><span class="line">my_lib.foo(data_p)</span><br></pre></td></tr></table></figure><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol><li><a href="https://docs.python.org/3/library/ctypes.html#callback-functions">https://docs.python.org/3/library/ctypes.html#callback-functions</a></li><li><a href="https://stackoverflow.com/questions/3195660/how-to-use-numpy-array-with-ctypes">https://stackoverflow.com/questions/3195660/how-to-use-numpy-array-with-ctypes</a></li></ol>]]></content>
     
     
-    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;ctypes 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中，通过 ctypes 来调用函数，将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。&lt;/p&gt;
+    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://docs.python.org/3/library/ctypes.html&quot;&gt;ctypes&lt;/a&gt; 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中，通过 ctypes 来调用函数，将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。&lt;/p&gt;
 &lt;p&gt;现在有个更复杂的情况，我想要在C代码中调用Python中的某些函数来完成C代码的计算，比如在C代码的sort函数中，采用Python中定义的函数来进行大小判断。这个在Python中定义的函数在 ctypes 中称为回调函数 (callback function)。也就是说需要把Python函数当作变量传给C语言，想想还是有些难度。 但调查以后发现 ctypes 提供了 &lt;code&gt;CFUNCTYPE&lt;/code&gt;来方便地进行回调函数定义，而C语言本身也是支持函数指针的，因此这个功能实现还算简单，具体展开如下。&lt;/p&gt;</summary>
     
     
@@ -78,9 +78,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -178,9 +178,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -243,9 +243,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -270,9 +270,9 @@
     
     <category term="Computer Vision" scheme="http://vra.github.io/tags/Computer-Vision/"/>
     
-    <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
     <category term="Paper" scheme="http://vra.github.io/tags/Paper/"/>
+    
+    <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
     <category term="Pose Estimation" scheme="http://vra.github.io/tags/Pose-Estimation/"/>
     
@@ -324,9 +324,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -345,9 +345,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -450,9 +450,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="多进程" scheme="http://vra.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
     
