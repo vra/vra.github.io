@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-10-04T04:35:42.172Z</updated>
+  <updated>2022-10-06T01:23:37.421Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>fly.io 使用指南</title>
+    <link href="http://vra.github.io/2022/10/06/fly-io-tutorial/"/>
+    <id>http://vra.github.io/2022/10/06/fly-io-tutorial/</id>
+    <published>2022-10-06T00:18:04.000Z</published>
+    <updated>2022-10-06T01:23:37.421Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>最近看技术论坛，发现提到 <a href="https://fly.io/">fly.io</a> 的次数越来越多了。 fly.io 是一个容器化的部署平台，只需要一个<code>Dockerfile</code>文件就能部署代码到fly.io 的服务器上，同时还自动生成域名。其他的好处多多，我根据自己体验，我总结成了下面的这些条：</p><p>有免费使用的额度。不填写信用卡信息可以创建一个App，完全不收费；填写信用卡信息后每月有一定额度的免费流量，超过额度会额外收费。所以想做个小demo完全可以不填信用卡试用。</p><p>自动生成域名。比如你创建一个名字叫<code>my_demo</code>的App，那么部署完成后，就会生成<code>my_demo.fly.dev</code>的域名，可以全球访问，不用自己单独买域名了。</p><p>可以 SSH 连接进入服务器。部署完成后，可以通过<code>flyctl ssh console</code> 命令登录部署的服务器，所以相当于你有了一台免费的VPS，可以做你想做的任何事情。</p><p>部署简单，采用<code>flyctl</code> 命令集合统一部署;支持各种语言的各种框架来搭建部署环境，能自动识别当前目录下代码所采用的是哪个框架，自动部署。</p><p>下面简单记录一下使用的流程和一些教程里面没提及的使用命令。</p><span id="more"></span><h3 id="2-部署一个应用"><a href="#2-部署一个应用" class="headerlink" title="2. 部署一个应用"></a>2. 部署一个应用</h3><p>这里以Python 的 Flask 框架为例，进行部署的步骤总结，其实fly.io支持很多框架，可以在<a href="https://fly.io/docs/speedrun/">这里</a>查看。</p><h4 id="2-1-安装-flyctl"><a href="#2-1-安装-flyctl" class="headerlink" title="2.1 安装 flyctl"></a>2.1 安装 flyctl</h4><p>首先需要安装 flyctl 这个工具：<br>Mac:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install flyctl</span><br></pre></td></tr></table></figure><p>Linux:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://fly.io/install.sh | sh</span><br></pre></td></tr></table></figure><p>Windows:<br>在Powershell中运行下面的命令:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwr https://fly.io/install.ps1 -useb | iex</span><br></pre></td></tr></table></figure><p>如果执行<code>flyctl version</code> 不报错，就说明安装成功了。</p><p>安装这个工具是一次性的，后面不需要再操作</p><h4 id="2-2-创建并登录账号"><a href="#2-2-创建并登录账号" class="headerlink" title="2.2 创建并登录账号"></a>2.2 创建并登录账号</h4><p>创建账号:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly auth signup</span><br></pre></td></tr></table></figure><p>会打开网页，选择自己要创建账号的方式，GitHub账号或者邮箱等。</p><p>创建完成后登录账号:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly auth login</span><br></pre></td></tr></table></figure><h4 id="2-3-先在本地将Flask-demo跑起来"><a href="#2-3-先在本地将Flask-demo跑起来" class="headerlink" title="2.3 先在本地将Flask demo跑起来"></a>2.3 先在本地将Flask demo跑起来</h4><p>这里采用 fly.io 提供的Flask demo 代码，先在本地跑起来:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/fly-apps/python-hellofly-flask</span><br><span class="line"><span class="built_in">cd</span> python-hellofly-flask</span><br><span class="line">python -m venv flask-env</span><br><span class="line"><span class="built_in">source</span> flask-env/bin/activate</span><br><span class="line">python -m pip install -r requirements.txt</span><br><span class="line">FLASK_APP=hellofly flask run</span><br></pre></td></tr></table></figure><p>然后访问<code>http://127.0.0.1:5000</code> 就能看到网站，说明本地搭建成功了。</p><h3 id="2-4-部署到-fly-io"><a href="#2-4-部署到-fly-io" class="headerlink" title="2.4 部署到 fly.io"></a>2.4 部署到 fly.io</h3><p>在当前目录下，执行<code>fly launch</code>，进入交互式界面创建App:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">flyctl launch</span><br><span class="line">Creating app <span class="keyword">in</span> /Users/username/project/demo/flyio_demo/python-hellofly-flask</span><br><span class="line">Scanning <span class="built_in">source</span> code</span><br><span class="line">Detected a Python app</span><br><span class="line">Using the following build configuration:</span><br><span class="line">        Builder: paketobuildpacks/builder:base</span><br><span class="line">? Overwrite <span class="string">&quot;/Users/username/project/demo/flyio_demo/python-hellofly-flask/Procfile&quot;</span>? No</span><br><span class="line">? App Name (leave blank to use an auto-generated name): treehole</span><br><span class="line">Automatically selected personal organization: username</span><br><span class="line">? Select region: hkg (Hong Kong, Hong Kong)</span><br><span class="line">Created app treehole <span class="keyword">in</span> organization personal</span><br><span class="line">Wrote config file fly.toml</span><br><span class="line">? Would you like to <span class="built_in">set</span> up a Postgresql database now? No</span><br><span class="line">We have generated a simple Procfile <span class="keyword">for</span> you. Modify it to fit your needs and run <span class="string">&quot;fly deploy&quot;</span> to deploy your application.</span><br></pre></td></tr></table></figure><p>然后执行<code>flyctl deploy</code> 来将Appb部署到 fly.io 的服务器上:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flyctl deploy</span><br></pre></td></tr></table></figure><p>执行成功后，可以用<code>flyctl open</code>来打开浏览器，访问自己部署的App，网址是<code>appname.fly.dev</code>。</p><p>接下来就是修改你的Flask源代码，完成更复杂有真正意义的功能了。</p><h4 id="2-5-别的有用的flyctl-命令"><a href="#2-5-别的有用的flyctl-命令" class="headerlink" title="2.5 别的有用的flyctl 命令"></a>2.5 别的有用的flyctl 命令</h4><p>查看App状态: <code>flyctl status</code><br>查看App信息: <code>flyctl info</code><br>查看App列表: <code>flyctl apps list</code><br>查看App的IP: <code>flyctl ips list</code><br>销毁某个App: <code>flyctl apps destroy &lt;appname&gt;</code></p><h3 id="3-登录部署机器"><a href="#3-登录部署机器" class="headerlink" title="3. 登录部署机器"></a>3. 登录部署机器</h3><p>机器部署完成后，可以通过<code>flyctl ssh console</code>来登录机器，登录后就跟普通Linux机器的使用是一样的了，可以随意探索。</p><h3 id="4-复制部署机器上的文件到本地"><a href="#4-复制部署机器上的文件到本地" class="headerlink" title="4. 复制部署机器上的文件到本地"></a>4. 复制部署机器上的文件到本地</h3><p>在一个终端输入下面的命令来代理端口</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly proxy 10022:22</span><br></pre></td></tr></table></figure><p>然后保持上面的终端打开，在另一个终端输入下面的命令:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P 10022 root@localhost:/path/of/file/on/vm  /path/on/<span class="built_in">local</span></span><br></pre></td></tr></table></figure><p>修改文件的路径就能将文件复制过来</p><h3 id="5-一点感想"><a href="#5-一点感想" class="headerlink" title="5.一点感想"></a>5.一点感想</h3><p>当demo部署服务成功后，却不知道能做什么真正有意义的事情，或许缺少的不是工具，而是真正产生价值的点子。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;最近看技术论坛，发现提到 &lt;a href=&quot;https://fly.io/&quot;&gt;fly.io&lt;/a&gt; 的次数越来越多了。 fly.io 是一个容器化的部署平台，只需要一个&lt;code&gt;Dockerfile&lt;/code&gt;文件就能部署代码到fly.io 的服务器上，同时还自动生成域名。其他的好处多多，我根据自己体验，我总结成了下面的这些条：&lt;/p&gt;
+&lt;p&gt;有免费使用的额度。不填写信用卡信息可以创建一个App，完全不收费；填写信用卡信息后每月有一定额度的免费流量，超过额度会额外收费。所以想做个小demo完全可以不填信用卡试用。&lt;/p&gt;
+&lt;p&gt;自动生成域名。比如你创建一个名字叫&lt;code&gt;my_demo&lt;/code&gt;的App，那么部署完成后，就会生成&lt;code&gt;my_demo.fly.dev&lt;/code&gt;的域名，可以全球访问，不用自己单独买域名了。&lt;/p&gt;
+&lt;p&gt;可以 SSH 连接进入服务器。部署完成后，可以通过&lt;code&gt;flyctl ssh console&lt;/code&gt; 命令登录部署的服务器，所以相当于你有了一台免费的VPS，可以做你想做的任何事情。&lt;/p&gt;
+&lt;p&gt;部署简单，采用&lt;code&gt;flyctl&lt;/code&gt; 命令集合统一部署;支持各种语言的各种框架来搭建部署环境，能自动识别当前目录下代码所采用的是哪个框架，自动部署。&lt;/p&gt;
+&lt;p&gt;下面简单记录一下使用的流程和一些教程里面没提及的使用命令。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="fly.io" scheme="http://vra.github.io/tags/fly-io/"/>
+    
+    <category term="Docker" scheme="http://vra.github.io/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>在ctypes的C共享库中调用Python函数</title>
@@ -455,29 +483,6 @@
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="多进程" scheme="http://vra.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>kinematics和dynamics含义辨析</title>
-    <link href="http://vra.github.io/2022/04/13/kinematics-vs-dynamics/"/>
-    <id>http://vra.github.io/2022/04/13/kinematics-vs-dynamics/</id>
-    <published>2022-04-13T03:10:14.000Z</published>
-    <updated>2022-04-14T05:19:40.511Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Kinematics is the study of how things move, while dynamics is the study of forces and motion. Kinematics is the study of motion. It is concerned with what happens to a body when it is at rest and in uniform motion. Dynamics is the study of forces and their effect on moving bodies.</p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;Kinematics is the study of how things move, while dynamics is the study of forces and motion. Kinematics is the study of mot</summary>
-      
-    
-    
-    
-    
-    <category term="misc" scheme="http://vra.github.io/tags/misc/"/>
     
   </entry>
   
