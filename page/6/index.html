@@ -103,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/04/wsl-ssh-permission-error/" data-id="cl8ykv2cx00kg14jfd5do9acu" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/03/04/wsl-ssh-permission-error/" data-id="cl8ykyboi00lfehjfh9rf4dqv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Trick/" rel="tag">Trick</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL/" rel="tag">WSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
@@ -151,10 +151,55 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/01/arxiv-speedup/" data-id="cl8ykv27f000614jf5dpg08tz" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/03/01/arxiv-speedup/" data-id="cl8ykybig0006ehjfbfnw5vf5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-cygwin-rsync" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/01/cygwin-rsync/" class="article-date">
+  <time datetime="2020-03-01T01:32:12.000Z" itemprop="datePublished">2020-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/01/cygwin-rsync/">Cygwin 使用rsync 报错解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在 Cygwin 下使用<code>rsync</code>时，报下面的错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rsync: connection unexpectedly closed (0 bytes received so far) [receiver] </span><br><span class="line">rsync error: error <span class="keyword">in</span> rsync protocol data stream (code 12) at io.c(600) [receiver=3.0.5]</span><br><span class="line">rsync: connection unexpectedly closed (0 bytes received so far) [sender]</span><br><span class="line">rsync error: error <span class="keyword">in</span> rsync protocol data stream (code 12) at io.c(610) [sender=3.0.8]</span><br></pre></td></tr></table></figure>
+<p>由于<code>rsync</code>是通过<code>ssh</code>工具来传数据的，通过<code>which ssh</code> 查看，发现使用的是 Windows 自带的 SSH，所以报错，因此用 Cygwin 的安装程序重新安装<code>openssh</code>包，再打开终端，默认使用的<code>ssh</code>就变成 Cygwin 下的了，此时使用<code>rsync</code>命令就不再报错了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vra.github.io/2020/03/01/cygwin-rsync/" data-id="cl8ykybjd001dehjfc2zxfbhn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
 
     </footer>
   </div>
@@ -199,52 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/01/cygwin-open-gui/" data-id="cl8ykv282001a14jf5teeb9js" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-cygwin-rsync" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/01/cygwin-rsync/" class="article-date">
-  <time datetime="2020-03-01T01:32:12.000Z" itemprop="datePublished">2020-03-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/cygwin-rsync/">Cygwin 使用rsync 报错解决</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 Cygwin 下使用<code>rsync</code>时，报下面的错误：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rsync: connection unexpectedly closed (0 bytes received so far) [receiver] </span><br><span class="line">rsync error: error <span class="keyword">in</span> rsync protocol data stream (code 12) at io.c(600) [receiver=3.0.5]</span><br><span class="line">rsync: connection unexpectedly closed (0 bytes received so far) [sender]</span><br><span class="line">rsync error: error <span class="keyword">in</span> rsync protocol data stream (code 12) at io.c(610) [sender=3.0.8]</span><br></pre></td></tr></table></figure>
-<p>由于<code>rsync</code>是通过<code>ssh</code>工具来传数据的，通过<code>which ssh</code> 查看，发现使用的是 Windows 自带的 SSH，所以报错，因此用 Cygwin 的安装程序重新安装<code>openssh</code>包，再打开终端，默认使用的<code>ssh</code>就变成 Cygwin 下的了，此时使用<code>rsync</code>命令就不再报错了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/03/01/cygwin-rsync/" data-id="cl8ykv284001g14jf6l7p9yys" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/03/01/cygwin-open-gui/" data-id="cl8ykybjf001jehjf7j0odn6y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cygwin/" rel="tag">Cygwin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
@@ -296,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2020/01/01/summary-2019/" data-id="cl8ykv2ah008i14jfejfid2ig" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2020/01/01/summary-2019/" data-id="cl8ykyblu008mehjf4y8yb7f6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2019/" rel="tag">2019</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="tag">年终总结</a></li></ul>
@@ -343,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/12/19/opencv-bgr-yuv-conversion/" data-id="cl8ykv29o005q14jf0zc76i3f" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/12/19/opencv-bgr-yuv-conversion/" data-id="cl8ykybl7005pehjf8yue64bp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li></ul>
@@ -390,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/12/16/always-blue/" data-id="cl8ykv276000114jfh4u04ty5" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/12/16/always-blue/" data-id="cl8ykybi20001ehjf7z2h6yer" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programmer/" rel="tag">Programmer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li></ul>
@@ -437,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/10/11/install-tmux-from-source/" data-id="cl8ykv292004314jfb2i95gyo" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/10/11/install-tmux-from-source/" data-id="cl8ykybki0041ehjfcxtg22ij" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li></ul>
@@ -484,7 +484,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/09/10/colorful-logging/" data-id="cl8ykv27o000p14jf94rlc31i" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/09/10/colorful-logging/" data-id="cl8ykybj0000rehjf8p8m35xt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coloredlogs/" rel="tag">coloredlogs</a></li></ul>
@@ -531,7 +531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2019/09/07/install-pip2/" data-id="cl8ykv292004114jf8q352lhy" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2019/09/07/install-pip2/" data-id="cl8ykybkf0040ehjfhvwk2p76" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pip/" rel="tag">Pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>

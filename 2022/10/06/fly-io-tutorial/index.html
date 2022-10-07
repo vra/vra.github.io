@@ -15,7 +15,7 @@
 <meta property="og:description" content="1. 概述最近看技术论坛，发现提到 fly.io 的次数越来越多了。 fly.io 是一个容器化的部署平台，只需要一个Dockerfile文件就能部署代码到fly.io 的服务器上，同时还自动生成域名。其他的好处多多，我根据自己体验，我总结成了下面的这些条： 有免费使用的额度。不填写信用卡信息可以创建一个App，完全不收费；填写信用卡信息后每月有一定额度的免费流量，超过额度会额外收费。所以想做个小">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-06T00:18:04.000Z">
-<meta property="article:modified_time" content="2022-10-06T01:23:37.421Z">
+<meta property="article:modified_time" content="2022-10-07T14:25:44.989Z">
 <meta property="article:author" content="Yunfeng Wang">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="fly.io">
@@ -125,6 +125,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flyctl deploy</span><br></pre></td></tr></table></figure>
 
 <p>执行成功后，可以用<code>flyctl open</code>来打开浏览器，访问自己部署的App，网址是<code>appname.fly.dev</code>。</p>
+<p>如果后面有源码或者配置的修改，可以多次执行<code>flyctl deploy</code>，会生成新的版本v0，v1, v2依次往下，往fly.io上部署。</p>
 <p>接下来就是修改你的Flask源代码，完成更复杂有真正意义的功能了。</p>
 <h4 id="2-5-别的有用的flyctl-命令"><a href="#2-5-别的有用的flyctl-命令" class="headerlink" title="2.5 别的有用的flyctl 命令"></a>2.5 别的有用的flyctl 命令</h4><p>查看App状态: <code>flyctl status</code><br>查看App信息: <code>flyctl info</code><br>查看App列表: <code>flyctl apps list</code><br>查看App的IP: <code>flyctl ips list</code><br>销毁某个App: <code>flyctl apps destroy &lt;appname&gt;</code></p>
 <h3 id="3-登录部署机器"><a href="#3-登录部署机器" class="headerlink" title="3. 登录部署机器"></a>3. 登录部署机器</h3><p>机器部署完成后，可以通过<code>flyctl ssh console</code>来登录机器，登录后就跟普通Linux机器的使用是一样的了，可以随意探索。</p>
@@ -138,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/10/06/fly-io-tutorial/" data-id="cl8ykv28h002x14jfay2wfibs" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/10/06/fly-io-tutorial/" data-id="cl8ykybju002vehjffh3pbulg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fly-io/" rel="tag">fly.io</a></li></ul>
