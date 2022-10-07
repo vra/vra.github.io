@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-10-06T01:23:37.421Z</updated>
+  <updated>2022-10-07T14:23:10.786Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用Python将图片转换为base64字符串</title>
+    <link href="http://vra.github.io/2022/10/07/convert-image-to-base64/"/>
+    <id>http://vra.github.io/2022/10/07/convert-image-to-base64/</id>
+    <published>2022-10-07T14:19:37.000Z</published>
+    <updated>2022-10-07T14:23:10.786Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>无他，这篇博文记录一下利用Python将OpenCV图片转换为base64字符串并在网页上进行展示的过程，权当备忘。可在<a href="https://github.com/vra/image-to-base64">这里</a>查看源码。</p><span id="more"></span><h3 id="2-Show-the-code"><a href="#2-Show-the-code" class="headerlink" title="2. Show the code"></a>2. Show the code</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">img_to_base64</span>(<span class="params">img_path</span>):</span></span><br><span class="line">    img = cv2.imread(img_path)</span><br><span class="line"></span><br><span class="line">    _, buffer = cv2.imencode(<span class="string">&#x27;.jpg&#x27;</span>, img)</span><br><span class="line">    text = base64.b64encode(buffer).decode(<span class="string">&#x27;ascii&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_html_file</span>(<span class="params">text, file_name</span>):</span></span><br><span class="line">    html_pattern = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    &lt;html&gt;</span></span><br><span class="line"><span class="string">    &lt;body&gt;</span></span><br><span class="line"><span class="string">    &lt;img src=&quot;data:image/png;base64,&#123;&#125;&quot;/&gt;</span></span><br><span class="line"><span class="string">    &lt;/body&gt;</span></span><br><span class="line"><span class="string">    &lt;/html&gt;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    html = html_pattern.<span class="built_in">format</span>(text)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_name, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(html)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    img_path = <span class="string">&#x27;data/cat.jpg&#x27;</span></span><br><span class="line">    html_file_name = <span class="string">&#x27;data/show_img.html&#x27;</span></span><br><span class="line"></span><br><span class="line">    text = img_to_base64(img_path)</span><br><span class="line">    create_html_file(text, html_file_name)</span><br></pre></td></tr></table></figure><p>代码仓库</p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;无他，这篇博文记录一下利用Python将OpenCV图片转换为base64字符串并在网页上进行展示的过程，权当备忘。可在&lt;a href=&quot;https://github.com/vra/image-to-base64&quot;&gt;这里&lt;/a&gt;查看源码。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
+    
+    <category term="OpenCV" scheme="http://vra.github.io/tags/OpenCV/"/>
+    
+  </entry>
   
   <entry>
     <title>fly.io 使用指南</title>
@@ -460,29 +483,6 @@
     
     
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python Multiprocessing使用Queue的例子</title>
-    <link href="http://vra.github.io/2022/05/16/python-multiprocessing-queue-example/"/>
-    <id>http://vra.github.io/2022/05/16/python-multiprocessing-queue-example/</id>
-    <published>2022-05-16T14:10:55.000Z</published>
-    <updated>2022-05-16T14:26:19.510Z</updated>
-    
-    <content type="html"><![CDATA[<p>对于一些计算密集性的任务，使用Python的多进程能显著缩短运行的时间。例如对10个元素进行相同的操作，通过Python的<code>multiprocessing</code> 包可以进行并行化，实测能有数倍的速度提升。这里写一个简单的例子，将所有的结果写入队列，等队列拿到10个结果后，将结果写入文件。</p><span id="more"></span><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Queue, Process, Pool</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_queue</span>(<span class="params">q, i</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Begin process (<span class="subst">&#123;os.getpid()&#125;</span>)&#x27;</span>)</span><br><span class="line">    cur_value = i * i</span><br><span class="line"></span><br><span class="line">    q.put(cur_value)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_queue</span>(<span class="params">q, num_sample</span>):</span></span><br><span class="line">    val_list = []</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        v = q.get(<span class="literal">True</span>)</span><br><span class="line">        val_list.append(v)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(val_list) &gt;= num_sample:</span><br><span class="line">            np.save(<span class="string">&#x27;data.npy&#x27;</span>, np.array(val_list))</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    NUM_PROCESS = <span class="number">10</span></span><br><span class="line">    q = Queue(NUM_PROCESS)</span><br><span class="line">    pws = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(NUM_PROCESS):</span><br><span class="line">        pw = Process(target=write_queue, args=(q, i))</span><br><span class="line">        pws.append(pw)</span><br><span class="line"></span><br><span class="line">    pr = Process(target=read_queue, args=(q, NUM_PROCESS))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> pw <span class="keyword">in</span> pws:</span><br><span class="line">        pw.start()</span><br><span class="line"></span><br><span class="line">    pr.start()</span><br><span class="line">    <span class="keyword">for</span> pw <span class="keyword">in</span> pws:</span><br><span class="line">        pw.join()</span><br><span class="line"></span><br><span class="line">    pr.terminate()</span><br><span class="line"></span><br><span class="line">    data = np.load(<span class="string">&#x27;data.npy&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;对于一些计算密集性的任务，使用Python的多进程能显著缩短运行的时间。例如对10个元素进行相同的操作，通过Python的&lt;code&gt;multiprocessing&lt;/code&gt; 包可以进行并行化，实测能有数倍的速度提升。这里写一个简单的例子，将所有的结果写入队列，等队列拿到10个结果后，将结果写入文件。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
-    <category term="多进程" scheme="http://vra.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
     
   </entry>
   
