@@ -36,9 +36,9 @@
     
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
-    <category term="Numpy" scheme="http://vra.github.io/tags/Numpy/"/>
-    
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
+    
+    <category term="Numpy" scheme="http://vra.github.io/tags/Numpy/"/>
     
   </entry>
   
@@ -155,9 +155,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -255,9 +255,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -320,9 +320,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -401,9 +401,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -422,9 +422,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
