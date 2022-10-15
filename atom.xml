@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-10-07T14:26:06.577Z</updated>
+  <updated>2022-10-15T03:27:51.250Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python中将图像切分为小的patch</title>
+    <link href="http://vra.github.io/2022/10/15/python-split-image-to-grid-patch/"/>
+    <id>http://vra.github.io/2022/10/15/python-split-image-to-grid-patch/</id>
+    <published>2022-10-14T23:51:36.000Z</published>
+    <updated>2022-10-15T03:27:51.250Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>假如有张1000x1000的图像，我们要将它切成20x20的小patch，该怎么处理呢？<br>最简单的方法就是采用两重for循环，每次计算小patch对应的下标，在原图上进行crop:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">ncols = <span class="number">20</span></span><br><span class="line">nrows = <span class="number">20</span></span><br><span class="line">img = np.random.rand(size, size)</span><br><span class="line"></span><br><span class="line">patches = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size//ncols):</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(size//nrows):</span><br><span class="line">patch = img[ncols*i:ncols*(i+<span class="number">1</span>), nrows*j:nrows*(j+<span class="number">1</span>)]</span><br><span class="line">patches.append(patch)</span><br><span class="line"></span><br><span class="line">patches = np.array(patches)</span><br></pre></td></tr></table></figure><p>但这样总共需要循环50*x50=2500次，而我们知道 Python 的 for 循环比较慢，因此整体开销还是比较大的，有没有更快的方式呢？</p><span id="more"></span><h3 id="reshape-swapaxes"><a href="#reshape-swapaxes" class="headerlink" title="reshape + swapaxes"></a>reshape + swapaxes</h3><p>搜索发现可以使用 reshape + swapaxes函数的组合来完成这个功能:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">ncols = <span class="number">20</span></span><br><span class="line">nrows = <span class="number">20</span></span><br><span class="line">img = np.random.rand(size, size)</span><br><span class="line"></span><br><span class="line">patches = img.reshape(size // ncols, ncols, -<span class="number">1</span>, nrows).swapaxes(<span class="number">1</span>, <span class="number">2</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br></pre></td></tr></table></figure><p>实际测试对于1000x1000的图像，采用reshape + swapaxes 要比循环快大约4倍。</p><h3 id="Pytorch中的实现？"><a href="#Pytorch中的实现？" class="headerlink" title="Pytorch中的实现？"></a>Pytorch中的实现？</h3><p>Pytorch相比numpy，又增加了许多操作tensor的函数，因此实现方式会更多，这里大概列一下几种实现，具体函数可以查询 Pytorch 的文档:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patches1 = img.unfold(<span class="number">0</span>, ncols, nrows).unfold(<span class="number">1</span>, ncols, nrows).reshape(-<span class="number">1</span>, ncols, nrows)</span><br><span class="line">patches2 = img.reshape(size//ncols, ncols, -<span class="number">1</span>, nrows).swapaxes(<span class="number">1</span>, <span class="number">2</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br><span class="line">patches3 = img.reshape(size//ncols, ncols, -<span class="number">1</span>, nrows).permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br></pre></td></tr></table></figure><h3 id="其他相关操作"><a href="#其他相关操作" class="headerlink" title="其他相关操作"></a>其他相关操作</h3><p>ShuffleNet中的ShuffleBlock中的channel shuffle也是通过reshape+维度变换来完成的，可以参考<a href="https://github.com/MegEngine/Models/blob/master/official/vision/classification/shufflenet/model.py#L98">这里</a> 和<a href="https://iq.opengenus.org/shufflenet-implementation-using-pytorch/">这里</a>的实现。</p><p>另外之前一篇做分割的论文<a href="https://arxiv.org/abs/1702.08502">DUC</a>里面也用到了类似的把图像特征重排列来Upsample的操作，<a href="https://github.com/ycszen/pytorch-segmentation/blob/master/duc.py#L18">搜索了下</a>对应的实现，是用Pytorch的PixelShuffle来做的，具体用法参考<a href="https://pytorch.org/docs/stable/generated/torch.nn.PixelShuffle.html">文档</a>，还有个匹配的PixelUnShuffle来进行逆向操作。</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol><li><a href="https://stackoverflow.com/questions/16856788/slice-2d-array-into-smaller-2d-arrays/16858283#16858283">https://stackoverflow.com/questions/16856788/slice-2d-array-into-smaller-2d-arrays/16858283#16858283</a></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;问题定义&quot;&gt;&lt;a href=&quot;#问题定义&quot; class=&quot;headerlink&quot; title=&quot;问题定义&quot;&gt;&lt;/a&gt;问题定义&lt;/h3&gt;&lt;p&gt;假如有张1000x1000的图像，我们要将它切成20x20的小patch，该怎么处理呢？&lt;br&gt;最简单的方法就是采用两重for循环，每次计算小patch对应的下标，在原图上进行crop:&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;size = &lt;span class=&quot;number&quot;&gt;1000&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ncols = &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nrows = &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;img = np.random.rand(size, size)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;patches = []&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;range&lt;/span&gt;(size//ncols):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; j &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;range&lt;/span&gt;(size//nrows):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		patch = img[ncols*i:ncols*(i+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;), nrows*j:nrows*(j+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		patches.append(patch)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;patches = np.array(patches)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;但这样总共需要循环50*x50=2500次，而我们知道 Python 的 for 循环比较慢，因此整体开销还是比较大的，有没有更快的方式呢？&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Numpy" scheme="http://vra.github.io/tags/Numpy/"/>
+    
+    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
+    
+  </entry>
   
   <entry>
     <title>用Python将图片转换为base64字符串</title>
@@ -321,9 +347,9 @@
     
     <category term="Computer Vision" scheme="http://vra.github.io/tags/Computer-Vision/"/>
     
-    <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
     <category term="Paper" scheme="http://vra.github.io/tags/Paper/"/>
+    
+    <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
     <category term="Pose Estimation" scheme="http://vra.github.io/tags/Pose-Estimation/"/>
     
@@ -464,25 +490,6 @@
     <category term="GPU" scheme="http://vra.github.io/tags/GPU/"/>
     
     <category term="Mac" scheme="http://vra.github.io/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++的RAII到底指的是什么</title>
-    <link href="http://vra.github.io/2022/05/19/cpp-raii/"/>
-    <id>http://vra.github.io/2022/05/19/cpp-raii/</id>
-    <published>2022-05-19T08:43:00.000Z</published>
-    <updated>2022-05-19T15:19:46.603Z</updated>
-    
-    <content type="html"><![CDATA[<p>RAII，全称 Resource Acquisition Is Initialization，中文翻译为资源获取即初始化。这是C++中一个比较不直观的术语，而RAII的缩写也时不时遇到，总给人一种很高深但不易掌握的感觉。实际上查了资料后发现，RAII这个技术的含义其实比较明确，这里简单汇总一下从资料中的得到的知识点。</p><span id="more"></span><h2 id="什么是资源"><a href="#什么是资源" class="headerlink" title="什么是资源"></a>什么是资源</h2><p>这里的资源 (Resource) 是C++编程中的一个概念，表示哪些不能无限申请的变量（常有明确的含义），比如一段内存，数据库句柄，Socket，打开的文件，线程等。<br>个人理解，一般的内置类型变量如<code>int</code> 变量不算是资源。</p><h2 id="为什么要设计-RAII-这项技术？"><a href="#为什么要设计-RAII-这项技术？" class="headerlink" title="为什么要设计 RAII 这项技术？"></a>为什么要设计 RAII 这项技术？</h2><p>简单来说，RAII 这项技术的目的是将资源的生命周期绑定到某个对象（Object）上。对象，一般情况是某个类的示例。这么做有下面几个好处：</p><ol><li>保证资源在使用的时候已经进行了初始化，避免访问未初始化的内存地址而crash</li><li>保证资源在程序正常退出的时候进行了释放，避免未释放导致的内存泄漏</li><li>保证资源在运行出错的时候也能被正常释放</li></ol><h2 id="具体如何实现RAII？"><a href="#具体如何实现RAII？" class="headerlink" title="具体如何实现RAII？"></a>具体如何实现RAII？</h2><p>RAII 的实现可以总结为：</p><ul><li>将每个资源封装到一个类中，类的构造函数获取资源，如果获取资源失败，则抛出一个异常。</li><li>类的解构函数释放资源，并且保证不抛出异常，因此保证资源的释放是没问题的</li></ul><h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><p>从<a href="https://docs.microsoft.com/en-us/cpp/cpp/object-lifetime-and-resource-management-modern-cpp?redirectedfrom=MSDN&view=msvc-170">这里</a>拿过来的一个例子:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">widget</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">widget</span>(<span class="keyword">const</span> <span class="keyword">int</span> size) &#123; data = <span class="keyword">new</span> <span class="keyword">int</span>[size]; &#125; <span class="comment">// 资源获取</span></span><br><span class="line">    ~<span class="built_in">widget</span>() &#123; <span class="keyword">delete</span>[] data; &#125; <span class="comment">// 资源释放</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">do_something</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">functionUsingWidget</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">widget <span class="title">w</span><span class="params">(<span class="number">1000000</span>)</span></span>;   <span class="comment">// lifetime automatically tied to enclosing scope</span></span><br><span class="line">                        <span class="comment">// constructs w, including the w.data member</span></span><br><span class="line">    w.<span class="built_in">do_something</span>();</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// automatic destruction and deallocation for w and w.data</span></span><br></pre></td></tr></table></figure><p>这里<code>widget</code>就是一个RAII类，它将<code>data</code>这个资源绑定到类上面，在构造和析构函数里面进行资源获取和释放。</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li><a href="https://en.cppreference.com/w/cpp/language/raii">https://en.cppreference.com/w/cpp/language/raii</a></li><li><a href="https://stackoverflow.com/questions/2321511/what-is-meant-by-resource-acquisition-is-initialization-raii?answertab=scoredesc#tab-top">https://stackoverflow.com/questions/2321511/what-is-meant-by-resource-acquisition-is-initialization-raii?answertab=scoredesc#tab-top</a></li><li><a href="https://docs.microsoft.com/en-us/cpp/cpp/object-lifetime-and-resource-management-modern-cpp?redirectedfrom=MSDN&amp;view=msvc-170">https://docs.microsoft.com/en-us/cpp/cpp/object-lifetime-and-resource-management-modern-cpp?redirectedfrom=MSDN&amp;view=msvc-170</a></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;RAII，全称 Resource Acquisition Is Initialization，中文翻译为资源获取即初始化。这是C++中一个比较不直观的术语，而RAII的缩写也时不时遇到，总给人一种很高深但不易掌握的感觉。实际上查了资料后发现，RAII这个技术的含义其实比较明确，这里简单汇总一下从资料中的得到的知识点。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
   </entry>
   
