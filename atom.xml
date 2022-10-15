@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2022-10-15T03:27:51.250Z</updated>
+  <updated>2022-10-15T03:33:46.510Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://vra.github.io/2022/10/15/python-split-image-to-grid-patch/"/>
     <id>http://vra.github.io/2022/10/15/python-split-image-to-grid-patch/</id>
     <published>2022-10-14T23:51:36.000Z</published>
-    <updated>2022-10-15T03:27:51.250Z</updated>
+    <updated>2022-10-15T03:33:46.510Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>假如有张1000x1000的图像，我们要将它切成20x20的小patch，该怎么处理呢？<br>最简单的方法就是采用两重for循环，每次计算小patch对应的下标，在原图上进行crop:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">ncols = <span class="number">20</span></span><br><span class="line">nrows = <span class="number">20</span></span><br><span class="line">img = np.random.rand(size, size)</span><br><span class="line"></span><br><span class="line">patches = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size//ncols):</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(size//nrows):</span><br><span class="line">patch = img[ncols*i:ncols*(i+<span class="number">1</span>), nrows*j:nrows*(j+<span class="number">1</span>)]</span><br><span class="line">patches.append(patch)</span><br><span class="line"></span><br><span class="line">patches = np.array(patches)</span><br></pre></td></tr></table></figure><p>但这样总共需要循环50*x50=2500次，而我们知道 Python 的 for 循环比较慢，因此整体开销还是比较大的，有没有更快的方式呢？</p><span id="more"></span><h3 id="reshape-swapaxes"><a href="#reshape-swapaxes" class="headerlink" title="reshape + swapaxes"></a>reshape + swapaxes</h3><p>搜索发现可以使用 reshape + swapaxes函数的组合来完成这个功能:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">ncols = <span class="number">20</span></span><br><span class="line">nrows = <span class="number">20</span></span><br><span class="line">img = np.random.rand(size, size)</span><br><span class="line"></span><br><span class="line">patches = img.reshape(size // ncols, ncols, -<span class="number">1</span>, nrows).swapaxes(<span class="number">1</span>, <span class="number">2</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br></pre></td></tr></table></figure><p>实际测试对于1000x1000的图像，采用reshape + swapaxes 要比循环快大约4倍。</p><h3 id="Pytorch中的实现？"><a href="#Pytorch中的实现？" class="headerlink" title="Pytorch中的实现？"></a>Pytorch中的实现？</h3><p>Pytorch相比numpy，又增加了许多操作tensor的函数，因此实现方式会更多，这里大概列一下几种实现，具体函数可以查询 Pytorch 的文档:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patches1 = img.unfold(<span class="number">0</span>, ncols, nrows).unfold(<span class="number">1</span>, ncols, nrows).reshape(-<span class="number">1</span>, ncols, nrows)</span><br><span class="line">patches2 = img.reshape(size//ncols, ncols, -<span class="number">1</span>, nrows).swapaxes(<span class="number">1</span>, <span class="number">2</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br><span class="line">patches3 = img.reshape(size//ncols, ncols, -<span class="number">1</span>, nrows).permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br></pre></td></tr></table></figure><h3 id="其他相关操作"><a href="#其他相关操作" class="headerlink" title="其他相关操作"></a>其他相关操作</h3><p>ShuffleNet中的ShuffleBlock中的channel shuffle也是通过reshape+维度变换来完成的，可以参考<a href="https://github.com/MegEngine/Models/blob/master/official/vision/classification/shufflenet/model.py#L98">这里</a> 和<a href="https://iq.opengenus.org/shufflenet-implementation-using-pytorch/">这里</a>的实现。</p><p>另外之前一篇做分割的论文<a href="https://arxiv.org/abs/1702.08502">DUC</a>里面也用到了类似的把图像特征重排列来Upsample的操作，<a href="https://github.com/ycszen/pytorch-segmentation/blob/master/duc.py#L18">搜索了下</a>对应的实现，是用Pytorch的PixelShuffle来做的，具体用法参考<a href="https://pytorch.org/docs/stable/generated/torch.nn.PixelShuffle.html">文档</a>，还有个匹配的PixelUnShuffle来进行逆向操作。</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol><li><a href="https://stackoverflow.com/questions/16856788/slice-2d-array-into-smaller-2d-arrays/16858283#16858283">https://stackoverflow.com/questions/16856788/slice-2d-array-into-smaller-2d-arrays/16858283#16858283</a></li></ol>]]></content>
+    <content type="html"><![CDATA[<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>假如有张1000x1000的图像，我们要将它切成20x20的小patch，该怎么处理呢？<br>最简单的方法就是采用两重for循环，每次计算小patch对应的下标，在原图上进行crop:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">ncols = <span class="number">20</span></span><br><span class="line">nrows = <span class="number">20</span></span><br><span class="line">img = np.random.rand(size, size)</span><br><span class="line"></span><br><span class="line">patches = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size//ncols):</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(size//nrows):</span><br><span class="line">patch = img[ncols*i:ncols*(i+<span class="number">1</span>), nrows*j:nrows*(j+<span class="number">1</span>)]</span><br><span class="line">patches.append(patch)</span><br><span class="line"></span><br><span class="line">patches = np.array(patches)</span><br></pre></td></tr></table></figure><p>但这样总共需要循环50*x50=2500次，而我们知道 Python 的 for 循环比较慢，因此整体开销还是比较大的，有没有更快的方式呢？</p><span id="more"></span><h3 id="reshape-swapaxes"><a href="#reshape-swapaxes" class="headerlink" title="reshape + swapaxes"></a>reshape + swapaxes</h3><p>搜索发现可以使用 reshape + swapaxes函数的组合来完成这个功能:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">ncols = <span class="number">20</span></span><br><span class="line">nrows = <span class="number">20</span></span><br><span class="line">img = np.random.rand(size, size)</span><br><span class="line"></span><br><span class="line">patches = img.reshape(size // ncols, ncols, -<span class="number">1</span>, nrows).swapaxes(<span class="number">1</span>, <span class="number">2</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br></pre></td></tr></table></figure><p>完整对比代码如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">ncols = <span class="number">20</span></span><br><span class="line">nrows = <span class="number">20</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计100次耗时</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    img = np.random.rand(size, size)</span><br><span class="line">    t0 = time.time()</span><br><span class="line">    patches0 = img.reshape(size // ncols, ncols, -<span class="number">1</span>, nrows).swapaxes(<span class="number">1</span>, <span class="number">2</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br><span class="line"></span><br><span class="line">    t1 = time.time()</span><br><span class="line">    d1 = t1 - t0</span><br><span class="line"></span><br><span class="line">    patches = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size//ncols):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(size//nrows):</span><br><span class="line">            patch = img[ncols*i:ncols*(i+<span class="number">1</span>), nrows*j:nrows*(j+<span class="number">1</span>)]</span><br><span class="line">            patches.append(patch)</span><br><span class="line"></span><br><span class="line">    patches1 = np.array(patches)</span><br><span class="line">    t2 = time.time()</span><br><span class="line">    d2 = t2 - t1</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;time ratio:&#x27;</span>, d2/d1)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;diff:&#x27;</span>, (patches0-patches1).<span class="built_in">sum</span>())</span><br></pre></td></tr></table></figure><p>实际测试对于1000x1000的图像，采用reshape + swapaxes 要比循环快大约4倍。</p><h3 id="Pytorch中的实现？"><a href="#Pytorch中的实现？" class="headerlink" title="Pytorch中的实现？"></a>Pytorch中的实现？</h3><p>Pytorch相比numpy，又增加了许多操作tensor的函数，因此实现方式会更多，这里大概列一下几种实现，具体函数可以查询 Pytorch 的文档:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patches1 = img.unfold(<span class="number">0</span>, ncols, nrows).unfold(<span class="number">1</span>, ncols, nrows).reshape(-<span class="number">1</span>, ncols, nrows)</span><br><span class="line">patches2 = img.reshape(size//ncols, ncols, -<span class="number">1</span>, nrows).swapaxes(<span class="number">1</span>, <span class="number">2</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br><span class="line">patches3 = img.reshape(size//ncols, ncols, -<span class="number">1</span>, nrows).permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>).reshape(-<span class="number">1</span>, ncols, nrows)</span><br></pre></td></tr></table></figure><h3 id="其他相关操作"><a href="#其他相关操作" class="headerlink" title="其他相关操作"></a>其他相关操作</h3><p>ShuffleNet中的ShuffleBlock中的channel shuffle也是通过reshape+维度变换来完成的，可以参考<a href="https://github.com/MegEngine/Models/blob/master/official/vision/classification/shufflenet/model.py#L98">这里</a> 和<a href="https://iq.opengenus.org/shufflenet-implementation-using-pytorch/">这里</a>的实现。</p><p>另外之前一篇做分割的论文<a href="https://arxiv.org/abs/1702.08502">DUC</a>里面也用到了类似的把图像特征重排列来Upsample的操作，<a href="https://github.com/ycszen/pytorch-segmentation/blob/master/duc.py#L18">搜索了下</a>对应的实现，是用Pytorch的PixelShuffle来做的，具体用法参考<a href="https://pytorch.org/docs/stable/generated/torch.nn.PixelShuffle.html">文档</a>，还有个匹配的PixelUnShuffle来进行逆向操作。</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol><li><a href="https://stackoverflow.com/questions/16856788/slice-2d-array-into-smaller-2d-arrays/16858283#16858283">https://stackoverflow.com/questions/16856788/slice-2d-array-into-smaller-2d-arrays/16858283#16858283</a></li></ol>]]></content>
     
     
     <summary type="html">&lt;h3 id=&quot;问题定义&quot;&gt;&lt;a href=&quot;#问题定义&quot; class=&quot;headerlink&quot; title=&quot;问题定义&quot;&gt;&lt;/a&gt;问题定义&lt;/h3&gt;&lt;p&gt;假如有张1000x1000的图像，我们要将它切成20x20的小patch，该怎么处理呢？&lt;br&gt;最简单的方法就是采用两重for循环，每次计算小patch对应的下标，在原图上进行crop:&lt;/p&gt;
@@ -155,9 +155,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -255,9 +255,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -320,9 +320,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -347,9 +347,9 @@
     
     <category term="Computer Vision" scheme="http://vra.github.io/tags/Computer-Vision/"/>
     
-    <category term="Paper" scheme="http://vra.github.io/tags/Paper/"/>
-    
     <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+    <category term="Paper" scheme="http://vra.github.io/tags/Paper/"/>
     
     <category term="Pose Estimation" scheme="http://vra.github.io/tags/Pose-Estimation/"/>
     
@@ -401,9 +401,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -422,9 +422,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
