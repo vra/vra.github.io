@@ -15,7 +15,7 @@
 <meta property="og:description" content="1. 概述最近看技术论坛，发现提到 fly.io 的次数越来越多了。 fly.io 是一个容器化的部署平台，只需要一个Dockerfile文件就能部署代码到fly.io 的服务器上，同时还自动生成域名。其他的好处多多，我根据自己体验，我总结成了下面的这些条： 有免费使用的额度。不填写信用卡信息可以创建一个App，完全不收费；填写信用卡信息后每月有一定额度的免费流量，超过额度会额外收费。所以想做个小">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-06T00:18:04.000Z">
-<meta property="article:modified_time" content="2022-10-07T14:25:44.989Z">
+<meta property="article:modified_time" content="2022-10-15T03:36:23.912Z">
 <meta property="article:author" content="Yunfeng Wang">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="fly.io">
@@ -109,6 +109,7 @@
 <p>Windows:<br>在Powershell中运行下面的命令:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwr https://fly.io/install.ps1 -useb | iex</span><br></pre></td></tr></table></figure>
 <p>如果执行<code>flyctl version</code> 不报错，就说明安装成功了。</p>
+<p><strong>一个小技巧，flyctl还有个alias fly，敲起来更简短些。</strong></p>
 <p>安装这个工具是一次性的，后面不需要再操作</p>
 <h4 id="2-2-创建并登录账号"><a href="#2-2-创建并登录账号" class="headerlink" title="2.2 创建并登录账号"></a>2.2 创建并登录账号</h4><p>创建账号:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly auth signup</span><br></pre></td></tr></table></figure>
@@ -139,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vra.github.io/2022/10/06/fly-io-tutorial/" data-id="cl99d6p6n002suhjeacx1f9te" class="article-share-link">Share</a>
+      <a data-url="http://vra.github.io/2022/10/06/fly-io-tutorial/" data-id="cl99da258003581je9aeje5wy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fly-io/" rel="tag">fly.io</a></li></ul>
