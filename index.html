@@ -231,7 +231,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/16/git-update-a-history-commit/" class="post-title-link" itemprop="url">git 更新任一个历史提交</a>
+          <a href="/2022/12/16/git-update-a-history-commit/" class="post-title-link" itemprop="url">git 更新历史提交</a>
         </h2>
 
         <div class="post-meta-container">
@@ -249,11 +249,11 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-17 22:05:49" itemprop="dateModified" datetime="2022-12-17T22:05:49+08:00">2022-12-17</time>
+      <time title="修改时间：2022-12-17 22:19:11" itemprop="dateModified" datetime="2022-12-17T22:19:11+08:00">2022-12-17</time>
     </span>
 
   
-    <span id="/2022/12/16/git-update-a-history-commit/" class="post-meta-item leancloud_visitors" data-flag-title="git 更新任一个历史提交" title="阅读次数">
+    <span id="/2022/12/16/git-update-a-history-commit/" class="post-meta-item leancloud_visitors" data-flag-title="git 更新历史提交" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -269,7 +269,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>有时候我们在git commit后才发现，之前的一些提交有些问题，比如有些代码忘提交了或者有一些typo需要修改。如果要修改的地方是需要添加到最后一次提交上的，那么可以参考我的这篇博文修改，如果是在非最后一次提交上的，那么就需要用<code>git rebase</code>来操作。这里简单记录一下操作的过程。</p>
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>有时候我们在git commit后才发现，之前的一些提交有些问题，比如有些代码忘提交了或者有一些typo需要修改。如果要修改的地方是需要添加到最后一次提交上的，那么可以参考我的<a href="https://vra.github.io/2022/11/12/git-add-file-to-last-commit/">这篇博文</a>修改，如果是在非最后一次提交上的，那么就需要用<code>git rebase</code>来操作。这里简单记录一下操作的过程。</p>
 <p><strong>TL;DR</strong><br>操作命令简要来说是这样:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git log 查看历史提交，得到需要修改的那次提交的commit id</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line"><span class="comment"># 执行rebase命令，注意&lt;commit-id&gt;后面有一个^，表示修改在此次提交前</span></span><br><span class="line">git rebase -i <span class="string">&#x27;&lt;commmit-hash&gt;^&#x27;</span> <span class="comment"># 如果是修改第一次提交，使用 git rebase -i --root</span></span><br><span class="line"><span class="comment"># 修改代码</span></span><br><span class="line">vim changed-file</span><br><span class="line"><span class="comment"># git add 添加更新后的文件</span></span><br><span class="line">git add changed-file</span><br><span class="line"><span class="comment"># git commit 提交，注意需要使用后面三个选项，并且不需要加commit信息，因为会采用之前的commit信息</span></span><br><span class="line">git commit --all --amend --no-edit</span><br><span class="line"><span class="comment"># 使用--continue来完成 git rebase</span></span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
 <p>后面会使用一个具体的（假）例子来演示这个过程。</p>
