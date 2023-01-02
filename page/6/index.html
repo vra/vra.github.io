@@ -1068,7 +1068,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2020/03/01/cygwin-rsync/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2020/03/01/cygwin-open-gui/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1086,7 +1086,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/03/01/cygwin-rsync/" class="post-title-link" itemprop="url">Cygwin 使用rsync 报错解决</a>
+          <a href="/2020/03/01/cygwin-open-gui/" class="post-title-link" itemprop="url">Cygwin环境下查看远程服务器的图片</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1104,11 +1104,11 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:00" itemprop="dateModified" datetime="2021-08-20T23:48:00+08:00">2021-08-20</time>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
     </span>
 
   
-    <span id="/2020/03/01/cygwin-rsync/" class="post-meta-item leancloud_visitors" data-flag-title="Cygwin 使用rsync 报错解决" title="阅读次数">
+    <span id="/2020/03/01/cygwin-open-gui/" class="post-meta-item leancloud_visitors" data-flag-title="Cygwin环境下查看远程服务器的图片" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -1124,9 +1124,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在 Cygwin 下使用<code>rsync</code>时，报下面的错误：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rsync: connection unexpectedly closed (0 bytes received so far) [receiver] </span><br><span class="line">rsync error: error <span class="keyword">in</span> rsync protocol data stream (code 12) at io.c(600) [receiver=3.0.5]</span><br><span class="line">rsync: connection unexpectedly closed (0 bytes received so far) [sender]</span><br><span class="line">rsync error: error <span class="keyword">in</span> rsync protocol data stream (code 12) at io.c(610) [sender=3.0.8]</span><br></pre></td></tr></table></figure>
-<p>由于<code>rsync</code>是通过<code>ssh</code>工具来传数据的，通过<code>which ssh</code> 查看，发现使用的是 Windows 自带的 SSH，所以报错，因此用 Cygwin 的安装程序重新安装<code>openssh</code>包，再打开终端，默认使用的<code>ssh</code>就变成 Cygwin 下的了，此时使用<code>rsync</code>命令就不再报错了。</p>
+          <p>Linux系统下，<code>SSH -X</code>能够将 ssh 连接到的远程服务器上的图形化显示转发到本地，因此可以方便地查看服务器上的结果。不过在Cygwin下，使用<code>ssh -X</code>选项并不work。</p>
+<p>调查后发现是需要用Cygwin的安装文件安装<code>xorg-server</code> 和 <code>xinit</code>这两个包，然后在一个终端执行<code>startxwin</code>，一直开着，在别的终端进行ssh连接与显示，发现就可以了。</p>
+<p>另外发现Cygwin的一个缺点是，每次安装包都得重新运行一遍安装文件，还是没有<code>apt</code>来得方便，所以后面试试能否用WSL替代Cygwin来工作。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/a/227937">https://unix.stackexchange.com/a/227937</a></li>
+</ol>
 
       
     </div>
