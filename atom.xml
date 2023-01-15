@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-01-15T07:58:36.358Z</updated>
+  <updated>2023-01-15T14:53:10.057Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ffmpeg抽取高清图像帧</title>
+    <link href="http://vra.github.io/2023/01/15/ffmpeg-extract-high-quality-images/"/>
+    <id>http://vra.github.io/2023/01/15/ffmpeg-extract-high-quality-images/</id>
+    <published>2023-01-15T14:27:33.000Z</published>
+    <updated>2023-01-15T14:53:10.057Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>图像</li><li>ffmpeg</li></ul><p>使用<a href="https://ffmpeg.org/">ffmpeg</a>可以方便地从视频中抽取图像帧：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i /path/to/video.mp4 image-folder/%06d.jpg</span><br></pre></td></tr></table></figure><p>但实际测试发现，抽取的图像帧比较模糊，有明显的块效应。</p><p>搜索了一些方法，都没有明显的效果。</p><p>最后发现，把抽取的图像格式从<code>.jpg</code>修改为<code>.png</code>，结果就是高清无块效应的了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i /path/to/video.mp4 image-folder/%06d.png</span><br></pre></td></tr></table></figure><p>另外PNG格式的图像存储大小要大一些，但还好能接受。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;图像&lt;/li&gt;
+&lt;li&gt;ffmpeg&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用&lt;a href=&quot;https://ffmpeg.org/&quot;&gt;ffmpeg&lt;/a&gt;可以方便地从视频中抽取图像帧：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;tabl</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>原来 git stash 应该这么用</title>
@@ -479,29 +504,6 @@
     <category term="OpenCV" scheme="http://vra.github.io/tags/OpenCV/"/>
     
     <category term="Matplotlib" scheme="http://vra.github.io/tags/Matplotlib/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git 提交文件中的部分修改</title>
-    <link href="http://vra.github.io/2022/06/17/git-add-part-of-a-file/"/>
-    <id>http://vra.github.io/2022/06/17/git-add-part-of-a-file/</id>
-    <published>2022-06-17T15:19:36.000Z</published>
-    <updated>2022-06-17T23:56:04.419Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在 Git 提交一个文件的时候，有时候会在同一个文件中，包含两个不同功能的修改，或者一个功能完成了，而别的部分还没有完善不应该进入代码库，这时候如果使用<code>git add file-name</code>的话，会将这个文件中的所有更新都提交，达不到上述的需求。针对这种场景，git 提供了更细粒度的提交命令<code>git add -p</code>，可以分部分提交一个文件中的更新代码块，实测能满足常见的需求。这里简要记录一下如何使用这个命令。</p><span id="more"></span><h2 id="2-实现命令"><a href="#2-实现命令" class="headerlink" title="2. 实现命令"></a>2. 实现命令</h2><h3 id="2-1-原理解释"><a href="#2-1-原理解释" class="headerlink" title="2.1 原理解释"></a>2.1 原理解释</h3><p>git 中用”hunk”来表示一个文件中邻近区域中的代码修改块，比如用<code>git diff</code> 查看修改时，两个<code>@@</code>符号分割的一个区域就是一个hunk，其中行首是<code>-</code>，颜色为红色的为删去的行，而行首为<code>+</code>，颜色为绿色的为增加的行。<br><img src="/imgs/git_add_part/git_hunk_vis.jpg" alt="git_hunk_vis"></p><p>需要注意的是，git有一套默认的将文件中所有修改分成不同hunk的机制，但我们也可以将默认机制分的太大的hunk分割为多个小的hunk，这样能更精确地控制提交的粒度。</p><p>部分提交文件修改的原理简单来说是将所有的修改分成不同的hunk，通过对每个hunk来进行是否提交的判断，从而完成我们的需求。具体命令下面详细讲述。</p><h3 id="2-2-命令详解"><a href="#2-2-命令详解" class="headerlink" title="2.2 命令详解"></a>2.2 命令详解</h3><p><code>git add -p filename</code>就可以进入交互式的操作界面，所有的操作在该界面完成，其中<code>-p</code>是patch的缩写。界面如下:<br><img src="/imgs/git_add_part/git_part_add_2.jpg"><br>这里会自动载入第一个hunk，显示了修改的代码行，最底下一行显示了这是8个hunk里面的第一个，然后有一些选项让我们选择，这时候输入<code>?</code>，按会车会显示help信息:<br><img src="/imgs/git_add_part/git_part_add_2.jpg"></p><p>所有命令的含义如下:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">y - 将当前的hunk进行提交</span><br><span class="line">n - 不提交当前hunk</span><br><span class="line">q - 退出交互式界面，不提交当前hunk以及后面的所有hunk</span><br><span class="line">a - 提交当前hunk以及后面的所有hunk</span><br><span class="line">d - 不提交当前hunk以及后面的所有hunk，效果与q一样，也会退出交互式界面</span><br><span class="line">g - 选择一个hunk并跳转过去，输入后会列出所有hunk的编号，输入编号就跳转到对应的hunk</span><br><span class="line">/ - 输入一个正则表达式，选择一个包含搜索词的hunk进行跳转</span><br><span class="line">j - 暂时不确定是否保存当前hunk，跳转到下一个没确定的hunk</span><br><span class="line">J - 暂时不确定是否保存当前hunk，跳转到下一个hunk</span><br><span class="line">e - 手动修改hunk块的内容，将`-` 开头的行替换为 ` `则不会删去这行，删除`+`为首的行则不提交这个新增，以`<span class="comment">#`开始的行会被忽略</span></span><br><span class="line">? - 显示帮助信息 </span><br></pre></td></tr></table></figure><p>详细阅读上面的说明，结合实际的操作，就能掌握这个命令的所有用法。</p><p>简单来说，使用<code>y</code>来提交当前hunk，使用<code>n</code>来忽略当前hunk，如果hunk代码块太大，输入<code>s</code>会将其分割为小的hunk，在上面继续操作，hunk间上下跳转用vim的快捷键<code>k</code> 和<code>j</code>，要退出则输入<code>q</code>。</p><h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ol><li><a href="https://stackoverflow.com/questions/1085162/commit-only-part-of-a-file-in-git">https://stackoverflow.com/questions/1085162/commit-only-part-of-a-file-in-git</a></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;在 Git 提交一个文件的时候，有时候会在同一个文件中，包含两个不同功能的修改，或者一个功能完成了，而别的部分还没有完善不应该进入代码库，这时候如果使用&lt;code&gt;git add file-name&lt;/code&gt;的话，会将这个文件中的所有更新都提交，达不到上述的需求。针对这种场景，git 提供了更细粒度的提交命令&lt;code&gt;git add -p&lt;/code&gt;，可以分部分提交一个文件中的更新代码块，实测能满足常见的需求。这里简要记录一下如何使用这个命令。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
-    <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
   </entry>
   

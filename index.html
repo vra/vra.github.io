@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">138</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">149</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">138</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">150</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">149</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -204,6 +204,96 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/01/15/ffmpeg-extract-high-quality-images/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/15/ffmpeg-extract-high-quality-images/" class="post-title-link" itemprop="url">ffmpeg抽取高清图像帧</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-01-15 22:27:33 / 修改时间：22:53:10" itemprop="dateCreated datePublished" datetime="2023-01-15T22:27:33+08:00">2023-01-15</time>
+    </span>
+
+  
+    <span id="/2023/01/15/ffmpeg-extract-high-quality-images/" class="post-meta-item leancloud_visitors" data-flag-title="ffmpeg抽取高清图像帧" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>图像</li>
+<li>ffmpeg</li>
+</ul>
+<p>使用<a target="_blank" rel="noopener" href="https://ffmpeg.org/">ffmpeg</a>可以方便地从视频中抽取图像帧：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i /path/to/video.mp4 image-folder/%06d.jpg</span><br></pre></td></tr></table></figure>
+
+<p>但实际测试发现，抽取的图像帧比较模糊，有明显的块效应。</p>
+<p>搜索了一些方法，都没有明显的效果。</p>
+<p>最后发现，把抽取的图像格式从<code>.jpg</code>修改为<code>.png</code>，结果就是高清无块效应的了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i /path/to/video.mp4 image-folder/%06d.png</span><br></pre></td></tr></table></figure>
+<p>另外PNG格式的图像存储大小要大一些，但还好能接受。</p>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -988,109 +1078,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/10/07/convert-image-to-base64/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/10/06/fly-io-tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/06/fly-io-tutorial/" class="post-title-link" itemprop="url">fly.io 使用指南</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-06 08:18:04" itemprop="dateCreated datePublished" datetime="2022-10-06T08:18:04+08:00">2022-10-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-20 00:16:09" itemprop="dateModified" datetime="2022-12-20T00:16:09+08:00">2022-12-20</time>
-    </span>
-
-  
-    <span id="/2022/10/06/fly-io-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="fly.io 使用指南" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>最近看技术论坛，发现提到 <a target="_blank" rel="noopener" href="https://fly.io/">fly.io</a> 的次数越来越多了。 fly.io 是一个容器化的部署平台，只需要一个<code>Dockerfile</code>文件就能部署代码到fly.io 的服务器上，同时还自动生成域名。其他的好处多多，我根据自己体验，我总结成了下面的这些条：</p>
-<ul>
-<li><p><del>有免费使用的额度。不填写信用卡信息可以创建一个App，完全不收费；填写信用卡信息后每月有一定额度的免费流量，超过额度会额外收费。所以想做个小demo完全可以不填信用卡试用。</del> 目前已经不支持无信用卡使用了，参见<a target="_blank" rel="noopener" href="https://community.fly.io/t/is-it-free-getting-error-we-need-your-payment-information-to-continue/8871">这里</a>的讨论</p>
-</li>
-<li><p>自动生成域名。比如你创建一个名字叫<code>my_demo</code>的App，那么部署完成后，就会生成<code>my_demo.fly.dev</code>的域名，可以全球访问，不用自己单独买域名了。</p>
-</li>
-<li><p>可以 SSH 连接进入服务器。部署完成后，可以通过<code>flyctl ssh console</code> 命令登录部署的服务器，所以相当于你有了一台免费的VPS，可以做你想做的任何事情。</p>
-</li>
-<li><p>部署简单，采用<code>flyctl</code> 命令集合统一部署;支持各种语言的各种框架来搭建部署环境，能自动识别当前目录下代码所采用的是哪个框架，自动部署。</p>
-</li>
-</ul>
-<p>下面简单记录一下使用的流程和一些教程里面没提及的使用命令。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/06/fly-io-tutorial/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
