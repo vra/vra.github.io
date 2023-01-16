@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-01-15T14:53:10.057Z</updated>
+  <updated>2023-01-16T10:35:20.671Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -21,23 +21,23 @@
     <link href="http://vra.github.io/2023/01/15/ffmpeg-extract-high-quality-images/"/>
     <id>http://vra.github.io/2023/01/15/ffmpeg-extract-high-quality-images/</id>
     <published>2023-01-15T14:27:33.000Z</published>
-    <updated>2023-01-15T14:53:10.057Z</updated>
+    <updated>2023-01-16T10:35:20.671Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>图像</li><li>ffmpeg</li></ul><p>使用<a href="https://ffmpeg.org/">ffmpeg</a>可以方便地从视频中抽取图像帧：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i /path/to/video.mp4 image-folder/%06d.jpg</span><br></pre></td></tr></table></figure><p>但实际测试发现，抽取的图像帧比较模糊，有明显的块效应。</p><p>搜索了一些方法，都没有明显的效果。</p><p>最后发现，把抽取的图像格式从<code>.jpg</code>修改为<code>.png</code>，结果就是高清无块效应的了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i /path/to/video.mp4 image-folder/%06d.png</span><br></pre></td></tr></table></figure><p>另外PNG格式的图像存储大小要大一些，但还好能接受。</p>]]></content>
+    <content type="html"><![CDATA[<p>使用<a href="https://ffmpeg.org/">ffmpeg</a>可以方便地从视频中抽取图像帧：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i /path/to/video.mp4 image-folder/%06d.jpg</span><br></pre></td></tr></table></figure><p>但实际测试发现，抽取的图像帧比较模糊，有明显的块效应。</p><p>搜索时有人说可以加<code>-q:v 1 -qmin 1 -qmax 1</code>来提高图像质量</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i /path/to/video.mp4 -q:v 1 -qmin 1 -qmax 1 image-folder/%06d.jpg</span><br><span class="line">``</span><br><span class="line">测试发现确实有一些提升，但还是能看到明显的模糊。</span><br><span class="line"></span><br><span class="line">最后发现，把抽取的图像格式从`.jpg`修改为`.png`，结果就是高清且无块效应的了：</span><br><span class="line">```bash</span><br><span class="line">ffmpeg -i /path/to/video.mp4 image-folder/%06d.png</span><br></pre></td></tr></table></figure><p>另外PNG格式的图像存储大小要大一些，但不会太大，还是能接受的。</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;ul&gt;
-&lt;li&gt;图像&lt;/li&gt;
-&lt;li&gt;ffmpeg&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;使用&lt;a href=&quot;https://ffmpeg.org/&quot;&gt;ffmpeg&lt;/a&gt;可以方便地从视频中抽取图像帧：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;tabl</summary>
+    <summary type="html">&lt;p&gt;使用&lt;a href=&quot;https://ffmpeg.org/&quot;&gt;ffmpeg&lt;/a&gt;可以方便地从视频中抽取图像帧：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cla</summary>
       
     
     
     
+    
+    <category term="图像" scheme="http://vra.github.io/tags/%E5%9B%BE%E5%83%8F/"/>
+    
+    <category term="ffmpeg" scheme="http://vra.github.io/tags/ffmpeg/"/>
     
   </entry>
   
