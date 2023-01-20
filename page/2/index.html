@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">140</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">150</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">141</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">152</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-count">152</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">140</span>
+        <span class="site-state-item-count">141</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,6 +204,181 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/10/15/python-split-image-to-grid-patch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/15/python-split-image-to-grid-patch/" class="post-title-link" itemprop="url">Python中将图像切分为小的patch</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-15 07:51:36 / 修改时间：11:37:09" itemprop="dateCreated datePublished" datetime="2022-10-15T07:51:36+08:00">2022-10-15</time>
+    </span>
+
+  
+    <span id="/2022/10/15/python-split-image-to-grid-patch/" class="post-meta-item leancloud_visitors" data-flag-title="Python中将图像切分为小的patch" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>假如有张1000x1000的图像，我们要将它切成20x20的小patch，该怎么处理呢？<br>最简单的方法就是采用两重for循环，每次计算小patch对应的下标，在原图上进行crop:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">ncols = <span class="number">20</span></span><br><span class="line">nrows = <span class="number">20</span></span><br><span class="line">img = np.random.rand(size, size)</span><br><span class="line"></span><br><span class="line">patches = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size//ncols):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(size//nrows):</span><br><span class="line">		patch = img[ncols*i:ncols*(i+<span class="number">1</span>), nrows*j:nrows*(j+<span class="number">1</span>)]</span><br><span class="line">		patches.append(patch)</span><br><span class="line"></span><br><span class="line">patches = np.array(patches)</span><br></pre></td></tr></table></figure>
+
+<p>但这样总共需要循环50*x50=2500次，而我们知道 Python 的 for 循环比较慢，因此整体开销还是比较大的，有没有更快的方式呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/15/python-split-image-to-grid-patch/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/10/07/convert-image-to-base64/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/07/convert-image-to-base64/" class="post-title-link" itemprop="url">用Python将图片转换为base64字符串</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-07 22:19:37 / 修改时间：22:26:06" itemprop="dateCreated datePublished" datetime="2022-10-07T22:19:37+08:00">2022-10-07</time>
+    </span>
+
+  
+    <span id="/2022/10/07/convert-image-to-base64/" class="post-meta-item leancloud_visitors" data-flag-title="用Python将图片转换为base64字符串" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>无他，这篇博文记录一下利用Python将OpenCV图片转换为base64字符串并在网页上进行展示的过程，权当备忘。可在<a target="_blank" rel="noopener" href="https://github.com/vra/image-to-base64">这里</a>查看源码。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/07/convert-image-to-base64/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -695,9 +870,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-07-23 11:17:27 / 修改时间：17:38:32" itemprop="dateCreated datePublished" datetime="2022-07-23T11:17:27+08:00">2022-07-23</time>
+      <time title="创建时间：2022-07-23 11:17:27" itemprop="dateCreated datePublished" datetime="2022-07-23T11:17:27+08:00">2022-07-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 14:25:25" itemprop="dateModified" datetime="2023-01-20T14:25:25+08:00">2023-01-20</time>
     </span>
 
   
@@ -717,8 +898,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-一个故事"><a href="#1-一个故事" class="headerlink" title="1. 一个故事"></a>1. 一个故事</h2><p>在大约十年以前，大二或大三的夏天，<a target="_blank" rel="noopener" href="https://wzhd.org/">子浩</a> 在科大西区活动中心的自习室内，给我帮忙安装Linux系统。当时他问了一个问题，用<code>apt-get install</code> 安装包时，什么时候会弹出<code>Do you want to continue?Y/[n]</code>的提示呢？我当时说应该是包大小超过限制时会有这个提示吧，但我们随即验证了这个假设并不成立，安装一个很小的包也会有这个提示。当时没有得到明确的结论。</p>
-<p>这个问题时不时在脑海中想起，每次想查一下弄个清楚，但始终是没做。这样十年过去了，近日终于又想起来，通过谷歌搜索，终于发现了StackOverflow上已经又同样疑问的人提问了，而且得到了解答。至此这个小疑问算是解决了，我也不用每次念念不忘了。</p>
+          <h2 id="1-一个故事"><a href="#1-一个故事" class="headerlink" title="1. 一个故事"></a>1. 一个故事</h2><p>在大约十年以前，大二或大三的夏天，<a target="_blank" rel="noopener" href="https://wzhd.org/">子浩</a> 在科大西区活动中心的自习室内，给我帮忙安装Linux系统。当时他问了我一个问题，执行<code>apt-get install</code> 安装软件时，什么时候会弹出<code>Do you want to continue?Y/[n]</code>的提示呢？我当时说应该是包大小超过某个限制大小时会有这个提示吧，但我们随即验证了这个假设并不成立，安装一个很小的包也会有这个提示。当时没有得到明确的结论。</p>
+<p>这个问题时不时在脑海中想起，每次想查一下弄个清楚，但始终没来得及调查。这样十年过去了，近日终于又想起来，通过谷歌搜索，发现StackOverflow上已经有人问过同样的问题，而且也有人进行了回答。至此这个小疑问算是解决了，我也不用每次念念不忘了。</p>
 <p>具体原因是什么，请见下节。</p>
           <!--noindex-->
             <div class="post-button">
@@ -916,180 +1097,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/06/26/pytorch-fit-polynomial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/26/pytorch-fit-polynomial/" class="post-title-link" itemprop="url">Pytorch 拟合多项式的例子</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-06-26 11:20:15 / 修改时间：17:00:34" itemprop="dateCreated datePublished" datetime="2022-06-26T11:20:15+08:00">2022-06-26</time>
-    </span>
-
-  
-    <span id="/2022/06/26/pytorch-fit-polynomial/" class="post-meta-item leancloud_visitors" data-flag-title="Pytorch 拟合多项式的例子" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>Pytorch包含了Linear层，可以用来拟合<code>y = w * x + b</code> 形式的函数，其中<code>w</code>和<code>bias</code>就是Linear层的weights和bias。这里写个拟合一次多项式的简单demo，作为一个小实验。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/26/pytorch-fit-polynomial/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/06/24/matplotlib-convert-opencv/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/24/matplotlib-convert-opencv/" class="post-title-link" itemprop="url">matplotlibt图像转OpenCV图像</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-06-24 23:14:44 / 修改时间：23:51:04" itemprop="dateCreated datePublished" datetime="2022-06-24T23:14:44+08:00">2022-06-24</time>
-    </span>
-
-  
-    <span id="/2022/06/24/matplotlib-convert-opencv/" class="post-meta-item leancloud_visitors" data-flag-title="matplotlibt图像转OpenCV图像" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>有时候，我们需要使用Matplotlib库强大的绘图函数来在numpy.ndarray格式的图像上进行一些可视化，比如关键点绘制，投影点绘制。绘制完后，还需要把matplotlib的figure对象转换为numpy.ndarray 格式的对象，方便和原图进行比较。有时候为了可视化的美观，需要验证保证转换后的图像与原始图像大小一致。这里记录一下操作的流程，以及一些常遇到的问题。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/24/matplotlib-convert-opencv/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
