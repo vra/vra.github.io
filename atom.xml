@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-01-27T15:15:56.996Z</updated>
+  <updated>2023-01-27T15:16:22.167Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://vra.github.io/2023/01/27/arxiv-on-mobile/"/>
     <id>http://vra.github.io/2023/01/27/arxiv-on-mobile/</id>
     <published>2023-01-27T14:44:41.000Z</published>
-    <updated>2023-01-27T15:15:56.996Z</updated>
+    <updated>2023-01-27T15:16:22.167Z</updated>
     
-    <content type="html"><![CDATA[<p>有时候想要在手机上访问Arxiv上的论文，打开arxiv.com，发现体验比较差，没有响应式设计，需要不断移动页面才能读完一行文字，影响阅读。偶然发现了<a href="https://www.arxiv-vanity.com/">arxiv-vanity</a>这个网站，发现能很好的满足手机上看arxiv论文的需求，收藏了。</p><span id="more"></span><p>首先看下arxiv-vanity网站的介绍:</p><blockquote><p>arXiv Vanity renders academic papers from arXiv as responsive web pages so you don’t have to squint at a PDF.<br>翻译成中文就是:<br>arXiv Vanity 将 arXiv 的学术论文呈现为响应式网页，因此您不必眯着眼睛看 PDF。</p></blockquote><p>exactly what I need!</p><p>那么该如何使用呢？</p><p>在<a href="https://www.arxiv-vanity.com/">arxiv-vanity</a>首页的搜索框中输入arxiv论文的摘要页面，如<code>https://arxiv.org/abs/1605.07683</code>，按右边的按钮，就能将论文转换为HTML文件，并且在不同的设备下自适应地调整大小。</p><p>另外也可以通过<code>https://www.arxiv-vanity.com/papers/&lt;paper_id&gt;</code>的方式访问转换后的HTML页面，比如<code>https://www.arxiv-vanity.com/papers/1605.07683/</code>。</p><p>大概原理是使用<a href="https://dlmf.nist.gov/LaTeXML/">LaTeXML</a>将Latex原文件转换为HTML，再进行显示。具体实现参见<a href="https://github.com/arxiv-vanity/engrafo">源码</a>。</p>]]></content>
+    <content type="html"><![CDATA[<p>有时候想要在手机上访问Arxiv上的论文，打开arxiv.com，发现体验比较差，没有响应式设计，需要不断移动页面才能读完一行文字，影响阅读。偶然发现了<a href="https://www.arxiv-vanity.com/">arxiv-vanity</a>这个网站，发现能很好的满足手机上看arxiv论文的需求，收藏了。</p><span id="more"></span><p>首先看下arxiv-vanity网站的介绍:</p><blockquote><p>arXiv Vanity renders academic papers from arXiv as responsive web pages so you don’t have to squint at a PDF.</p></blockquote><p>翻译成中文就是:</p><blockquote><p>arXiv Vanity 将 arXiv 的学术论文呈现为响应式网页，因此您不必眯着眼睛看 PDF。</p></blockquote><p>exactly what I need!</p><p>那么该如何使用呢？</p><p>在<a href="https://www.arxiv-vanity.com/">arxiv-vanity</a>首页的搜索框中输入arxiv论文的摘要页面，如<code>https://arxiv.org/abs/1605.07683</code>，按右边的按钮，就能将论文转换为HTML文件，并且在不同的设备下自适应地调整大小。</p><p>另外也可以通过<code>https://www.arxiv-vanity.com/papers/&lt;paper_id&gt;</code>的方式访问转换后的HTML页面，比如<code>https://www.arxiv-vanity.com/papers/1605.07683/</code>。</p><p>大概原理是使用<a href="https://dlmf.nist.gov/LaTeXML/">LaTeXML</a>将Latex原文件转换为HTML，再进行显示。具体实现参见<a href="https://github.com/arxiv-vanity/engrafo">源码</a>。</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;有时候想要在手机上访问Arxiv上的论文，打开arxiv.com，发现体验比较差，没有响应式设计，需要不断移动页面才能读完一行文字，影响阅读。偶然发现了&lt;a href=&quot;https://www.arxiv-vanity.com/&quot;&gt;arxiv-vanity&lt;/a&gt;这个网站，发现能很好的满足手机上看arxiv论文的需求，收藏了。&lt;/p&gt;</summary>
@@ -61,9 +61,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="find" scheme="http://vra.github.io/tags/find/"/>
     
@@ -86,9 +86,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
@@ -139,9 +139,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -184,9 +184,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -211,9 +211,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -331,9 +331,9 @@
     
     
     
-    <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
     
     <category term="OpenCV" scheme="http://vra.github.io/tags/OpenCV/"/>
     
@@ -435,9 +435,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
