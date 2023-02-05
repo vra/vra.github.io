@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-01-27T15:16:22.167Z</updated>
+  <updated>2023-02-05T03:42:17.926Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,95 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于 np.float 被删除的问题</title>
+    <link href="http://vra.github.io/2023/02/05/numpy-remove-np-float/"/>
+    <id>http://vra.github.io/2023/02/05/numpy-remove-np-float/</id>
+    <published>2023-02-05T03:34:04.000Z</published>
+    <updated>2023-02-05T03:42:17.926Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>在Numpy 1.24版本中，<a href="https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations">删除</a>了像<code>np.float</code>、<code>np.int</code> 这样的 Python 内置类型的 alias，因此以后在代码中使用这些类型会报错<code>AttributeError: module &#39;numpy&#39; has no attribute &#39;float&#39;</code>, 涉及的类型包括：</p><ul><li><code>numpy.bool</code></li><li><code>numpy.int</code></li><li><code>numpy.float</code></li><li><code>numpy.complex</code></li><li><code>numpy.object</code></li><li><code>numpy.str</code></li><li><code>numpy.long</code></li><li><code>numpy.unicode</code></li></ul><p>那该怎么解决这个错误呢？</p><p>TL;DR</p><ul><li>对于在标量上的操作，直接使用Python内置类型替换<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo = np.random.rand(<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 原先用法，注意foo[0]是一个标量</span></span><br><span class="line">bar = np.<span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">bar = <span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></li><li>对于在<code>np.ndarray</code> 上的操作，使用<code>np.float64</code> 或<code>np.float32</code> 来替代，具体选择哪个需要自己根据情况来确定，不同类型精度会有不同，下面举两个例子:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.float32)</span><br></pre></td></tr></table></figure></li></ul><p>这里列出来了删除类型在标量和<code>np.ndarray</code> 上的替代，方便查找</p><table><thead><tr><th>原先类型</th><th>标量替换类型</th><th><code>np.ndarray</code>替换类型</th></tr></thead><tbody><tr><td>np.int</td><td>int</td><td>np.int32/np.int64</td></tr><tr><td>np.float</td><td>float</td><td>np.float32/np.float64</td></tr><tr><td>np.bool</td><td>bool</td><td>np.bool_</td></tr><tr><td>np.complex</td><td>complex</td><td>np.complex128</td></tr><tr><td>np.object</td><td>object</td><td>-</td></tr><tr><td>np.str</td><td>str</td><td>np.str_</td></tr><tr><td>np.long</td><td>int</td><td>np.int32/np.int64</td></tr><tr><td>np.unicode</td><td>str</td><td>np.str_</td></tr></tbody></table><p>详细说明参考<a href="https://numpy.org/doc/stable/release/1.20.0-notes.html#deprecations">NumPy 1.20.0 Release Notes</a>。</p><p>下面详细说说事情的来龙去脉。</p><span id="more"></span><h3 id="2-代码验证"><a href="#2-代码验证" class="headerlink" title="2. 代码验证"></a>2. 代码验证</h3><p>下面我搭建 Numpy 1.20.0 和 1.24.0 的环境进行简单测试，以及分析为什么会弃用这些类型。</p><p>首先是 Numpy 1.20.0 环境搭建与简单测试：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m venv np1.20</span><br><span class="line"><span class="built_in">source</span> np1.20/bin/activate</span><br><span class="line">pip install numpy==1.20</span><br><span class="line">python -c <span class="string">&quot;import numpy as np; a = np.array([1.0], dtype=np.float)&quot;</span></span><br></pre></td></tr></table></figure><p>输出如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;string&gt;:1: DeprecationWarning: `np.float` is a deprecated <span class="built_in">alias</span> <span class="keyword">for</span> the <span class="built_in">builtin</span> `<span class="built_in">float</span>`. To silence this warning, use `<span class="built_in">float</span>` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar <span class="built_in">type</span>, use `np.float64` here.</span><br><span class="line">Deprecated <span class="keyword">in</span> NumPy 1.20; <span class="keyword">for</span> more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html<span class="comment">#deprecations</span></span><br></pre></td></tr></table></figure><p>仔细看这段输出的话，可以发现从 Numpy 1.20 版本开始，Numpy已经弃用<code>np.float</code> 类型了，并且给出了替换建议，以及详细的说明文档<a href="https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations">地址</a>。</p><p>而在 Numpy 1.24版本里面，正式删除了<code>np.float</code>，可以用下面的代码来测试。<br>首先我们创建一个新的环境，安装Numpy 1.24版本，然后创建一个<code>np.float</code>类型的数组：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m venv np1.24</span><br><span class="line"><span class="built_in">source</span> np1.24/bin/activate</span><br><span class="line">pip install numpy==1.24</span><br><span class="line">python -c <span class="string">&quot;import numpy as np; a = np.array([1.0], dtype=np.float)&quot;</span></span><br></pre></td></tr></table></figure><p>输出如下:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;string&gt;&quot;</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">&quot;/Users/name/np1.24/lib/python3.9/site-packages/numpy/__init__.py&quot;</span>, line 284, <span class="keyword">in</span> __getattr__</span><br><span class="line">    raise AttributeError(<span class="string">&quot;module &#123;!r&#125; has no attribute &quot;</span></span><br><span class="line">AttributeError: module <span class="string">&#x27;numpy&#x27;</span> has no attribute <span class="string">&#x27;float&#x27;</span></span><br></pre></td></tr></table></figure><p>直接就报了我们开头提到的属性错误。</p><h3 id="3-Why"><a href="#3-Why" class="headerlink" title="3. Why"></a>3. Why</h3><p>其实早在2015年，Numpy 开发者就在<a href="https://github.com/numpy/numpy/pull/6103">策划</a>删除这些类型了，只不过当时使用范围太广，删除造成的影响太大，所以在近8年，1.20-1.24 4个版本的Warning后，才正式删除。<br>为什么要删除这些操作呢？我自己觉得是因为<code>np.float</code> 这种类型太容易误用了。大家都以为<code>np.float</code>是一个Numpy的数据类型，是<code>np.float32</code>的alias，但实际它是内置类型，是<code>int</code>类型的alias。<br>就像下面这个例子：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo = np.array([<span class="number">10</span>], dtype=np.int32)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bar = np.<span class="built_in">int</span>(foo)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(bar)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">int</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">baz</span> = <span class="title">np</span>.<span class="title">int32</span>(<span class="params">foo</span>)</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span>(<span class="params">baz</span>)</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> &#x27;<span class="title">numpy</span>.<span class="title">ndarray</span>&#x27;&gt;</span></span><br></pre></td></tr></table></figure><p>可以看到，对<code>np.ndarray</code> 数组进行<code>np.int</code> 和<code>np.int32</code>的操作，一个得到<code>int</code>类型的变量，另一个得到的是<code>np.ndarray</code>类型的变量。</p><p>详细的原因可以参考上面的 issue 链接。</p><p>那最早为什么还要引入<code>np.float</code>呢？直接用Python内置的类型不好吗？其实这是在很早的Numpy版本中错误地引入的，那个版本<code>np.float</code>的含义就是<code>np.float64</code> ，只不过后来版本中<code>np.float</code> 的含义修改了，但如果直接删除<code>np.float</code>，有人使用老版本的Numpy，就会在执行<code>from numpy import *</code> 报错。当前那个老版本已经很少有人用了 ，所以就删除了。</p><h3 id="4-带来的影响"><a href="#4-带来的影响" class="headerlink" title="4. 带来的影响"></a>4. 带来的影响</h3><p>这个改动带来的影响可以说是非常大了，简单来说，在 Numpy 1.24.0以上的版本中，使用<code>np.float</code>的代码都会直接报错。而 Numpy 作为 Python 在科学计算中的基础包，被广泛使用的程度无需我赘述。<br>简单在GitHub 搜索了一下，光涉及到<code>np.float</code>的(<a href="https://github.com/search?q=np.float)++lang:Python++&ref=opensearch&type=code">结果1</a>， <a href="https://github.com/search?q=np.float(+lang:Python++&ref=opensearch&type=code">结果2</a>）就有近9万行代码，我自己短期内就在两个仓库中遇到这个问题。好在解决办法也比较直接，希望可以顺利的过渡过去。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;在Numpy 1.24版本中，&lt;a href=&quot;https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations&quot;&gt;删除&lt;/a&gt;了像&lt;code&gt;np.float&lt;/code&gt;、&lt;code&gt;np.int&lt;/code&gt; 这样的 Python 内置类型的 alias，因此以后在代码中使用这些类型会报错&lt;code&gt;AttributeError: module &amp;#39;numpy&amp;#39; has no attribute &amp;#39;float&amp;#39;&lt;/code&gt;, 涉及的类型包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;numpy.bool&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numpy.int&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numpy.float&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numpy.complex&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numpy.object&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numpy.str&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numpy.long&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numpy.unicode&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那该怎么解决这个错误呢？&lt;/p&gt;
+&lt;p&gt;TL;DR&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于在标量上的操作，直接使用Python内置类型替换&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 原先用法，注意foo[0]是一个标量&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;bar = np.&lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;(foo[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 新用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;bar = &lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;(foo[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;对于在&lt;code&gt;np.ndarray&lt;/code&gt; 上的操作，使用&lt;code&gt;np.float64&lt;/code&gt; 或&lt;code&gt;np.float32&lt;/code&gt; 来替代，具体选择哪个需要自己根据情况来确定，不同类型精度会有不同，下面举两个例子:&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 原先用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;, dtype=np.&lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 新用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;, dtype=np.float32)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 原先用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;).astype(np.&lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 新用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;).astype(np.float32)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里列出来了删除类型在标量和&lt;code&gt;np.ndarray&lt;/code&gt; 上的替代，方便查找&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;原先类型&lt;/th&gt;
+&lt;th&gt;标量替换类型&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;np.ndarray&lt;/code&gt;替换类型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;np.int&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;np.int32/np.int64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;np.float&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;np.float32/np.float64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;np.bool&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;np.bool_&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;np.complex&lt;/td&gt;
+&lt;td&gt;complex&lt;/td&gt;
+&lt;td&gt;np.complex128&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;np.object&lt;/td&gt;
+&lt;td&gt;object&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;np.str&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;np.str_&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;np.long&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;np.int32/np.int64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;np.unicode&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;np.str_&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;详细说明参考&lt;a href=&quot;https://numpy.org/doc/stable/release/1.20.0-notes.html#deprecations&quot;&gt;NumPy 1.20.0 Release Notes&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;下面详细说说事情的来龙去脉。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Numpy" scheme="http://vra.github.io/tags/Numpy/"/>
+    
+  </entry>
   
   <entry>
     <title>手机上看arxiv上论文的方法</title>
@@ -31,13 +120,13 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Latex" scheme="http://vra.github.io/tags/Latex/"/>
     
     <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
     
     <category term="Web" scheme="http://vra.github.io/tags/Web/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -488,31 +577,6 @@
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Ubuntu" scheme="http://vra.github.io/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>surface-simplification-using-quadric-error-metrics</title>
-    <link href="http://vra.github.io/2022/06/29/surface-simplification-using-quadric-error-metrics/"/>
-    <id>http://vra.github.io/2022/06/29/surface-simplification-using-quadric-error-metrics/</id>
-    <published>2022-06-29T07:25:53.000Z</published>
-    <updated>2022-06-29T07:29:10.693Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>顶点可以看作是三角面片所在的平面的交集</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;顶点可以看作是三角面片所在的平面的交集&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
-    <category term="Graphic" scheme="http://vra.github.io/tags/Graphic/"/>
     
   </entry>
   
