@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-02-05T03:42:17.926Z</updated>
+  <updated>2023-02-12T16:33:42.275Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nanoGPT + 鲁迅</title>
+    <link href="http://vra.github.io/2023/02/12/nanogpt-and-luxun/"/>
+    <id>http://vra.github.io/2023/02/12/nanogpt-and-luxun/</id>
+    <published>2023-02-12T15:24:02.000Z</published>
+    <updated>2023-02-12T16:33:42.275Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-起因"><a href="#1-起因" class="headerlink" title="1. 起因"></a>1. 起因</h2><p>今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的<a href="https://til.simonwillison.net/llms/training-nanogpt-on-my-blog">实验</a>，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模型生成鲁迅风格的文字：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">故乡，债是佩服的。</span><br><span class="line"> 我一向对于新青年的态度，先来说话，谢容易做的，然而伏园已经见过几样，感觉的是另外捧之数，以为先前的例子。今但近来做了做事，自己也还不做，不能先行通，所以生在冷静和“人生”，三妇一苦闷，觉得大约是如此隔膜</span><br><span class="line">和曹操，于是非意模茶炛，可以说是太高了，所以现在便能教育，竟�如此。</span><br><span class="line"> 但汝实在有给法历代的，不久就在绝末年间，我想显出向大家饮一趟，而汉子大毒是怀旧的，就要贫足有打劫，可以永掠的。这种事情，中国有一个大官左翼阿，（陀思妥习），有敢请佛喜，总要适说一点�</span><br></pre></td></tr></table></figure><p>还算有鲁迅文字的风格，但逻辑一窍不通，整体还是难让人满意，不知道是GPT2能力的问题还是我实验设置的问题。 Anyway，这里共享一下我实验的流程，有兴趣的朋友可以参考，进行改进。本文涉及的代码修改代码已经提交到这个<a href="https://github.com/vra/nanoGPT">仓库了</a>，可以参考，文末会附上更多例子。</p><span id="more"></span><h2 id="2-操作流程"><a href="#2-操作流程" class="headerlink" title="2. 操作流程"></a>2. 操作流程</h2><h3 id="2-1-下载nanoGPT源码并安装依赖"><a href="#2-1-下载nanoGPT源码并安装依赖" class="headerlink" title="2.1 下载nanoGPT源码并安装依赖"></a>2.1 下载nanoGPT源码并安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/karpathy/nanoGPT</span><br><span class="line"><span class="built_in">cd</span> nanoGPT</span><br><span class="line">conda create --name nanogpt  python=3.9</span><br><span class="line">conda activate nanogpt</span><br><span class="line">pip install transformers datasets tiktoken tqdm wandb numpy httpx torch torchvision</span><br></pre></td></tr></table></figure><h3 id="2-2-数据预处理"><a href="#2-2-数据预处理" class="headerlink" title="2.2 数据预处理"></a>2.2 数据预处理</h3><p>进入代码目录后，重建文件夹<code>data/lunxun</code>，用于存放数据。</p><p>从<a href="https://github.com/gzx1996/luxun/blob/master/book/book.txt">这里</a>下载鲁迅全集，放到<code>data/luxun</code>目录下，然后进行下面的处理：</p><ul><li>去掉所有编者加的注释(由于注释都是以<code>[n]</code>这种形式开头的，因此在VIM中可以用<code>0,$s/^\[.\+//g</code>命令来去掉)</li><li>由于我们想要的是鲁迅白话文的风格，因此手动去掉所有文言文的作品和翻译作品(文言文在最开头的《坟》集子里，翻译作品在最后)</li><li>去掉单行的日期文字（如<code>(一九一八年二月二日)</code>，可以在VIM中用<code>g/^(一九.\+/d</code>去掉)</li></ul><p>我处理后的文本地址在<a href="https://github.com/vra/nanoGPT/tree/master/data/luxun/book.txt">这里</a>。</p><p>然后编写代码<code>prepare.py</code>, 读取文本，构造训练集和验证集，数据比例9:1。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> tiktoken</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">input_file_path = os.path.join(os.path.dirname(__file__), <span class="string">&quot;book.txt&quot;</span>)</span><br><span class="line"></span><br><span class="line">entries = []</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(input_file_path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="keyword">if</span> line.strip() <span class="keyword">and</span> <span class="built_in">len</span>(line) &gt; <span class="number">2</span>:</span><br><span class="line">            entries.append(line)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;len of lines: <span class="subst">&#123;<span class="built_in">len</span>(entries)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># Shuffle entries</span></span><br><span class="line">random.shuffle(entries)</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">len</span>(entries)</span><br><span class="line">train_entries = entries[: <span class="built_in">int</span>(n * <span class="number">0.9</span>)]</span><br><span class="line">val_entries = entries[<span class="built_in">int</span>(n * <span class="number">0.9</span>):]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Turn those into strings</span></span><br><span class="line">train_data = <span class="string">&quot; &quot;</span>.join(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(entry) <span class="keyword">for</span> entry <span class="keyword">in</span> train_entries)</span><br><span class="line">val_data = <span class="string">&quot; &quot;</span>.join(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(entry) <span class="keyword">for</span> entry <span class="keyword">in</span> val_entries)</span><br><span class="line"></span><br><span class="line"><span class="comment"># encode with tiktoken gpt2 bpe</span></span><br><span class="line">enc = tiktoken.get_encoding(<span class="string">&quot;gpt2&quot;</span>)</span><br><span class="line">train_ids = enc.encode_ordinary(train_data)</span><br><span class="line">val_ids = enc.encode_ordinary(val_data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;train has <span class="subst">&#123;<span class="built_in">len</span>(train_ids):,&#125;</span> tokens&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;val has <span class="subst">&#123;<span class="built_in">len</span>(val_ids):,&#125;</span> tokens&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># export to bin files</span></span><br><span class="line">train_ids = np.array(train_ids, dtype=np.uint16)</span><br><span class="line">val_ids = np.array(val_ids, dtype=np.uint16)</span><br><span class="line">train_ids.tofile(os.path.join(os.path.dirname(__file__), <span class="string">&quot;train.bin&quot;</span>))</span><br><span class="line">val_ids.tofile(os.path.join(os.path.dirname(__file__), <span class="string">&quot;val.bin&quot;</span>))</span><br></pre></td></tr></table></figure><p>处理好的训练验证集在<a href="https://github.com/vra/nanoGPT/tree/master/data/luxun">这里</a>，可以直接使用。</p><h3 id="2-3-训练网络"><a href="#2-3-训练网络" class="headerlink" title="2.3 训练网络"></a>2.3 训练网络</h3><p>数据集构建完成后，就可以训练模型了。在代码库根目录，执行下面的命令:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python train.py \</span><br><span class="line">  --dataset=luxun \</span><br><span class="line">--compile=False \</span><br><span class="line">--batch_size=8 \</span><br><span class="line">--dtype=float16</span><br></pre></td></tr></table></figure><p>具体训练参数可以查看<code>train.py</code>，包括训练的层数、batch size，训练后端等等。</p><p>训练的模型默认保存在<code>out/ckpt.pt</code>。</p><p>训练22000次迭代的时候我停止了实验，loss是0.15左右。</p><h3 id="2-4-测试模型"><a href="#2-4-测试模型" class="headerlink" title="2.4 测试模型"></a>2.4 测试模型</h3><p>测试代码在<code>sample.py</code>，默认提示词为空(<code>start=&#39;\n&#39;</code>)可以通过添加<code>--start=&quot;xxx&quot;</code>来修改提示词:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sample.py --start=<span class="string">&quot;故乡&quot;</span></span><br></pre></td></tr></table></figure><h2 id="3-更多例子"><a href="#3-更多例子" class="headerlink" title="3. 更多例子"></a>3. 更多例子</h2><h3 id="3-1-人工智能"><a href="#3-1-人工智能" class="headerlink" title="3.1 人工智能"></a>3.1 人工智能</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">人工智能力。两社丈一多，西辛，是发昏了的结果，但去的四五十岁，死的陈源教授却很不通，我也就不再有了。忍不知道阿Ｑ的名字是怎么写的？这不过是一个问境。他总还拿着四个年的过头放在心里，说道，“哀，遇的。他可</span><br><span class="line">是弯口，道是阿Ｑ；近来已经做了杜师长了，半年的大武人，你还和他对面具汗说：‘非常救命！’‘是情愧 夫子’的学理论矛盾的工人，……而且跳不过是这三秒……。”</span><br><span class="line"> 而已 偶战线告了一个大问题，拿去做的纠纷，而他们就癖在《试玈书》的第一幅，来因为又是删节的，还和所放的做。不过如果加以细见，不想多写了东�</span><br></pre></td></tr></table></figure><h3 id="3-2-文艺复兴"><a href="#3-2-文艺复兴" class="headerlink" title="3.2 文艺复兴"></a>3.2 文艺复兴</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">文艺复兴运动，也是指惺把文艺当承受照时代，更易于政治家，中国并不见立刻，万分折中间，更何况失了国家，只有拜读之处，这就是政治心软到新舖式的必读书。……”</span><br><span class="line"> 我们──由此满可知道河南的内心眼和明白的点灵魂。我在曾经想做以看空虚洋，决不叫看情形。因为我想，便可以支持生活的原因，至少，更进一步而到中国来，他们也给了世界上的美�家所指见的最多也并非精微坏，莫非看翻译</span><br><span class="line">，可说是不算太多了。</span><br><span class="line"> 问题。</span><br><span class="line"> “我们没有见过这种东西，便怎么办呢？”</span><br><span class="line"> 递进句也不是有许多话。</span><br><span class="line"> “可以可以，”四铭吃了点</span><br></pre></td></tr></table></figure><h3 id="3-3-新文化"><a href="#3-3-新文化" class="headerlink" title="3.3 新文化"></a>3.3 新文化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">新文化运动，也许因为他们已经有了“力”这句话的责任了。在那里和他们的风化是并不相禁多的。</span><br><span class="line"> 阿呼呜呼兮呜呼阿呼，</span><br><span class="line"> 八九年</span><br><span class="line"> 二、浙江艳七百</span><br><span class="line"> 一九二五年十二月三十日风雨之夜示，此地声声流鼓近山腌至责诼谢。</span><br><span class="line"> 阿Ｑ的讲到文学说，他们会打断了阿Ｑ的名目退向王的头发，向公司被挤出去了。</span><br><span class="line"> 最末的批评，是“没有话派的书，对于政府来往往解释，加以泄除，以政治的运命，至于失败，那倒是往往会说，我非常危险。</span><br><span class="line"> 小娘枟不用小说的经济字的由校的文章，使是屠戮政府，是凡这些的，但我知道画家一致攻，一致的经历</span><br></pre></td></tr></table></figure><p>如果本文操作中有误的地方，还请专业人士多指出讨论。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;1-起因&quot;&gt;&lt;a href=&quot;#1-起因&quot; class=&quot;headerlink&quot; title=&quot;1. 起因&quot;&gt;&lt;/a&gt;1. 起因&lt;/h2&gt;&lt;p&gt;今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的&lt;a href=&quot;https://til.simonwillison.net/llms/training-nanogpt-on-my-blog&quot;&gt;实验&lt;/a&gt;，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模型生成鲁迅风格的文字：&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;故乡，债是佩服的。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 我一向对于新青年的态度，先来说话，谢容易做的，然而伏园已经见过几样，感觉的是另外捧之数，以为先前的例子。今但近来做了做事，自己也还不做，不能先行通，所以生在冷静和“人生”，三妇一苦闷，觉得大约是如此隔膜&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;和曹操，于是非意模茶炛，可以说是太高了，所以现在便能教育，竟�如此。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 但汝实在有给法历代的，不久就在绝末年间，我想显出向大家饮一趟，而汉子大毒是怀旧的，就要贫足有打劫，可以永掠的。这种事情，中国有一个大官左翼阿，（陀思妥习），有敢请佛喜，总要适说一点�&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;还算有鲁迅文字的风格，但逻辑一窍不通，整体还是难让人满意，不知道是GPT2能力的问题还是我实验设置的问题。 Anyway，这里共享一下我实验的流程，有兴趣的朋友可以参考，进行改进。本文涉及的代码修改代码已经提交到这个&lt;a href=&quot;https://github.com/vra/nanoGPT&quot;&gt;仓库了&lt;/a&gt;，可以参考，文末会附上更多例子。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
+    
+    <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
+    
+    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+  </entry>
   
   <entry>
     <title>关于 np.float 被删除的问题</title>
@@ -120,13 +148,13 @@
     
     
     
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
     <category term="Latex" scheme="http://vra.github.io/tags/Latex/"/>
     
     <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
     
     <category term="Web" scheme="http://vra.github.io/tags/Web/"/>
-    
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -150,9 +178,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="find" scheme="http://vra.github.io/tags/find/"/>
     
@@ -175,9 +203,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
@@ -228,9 +256,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -273,9 +301,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -300,9 +328,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -420,9 +448,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="OpenCV" scheme="http://vra.github.io/tags/OpenCV/"/>
     
@@ -524,9 +552,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -554,29 +582,6 @@
     <category term="Debian" scheme="http://vra.github.io/tags/Debian/"/>
     
     <category term="CentOS" scheme="http://vra.github.io/tags/CentOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux小知识:apt install什么时候会出现 Do you want to continue?的提示</title>
-    <link href="http://vra.github.io/2022/07/23/ubuntu-when-to-ask-do-you-want-to-continue/"/>
-    <id>http://vra.github.io/2022/07/23/ubuntu-when-to-ask-do-you-want-to-continue/</id>
-    <published>2022-07-23T03:17:27.000Z</published>
-    <updated>2023-01-20T06:25:25.613Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-一个故事"><a href="#1-一个故事" class="headerlink" title="1. 一个故事"></a>1. 一个故事</h2><p>在大约十年以前，大二或大三的夏天，<a href="https://wzhd.org/">子浩</a> 在科大西区活动中心的自习室内，给我帮忙安装Linux系统。当时他问了我一个问题，执行<code>apt-get install</code> 安装软件时，什么时候会弹出<code>Do you want to continue?Y/[n]</code>的提示呢？我当时说应该是包大小超过某个限制大小时会有这个提示吧，但我们随即验证了这个假设并不成立，安装一个很小的包也会有这个提示。当时没有得到明确的结论。</p><p>这个问题时不时在脑海中想起，每次想查一下弄个清楚，但始终没来得及调查。这样十年过去了，近日终于又想起来，通过谷歌搜索，发现StackOverflow上已经有人问过同样的问题，而且也有人进行了回答。至此这个小疑问算是解决了，我也不用每次念念不忘了。</p><p>具体原因是什么，请见下节。</p><span id="more"></span><h2 id="2-谜底揭晓"><a href="#2-谜底揭晓" class="headerlink" title="2. 谜底揭晓"></a>2. 谜底揭晓</h2><p>根据<a href="https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357">这里</a>的回答，<code>Do you want to continue</code> 的提示会在下面几种情况下出现:</p><ol><li>当除了你要安装包外，有额外的依赖包需要被安装时，比如你执行的是<code>sudo apt install aaa</code>, 包 <code>aaa</code> 依赖 <code>bbb</code>，因此<code>bbb</code> 也需要被安装，这时候就会有提示</li><li>当现有包的版本要改变，比如机器上已经安装了<code>bbb-1.0.0</code>，而安装<code>aaa</code>需要安装<code>bbb-2.0.0</code>，这时候就会有提示</li><li>当基础包要被移除的时候，基础包大体意思是系统运行所需的最小软件包集，删除了就会导致系统运行出问题，详细的概念可以参考<a href="https://www.debian.org/doc/debian-policy/ch-binary.html#essential-packages">这里</a></li></ol><p>常见的情况应该是第一种和第二种，第三种情况应该是只有<code>apt remove</code>才会出现。</p><h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ol><li><a href="https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357">https://superuser.com/questions/287348/why-does-apt-get-sometimes-asks-for-confirmation/287357#287357</a></li><li><a href="https://unix.stackexchange.com/questions/70651/when-does-apt-get-install-ask-me-to-confirm-whether-i-want-to-continue-or-not">https://unix.stackexchange.com/questions/70651/when-does-apt-get-install-ask-me-to-confirm-whether-i-want-to-continue-or-not</a></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;1-一个故事&quot;&gt;&lt;a href=&quot;#1-一个故事&quot; class=&quot;headerlink&quot; title=&quot;1. 一个故事&quot;&gt;&lt;/a&gt;1. 一个故事&lt;/h2&gt;&lt;p&gt;在大约十年以前，大二或大三的夏天，&lt;a href=&quot;https://wzhd.org/&quot;&gt;子浩&lt;/a&gt; 在科大西区活动中心的自习室内，给我帮忙安装Linux系统。当时他问了我一个问题，执行&lt;code&gt;apt-get install&lt;/code&gt; 安装软件时，什么时候会弹出&lt;code&gt;Do you want to continue?Y/[n]&lt;/code&gt;的提示呢？我当时说应该是包大小超过某个限制大小时会有这个提示吧，但我们随即验证了这个假设并不成立，安装一个很小的包也会有这个提示。当时没有得到明确的结论。&lt;/p&gt;
-&lt;p&gt;这个问题时不时在脑海中想起，每次想查一下弄个清楚，但始终没来得及调查。这样十年过去了，近日终于又想起来，通过谷歌搜索，发现StackOverflow上已经有人问过同样的问题，而且也有人进行了回答。至此这个小疑问算是解决了，我也不用每次念念不忘了。&lt;/p&gt;
-&lt;p&gt;具体原因是什么，请见下节。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
-    <category term="Ubuntu" scheme="http://vra.github.io/tags/Ubuntu/"/>
     
   </entry>
   

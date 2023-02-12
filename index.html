@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">143</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">154</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">155</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">143</span>
+        <span class="site-state-item-count">145</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,6 +204,101 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/12/nanogpt-and-luxun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/12/nanogpt-and-luxun/" class="post-title-link" itemprop="url">nanoGPT + 鲁迅</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-12 23:24:02" itemprop="dateCreated datePublished" datetime="2023-02-12T23:24:02+08:00">2023-02-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-13 00:33:42" itemprop="dateModified" datetime="2023-02-13T00:33:42+08:00">2023-02-13</time>
+    </span>
+
+  
+    <span id="/2023/02/12/nanogpt-and-luxun/" class="post-meta-item leancloud_visitors" data-flag-title="nanoGPT + 鲁迅" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-起因"><a href="#1-起因" class="headerlink" title="1. 起因"></a>1. 起因</h2><p>今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的<a target="_blank" rel="noopener" href="https://til.simonwillison.net/llms/training-nanogpt-on-my-blog">实验</a>，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模型生成鲁迅风格的文字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">故乡，债是佩服的。</span><br><span class="line"> 我一向对于新青年的态度，先来说话，谢容易做的，然而伏园已经见过几样，感觉的是另外捧之数，以为先前的例子。今但近来做了做事，自己也还不做，不能先行通，所以生在冷静和“人生”，三妇一苦闷，觉得大约是如此隔膜</span><br><span class="line">和曹操，于是非意模茶炛，可以说是太高了，所以现在便能教育，竟�如此。</span><br><span class="line"> 但汝实在有给法历代的，不久就在绝末年间，我想显出向大家饮一趟，而汉子大毒是怀旧的，就要贫足有打劫，可以永掠的。这种事情，中国有一个大官左翼阿，（陀思妥习），有敢请佛喜，总要适说一点�</span><br></pre></td></tr></table></figure>
+
+<p>还算有鲁迅文字的风格，但逻辑一窍不通，整体还是难让人满意，不知道是GPT2能力的问题还是我实验设置的问题。 Anyway，这里共享一下我实验的流程，有兴趣的朋友可以参考，进行改进。本文涉及的代码修改代码已经提交到这个<a target="_blank" rel="noopener" href="https://github.com/vra/nanoGPT">仓库了</a>，可以参考，文末会附上更多例子。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/12/nanogpt-and-luxun/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1073,93 +1168,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/11/12/git-add-file-to-last-commit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/12/git-add-file-to-last-commit/" class="post-title-link" itemprop="url">git如何添加文件到最新的提交</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-11-12 17:54:22" itemprop="dateCreated datePublished" datetime="2022-11-12T17:54:22+08:00">2022-11-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-16 08:54:01" itemprop="dateModified" datetime="2022-12-16T08:54:01+08:00">2022-12-16</time>
-    </span>
-
-  
-    <span id="/2022/11/12/git-add-file-to-last-commit/" class="post-meta-item leancloud_visitors" data-flag-title="git如何添加文件到最新的提交" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>有时候，在git commit后，我们会发现一些文件忘了提交了，或者需要修改，而且这些提交和修改是与上一次commit的主题一致的，这时候再执行一遍相同的git commit就会让提交记录显得比较冗余，有没有办法将修改后的文件加到最后一次的提交记录里面呢？搜索后发现<a target="_blank" rel="noopener" href="https://stackoverflow.com/a/40503483">这里</a>给了一个解决办法，git add文件后调用<code>git commit --amend -no-edit</code>即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file_path&gt;</span><br><span class="line">git commit --amend --no-edit</span><br></pre></td></tr></table></figure>
-<p><strong>注意：如果之前的代码已经提交的话，需要执行<code>git push --force</code>来推送代码以替代之前的提交记录。</strong></p>
-
       
     </div>
 

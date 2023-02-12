@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 起因今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的实验，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nanoGPT + 鲁迅">
+<meta property="og:url" content="http://vra.github.io/2023/02/12/nanogpt-and-luxun/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 起因今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的实验，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-12T15:24:02.000Z">
+<meta property="article:modified_time" content="2023-02-12T16:33:42.275Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Pytorch">
+<meta property="article:tag" content="GPT">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/02/12/nanogpt-and-luxun/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/02/12/nanogpt-and-luxun/","path":"2023/02/12/nanogpt-and-luxun/","title":"nanoGPT + 鲁迅"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>nanoGPT + 鲁迅 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">155</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">1. 起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">2. 操作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%B8%8B%E8%BD%BDnanoGPT%E6%BA%90%E7%A0%81%E5%B9%B6%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 下载nanoGPT源码并安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%AE%AD%E7%BB%83%E7%BD%91%E7%BB%9C"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 训练网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%B5%8B%E8%AF%95%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 测试模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9B%B4%E5%A4%9A%E4%BE%8B%E5%AD%90"><span class="nav-number">3.</span> <span class="nav-text">3. 更多例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 人工智能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%96%87%E8%89%BA%E5%A4%8D%E5%85%B4"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 文艺复兴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%96%B0%E6%96%87%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 新文化</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">145</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/12/nanogpt-and-luxun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="nanoGPT + 鲁迅 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nanoGPT + 鲁迅
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-12 23:24:02" itemprop="dateCreated datePublished" datetime="2023-02-12T23:24:02+08:00">2023-02-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-13 00:33:42" itemprop="dateModified" datetime="2023-02-13T00:33:42+08:00">2023-02-13</time>
+    </span>
+
+  
+    <span id="/2023/02/12/nanogpt-and-luxun/" class="post-meta-item leancloud_visitors" data-flag-title="nanoGPT + 鲁迅" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-起因"><a href="#1-起因" class="headerlink" title="1. 起因"></a>1. 起因</h2><p>今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的<a target="_blank" rel="noopener" href="https://til.simonwillison.net/llms/training-nanogpt-on-my-blog">实验</a>，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模型生成鲁迅风格的文字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">故乡，债是佩服的。</span><br><span class="line"> 我一向对于新青年的态度，先来说话，谢容易做的，然而伏园已经见过几样，感觉的是另外捧之数，以为先前的例子。今但近来做了做事，自己也还不做，不能先行通，所以生在冷静和“人生”，三妇一苦闷，觉得大约是如此隔膜</span><br><span class="line">和曹操，于是非意模茶炛，可以说是太高了，所以现在便能教育，竟�如此。</span><br><span class="line"> 但汝实在有给法历代的，不久就在绝末年间，我想显出向大家饮一趟，而汉子大毒是怀旧的，就要贫足有打劫，可以永掠的。这种事情，中国有一个大官左翼阿，（陀思妥习），有敢请佛喜，总要适说一点�</span><br></pre></td></tr></table></figure>
+
+<p>还算有鲁迅文字的风格，但逻辑一窍不通，整体还是难让人满意，不知道是GPT2能力的问题还是我实验设置的问题。 Anyway，这里共享一下我实验的流程，有兴趣的朋友可以参考，进行改进。本文涉及的代码修改代码已经提交到这个<a target="_blank" rel="noopener" href="https://github.com/vra/nanoGPT">仓库了</a>，可以参考，文末会附上更多例子。</p>
+<span id="more"></span>
+
+<h2 id="2-操作流程"><a href="#2-操作流程" class="headerlink" title="2. 操作流程"></a>2. 操作流程</h2><h3 id="2-1-下载nanoGPT源码并安装依赖"><a href="#2-1-下载nanoGPT源码并安装依赖" class="headerlink" title="2.1 下载nanoGPT源码并安装依赖"></a>2.1 下载nanoGPT源码并安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/karpathy/nanoGPT</span><br><span class="line"><span class="built_in">cd</span> nanoGPT</span><br><span class="line">conda create --name nanogpt  python=3.9</span><br><span class="line">conda activate nanogpt</span><br><span class="line">pip install transformers datasets tiktoken tqdm wandb numpy httpx torch torchvision</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-数据预处理"><a href="#2-2-数据预处理" class="headerlink" title="2.2 数据预处理"></a>2.2 数据预处理</h3><p>进入代码目录后，重建文件夹<code>data/lunxun</code>，用于存放数据。</p>
+<p>从<a target="_blank" rel="noopener" href="https://github.com/gzx1996/luxun/blob/master/book/book.txt">这里</a>下载鲁迅全集，放到<code>data/luxun</code>目录下，然后进行下面的处理：</p>
+<ul>
+<li>去掉所有编者加的注释(由于注释都是以<code>[n]</code>这种形式开头的，因此在VIM中可以用<code>0,$s/^\[.\+//g</code>命令来去掉)</li>
+<li>由于我们想要的是鲁迅白话文的风格，因此手动去掉所有文言文的作品和翻译作品(文言文在最开头的《坟》集子里，翻译作品在最后)</li>
+<li>去掉单行的日期文字（如<code>(一九一八年二月二日)</code>，可以在VIM中用<code>g/^(一九.\+/d</code>去掉)</li>
+</ul>
+<p>我处理后的文本地址在<a target="_blank" rel="noopener" href="https://github.com/vra/nanoGPT/tree/master/data/luxun/book.txt">这里</a>。</p>
+<p>然后编写代码<code>prepare.py</code>, 读取文本，构造训练集和验证集，数据比例9:1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> tiktoken</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">input_file_path = os.path.join(os.path.dirname(__file__), <span class="string">&quot;book.txt&quot;</span>)</span><br><span class="line"></span><br><span class="line">entries = []</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(input_file_path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="keyword">if</span> line.strip() <span class="keyword">and</span> <span class="built_in">len</span>(line) &gt; <span class="number">2</span>:</span><br><span class="line">            entries.append(line)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;len of lines: <span class="subst">&#123;<span class="built_in">len</span>(entries)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># Shuffle entries</span></span><br><span class="line">random.shuffle(entries)</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">len</span>(entries)</span><br><span class="line">train_entries = entries[: <span class="built_in">int</span>(n * <span class="number">0.9</span>)]</span><br><span class="line">val_entries = entries[<span class="built_in">int</span>(n * <span class="number">0.9</span>):]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Turn those into strings</span></span><br><span class="line">train_data = <span class="string">&quot; &quot;</span>.join(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(entry) <span class="keyword">for</span> entry <span class="keyword">in</span> train_entries)</span><br><span class="line">val_data = <span class="string">&quot; &quot;</span>.join(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(entry) <span class="keyword">for</span> entry <span class="keyword">in</span> val_entries)</span><br><span class="line"></span><br><span class="line"><span class="comment"># encode with tiktoken gpt2 bpe</span></span><br><span class="line">enc = tiktoken.get_encoding(<span class="string">&quot;gpt2&quot;</span>)</span><br><span class="line">train_ids = enc.encode_ordinary(train_data)</span><br><span class="line">val_ids = enc.encode_ordinary(val_data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;train has <span class="subst">&#123;<span class="built_in">len</span>(train_ids):,&#125;</span> tokens&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;val has <span class="subst">&#123;<span class="built_in">len</span>(val_ids):,&#125;</span> tokens&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># export to bin files</span></span><br><span class="line">train_ids = np.array(train_ids, dtype=np.uint16)</span><br><span class="line">val_ids = np.array(val_ids, dtype=np.uint16)</span><br><span class="line">train_ids.tofile(os.path.join(os.path.dirname(__file__), <span class="string">&quot;train.bin&quot;</span>))</span><br><span class="line">val_ids.tofile(os.path.join(os.path.dirname(__file__), <span class="string">&quot;val.bin&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p>处理好的训练验证集在<a target="_blank" rel="noopener" href="https://github.com/vra/nanoGPT/tree/master/data/luxun">这里</a>，可以直接使用。</p>
+<h3 id="2-3-训练网络"><a href="#2-3-训练网络" class="headerlink" title="2.3 训练网络"></a>2.3 训练网络</h3><p>数据集构建完成后，就可以训练模型了。在代码库根目录，执行下面的命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python train.py \</span><br><span class="line">  --dataset=luxun \</span><br><span class="line">--compile=False \</span><br><span class="line">--batch_size=8 \</span><br><span class="line">--dtype=float16</span><br></pre></td></tr></table></figure>
+<p>具体训练参数可以查看<code>train.py</code>，包括训练的层数、batch size，训练后端等等。</p>
+<p>训练的模型默认保存在<code>out/ckpt.pt</code>。</p>
+<p>训练22000次迭代的时候我停止了实验，loss是0.15左右。</p>
+<h3 id="2-4-测试模型"><a href="#2-4-测试模型" class="headerlink" title="2.4 测试模型"></a>2.4 测试模型</h3><p>测试代码在<code>sample.py</code>，默认提示词为空(<code>start=&#39;\n&#39;</code>)可以通过添加<code>--start=&quot;xxx&quot;</code>来修改提示词:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sample.py --start=<span class="string">&quot;故乡&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-更多例子"><a href="#3-更多例子" class="headerlink" title="3. 更多例子"></a>3. 更多例子</h2><h3 id="3-1-人工智能"><a href="#3-1-人工智能" class="headerlink" title="3.1 人工智能"></a>3.1 人工智能</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">人工智能力。两社丈一多，西辛，是发昏了的结果，但去的四五十岁，死的陈源教授却很不通，我也就不再有了。忍不知道阿Ｑ的名字是怎么写的？这不过是一个问境。他总还拿着四个年的过头放在心里，说道，“哀，遇的。他可</span><br><span class="line">是弯口，道是阿Ｑ；近来已经做了杜师长了，半年的大武人，你还和他对面具汗说：‘非常救命！’‘是情愧 夫子’的学理论矛盾的工人，……而且跳不过是这三秒……。”</span><br><span class="line"> 而已 偶战线告了一个大问题，拿去做的纠纷，而他们就癖在《试玈书》的第一幅，来因为又是删节的，还和所放的做。不过如果加以细见，不想多写了东�</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-文艺复兴"><a href="#3-2-文艺复兴" class="headerlink" title="3.2 文艺复兴"></a>3.2 文艺复兴</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">文艺复兴运动，也是指惺把文艺当承受照时代，更易于政治家，中国并不见立刻，万分折中间，更何况失了国家，只有拜读之处，这就是政治心软到新舖式的必读书。……”</span><br><span class="line"> 我们──由此满可知道河南的内心眼和明白的点灵魂。我在曾经想做以看空虚洋，决不叫看情形。因为我想，便可以支持生活的原因，至少，更进一步而到中国来，他们也给了世界上的美�家所指见的最多也并非精微坏，莫非看翻译</span><br><span class="line">，可说是不算太多了。</span><br><span class="line"> 问题。</span><br><span class="line"> “我们没有见过这种东西，便怎么办呢？”</span><br><span class="line"> 递进句也不是有许多话。</span><br><span class="line"> “可以可以，”四铭吃了点</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-新文化"><a href="#3-3-新文化" class="headerlink" title="3.3 新文化"></a>3.3 新文化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">新文化运动，也许因为他们已经有了“力”这句话的责任了。在那里和他们的风化是并不相禁多的。</span><br><span class="line"> 阿呼呜呼兮呜呼阿呼，</span><br><span class="line"> 八九年</span><br><span class="line"> 二、浙江艳七百</span><br><span class="line"> 一九二五年十二月三十日风雨之夜示，此地声声流鼓近山腌至责诼谢。</span><br><span class="line"> 阿Ｑ的讲到文学说，他们会打断了阿Ｑ的名目退向王的头发，向公司被挤出去了。</span><br><span class="line"> 最末的批评，是“没有话派的书，对于政府来往往解释，加以泄除，以政治的运命，至于失败，那倒是往往会说，我非常危险。</span><br><span class="line"> 小娘枟不用小说的经济字的由校的文章，使是屠戮政府，是凡这些的，但我知道画家一致攻，一致的经历</span><br></pre></td></tr></table></figure>
+
+<p>如果本文操作中有误的地方，还请专业人士多指出讨论。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/02/12/nanogpt-and-luxun/" title="nanoGPT + 鲁迅">http://vra.github.io/2023/02/12/nanogpt-and-luxun/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
+              <a href="/tags/GPT/" rel="tag"># GPT</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/02/05/numpy-remove-np-float/" rel="prev" title="关于 np.float 被删除的问题">
+                  <i class="fa fa-chevron-left"></i> 关于 np.float 被删除的问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
