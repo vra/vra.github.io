@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="概述这篇论文是CVPR2018年的录取论文，主要讨论了时空卷积的几种网络结构，在Action Recognition 的几个标准数据集上也取得了媲美最好方法的效果。作者是FAIR的工作人员，其中包括Du Tran(C3D)作者，Heng Wang(iDT)作者和Yann LecCun等，可谓是大牛云集。论文可以在这里下载。这里大概介绍下论文中的内容，可以看作是原论文的一个翻译。">
 <meta property="og:type" content="article">
@@ -294,31 +294,31 @@
 </script>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这篇论文是CVPR2018年的录取论文，主要讨论了时空卷积的几种网络结构，在Action Recognition 的几个标准数据集上也取得了媲美最好方法的效果。作者是FAIR的工作人员，其中包括Du Tran(C3D)作者，Heng Wang(iDT)作者和Yann LecCun等，可谓是大牛云集。论文可以在<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.11248">这里</a>下载。这里大概介绍下论文中的内容，可以看作是原论文的一个翻译。</p>
 <span id="more"></span>
-<h2 id="1-几种网络结构说明"><a href="#1-几种网络结构说明" class="headerlink" title="1. 几种网络结构说明"></a>1. 几种网络结构说明</h2><p><img src="/imgs/closer_fig1.png"><br>网络结构如图Figure 1所示，具体每种网络陈述如下。</p>
+<h2 id="1-几种网络结构说明"><a href="#1-几种网络结构说明" class="headerlink" title="1. 几种网络结构说明"></a>1. 几种网络结构说明</h2><p><img data-src="/imgs/closer_fig1.png"><br>网络结构如图Figure 1所示，具体每种网络陈述如下。</p>
 <h3 id="R2D-整个clip上的2D卷积网络"><a href="#R2D-整个clip上的2D卷积网络" class="headerlink" title="R2D: 整个clip上的2D卷积网络"></a>R2D: 整个clip上的2D卷积网络</h3><p>R代表ResNet， 即残差网络。 R2D将L帧，宽高分别为W，H的一个视频clip当成3LxWxH的3D tensor输入网络，得到的还是3D的tensor。虽然是3D tensor，实际的卷积是2D卷积，因此时间信息是全部丢失了的。</p>
 <h3 id="f-R2D-帧层面的2D卷积网络"><a href="#f-R2D-帧层面的2D卷积网络" class="headerlink" title="f-R2D: 帧层面的2D卷积网络"></a>f-R2D: 帧层面的2D卷积网络</h3><p>跟R2D不同，f-R2D中没有将整个clip的L帧当作不同的channel，而是每个frame单独的作用卷积 （原文： The same filters are applied to all L frames）。这里我有些不太清楚具体实现的时候和R2D有什么区别，是指将不同的frame当作不同的样本输入网络吗？ 和R2D一样，这种方法也没有保留时间维度的信息</p>
 <h3 id="R3D-3D的ResNet"><a href="#R3D-3D的ResNet" class="headerlink" title="R3D: 3D的ResNet"></a>R3D: 3D的ResNet</h3><p>这个就是标准的3D ResNet结构，即将输入看作N<sub>i</sub> * L * W * H 的4D tensor, 卷积核也是4D的。<br>时间维度是有卷积的，因此时序信息能够保留下来。</p>
 <h3 id="MCx和rMCx-混合2D和3D卷积的结构"><a href="#MCx和rMCx-混合2D和3D卷积的结构" class="headerlink" title="MCx和rMCx: 混合2D和3D卷积的结构"></a>MC<sub>x</sub>和rMC<sub>x</sub>: 混合2D和3D卷积的结构</h3><p>有一种观点认为卷积网络较低层对motion的建模比较好，而高层由于特征已经很抽象了，motion和时序信息建模是不需要的，因此作者提出了MC<sub>x</sub>网络，即将第x以及后面的3D卷积group换为2D的卷积group，而R3D总共有5个卷积group（具体参数见Table 1），因此像MC4表示将group 4和group 5中的卷积和都换为2D卷积，而前面的group 1-3则保留为3D卷积。 注意此时MC1等效于f-R2D，即所有的层都是2D卷积。</p>
-<p><img src="/imgs/closer_table1.png"></p>
+<p><img data-src="/imgs/closer_table1.png"></p>
 <p>同时还有一种假设认为高层的信息需要用3D卷积来建模，而底层的信息通过2D卷积就可以获取，因此作者提出了rMC<sub>x</sub>结构，前面的<code>r</code>代表reverse，即反向的意思。rMC<sub>x</sub>表示前面的5-x层为2D卷积，后面的x层为3D卷积。</p>
 <h3 id="R-2-1-D-拆分3D卷积为2D卷积-1D卷积"><a href="#R-2-1-D-拆分3D卷积为2D卷积-1D卷积" class="headerlink" title="R(2+1)D: 拆分3D卷积为2D卷积+1D卷积"></a>R(2+1)D: 拆分3D卷积为2D卷积+1D卷积</h3><p>这几年1D卷积的应用比较广，可以用来进行通道变换，拆分单个卷积核为多个卷积核等等。这里作者提出了R(2+1)D的结构，将3D卷积改为一个2D的空间卷积和一个1D的时间卷积。具体来说，作者将$N_i$个$N_{i-1}\times t\times d\times d$的3D卷积核改为$M_i$个大小为$N_{i-1}\times 1\times d\times d$的2D卷积和$N_i$个$M_i\times t\times 1\times 1$的卷积核。 $M_i$的值实验中取为$\lfloor \frac{td^2N_{i-1}N_i}{d^2N_{i-1}+tN_i}\rfloor$，这样取是为了让R(2+1)D的参数和R3D的参数保持一致，具体计算方式就是算出两种情况下的参数个数，求出$M_i$被别的参数表示的形式即可。  (2+1)D和3D的比较见Figure 2，其中以$N_{i-1} = 1$为例。如果3D卷积有stride，则stride也按时间空间拆分给对应的2D卷积和1D卷积。</p>
-<p><img src="/imgs/closer_fig2.png" alt="Figure 2"></p>
+<p><img data-src="/imgs/closer_fig2.png" alt="Figure 2"></p>
 <p>这种从3D到(2+1)D的拆分有下面两个好处：</p>
 <ol>
 <li>增加了非线性的层数，因为从图2可以看到，原先的1个卷积变成2个卷积，而2个卷积之间多了非线性层（通过ReLU来得到）， 因此总体的非线性层增加了。 用同样的参数来得到增加非线性的目的。</li>
 <li>使得网络优化更容易，这个可以参考Figure 4中的结果，可以看到R(2+1)D的训练错误率比R3D更低，说明网络更易于训练。</li>
 </ol>
-<p> <img src="/imgs/closer_fig4.png"></p>
+<p> <img data-src="/imgs/closer_fig4.png"></p>
 <p>另外作者还和<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.10305">P3D</a>进行了比较，因为两者结构确实比较类似。</p>
 <h2 id="2-实验设置"><a href="#2-实验设置" class="headerlink" title="2. 实验设置"></a>2. 实验设置</h2><p>作者在视频动作识别的中型和大型数据集上都做了实验，包括HMDB51, UCF101， Sport-1M 和 Kinetics这几个数据集。<br>由于前面讨论的都是残差网络，因此实验中的网络都采用了残差网络。对R3D网络，作者采取了2种结构，包括18层的和34层的，图片输入采用了8帧的clip，图像大小为112x112。在3D网络的基础上，进行修改来得到R2D, MC<sub>x</sub>和rMC<sub>x</sub>，R(2+1)D等结构。 需要注意的是，由于不同网络结构时间维度的卷积和stride操作和个数不同，因此输出的feature map的时间维度是不一致的，为了方便统一比较，作者在卷积层最后的feature map后跟了一个时间空间的average pooling，然后晋国一个维度为K的fc层，$K$为数据集对应的类别，如对UCF101数据集，$K$=101。</p>
 <p>视频帧数据首先被缩放到128x171，然后通过随机crop112x112的区域得到clip。训练时还应用了时域上的抖动。每个卷积层后面还使用到了BN。训练是batch size设置为32个clip，初始学习率设置为0.01，然后每过10个周期下降为原来的1/10，总共训练45个周期。video-level的准确率是在clip-level的准确率上得到的，即随机在视频中选择10个clip，然后对每个clip做center crop得到最后的clip，将这10个clip单独训练，结果进行一个平均，即为video-level的准确率。实验中采用caffe2在GPU cluster进行训练。</p>
-<h2 id="3-实验分析"><a href="#3-实验分析" class="headerlink" title="3. 实验分析"></a>3. 实验分析</h2><h3 id="不同网络结构性能分析"><a href="#不同网络结构性能分析" class="headerlink" title="不同网络结构性能分析"></a>不同网络结构性能分析</h3><p><img src="/imgs/closer_table2.png"><br>由于这部分实验比较的是不同网络结构的性能，因此作者只在Kinetics上用18层的ResNet进行了实验，具体结果见Table 2。这里主要的结论有下面几点：</p>
+<h2 id="3-实验分析"><a href="#3-实验分析" class="headerlink" title="3. 实验分析"></a>3. 实验分析</h2><h3 id="不同网络结构性能分析"><a href="#不同网络结构性能分析" class="headerlink" title="不同网络结构性能分析"></a>不同网络结构性能分析</h3><p><img data-src="/imgs/closer_table2.png"><br>由于这部分实验比较的是不同网络结构的性能，因此作者只在Kinetics上用18层的ResNet进行了实验，具体结果见Table 2。这里主要的结论有下面几点：</p>
 <ol>
 <li>纯2D网络（包括R2D和f-R2D）比含3D的网络（包括R3D, MC<sub>x</sub>,rMC<sub>x</sub>, R(2+1)D）性能要差</li>
 <li>R(2+1)D性能最好</li>
 <li>MC<sub>x</sub>性能优于rMC<sub>r</sub>，因此说明在网络底层的3D卷积层更有用，而后面用2D卷积更合理。</li>
 </ol>
-<h3 id="不同clip长度分析"><a href="#不同clip长度分析" class="headerlink" title="不同clip长度分析"></a>不同clip长度分析</h3><p> <img src="/imgs/closer_fig5.png"><br> 作者采用了8，16，24，32，40和48帧的clip进行实验，对clip-level的结果和video-level的结果进行分析，得到的准确率如Figure 5所示。可以看到，clip-level的准确率随着clip的长度增长在持续上升，而video-level的准确率则在24帧的时候达到最高，后面反倒有所下降，作者分析随着clip长度的增加，不同clip之间的相关性增加（甚至可能会产生重叠），所以video-level的准确率增益越来越小。 为了分析video-level准确率下降的原因，作者又做了两个实验：</p>
+<h3 id="不同clip长度分析"><a href="#不同clip长度分析" class="headerlink" title="不同clip长度分析"></a>不同clip长度分析</h3><p> <img data-src="/imgs/closer_fig5.png"><br> 作者采用了8，16，24，32，40和48帧的clip进行实验，对clip-level的结果和video-level的结果进行分析，得到的准确率如Figure 5所示。可以看到，clip-level的准确率随着clip的长度增长在持续上升，而video-level的准确率则在24帧的时候达到最高，后面反倒有所下降，作者分析随着clip长度的增加，不同clip之间的相关性增加（甚至可能会产生重叠），所以video-level的准确率增益越来越小。 为了分析video-level准确率下降的原因，作者又做了两个实验：</p>
 <ol>
 <li>采用8帧的clip训练网络，然后在32帧的的clip上测试，发现结果相比用8帧的clip做测试，clip-level的准确率下降2.6%</li>
 <li>在8帧的clip上训练的网络的基础上，采用32帧的clip进行fine tune，得到的clip-level的准确率与32帧从头训练的结果相差不多（56.8% vs 58.5%），而比8帧的clip的clip-level结果高4.4%。因此用长的clip结果更高说明学到了long-term的时间域上的信息</li>
@@ -483,6 +483,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   

@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="并行计算并行计算的定义： 应用多个计算资源来解决同一个计算问题 一些名词 Flynn矩阵：SISD(Single Instruction Single Data),SIMD(Single Instruction Multiple Data),MISD(Multiple Instruction Single Data),MIMD(Multiple Instruction Multiple Data)">
 <meta property="og:type" content="article">
@@ -311,9 +311,9 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 <h3 id="Amdahl定律"><a href="#Amdahl定律" class="headerlink" title="Amdahl定律"></a>Amdahl定律</h3><p>  $$1. speed rate = \frac{1}{1-P} $$<br>其中P是可以并行的部分，即加速比与任务中不可并行部分的大小成正比，如果完全不可并行，即P = 0，则speed rate = 1，即不加速；如果完全可以并行，即P = 1, 则$speed rate = \infty$, 即加速无穷大倍。<br>  $$2. speed rate = \frac{1}{\frac{P}{N} + S} $$<br> 其中N是处理器个数，P是可以并行的部分，S是不可以并行，只能串行的部分。可以看到，当N趋近无穷时，speed rate 只取决于S，即不可并行部分是系统的瓶颈所在。 </p>
-<h2 id="GPU结构"><a href="#GPU结构" class="headerlink" title="GPU结构"></a>GPU结构</h2><p>CPU和GPU的内部结构的对比图如下：<br><img src="/imgs/cpu_gpu_schema.gif"><br>图中绿色的为ALU（运算逻辑单元，Arithmetic Logic Unit）, 可以看出GPU相比CPU，多了很多ALU，而且ALU占据了内部空间的绝大部分，所以可以看出GPU是对运算很强调的芯片。</p>
-<p>下图是一个GPU核的结构，图中所有8个ALU共用一个指令单元Fetch/Decode, 而Ctx则是每个ALU独有的存储上下文，所以，只是一种SIMD结构。<br><img src="/imgs/gpu-core.png"></p>
-<h3 id="分支问题"><a href="#分支问题" class="headerlink" title="分支问题"></a>分支问题</h3><p>由于每个ALU的Ctx不同，所以有可能会出现分支，这时候8个ALU的指令可能会出现分叉，即各自走了不同的路，没法共享同一个指令了，这种结构就会失效。为了解决这个问题，将所有可能出现的分支用<code>if/else</code>来表示，让每个ALU都进行判断，如下图所示：<br><img src="/imgs/gpu-branch.jpg"></p>
+<h2 id="GPU结构"><a href="#GPU结构" class="headerlink" title="GPU结构"></a>GPU结构</h2><p>CPU和GPU的内部结构的对比图如下：<br><img data-src="/imgs/cpu_gpu_schema.gif"><br>图中绿色的为ALU（运算逻辑单元，Arithmetic Logic Unit）, 可以看出GPU相比CPU，多了很多ALU，而且ALU占据了内部空间的绝大部分，所以可以看出GPU是对运算很强调的芯片。</p>
+<p>下图是一个GPU核的结构，图中所有8个ALU共用一个指令单元Fetch/Decode, 而Ctx则是每个ALU独有的存储上下文，所以，只是一种SIMD结构。<br><img data-src="/imgs/gpu-core.png"></p>
+<h3 id="分支问题"><a href="#分支问题" class="headerlink" title="分支问题"></a>分支问题</h3><p>由于每个ALU的Ctx不同，所以有可能会出现分支，这时候8个ALU的指令可能会出现分叉，即各自走了不同的路，没法共享同一个指令了，这种结构就会失效。为了解决这个问题，将所有可能出现的分支用<code>if/else</code>来表示，让每个ALU都进行判断，如下图所示：<br><img data-src="/imgs/gpu-branch.jpg"></p>
 <p>从图中我们可以看到，每个ALU都进行了<code>if/else</code>的判断，有的ALU走了<code>if</code>部分，有的ALU走了<code>else</code>部分，这样8个ALU就可以共用一个Fetch/Decode单元了。但因为每个ALU都要进行判断，所以做了一部分无用功，牺牲了部分性能，性能最差的时候只有1/8的有用功，即只有1个ALU选择<code>if</code>或选择<code>else</code>，其他7个ALU都做了无用功，性能只有1/8。  </p>
 <!--
 ### 停滞问题（Stall）
@@ -475,6 +475,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   

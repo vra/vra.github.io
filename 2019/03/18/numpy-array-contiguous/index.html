@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="1. 概述在使用Numpy的时候，有时候会遇到下面的错误： 1AttributeError: incompatible shape for a non-contiguous array 看报错的字面意思，好像是不连续数组的shape不兼容。 有的时候，在看别人代码时会时不时看到ascontiguous()这样的一个函数，查文档会发现函数说明只有一句话：“Return a contiguous ar">
 <meta property="og:type" content="article">
@@ -295,11 +295,11 @@
 <span id="more"></span>
 
 <h2 id="3-译文"><a href="#3-译文" class="headerlink" title="3. 译文"></a>3. 译文</h2><p>所谓<code>contiguous array</code>，指的是数组在内存中存放的地址也是连续的（注意内存地址实际是一维的），即访问数组中的下一个元素，直接移动到内存中的下一个地址就可以。</p>
-<p>考虑一个2维数组<code>arr = np.arange(12).reshape(3,4)</code>。这个数组看起来结构是这样的：<br><img src="/imgs/numpy_ascontiguous_2.png"></p>
-<p>在计算机的内存里，数组<code>arr</code>实际存储是像下图所示的：<br><img src="/imgs/numpy_ascontiguous_3.png"></p>
+<p>考虑一个2维数组<code>arr = np.arange(12).reshape(3,4)</code>。这个数组看起来结构是这样的：<br><img data-src="/imgs/numpy_ascontiguous_2.png"></p>
+<p>在计算机的内存里，数组<code>arr</code>实际存储是像下图所示的：<br><img data-src="/imgs/numpy_ascontiguous_3.png"></p>
 <p>这意味着<code>arr</code>是<code>C连续的</code>（<code>C contiguous</code>)的，因为在内存是行优先的，即某个元素在内存中的下一个位置存储的是它同行的下一个值。</p>
 <p>如果想要向下移动一列，则只需要跳过3个块既可（例如，从0到4只需要跳过1,2和3）。</p>
-<p>上述数组的转置<code>arr.T</code>则没有了C连续特性，因为同一行中的相邻元素现在并不是在内存中相邻存储的了:<br><img src="/imgs/numpy_ascontiguous_1.png"><br>这时候<code>arr.T</code>变成了<code>Fortran 连续的</code>（<code>Fortran contiguous</code>），因为相邻列中的元素在内存中相邻存储的了。</p>
+<p>上述数组的转置<code>arr.T</code>则没有了C连续特性，因为同一行中的相邻元素现在并不是在内存中相邻存储的了:<br><img data-src="/imgs/numpy_ascontiguous_1.png"><br>这时候<code>arr.T</code>变成了<code>Fortran 连续的</code>（<code>Fortran contiguous</code>），因为相邻列中的元素在内存中相邻存储的了。</p>
 <p>从性能上来说，获取内存中相邻的地址比不相邻的地址速度要快很多（从RAM读取一个数值的时候可以连着一起读一块地址中的数值，并且可以保存在Cache中）。这意味着对连续数组的操作会快很多。</p>
 <p>由于<code>arr</code>是C连续的，因此对其进行行操作比进行列操作速度要快，例如，通常来说</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.<span class="built_in">sum</span>(arr, axis=<span class="number">1</span>) <span class="comment"># 按行求和</span></span><br></pre></td></tr></table></figure>
@@ -472,6 +472,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   

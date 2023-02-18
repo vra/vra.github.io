@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="在服务器使用matplotlib的时候，可能是因为没有装图形化和显示相关的包的原因，总是会出现backend相关的错误。所以我调查了下matplotlib中的backend的含义，以及如何处理相关的错误。">
 <meta property="og:type" content="article">
@@ -286,13 +286,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>在服务器使用<code>matplotlib</code>的时候，可能是因为没有装图形化和显示相关的包的原因，总是会出现<code>backend</code>相关的错误。所以我调查了下matplotlib中的backend的含义，以及如何处理相关的错误。<br><img src="http://matplotlib.org/1.3.0/_static/logo2.png" alt="matplotlib"></p>
+        <p>在服务器使用<code>matplotlib</code>的时候，可能是因为没有装图形化和显示相关的包的原因，总是会出现<code>backend</code>相关的错误。所以我调查了下matplotlib中的backend的含义，以及如何处理相关的错误。<br><img data-src="http://matplotlib.org/1.3.0/_static/logo2.png" alt="matplotlib"></p>
 <span id="more"></span>
 
 
 <h3 id="matplotlib中的backend"><a href="#matplotlib中的backend" class="headerlink" title="matplotlib中的backend"></a>matplotlib中的backend</h3><p>matplotlib中，frontend就是我们写的python代码，而backend就是负责显示我们代码所写图形的底层代码。因为不同使用环境下硬件情况不同，所以后端是跟具体的硬件和显示条件相关的。</p>
-<h3 id="backend的类别"><a href="#backend的类别" class="headerlink" title="backend的类别"></a>backend的类别</h3><p>backend又分为两类，一类是<code>interface backend</code>，又叫做<code>interactive backend</code>，这一类是表示跟显示到屏幕相关的后端；另一类是<code>hardcopy backend</code>，又叫做<code>non-interactive backend</code>，这一类是写入到文件相关的后端。下面两图分别是non-interactive backend和interactive backend的具体值：<br><img src="/imgs/non-iteractive-backend.png" alt="non-interactive backend"></p>
-<p><img src="/imgs/iteractive-backend.png" alt="interactive backend"><br>在python中，可以通过如下的命令来获取当前机器支持的这两种后端：</p>
+<h3 id="backend的类别"><a href="#backend的类别" class="headerlink" title="backend的类别"></a>backend的类别</h3><p>backend又分为两类，一类是<code>interface backend</code>，又叫做<code>interactive backend</code>，这一类是表示跟显示到屏幕相关的后端；另一类是<code>hardcopy backend</code>，又叫做<code>non-interactive backend</code>，这一类是写入到文件相关的后端。下面两图分别是non-interactive backend和interactive backend的具体值：<br><img data-src="/imgs/non-iteractive-backend.png" alt="non-interactive backend"></p>
+<p><img data-src="/imgs/iteractive-backend.png" alt="interactive backend"><br>在python中，可以通过如下的命令来获取当前机器支持的这两种后端：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.rcsetup.interactive_bk <span class="comment"># 获取 interactive backend</span></span><br><span class="line">matplotlib.rcsetup.non_interactive_bk <span class="comment"># 获取 non-interactive backend</span></span><br><span class="line">matplotlib.rcsetup.all_backends <span class="comment"># 获取 所有 backend</span></span><br></pre></td></tr></table></figure>
 <p>在我们实验室的GPU服务器上，得到的结果如下：</p>
 <script type="text/javascript" src="https://asciinema.org/a/avw1ng2fbxp5fdk8b2cncpbp0.js" id="asciicast-avw1ng2fbxp5fdk8b2cncpbp0" async></script>
@@ -480,6 +480,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   

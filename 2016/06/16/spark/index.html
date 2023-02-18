@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="概述这篇文章是我通过学习了Spark官网上的一些内容，参考了许多博客和文章，也尝试进行了一些初级的Spark编程后写的关于Spark的简要的说明，希望能讲明白Spark这个框架的一些原理，提供一个基础的入门教程。">
 <meta property="og:type" content="article">
@@ -288,7 +288,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这篇文章是我通过学习了Spark官网上的一些内容，参考了许多博客和文章，也尝试进行了一些初级的Spark编程后写的关于Spark的简要的说明，希望能讲明白Spark这个框架的一些原理，提供一个基础的入门教程。  </p>
-<p><img src="http://spark.apache.org/images/spark-logo-trademark.png">    </p>
+<p><img data-src="http://spark.apache.org/images/spark-logo-trademark.png">    </p>
 <span id="more"></span>
 
 <p>Spark是一个用于分布式数据处理和并行计算的开源项目，最早由UC Berkeley 的AMP 实验室开发，现在已经交由Apache开源项目组管理。Spark目前变得非常流行，跟其高效性，通用性和易于编程性都有很大关系。Spark在机器学习，大数据处理和实时数据处理，以及分布式的应用场景中都能充分发挥作用。  </p>
@@ -301,10 +301,10 @@
 <p>可以看到，核心代码不超过10行。    </p>
 <p>而为了配置Hadoop，我花了2天的时间，也还没有搞好，实在是对入门者不够友好。此外Java编写的程序和XML编写的配置文件一开始就有一种很“重”的感觉，使人望而却步。   </p>
 <p>上面这部分内容是关于Spark的一个大概的介绍，<strong>下面，我将从核心概念，集群模型和编程体验这三个大的方向进行详细的说明和我的理解。注意：下面的示例都以Spark的Python API为例。</strong></p>
-<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><h2 id="1-SparkContext"><a href="#1-SparkContext" class="headerlink" title="1. SparkContext"></a>1. SparkContext</h2><p>Spark是管理集群和协调集群进程的对象。SparkContext就像任务的分配和总调度师一样，处理数据分配，任务切分这些任务。下图是Spark官网给出的集群之间的逻辑框架图，可以看到SparkContext在Driver程序中运行，这里的Driver就是主进程的意思。Worker Node就是集群的计算节点，计算任务在它们上完成。<br><img src="http://spark.apache.org/docs/latest/img/cluster-overview.png" alt="Spark集群逻辑框架"></p>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><h2 id="1-SparkContext"><a href="#1-SparkContext" class="headerlink" title="1. SparkContext"></a>1. SparkContext</h2><p>Spark是管理集群和协调集群进程的对象。SparkContext就像任务的分配和总调度师一样，处理数据分配，任务切分这些任务。下图是Spark官网给出的集群之间的逻辑框架图，可以看到SparkContext在Driver程序中运行，这里的Driver就是主进程的意思。Worker Node就是集群的计算节点，计算任务在它们上完成。<br><img data-src="http://spark.apache.org/docs/latest/img/cluster-overview.png" alt="Spark集群逻辑框架"></p>
 <p>Spark提供了Scala和Python的交互式命令环境，里面默认会创建一个<code>SparkContext</code>变量，并将其重命名为<code>sc</code>，所以在交互式环境下，可以用<code>sc</code>来方便地调用<code>SparkContext</code>的函数集合。下面示例中采用<code>sc</code>来代表<code>SparkContext</code>。  </p>
 <h3 id="2-RDD"><a href="#2-RDD" class="headerlink" title="2. RDD"></a>2. RDD</h3><p>RDD是Resilient Distributed Datasets的缩写，中文翻译为弹性分布式数据集，它是Spark的数据操作元素，是具有容错性的并行的基本单元。<strong>RDD之于Spark，就相当于array之于Numpy，Matrix之于MatLab，DataFrames之于Pandas。</strong> 很重要的一个点是：RDD天然就是在分布式机器上存储的，比如对于下面这个RDD数据,可能Data1-3是存储在节点1的，Data4-6是存储节点2的，后面的数据也是这样，存储在集群中不同的机器上的。这种碎片化的存储使得任务的并行变得容易。    </p>
-<p><img src="http://img.ptcms.csdn.net/article/201511/25/5655b0ea512a8.jpg" alt="RDD data"></p>
+<p><img data-src="http://img.ptcms.csdn.net/article/201511/25/5655b0ea512a8.jpg" alt="RDD data"></p>
 <p>RDD生成也很容易，可以由串行的List， Tuple等等来生成，如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br><span class="line">dist_data = sc.parallelize(data)</span><br></pre></td></tr></table></figure>
 <p>这两行代码就可以将串行的数据转换为并行的RDD。  </p>
@@ -332,7 +332,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">accum = sc.accumulator(<span class="number">0</span>)</span><br><span class="line">sc.parallelize([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]).foreach(<span class="keyword">lambda</span> x: accum.add(x))</span><br><span class="line">accum.value </span><br><span class="line"><span class="comment">#结果：10</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="集群模型"><a href="#集群模型" class="headerlink" title="集群模型"></a>集群模型</h2><p>结束了冗长而且枯燥的概念部分后，下面我来阐述一下关于Spark集群模型的一些理解。  </p>
-<h3 id="1-Cluster模型"><a href="#1-Cluster模型" class="headerlink" title="1. Cluster模型"></a>1. Cluster模型</h3><p><img src="http://spark.apache.org/docs/latest/img/cluster-overview.png" alt="Spark Cluster Model"><br>上图是官网给出的Spark集群模型，Driver Program 是主进程，SparkContext运行在它上面，它跟Cluster Manager相连。Driver对Cluster Manager下达任务人，然后由Cluster Manager将任资源分配给各个计算节点(Worker Node)上的<code>executor</code>，然后Driver再将应用的代码发送给各个Worker Node。最后，Driver向各个节点发送<code>Task</code>来运行。  </p>
+<h3 id="1-Cluster模型"><a href="#1-Cluster模型" class="headerlink" title="1. Cluster模型"></a>1. Cluster模型</h3><p><img data-src="http://spark.apache.org/docs/latest/img/cluster-overview.png" alt="Spark Cluster Model"><br>上图是官网给出的Spark集群模型，Driver Program 是主进程，SparkContext运行在它上面，它跟Cluster Manager相连。Driver对Cluster Manager下达任务人，然后由Cluster Manager将任资源分配给各个计算节点(Worker Node)上的<code>executor</code>，然后Driver再将应用的代码发送给各个Worker Node。最后，Driver向各个节点发送<code>Task</code>来运行。  </p>
 <p>这里有几个需要注意的点：</p>
 <blockquote>
 <ul>
@@ -574,6 +574,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
