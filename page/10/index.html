@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">155</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">156</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-count">156</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -203,6 +203,99 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/03/18/keras-callbacks-remote-monitor/" class="post-title-link" itemprop="url">Keras Callback之RemoteMonitor</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-03-18 18:35:41" itemprop="dateCreated datePublished" datetime="2018-03-18T18:35:41+08:00">2018-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2018/03/18/keras-callbacks-remote-monitor/" class="post-meta-item leancloud_visitors" data-flag-title="Keras Callback之RemoteMonitor" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Keras提供了一系列的回调函数，用来在训练网络的过程中，查看网络的内部信息，或者控制网络训练的过程。<code>BaseLogger</code>、<code>ProgbarLogger</code>用来在命令行输出Log信息（默认会调用）， <code>EarlyStopping</code>、<code>ReduceLROnPlateu</code>分别用来提前终止训练和自动调整学习率，改变网络训练过程；而今天要介绍的<code>RemoteMonitor</code>则用来<strong>实时</strong>输出网络训练过程中的结果变化情况，包括训练集准确率(<code>accu</code>)、训练集损失值(<code>loss</code>)、验证集准确率(<code>val_acc</code>)、验证集损失值(<code>val_loss</code>)，用户也可以自己修改需要显示的数据。一图胜千言，看看下面的结果图吧：<br><img data-src="/imgs/keras_viz.png"></p>
+<p>这个图是在浏览器中打开得到，Keras使用了Flask搭建了一个简单的服务器，然后采用D3.js来可视化数据。下面详细介绍可视化的过程吧</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/03/18/keras-callbacks-remote-monitor/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1020,98 +1113,6 @@ On Unix-like operating systems, a process that accesses invalid memory receives 
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/12/02/argparse-usage/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2017/11/15/py-faster-rcnn-update/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/11/15/py-faster-rcnn-update/" class="post-title-link" itemprop="url">更新Faster-RCNN代码到最新版的caffe</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-11-15 00:00:28" itemprop="dateCreated datePublished" datetime="2017-11-15T00:00:28+08:00">2017-11-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2017/11/15/py-faster-rcnn-update/" class="post-meta-item leancloud_visitors" data-flag-title="更新Faster-RCNN代码到最新版的caffe" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>因为CuDNN函数接口更新的原因，以前用低版本写的项目在新版本的CuDNN环境下编译就会出问题。例如，<a target="_blank" rel="noopener" href="https://github.com/rbgirshick/py-faster-rcnn">py-faster-rcnn</a>代码在最新版的CuDNN6上面编译时就会报错。<br>解决这个问题的一个方法是禁用CUDNN，即修改<code>Makefile.config</code>里面的第5行，在前面加<code>#</code>。这种方法没法使用CuDNN加速，不推荐。这里我们使用一种比较土的方法，即将使用了旧的CuDNN函数的文件都换成新的caffe里面的文件即可。  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/11/15/py-faster-rcnn-update/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

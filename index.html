@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">155</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">156</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-count">156</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -203,6 +203,106 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/25/libtorch-tutorial1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/25/libtorch-tutorial1/" class="post-title-link" itemprop="url">libtorch 系列1：一个丝滑的C++ Tensor库</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-02-25 03:03:51 / 修改时间：04:39:54" itemprop="dateCreated datePublished" datetime="2023-02-25T03:03:51+08:00">2023-02-25</time>
+    </span>
+
+  
+    <span id="/2023/02/25/libtorch-tutorial1/" class="post-meta-item leancloud_visitors" data-flag-title="libtorch 系列1：一个丝滑的C++ Tensor库" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p><a target="_blank" rel="noopener" href="https://pytorch.org/cppdocs/installing.html">Libtorch</a>是Pytorch的C++接口，实现了在C++中进行网络训练、网络推理的功能，</p>
+<p>除此之外，由于Libtorch中的大部份接口都是与Pytorch一致的，所以Libtorch还是一个很强大的张量库，有着类似Pytorch的清晰接口，这在C++中很难得的。如果你用过C++ Tensor库，就会发现写法比较复杂，学习成本搞。因为强类型的限制和通用容器类型的缺失，C++相比Python天然更复杂，库设计者因为语言使用习惯，以及为了性能等因素，设计的接口一般都是高效但难用的。而Libtorch采用了与Pytorch类似的函数接口，如果你使用过Pytorch的话，使用Libtorch学习成本很低，后面会看到具体的例子。</p>
+<p>另一个问题是，很多Python库中基础的操作，例如<code>numpy.einsum</code>函数，在C++中没有合适的替代，看看<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/65347170/numpy-einsum-equivalent-for-xtensor-c">这些</a>搜索你就知道了。Libtorch解决了这个问题，Pytorch中有的它都有，所以在C++中可以简单地用<code>torch::einsum</code>来使用einsum函数，简直是C++开发者的福音。</p>
+<p>此外Libtorch 是支持GPU的，所以我猜测它在速度上相比别的C++ Tensor 库可能有优势，当然具体速度需要测试对比。当然使用C++代码的话速度不是瓶颈，本身CPU代码就够快了。</p>
+<p>Litorch另一个优势是编译简单，只要你安装了Pytorch，Libtorch就可以直接使用，省去了复杂的安装和配置，一分钟内就能跑起来一个简单的的示例程序，这是大部分C++库做不到的。</p>
+<p>总结来说，Libtorch有以下很吸引人的特性：</p>
+<ul>
+<li>强大如Numpy和Pytorch的C++ Tensor库，写法优雅丝滑，并且是支持GPU的。</li>
+<li>可以训练神经网络</li>
+<li>可以推理神经网络模型，用在C++环境的模型部署场景</li>
+<li>编译简单</li>
+</ul>
+<p>由于Pytorch开发团队是以Python优先的思路来进行Pytorch的开发的，因此我感觉Libtorch的重视程度不是很高，文档和教程也比较少，官网的示例也几乎没有，因此写一个比较完善的教程是比较有意义的。</p>
+<p>这个系列文章中，我会对Libtorch 的Tensor库和推理神经网络过程进行介绍，因为这些内容在实际对于用Libtorch来进行网络训练的部分进行跳过，因为这部分使用的场景不是很多（用Python训练网络比C++香多了)。</p>
+<p>本篇以Mac下的操作为例，对Libtorch的安装和简单使用进行介绍，后续内容敬请关注。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/25/libtorch-tutorial1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1078,96 +1178,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/16/git-update-a-history-commit/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/12/10/python-defaultdict-usage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/10/python-defaultdict-usage/" class="post-title-link" itemprop="url">使用 defaultdict 来简化 dict 的初始化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-12-10 15:17:17 / 修改时间：15:57:10" itemprop="dateCreated datePublished" datetime="2022-12-10T15:17:17+08:00">2022-12-10</time>
-    </span>
-
-  
-    <span id="/2022/12/10/python-defaultdict-usage/" class="post-meta-item leancloud_visitors" data-flag-title="使用 defaultdict 来简化 dict 的初始化" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在我们使用Python中的dict时，常常需要判断某个关键字是否已经在dict中，如果不存在则创建，非空则进行另外的操作。例如统计一篇文章中所有单词出现次数的代码，大致写法如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">words_num = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">    <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> words_num.keys():</span><br><span class="line">        words_num[word] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        words_num[word] += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>这样写总是需要判断key是否在dict中，不是很优雅。</p>
-<p>Python标准库collections中<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/collections.html#defaultdict-objects">defaultdict</a>类可以很好的解决这个问题。这个类使用与dict几乎一样，除了可以在初始化时设置key的默认类型和数值。类的声明格式为<code>defaultdict(default_factory=None, /[, ...])</code>，<code>default_factory</code>是一个<code>callable</code>的变量。</p>
-<p>别的使用与dict无异，正常使用即可。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/12/10/python-defaultdict-usage/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
