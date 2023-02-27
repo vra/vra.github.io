@@ -337,9 +337,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-02-25 03:03:51 / 修改时间：14:28:37" itemprop="dateCreated datePublished" datetime="2023-02-25T03:03:51+08:00">2023-02-25</time>
+      <time title="创建时间：2023-02-25 03:03:51" itemprop="dateCreated datePublished" datetime="2023-02-25T03:03:51+08:00">2023-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-27 08:32:59" itemprop="dateModified" datetime="2023-02-27T08:32:59+08:00">2023-02-27</time>
     </span>
 
   
@@ -359,7 +365,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p><a target="_blank" rel="noopener" href="https://pytorch.org/cppdocs/installing.html">Libtorch</a>是Pytorch的C++接口，实现了在C++中进行网络训练、网络推理的功能。</p>
+          <p>系列教程列表：</p>
+<ul>
+<li><a href="https://vra.github.io/2023/02/25/libtorch-tutorial1/">Libtorch系列教程1：一个丝滑的C++ Tensor库</a> </li>
+<li><a href="https://vra.github.io/2023/02/25/libtorch-tutorial2/">Libtorch系列教程2：torch::Tensor的使用</a> </li>
+</ul>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p><a target="_blank" rel="noopener" href="https://pytorch.org/cppdocs/installing.html">Libtorch</a>是Pytorch的C++接口，实现了在C++中进行网络训练、网络推理的功能。</p>
 <p>除此之外，由于Libtorch中的大部份接口都是与Pytorch一致的，所以Libtorch还是一个很强大的张量库，有着类似Pytorch的清晰接口，这在C++中很难得的。如果你用过C++ Tensor库，就会发现写法比较复杂，学习成本。因为强类型的限制和通用容器类型的缺失，C++相比Python天然更复杂，库设计者因为语言使用习惯，以及为了性能等因素，设计的接口一般都是高效但难用的。而Libtorch采用了与Pytorch类似的函数接口，如果你使用过Pytorch的话，使用Libtorch学习成本很低，后面会看到具体的例子。</p>
 <p>另一个问题是，很多Python库中基础的操作，例如<code>numpy.einsum</code>函数，在C++中没有合适的替代，看看<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/65347170/numpy-einsum-equivalent-for-xtensor-c">这些</a>搜索你就知道了。Libtorch解决了这个问题，Pytorch中有的它都有，所以在C++中可以简单地用<code>torch::einsum</code>来使用einsum函数，简直是C++开发者的福音。</p>
 <p>此外Libtorch 是支持GPU的，主要用于模型的推理过程，但我猜测使用GPU的话，Libtorch的Tensor操作在速度上相比别的C++ Tensor 库可能有优势，具体速度需要测试对比。当然使用C++代码的话速度不是瓶颈，本身CPU代码就够快了。</p>
