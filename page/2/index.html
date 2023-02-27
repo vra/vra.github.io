@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">156</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">157</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">156</span>
+          <span class="site-state-item-count">157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -203,6 +203,101 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/12/16/git-update-a-history-commit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/12/16/git-update-a-history-commit/" class="post-title-link" itemprop="url">git 更新历史提交</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-12-16 09:01:45" itemprop="dateCreated datePublished" datetime="2022-12-16T09:01:45+08:00">2022-12-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-19 23:46:55" itemprop="dateModified" datetime="2022-12-19T23:46:55+08:00">2022-12-19</time>
+    </span>
+
+  
+    <span id="/2022/12/16/git-update-a-history-commit/" class="post-meta-item leancloud_visitors" data-flag-title="git 更新历史提交" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>有时候我们在git commit后才发现，之前的一些提交有些问题，比如有些代码忘提交了或者有一些typo需要修改。如果要修改的地方是需要添加到最后一次提交上的，那么可以参考我的<a href="https://vra.github.io/2022/11/12/git-add-file-to-last-commit/">这篇博文</a>修改，如果是在非最后一次提交上的，那么就需要用<code>git rebase</code>来操作。这里简单记录一下操作的过程。</p>
+<p><strong>TL;DR</strong><br>操作命令简要来说是这样:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git log 查看历史提交，得到需要修改的那次提交的commit id</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line"><span class="comment"># 执行rebase命令，注意&lt;commit-id&gt;后面有一个^，表示修改在此次提交前</span></span><br><span class="line">git rebase -i <span class="string">&#x27;&lt;commmit-hash&gt;^&#x27;</span> <span class="comment"># 如果是修改第一次提交，使用 git rebase -i --root</span></span><br><span class="line"><span class="comment"># 修改代码</span></span><br><span class="line">vim changed-file</span><br><span class="line"><span class="comment"># git add 添加更新后的文件</span></span><br><span class="line">git add changed-file</span><br><span class="line"><span class="comment"># git commit 提交，注意需要使用后面三个选项，并且不需要加commit信息，因为会采用之前的commit信息</span></span><br><span class="line">git commit --all --amend --no-edit</span><br><span class="line"><span class="comment"># 使用--continue来完成 git rebase</span></span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+<p>后面会使用一个具体的（假）例子来演示这个过程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/16/git-update-a-history-commit/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -985,92 +1080,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/09/22/python-spell-checking-codespell/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/08/14/git-merge-file-from-another-branch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/14/git-merge-file-from-another-branch/" class="post-title-link" itemprop="url">git合并另一个分支的某个文件到当前分支</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-08-14 11:14:26 / 修改时间：12:23:44" itemprop="dateCreated datePublished" datetime="2022-08-14T11:14:26+08:00">2022-08-14</time>
-    </span>
-
-  
-    <span id="/2022/08/14/git-merge-file-from-another-branch/" class="post-meta-item leancloud_visitors" data-flag-title="git合并另一个分支的某个文件到当前分支" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>使用Git时，有时候不同分支的文件是不同步的，因此如果想要把别的分支的文件改动应用到当前分支，应该怎么操作呢？如果两边都有更新，该如何选择合并呢？这篇小文会对不同情形下的合并进行一个简单的介绍。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/14/git-merge-file-from-another-branch/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

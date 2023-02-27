@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">156</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">145</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">157</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">156</span>
+          <span class="site-state-item-count">157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -212,6 +212,103 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/25/libtorch-tutorial2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/25/libtorch-tutorial2/" class="post-title-link" itemprop="url">libtorch系列教程2：torch::Tensor的使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-25 17:15:46" itemprop="dateCreated datePublished" datetime="2023-02-25T17:15:46+08:00">2023-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-27 08:22:23" itemprop="dateModified" datetime="2023-02-27T08:22:23+08:00">2023-02-27</time>
+    </span>
+
+  
+    <span id="/2023/02/25/libtorch-tutorial2/" class="post-meta-item leancloud_visitors" data-flag-title="libtorch系列教程2：torch::Tensor的使用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>系列教程列表：</p>
+<ul>
+<li><a href="https://vra.github.io/2023/02/25/libtorch-tutorial1/">Libtorch系列教程1：一个丝滑的C++ Tensor库</a> </li>
+<li><a href="https://vra.github.io/2023/02/25/libtorch-tutorial2/">Libtorch系列教程2：torch::Tensor的使用</a> </li>
+</ul>
+<p>这篇文章中，我们暂时忽略网络训练和推理，详细展开Libtorch中Tensor对象的使用，看看将Libtorch当作一个纯粹的Tensor库来使用时，有哪些注意事项。如有未涉及的内容，请访问Libtorch<a target="_blank" rel="noopener" href="https://pytorch.org/cppdocs/">官方文档</a>，通过搜索框获取更多的信息。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/25/libtorch-tutorial2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/25/libtorch-tutorial1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -242,7 +339,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-02-25 03:03:51 / 修改时间：06:09:59" itemprop="dateCreated datePublished" datetime="2023-02-25T03:03:51+08:00">2023-02-25</time>
+      <time title="创建时间：2023-02-25 03:03:51 / 修改时间：14:28:37" itemprop="dateCreated datePublished" datetime="2023-02-25T03:03:51+08:00">2023-02-25</time>
     </span>
 
   
@@ -266,7 +363,7 @@
 <p>除此之外，由于Libtorch中的大部份接口都是与Pytorch一致的，所以Libtorch还是一个很强大的张量库，有着类似Pytorch的清晰接口，这在C++中很难得的。如果你用过C++ Tensor库，就会发现写法比较复杂，学习成本。因为强类型的限制和通用容器类型的缺失，C++相比Python天然更复杂，库设计者因为语言使用习惯，以及为了性能等因素，设计的接口一般都是高效但难用的。而Libtorch采用了与Pytorch类似的函数接口，如果你使用过Pytorch的话，使用Libtorch学习成本很低，后面会看到具体的例子。</p>
 <p>另一个问题是，很多Python库中基础的操作，例如<code>numpy.einsum</code>函数，在C++中没有合适的替代，看看<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/65347170/numpy-einsum-equivalent-for-xtensor-c">这些</a>搜索你就知道了。Libtorch解决了这个问题，Pytorch中有的它都有，所以在C++中可以简单地用<code>torch::einsum</code>来使用einsum函数，简直是C++开发者的福音。</p>
 <p>此外Libtorch 是支持GPU的，主要用于模型的推理过程，但我猜测使用GPU的话，Libtorch的Tensor操作在速度上相比别的C++ Tensor 库可能有优势，具体速度需要测试对比。当然使用C++代码的话速度不是瓶颈，本身CPU代码就够快了。</p>
-<p>Litorch另一个优势是编译简单，只要你安装了Pytorch，Libtorch就可以直接使用，省去了复杂的安装和配置，一分钟内就能跑起来一个简单的的示例程序。</p>
+<p>Libtorch另一个优势是编译简单，只要你安装了Pytorch，Libtorch就可以直接使用，省去了复杂的安装和配置，一分钟内就能跑起来一个简单的的示例程序。</p>
 <p>总结来说，Libtorch有以下很吸引人的特性：</p>
 <ul>
 <li>强大如Numpy和Pytorch的C++ Tensor库，写法优雅丝滑，并且是支持GPU的。</li>
@@ -1083,101 +1180,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/31/summary-2022/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/12/16/git-update-a-history-commit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/16/git-update-a-history-commit/" class="post-title-link" itemprop="url">git 更新历史提交</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-12-16 09:01:45" itemprop="dateCreated datePublished" datetime="2022-12-16T09:01:45+08:00">2022-12-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-19 23:46:55" itemprop="dateModified" datetime="2022-12-19T23:46:55+08:00">2022-12-19</time>
-    </span>
-
-  
-    <span id="/2022/12/16/git-update-a-history-commit/" class="post-meta-item leancloud_visitors" data-flag-title="git 更新历史提交" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>有时候我们在git commit后才发现，之前的一些提交有些问题，比如有些代码忘提交了或者有一些typo需要修改。如果要修改的地方是需要添加到最后一次提交上的，那么可以参考我的<a href="https://vra.github.io/2022/11/12/git-add-file-to-last-commit/">这篇博文</a>修改，如果是在非最后一次提交上的，那么就需要用<code>git rebase</code>来操作。这里简单记录一下操作的过程。</p>
-<p><strong>TL;DR</strong><br>操作命令简要来说是这样:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git log 查看历史提交，得到需要修改的那次提交的commit id</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line"><span class="comment"># 执行rebase命令，注意&lt;commit-id&gt;后面有一个^，表示修改在此次提交前</span></span><br><span class="line">git rebase -i <span class="string">&#x27;&lt;commmit-hash&gt;^&#x27;</span> <span class="comment"># 如果是修改第一次提交，使用 git rebase -i --root</span></span><br><span class="line"><span class="comment"># 修改代码</span></span><br><span class="line">vim changed-file</span><br><span class="line"><span class="comment"># git add 添加更新后的文件</span></span><br><span class="line">git add changed-file</span><br><span class="line"><span class="comment"># git commit 提交，注意需要使用后面三个选项，并且不需要加commit信息，因为会采用之前的commit信息</span></span><br><span class="line">git commit --all --amend --no-edit</span><br><span class="line"><span class="comment"># 使用--continue来完成 git rebase</span></span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
-<p>后面会使用一个具体的（假）例子来演示这个过程。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/12/16/git-update-a-history-commit/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
