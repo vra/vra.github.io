@@ -29,7 +29,7 @@
 <meta property="og:description" content="系列教程列表：  Libtorch系列教程1：一个丝滑的C++ Tensor库  Libtorch系列教程2：torch::Tensor的使用   这篇文章中，我们暂时忽略网络训练和推理，详细展开Libtorch中Tensor对象的使用，看看将Libtorch当作一个纯粹的Tensor库来使用时，有哪些注意事项。如有未涉及的内容，请访问Libtorch官方文档，通过搜索框获取更多的信息。Libto">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T09:15:46.000Z">
-<meta property="article:modified_time" content="2023-02-27T04:46:18.470Z">
+<meta property="article:modified_time" content="2023-02-27T04:48:49.191Z">
 <meta property="article:author" content="Yunfeng Wang">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="C++">
@@ -256,7 +256,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-27 12:46:18" itemprop="dateModified" datetime="2023-02-27T12:46:18+08:00">2023-02-27</time>
+      <time title="修改时间：2023-02-27 12:48:49" itemprop="dateModified" datetime="2023-02-27T12:48:49+08:00">2023-02-27</time>
     </span>
 
   
@@ -358,7 +358,7 @@
 <li>transpose</li>
 <li>cat/concat/concatenate</li>
 </ul>
-<p>而且支持torch::reshape这种静态函数和<code>tensor.reshape</code>这种对象函数。下面是一些例子:</p>
+<p>而且支持<code>torch::reshape</code>这种静态函数和<code>tensor.reshape</code>这种对象函数。下面是一些例子:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 变形操作</span></span><br><span class="line">bar = foo.<span class="built_in">reshape</span>(&#123;<span class="number">2</span>, <span class="number">-1</span>&#125;);</span><br><span class="line">bar = foo.<span class="built_in">flatten</span>();</span><br><span class="line">bar = foo.<span class="built_in">squeeze</span>();</span><br><span class="line">bar = foo.<span class="built_in">unsqueeze</span>(<span class="number">0</span>);</span><br><span class="line">bar = torch::<span class="built_in">unsqueeze</span>(foo, <span class="number">-1</span>);</span><br><span class="line">bar = foo.<span class="built_in">transpose</span>(<span class="number">0</span>, <span class="number">1</span>).<span class="built_in">transpose</span>(<span class="number">2</span>, <span class="number">3</span>).<span class="built_in">transpose</span>(<span class="number">3</span>, <span class="number">1</span>);</span><br><span class="line">bar = torch::<span class="built_in">transpose</span>(foo, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">bar = torch::<span class="built_in">cat</span>(&#123;foo, foo&#125;, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
 <p>一个比较特殊的地方是transpose只支持两个轴的交换，多个轴的交换需要调用多次来实现。</p>
 <h3 id="1-9-Tensor之间的操作函数"><a href="#1-9-Tensor之间的操作函数" class="headerlink" title="1.9 Tensor之间的操作函数"></a>1.9 Tensor之间的操作函数</h3><p>Tensor库中，Tensor和Tensor之间的操作是很常见的，比如求矩阵相乘，内积外积等，有内置的函数支持能避免很多额外的开发工作。这里是一些例子:</p>
