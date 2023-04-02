@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 概述TL;DR: talkGPT4All 是一个在PC本地运行的基于talkGPT和GPT4All的语音聊天程序，通过OpenAI Whisper将输入语音转文本，再将输入文本传给GPT4All获取回答文本，最后利用发音程序将文本读出来，构建了完整的语音交互聊天过程。 实际使用效果视频。 实际上，它只是几个工具的简易组合，没有什么创新的地方（甚至不支持多轮聊天，只支持英文），但 talkGP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="talkGPT4All">
+<meta property="og:url" content="http://vra.github.io/2023/04/02/chatbot4all/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 概述TL;DR: talkGPT4All 是一个在PC本地运行的基于talkGPT和GPT4All的语音聊天程序，通过OpenAI Whisper将输入语音转文本，再将输入文本传给GPT4All获取回答文本，最后利用发音程序将文本读出来，构建了完整的语音交互聊天过程。 实际使用效果视频。 实际上，它只是几个工具的简易组合，没有什么创新的地方（甚至不支持多轮聊天，只支持英文），但 talkGP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://vra.github.io/imgs/talkgpt4all-mac-m1.jpg">
+<meta property="article:published_time" content="2023-04-01T22:11:54.000Z">
+<meta property="article:modified_time" content="2023-04-02T00:45:18.594Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="ChatBot">
+<meta property="article:tag" content="GPT">
+<meta property="article:tag" content="Whisper">
+<meta property="article:tag" content="Mac">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://vra.github.io/imgs/talkgpt4all-mac-m1.jpg">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/04/02/chatbot4all/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/04/02/chatbot4all/","path":"2023/04/02/chatbot4all/","title":"talkGPT4All"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>talkGPT4All | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">147</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">159</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%A0%E8%BF%99%E4%B8%AA%E8%BD%AE%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">2. 为什么造这个轮子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9E%84%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">3. 构建环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Python%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Python环境的搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Whisper-%E8%AF%AD%E9%9F%B3%E8%BD%AC%E6%96%87%E6%9C%AC%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Whisper 语音转文本模型下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-GPT4All-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 GPT4All 语言模型的下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-GPT4All-%E8%81%8A%E5%A4%A9%E7%A8%8B%E5%BA%8F%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.4.</span> <span class="nav-text">3.3 GPT4All 聊天程序下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E6%96%87%E6%9C%AC%E8%BD%AC%E8%AF%AD%E9%9F%B3%E7%A8%8B%E5%BA%8F%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.5.</span> <span class="nav-text">3.4 文本转语音程序下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8"><span class="nav-number">3.6.</span> <span class="nav-text">4. 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%90%8E%E7%BB%AD%E6%94%B9%E8%BF%9B%E6%80%9D%E8%B7%AF"><span class="nav-number">3.7.</span> <span class="nav-text">5. 后续改进思路</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">159</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">147</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/04/02/chatbot4all/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="talkGPT4All | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          talkGPT4All
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-02 06:11:54 / 修改时间：08:45:18" itemprop="dateCreated datePublished" datetime="2023-04-02T06:11:54+08:00">2023-04-02</time>
+    </span>
+
+  
+    <span id="/2023/04/02/chatbot4all/" class="post-meta-item leancloud_visitors" data-flag-title="talkGPT4All" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>TL;DR: talkGPT4All 是一个在PC本地运行的基于talkGPT和GPT4All的语音聊天程序，通过OpenAI Whisper将输入语音转文本，再将输入文本传给GPT4All获取回答文本，最后利用发音程序将文本读出来，构建了完整的语音交互聊天过程。</p>
+<p>实际使用效果<a target="_blank" rel="noopener" href="https://www.zhihu.com/zvideo/1625779747656515584">视频</a>。</p>
+<p>实际上，它只是几个工具的简易组合，没有什么创新的地方（甚至不支持多轮聊天，只支持英文），但 talkGPT4All 有下面几个比较好的特点</p>
+<ul>
+<li>所有算法本地运行，不涉及API的调用，避免了国内无法访问OpenAI API的问题</li>
+<li>CPU 运行，无须 GPU 显卡</li>
+<li>占内存小，实测8G内存就可以跑起来</li>
+<li>速度还可以，测试8G Windows 一轮聊天小于1分钟， 16G Mac 一轮聊天小于30秒</li>
+<li>集成的AI还算智能，至少答能对题，回答看起来是符合英语语法的</li>
+</ul>
+<p>目前支持平台和验证的情况如下:</p>
+<ul>
+<li>Mac M1，已经验证可用</li>
+<li>Windows，已经验证可用</li>
+<li>Mac intel，未验证</li>
+<li>Linux，未验证<br>如果有对应机器的朋友感兴趣的话，可以帮忙验证一下，有问题可以提PR和issue。</li>
+</ul>
+<p>想体验的朋友可以参考 GitHub README进行快速安装，也可以在这篇文章中跟着我一步步来进行。</p>
+<span id="more"></span>
+
+<h2 id="2-为什么造这个轮子"><a href="#2-为什么造这个轮子" class="headerlink" title="2. 为什么造这个轮子"></a>2. 为什么造这个轮子</h2><p>聊天机器人是我比较喜欢的一个应用，机器+人类的思维是一个很有意思的场景。另一方面，通过一个智能机器人来练习英语口语，也是一个很实际的应用。</p>
+<p>一直以来，想要做一个含有智能的聊天机器人应用都是难度很大的，尤其是智能化的程度，受学术研究进展的制约，没法做到很高。然而近期的AI LLM大爆发，让开发一个真正智能的AI聊天机器人越来越容易。</p>
+<p>最早看到的是基于<a target="_blank" rel="noopener" href="https://github.com/ggerganov/whisper.cpp">whisper.cpp</a>的<a target="_blank" rel="noopener" href="https://github.com/ggerganov/whisper.cpp/tree/master/examples/talk.wasm">talk.wasm</a>, 一个基于Whisper+GPT-2的浏览器对话机器人，实际测试后发现GPT-2还不够智能，回答很多时候都答非所问。</p>
+<p>然后是在ChatGPT出来后，我在想能不能做一个Whisper + ChatGPT的智能聊天机器人呢，搜索后发现whisper.cpp的讨论区已经有人在<a target="_blank" rel="noopener" href="https://github.com/ggerganov/whisper.cpp/discussions/167#discussioncomment-4334628">讨论</a>这个事情，不过没看到成品。</p>
+<p>在ChatGPT 开放API后，有人做了一个MacOS上的基于OpenAI API的语音聊天机器人<a target="_blank" rel="noopener" href="https://github.com/chenyukang/talkGPT">talkGPT</a>，简单好用，唯一的问题是需要借助OpenAI API，目前国内是不太好访问的。</p>
+<p>再然后是<a target="_blank" rel="noopener" href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>，通过量化和大量工程优化，让原本参数量很大的<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/llama">LLaMA</a>模型可以跑在普通的笔记本上（现在甚至支持在Android上运行！)，但实际测试经过量化后 LLaMA 7B 模型智能程度不太高，有时候会出错，而 更大的LLaMA 15B 和 30B 在8GB内存的Windows 机器上跑起来就比较难了（最新进展：大小20GB的30B模型可以在8G的系统上运行了，参见这个<a target="_blank" rel="noopener" href="https://github.com/ggerganov/llama.cpp/pull/613">优化</a>和这里的<a target="_blank" rel="noopener" href="https://github.com/ggerganov/llama.cpp/discussions/638">讨论</a>)。</p>
+<p>这周又出现了<a target="_blank" rel="noopener" href="https://github.com/nomic-ai/gpt4all">gpt4all</a>，基于 LLaMA 7B模型，采集近80万的GPT-3.5-Turbo对话数据进行finetune，效果看起来比 LLaMA 7B 要好。作者发布了他们训练好的经过量化的模型，大小3.9G，以及可以直接在PC上运行的二进制聊天程序，可以直接在各个平台运行。</p>
+<p>然后长久以来的TODO 可以实现了，在缝合了talkGPT和GPT4All后，就有了talkGPT4All。简单来说，是把talkGPT的OpenAI API 换成了 GPT4All提供的本地可以运行的量化模型，也可以说是在GPT4All的基础上添加了语音转文本和文本转语音的功能。</p>
+<p>那下面我们来看看怎么安装和运行这个缝合怪吧。</p>
+<h2 id="3-构建环境"><a href="#3-构建环境" class="headerlink" title="3. 构建环境"></a>3. 构建环境</h2><p>由于整个程序设计到 Python 代码环境的搭建、Whisper 语音转文本模型的下载、GPT4All 语言模型的下载、GPT4All 聊天程序的下载、文本转语音程序的下载，整体链路略长，下面分步骤分平台分别进行详细说明。</p>
+<h3 id="3-1-Python环境的搭建"><a href="#3-1-Python环境的搭建" class="headerlink" title="3.1 Python环境的搭建"></a>3.1 Python环境的搭建</h3><p>在不同平台 Python 代码环境的搭建是一致的。</p>
+<p>推荐使用&gt;= 3.8的Python版本，因为新版本的Python有一定的速度提升。低版本可能一些功能不支持。<br>首先clone代码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/vra/talkGPT4All.git</span><br></pre></td></tr></table></figure>
+<p>后面假设代码仓库的根目录为<code>&lt;ROOT&gt;</code>来进行命令说明。</p>
+<p>基于 Python自带的 venv 来搭建隔离的环境，并进行依赖安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;ROOT&gt;</span><br><span class="line">python -m venv talkgpt4all</span><br><span class="line"><span class="built_in">source</span> talkgpt4all/bin/activate</span><br><span class="line">pip install -U pip</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-Whisper-语音转文本模型下载"><a href="#3-2-Whisper-语音转文本模型下载" class="headerlink" title="3.2 Whisper 语音转文本模型下载"></a>3.2 Whisper 语音转文本模型下载</h3><p>Whisper 模型在调用时会自动下载，但有时候在命令行下载速度比较慢，我们可以在浏览器中提前下载后放置到对应目录，解决这个问题。<br>Whisper 的所有模型地址参见<a target="_blank" rel="noopener" href="https://github.com/openai/whisper/blob/b80bcf610d89960bc658b61af9c333fc6d978d78/whisper/__init__.py#L18-L29">这里</a>，我们用的是<code>base.pt</code>，地址是<a target="_blank" rel="noopener" href="https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt">https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt</a>，放置的目录是<code>$HOME/.cache/whisper</code>（Windows上是<code>C:\Users\username\.cache\whisper</code>),通过浏览器或 wget 下载<code>base.pt</code>到这个目录就行。</p>
+<h3 id="3-3-GPT4All-语言模型的下载"><a href="#3-3-GPT4All-语言模型的下载" class="headerlink" title="3.3 GPT4All 语言模型的下载"></a>3.3 GPT4All 语言模型的下载</h3><p>语言模型放置目录是<code>&lt;ROOT&gt;/models</code>，根据 GPT4All <a target="_blank" rel="noopener" href="https://github.com/nomic-ai/gpt4all#try-it-yourself">文档</a>，下载方式包括</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://the-eye.eu/public/AI/models/nomic-ai/gpt4all/gpt4all-lora-quantized.bin">链接</a>直接下载</li>
+<li><a target="_blank" rel="noopener" href="https://tinyurl.com/gpt4all-lora-quantized">torrent</a>下载</li>
+</ul>
+<p>选择其中一种方式，将下载后的模型放置到<code>&lt;ROOT&gt;/models</code>目录下。</p>
+<h3 id="3-3-GPT4All-聊天程序下载"><a href="#3-3-GPT4All-聊天程序下载" class="headerlink" title="3.3 GPT4All 聊天程序下载"></a>3.3 GPT4All 聊天程序下载</h3><p>GPT4All 的作者打包了多平台的二进制聊天程序，可以下载后直接使用，不用从源码编译 C++ 文件。</p>
+<p>聊天程序的放置目录是<code>&lt;ROOT&gt;/bin</code>，不同平台的下载地址如下：</p>
+<ul>
+<li>Mac M1: <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-OSX-m1">https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-OSX-m1</a></li>
+<li>Mac Intel : <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-OSX-Intel">https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-OSX-Intel</a></li>
+<li>Linux : <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-linux-x86">https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-linux-x86</a></li>
+<li>Windows : <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-win64.exe">https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-win64.exe</a></li>
+</ul>
+<p>下载你的平台的文件，放置到<code>&lt;ROOT&gt;/bin</code>。</p>
+<h3 id="3-4-文本转语音程序下载"><a href="#3-4-文本转语音程序下载" class="headerlink" title="3.4 文本转语音程序下载"></a>3.4 文本转语音程序下载</h3><p>在 Mac 下，自带<a target="_blank" rel="noopener" href="https://ss64.com/osx/say.html">say命令</a>，可以将文本转语音，因此不需要额外安装工具。</p>
+<p>在 Linux 下，有<a target="_blank" rel="noopener" href="https://espeak.sourceforge.net/">espeak</a>命令可以来完成文本转语音，但需要额外安装，Ubuntu下的安装命令为<code>sudo apt install espeak</code>，别的发行版也可以用包管理安装。如果不行的话，尝试<a target="_blank" rel="noopener" href="https://espeak.sourceforge.net/download.html">下载源码</a>自行编译安装。</p>
+<p>Windows 下有一个 say 命令的替代 <a target="_blank" rel="noopener" href="https://github.com/p-groarke/wsay">wsay</a>, 可以在<a target="_blank" rel="noopener" href="https://github.com/p-groarke/wsay/releases/tag/v1.5.0">这里</a>下载 wsay.exe，放置到<code>&lt;ROOT&gt;/bin</code>目录下。</p>
+<h3 id="4-使用"><a href="#4-使用" class="headerlink" title="4. 使用"></a>4. 使用</h3><p>安装完成后，进入<code>&lt;ROOT&gt;</code>目录，启用虚拟环境，使用<code>python chat.py --platform &lt;platform&gt;</code>运行程序，<code>&lt;platform&gt;</code>分别是<code>mac-m1</code>, <code>mac-intel</code>, <code>linux</code>, <code>windows</code>。</p>
+<p>Mac M1:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --platform mac-m1</span><br></pre></td></tr></table></figure>
+
+<p>Mac Intel:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --platform mac-intel</span><br></pre></td></tr></table></figure>
+
+<p>Linux:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --platform linux</span><br></pre></td></tr></table></figure>
+
+<p>Windows:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --platform windows</span><br></pre></td></tr></table></figure>
+<p>⚠️注意：目前只测试过 Mac M1 和 Windows，别的平台未测试，如有问题，欢迎提 <a target="_blank" rel="noopener" href="https://github.com/vra/talkGPT4All/issues">issue</a> 和 <a target="_blank" rel="noopener" href="https://github.com/vra/talkGPT4All/pulls">PR</a> 。</p>
+<p>在 Mac 上使用效果如下:<br><img data-src="/imgs/talkgpt4all-mac-m1.jpg"></p>
+<p>也可以参见本文开头的视频或<a target="_blank" rel="noopener" href="https://www.zhihu.com/zvideo/1625779747656515584">这里</a>。</p>
+<h3 id="5-后续改进思路"><a href="#5-后续改进思路" class="headerlink" title="5. 后续改进思路"></a>5. 后续改进思路</h3><p>目前实现还是比较粗糙，计划后续会增加下面的功能（按实现难度从低到高排列）：</p>
+<ul>
+<li>验证 Linux，Mac Intel 和 WSL2 下能否正常运行</li>
+<li>增加多轮对话支持</li>
+<li>增加中文支持</li>
+<li>去掉编译好的二进制程序，包含 llama.cpp 源码，自行编译，支持更灵活的使用</li>
+<li>更多效果更好模型的添加</li>
+</ul>
+<p>欢迎基于这个仓库进行修改和代码分发，期待创造出更有新意、更有应用价值的东西～</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/04/02/chatbot4all/" title="talkGPT4All">http://vra.github.io/2023/04/02/chatbot4all/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/ChatBot/" rel="tag"># ChatBot</a>
+              <a href="/tags/GPT/" rel="tag"># GPT</a>
+              <a href="/tags/Whisper/" rel="tag"># Whisper</a>
+              <a href="/tags/Mac/" rel="tag"># Mac</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/28/neovim-telescope/" rel="prev" title="neovim telescope 插件简要教程">
+                  <i class="fa fa-chevron-left"></i> neovim telescope 插件简要教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

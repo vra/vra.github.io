@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-03-28T16:23:19.254Z</updated>
+  <updated>2023-04-02T00:45:18.594Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>talkGPT4All</title>
+    <link href="http://vra.github.io/2023/04/02/chatbot4all/"/>
+    <id>http://vra.github.io/2023/04/02/chatbot4all/</id>
+    <published>2023-04-01T22:11:54.000Z</published>
+    <updated>2023-04-02T00:45:18.594Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>TL;DR: talkGPT4All 是一个在PC本地运行的基于talkGPT和GPT4All的语音聊天程序，通过OpenAI Whisper将输入语音转文本，再将输入文本传给GPT4All获取回答文本，最后利用发音程序将文本读出来，构建了完整的语音交互聊天过程。</p><p>实际使用效果<a href="https://www.zhihu.com/zvideo/1625779747656515584">视频</a>。</p><p>实际上，它只是几个工具的简易组合，没有什么创新的地方（甚至不支持多轮聊天，只支持英文），但 talkGPT4All 有下面几个比较好的特点</p><ul><li>所有算法本地运行，不涉及API的调用，避免了国内无法访问OpenAI API的问题</li><li>CPU 运行，无须 GPU 显卡</li><li>占内存小，实测8G内存就可以跑起来</li><li>速度还可以，测试8G Windows 一轮聊天小于1分钟， 16G Mac 一轮聊天小于30秒</li><li>集成的AI还算智能，至少答能对题，回答看起来是符合英语语法的</li></ul><p>目前支持平台和验证的情况如下:</p><ul><li>Mac M1，已经验证可用</li><li>Windows，已经验证可用</li><li>Mac intel，未验证</li><li>Linux，未验证<br>如果有对应机器的朋友感兴趣的话，可以帮忙验证一下，有问题可以提PR和issue。</li></ul><p>想体验的朋友可以参考 GitHub README进行快速安装，也可以在这篇文章中跟着我一步步来进行。</p><span id="more"></span><h2 id="2-为什么造这个轮子"><a href="#2-为什么造这个轮子" class="headerlink" title="2. 为什么造这个轮子"></a>2. 为什么造这个轮子</h2><p>聊天机器人是我比较喜欢的一个应用，机器+人类的思维是一个很有意思的场景。另一方面，通过一个智能机器人来练习英语口语，也是一个很实际的应用。</p><p>一直以来，想要做一个含有智能的聊天机器人应用都是难度很大的，尤其是智能化的程度，受学术研究进展的制约，没法做到很高。然而近期的AI LLM大爆发，让开发一个真正智能的AI聊天机器人越来越容易。</p><p>最早看到的是基于<a href="https://github.com/ggerganov/whisper.cpp">whisper.cpp</a>的<a href="https://github.com/ggerganov/whisper.cpp/tree/master/examples/talk.wasm">talk.wasm</a>, 一个基于Whisper+GPT-2的浏览器对话机器人，实际测试后发现GPT-2还不够智能，回答很多时候都答非所问。</p><p>然后是在ChatGPT出来后，我在想能不能做一个Whisper + ChatGPT的智能聊天机器人呢，搜索后发现whisper.cpp的讨论区已经有人在<a href="https://github.com/ggerganov/whisper.cpp/discussions/167#discussioncomment-4334628">讨论</a>这个事情，不过没看到成品。</p><p>在ChatGPT 开放API后，有人做了一个MacOS上的基于OpenAI API的语音聊天机器人<a href="https://github.com/chenyukang/talkGPT">talkGPT</a>，简单好用，唯一的问题是需要借助OpenAI API，目前国内是不太好访问的。</p><p>再然后是<a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>，通过量化和大量工程优化，让原本参数量很大的<a href="https://github.com/facebookresearch/llama">LLaMA</a>模型可以跑在普通的笔记本上（现在甚至支持在Android上运行！)，但实际测试经过量化后 LLaMA 7B 模型智能程度不太高，有时候会出错，而 更大的LLaMA 15B 和 30B 在8GB内存的Windows 机器上跑起来就比较难了（最新进展：大小20GB的30B模型可以在8G的系统上运行了，参见这个<a href="https://github.com/ggerganov/llama.cpp/pull/613">优化</a>和这里的<a href="https://github.com/ggerganov/llama.cpp/discussions/638">讨论</a>)。</p><p>这周又出现了<a href="https://github.com/nomic-ai/gpt4all">gpt4all</a>，基于 LLaMA 7B模型，采集近80万的GPT-3.5-Turbo对话数据进行finetune，效果看起来比 LLaMA 7B 要好。作者发布了他们训练好的经过量化的模型，大小3.9G，以及可以直接在PC上运行的二进制聊天程序，可以直接在各个平台运行。</p><p>然后长久以来的TODO 可以实现了，在缝合了talkGPT和GPT4All后，就有了talkGPT4All。简单来说，是把talkGPT的OpenAI API 换成了 GPT4All提供的本地可以运行的量化模型，也可以说是在GPT4All的基础上添加了语音转文本和文本转语音的功能。</p><p>那下面我们来看看怎么安装和运行这个缝合怪吧。</p><h2 id="3-构建环境"><a href="#3-构建环境" class="headerlink" title="3. 构建环境"></a>3. 构建环境</h2><p>由于整个程序设计到 Python 代码环境的搭建、Whisper 语音转文本模型的下载、GPT4All 语言模型的下载、GPT4All 聊天程序的下载、文本转语音程序的下载，整体链路略长，下面分步骤分平台分别进行详细说明。</p><h3 id="3-1-Python环境的搭建"><a href="#3-1-Python环境的搭建" class="headerlink" title="3.1 Python环境的搭建"></a>3.1 Python环境的搭建</h3><p>在不同平台 Python 代码环境的搭建是一致的。</p><p>推荐使用&gt;= 3.8的Python版本，因为新版本的Python有一定的速度提升。低版本可能一些功能不支持。<br>首先clone代码:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/vra/talkGPT4All.git</span><br></pre></td></tr></table></figure><p>后面假设代码仓库的根目录为<code>&lt;ROOT&gt;</code>来进行命令说明。</p><p>基于 Python自带的 venv 来搭建隔离的环境，并进行依赖安装:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;ROOT&gt;</span><br><span class="line">python -m venv talkgpt4all</span><br><span class="line"><span class="built_in">source</span> talkgpt4all/bin/activate</span><br><span class="line">pip install -U pip</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><h3 id="3-2-Whisper-语音转文本模型下载"><a href="#3-2-Whisper-语音转文本模型下载" class="headerlink" title="3.2 Whisper 语音转文本模型下载"></a>3.2 Whisper 语音转文本模型下载</h3><p>Whisper 模型在调用时会自动下载，但有时候在命令行下载速度比较慢，我们可以在浏览器中提前下载后放置到对应目录，解决这个问题。<br>Whisper 的所有模型地址参见<a href="https://github.com/openai/whisper/blob/b80bcf610d89960bc658b61af9c333fc6d978d78/whisper/__init__.py#L18-L29">这里</a>，我们用的是<code>base.pt</code>，地址是<a href="https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt">https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt</a>，放置的目录是<code>$HOME/.cache/whisper</code>（Windows上是<code>C:\Users\username\.cache\whisper</code>),通过浏览器或 wget 下载<code>base.pt</code>到这个目录就行。</p><h3 id="3-3-GPT4All-语言模型的下载"><a href="#3-3-GPT4All-语言模型的下载" class="headerlink" title="3.3 GPT4All 语言模型的下载"></a>3.3 GPT4All 语言模型的下载</h3><p>语言模型放置目录是<code>&lt;ROOT&gt;/models</code>，根据 GPT4All <a href="https://github.com/nomic-ai/gpt4all#try-it-yourself">文档</a>，下载方式包括</p><ul><li><a href="https://the-eye.eu/public/AI/models/nomic-ai/gpt4all/gpt4all-lora-quantized.bin">链接</a>直接下载</li><li><a href="https://tinyurl.com/gpt4all-lora-quantized">torrent</a>下载</li></ul><p>选择其中一种方式，将下载后的模型放置到<code>&lt;ROOT&gt;/models</code>目录下。</p><h3 id="3-3-GPT4All-聊天程序下载"><a href="#3-3-GPT4All-聊天程序下载" class="headerlink" title="3.3 GPT4All 聊天程序下载"></a>3.3 GPT4All 聊天程序下载</h3><p>GPT4All 的作者打包了多平台的二进制聊天程序，可以下载后直接使用，不用从源码编译 C++ 文件。</p><p>聊天程序的放置目录是<code>&lt;ROOT&gt;/bin</code>，不同平台的下载地址如下：</p><ul><li>Mac M1: <a href="https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-OSX-m1">https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-OSX-m1</a></li><li>Mac Intel : <a href="https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-OSX-Intel">https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-OSX-Intel</a></li><li>Linux : <a href="https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-linux-x86">https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-linux-x86</a></li><li>Windows : <a href="https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-win64.exe">https://raw.githubusercontent.com/nomic-ai/gpt4all/main/chat/gpt4all-lora-quantized-win64.exe</a></li></ul><p>下载你的平台的文件，放置到<code>&lt;ROOT&gt;/bin</code>。</p><h3 id="3-4-文本转语音程序下载"><a href="#3-4-文本转语音程序下载" class="headerlink" title="3.4 文本转语音程序下载"></a>3.4 文本转语音程序下载</h3><p>在 Mac 下，自带<a href="https://ss64.com/osx/say.html">say命令</a>，可以将文本转语音，因此不需要额外安装工具。</p><p>在 Linux 下，有<a href="https://espeak.sourceforge.net/">espeak</a>命令可以来完成文本转语音，但需要额外安装，Ubuntu下的安装命令为<code>sudo apt install espeak</code>，别的发行版也可以用包管理安装。如果不行的话，尝试<a href="https://espeak.sourceforge.net/download.html">下载源码</a>自行编译安装。</p><p>Windows 下有一个 say 命令的替代 <a href="https://github.com/p-groarke/wsay">wsay</a>, 可以在<a href="https://github.com/p-groarke/wsay/releases/tag/v1.5.0">这里</a>下载 wsay.exe，放置到<code>&lt;ROOT&gt;/bin</code>目录下。</p><h3 id="4-使用"><a href="#4-使用" class="headerlink" title="4. 使用"></a>4. 使用</h3><p>安装完成后，进入<code>&lt;ROOT&gt;</code>目录，启用虚拟环境，使用<code>python chat.py --platform &lt;platform&gt;</code>运行程序，<code>&lt;platform&gt;</code>分别是<code>mac-m1</code>, <code>mac-intel</code>, <code>linux</code>, <code>windows</code>。</p><p>Mac M1:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --platform mac-m1</span><br></pre></td></tr></table></figure><p>Mac Intel:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --platform mac-intel</span><br></pre></td></tr></table></figure><p>Linux:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --platform linux</span><br></pre></td></tr></table></figure><p>Windows:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --platform windows</span><br></pre></td></tr></table></figure><p>⚠️注意：目前只测试过 Mac M1 和 Windows，别的平台未测试，如有问题，欢迎提 <a href="https://github.com/vra/talkGPT4All/issues">issue</a> 和 <a href="https://github.com/vra/talkGPT4All/pulls">PR</a> 。</p><p>在 Mac 上使用效果如下:<br><img data-src="/imgs/talkgpt4all-mac-m1.jpg"></p><p>也可以参见本文开头的视频或<a href="https://www.zhihu.com/zvideo/1625779747656515584">这里</a>。</p><h3 id="5-后续改进思路"><a href="#5-后续改进思路" class="headerlink" title="5. 后续改进思路"></a>5. 后续改进思路</h3><p>目前实现还是比较粗糙，计划后续会增加下面的功能（按实现难度从低到高排列）：</p><ul><li>验证 Linux，Mac Intel 和 WSL2 下能否正常运行</li><li>增加多轮对话支持</li><li>增加中文支持</li><li>去掉编译好的二进制程序，包含 llama.cpp 源码，自行编译，支持更灵活的使用</li><li>更多效果更好模型的添加</li></ul><p>欢迎基于这个仓库进行修改和代码分发，期待创造出更有新意、更有应用价值的东西～</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;TL;DR: talkGPT4All 是一个在PC本地运行的基于talkGPT和GPT4All的语音聊天程序，通过OpenAI Whisper将输入语音转文本，再将输入文本传给GPT4All获取回答文本，最后利用发音程序将文本读出来，构建了完整的语音交互聊天过程。&lt;/p&gt;
+&lt;p&gt;实际使用效果&lt;a href=&quot;https://www.zhihu.com/zvideo/1625779747656515584&quot;&gt;视频&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;实际上，它只是几个工具的简易组合，没有什么创新的地方（甚至不支持多轮聊天，只支持英文），但 talkGPT4All 有下面几个比较好的特点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;所有算法本地运行，不涉及API的调用，避免了国内无法访问OpenAI API的问题&lt;/li&gt;
+&lt;li&gt;CPU 运行，无须 GPU 显卡&lt;/li&gt;
+&lt;li&gt;占内存小，实测8G内存就可以跑起来&lt;/li&gt;
+&lt;li&gt;速度还可以，测试8G Windows 一轮聊天小于1分钟， 16G Mac 一轮聊天小于30秒&lt;/li&gt;
+&lt;li&gt;集成的AI还算智能，至少答能对题，回答看起来是符合英语语法的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;目前支持平台和验证的情况如下:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mac M1，已经验证可用&lt;/li&gt;
+&lt;li&gt;Windows，已经验证可用&lt;/li&gt;
+&lt;li&gt;Mac intel，未验证&lt;/li&gt;
+&lt;li&gt;Linux，未验证&lt;br&gt;如果有对应机器的朋友感兴趣的话，可以帮忙验证一下，有问题可以提PR和issue。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;想体验的朋友可以参考 GitHub README进行快速安装，也可以在这篇文章中跟着我一步步来进行。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="ChatBot" scheme="http://vra.github.io/tags/ChatBot/"/>
+    
+    <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
+    
+    <category term="Whisper" scheme="http://vra.github.io/tags/Whisper/"/>
+    
+    <category term="Mac" scheme="http://vra.github.io/tags/Mac/"/>
+    
+    <category term="Windows" scheme="http://vra.github.io/tags/Windows/"/>
+    
+  </entry>
   
   <entry>
     <title>neovim telescope 插件简要教程</title>
@@ -59,9 +107,9 @@
     
     
     
-    <category term="C++" scheme="http://vra.github.io/tags/C/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
@@ -103,9 +151,9 @@
     
     
     
-    <category term="C++" scheme="http://vra.github.io/tags/C/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="C++" scheme="http://vra.github.io/tags/C/"/>
     
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
@@ -133,11 +181,11 @@
     
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
-    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
+    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
     
     <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
     
-    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
   </entry>
   
@@ -275,9 +323,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="find" scheme="http://vra.github.io/tags/find/"/>
     
@@ -300,9 +348,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
@@ -353,9 +401,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -398,9 +446,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -425,9 +473,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -545,9 +593,9 @@
     
     
     
-    <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
     
     <category term="OpenCV" scheme="http://vra.github.io/tags/OpenCV/"/>
     
@@ -584,30 +632,6 @@
     <category term="fly.io" scheme="http://vra.github.io/tags/fly-io/"/>
     
     <category term="Docker" scheme="http://vra.github.io/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在ctypes的C共享库中调用Python函数</title>
-    <link href="http://vra.github.io/2022/10/04/callback-in-ctypes/"/>
-    <id>http://vra.github.io/2022/10/04/callback-in-ctypes/</id>
-    <published>2022-10-04T03:42:22.000Z</published>
-    <updated>2022-10-04T04:35:42.172Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a href="https://docs.python.org/3/library/ctypes.html">ctypes</a> 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中来进行提速，因为Python代码循环实在是太慢了。大致流程是通过 ctypes 来调用C函数，先将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。</p><p>现在有个更复杂的情况，我想要在C代码中调用Python中的某些函数来完成C代码的计算，比如在C代码的sort函数中，采用Python中定义的函数来进行大小判断。这个在Python中定义的函数在 ctypes 中称为回调函数 (callback function)。也就是说需要把Python函数当作变量传给C语言，想想还是有些难度。 但调查以后发现 ctypes 提供了 <code>CFUNCTYPE</code>来方便地进行回调函数定义，而C语言本身也是支持函数指针的，因此这个功能实现还算简单，具体展开如下。</p><span id="more"></span><h3 id="2-一个最简单例子"><a href="#2-一个最简单例子" class="headerlink" title="2. 一个最简单例子"></a>2. 一个最简单例子</h3><p>先从最简单例子开始，跑通整体流程。假设我们有个回调函数，判断int类型的输入是不是大于0，那么可以在C语言这么写:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my_lib.c</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> (*function_ptr)(<span class="keyword">int</span>) , <span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> function_ptr(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个文件内容很简单，我们定义了一个C函数<code>foo</code>，它调用Python传过来的回调函数，直接返回结果。</p><p>这里使用了C语言的函数指针类型，<code>int (function_ptr)(int)</code>中函数指针变量名是<code>function_ptr</code>, 返回值类型是前面的int，参数类型是后面的int。</p><p>我们在C语言里面只是简单地调用了Python传过来的函数指针，并直接将结果返回，实际使用时其实是需要在Python函数算完后，利用输出进行更多操作，否则直接在Python里面计算函数就可以了，没必要传函数到C，算法结果再返回给Python。</p><p>使用下面的命令来将上述C文件编程成共享库<code>my_lib.so</code>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -o my_lib.so my_lib.c</span><br></pre></td></tr></table></figure><p>这个命令会在当前目录下会生成<code>my_lib.so</code>。</p><p>然后在Python文件中定义这个回调函数的具体实现，以及调用共享库<code>my_lib.so</code>中定义的<code>foo</code>函数：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># file name: ctype_callback_demo.py</span></span><br><span class="line"><span class="keyword">import</span> ctypes <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> cdll</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义回调函数</span></span><br><span class="line"><span class="meta">@c.CFUNCTYPE(<span class="params">c.c_int, c.c_int</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback_func</span>(<span class="params">a</span>):</span></span><br><span class="line">    res = <span class="built_in">int</span>(a &gt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    a = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 载入共享库</span></span><br><span class="line">    lib = cdll.LoadLibrary(<span class="string">&#x27;./my_lib.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用共享库中的foo函数</span></span><br><span class="line">    res = lib.foo(callback_func, a)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125; &gt; 0 = &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(a, res))</span><br></pre></td></tr></table></figure><p>所有 magic 的事情都被 ctypes 这个库给做了，留给我们的都是比较简单的接口。</p><p><code>@c.CFUNCTYPE</code> 这个装饰器就是用来声明回调函数的，装饰器的第一个参数是函数的返回类型，第二个参数开始，就是回调函数自己的参数的类型。如果回调函数没有返回值，那<code>@c.CFUNCTYPE</code>后面的第一个参数设置为<code>None</code>。</p><p>然后执行这个Python脚本，可以得到下面的输出:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python ctype_callback_demo.py</span><br><span class="line">2 &gt; 0 = 1</span><br></pre></td></tr></table></figure><h3 id="3-Numpy-ndarray-类型的参数如何使用"><a href="#3-Numpy-ndarray-类型的参数如何使用" class="headerlink" title="3. Numpy.ndarray 类型的参数如何使用"></a>3. Numpy.ndarray 类型的参数如何使用</h3><p>ctypes 对 Python原生类型支持是没问题的，但我们还会经常用到Numpy的ndarray对象，它们该如何转换为C语言可以识别的类型呢？因为跨语言的类型转换不对的话，结果就会有问题。</p><p>Numpy 提供了 numpy.ndarray.ctypes 属性，可以来完成这个操作。</p><p>比如C文件中，需要一个float 指针类型的输入:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my_lib.c</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> (*function_ptr)(<span class="keyword">float</span>*) , <span class="keyword">float</span>* a)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">function_ptr</span>(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们需要将Numpy.ndarray对象进行转换，传给C函数:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取C的float指针类型</span></span><br><span class="line">c_float_p = ctypes.POINTER(ctypes.c_float)</span><br><span class="line"></span><br><span class="line">data = np.random.rand(<span class="number">3</span>, <span class="number">3</span>).astype(np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将np.ndarray 对象的类型转换为C的float指针类型</span></span><br><span class="line">data_p = data.ctypes.data_as(c_float_p)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用共享库中的foo函数</span></span><br><span class="line">my_lib.foo(data_p)</span><br></pre></td></tr></table></figure><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol><li><a href="https://docs.python.org/3/library/ctypes.html#callback-functions">https://docs.python.org/3/library/ctypes.html#callback-functions</a></li><li><a href="https://stackoverflow.com/questions/3195660/how-to-use-numpy-array-with-ctypes">https://stackoverflow.com/questions/3195660/how-to-use-numpy-array-with-ctypes</a></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://docs.python.org/3/library/ctypes.html&quot;&gt;ctypes&lt;/a&gt; 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中来进行提速，因为Python代码循环实在是太慢了。大致流程是通过 ctypes 来调用C函数，先将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。&lt;/p&gt;
-&lt;p&gt;现在有个更复杂的情况，我想要在C代码中调用Python中的某些函数来完成C代码的计算，比如在C代码的sort函数中，采用Python中定义的函数来进行大小判断。这个在Python中定义的函数在 ctypes 中称为回调函数 (callback function)。也就是说需要把Python函数当作变量传给C语言，想想还是有些难度。 但调查以后发现 ctypes 提供了 &lt;code&gt;CFUNCTYPE&lt;/code&gt;来方便地进行回调函数定义，而C语言本身也是支持函数指针的，因此这个功能实现还算简单，具体展开如下。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="C++" scheme="http://vra.github.io/tags/C/"/>
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="Numpy" scheme="http://vra.github.io/tags/Numpy/"/>
     
   </entry>
   
