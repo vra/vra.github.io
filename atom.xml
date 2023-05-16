@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-04-02T00:45:18.594Z</updated>
+  <updated>2023-05-16T07:56:23.905Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git 回滚代码并保留提交历史</title>
+    <link href="http://vra.github.io/2023/05/16/git-roll-back-code-and-save-commit-history/"/>
+    <id>http://vra.github.io/2023/05/16/git-roll-back-code-and-save-commit-history/</id>
+    <published>2023-05-16T07:55:28.000Z</published>
+    <updated>2023-05-16T07:56:23.905Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用git时，有时候需要回退最新代码到之前的某次提交或某个tag，将中间的所有代码提交去掉。同时保持中间的提交记录。实际应用时发现这个动作没有比较好的实现方式。</p><p>例如，如果使用<code>git revert commit-id</code>, 那么只会会退<code>commit-id</code> 对应的那次提交，之后的提交不受影响，仍然存在，不是我们想要的效果。</p><p>如果使用<code>git reset</code>, 那操作就比较麻烦，需要使用<code>--hard</code> 和<code>--force</code> 等比较危险的命令，具体如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard commit-id</span><br><span class="line">git push --force</span><br></pre></td></tr></table></figure><p>这样做除了使用比较危险的命令选项外，还有个问题是没法保留中间的提交历史，这不是我们想要的。</p><p>搜索发现，利用git diff和git apply可以来比较清晰的完成这个需求，整体的思路是：</p><ol><li>得到当前最新提交到回退提交之间的代码diff，将diff保存为文件</li><li>利用<code>git apply</code> 将diff作用到代码上，回到之前的代码状态</li><li>提交代码</li></ol><p>具体来说，假设当前最新提交就在分支<code>current-branch</code>上，回退提交为<code>prev-commit</code>,这个回退提交可以是一次commit id，也可以是一个tag，也可以是一个分支名。执行命令如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout prev-commit</span><br><span class="line">git diff current-branch &gt; ~/diff.patch</span><br><span class="line">git checkout current-branch</span><br><span class="line">cat ~/diff.patch | git apply</span><br><span class="line">git commit -am <span class="string">&quot;roll back to prev-commit&quot;</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure><p>这样就能既回退代码，又保留提交历史。</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul><li><a href="https://stackoverflow.com/a/33890073">https://stackoverflow.com/a/33890073</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在使用git时，有时候需要回退最新代码到之前的某次提交或某个tag，将中间的所有代码提交去掉。同时保持中间的提交记录。实际应用时发现这个动作没有比较好的实现方式。&lt;/p&gt;
+&lt;p&gt;例如，如果使用&lt;code&gt;git revert commit-id&lt;/code&gt;, 那么只会会退</summary>
+      
+    
+    
+    
+    
+    <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>talkGPT4All</title>
@@ -323,9 +346,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="find" scheme="http://vra.github.io/tags/find/"/>
     
@@ -348,9 +371,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
@@ -401,9 +424,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -446,9 +469,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -473,9 +496,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -598,40 +621,6 @@
     <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
     
     <category term="OpenCV" scheme="http://vra.github.io/tags/OpenCV/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>fly.io 使用指南</title>
-    <link href="http://vra.github.io/2022/10/06/fly-io-tutorial/"/>
-    <id>http://vra.github.io/2022/10/06/fly-io-tutorial/</id>
-    <published>2022-10-06T00:18:04.000Z</published>
-    <updated>2022-12-19T16:16:09.680Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>最近看技术论坛，发现提到 <a href="https://fly.io/">fly.io</a> 的次数越来越多了。 fly.io 是一个容器化的部署平台，只需要一个<code>Dockerfile</code>文件就能部署代码到fly.io 的服务器上，同时还自动生成域名。其他的好处多多，我根据自己体验，我总结成了下面的这些条：</p><ul><li><p><del>有免费使用的额度。不填写信用卡信息可以创建一个App，完全不收费；填写信用卡信息后每月有一定额度的免费流量，超过额度会额外收费。所以想做个小demo完全可以不填信用卡试用。</del> 目前已经不支持无信用卡使用了，参见<a href="https://community.fly.io/t/is-it-free-getting-error-we-need-your-payment-information-to-continue/8871">这里</a>的讨论</p></li><li><p>自动生成域名。比如你创建一个名字叫<code>my_demo</code>的App，那么部署完成后，就会生成<code>my_demo.fly.dev</code>的域名，可以全球访问，不用自己单独买域名了。</p></li><li><p>可以 SSH 连接进入服务器。部署完成后，可以通过<code>flyctl ssh console</code> 命令登录部署的服务器，所以相当于你有了一台免费的VPS，可以做你想做的任何事情。</p></li><li><p>部署简单，采用<code>flyctl</code> 命令集合统一部署;支持各种语言的各种框架来搭建部署环境，能自动识别当前目录下代码所采用的是哪个框架，自动部署。</p></li></ul><p>下面简单记录一下使用的流程和一些教程里面没提及的使用命令。</p><span id="more"></span><h3 id="2-部署一个应用"><a href="#2-部署一个应用" class="headerlink" title="2. 部署一个应用"></a>2. 部署一个应用</h3><p>这里以Python 的 Flask 框架为例，进行部署的步骤总结，其实fly.io支持很多框架，可以在<a href="https://fly.io/docs/speedrun/">这里</a>查看。</p><h4 id="2-1-安装-flyctl"><a href="#2-1-安装-flyctl" class="headerlink" title="2.1 安装 flyctl"></a>2.1 安装 flyctl</h4><p>首先需要安装 flyctl 这个工具：<br>Mac:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install flyctl</span><br></pre></td></tr></table></figure><p>Linux:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://fly.io/install.sh | sh</span><br></pre></td></tr></table></figure><p>Windows:<br>在Powershell中运行下面的命令:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwr https://fly.io/install.ps1 -useb | iex</span><br></pre></td></tr></table></figure><p>如果执行<code>flyctl version</code> 不报错，就说明安装成功了。</p><p><strong>一个小技巧，flyctl还有个alias fly，敲起来更简短些。</strong></p><p>安装这个工具是一次性的，后面不需要再操作</p><h4 id="2-2-创建并登录账号"><a href="#2-2-创建并登录账号" class="headerlink" title="2.2 创建并登录账号"></a>2.2 创建并登录账号</h4><p>创建账号:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly auth signup</span><br></pre></td></tr></table></figure><p>会打开网页，选择自己要创建账号的方式，GitHub账号或者邮箱等。</p><p>创建完成后登录账号:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly auth login</span><br></pre></td></tr></table></figure><h4 id="2-3-先在本地将Flask-demo跑起来"><a href="#2-3-先在本地将Flask-demo跑起来" class="headerlink" title="2.3 先在本地将Flask demo跑起来"></a>2.3 先在本地将Flask demo跑起来</h4><p>这里采用 fly.io 提供的Flask demo 代码，先在本地跑起来:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/fly-apps/python-hellofly-flask</span><br><span class="line"><span class="built_in">cd</span> python-hellofly-flask</span><br><span class="line">python -m venv flask-env</span><br><span class="line"><span class="built_in">source</span> flask-env/bin/activate</span><br><span class="line">python -m pip install -r requirements.txt</span><br><span class="line">FLASK_APP=hellofly flask run</span><br></pre></td></tr></table></figure><p>然后访问<code>http://127.0.0.1:5000</code> 就能看到网站，说明本地搭建成功了。</p><h3 id="2-4-部署到-fly-io"><a href="#2-4-部署到-fly-io" class="headerlink" title="2.4 部署到 fly.io"></a>2.4 部署到 fly.io</h3><p>在当前目录下，执行<code>fly launch</code>，进入交互式界面创建App:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">flyctl launch</span><br><span class="line">Creating app <span class="keyword">in</span> /Users/username/project/demo/flyio_demo/python-hellofly-flask</span><br><span class="line">Scanning <span class="built_in">source</span> code</span><br><span class="line">Detected a Python app</span><br><span class="line">Using the following build configuration:</span><br><span class="line">        Builder: paketobuildpacks/builder:base</span><br><span class="line">? Overwrite <span class="string">&quot;/Users/username/project/demo/flyio_demo/python-hellofly-flask/Procfile&quot;</span>? No</span><br><span class="line">? App Name (leave blank to use an auto-generated name): treehole</span><br><span class="line">Automatically selected personal organization: username</span><br><span class="line">? Select region: hkg (Hong Kong, Hong Kong)</span><br><span class="line">Created app treehole <span class="keyword">in</span> organization personal</span><br><span class="line">Wrote config file fly.toml</span><br><span class="line">? Would you like to <span class="built_in">set</span> up a Postgresql database now? No</span><br><span class="line">We have generated a simple Procfile <span class="keyword">for</span> you. Modify it to fit your needs and run <span class="string">&quot;fly deploy&quot;</span> to deploy your application.</span><br></pre></td></tr></table></figure><p>然后执行<code>flyctl deploy</code> 来将Appb部署到 fly.io 的服务器上:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flyctl deploy</span><br></pre></td></tr></table></figure><p>执行成功后，可以用<code>flyctl open</code>来打开浏览器，访问自己部署的App，网址是<code>appname.fly.dev</code>。</p><p>如果后面有源码或者配置的修改，可以多次执行<code>flyctl deploy</code>，会生成新的版本v0，v1, v2依次往下，往fly.io上部署。</p><p>接下来就是修改你的Flask源代码，完成更复杂有真正意义的功能了。</p><h4 id="2-5-别的有用的flyctl-命令"><a href="#2-5-别的有用的flyctl-命令" class="headerlink" title="2.5 别的有用的flyctl 命令"></a>2.5 别的有用的flyctl 命令</h4><ul><li>查看App状态: <code>flyctl status</code></li><li>查看App信息: <code>flyctl info</code></li><li>查看App列表: <code>flyctl apps list</code></li><li>查看App的IP: <code>flyctl ips list</code></li><li>销毁某个App: <code>flyctl apps destroy &lt;appname&gt;</code></li></ul><h3 id="3-登录部署机器"><a href="#3-登录部署机器" class="headerlink" title="3. 登录部署机器"></a>3. 登录部署机器</h3><p>机器部署完成后，可以通过<code>flyctl ssh console</code>来登录机器，登录后就跟普通Linux机器的使用是一样的了，可以随意探索。</p><h3 id="4-复制部署机器上的文件到本地"><a href="#4-复制部署机器上的文件到本地" class="headerlink" title="4. 复制部署机器上的文件到本地"></a>4. 复制部署机器上的文件到本地</h3><p>在一个终端输入下面的命令来代理端口</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly proxy 10022:22</span><br></pre></td></tr></table></figure><p>然后保持上面的终端打开，在另一个终端输入下面的命令:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P 10022 root@localhost:/path/of/file/on/vm  /path/on/<span class="built_in">local</span></span><br></pre></td></tr></table></figure><p>修改文件的路径就能将文件复制过来</p><h3 id="5-一点感想"><a href="#5-一点感想" class="headerlink" title="5.一点感想"></a>5.一点感想</h3><p>当demo部署服务成功后，却不知道能做什么真正有意义的事情，或许缺少的不是工具，而是真正产生价值的点子。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;最近看技术论坛，发现提到 &lt;a href=&quot;https://fly.io/&quot;&gt;fly.io&lt;/a&gt; 的次数越来越多了。 fly.io 是一个容器化的部署平台，只需要一个&lt;code&gt;Dockerfile&lt;/code&gt;文件就能部署代码到fly.io 的服务器上，同时还自动生成域名。其他的好处多多，我根据自己体验，我总结成了下面的这些条：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;del&gt;有免费使用的额度。不填写信用卡信息可以创建一个App，完全不收费；填写信用卡信息后每月有一定额度的免费流量，超过额度会额外收费。所以想做个小demo完全可以不填信用卡试用。&lt;/del&gt; 目前已经不支持无信用卡使用了，参见&lt;a href=&quot;https://community.fly.io/t/is-it-free-getting-error-we-need-your-payment-information-to-continue/8871&quot;&gt;这里&lt;/a&gt;的讨论&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;自动生成域名。比如你创建一个名字叫&lt;code&gt;my_demo&lt;/code&gt;的App，那么部署完成后，就会生成&lt;code&gt;my_demo.fly.dev&lt;/code&gt;的域名，可以全球访问，不用自己单独买域名了。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;可以 SSH 连接进入服务器。部署完成后，可以通过&lt;code&gt;flyctl ssh console&lt;/code&gt; 命令登录部署的服务器，所以相当于你有了一台免费的VPS，可以做你想做的任何事情。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;部署简单，采用&lt;code&gt;flyctl&lt;/code&gt; 命令集合统一部署;支持各种语言的各种框架来搭建部署环境，能自动识别当前目录下代码所采用的是哪个框架，自动部署。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;下面简单记录一下使用的流程和一些教程里面没提及的使用命令。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
-    <category term="fly.io" scheme="http://vra.github.io/tags/fly-io/"/>
-    
-    <category term="Docker" scheme="http://vra.github.io/tags/Docker/"/>
     
   </entry>
   
