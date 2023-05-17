@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">147</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">160</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">148</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">161</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">147</span>
+        <span class="site-state-item-count">148</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -203,6 +203,108 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/17/rye-intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/17/rye-intro/" class="post-title-link" itemprop="url">Rye:一个实验性质的Python包管理系统</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-17 10:08:32 / 修改时间：10:10:14" itemprop="dateCreated datePublished" datetime="2023-05-17T10:08:32+08:00">2023-05-17</time>
+    </span>
+
+  
+    <span id="/2023/05/17/rye-intro/" class="post-meta-item leancloud_visitors" data-flag-title="Rye:一个实验性质的Python包管理系统" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://mitsuhiko.github.io/rye/">Rye</a> 是<a target="_blank" rel="noopener" href="https://flask.palletsprojects.com/en/2.3.x/">Flask</a>的作者<a target="_blank" rel="noopener" href="https://github.com/mitsuhiko">Armin Ronacher</a>最近推出的一个实验性的Python包管理系统，目的是解决Python包管理目前面临的工具链碎片化的问题。</p>
+<p>大家知道，Python目前的包管理系统很多，包括 poetry, pip, pipenv, pyenv, venv, virtualenv, pdm, hatch 等等，它们都是优秀的工具，提出时都是解决了一定的问题，但没有哪个工具能够做到主流，因此也增加了系统的碎片化程度。</p>
+<p>另一方面，conda等工具能提供不同版本的 Python，管理不同的环境，但每个环境的 Python 不是共享的，环境创建一多，环境目录就变得很大，且内部机制很不透明，有时也会遇到冲突没法解决的问题。</p>
+<p>另一方面，Python 在Linux/macOS上的安装也面临一些问题，例如用包管理器安装的  Python和用户手动安装的 Python 有的时候会混淆，导致一些混乱，例如在 Fedora 上，用<code>pip install</code> 安装包可能会导致系统的包管理命令<code>dnf</code> 出错。<a target="_blank" rel="noopener" href="https://peps.python.org/pep-0668">PEP 668</a>尝试对这些问题给出一个解决方案，但也需要不同的系统来支持，目前看还任重道远。</p>
+<p>由于Armin也是一个Rust 开发者，而Rust基于标准化的<code>rustup</code>和<code>cargo</code>两个工具，配合配置文件来进行包管理，目前做的比较好，没有Python面临的碎片化问题。受Rust的启发，作者提出了Rye，并且期望能够启发Python社区提出类似Rust的标准包管理工具。</p>
+<p>具体来说，Rye 提出了一些解决这些问题的思路：</p>
+<ul>
+<li>提出一个workspace的概念，workspace类似一个项目目录，或者一个git仓库，一个workspace下只有一个Python版本，不同workspace Python版本相互隔离，每个项目采用<code>pyproject.toml</code>来进行配置</li>
+<li>不使用系统自带的Python，相反地，在每个项目目录的中下载一个standalone的python，解决不同版本的冲突问题</li>
+<li>不暴露pip命令，通过<code>rye add</code> + <code>rye sync</code> 来管理包的依赖，避免包A和包B依赖不同版本的包C而导致的不兼容问题</li>
+<li>区分开发环境和正式环境，因为一些包在开发时会用到一些调试工具，但作为第三方库被引入的时候并不需要</li>
+<li>支持import本地workspace作为第三方库包</li>
+</ul>
+<p>但同时也有一个问题：rye会不会是另一个做不到主流的Python包管理系统，从而进一步增加Python包管理的碎片化呢？作者也有这个考虑，因此写了一个讨论帖 <a target="_blank" rel="noopener" href="https://github.com/mitsuhiko/rye/discussions/6">Should Rye Exist?</a>来讨论这个问题，同时关于Rye的设计初衷，可以参考<a target="_blank" rel="noopener" href="https://mitsuhiko.github.io/rye/philosophy/">这里</a>作者的思考。</p>
+<p>个人观点：Rye的出现给Python社区引入了一些新鲜的解决现有问题的思路。使用Rye一段时间后，发现至少使用standalone 的Python版本是一个解决冲突的好的方式。通过几个简单的命令来解决版本管理的问题是比较直观的，提出Rye应该是利大于弊的，也就是有益程度大于碎片化增加的程度。</p>
+<p>总之不管是PEP 668中标记版本管理是系统还是Python，还是<a target="_blank" rel="noopener" href="https://peps.python.org/pep-0711/">PEP 711</a>来单独下发Python解释器二进制文件，还是Rye的出现，都是Python社区意识到Python包管理问题的严重性，进而做出的一些有益尝试。期待在未来，有更标准化的工具，Python的开发也更容易。</p>
+<p>下面将对Rye的安装和使用进行简单介绍。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/17/rye-intro/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1135,96 +1237,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/01/20/python-with-statement/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/20/python-with-statement/" class="post-title-link" itemprop="url">python 多个with 语句一起使用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-01-20 13:37:24 / 修改时间：13:58:36" itemprop="dateCreated datePublished" datetime="2023-01-20T13:37:24+08:00">2023-01-20</time>
-    </span>
-
-  
-    <span id="/2023/01/20/python-with-statement/" class="post-meta-item leancloud_visitors" data-flag-title="python 多个with 语句一起使用" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在读《流畅的Python》时，偶然看到下面的语句：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> urlopen(URL) <span class="keyword">as</span> remote, <span class="built_in">open</span>(JSON, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> local:</span><br><span class="line">    local.write(remote.read())</span><br></pre></td></tr></table></figure>
-<p>突然才发现，原来多个with语句可以写到一起!</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/01/20/python-with-statement/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
