@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 概述对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdown来简便地写出技术文档，并且 通过GitHub Pages等工具快速地进行技术文档的部署。 虽然GItHub Pages默认支持静态文档框架Jekyll，也包含一些简单的主题，但对于文档和教程比较多的项目来说，使用GitHub Pages的默认部署工具还不够用，主要体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Material for MkDocs 来生成专业的技术文档">
+<meta property="og:url" content="http://vra.github.io/2023/05/17/mkdocs-material-tutorial/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 概述对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdown来简便地写出技术文档，并且 通过GitHub Pages等工具快速地进行技术文档的部署。 虽然GItHub Pages默认支持静态文档框架Jekyll，也包含一些简单的主题，但对于文档和教程比较多的项目来说，使用GitHub Pages的默认部署工具还不够用，主要体">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-17T11:31:37.000Z">
+<meta property="article:modified_time" content="2023-05-17T11:32:37.316Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Docs">
+<meta property="article:tag" content="Markdown">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/05/17/mkdocs-material-tutorial/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/05/17/mkdocs-material-tutorial/","path":"2023/05/17/mkdocs-material-tutorial/","title":"用 Material for MkDocs 来生成专业的技术文档"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用 Material for MkDocs 来生成专业的技术文档 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">150</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">162</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">2.1 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">2.2 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%B8%8A%E4%BC%A0%E6%96%87%E6%A1%A3%E5%88%B0-GitHub-Pages"><span class="nav-number">2.2.</span> <span class="nav-text">2.3 上传文档到 GitHub Pages</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">150</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/17/mkdocs-material-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="用 Material for MkDocs 来生成专业的技术文档 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用 Material for MkDocs 来生成专业的技术文档
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-17 19:31:37 / 修改时间：19:32:37" itemprop="dateCreated datePublished" datetime="2023-05-17T19:31:37+08:00">2023-05-17</time>
+    </span>
+
+  
+    <span id="/2023/05/17/mkdocs-material-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="用 Material for MkDocs 来生成专业的技术文档" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdown来简便地写出技术文档，并且 通过GitHub Pages等工具快速地进行技术文档的部署。</p>
+<p>虽然GItHub Pages默认支持静态文档框架<a target="_blank" rel="noopener" href="https://jekyllrb.com/">Jekyll</a>，也包含一些简单的<a target="_blank" rel="noopener" href="https://pages.github.com/themes/">主题</a>，但对于文档和教程比较多的项目来说，使用GitHub Pages的默认部署工具还不够用，主要体现在下面几个方面：</p>
+<ul>
+<li>Markdown本身支持的语法比较简单，一些复杂的像Warning等提示没法直接用Pages的默认主题来实现</li>
+<li>Pages 默认显示的是单页文档，没有侧边栏、导航栏等工具</li>
+<li>Pags默认主题无法搜索文档内容</li>
+<li>…</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> 是 <a target="_blank" rel="noopener" href="https://www.mkdocs.org/">MkDocs</a>的一个主题配置，同时也是一个功能齐全的静态网站生成工具，能够解决上面提到的GitHub Pages的问题。</p>
+<p>Material for MkDocs 使用广泛，下面是一些大公司和知名开源项目的使用例子：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://aws.github.io/copilot-cli/">AWS Copilot CLI </a></li>
+<li><a target="_blank" rel="noopener" href="https://google.github.io/accompanist/">Google Accompanist</a></li>
+<li><a target="_blank" rel="noopener" href="https://microsoft.github.io/code-with-engineering-playbook/">MicroSoft Code With Engineering Playbook</a></li>
+<li><a target="_blank" rel="noopener" href="https://mozillafoundation.github.io/engineering-handbook/">Mozilla Foundation Engineering Handbook</a></li>
+<li><a target="_blank" rel="noopener" href="https://netflix.github.io/titus/">Netflix Titus</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.infra.centos.org/">CentOS Infra docs</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.electron.build/">electron-builder</a></li>
+<li><a target="_blank" rel="noopener" href="https://kops.sigs.k8s.io/">Kubernetes</a></li>
+</ul>
+<p>虽然我还没有比较复杂的开源项目需要用mkdocs-material来管理文档，但看到GitHub Pages的一些限制，最近有空还是学了一下这个工具，以备后续项目中使用。这里做一些简单记录，方便以后查找。</p>
+<p>需要说明的是，Material for MkDocs 是一个比较复杂的工具，很多配置项这里没有提到，根据需要在官方<a target="_blank" rel="noopener" href="https://squidfunk.github.io/mkdocs-material/setup/">Setup</a>文档中查看使用说明。</p>
+<p>另外一种学习配置的方式是直接查看上面提到的开源项目源码根目录下的<code>mkdocs.yml</code>文件，复制这个文件过去，就能得到类似的布局效果。</p>
+<p>这个教程里面的示例页面：<a href="https://vra.github.io/mkdocs-material-example/">https://vra.github.io/mkdocs-material-example/</a><br>示例页面的配置文件：<a target="_blank" rel="noopener" href="https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml">https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml</a></p>
+<h2 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h2><p>可以直接使用 <code>pip</code> 来安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mkdocs-material</span><br></pre></td></tr></table></figure>
+
+<p>使用下面的命令测试是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdocs -h</span><br></pre></td></tr></table></figure>
+
+<p>其他从docker安装、从GitHub安装的方式参考<a target="_blank" rel="noopener" href="https://squidfunk.github.io/mkdocs-material/getting-started/#with-docker">官方文档</a>。</p>
+<h3 id="2-2-使用"><a href="#2-2-使用" class="headerlink" title="2.2 使用"></a>2.2 使用</h3><p>mkdocs-material 的使用命令比较简单，概括来说就是三板斧：</p>
+<ol>
+<li><code>mkdocs new .</code>： 在当前目录生成<code>docs</code>目录和<code>mkdocs.yml</code> 配置文件</li>
+<li><code>mkdocs serve</code>： 在本地运行文档生成服务，可在浏览器中访问<code>localhost:8000</code>查看文档的效果</li>
+<li><code>mkdocs build</code>： 非必需，在<code>sites</code> 目录中生成最终的HTML文件</li>
+</ol>
+<p>由于命令比较简单，没有什么太多东西，因而核心要做的事情其实是：</p>
+<ul>
+<li>写markdown 格式的文档文件</li>
+<li>修改配置文件<code>mkdocs.yml</code></li>
+</ul>
+<p>在<code>mkdocs serve</code> 运行的过程中，更新完 <code>mkdocs.yml</code>配置文件后，文档生成效果实时更新。</p>
+<h3 id="2-3-上传文档到-GitHub-Pages"><a href="#2-3-上传文档到-GitHub-Pages" class="headerlink" title="2.3 上传文档到 GitHub Pages"></a>2.3 上传文档到 GitHub Pages</h3><p>mkdocs-material 一个很棒的特性是可以一键将代码部署到GIthub Pages上，并且通过GitHub Actions配置，Push 代码时自动更新文档。<br>假如你的GitHub 仓库地址是<code>https://github.com/user/repo</code>，那完成配置后你就可以在<code>https://user.github.io/repo</code> 网址查看你的mkdocs-material 文档了。</p>
+<p>具体来说，假设你已经创建了一个Git 仓库，需要做下面的事情：</p>
+<ol>
+<li>将<code>mkdocs.yml</code> 和<code>docs</code> 目录提交到Git仓库</li>
+<li>增加GitHub Action 配置文件<code>.github/workflows/ci.yml</code>，写入下面的内容并提交到GitHub:<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">ci</span> </span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">permissions:</span></span><br><span class="line">  <span class="attr">contents:</span> <span class="string">write</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-python@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">python-version:</span> <span class="number">3.</span><span class="string">x</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;cache_id=$(date --utc &#x27;+%V&#x27;)&quot;</span> <span class="string">&gt;&gt;</span> <span class="string">$GITHUB_ENV</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/cache@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">mkdocs-material-$&#123;&#123;</span> <span class="string">env.cache_id</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">.cache</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            mkdocs-material-</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">pip</span> <span class="string">install</span> <span class="string">mkdocs-material</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">mkdocs</span> <span class="string">gh-deploy</span> <span class="string">--force</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>在GitHub仓库的<code>Settings</code> -&gt; <code>Pages</code> -&gt; <code>Build and deployment</code> 部分，Source 选项选择”Deploy from a branch”, Branch 选择<code>gh-pages</code>, folder选择”/(root)”<br>经过这个配置后，每次向<code>master</code> 或<code>main</code> 分支push代码，会自动更新<code>user.github.io/repo</code>下的文档。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/05/17/mkdocs-material-tutorial/" title="用 Material for MkDocs 来生成专业的技术文档">http://vra.github.io/2023/05/17/mkdocs-material-tutorial/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docs/" rel="tag"># Docs</a>
+              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/17/rye-intro/" rel="prev" title="Rye:一个实验性质的Python包管理系统">
+                  <i class="fa fa-chevron-left"></i> Rye:一个实验性质的Python包管理系统
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
