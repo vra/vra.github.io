@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-05-17T11:35:41.201Z</updated>
+  <updated>2023-05-17T11:37:34.893Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -21,15 +21,36 @@
     <link href="http://vra.github.io/2023/05/17/mkdocs-material-tutorial/"/>
     <id>http://vra.github.io/2023/05/17/mkdocs-material-tutorial/</id>
     <published>2023-05-17T11:31:37.000Z</published>
-    <updated>2023-05-17T11:35:41.201Z</updated>
+    <updated>2023-05-17T11:37:34.893Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdown来简便地写出技术文档，并且 通过GitHub Pages等工具快速地进行技术文档的部署。</p><p>虽然GItHub Pages默认支持静态文档框架<a href="https://jekyllrb.com/">Jekyll</a>，也包含一些简单的<a href="https://pages.github.com/themes/">主题</a>，但对于文档和教程比较多的项目来说，使用GitHub Pages的默认部署工具还不够用，主要体现在下面几个方面：</p><ul><li>Markdown本身支持的语法比较简单，一些复杂的像Warning等提示没法直接用Pages的默认主题来实现</li><li>Pages 默认显示的是单页文档，没有侧边栏、导航栏等工具</li><li>Pages 默认主题无法搜索文档内容</li><li>Pages 不支持选择<code>Linux</code>或<code>Windows</code> 后显示不同执行语句的功能</li><li>…</li></ul><p><a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> 是 <a href="https://www.mkdocs.org/">MkDocs</a>的一个主题配置，同时也是一个功能齐全的静态网站生成工具，能够解决上面提到的GitHub Pages的问题。</p><p>Material for MkDocs 使用广泛，下面是一些大公司和知名开源项目的使用例子：</p><ul><li><a href="https://aws.github.io/copilot-cli/">AWS Copilot CLI </a></li><li><a href="https://google.github.io/accompanist/">Google Accompanist</a></li><li><a href="https://microsoft.github.io/code-with-engineering-playbook/">MicroSoft Code With Engineering Playbook</a></li><li><a href="https://mozillafoundation.github.io/engineering-handbook/">Mozilla Foundation Engineering Handbook</a></li><li><a href="https://netflix.github.io/titus/">Netflix Titus</a></li><li><a href="https://docs.infra.centos.org/">CentOS Infra docs</a></li><li><a href="https://www.electron.build/">electron-builder</a></li><li><a href="https://kops.sigs.k8s.io/">Kubernetes</a></li></ul><p>虽然我还没有比较复杂的开源项目需要用mkdocs-material来管理文档，但看到GitHub Pages的一些限制，最近有空还是学了一下这个工具，以备后续项目中使用。这里做一些简单记录，方便以后查找。</p><p>需要说明的是，Material for MkDocs 是一个比较复杂的工具，很多配置项这里没有提到，根据需要在官方<a href="https://squidfunk.github.io/mkdocs-material/setup/">Setup</a>文档中查看使用说明。</p><p>另外一种学习配置的方式是直接查看上面提到的开源项目源码根目录下的<code>mkdocs.yml</code>文件，复制这个文件过去，就能得到类似的布局效果。</p><p>这个教程里面的示例页面：<a href="https://vra.github.io/mkdocs-material-example/">https://vra.github.io/mkdocs-material-example/</a><br>示例页面的配置文件：<a href="https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml">https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml</a></p><h2 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h2><p>可以直接使用 <code>pip</code> 来安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mkdocs-material</span><br></pre></td></tr></table></figure><p>使用下面的命令测试是否安装成功：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdocs -h</span><br></pre></td></tr></table></figure><p>其他从docker安装、从GitHub安装的方式参考<a href="https://squidfunk.github.io/mkdocs-material/getting-started/#with-docker">官方文档</a>。</p><h3 id="2-2-使用"><a href="#2-2-使用" class="headerlink" title="2.2 使用"></a>2.2 使用</h3><p>mkdocs-material 的使用命令比较简单，概括来说就是三板斧：</p><ol><li><code>mkdocs new .</code>： 在当前目录生成<code>docs</code>目录和<code>mkdocs.yml</code> 配置文件</li><li><code>mkdocs serve</code>： 在本地运行文档生成服务，可在浏览器中访问<code>localhost:8000</code>查看文档的效果</li><li><code>mkdocs build</code>： 非必需，在<code>sites</code> 目录中生成最终的HTML文件</li></ol><p>由于命令比较简单，没有什么太多东西，因而核心要做的事情其实是：</p><ul><li>写markdown 格式的文档文件</li><li>修改配置文件<code>mkdocs.yml</code></li></ul><p>在<code>mkdocs serve</code> 运行的过程中，更新完 <code>mkdocs.yml</code>配置文件后，文档生成效果实时更新。</p><h3 id="2-3-上传文档到-GitHub-Pages"><a href="#2-3-上传文档到-GitHub-Pages" class="headerlink" title="2.3 上传文档到 GitHub Pages"></a>2.3 上传文档到 GitHub Pages</h3><p>mkdocs-material 一个很棒的特性是可以一键将代码部署到GIthub Pages上，并且通过GitHub Actions配置，Push 代码时自动更新文档。<br>假如你的GitHub 仓库地址是<code>https://github.com/user/repo</code>，那完成配置后你就可以在<code>https://user.github.io/repo</code> 网址查看你的mkdocs-material 文档了。</p><p>具体来说，假设你已经创建了一个Git 仓库，需要做下面的事情：</p><ol><li>将<code>mkdocs.yml</code> 和<code>docs</code> 目录提交到Git仓库</li><li>增加GitHub Action 配置文件<code>.github/workflows/ci.yml</code>，写入下面的内容并提交到GitHub:<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">ci</span> </span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">permissions:</span></span><br><span class="line">  <span class="attr">contents:</span> <span class="string">write</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-python@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">python-version:</span> <span class="number">3.</span><span class="string">x</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;cache_id=$(date --utc &#x27;+%V&#x27;)&quot;</span> <span class="string">&gt;&gt;</span> <span class="string">$GITHUB_ENV</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/cache@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">mkdocs-material-$&#123;&#123;</span> <span class="string">env.cache_id</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">.cache</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            mkdocs-material-</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">pip</span> <span class="string">install</span> <span class="string">mkdocs-material</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">mkdocs</span> <span class="string">gh-deploy</span> <span class="string">--force</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li><li>在GitHub仓库的<code>Settings</code> -&gt; <code>Pages</code> -&gt; <code>Build and deployment</code> 部分，Source 选项选择”Deploy from a branch”, Branch 选择<code>gh-pages</code>, folder选择”/(root)”<br>经过这个配置后，每次向<code>master</code> 或<code>main</code> 分支push代码，会自动更新<code>user.github.io/repo</code>下的文档。</li></ol>]]></content>
+    <content type="html"><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdown来简便地写出技术文档，并且 通过GitHub Pages等工具快速地进行技术文档的部署。</p><p>虽然GItHub Pages默认支持静态文档框架<a href="https://jekyllrb.com/">Jekyll</a>，也包含一些简单的<a href="https://pages.github.com/themes/">主题</a>，但对于文档和教程比较多的项目来说，使用GitHub Pages的默认部署工具还不够用，主要体现在下面几个方面：</p><ul><li>Markdown本身支持的语法比较简单，一些复杂的像Warning等提示没法直接用Pages的默认主题来实现</li><li>Pages 默认显示的是单页文档，没有侧边栏、导航栏等工具</li><li>Pages 默认主题无法搜索文档内容</li><li>Pages 不支持选择<code>Linux</code>或<code>Windows</code> 后显示不同执行语句的功能</li><li>…</li></ul><p><a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> 是 <a href="https://www.mkdocs.org/">MkDocs</a>的一个主题配置，同时也是一个功能齐全的静态网站生成工具，能够解决上面提到的GitHub Pages的问题。</p><p>Material for MkDocs 使用广泛，下面是一些大公司和知名开源项目的使用例子：</p><ul><li><a href="https://aws.github.io/copilot-cli/">AWS Copilot CLI </a></li><li><a href="https://google.github.io/accompanist/">Google Accompanist</a></li><li><a href="https://microsoft.github.io/code-with-engineering-playbook/">MicroSoft Code With Engineering Playbook</a></li><li><a href="https://mozillafoundation.github.io/engineering-handbook/">Mozilla Foundation Engineering Handbook</a></li><li><a href="https://netflix.github.io/titus/">Netflix Titus</a></li><li><a href="https://docs.infra.centos.org/">CentOS Infra docs</a></li><li><a href="https://www.electron.build/">electron-builder</a></li><li><a href="https://kops.sigs.k8s.io/">Kubernetes</a></li></ul><p>虽然我还没有比较复杂的开源项目需要用mkdocs-material来管理文档，但看到GitHub Pages的一些限制，最近有空还是学了一下这个工具，以备后续项目中使用。这里做一些简单记录，方便以后查找。</p><p>需要说明的是，Material for MkDocs 是一个比较复杂的工具，很多配置项这里没有提到，根据需要在官方<a href="https://squidfunk.github.io/mkdocs-material/setup/">Setup</a>文档中查看使用说明。</p><p>另外一种学习配置的方式是直接查看上面提到的开源项目源码根目录下的<code>mkdocs.yml</code>文件，复制这个文件过去，就能得到类似的布局效果。</p><p>这个教程里面的示例页面：<a href="https://vra.github.io/mkdocs-material-example/">https://vra.github.io/mkdocs-material-example/</a><br>示例页面的配置文件：<a href="https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml">https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml</a></p><span id="more"></span><h2 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h2><p>可以直接使用 <code>pip</code> 来安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mkdocs-material</span><br></pre></td></tr></table></figure><p>使用下面的命令测试是否安装成功：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdocs -h</span><br></pre></td></tr></table></figure><p>其他从docker安装、从GitHub安装的方式参考<a href="https://squidfunk.github.io/mkdocs-material/getting-started/#with-docker">官方文档</a>。</p><h3 id="2-2-使用"><a href="#2-2-使用" class="headerlink" title="2.2 使用"></a>2.2 使用</h3><p>mkdocs-material 的使用命令比较简单，概括来说就是三板斧：</p><ol><li><code>mkdocs new .</code>： 在当前目录生成<code>docs</code>目录和<code>mkdocs.yml</code> 配置文件</li><li><code>mkdocs serve</code>： 在本地运行文档生成服务，可在浏览器中访问<code>localhost:8000</code>查看文档的效果</li><li><code>mkdocs build</code>： 非必需，在<code>sites</code> 目录中生成最终的HTML文件</li></ol><p>由于命令比较简单，没有什么太多东西，因而核心要做的事情其实是：</p><ul><li>写markdown 格式的文档文件</li><li>修改配置文件<code>mkdocs.yml</code></li></ul><p>在<code>mkdocs serve</code> 运行的过程中，更新完 <code>mkdocs.yml</code>配置文件后，文档生成效果实时更新。</p><h3 id="2-3-上传文档到-GitHub-Pages"><a href="#2-3-上传文档到-GitHub-Pages" class="headerlink" title="2.3 上传文档到 GitHub Pages"></a>2.3 上传文档到 GitHub Pages</h3><p>mkdocs-material 一个很棒的特性是可以一键将代码部署到GIthub Pages上，并且通过GitHub Actions配置，Push 代码时自动更新文档。<br>假如你的GitHub 仓库地址是<code>https://github.com/user/repo</code>，那完成配置后你就可以在<code>https://user.github.io/repo</code> 网址查看你的mkdocs-material 文档了。</p><p>具体来说，假设你已经创建了一个Git 仓库，需要做下面的事情：</p><ol><li>将<code>mkdocs.yml</code> 和<code>docs</code> 目录提交到Git仓库</li><li>增加GitHub Action 配置文件<code>.github/workflows/ci.yml</code>，写入下面的内容并提交到GitHub:<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">ci</span> </span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">permissions:</span></span><br><span class="line">  <span class="attr">contents:</span> <span class="string">write</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-python@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">python-version:</span> <span class="number">3.</span><span class="string">x</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;cache_id=$(date --utc &#x27;+%V&#x27;)&quot;</span> <span class="string">&gt;&gt;</span> <span class="string">$GITHUB_ENV</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/cache@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">mkdocs-material-$&#123;&#123;</span> <span class="string">env.cache_id</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">.cache</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            mkdocs-material-</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">pip</span> <span class="string">install</span> <span class="string">mkdocs-material</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">mkdocs</span> <span class="string">gh-deploy</span> <span class="string">--force</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li><li>在GitHub仓库的<code>Settings</code> -&gt; <code>Pages</code> -&gt; <code>Build and deployment</code> 部分，Source 选项选择”Deploy from a branch”, Branch 选择<code>gh-pages</code>, folder选择<code>/(root)</code><br>经过这个配置后，每次向<code>master</code> 或<code>main</code> 分支push代码，会自动更新<code>user.github.io/repo</code>下的文档。</li></ol>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdo</summary>
-      
+    <summary type="html">&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdown来简便地写出技术文档，并且 通过GitHub Pages等工具快速地进行技术文档的部署。&lt;/p&gt;
+&lt;p&gt;虽然GItHub Pages默认支持静态文档框架&lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;，也包含一些简单的&lt;a href=&quot;https://pages.github.com/themes/&quot;&gt;主题&lt;/a&gt;，但对于文档和教程比较多的项目来说，使用GitHub Pages的默认部署工具还不够用，主要体现在下面几个方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Markdown本身支持的语法比较简单，一些复杂的像Warning等提示没法直接用Pages的默认主题来实现&lt;/li&gt;
+&lt;li&gt;Pages 默认显示的是单页文档，没有侧边栏、导航栏等工具&lt;/li&gt;
+&lt;li&gt;Pages 默认主题无法搜索文档内容&lt;/li&gt;
+&lt;li&gt;Pages 不支持选择&lt;code&gt;Linux&lt;/code&gt;或&lt;code&gt;Windows&lt;/code&gt; 后显示不同执行语句的功能&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://squidfunk.github.io/mkdocs-material/&quot;&gt;Material for MkDocs&lt;/a&gt; 是 &lt;a href=&quot;https://www.mkdocs.org/&quot;&gt;MkDocs&lt;/a&gt;的一个主题配置，同时也是一个功能齐全的静态网站生成工具，能够解决上面提到的GitHub Pages的问题。&lt;/p&gt;
+&lt;p&gt;Material for MkDocs 使用广泛，下面是一些大公司和知名开源项目的使用例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://aws.github.io/copilot-cli/&quot;&gt;AWS Copilot CLI &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://google.github.io/accompanist/&quot;&gt;Google Accompanist&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://microsoft.github.io/code-with-engineering-playbook/&quot;&gt;MicroSoft Code With Engineering Playbook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://mozillafoundation.github.io/engineering-handbook/&quot;&gt;Mozilla Foundation Engineering Handbook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://netflix.github.io/titus/&quot;&gt;Netflix Titus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.infra.centos.org/&quot;&gt;CentOS Infra docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.electron.build/&quot;&gt;electron-builder&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://kops.sigs.k8s.io/&quot;&gt;Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;虽然我还没有比较复杂的开源项目需要用mkdocs-material来管理文档，但看到GitHub Pages的一些限制，最近有空还是学了一下这个工具，以备后续项目中使用。这里做一些简单记录，方便以后查找。&lt;/p&gt;
+&lt;p&gt;需要说明的是，Material for MkDocs 是一个比较复杂的工具，很多配置项这里没有提到，根据需要在官方&lt;a href=&quot;https://squidfunk.github.io/mkdocs-material/setup/&quot;&gt;Setup&lt;/a&gt;文档中查看使用说明。&lt;/p&gt;
+&lt;p&gt;另外一种学习配置的方式是直接查看上面提到的开源项目源码根目录下的&lt;code&gt;mkdocs.yml&lt;/code&gt;文件，复制这个文件过去，就能得到类似的布局效果。&lt;/p&gt;
+&lt;p&gt;这个教程里面的示例页面：&lt;a href=&quot;https://vra.github.io/mkdocs-material-example/&quot;&gt;https://vra.github.io/mkdocs-material-example/&lt;/a&gt;&lt;br&gt;示例页面的配置文件：&lt;a href=&quot;https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml&quot;&gt;https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     
@@ -377,13 +398,13 @@
     
     
     
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
     <category term="Latex" scheme="http://vra.github.io/tags/Latex/"/>
     
     <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
     
     <category term="Web" scheme="http://vra.github.io/tags/Web/"/>
-    
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -407,9 +428,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="find" scheme="http://vra.github.io/tags/find/"/>
     
@@ -432,9 +453,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
@@ -485,9 +506,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -530,9 +551,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -557,9 +578,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
