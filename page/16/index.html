@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">150</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">162</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">156</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">163</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">150</span>
+        <span class="site-state-item-count">156</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -203,6 +203,115 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/01/25/cpp-new-and-delete/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/01/25/cpp-new-and-delete/" class="post-title-link" itemprop="url">C++学习总结3——动态创建对象及其撤销</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-01-25 15:36:25" itemprop="dateCreated datePublished" datetime="2015-01-25T15:36:25+08:00">2015-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2015/01/25/cpp-new-and-delete/" class="post-meta-item leancloud_visitors" data-flag-title="C++学习总结3——动态创建对象及其撤销" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这里的动态创建对象，特指在程序中通过new命令创建对象；而撤销，特指通过delete命令来删除对象并释放其内存空间。</p>
+<h2 id="new和delete的基本用法"><a href="#new和delete的基本用法" class="headerlink" title="new和delete的基本用法"></a>new和delete的基本用法</h2><p><code>new</code>命令会在堆区域分配创建一个对象，而后返回此对象的地址。<br><code>delete</code>命令会释放指针指向的对象所占用的内存空间，而此后指针指向的地址是没有意义的，为了避免错误，一般来说，应该在delete后立即将指针置为NULL。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *pi=<span class="keyword">new</span> <span class="keyword">int</span>;    <span class="comment">//动态创建对象</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> pi;    <span class="comment">//删除动态创建对象</span></span><br><span class="line"></span><br><span class="line">pi=<span class="literal">NULL</span>;    <span class="comment">//将指针置为NULL</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：<code>delete</code>命令只能用来释放由<code>new</code>获得的指针，而且<code>new</code>得到的指针必须通过<code>delete</code>释放掉，否则会有内存泄漏的问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/01/25/cpp-new-and-delete/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1096,104 +1205,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>一直以来我都没有很好的写作习惯，但随着本科学习即将结束，我越来越觉得学习过程中认真总结，整理思路然后清晰的将整个过程写出来是非常有必要的。而且这也不是很容易，因为要将一个东西给别人讲清楚对我来说有一定挑战。不管怎么说还是要开始这个博客的写作了，希望我能坚持写，写到老。</p>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2014/10/19/e7-a7-8b-e5-a4-a9-e7-9a-84-e8-af-97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2014/10/19/e7-a7-8b-e5-a4-a9-e7-9a-84-e8-af-97/" class="post-title-link" itemprop="url">秋天的诗</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2014-10-19 20:07:53" itemprop="dateCreated datePublished" datetime="2014-10-19T20:07:53+08:00">2014-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%9B%9B%E5%AD%A3%E9%A3%8E%E7%89%A9/" itemprop="url" rel="index"><span itemprop="name">四季风物</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2014/10/19/e7-a7-8b-e5-a4-a9-e7-9a-84-e8-af-97/" class="post-meta-item leancloud_visitors" data-flag-title="秋天的诗" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>震落了清晨满披着的露珠，<br>伐木声丁丁地飘出幽谷。<br>放下饱食过稻香的镰刀，<br>用背篓来装竹篱间肥硕的瓜果。<br>秋天栖息在农家里。<br>向江面的冷雾撒下圆圆的网，<br>收起青鳊鱼似的乌桕叶的影子。<br>芦蓬上满载着白霜，<br>轻轻摇着归泊的小桨。<br>秋天游戏在渔船上。<br>草野在蟋蟀声中更寥阔了。<br>溪水因枯涸见石更清洌了。<br>牛背上的笛声何处去了，<br>那满流着夏夜的香与热的笛孔？<br>秋天梦寐在牧羊女的眼里。</p>
-<p>——–秋天，何其芳</p>
-<p>每年到秋天都会想起这首初中学的诗，虽然在城市里、在校园里没有农人家，没有渔船更无牧羊女，只有银杏叶渐渐变黄而摇落，晚樱树的叶子经霜变红变黄而色彩斑斓。</p>
-<p>&nbsp;</p>
-<p><a href="/uploads/2014/10/7427ea21079d13a655072d.jpg"><img data-src="/uploads/2014/10/7427ea21079d13a655072d.jpg" alt="7427ea21079d13a655072d"></a></p>
 
       
     </div>
