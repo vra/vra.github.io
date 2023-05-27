@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-05-26T17:19:20.646Z</updated>
+  <updated>2023-05-27T06:53:19.582Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,51 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>talkgpt4all-2.0</title>
+    <link href="http://vra.github.io/2023/05/27/talkgpt4all-2-0/"/>
+    <id>http://vra.github.io/2023/05/27/talkgpt4all-2-0/</id>
+    <published>2023-05-27T06:49:45.000Z</published>
+    <updated>2023-05-27T06:53:19.582Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a href="https://github.com/vra/talkGPT4All">talkGPT4All</a>是基于<a href="https://gpt4all.io/index.html">GPT4All</a>的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。</p><p>关于 talkGPT4All 1.0的介绍在<a href="https://juejin.cn/post/7217112585802498107">这篇文章</a>。</p><p>talkGPT4All 1.0的<a href="https://www.zhihu.com/zvideo/1625779747656515584">视频效果</a>。</p><p>由于GPT4All一直在迭代，相比上一篇文章发布时(2023-04-10)已经有较大的更新，今天将GPT4All的一些更新同步到talkGPT4All，由于支持的模型和运行模式都有较大的变化，因此发布 talkGPT4All 2.0。</p><p>具体来说，2.0版本相比1.0有下面的更新。</p><p>首先是GPT4All框架支持的语言模型从1个增加到8个，并且可以一键切换模型。具体的模型是</p><ul><li>  Vicuna-7B-1.1-q4_2</li><li>  Vicuna-7B-1.2-q4_2</li><li>  wizardLM-7B.q4_2</li><li>  GPT4All</li><li>  GPT4All-J</li><li>  GPT4All-J-v1.1</li><li>  GPT4All-J-v1.2</li><li>  GPT4All-J-v1.3</li></ul><p>可以看到除了GPT4All系列的模型，这个框架也支持Vicuna和Wizard的模型了。更多模型因为证书和格式的问题，还在集成中。</p><p>根据GPT4All的<a href="https://gpt4all.io/index.html">文档</a>，不同模型在benchmark上的结果：</p><p><img data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/988ae9ef513049d68d790e742f9e2139~tplv-k3u1fbpfcp-zoom-1.image"></p><p>可以看到GPT4All系列的模型的指标还是比较高的。</p><p>另一个重要更新是GPT4All发布了更成熟的Python包，可以直接通过pip 来安装，因此1.0中集成的不同平台不同的GPT4All二进制包也不需要了。集成PyPI包的好处多多，既可以查看源码学习内部的实现，又更方便定位问题（之前的二进制包没法调试内部代码），且保证了不同平台安装命令一致（之前不同平台二进制包不同）。</p><p>还有一个变化是GPT4All会自动按需下载模型，因此用户不需要手动下载和维护模型路径。同时将模型统一放置到<a href="https://gpt4all.io/models/">https://gpt4all.io/models/</a> 目录下，测试国内模型下载速度也很快，大家玩起来也会更舒服。</p><p>核心的更新内容就这些，下面对talkGPT4All的安装和使用进行说明，后面有空会添加一些多个语言模型效果的对比视频。</p><span id="more"></span><h3 id="2-安装与使用"><a href="#2-安装与使用" class="headerlink" title="2. 安装与使用"></a>2. 安装与使用</h3><h3 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h3><p>由于GPT4All, OpenAI Whisper 和TTS工具都是PyPI的包，因此所有的依赖都可以用pip 命令来安装。</p><p>流程大致上就是clone代码，创建Python虚拟环境，安装依赖，开始聊天：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/vra/talkGPT4All.git</span><br><span class="line"><span class="built_in">cd</span> talkGPT4All</span><br><span class="line">python -m venv talkgpt4all-env</span><br><span class="line"><span class="built_in">source</span> talkgpt4all-env/bin/activate</span><br><span class="line">pip install -U pip</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><p>如果在Linux环境下使用，还需要安装 TTS 工具 pyttsx3 的一些前置依赖，例如在Ubuntu下，可以这么安装（别的发行版切换apt 为对应的包管理命令应该就可以）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt install -y espeak ffmpeg libespeak1</span><br></pre></td></tr></table></figure><p>依赖安装完后即刻开始聊天：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py</span><br></pre></td></tr></table></figure><p>语音输入问题，Whisper会识别语音到文字，第一次需要下载模型Whisper的模型，可能耗时会比较久。Whisper 模型默认存储地址是<code>~/.cache/whisper/</code>。</p><p>文字识别后，输入到语言模型部分后会下载语言模型文件，文件默认存储到<code>~/.cache/gpt4all</code> 目录。</p><h3 id="2-2-切换不同的LLM"><a href="#2-2-切换不同的LLM" class="headerlink" title="2.2 切换不同的LLM"></a>2.2 切换不同的LLM</h3><p>默认的语言模型是GPT4All-J-v1.3,，可以通过命令行选项–gpt-model-name来切换模型，所有的选项是：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;ggml-gpt4all-j-v1.3-groovy&quot;</span></span><br><span class="line"><span class="string">&quot;ggml-gpt4all-j-v1.2-jazzy&quot;</span></span><br><span class="line"><span class="string">&quot;ggml-gpt4all-j-v1.1-breezy&quot;</span></span><br><span class="line"><span class="string">&quot;ggml-gpt4all-j&quot;</span></span><br><span class="line"><span class="string">&quot;ggml-gpt4all-l13b-snoozy&quot;</span></span><br><span class="line"><span class="string">&quot;ggml-vicuna-7b-1.1-q4_2&quot;</span></span><br><span class="line"><span class="string">&quot;ggml-vicuna-13b-1.1-q4_2&quot;</span></span><br><span class="line"><span class="string">&quot;ggml-wizardLM-7B.q4_2&quot;</span></span><br></pre></td></tr></table></figure><p>例如可以这样使用：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --gpt-model-name ggml-wizardLM-7B.q4_2</span><br></pre></td></tr></table></figure><p>如果模型未下载过，会进行下载。</p><p>这里有个小问题，GPT4All工具貌似没有对模型的完整性进行校验，所以如果之前模型下载没完成就退出，再次进入后会加载不完整的文件，造成报错。所以需要手动删除不完整的文件再次完整下载后使用。</p><h3 id="2-3-切换不同大小的Whisper模型"><a href="#2-3-切换不同大小的Whisper模型" class="headerlink" title="2.3 切换不同大小的Whisper模型"></a>2.3 切换不同大小的Whisper模型</h3><p>OpenAI Whisper 也有一系列的模型，模型越大识别结果应该是越准。talkGPT4All默认使用的是base模型，也提供了命令行参数–whisper-model-type 来修改，所有的可选项是:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;tiny.en&quot;</span></span><br><span class="line"><span class="string">&quot;tiny&quot;</span></span><br><span class="line"><span class="string">&quot;base.en&quot;</span></span><br><span class="line"><span class="string">&quot;base&quot;</span></span><br><span class="line"><span class="string">&quot;small.en&quot;</span></span><br><span class="line"><span class="string">&quot;small&quot;</span></span><br><span class="line"><span class="string">&quot;medium.en&quot;</span></span><br><span class="line"><span class="string">&quot;medium&quot;</span></span><br><span class="line"><span class="string">&quot;large-v1&quot;</span></span><br><span class="line"><span class="string">&quot;large-v2&quot;</span></span><br><span class="line"><span class="string">&quot;large&quot;</span></span><br></pre></td></tr></table></figure><p>例如可以这样使用：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --whisper-model-type large</span><br></pre></td></tr></table></figure><h3 id="2-4-调整声音语速"><a href="#2-4-调整声音语速" class="headerlink" title="2.4 调整声音语速"></a>2.4 调整声音语速</h3><p>talkGPT4All也提供了一个参数–voice rate 来调整 TTS发音的速度，默认是165，设置越大速度越快:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chat.py --voice-rate 200</span><br></pre></td></tr></table></figure><h3 id="3-缺陷和改进思考"><a href="#3-缺陷和改进思考" class="headerlink" title="3. 缺陷和改进思考"></a>3. 缺陷和改进思考</h3><p>其实talkGPT4All一直以来的缺陷是比较明显的：</p><ol><li> 大模型在CPU上出词太慢</li><li> 离线的文本转语音的程序太生硬</li></ol><p>针对第一个问题，我的思考是这样，要在非Nvidia GPU设备上流畅运行基于Transformer结构的大语言模型，除了4比特量化、fp16这种 low-hang fruit外，必须要做很多底层的AI工程的优化，这个我觉得我自己是没有能力来完成的，甚至我猜测，可能GPT4All背后的Nomic AI团队也没有这方面的积累来解决这个问题。</p><p>可喜的是最近看到了<a href="https://github.com/mlc-ai/mlc-llm">MLC LLM</a>这个工作，是TVM 团队利用TVM Unity来优化语言模型，成功地将Vicuna-7B运行到了<a href="https://github.com/mlc-ai/mlc-llm/blob/main/android/README.md">Android</a>和<a href="https://github.com/mlc-ai/mlc-llm/blob/main/ios/README.md">iOS</a>手机上，我自己用小米12 Pro测试每秒能输出3～4个token，体验算是比较好的。这也是我第一次在自己手机上运行大语言模型，也意识到真正要提高大语言模型的覆盖设备，一个极致优化的底层AI工具是必不可少的。</p><p>所以对talkGPT4All这个项目感兴趣的朋友也可以了解一下MLC LLM这个工作，我认为在未来这个项目会促进LLM的真正落地。</p><p>针对第二个问题，说实话还没有找到比较自然的离线 TTS Python工具，如果看到这篇文章的你有这方面的经验，欢迎评论交流～</p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/vra/talkGPT4All&quot;&gt;talkGPT4All&lt;/a&gt;是基于&lt;a href=&quot;https://gpt4all.io/index.html&quot;&gt;GPT4All&lt;/a&gt;的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。&lt;/p&gt;
+&lt;p&gt;关于 talkGPT4All 1.0的介绍在&lt;a href=&quot;https://juejin.cn/post/7217112585802498107&quot;&gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;talkGPT4All 1.0的&lt;a href=&quot;https://www.zhihu.com/zvideo/1625779747656515584&quot;&gt;视频效果&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;由于GPT4All一直在迭代，相比上一篇文章发布时(2023-04-10)已经有较大的更新，今天将GPT4All的一些更新同步到talkGPT4All，由于支持的模型和运行模式都有较大的变化，因此发布 talkGPT4All 2.0。&lt;/p&gt;
+&lt;p&gt;具体来说，2.0版本相比1.0有下面的更新。&lt;/p&gt;
+&lt;p&gt;首先是GPT4All框架支持的语言模型从1个增加到8个，并且可以一键切换模型。具体的模型是&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;  Vicuna-7B-1.1-q4_2&lt;/li&gt;
+&lt;li&gt;  Vicuna-7B-1.2-q4_2&lt;/li&gt;
+&lt;li&gt;  wizardLM-7B.q4_2&lt;/li&gt;
+&lt;li&gt;  GPT4All&lt;/li&gt;
+&lt;li&gt;  GPT4All-J&lt;/li&gt;
+&lt;li&gt;  GPT4All-J-v1.1&lt;/li&gt;
+&lt;li&gt;  GPT4All-J-v1.2&lt;/li&gt;
+&lt;li&gt;  GPT4All-J-v1.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以看到除了GPT4All系列的模型，这个框架也支持Vicuna和Wizard的模型了。更多模型因为证书和格式的问题，还在集成中。&lt;/p&gt;
+&lt;p&gt;根据GPT4All的&lt;a href=&quot;https://gpt4all.io/index.html&quot;&gt;文档&lt;/a&gt;，不同模型在benchmark上的结果：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/988ae9ef513049d68d790e742f9e2139~tplv-k3u1fbpfcp-zoom-1.image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到GPT4All系列的模型的指标还是比较高的。&lt;/p&gt;
+&lt;p&gt;另一个重要更新是GPT4All发布了更成熟的Python包，可以直接通过pip 来安装，因此1.0中集成的不同平台不同的GPT4All二进制包也不需要了。集成PyPI包的好处多多，既可以查看源码学习内部的实现，又更方便定位问题（之前的二进制包没法调试内部代码），且保证了不同平台安装命令一致（之前不同平台二进制包不同）。&lt;/p&gt;
+&lt;p&gt;还有一个变化是GPT4All会自动按需下载模型，因此用户不需要手动下载和维护模型路径。同时将模型统一放置到&lt;a href=&quot;https://gpt4all.io/models/&quot;&gt;https://gpt4all.io/models/&lt;/a&gt; 目录下，测试国内模型下载速度也很快，大家玩起来也会更舒服。&lt;/p&gt;
+&lt;p&gt;核心的更新内容就这些，下面对talkGPT4All的安装和使用进行说明，后面有空会添加一些多个语言模型效果的对比视频。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
+    
+    <category term="GPT4All" scheme="http://vra.github.io/tags/GPT4All/"/>
+    
+    <category term="LLM" scheme="http://vra.github.io/tags/LLM/"/>
+    
+  </entry>
   
   <entry>
     <title>mac 编译问题解决——building for macOS-x86_64 but attempting to link with file built for xxx</title>
@@ -465,9 +510,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="find" scheme="http://vra.github.io/tags/find/"/>
     
@@ -490,9 +535,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
@@ -543,9 +588,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -588,9 +633,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -615,9 +660,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   
@@ -640,30 +685,6 @@
     
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
-    
-    <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>执行du命令时统计隐藏文件和目录</title>
-    <link href="http://vra.github.io/2022/11/07/du-show-hidden-folders/"/>
-    <id>http://vra.github.io/2022/11/07/du-show-hidden-folders/</id>
-    <published>2022-11-07T15:32:23.000Z</published>
-    <updated>2022-11-07T15:38:24.784Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Linux和Mac下，执行<code>du -sh</code> 来统计目录大小时，默认不统计以点开头的文件或者目录，比如<code>.local</code>，因此得到不准确的统计结果。从<a href="https://superuser.com/a/633808">这里</a>知道，要统计隐藏文件和目录，可以这么用:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只统计隐藏文件或者目录</span></span><br><span class="line">du -sh .[^.]*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计隐藏文件或者目录和常规文件</span></span><br><span class="line">du -sh .[^.]* *</span><br></pre></td></tr></table></figure><p>结合 <code>sort -h</code>，可以快速得到比较大的目录：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh .[^.]* * |sort -h</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在Linux和Mac下，执行&lt;code&gt;du -sh&lt;/code&gt; 来统计目录大小时，默认不统计以点开头的文件或者目录，比如&lt;code&gt;.local&lt;/code&gt;，因此得到不准确的统计结果。从&lt;a href=&quot;https://superuser.com/a/633808&quot;&gt;</summary>
-      
-    
-    
-    
-    
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     

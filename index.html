@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">156</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">163</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">158</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">164</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">158</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -203,6 +203,114 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/27/talkgpt4all-2-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/27/talkgpt4all-2-0/" class="post-title-link" itemprop="url">talkgpt4all-2.0</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-27 14:49:45 / 修改时间：14:53:19" itemprop="dateCreated datePublished" datetime="2023-05-27T14:49:45+08:00">2023-05-27</time>
+    </span>
+
+  
+    <span id="/2023/05/27/talkgpt4all-2-0/" class="post-meta-item leancloud_visitors" data-flag-title="talkgpt4all-2.0" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a target="_blank" rel="noopener" href="https://github.com/vra/talkGPT4All">talkGPT4All</a>是基于<a target="_blank" rel="noopener" href="https://gpt4all.io/index.html">GPT4All</a>的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。</p>
+<p>关于 talkGPT4All 1.0的介绍在<a target="_blank" rel="noopener" href="https://juejin.cn/post/7217112585802498107">这篇文章</a>。</p>
+<p>talkGPT4All 1.0的<a target="_blank" rel="noopener" href="https://www.zhihu.com/zvideo/1625779747656515584">视频效果</a>。</p>
+<p>由于GPT4All一直在迭代，相比上一篇文章发布时(2023-04-10)已经有较大的更新，今天将GPT4All的一些更新同步到talkGPT4All，由于支持的模型和运行模式都有较大的变化，因此发布 talkGPT4All 2.0。</p>
+<p>具体来说，2.0版本相比1.0有下面的更新。</p>
+<p>首先是GPT4All框架支持的语言模型从1个增加到8个，并且可以一键切换模型。具体的模型是</p>
+<ul>
+<li>  Vicuna-7B-1.1-q4_2</li>
+<li>  Vicuna-7B-1.2-q4_2</li>
+<li>  wizardLM-7B.q4_2</li>
+<li>  GPT4All</li>
+<li>  GPT4All-J</li>
+<li>  GPT4All-J-v1.1</li>
+<li>  GPT4All-J-v1.2</li>
+<li>  GPT4All-J-v1.3</li>
+</ul>
+<p>可以看到除了GPT4All系列的模型，这个框架也支持Vicuna和Wizard的模型了。更多模型因为证书和格式的问题，还在集成中。</p>
+<p>根据GPT4All的<a target="_blank" rel="noopener" href="https://gpt4all.io/index.html">文档</a>，不同模型在benchmark上的结果：</p>
+<p><img data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/988ae9ef513049d68d790e742f9e2139~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>可以看到GPT4All系列的模型的指标还是比较高的。</p>
+<p>另一个重要更新是GPT4All发布了更成熟的Python包，可以直接通过pip 来安装，因此1.0中集成的不同平台不同的GPT4All二进制包也不需要了。集成PyPI包的好处多多，既可以查看源码学习内部的实现，又更方便定位问题（之前的二进制包没法调试内部代码），且保证了不同平台安装命令一致（之前不同平台二进制包不同）。</p>
+<p>还有一个变化是GPT4All会自动按需下载模型，因此用户不需要手动下载和维护模型路径。同时将模型统一放置到<a target="_blank" rel="noopener" href="https://gpt4all.io/models/">https://gpt4all.io/models/</a> 目录下，测试国内模型下载速度也很快，大家玩起来也会更舒服。</p>
+<p>核心的更新内容就这些，下面对talkGPT4All的安装和使用进行说明，后面有空会添加一些多个语言模型效果的对比视频。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/27/talkgpt4all-2-0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1076,166 +1184,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/02/12/nanogpt-and-luxun/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/05/numpy-remove-np-float/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/05/numpy-remove-np-float/" class="post-title-link" itemprop="url">关于 np.float 被删除的问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-02-05 11:34:04" itemprop="dateCreated datePublished" datetime="2023-02-05T11:34:04+08:00">2023-02-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-13 16:37:25" itemprop="dateModified" datetime="2023-02-13T16:37:25+08:00">2023-02-13</time>
-    </span>
-
-  
-    <span id="/2023/02/05/numpy-remove-np-float/" class="post-meta-item leancloud_visitors" data-flag-title="关于 np.float 被删除的问题" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>在Numpy 1.24版本中，<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations">删除</a>了像<code>np.float</code>、<code>np.int</code> 这样的 Python 内置类型的 alias，因此以后在代码中使用这些类型会报错<code>AttributeError: module &#39;numpy&#39; has no attribute &#39;float&#39;</code>, 涉及的类型包括：</p>
-<ul>
-<li><code>numpy.bool</code></li>
-<li><code>numpy.int</code></li>
-<li><code>numpy.float</code></li>
-<li><code>numpy.complex</code></li>
-<li><code>numpy.object</code></li>
-<li><code>numpy.str</code></li>
-<li><code>numpy.long</code></li>
-<li><code>numpy.unicode</code></li>
-</ul>
-<p>那该怎么解决这个错误呢？</p>
-<p>TL;DR</p>
-<ul>
-<li>对于在标量上的操作，直接使用Python内置类型替换<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo = np.random.rand(<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 原先用法，注意foo[0]是一个标量</span></span><br><span class="line">bar = np.<span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">bar = <span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></li>
-<li>对于在<code>np.ndarray</code> 上的操作，使用<code>np.float64</code> 或<code>np.float32</code> 来替代，具体选择哪个需要自己根据情况来确定，不同类型精度会有不同，下面举两个例子:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.float32)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>这里列出来了删除类型在标量和<code>np.ndarray</code> 上的替代，方便查找</p>
-<table>
-<thead>
-<tr>
-<th>原先类型</th>
-<th>标量替换类型</th>
-<th><code>np.ndarray</code>替换类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>np.int</td>
-<td>int</td>
-<td>np.int32/np.int64</td>
-</tr>
-<tr>
-<td>np.float</td>
-<td>float</td>
-<td>np.float32/np.float64</td>
-</tr>
-<tr>
-<td>np.bool</td>
-<td>bool</td>
-<td>np.bool_</td>
-</tr>
-<tr>
-<td>np.complex</td>
-<td>complex</td>
-<td>np.complex128</td>
-</tr>
-<tr>
-<td>np.object</td>
-<td>object</td>
-<td>-</td>
-</tr>
-<tr>
-<td>np.str</td>
-<td>str</td>
-<td>np.str_</td>
-</tr>
-<tr>
-<td>np.long</td>
-<td>int</td>
-<td>np.int32/np.int64</td>
-</tr>
-<tr>
-<td>np.unicode</td>
-<td>str</td>
-<td>np.str_</td>
-</tr>
-</tbody></table>
-<p>详细说明参考<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/release/1.20.0-notes.html#deprecations">NumPy 1.20.0 Release Notes</a>。</p>
-<p>下面详细说说事情的来龙去脉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/02/05/numpy-remove-np-float/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
