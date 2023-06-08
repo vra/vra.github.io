@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-05-27T06:58:57.916Z</updated>
+  <updated>2023-06-08T14:13:49.420Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>homebrew禁止执行install命令时自动更新</title>
+    <link href="http://vra.github.io/2023/06/08/homebrew-disable-auto-update/"/>
+    <id>http://vra.github.io/2023/06/08/homebrew-disable-auto-update/</id>
+    <published>2023-06-08T14:02:49.000Z</published>
+    <updated>2023-06-08T14:13:49.420Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://brew.sh/">Homebrew</a> 是 macOS 下的默认的包管理器，不需要sudo权限就可以安装包，比较好用。</p><p>不过用<code>brew install</code>安装包时有个问题，它默认会先执行<code>brew update</code>来更新brew的版本。但由于brew 的源国内访问比较慢，常常<code>brew update</code>执行耗时比较久，影响每次安装包的体验。</p><p>解决办法是设置<code>HOMEBREW_NO_AUTO_UPDATE</code>环境变量为1，这样每次<code>brew install</code>时跳过更新brew的步骤，实际体验安装包速度提升明显。</p><p>可以添加下面的语句到你的.bashrc或.zshrc中，重启shell即生效:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HOMEBREW_NO_AUTO_UPDATE=1</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://brew.sh/&quot;&gt;Homebrew&lt;/a&gt; 是 macOS 下的默认的包管理器，不需要sudo权限就可以安装包，比较好用。&lt;/p&gt;
+&lt;p&gt;不过用&lt;code&gt;brew install&lt;/code&gt;安装包时有个问题，它默认会先执行&lt;code&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="Homebrew" scheme="http://vra.github.io/tags/Homebrew/"/>
+    
+    <category term="macOS" scheme="http://vra.github.io/tags/macOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python-autocomplete-with-argcomplete</title>
+    <link href="http://vra.github.io/2023/05/28/python-autocomplete-with-argcomplete/"/>
+    <id>http://vra.github.io/2023/05/28/python-autocomplete-with-argcomplete/</id>
+    <published>2023-05-28T02:33:12.000Z</published>
+    <updated>2023-05-28T08:02:55.488Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>talkGPT4All 2.0</title>
@@ -480,13 +518,13 @@
     
     
     
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
     <category term="Latex" scheme="http://vra.github.io/tags/Latex/"/>
     
     <category term="HTML" scheme="http://vra.github.io/tags/HTML/"/>
     
     <category term="Web" scheme="http://vra.github.io/tags/Web/"/>
-    
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -510,9 +548,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="find" scheme="http://vra.github.io/tags/find/"/>
     
@@ -535,9 +573,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
@@ -588,9 +626,9 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
+    
+    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
@@ -633,60 +671,11 @@
     
     
     
-    <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
-    <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用 defaultdict 来简化 dict 的初始化</title>
-    <link href="http://vra.github.io/2022/12/10/python-defaultdict-usage/"/>
-    <id>http://vra.github.io/2022/12/10/python-defaultdict-usage/</id>
-    <published>2022-12-10T07:17:17.000Z</published>
-    <updated>2022-12-10T07:57:10.581Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在我们使用Python中的dict时，常常需要判断某个关键字是否已经在dict中，如果不存在则创建，非空则进行另外的操作。例如统计一篇文章中所有单词出现次数的代码，大致写法如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">words_num = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">    <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> words_num.keys():</span><br><span class="line">        words_num[word] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        words_num[word] += <span class="number">1</span></span><br></pre></td></tr></table></figure><p>这样写总是需要判断key是否在dict中，不是很优雅。</p><p>Python标准库collections中<a href="https://docs.python.org/3/library/collections.html#defaultdict-objects">defaultdict</a>类可以很好的解决这个问题。这个类使用与dict几乎一样，除了可以在初始化时设置key的默认类型和数值。类的声明格式为<code>defaultdict(default_factory=None, /[, ...])</code>，<code>default_factory</code>是一个<code>callable</code>的变量。</p><p>别的使用与dict无异，正常使用即可。</p><span id="more"></span><p>例如，<code>foo = defaultdict(int)</code>表示foo中的key的默认类型是int，且默认值为int的默认值0，我们可以获取<strong>任意</strong>的key，不需要手动初始化key:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo = defaultdict(<span class="built_in">int</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo[<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo[<span class="string">&#x27;b&#x27;</span>]</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo[<span class="string">&#x27;whatever&#x27;</span>]</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo[<span class="string">&#x27;a&#x27;</span>] += <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo[<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure><p>所以最开始的例子可以简化为如下:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">words_num = defaultdict(<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">    words_num[word] += <span class="number">1</span></span><br></pre></td></tr></table></figure><p>可以看到使用defaultdict后，代码中只需要关注上层逻辑（统计单词的出现次数），而不需要关注具体的语法的代码实现（dict是否存在某个key，没有的话xxx，有的话xxx），因此世界变得更美好了一些。</p><p>除了int外，用list，tuple，dict，set等作为变量也比较常见。除了内置类型外，还可以自定义函数，比如设置key的默认值为<code>&#39;China&#39;</code>:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">set_default_contry</span>():</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> <span class="string">&quot;China&quot;</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>person_from = defaultdict(set_default_contry)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>person_from[<span class="string">&#x27;张三&#x27;</span>]</span><br><span class="line"><span class="string">&#x27;China&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>person_from[<span class="string">&#x27;李四&#x27;</span>]</span><br><span class="line"><span class="string">&#x27;China&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>person_from[<span class="string">&#x27;Tim&#x27;</span>] = <span class="string">&#x27;USA&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>person_from</span><br><span class="line">defaultdict(&lt;function set_default_contry at <span class="number">0x10896eca0</span>&gt;, &#123;<span class="string">&#x27;a&#x27;</span>: <span class="string">&#x27;China&#x27;</span>, <span class="string">&#x27;张三&#x27;</span>: <span class="string">&#x27;China&#x27;</span>, <span class="string">&#x27;李四&#x27;</span>: <span class="string">&#x27;China&#x27;</span>, <span class="string">&#x27;Tim&#x27;</span>: <span class="string">&#x27;USA&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure><p><code>defauldict</code>是一个简单但很好用的功能，在日常的使用中还是能减少一些代码复杂度的。希望这篇小文能给让你写代码更容易，更开心。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;在我们使用Python中的dict时，常常需要判断某个关键字是否已经在dict中，如果不存在则创建，非空则进行另外的操作。例如统计一篇文章中所有单词出现次数的代码，大致写法如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;words_num = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; word &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; words:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; word &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; words_num.keys():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        words_num[word] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        words_num[word] += &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;这样写总是需要判断key是否在dict中，不是很优雅。&lt;/p&gt;
-&lt;p&gt;Python标准库collections中&lt;a href=&quot;https://docs.python.org/3/library/collections.html#defaultdict-objects&quot;&gt;defaultdict&lt;/a&gt;类可以很好的解决这个问题。这个类使用与dict几乎一样，除了可以在初始化时设置key的默认类型和数值。类的声明格式为&lt;code&gt;defaultdict(default_factory=None, /[, ...])&lt;/code&gt;，&lt;code&gt;default_factory&lt;/code&gt;是一个&lt;code&gt;callable&lt;/code&gt;的变量。&lt;/p&gt;
-&lt;p&gt;别的使用与dict无异，正常使用即可。&lt;/p&gt;</summary>
-    
-    
-    
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git如何添加文件到最新的提交</title>
-    <link href="http://vra.github.io/2022/11/12/git-add-file-to-last-commit/"/>
-    <id>http://vra.github.io/2022/11/12/git-add-file-to-last-commit/</id>
-    <published>2022-11-12T09:54:22.000Z</published>
-    <updated>2022-12-16T00:54:01.016Z</updated>
-    
-    <content type="html"><![CDATA[<p>有时候，在git commit后，我们会发现一些文件忘了提交了，或者需要修改，而且这些提交和修改是与上一次commit的主题一致的，这时候再执行一遍相同的git commit就会让提交记录显得比较冗余，有没有办法将修改后的文件加到最后一次的提交记录里面呢？搜索后发现<a href="https://stackoverflow.com/a/40503483">这里</a>给了一个解决办法，git add文件后调用<code>git commit --amend -no-edit</code>即可：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file_path&gt;</span><br><span class="line">git commit --amend --no-edit</span><br></pre></td></tr></table></figure><p><strong>注意：如果之前的代码已经提交的话，需要执行<code>git push --force</code>来推送代码以替代之前的提交记录。</strong></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;有时候，在git commit后，我们会发现一些文件忘了提交了，或者需要修改，而且这些提交和修改是与上一次commit的主题一致的，这时候再执行一遍相同的git commit就会让提交记录显得比较冗余，有没有办法将修改后的文件加到最后一次的提交记录里面呢？搜索后发现&lt;a h</summary>
-      
-    
-    
-    
-    
     <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
-    
-    <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
   </entry>
   
