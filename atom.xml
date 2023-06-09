@@ -42,15 +42,29 @@
   </entry>
   
   <entry>
-    <title>python-autocomplete-with-argcomplete</title>
+    <title>Python 命令补全神器 argcomplete</title>
     <link href="http://vra.github.io/2023/05/28/python-autocomplete-with-argcomplete/"/>
     <id>http://vra.github.io/2023/05/28/python-autocomplete-with-argcomplete/</id>
     <published>2023-05-28T02:33:12.000Z</published>
-    <updated>2023-05-28T08:02:55.488Z</updated>
+    <updated>2023-06-09T14:59:03.363Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在使用Python 命令或者 Python的命令行工具的时候，一个痛点是没有补全。比如<code>python -m</code>后面输入包名字，就没有提示，每次想运行一个http server的时候，都需要搜索一下http服务的包名。另外，像pip，pipx等命令也没有提示，使用不太方便。</p><p>偶然看到<a href="https://github.com/kislyuk/argcomplete">argcomplete</a>这个库，按tab键就可以给Python的命令行添加自动补全，简直是使用Python的一个神器。</p><p>具体来说，argcomplete有下面的特点</p><ul><li>官方支持支持bash和zsh两种shell，对tcsh和fish有第三方贡献者提供的支持（不好意思Windows用户这里又被当做二等公民了😂）</li><li>可以对python命令和pip命令进行补全</li><li>其他任何以argparse解析的第三方包的命令都可以用自动补全，添加argcomplete的几行代码就行</li></ul><p>下面具体展开怎么对已有的工具启用自动补全，以及如何让自己的Python包支持argcomplete。</p><span id="more"></span><h2 id="2-对Python和pip启用自动补全"><a href="#2-对Python和pip启用自动补全" class="headerlink" title="2. 对Python和pip启用自动补全"></a>2. 对Python和pip启用自动补全</h2><p>首先通过<code>pip</code>命令来安装argcomplete:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install argcomplete</span><br></pre></td></tr></table></figure><p>然后执行下面的语句来启用对Python和pip的自动补全:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activate-global-python-argcomplete</span><br></pre></td></tr></table></figure><p>重启Shell，试试输入<code>pip</code>然后按tab，发现就会列出所有的命令选项。</p><h2 id="3-如何对别的第三方库启用自动补全"><a href="#3-如何对别的第三方库启用自动补全" class="headerlink" title="3. 如何对别的第三方库启用自动补全"></a>3. 如何对别的第三方库启用自动补全</h2><p>有些库的命令行程序是已经支持argcomplete补全，只需要用下面的命令来激活：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(register-python-argcomplete &lt;python-app-name&gt;)</span>&quot;</span></span><br></pre></td></tr></table></figure><p>例如 pipx 包安装后会在系统安装一个命令行程序pipx，且pipx已经支持argcomplete，我们就可以用下面的命令来激活自动补全:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(register-python-argcomplete pipx)</span>&quot;</span></span><br></pre></td></tr></table></figure><p>激活后输入<code>pipx in</code> 按tab键，就可以列出pipx所有以<code>in</code>开头的命令，再按tab键会在各个候选命令之间切换。</p><p>⚠️注意：这个激活命令是只对哪些代码中已经支持了argcomplete语句的程序才生效，如果代码中无这些语句，那是不生效的。</p><h2 id="4-如何让自己的Python库支持自动补全"><a href="#4-如何让自己的Python库支持自动补全" class="headerlink" title="4. 如何让自己的Python库支持自动补全"></a>4. 如何让自己的Python库支持自动补全</h2><p>只需要增加下面几行代码，就能让你的库的命令行支持自动补全:</p><pre><code class="python"># 在ArgumentParser对象初始化前增加这两行# PYTHON_ARGCOMPLETE_OKimport argcomplete, argparse# 原有代码parser = argparse.ArgumentParser()...# 在调用parse_args()函数前增加这一行argcomplete.autocomplete(parser)# 原有代码args = parser.parse_args()...</code></pre><p>然后你的包安装后，对应的命令行程序就可以用<code>eval &quot;$(register-python-argcomplete &lt;app-name&gt;)&quot;</code>来补全了。</p><p>⚠️注意：如果程序执行到<code>argcomplete.autocomplete()</code> 被调用的地方耗时很久的话，用户按tab就会有明显的延迟感。所以尽量将一些比较耗时的操作放在<code>argcomplete.autocomplete()</code> 语句后面，比如一些<code>import</code>语句，常常比较耗时，可以往后放。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h2&gt;&lt;p&gt;在使用Python 命令或者 Python的命令行工具的时候，一个痛点是没有补全。比如&lt;code&gt;python -m&lt;/code&gt;后面输入包名字，就没有提示，每次想运行一个http server的时候，都需要搜索一下http服务的包名。另外，像pip，pipx等命令也没有提示，使用不太方便。&lt;/p&gt;
+&lt;p&gt;偶然看到&lt;a href=&quot;https://github.com/kislyuk/argcomplete&quot;&gt;argcomplete&lt;/a&gt;这个库，按tab键就可以给Python的命令行添加自动补全，简直是使用Python的一个神器。&lt;/p&gt;
+&lt;p&gt;具体来说，argcomplete有下面的特点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;官方支持支持bash和zsh两种shell，对tcsh和fish有第三方贡献者提供的支持（不好意思Windows用户这里又被当做二等公民了😂）&lt;/li&gt;
+&lt;li&gt;可以对python命令和pip命令进行补全&lt;/li&gt;
+&lt;li&gt;其他任何以argparse解析的第三方包的命令都可以用自动补全，添加argcomplete的几行代码就行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面具体展开怎么对已有的工具启用自动补全，以及如何让自己的Python包支持argcomplete。&lt;/p&gt;</summary>
     
     
     
     
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
   </entry>
   

@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -19,7 +18,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Love, Life, Linux">
 <meta property="og:type" content="website">
@@ -313,7 +312,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/28/python-autocomplete-with-argcomplete/" class="post-title-link" itemprop="url">python-autocomplete-with-argcomplete</a>
+          <a href="/2023/05/28/python-autocomplete-with-argcomplete/" class="post-title-link" itemprop="url">Python 命令补全神器 argcomplete</a>
         </h2>
 
         <div class="post-meta-container">
@@ -323,13 +322,19 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-05-28 10:33:12 / 修改时间：16:02:55" itemprop="dateCreated datePublished" datetime="2023-05-28T10:33:12+08:00">2023-05-28</time>
+      <time title="创建时间：2023-05-28 10:33:12" itemprop="dateCreated datePublished" datetime="2023-05-28T10:33:12+08:00">2023-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-09 22:59:03" itemprop="dateModified" datetime="2023-06-09T22:59:03+08:00">2023-06-09</time>
     </span>
 
   
-    <span id="/2023/05/28/python-autocomplete-with-argcomplete/" class="post-meta-item leancloud_visitors" data-flag-title="python-autocomplete-with-argcomplete" title="阅读次数">
+    <span id="/2023/05/28/python-autocomplete-with-argcomplete/" class="post-meta-item leancloud_visitors" data-flag-title="Python 命令补全神器 argcomplete" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -345,7 +350,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在使用Python 命令或者 Python的命令行工具的时候，一个痛点是没有补全。比如<code>python -m</code>后面输入包名字，就没有提示，每次想运行一个http server的时候，都需要搜索一下http服务的包名。另外，像pip，pipx等命令也没有提示，使用不太方便。</p>
+<p>偶然看到<a target="_blank" rel="noopener" href="https://github.com/kislyuk/argcomplete">argcomplete</a>这个库，按tab键就可以给Python的命令行添加自动补全，简直是使用Python的一个神器。</p>
+<p>具体来说，argcomplete有下面的特点</p>
+<ul>
+<li>官方支持支持bash和zsh两种shell，对tcsh和fish有第三方贡献者提供的支持（不好意思Windows用户这里又被当做二等公民了😂）</li>
+<li>可以对python命令和pip命令进行补全</li>
+<li>其他任何以argparse解析的第三方包的命令都可以用自动补全，添加argcomplete的几行代码就行</li>
+</ul>
+<p>下面具体展开怎么对已有的工具启用自动补全，以及如何让自己的Python包支持argcomplete。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/28/python-autocomplete-with-argcomplete/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
