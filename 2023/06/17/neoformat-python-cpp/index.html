@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 概述neoformat 是 (Neo)Vim 的代码格式化插件，支持多种语言的格式化。这篇文章覆盖 Neoformat 对 Python 和 C++ 进行格式化的配置，以及如何在保存代码时自动进行格式化，可以直接应用的配置代码段在文章最后。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NeoVim Python 和 C++ 代码自动格式化">
+<meta property="og:url" content="http://vra.github.io/2023/06/17/neoformat-python-cpp/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 概述neoformat 是 (Neo)Vim 的代码格式化插件，支持多种语言的格式化。这篇文章覆盖 Neoformat 对 Python 和 C++ 进行格式化的配置，以及如何在保存代码时自动进行格式化，可以直接应用的配置代码段在文章最后。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-17T01:54:45.000Z">
+<meta property="article:modified_time" content="2023-06-17T03:17:05.705Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Vim">
+<meta property="article:tag" content="NeoVim">
+<meta property="article:tag" content="black">
+<meta property="article:tag" content="clang-format">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/06/17/neoformat-python-cpp/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/06/17/neoformat-python-cpp/","path":"2023/06/17/neoformat-python-cpp/","title":"NeoVim Python 和 C++ 代码自动格式化"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NeoVim Python 和 C++ 代码自动格式化 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">161</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">167</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-neoformat%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">2. neoformat安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-neoformat-%E6%A0%BC%E5%BC%8F%E5%8C%96-Python-%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">3. neoformat 格式化 Python 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E5%AE%89%E8%A3%85%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 安装格式化工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 格式化配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E6%89%A7%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 执行格式化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-%E4%BF%9D%E5%AD%98%E6%96%87%E4%BB%B6%E6%97%B6%E8%87%AA%E5%8A%A8%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 保存文件时自动格式化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 调试命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-neoformat-%E6%A0%BC%E5%BC%8F%E5%8C%96-C-C-%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">4. neoformat 格式化 C&#x2F;C++ 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E5%AE%89%E8%A3%85%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 安装格式化工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 格式化配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 自定义格式化文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-%E4%BF%9D%E5%AD%98%E6%96%87%E4%BB%B6%E6%97%B6%E8%87%AA%E5%8A%A8%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 保存文件时自动格式化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">5. 总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">161</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/17/neoformat-python-cpp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NeoVim Python 和 C++ 代码自动格式化 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NeoVim Python 和 C++ 代码自动格式化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-17 09:54:45 / 修改时间：11:17:05" itemprop="dateCreated datePublished" datetime="2023-06-17T09:54:45+08:00">2023-06-17</time>
+    </span>
+
+  
+    <span id="/2023/06/17/neoformat-python-cpp/" class="post-meta-item leancloud_visitors" data-flag-title="NeoVim Python 和 C++ 代码自动格式化" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a target="_blank" rel="noopener" href="https://github.com/sbdchd/neoformat">neoformat</a> 是 (Neo)Vim 的代码格式化插件，支持多种语言的格式化。这篇文章覆盖 Neoformat 对 Python 和 C++ 进行格式化的配置，以及如何在保存代码时自动进行格式化，可以直接应用的配置代码段在文章最后。</p>
+<span id="more"></span>
+
+<h3 id="2-neoformat安装"><a href="#2-neoformat安装" class="headerlink" title="2. neoformat安装"></a>2. neoformat安装</h3><p>采用 <a target="_blank" rel="noopener" href="https://github.com/junegunn/vim-plug">Vim-Plug</a> 进行插件管理，在<code>~/.config/nvim/init.vim</code> 中添加下面的插件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plug &#x27;sbdchd/neoformat&#x27;</span><br></pre></td></tr></table></figure>
+<p>然后用<code>:PlugInstall</code> 命令来安装插件。由于插件源码在 GitHub 上，国内访问时断时续，一次执行可能安装不成功，可以多执行几次这个命令，直到输出窗口显示安装成功。</p>
+<h3 id="3-neoformat-格式化-Python-代码"><a href="#3-neoformat-格式化-Python-代码" class="headerlink" title="3. neoformat 格式化 Python 代码"></a>3. neoformat 格式化 Python 代码</h3><h4 id="3-1-安装格式化工具"><a href="#3-1-安装格式化工具" class="headerlink" title="3.1 安装格式化工具"></a>3.1 安装格式化工具</h4><p>neoformat本 身不会安装格式化工具，它只会调用系统已经安装好的格式化工具来进行代码格式化，所以你还需要自己手动在系统上安装格式化工具。</p>
+<p>以 Python 格式化为例，我们采用 black 来格式化代码，那么需要先用<code>pip</code> 命令来安装black:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install black</span><br></pre></td></tr></table></figure>
+<p>然后需要确保在命令行执行<code>black --version</code> 命令能正常输出，neoformat 才能找到black:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ black --version</span><br><span class="line">black, 23.3.0 (compiled: yes)</span><br><span class="line">Python (CPython) 3.8.16</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-格式化配置"><a href="#3-2-格式化配置" class="headerlink" title="3.2 格式化配置"></a>3.2 格式化配置</h4><p>安装好以后，我们就可以在<code>~/.config/nvim/init.vim</code> 文件中进行 neoformat 配置:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let g:neoformat_python_black = &#123;</span><br><span class="line">            \ &#x27;exe&#x27;: &#x27;black&#x27;,</span><br><span class="line">            \ &#x27;args&#x27;: [&#x27;-q&#x27;, &#x27;-&#x27;],</span><br><span class="line">            \ &#x27;stdin&#x27;: 1,</span><br><span class="line">            \ &#125;</span><br><span class="line"></span><br><span class="line">let g:neoformat_enabled_python = [&#x27;black&#x27;]</span><br></pre></td></tr></table></figure>
+<p>这是 VimScript 的语法，<code>let g:neoformat_python_black</code> 是创建一个全局变量<code>neoformat_python_black</code>, 全局变量的特点是所有打开的窗口和缓冲区都可以访问该变量。</p>
+<p>注意这个变量的命名方式，<code>neoformat_&lt;Language&gt;_&lt;formatter&gt;</code>，表示针对某个语言的某一个格式化工具，这个格式化工具的名字会被注册，在下面的enable语句中使用到。</p>
+<p>全局变量的值的含义如下：</p>
+<ul>
+<li><code>exe</code> 表示格式化运行需要执行的程序名，就跟我们在命令行访问某个程序一样的机制，需要知道它叫什么才能来执行。</li>
+<li><code>args</code> 表示程序执行时需要的参数。这里<code>-q</code>是black命令的参数项，表示静默执行，不打印输出；<code>-</code> 表示从标准输入读取内容来格式化</li>
+<li><code>stdin</code>: 这个参数表示是否从标准输入来读取内容来格式化。标准输入对应的是文件的内容，除了标准输入外还有缓存区</li>
+</ul>
+<p>所有的可配置参数参考 <a target="_blank" rel="noopener" href="https://github.com/sbdchd/neoformat#config-optional">neoformat 文档</a>。这里我们配置这几个参数项就可以了。</p>
+<p>下面还有一条语句，创建全局变量<code>neoformat_enabled_python</code>，表示针对 Python 启用的格式化工具，这里我们使用上面创建变量后注册的<code>black</code>。</p>
+<h4 id="3-3-执行格式化"><a href="#3-3-执行格式化" class="headerlink" title="3.3 执行格式化"></a>3.3 执行格式化</h4><p>加了上面的 VimScript 配置后，我们在编辑文件时，就可以使用 <code>:Neoformat</code> 命令来格式化代码了。</p>
+<p>如果想要使用特定的格式化工具，可以使用<code>:Neoformat &lt;formater&gt;</code> 来操作。</p>
+<h4 id="3-4-保存文件时自动格式化"><a href="#3-4-保存文件时自动格式化" class="headerlink" title="3.4 保存文件时自动格式化"></a>3.4 保存文件时自动格式化</h4><p>前面的配置我们还需要手动执行<code>:Neoformat</code> 命令来格式化，下面我们添加一些配置到<code>~/.config/nvim/init.vim</code>，在保存文件时自动地进行格式化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">augroup fmt</span><br><span class="line">  autocmd!</span><br><span class="line">  autocmd BufWritePre * Neoformat</span><br><span class="line">augroup END</span><br></pre></td></tr></table></figure>
+
+<p>这段代码创建了一个自动化组并命名为<code>fmt</code>，用于将一组命令放在一起，方便管理。</p>
+<p>我们首先使用<code>autocmd!</code>清空这个自动化组中的所有自动化命令，避免影响后面的命令设置。</p>
+<p>然后用<code>autocmd BufWritePre * Neoformat</code>来完成在写buffer之前，对所有类型的文件都执行<code>Neoformat</code>命令。<code>autocmd</code>表示这是一条自动化命令。<code>BufWritePre</code>表示是在Write Buffer之前执行的操作,<code>*</code>表示匹配任意的文件，如果是<code>*.py</code>则只匹配后缀为<code>.py</code>的文件。<code>Neoformat</code> 表示要执行的命令。</p>
+<p>这样，在保存文件时，就可以自动执行代码格式化了。</p>
+<h4 id="3-5-调试命令"><a href="#3-5-调试命令" class="headerlink" title="3.5 调试命令"></a>3.5 调试命令</h4><p>如果出现格式化错误，或者格式化不生效，可以设置 <code>:set verbose=1</code> 来打开 NeoVim 的 log 显示，查看报错信息。实际测试发现这个命令真的很有用，很多信息打印出来后，对于定位问题帮助很大。</p>
+<h3 id="4-neoformat-格式化-C-C-代码"><a href="#4-neoformat-格式化-C-C-代码" class="headerlink" title="4. neoformat 格式化 C/C++ 代码"></a>4. neoformat 格式化 C/C++ 代码</h3><p>对 C/C++代码的格式化与 Python 是类似的，只不过使用的格式化工具不同而已。这里以 <a target="_blank" rel="noopener" href="https://clang.llvm.org/docs/ClangFormat.html">clang-format</a> 为例，记录需要执行的步骤。</p>
+<h4 id="4-1-安装格式化工具"><a href="#4-1-安装格式化工具" class="headerlink" title="4.1 安装格式化工具"></a>4.1 安装格式化工具</h4><p>Ubuntu:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install clang-format</span><br></pre></td></tr></table></figure>
+
+<p>Mac:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install clang-format</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-格式化配置"><a href="#4-2-格式化配置" class="headerlink" title="4.2 格式化配置"></a>4.2 格式化配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let g:neoformat_c_clangformat = &#123;</span><br><span class="line">            \ &#x27;exe&#x27;: &#x27;clang-format&#x27;,</span><br><span class="line">			\ &#x27;args&#x27;: [&#x27;-assume-filename=%:p&#x27;],</span><br><span class="line">            \ &#x27;stdin&#x27;: 1,</span><br><span class="line">            \ &#125;</span><br><span class="line"></span><br><span class="line">let g:neoformat_enabled_c = [&#x27;clangformat&#x27;]</span><br></pre></td></tr></table></figure>
+<p>与 Python black 的配置类似，语言修改为<code>c</code>, formatter 修改为 <code>clangformat</code>，参数有所不同，<code>-assume-filename=%:p</code> 表示将当前编辑的文件名传递给 clang-format，以便它可以正确地处理预编译指令等特殊情况。</p>
+<h4 id="4-3-自定义格式化文件"><a href="#4-3-自定义格式化文件" class="headerlink" title="4.3 自定义格式化文件"></a>4.3 自定义格式化文件</h4><p>如果不想用默认的 clang-format 格式化配置，可以通过下面的方式来生成格式化文件，并通过<code>args</code> 参数传递给Neoformat来使用。</p>
+<p>首先生成一个默认的配置文件，例如选择以google的风格来生成:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang-format -style=google -dump-config &gt; /Users/name/.clang-format</span><br></pre></td></tr></table></figure>
+<p>然后编辑生成的文件，修改为你想要的格式。例如我想修改默认的2空格缩进为4空格，那么去掉默认文件中的<code># BasedOnStyle:  Google</code>的注释，继承google风格的默认配置，删除后面所有的内容，只修改<code>IndentWidth</code> 项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">Language:        Cpp</span><br><span class="line">BasedOnStyle:  Google</span><br><span class="line">IndentWidth:     4</span><br></pre></td></tr></table></figure>
+<p>然后用<code>--style=/path/to/.clang-format</code>来代码规范文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let g:neoformat_c_clangformat = &#123;</span><br><span class="line">            \ &#x27;exe&#x27;: &#x27;clang-format&#x27;,</span><br><span class="line">			\ &#x27;args&#x27;: [&#x27;-assume-filename=%:p&#x27;, &#x27;--styel=/Users/name/.clang-format&#x27;],</span><br><span class="line">            \ &#x27;stdin&#x27;: 1,</span><br><span class="line">            \ &#125;</span><br><span class="line"></span><br><span class="line">let g:neoformat_enabled_c = [&#x27;clangformat&#x27;]</span><br></pre></td></tr></table></figure>
+<h4 id="4-4-保存文件时自动格式化"><a href="#4-4-保存文件时自动格式化" class="headerlink" title="4.4 保存文件时自动格式化"></a>4.4 保存文件时自动格式化</h4><p>上面 3.4 部分的代码已经开启了保存时自动格式化代码，这里不需要额外增加配置了。</p>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><p>总结下来，涉及到的需要增加在<code>~/.config/nvim/init.vim</code>中的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&quot;~/.nvim/bundle&quot;)</span><br><span class="line">...</span><br><span class="line">&quot; 增加neoformat</span><br><span class="line">Plug &#x27;sbdchd/neoformat&#x27;</span><br><span class="line">...</span><br><span class="line">call plug#end()</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">&quot; code format</span><br><span class="line">augroup fmt</span><br><span class="line">  autocmd!</span><br><span class="line">&quot;  autocmd BufWritePre * undojoin | Neoformat</span><br><span class="line">  autocmd BufWritePre * Neoformat</span><br><span class="line">augroup END</span><br><span class="line"></span><br><span class="line">&quot; format python</span><br><span class="line">let g:neoformat_python_black = &#123;</span><br><span class="line">            \ &#x27;exe&#x27;: &#x27;black&#x27;,</span><br><span class="line">            \ &#x27;args&#x27;: [&#x27;-q&#x27;, &#x27;-&#x27;],</span><br><span class="line">            \ &#x27;stdin&#x27;: 1,</span><br><span class="line">            \ &#125;</span><br><span class="line"></span><br><span class="line">let g:neoformat_enabled_python = [&#x27;black&#x27;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot; format c/c++</span><br><span class="line">let g:neoformat_c_clangformat = &#123;</span><br><span class="line">            \ &#x27;exe&#x27;: &#x27;clang-format&#x27;,</span><br><span class="line">			\ &#x27;args&#x27;: [&#x27;-assume-filename=%:p&#x27;],</span><br><span class="line">            \ &#x27;stdin&#x27;: 1,</span><br><span class="line">            \ &#125;</span><br><span class="line"></span><br><span class="line">let g:neoformat_enabled_c = [&#x27;clangformat&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>格式化工具需要单独通过命令行来安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install black</span><br><span class="line">brew install clang-format</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>:set verbose=1</code> 来打开 log 信息，对于定位问题很有帮助</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/06/17/neoformat-python-cpp/" title="NeoVim Python 和 C++ 代码自动格式化">http://vra.github.io/2023/06/17/neoformat-python-cpp/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Vim/" rel="tag"># Vim</a>
+              <a href="/tags/NeoVim/" rel="tag"># NeoVim</a>
+              <a href="/tags/black/" rel="tag"># black</a>
+              <a href="/tags/clang-format/" rel="tag"># clang-format</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/08/homebrew-disable-auto-update/" rel="prev" title="homebrew禁止执行install命令时自动更新">
+                  <i class="fa fa-chevron-left"></i> homebrew禁止执行install命令时自动更新
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
