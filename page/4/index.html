@@ -86,7 +86,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">161</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">167</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">161</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">170</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">170</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -202,6 +202,282 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/10/06/fly-io-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/06/fly-io-tutorial/" class="post-title-link" itemprop="url">fly.io 使用指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-06 08:18:04" itemprop="dateCreated datePublished" datetime="2022-10-06T08:18:04+08:00">2022-10-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-20 00:16:09" itemprop="dateModified" datetime="2022-12-20T00:16:09+08:00">2022-12-20</time>
+    </span>
+
+  
+    <span id="/2022/10/06/fly-io-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="fly.io 使用指南" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>最近看技术论坛，发现提到 <a target="_blank" rel="noopener" href="https://fly.io/">fly.io</a> 的次数越来越多了。 fly.io 是一个容器化的部署平台，只需要一个<code>Dockerfile</code>文件就能部署代码到fly.io 的服务器上，同时还自动生成域名。其他的好处多多，我根据自己体验，我总结成了下面的这些条：</p>
+<ul>
+<li><p><del>有免费使用的额度。不填写信用卡信息可以创建一个App，完全不收费；填写信用卡信息后每月有一定额度的免费流量，超过额度会额外收费。所以想做个小demo完全可以不填信用卡试用。</del> 目前已经不支持无信用卡使用了，参见<a target="_blank" rel="noopener" href="https://community.fly.io/t/is-it-free-getting-error-we-need-your-payment-information-to-continue/8871">这里</a>的讨论</p>
+</li>
+<li><p>自动生成域名。比如你创建一个名字叫<code>my_demo</code>的App，那么部署完成后，就会生成<code>my_demo.fly.dev</code>的域名，可以全球访问，不用自己单独买域名了。</p>
+</li>
+<li><p>可以 SSH 连接进入服务器。部署完成后，可以通过<code>flyctl ssh console</code> 命令登录部署的服务器，所以相当于你有了一台免费的VPS，可以做你想做的任何事情。</p>
+</li>
+<li><p>部署简单，采用<code>flyctl</code> 命令集合统一部署;支持各种语言的各种框架来搭建部署环境，能自动识别当前目录下代码所采用的是哪个框架，自动部署。</p>
+</li>
+</ul>
+<p>下面简单记录一下使用的流程和一些教程里面没提及的使用命令。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/06/fly-io-tutorial/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/10/04/callback-in-ctypes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/04/callback-in-ctypes/" class="post-title-link" itemprop="url">在ctypes的C共享库中调用Python函数</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-04 11:42:22 / 修改时间：12:35:42" itemprop="dateCreated datePublished" datetime="2022-10-04T11:42:22+08:00">2022-10-04</time>
+    </span>
+
+  
+    <span id="/2022/10/04/callback-in-ctypes/" class="post-meta-item leancloud_visitors" data-flag-title="在ctypes的C共享库中调用Python函数" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/ctypes.html">ctypes</a> 是Python标准库中提供的外部函数库，可以用来在Python中调用动态链接库或者共享库中的函数，比如将使用大量循环的代码写在C语言中来进行提速，因为Python代码循环实在是太慢了。大致流程是通过 ctypes 来调用C函数，先将Python类型的对象转换为C的类型，在C函数中做完计算，返回结果到Python中。这个过程相对是比较容易的。</p>
+<p>现在有个更复杂的情况，我想要在C代码中调用Python中的某些函数来完成C代码的计算，比如在C代码的sort函数中，采用Python中定义的函数来进行大小判断。这个在Python中定义的函数在 ctypes 中称为回调函数 (callback function)。也就是说需要把Python函数当作变量传给C语言，想想还是有些难度。 但调查以后发现 ctypes 提供了 <code>CFUNCTYPE</code>来方便地进行回调函数定义，而C语言本身也是支持函数指针的，因此这个功能实现还算简单，具体展开如下。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/04/callback-in-ctypes/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/09/22/python-spell-checking-codespell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/22/python-spell-checking-codespell/" class="post-title-link" itemprop="url">简单好用的英文拼写检查工具codespell</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-09-22 23:14:39 / 修改时间：23:31:31" itemprop="dateCreated datePublished" datetime="2022-09-22T23:14:39+08:00">2022-09-22</time>
+    </span>
+
+  
+    <span id="/2022/09/22/python-spell-checking-codespell/" class="post-meta-item leancloud_visitors" data-flag-title="简单好用的英文拼写检查工具codespell" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>网上冲浪看到了一个简单好用的英语单词拼写检查工具 <a target="_blank" rel="noopener" href="https://github.com/codespell-project/codespell">codespell</a>，测试发现真的好用，一键安装&amp;一键开箱使用，没有比这更美好的体验了，下面展开说下流程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/09/22/python-spell-checking-codespell/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -792,286 +1068,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/06/24/matplotlib-convert-opencv/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/06/17/git-add-part-of-a-file/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/17/git-add-part-of-a-file/" class="post-title-link" itemprop="url">git 提交文件中的部分修改</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-06-17 23:19:36" itemprop="dateCreated datePublished" datetime="2022-06-17T23:19:36+08:00">2022-06-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-06-18 07:56:04" itemprop="dateModified" datetime="2022-06-18T07:56:04+08:00">2022-06-18</time>
-    </span>
-
-  
-    <span id="/2022/06/17/git-add-part-of-a-file/" class="post-meta-item leancloud_visitors" data-flag-title="git 提交文件中的部分修改" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在 Git 提交一个文件的时候，有时候会在同一个文件中，包含两个不同功能的修改，或者一个功能完成了，而别的部分还没有完善不应该进入代码库，这时候如果使用<code>git add file-name</code>的话，会将这个文件中的所有更新都提交，达不到上述的需求。针对这种场景，git 提供了更细粒度的提交命令<code>git add -p</code>，可以分部分提交一个文件中的更新代码块，实测能满足常见的需求。这里简要记录一下如何使用这个命令。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/17/git-add-part-of-a-file/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/06/11/vitpose-intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/11/vitpose-intro/" class="post-title-link" itemprop="url">VitPose 论文阅读</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-06-11 20:12:02" itemprop="dateCreated datePublished" datetime="2022-06-11T20:12:02+08:00">2022-06-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-06-12 22:23:06" itemprop="dateModified" datetime="2022-06-12T22:23:06+08:00">2022-06-12</time>
-    </span>
-
-  
-    <span id="/2022/06/11/vitpose-intro/" class="post-meta-item leancloud_visitors" data-flag-title="VitPose 论文阅读" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>VitPose是最近出来的一篇用Transformer结构做人体2D关键点估计的论文，采用比较简单的Transformer结构就能在MS COCO 测试集上取得比较好的结果，挺吸引人的。论文不长，这周末读了一遍，感觉值得借鉴的地方挺多，这里我用自己的语言描述论文的细节，同时把自己的一些疑惑和思考写下来，欢迎讨论交流。</p>
-<p>论文标题: ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation<br>论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2204.12484">https://arxiv.org/abs/2204.12484</a><br>代码地址：<a target="_blank" rel="noopener" href="https://github.com/ViTAE-Transformer/ViTPose">https://github.com/ViTAE-Transformer/ViTPose</a></p>
-<p>注：本文中框图和表格均来自原论文。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/11/vitpose-intro/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/05/29/rss-2022/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/29/rss-2022/" class="post-title-link" itemprop="url">提高你的信息获取信噪比：RSS in 2022</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-05-29 21:49:39" itemprop="dateCreated datePublished" datetime="2022-05-29T21:49:39+08:00">2022-05-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-20 17:35:04" itemprop="dateModified" datetime="2023-01-20T17:35:04+08:00">2023-01-20</time>
-    </span>
-
-  
-    <span id="/2022/05/29/rss-2022/" class="post-meta-item leancloud_visitors" data-flag-title="提高你的信息获取信噪比：RSS in 2022" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>上学的时候，有一次听<a target="_blank" rel="noopener" href="https://ring0.me/whoami/">boj师兄</a>介绍博客，至今还记得讲座中的一句话，博客能提高获取信息的信噪比。</p>
-<p>在今天网络和社交媒体信息严重过载的情况下，如何集中自己的精力，将时间花到有用的事情上，进而提高工作效率，对我们每个人来说，都很有挑战。</p>
-<p>为了获取真正有用的信息，第一步是过滤信息来源。最近发现基于RSS的信息获取方式是比较高效的，这里大致描述一下我目前采用的信息获取方案。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/29/rss-2022/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

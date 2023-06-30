@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在这篇文章中，我们对如何使用Libtorch进行MNIST分类模型的训练和测试进行详细描述。首先会浏览官方MNIST示例，然后对其进行模块化重构，为后续别的模型的训练提供 codebase。 由于Libtorch中包含很多和Pytorch中没有的类型，所以看Libtorch代码的时候时常会遇到不了解的函数或者类，这时候可以在这里查找对应的类的实现，了解其作用。Libtorch C++ 代码中的注释">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libtorch系列教程3：优雅地训练MNIST分类模型">
+<meta property="og:url" content="http://vra.github.io/2023/06/30/libtorch-tutorial3/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="在这篇文章中，我们对如何使用Libtorch进行MNIST分类模型的训练和测试进行详细描述。首先会浏览官方MNIST示例，然后对其进行模块化重构，为后续别的模型的训练提供 codebase。 由于Libtorch中包含很多和Pytorch中没有的类型，所以看Libtorch代码的时候时常会遇到不了解的函数或者类，这时候可以在这里查找对应的类的实现，了解其作用。Libtorch C++ 代码中的注释">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-30T14:38:16.000Z">
+<meta property="article:modified_time" content="2023-06-30T14:39:28.217Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Pytorch">
+<meta property="article:tag" content="Libtorch">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/06/30/libtorch-tutorial3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/06/30/libtorch-tutorial3/","path":"2023/06/30/libtorch-tutorial3/","title":"libtorch系列教程3：优雅地训练MNIST分类模型"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>libtorch系列教程3：优雅地训练MNIST分类模型 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">161</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">170</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%98%E6%96%B9MNIST%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 官方MNIST示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%87%8D%E6%9E%84-MNIST-%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">2. 重构 MNIST 示例代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E7%AE%80%E5%8D%95%E6%8B%86%E5%88%86%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 简单拆分的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%B8%80%E7%A7%8D%E6%AF%94%E8%BE%83%E7%AE%80%E5%8D%95%E7%9A%84%E9%87%8D%E6%9E%84%E6%96%B9%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 一种比较简单的重构方案</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-CMake-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 CMake 配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-%E4%B8%BB%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E5%AE%9A%E4%B9%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 主入口文件定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-%E7%BD%91%E7%BB%9C%E5%AE%9A%E4%B9%89"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3 网络定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-4-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AE%9A%E4%B9%89"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.2.4 数据集定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-5-Trainer%E5%AE%9A%E4%B9%89"><span class="nav-number">2.2.5.</span> <span class="nav-text">2.2.5 Trainer定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-6-%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.6.</span> <span class="nav-text">2.2.6 编译和运行方式</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">170</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">161</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/30/libtorch-tutorial3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="libtorch系列教程3：优雅地训练MNIST分类模型 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          libtorch系列教程3：优雅地训练MNIST分类模型
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-30 22:38:16 / 修改时间：22:39:28" itemprop="dateCreated datePublished" datetime="2023-06-30T22:38:16+08:00">2023-06-30</time>
+    </span>
+
+  
+    <span id="/2023/06/30/libtorch-tutorial3/" class="post-meta-item leancloud_visitors" data-flag-title="libtorch系列教程3：优雅地训练MNIST分类模型" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在这篇文章中，我们对如何使用Libtorch进行MNIST分类模型的训练和测试进行详细描述。首先会浏览官方MNIST示例，然后对其进行模块化重构，为后续别的模型的训练提供 codebase。</p>
+<p>由于Libtorch中包含很多和Pytorch中没有的类型，所以看Libtorch代码的时候时常会遇到不了解的函数或者类，这时候可以在<a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch">这里</a>查找对应的类的实现，了解其作用。Libtorch C++ 代码中的注释虽然不多但基本够用了。</p>
+<p>这里列举一些常见的类的代码路径，方便查询：</p>
+<ul>
+<li>Datasets: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/base.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/base.h</a></li>
+<li>DataLoader:<a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch/data/dataloader/base.h">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch/data/dataloader/base.h</a></li>
+<li>MNIST: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/mnist.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/mnist.h</a></li>
+<li>Stack: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/transforms/stack.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/transforms/stack.h</a></li>
+<li>RandomSampler:  <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/random.cpp">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/random.cpp</a></li>
+<li>SequentialSampler: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/sequential.cpp">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/sequential.cpp</a></li>
+</ul>
+<span id="more"></span>
+<ul>
+<li><h3 id="1-官方MNIST示例"><a href="#1-官方MNIST示例" class="headerlink" title="1. 官方MNIST示例"></a>1. 官方MNIST示例</h3>Libtorch官方的训练代码仓库在<a target="_blank" rel="noopener" href="https://github.com/pytorch/examples/tree/main/cpp">这里</a>，拿里面的训练MNIST为例，代码如下：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Where to find the MNIST dataset.</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* kDataRoot = <span class="string">&quot;./data&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The batch size for training.</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int64_t</span> kTrainBatchSize = <span class="number">64</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The batch size for testing.</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int64_t</span> kTestBatchSize = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The number of epochs to train.</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int64_t</span> kNumberOfEpochs = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// After how many batches to log a new update with the loss value.</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int64_t</span> kLogInterval = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Net</span> :</span> torch::nn::Module &#123;</span><br><span class="line">  <span class="built_in">Net</span>()</span><br><span class="line">      : <span class="built_in">conv1</span>(torch::nn::<span class="built_in">Conv2dOptions</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="comment">/*kernel_size=*/</span><span class="number">5</span>)),</span><br><span class="line">        <span class="built_in">conv2</span>(torch::nn::<span class="built_in">Conv2dOptions</span>(<span class="number">10</span>, <span class="number">20</span>, <span class="comment">/*kernel_size=*/</span><span class="number">5</span>)),</span><br><span class="line">        <span class="built_in">fc1</span>(<span class="number">320</span>, <span class="number">50</span>),</span><br><span class="line">        <span class="built_in">fc2</span>(<span class="number">50</span>, <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="built_in">register_module</span>(<span class="string">&quot;conv1&quot;</span>, conv1);</span><br><span class="line">    <span class="built_in">register_module</span>(<span class="string">&quot;conv2&quot;</span>, conv2);</span><br><span class="line">    <span class="built_in">register_module</span>(<span class="string">&quot;conv2_drop&quot;</span>, conv2_drop);</span><br><span class="line">    <span class="built_in">register_module</span>(<span class="string">&quot;fc1&quot;</span>, fc1);</span><br><span class="line">    <span class="built_in">register_module</span>(<span class="string">&quot;fc2&quot;</span>, fc2);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">torch::Tensor <span class="title">forward</span><span class="params">(torch::Tensor x)</span> </span>&#123;</span><br><span class="line">    x = torch::<span class="built_in">relu</span>(torch::<span class="built_in">max_pool2d</span>(conv1-&gt;forward(x), <span class="number">2</span>));</span><br><span class="line">    x = torch::<span class="built_in">relu</span>(</span><br><span class="line">        torch::<span class="built_in">max_pool2d</span>(conv2_drop-&gt;forward(conv2-&gt;forward(x)), <span class="number">2</span>));</span><br><span class="line">    x = x.<span class="built_in">view</span>(&#123;<span class="number">-1</span>, <span class="number">320</span>&#125;);</span><br><span class="line">    x = torch::<span class="built_in">relu</span>(fc1-&gt;forward(x));</span><br><span class="line">    x = torch::<span class="built_in">dropout</span>(x, <span class="comment">/*p=*/</span><span class="number">0.5</span>, <span class="comment">/*training=*/</span><span class="built_in">is_training</span>());</span><br><span class="line">    x = fc2-&gt;forward(x);</span><br><span class="line">    <span class="keyword">return</span> torch::<span class="built_in">log_softmax</span>(x, <span class="comment">/*dim=*/</span><span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  torch::nn::Conv2d conv1;</span><br><span class="line">  torch::nn::Conv2d conv2;</span><br><span class="line">  torch::nn::Dropout2d conv2_drop;</span><br><span class="line">  torch::nn::Linear fc1;</span><br><span class="line">  torch::nn::Linear fc2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> DataLoader&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">train</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">size_t</span> epoch,</span></span></span><br><span class="line"><span class="params"><span class="function">    Net&amp; model,</span></span></span><br><span class="line"><span class="params"><span class="function">    torch::Device device,</span></span></span><br><span class="line"><span class="params"><span class="function">    DataLoader&amp; data_loader,</span></span></span><br><span class="line"><span class="params"><span class="function">    torch::optim::Optimizer&amp; optimizer,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">size_t</span> dataset_size)</span> </span>&#123;</span><br><span class="line">  model.<span class="built_in">train</span>();</span><br><span class="line">  <span class="keyword">size_t</span> batch_idx = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; batch : data_loader) &#123;</span><br><span class="line">    <span class="keyword">auto</span> data = batch.data.<span class="built_in">to</span>(device), targets = batch.target.<span class="built_in">to</span>(device);</span><br><span class="line">    optimizer.<span class="built_in">zero_grad</span>();</span><br><span class="line">    <span class="keyword">auto</span> output = model.forward(data);</span><br><span class="line">    <span class="keyword">auto</span> loss = torch::<span class="built_in">nll_loss</span>(output, targets);</span><br><span class="line">    <span class="built_in">AT_ASSERT</span>(!std::<span class="built_in">isnan</span>(loss.<span class="keyword">template</span> item&lt;<span class="keyword">float</span>&gt;()));</span><br><span class="line">    loss.<span class="built_in">backward</span>();</span><br><span class="line">    optimizer.<span class="built_in">step</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (batch_idx++ % kLogInterval == <span class="number">0</span>) &#123;</span><br><span class="line">      std::<span class="built_in">printf</span>(</span><br><span class="line">          <span class="string">&quot;\rTrain Epoch: %ld [%5ld/%5ld] Loss: %.4f&quot;</span>,</span><br><span class="line">          epoch,</span><br><span class="line">          batch_idx * batch.data.<span class="built_in">size</span>(<span class="number">0</span>),</span><br><span class="line">          dataset_size,</span><br><span class="line">          loss.<span class="keyword">template</span> item&lt;<span class="keyword">float</span>&gt;());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> DataLoader&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    Net&amp; model,</span></span></span><br><span class="line"><span class="params"><span class="function">    torch::Device device,</span></span></span><br><span class="line"><span class="params"><span class="function">    DataLoader&amp; data_loader,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">size_t</span> dataset_size)</span> </span>&#123;</span><br><span class="line">  torch::NoGradGuard no_grad;</span><br><span class="line">  model.<span class="built_in">eval</span>();</span><br><span class="line">  <span class="keyword">double</span> test_loss = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int32_t</span> correct = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; batch : data_loader) &#123;</span><br><span class="line">    <span class="keyword">auto</span> data = batch.data.<span class="built_in">to</span>(device), targets = batch.target.<span class="built_in">to</span>(device);</span><br><span class="line">    <span class="keyword">auto</span> output = model.forward(data);</span><br><span class="line">    test_loss += torch::<span class="built_in">nll_loss</span>(</span><br><span class="line">                     output,</span><br><span class="line">                     targets,</span><br><span class="line">                     <span class="comment">/*weight=*/</span>&#123;&#125;,</span><br><span class="line">                     torch::Reduction::Sum)</span><br><span class="line">                     .<span class="keyword">template</span> item&lt;<span class="keyword">float</span>&gt;();</span><br><span class="line">    <span class="keyword">auto</span> pred = output.<span class="built_in">argmax</span>(<span class="number">1</span>);</span><br><span class="line">    correct += pred.<span class="built_in">eq</span>(targets).<span class="built_in">sum</span>().<span class="keyword">template</span> item&lt;<span class="keyword">int64_t</span>&gt;();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  test_loss /= dataset_size;</span><br><span class="line">  std::<span class="built_in">printf</span>(</span><br><span class="line">      <span class="string">&quot;\nTest set: Average loss: %.4f | Accuracy: %.3f\n&quot;</span>,</span><br><span class="line">      test_loss,</span><br><span class="line">      <span class="keyword">static_cast</span>&lt;<span class="keyword">double</span>&gt;(correct) / dataset_size);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">main</span><span class="params">()</span> -&gt; <span class="keyword">int</span> </span>&#123;</span><br><span class="line">  torch::<span class="built_in">manual_seed</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  torch::DeviceType device_type;</span><br><span class="line">  <span class="keyword">if</span> (torch::cuda::<span class="built_in">is_available</span>()) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;CUDA available! Training on GPU.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    device_type = torch::kCUDA;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Training on CPU.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    device_type = torch::kCPU;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">torch::Device <span class="title">device</span><span class="params">(device_type)</span></span>;</span><br><span class="line"></span><br><span class="line">  Net model;</span><br><span class="line">  model.<span class="built_in">to</span>(device);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> train_dataset = torch::data::datasets::<span class="built_in">MNIST</span>(kDataRoot)</span><br><span class="line">                           .<span class="built_in">map</span>(torch::data::transforms::Normalize&lt;&gt;(<span class="number">0.1307</span>, <span class="number">0.3081</span>))</span><br><span class="line">                           .<span class="built_in">map</span>(torch::data::transforms::Stack&lt;&gt;());</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">size_t</span> train_dataset_size = train_dataset.<span class="built_in">size</span>().<span class="built_in">value</span>();</span><br><span class="line">  <span class="keyword">auto</span> train_loader =</span><br><span class="line">      torch::data::make_data_loader&lt;torch::data::samplers::SequentialSampler&gt;(</span><br><span class="line">          std::<span class="built_in">move</span>(train_dataset), kTrainBatchSize);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> test_dataset = torch::data::datasets::<span class="built_in">MNIST</span>(</span><br><span class="line">                          kDataRoot, torch::data::datasets::MNIST::Mode::kTest)</span><br><span class="line">                          .<span class="built_in">map</span>(torch::data::transforms::Normalize&lt;&gt;(<span class="number">0.1307</span>, <span class="number">0.3081</span>))</span><br><span class="line">                          .<span class="built_in">map</span>(torch::data::transforms::Stack&lt;&gt;());</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">size_t</span> test_dataset_size = test_dataset.<span class="built_in">size</span>().<span class="built_in">value</span>();</span><br><span class="line">  <span class="keyword">auto</span> test_loader =</span><br><span class="line">      torch::data::<span class="built_in">make_data_loader</span>(std::<span class="built_in">move</span>(test_dataset), kTestBatchSize);</span><br><span class="line"></span><br><span class="line">  torch::<span class="function">optim::SGD <span class="title">optimizer</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">      model.parameters(), torch::optim::SGDOptions(<span class="number">0.01</span>).momentum(<span class="number">0.5</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> epoch = <span class="number">1</span>; epoch &lt;= kNumberOfEpochs; ++epoch) &#123;</span><br><span class="line">    <span class="built_in">train</span>(epoch, model, device, *train_loader, optimizer, train_dataset_size);</span><br><span class="line">    <span class="built_in">test</span>(model, device, *test_loader, test_dataset_size);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>代码具体细节可以先不用理解，后文有一些说明。可以看到所有的模型搭建、数据读取、网络训练和测试代码都混在一个文件里面，别的几个例子里面也是类似的写法。</p>
+<p>这样写当然是可以的，但对于习惯了Pytorch训练的我们来说，这样所有的代码在一个文件中的写法很不易读，<br>修改数据和网络都相互有影响，且不利用真正严肃地模型训练迭代。</p>
+<h3 id="2-重构-MNIST-示例代码"><a href="#2-重构-MNIST-示例代码" class="headerlink" title="2. 重构 MNIST 示例代码"></a>2. 重构 MNIST 示例代码</h3><p>所以一个简单的想法是改进写法，将DataLoader, Model 和训练逻辑拆分出来，分别进行模块化，放到单独的文件中处理。</p>
+<h4 id="2-1-简单拆分的问题"><a href="#2-1-简单拆分的问题" class="headerlink" title="2.1 简单拆分的问题"></a>2.1 简单拆分的问题</h4><p>第一次尝试是将Dataset和DataLoader放到一个模块中，网络定义放到一个模块中，训练和测试代码放到一个模块中。<br>但这样拆分遇到很大问题，核心原因是 Libtorch 的DataLoader类别太复杂了，对于我这种C++了解不深入的人来说改造难度太大。</p>
+<p>举个例子，我们对MNIST Dataset类进行Normalize后Stack，然后构造一个DataLoader对象<code>train_loader</code>，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> train_dataset = torch::data::datasets::<span class="built_in">MNIST</span>(data_root)</span><br><span class="line">                             .<span class="built_in">map</span>(torch::data::transforms::Normalize&lt;&gt;(<span class="number">0.1307</span>, <span class="number">0.3081</span>))</span><br><span class="line">                             .<span class="built_in">map</span>(torch::data::transforms::Stack&lt;&gt;());</span><br><span class="line"><span class="keyword">auto</span> train_loader =</span><br><span class="line">        torch::data::make_data_loader&lt;torch::data::samplers::SequentialSampler&gt;(std::<span class="built_in">move</span>(train_dataset), <span class="number">64</span>);</span><br></pre></td></tr></table></figure>
+<p>生成的<code>train_loader</code>对象的类型是：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch::<span class="keyword">disable_if_t</span>&lt;MapDataset&lt;MapDataset&lt;MNIST, Normalize&lt;&gt;&gt;, Stack&lt;&gt;&gt;::is_stateful || !std::is_constructible&lt;SequentialSampler, <span class="keyword">size_t</span>&gt;::value, std::unique_ptr&lt;StatelessDataLoader&lt;MapDataset&lt;MapDataset&lt;MNIST, Normalize&lt;&gt;&gt;, Stack&lt;&gt;&gt;, SequentialSampler&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>这个类型太复杂了……</p>
+<p>因为官方示例是所有代码在一个文件，因此可以通过<code>auto</code> 来让编译器自动判定类型，省去了写着一长串类型的问题。</p>
+<p>但如果我们要拆分DataLoader到单独的类里面的话，就没法使用<code>auto</code>，需要显式的指出DataLoader的类型，然而即使是这样一长串的类型写上了，还是会有不知道是哪里的问题，导致编译报错。</p>
+<p>当然也有可能有简单的方法来解决这个问题，欢迎C++高手讨论指导。</p>
+<p>这次体验让我真正体会到了动态类型语言的简洁性，以及Python的所有类型转C++会存在哪些坑。</p>
+<h4 id="2-2-一种比较简单的重构方案"><a href="#2-2-一种比较简单的重构方案" class="headerlink" title="2.2 一种比较简单的重构方案"></a>2.2 一种比较简单的重构方案</h4><p>最后给出了一个妥协的方案：DataSet在单独的类中定义里面，而DataLoader在训练逻辑中构造，避免繁琐的类型问题。</p>
+<p>整体代码结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt <span class="comment"># CMake配置文件</span></span><br><span class="line">├── main.cpp <span class="comment"># 主入口</span></span><br><span class="line">├── my_dataset.cpp <span class="comment"># 数据集实现</span></span><br><span class="line">├── my_dataset.h </span><br><span class="line">├── my_model.cpp <span class="comment"># 模型定义</span></span><br><span class="line">├── my_model.h</span><br><span class="line">├── my_trainer.cpp <span class="comment"># 训练和测试脚手架代码</span></span><br><span class="line">└── my_trainer.h</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-1-CMake-配置文件"><a href="#2-2-1-CMake-配置文件" class="headerlink" title="2.2.1 CMake 配置文件"></a>2.2.1 CMake 配置文件</h5><p>CMake 配置文件<code>CMakeLists.txt</code>中将几个实现文件加入到编译依赖即可，别的部分与前两篇文章中的类似。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span> FATAL_ERROR)</span><br><span class="line"><span class="keyword">project</span>(mnist_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要找到Libtorch</span></span><br><span class="line"><span class="keyword">find_package</span>(Torch REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS <span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; $&#123;TORCH_CXX_FLAGS&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> main.cpp my_model.cpp my_dataset.cpp my_trainer.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> <span class="string">&quot;$&#123;TORCH_LIBRARIES&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Libtorch是基于C++14来实现的</span></span><br><span class="line"><span class="keyword">set_property</span>(<span class="keyword">TARGET</span> <span class="variable">$&#123;PROJECT_NAME&#125;</span> PROPERTY CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-2-主入口文件定义"><a href="#2-2-2-主入口文件定义" class="headerlink" title="2.2.2 主入口文件定义"></a>2.2.2 主入口文件定义</h5><p>主入口文件实现了超参数设置，网络和数据集初始化，以及调用Trainer进行训练和测试：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_dataset.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_model.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_trainer.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 超参数设置</span></span><br><span class="line">  std::string data_root = <span class="string">&quot;./data&quot;</span>;</span><br><span class="line">  <span class="keyword">int</span> train_batch_size = <span class="number">128</span>;</span><br><span class="line">  <span class="keyword">int</span> test_batch_size = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">int</span> total_epoch_num = <span class="number">30</span>;</span><br><span class="line">  <span class="keyword">int</span> log_interval = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">int</span> num_workers = <span class="number">32</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置随机数种子</span></span><br><span class="line">  torch::<span class="built_in">manual_seed</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取设备类型</span></span><br><span class="line">  torch::DeviceType device_type = torch::kCPU;</span><br><span class="line">  <span class="keyword">if</span> (torch::cuda::<span class="built_in">is_available</span>()) &#123;</span><br><span class="line">    device_type = torch::kCUDA;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">torch::Device <span class="title">device</span><span class="params">(device_type)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造网络</span></span><br><span class="line">  MyModel model;</span><br><span class="line">  model.<span class="built_in">to</span>(device);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置优化器</span></span><br><span class="line">  torch::<span class="function">optim::SGD <span class="title">optimizer</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">      model.parameters(), torch::optim::SGDOptions(<span class="number">0.01</span>).momentum(<span class="number">0.5</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造训练和测试dataset</span></span><br><span class="line">  <span class="keyword">auto</span> train_dataset =</span><br><span class="line">      <span class="built_in">MyDataset</span>(data_root, torch::data::datasets::MNIST::Mode::kTrain);</span><br><span class="line">  <span class="keyword">auto</span> test_dataset =</span><br><span class="line">      <span class="built_in">MyDataset</span>(data_root, torch::data::datasets::MNIST::Mode::kTest);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Trainer初始化</span></span><br><span class="line">  <span class="keyword">auto</span> trainer = <span class="built_in">MyTrainer</span>(log_interval);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> epoch = <span class="number">1</span>; epoch &lt; total_epoch_num; ++epoch) &#123;</span><br><span class="line">   <span class="comment">// 运行训练</span></span><br><span class="line">    trainer.<span class="built_in">train</span>(</span><br><span class="line">        epoch,</span><br><span class="line">        model,</span><br><span class="line">        optimizer,</span><br><span class="line">        device,</span><br><span class="line">        train_dataset,</span><br><span class="line">        train_batch_size,</span><br><span class="line">        num_workers);</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 运行测试</span></span><br><span class="line">    trainer.<span class="built_in">test</span>(model, device, test_dataset, test_batch_size, num_workers);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-3-网络定义"><a href="#2-2-3-网络定义" class="headerlink" title="2.2.3 网络定义"></a>2.2.3 网络定义</h5><p>网络结构采用简单的LeNet，两个conv层和2个fc层。<br>头文件 my_model.h 内容:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModel</span> :</span> <span class="keyword">public</span> torch::nn::Module &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">MyModel</span>();</span><br><span class="line">  <span class="function">torch::Tensor <span class="title">forward</span><span class="params">(torch::Tensor x)</span></span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  torch::nn::Conv2d conv1 = <span class="literal">nullptr</span>;</span><br><span class="line">  torch::nn::Conv2d conv2 = <span class="literal">nullptr</span>;</span><br><span class="line">  torch::nn::Dropout2d conv2_drop;</span><br><span class="line">  torch::nn::Linear fc1 = <span class="literal">nullptr</span>;</span><br><span class="line">  torch::nn::Linear fc2 = <span class="literal">nullptr</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>实现文件 my_model.cpp:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_model.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">MyModel::<span class="built_in">MyModel</span>() &#123;</span><br><span class="line">  conv1 = torch::nn::<span class="built_in">Conv2d</span>(torch::nn::<span class="built_in">Conv2dOptions</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="number">5</span>));</span><br><span class="line">  conv2 = torch::nn::<span class="built_in">Conv2d</span>(torch::nn::<span class="built_in">Conv2dOptions</span>(<span class="number">10</span>, <span class="number">20</span>, <span class="number">5</span>));</span><br><span class="line">  fc1 = torch::nn::<span class="built_in">Linear</span>(<span class="number">320</span>, <span class="number">50</span>);</span><br><span class="line">  fc2 = torch::nn::<span class="built_in">Linear</span>(<span class="number">50</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">register_module</span>(<span class="string">&quot;conv1&quot;</span>, conv1);</span><br><span class="line">  <span class="built_in">register_module</span>(<span class="string">&quot;conv2&quot;</span>, conv2);</span><br><span class="line">  <span class="built_in">register_module</span>(<span class="string">&quot;conv2_drop&quot;</span>, conv2_drop);</span><br><span class="line">  <span class="built_in">register_module</span>(<span class="string">&quot;fc1&quot;</span>, fc1);</span><br><span class="line">  <span class="built_in">register_module</span>(<span class="string">&quot;fc2&quot;</span>, fc2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">MyModel::forward</span><span class="params">(torch::Tensor x)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// conv1</span></span><br><span class="line">  x = conv1-&gt;forward(x);</span><br><span class="line">  x = torch::<span class="built_in">max_pool2d</span>(x, <span class="number">2</span>);</span><br><span class="line">  x = torch::<span class="built_in">relu</span>(x);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// conv2</span></span><br><span class="line">  x = conv2-&gt;forward(x);</span><br><span class="line">  x = conv2_drop-&gt;forward(x);</span><br><span class="line">  x = torch::<span class="built_in">max_pool2d</span>(x, <span class="number">2</span>);</span><br><span class="line">  x = torch::<span class="built_in">relu</span>(x);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// fc1</span></span><br><span class="line">  x = x.<span class="built_in">view</span>(&#123;<span class="number">-1</span>, <span class="number">320</span>&#125;);</span><br><span class="line">  x = fc1-&gt;forward(x);</span><br><span class="line">  x = torch::<span class="built_in">relu</span>(x);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// dropout</span></span><br><span class="line">  x = torch::<span class="built_in">dropout</span>(x, <span class="number">0.5</span>, <span class="built_in">is_training</span>());</span><br><span class="line"></span><br><span class="line">  <span class="comment">// fc2</span></span><br><span class="line">  x = fc2-&gt;forward(x);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// log softmax</span></span><br><span class="line">  x = torch::<span class="built_in">log_softmax</span>(x, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到网络的定义还是比较简单直接，可以直接从Python 网络定义迁移过去，几个核心点：</p>
+<ul>
+<li>网络类的定义需要继承<code>torch::nn::Module</code> 类</li>
+<li>实现<code>forward</code> 函数来进行网络前项运算，其中每个层需要显式地调用<code>forward</code> 函数</li>
+</ul>
+<h5 id="2-2-4-数据集定义"><a href="#2-2-4-数据集定义" class="headerlink" title="2.2.4 数据集定义"></a>2.2.4 数据集定义</h5><p>由于 Libtorch 自带 MNIST的实现，我们这里只是做了一个简单的封装，作为模块化的例子。<br>头文件<code>my_dataset.h</code> 内容：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">MyDataset</span>(</span><br><span class="line">      <span class="keyword">const</span> std::string&amp; data_root,</span><br><span class="line">      torch::data::datasets::MNIST::Mode phase);</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  torch::data::datasets::MNIST mnist_dataset;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>实现文件<code>my_dataset.cpp</code> 内容：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_dataset.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">MyDataset::<span class="built_in">MyDataset</span>(</span><br><span class="line">    <span class="keyword">const</span> std::string&amp; data_root,</span><br><span class="line">    torch::data::datasets::MNIST::Mode phase)</span><br><span class="line">    : <span class="built_in">mnist_dataset</span>(torch::data::datasets::<span class="built_in">MNIST</span>(data_root, phase)) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有一个需要注意的点，由于MNIST类本身没有默认构造函数，所以在<code>MyDataset</code> 类的初始化列表中就必须给成员变量<code>mnist_dataset</code>赋值，否则会报下面的错:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constructor for &#x27;MyDataset&#x27; must explicitly initialize the member &#x27;mnist_dataset&#x27; which does not have a default constructor</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="2-2-5-Trainer定义"><a href="#2-2-5-Trainer定义" class="headerlink" title="2.2.5 Trainer定义"></a>2.2.5 Trainer定义</h5><p>Trainer 包含训练和测试的两个函数，对数据和网络，优化器等输入进行计算，得到输出，计算loss和准确率。<br>头文件<code>my_trainer.h</code>内容：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_dataset.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_model.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTrainer</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">MyTrainer</span>(<span class="keyword">int</span> log_interval) : <span class="built_in">log_interval_</span>(log_interval)&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">train</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">      <span class="keyword">size_t</span> epoch,</span></span></span><br><span class="line"><span class="params"><span class="function">      MyModel&amp; model,</span></span></span><br><span class="line"><span class="params"><span class="function">      torch::optim::Optimizer&amp; optimizer,</span></span></span><br><span class="line"><span class="params"><span class="function">      torch::Device device,</span></span></span><br><span class="line"><span class="params"><span class="function">      MyDataset&amp; train_dataset,</span></span></span><br><span class="line"><span class="params"><span class="function">      <span class="keyword">int</span> batch_size,</span></span></span><br><span class="line"><span class="params"><span class="function">      <span class="keyword">int</span> num_workers)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">      MyModel&amp; model,</span></span></span><br><span class="line"><span class="params"><span class="function">      torch::Device device,</span></span></span><br><span class="line"><span class="params"><span class="function">      MyDataset&amp; test_dataset,</span></span></span><br><span class="line"><span class="params"><span class="function">      <span class="keyword">int</span> batch_size,</span></span></span><br><span class="line"><span class="params"><span class="function">      <span class="keyword">int</span> num_workers)</span></span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="keyword">int</span> log_interval_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>实现文件<code>my_trainer.cpp</code> 内容：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_trainer.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MyTrainer::train</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">size_t</span> epoch,</span></span></span><br><span class="line"><span class="params"><span class="function">    MyModel&amp; model,</span></span></span><br><span class="line"><span class="params"><span class="function">    torch::optim::Optimizer&amp; optimizer,</span></span></span><br><span class="line"><span class="params"><span class="function">    torch::Device device,</span></span></span><br><span class="line"><span class="params"><span class="function">    MyDataset&amp; train_dataset,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">int</span> batch_size,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">int</span> num_workers)</span> </span>&#123;</span><br><span class="line">  model.<span class="built_in">train</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 对MNIST数据进行Normalize和Stack（将多个Tensor stack成一个Tensor)</span></span><br><span class="line">  <span class="keyword">auto</span> dataset = train_dataset.mnist_dataset</span><br><span class="line">                     .<span class="built_in">map</span>(torch::data::transforms::Normalize&lt;&gt;(<span class="number">0.1307</span>, <span class="number">0.3081</span>))</span><br><span class="line">                     .<span class="built_in">map</span>(torch::data::transforms::Stack&lt;&gt;());</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造 DataLoader, 设置 batch size 和 worker 数目</span></span><br><span class="line">  <span class="keyword">auto</span> data_loader = torch::data::<span class="built_in">make_data_loader</span>(</span><br><span class="line">      dataset,</span><br><span class="line">      torch::data::<span class="built_in">DataLoaderOptions</span>()</span><br><span class="line">          .<span class="built_in">batch_size</span>(batch_size)</span><br><span class="line">          .<span class="built_in">workers</span>(num_workers));</span><br><span class="line">  <span class="keyword">auto</span> dataset_size = dataset.<span class="built_in">size</span>().<span class="built_in">value</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">size_t</span> batch_idx = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// 网络训练</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; batch : *data_loader) &#123;</span><br><span class="line">    <span class="comment">// 获取数据和label</span></span><br><span class="line">    <span class="keyword">auto</span> data = batch.data.<span class="built_in">to</span>(device);</span><br><span class="line">    <span class="keyword">auto</span> targets = batch.target.<span class="built_in">to</span>(device);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 优化器 梯度清零</span></span><br><span class="line">    optimizer.<span class="built_in">zero_grad</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模型前向操作，得到预测输出</span></span><br><span class="line">    <span class="keyword">auto</span> output = model.forward(data);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算loss</span></span><br><span class="line">    <span class="keyword">auto</span> loss = torch::<span class="built_in">nll_loss</span>(output, targets);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// loss 反传</span></span><br><span class="line">    loss.<span class="built_in">backward</span>();</span><br><span class="line">    optimizer.<span class="built_in">step</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印log信息</span></span><br><span class="line">    <span class="keyword">if</span> (batch_idx++ % log_interval_ == <span class="number">0</span>) &#123;</span><br><span class="line">      std::<span class="built_in">printf</span>(</span><br><span class="line">          <span class="string">&quot;\rTrain Epoch: %ld [%5llu/%5ld] Loss: %.4f&quot;</span>,</span><br><span class="line">          epoch,</span><br><span class="line">          batch_idx * batch.data.<span class="built_in">size</span>(<span class="number">0</span>),</span><br><span class="line">          dataset_size,</span><br><span class="line">          loss.<span class="keyword">template</span> item&lt;<span class="keyword">float</span>&gt;());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MyTrainer::test</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    MyModel&amp; model,</span></span></span><br><span class="line"><span class="params"><span class="function">    torch::Device device,</span></span></span><br><span class="line"><span class="params"><span class="function">    MyDataset&amp; test_dataset,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">int</span> batch_size,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">int</span> num_workers)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 测试时要将模型置为eval模式</span></span><br><span class="line">  model.<span class="built_in">eval</span>();</span><br><span class="line">  <span class="keyword">double</span> test_loss = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int32_t</span> correct = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 对MNIST数据进行Normalize和Stack（将多个Tensor stack成一个Tensor)</span></span><br><span class="line">  <span class="keyword">auto</span> dataset = test_dataset.mnist_dataset</span><br><span class="line">                     .<span class="built_in">map</span>(torch::data::transforms::Normalize&lt;&gt;(<span class="number">0.1307</span>, <span class="number">0.3081</span>))</span><br><span class="line">                     .<span class="built_in">map</span>(torch::data::transforms::Stack&lt;&gt;());</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造 DataLoader, 设置 batch size 和 worker 数目</span></span><br><span class="line">  <span class="keyword">auto</span> data_loader = torch::data::<span class="built_in">make_data_loader</span>(</span><br><span class="line">      dataset,</span><br><span class="line">      torch::data::<span class="built_in">DataLoaderOptions</span>()</span><br><span class="line">          .<span class="built_in">batch_size</span>(batch_size)</span><br><span class="line">          .<span class="built_in">workers</span>(num_workers));</span><br><span class="line">  <span class="keyword">auto</span> dataset_size = dataset.<span class="built_in">size</span>().<span class="built_in">value</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; batch : *data_loader) &#123;</span><br><span class="line">    <span class="comment">// 获取数据和label</span></span><br><span class="line">    <span class="keyword">auto</span> data = batch.data.<span class="built_in">to</span>(device);</span><br><span class="line">    <span class="keyword">auto</span> targets = batch.target.<span class="built_in">to</span>(device);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模型前向操作，得到预测输出</span></span><br><span class="line">    <span class="keyword">auto</span> output = model.forward(data);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算测试时的 loss</span></span><br><span class="line">    test_loss += torch::<span class="built_in">nll_loss</span>(</span><br><span class="line">                     output,</span><br><span class="line">                     targets,</span><br><span class="line">                     <span class="comment">/*weight=*/</span>&#123;&#125;,</span><br><span class="line">                     torch::Reduction::Sum)</span><br><span class="line">                     .item&lt;<span class="keyword">float</span>&gt;();</span><br><span class="line">    <span class="keyword">auto</span> pred = output.<span class="built_in">argmax</span>(<span class="number">1</span>);</span><br><span class="line">    correct += pred.<span class="built_in">eq</span>(targets).<span class="built_in">sum</span>().<span class="keyword">template</span> item&lt;<span class="keyword">int64_t</span>&gt;();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  test_loss /= dataset_size;</span><br><span class="line">  std::<span class="built_in">printf</span>(</span><br><span class="line">      <span class="string">&quot;\nTest set: Average loss: %.4f | Accuracy: %.3f\n&quot;</span>,</span><br><span class="line">      test_loss,</span><br><span class="line">      <span class="keyword">static_cast</span>&lt;<span class="keyword">double</span>&gt;(correct) / dataset_size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-6-编译和运行方式"><a href="#2-2-6-编译和运行方式" class="headerlink" title="2.2.6 编译和运行方式"></a>2.2.6 编译和运行方式</h5><p>我们基于CMake 编译上面的代码，同时下载MNIST数据集，完整的执行命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake ..  -DCMAKE_PREFIX_PATH=`python -c <span class="string">&#x27;import torch;print(torch.utils.cmake_prefix_path)&#x27;</span>`</span><br><span class="line">make -j8</span><br><span class="line"><span class="comment"># 下载MNIST数据</span></span><br><span class="line">mkdir data &amp;&amp; <span class="built_in">cd</span> data</span><br><span class="line">wget <span class="string">&quot;http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz&quot;</span> &amp;&amp; gunzip train-images-idx3-ubyte.gz</span><br><span class="line">wget <span class="string">&quot;http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz&quot;</span> &amp;&amp; gunzip train-labels-idx1-ubyte.gz</span><br><span class="line">wget <span class="string">&quot;http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz&quot;</span> &amp;&amp; gunzip t10k-images-idx3-ubyte.gz</span><br><span class="line">wget <span class="string">&quot;http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz&quot;</span> &amp;&amp; gunzip t10k-labels-idx1-ubyte.gz</span><br><span class="line"><span class="built_in">cd</span> ../</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行可执行文件</span></span><br><span class="line">./mnist_train</span><br></pre></td></tr></table></figure>
+<p>训练和测试输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Train Epoch: 1 [59008/60000] Loss: 0.6824</span><br><span class="line">Test set: Average loss: 0.3265 | Accuracy: 0.910</span><br><span class="line">Train Epoch: 2 [59008/60000] Loss: 0.5521</span><br><span class="line">Test set: Average loss: 0.2018 | Accuracy: 0.941</span><br><span class="line">Train Epoch: 3 [59008/60000] Loss: 0.3403</span><br><span class="line">Test set: Average loss: 0.1523 | Accuracy: 0.954</span><br><span class="line">Train Epoch: 4 [59008/60000] Loss: 0.3885</span><br><span class="line">Test set: Average loss: 0.1236 | Accuracy: 0.965</span><br><span class="line">Train Epoch: 5 [59008/60000] Loss: 0.3502</span><br><span class="line">Test set: Average loss: 0.1083 | Accuracy: 0.967</span><br><span class="line">Train Epoch: 6 [59008/60000] Loss: 0.1389</span><br><span class="line">Test set: Average loss: 0.0961 | Accuracy: 0.970</span><br><span class="line">Train Epoch: 7 [59008/60000] Loss: 0.3550</span><br><span class="line">Test set: Average loss: 0.0899 | Accuracy: 0.972</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>可以看到准确率在逐渐提升。</p>
+<p>这篇文章的内容主要就是这些，后面会根据训练一个实际一些的例子，比如nanoGPT，将在本文的codebase基础上，主要覆盖下面的内容：</p>
+<ul>
+<li>自定义数据集的Dataset类的搭建</li>
+<li>复杂网络的定义(如ResNet, Transformer)</li>
+<li>模型checkpoint的保存和读取</li>
+</ul>
+<p>欢迎点赞和关注！</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/06/30/libtorch-tutorial3/" title="libtorch系列教程3：优雅地训练MNIST分类模型">http://vra.github.io/2023/06/30/libtorch-tutorial3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
+              <a href="/tags/Libtorch/" rel="tag"># Libtorch</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/17/neoformat-python-cpp/" rel="prev" title="NeoVim 代码格式化教程">
+                  <i class="fa fa-chevron-left"></i> NeoVim 代码格式化教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/06/30/cpp-optional-tutorial/" rel="next" title="C++ std::optional 使用教程">
+                  C++ std::optional 使用教程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
