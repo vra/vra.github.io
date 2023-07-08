@@ -672,9 +672,9 @@
     
     
     
-    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Linux" scheme="http://vra.github.io/tags/Linux/"/>
     
     <category term="find" scheme="http://vra.github.io/tags/find/"/>
     
@@ -697,9 +697,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="总结" scheme="http://vra.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="TIL" scheme="http://vra.github.io/tags/TIL/"/>
     
