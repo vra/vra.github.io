@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 概述前些天 Meta 公司发布了 DINOv2 视觉预训练模型。DINOv2 能够高效地提出图像中的特征，提取的特征可以直接用于像分类等任务，而且只需要一个简单的线性层就能取得比较好的结果。 为了展示 DINOv2 强大的特征提取能力， Meta 提供了一个在线 Demo，上传一张图片，就能从一些艺术画作中检索出最相似的作品。 拿随手拍的照片体验后，DINOv2 特征提取能力确实强大，能够准">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dinov2_retrieval:一个基于DINOv2 的图片检索应用">
+<meta property="og:url" content="http://vra.github.io/2023/07/14/dinov2-retrieval/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 概述前些天 Meta 公司发布了 DINOv2 视觉预训练模型。DINOv2 能够高效地提出图像中的特征，提取的特征可以直接用于像分类等任务，而且只需要一个简单的线性层就能取得比较好的结果。 为了展示 DINOv2 强大的特征提取能力， Meta 提供了一个在线 Demo，上传一张图片，就能从一些艺术画作中检索出最相似的作品。 拿随手拍的照片体验后，DINOv2 特征提取能力确实强大，能够准">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/dinov2_demo_result.jpeg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688175364717_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688175364731_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688175364741_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688175364753_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688175364766_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688175364775_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688175364786_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688175364801_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688219476149_output.jpg">
+<meta property="og:image" content="http://vra.github.io/imgs/dinov2_retrieval/1688219476156_output.jpg">
+<meta property="article:published_time" content="2023-07-13T16:05:35.000Z">
+<meta property="article:modified_time" content="2023-07-13T16:16:35.363Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Pytorch">
+<meta property="article:tag" content="pip">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://vra.github.io/imgs/dinov2_retrieval/dinov2_demo_result.jpeg">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/07/14/dinov2-retrieval/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/07/14/dinov2-retrieval/","path":"2023/07/14/dinov2-retrieval/","title":"dinov2_retrieval:一个基于DINOv2 的图片检索应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>dinov2_retrieval:一个基于DINOv2 的图片检索应用 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">162</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">171</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">2. 安装和使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%80%9D%E8%80%83"><span class="nav-number"></span> <span class="nav-text">3. 思考</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">171</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">162</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/07/14/dinov2-retrieval/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="dinov2_retrieval:一个基于DINOv2 的图片检索应用 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          dinov2_retrieval:一个基于DINOv2 的图片检索应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-07-14 00:05:35 / 修改时间：00:16:35" itemprop="dateCreated datePublished" datetime="2023-07-14T00:05:35+08:00">2023-07-14</time>
+    </span>
+
+  
+    <span id="/2023/07/14/dinov2-retrieval/" class="post-meta-item leancloud_visitors" data-flag-title="dinov2_retrieval:一个基于DINOv2 的图片检索应用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>前些天 Meta 公司发布了 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/dinov2">DINOv2</a> 视觉预训练模型。DINOv2 能够高效地提出图像中的特征，提取的特征可以直接用于像分类等任务，而且只需要一个简单的线性层就能取得比较好的结果。</p>
+<p>为了展示 DINOv2 强大的特征提取能力， Meta 提供了一个在线 <a target="_blank" rel="noopener" href="https://dinov2.metademolab.com/">Demo</a>，上传一张图片，就能从一些艺术画作中检索出最相似的作品。</p>
+<p>拿随手拍的照片体验后，DINOv2 特征提取能力确实强大，能够准确地理解图片中的语义信息。</p>
+<p><img data-src="/imgs/dinov2_retrieval/dinov2_demo_result.jpeg"></p>
+<p>由于 DINOv2 预训练模型是开源的，因为基于它来测试实际的效果是可行的。比如，我想找到相册中跟某张照片最相似的图片，就可以用 DINOv2 来测试照片和相册中所有照片的特征，然后计算相册中照片特征与测试照片最相近的那一张，就是我想要的。</p>
+<p>整体思路是很简单直接的，经过一天的开发，终于完成了一个相对完善的Python工具 <a target="_blank" rel="noopener" href="https://github.com/vra/dinov2-retrieval">dinov2_retrieval</a>，能够检索若干张图片在测试数据集中最相似的图。</p>
+<p>写完后拿最近拍的一些随机照片跑了一下，检索结果还是挺不错的。最左边是测试图片，右边的5张图是在[Caltech 256](<a target="_blank" rel="noopener" href="https://data.caltech.edu/records/nyy15-4j048">Caltech 256</a>)数据集中检索得到的top5相似的图像：<br><img data-src="/imgs/dinov2_retrieval/1688175364717_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364731_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364741_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364753_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364766_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364775_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364786_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364801_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688219476149_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688219476156_output.jpg"></p>
+<p>通过和ResNet50预训练模型提取的特征做检索对比，发现 DINOv2 提取的特征还是更准确一些，检索结果也更好。</p>
+<p>后面部分详细说说这个工具 dinov2_retrieval 的使用。</p>
+<span id="more"></span>
+
+<h3 id="2-安装和使用"><a href="#2-安装和使用" class="headerlink" title="2. 安装和使用"></a>2. 安装和使用</h3><p>dinov2_retrieval 已经发布到 PyPI，因此可以使用pip来直接安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install dinov2_retrieval</span><br></pre></td></tr></table></figure>
+<p>安装后在命令行执行<code>dinov2_retrieval -h</code> 来检查安装是否成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">dinov2_retrieval -h</span><br><span class="line">usage: dinov2_retrieval [-h] [-s &#123;small,base,large,largest&#125;] [-p MODEL_PATH] [-o OUTPUT_ROOT] -q QUERY -d DATABASE [-n NUM] [--size SIZE]</span><br><span class="line">                        [-m &#123;0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100&#125;] [--disable-cache] [-v]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --<span class="built_in">help</span>            show this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">  -s &#123;small,base,large,largest&#125;, --model-size &#123;small,base,large,largest&#125;</span><br><span class="line">                        DinoV2 model <span class="built_in">type</span></span><br><span class="line">  -p MODEL_PATH, --model-path MODEL_PATH</span><br><span class="line">                        path to dinov2 model, useful when github is unavailable</span><br><span class="line">  -o OUTPUT_ROOT, --output-root OUTPUT_ROOT</span><br><span class="line">                        root folder to save output results</span><br><span class="line">  -q QUERY, --query QUERY</span><br><span class="line">                        path to a query image file or image folder</span><br><span class="line">  -d DATABASE, --database DATABASE</span><br><span class="line">                        path to the database image file or image folder</span><br><span class="line">  -n NUM, --num NUM     How many images to show <span class="keyword">in</span> retrieval results</span><br><span class="line">  --size SIZE           image output size</span><br><span class="line">  -m &#123;0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100&#125;, --margin &#123;0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100&#125;</span><br><span class="line">                        margin size (<span class="keyword">in</span> pixel) between concatenated images</span><br><span class="line">  --disable-cache       don<span class="string">&#x27;t cache database features, will extract features each time, quite time-consuming for large database</span></span><br><span class="line"><span class="string">  -v, --verbose         show detailed logs</span></span><br></pre></td></tr></table></figure>
+<p>如果有上面的输出说明就安装成功了，否则就有问题，解决不了的情况下可以在<a target="_blank" rel="noopener" href="https://github.com/vra/dinov2-retrieval/issues">这里</a>提交issue。</p>
+<p>运行时一般来说只需要设置一下<code>--query</code> 和<code>--database</code> 参数，分别代表测试图像和数据集的地址。两者都可以是单张图片或者目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dinov2_retrieval -q /path/to/query/image -d /path/to/database/images</span><br></pre></td></tr></table></figure>
+<p>检索得到的结果会保存在<code>output</code>目录下。</p>
+<p>另外的选项含义如下：</p>
+<ul>
+<li>-s/–model-size: 模型大小，可以设置small，base，large或者largest</li>
+<li>-p/–model_path: 模型缓存路径，一般是<code>$HOME/.cache/torch/hub/facebookresearch_dinov2_main</code>，对于GitHub连接不太稳定的情况使用此选项可以从本地读取模型</li>
+<li>-o/–output-root: 输出结果的保存目录，默认是<code>output</code></li>
+<li>-n/–num: 显示多少张最相似的图片，默认是1张</li>
+<li>–size: 图像缩放到多大来显示，默认是224</li>
+<li>-m/–margin: 不同图像拼接时的间距，默认10像素</li>
+<li>–disable-cache: 禁用database特征的cache，开启后每次运行都会对database所有图像提取一遍特征，耗时大大增加</li>
+<li>-v/–verbose: 开启debug log，会显示更多有用信息，比如图像的相似度等</li>
+</ul>
+<h2 id="3-思考"><a href="#3-思考" class="headerlink" title="3. 思考"></a>3. 思考</h2><p>写完这个工具后，有一点体会，检索这个任务要做出有意思的东西，还是要有足够丰富有趣的数据库。这也是一个通用的问题，现在的AI有强大的能力，但对于普通开发者来说，AI的能力用到哪里，怎么产生出有意思有意义的实际应用场景，是个值得思考的问题。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/07/14/dinov2-retrieval/" title="dinov2_retrieval:一个基于DINOv2 的图片检索应用">http://vra.github.io/2023/07/14/dinov2-retrieval/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
+              <a href="/tags/pip/" rel="tag"># pip</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/30/git-diff-a-special-use-case/" rel="prev" title="git diff 的一个妙用">
+                  <i class="fa fa-chevron-left"></i> git diff 的一个妙用
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
