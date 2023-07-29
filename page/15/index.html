@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">162</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">171</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">162</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">172</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">171</span>
+          <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -204,6 +204,98 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2016/04/07/cool-certificate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/04/07/cool-certificate/" class="post-title-link" itemprop="url">cool-certificate, 一个好玩的证书生成工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-04-07 23:15:03" itemprop="dateCreated datePublished" datetime="2016-04-07T23:15:03+08:00">2016-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:00" itemprop="dateModified" datetime="2021-08-20T23:48:00+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2016/04/07/cool-certificate/" class="post-meta-item leancloud_visitors" data-flag-title="cool-certificate, 一个好玩的证书生成工具" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前几天同学发过来一张无人机驾驶证的照片，瞬间觉得很高大上，仔细一询问，原来是用软件生成的图片，网址是：<a target="_blank" rel="noopener" href="http://wx.znl.cn/app/index.php?i=120&amp;c=entry&amp;id=1&amp;do=index&amp;m=bi_pic">http://wx.znl.cn/app/index.php?i=120&amp;c=entry&amp;id=1&amp;do=index&amp;m=bi_pic</a>。 当访问该网站的时候，用户输入用户名，然后就生成包含用户名的驾照照片。我接着想能不能自己做一个类似这样的东西呢，经过思考发现，其实操作比较简单，即将用户姓名写入到图像上的合适位置即可。因为我之前已经有一些用Python 的Django框架做小的网站的经验，而且Python PIL模块可以完成这个任务，所以我立即想到， 能不能结合两者，建立一个网站，让用户输入姓名，然后将用户姓名传入到后台，后台调用PIL函数，将名字写到图片的相应位置上，然后返回给用户呢？经过思考我发现这种思路是可行的，而且工作量貌似也不是很大，所以今天早上开始做了做，在无人机驾照的基础上又增加了2个有趣的证件：潜水证和超级帅哥证，今晚终于作出了一个粗糙的结果（网站页面使用了原始和简单的HTML标签），可以在<a target="_blank" rel="noopener" href="http://115.28.30.25:8001/">这里</a>访问。代码已经上传到<a target="_blank" rel="noopener" href="https://github.com/vra/cool_certificate">github上</a>了。下面记下来实现过程中的一些思考。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/04/07/cool-certificate/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1019,98 +1111,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2015/07/03/source-command/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/06/02/sublime-text-summary-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/06/02/sublime-text-summary-3/" class="post-title-link" itemprop="url">Sublime Text 使用技巧3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2015-06-02 20:47:10" itemprop="dateCreated datePublished" datetime="2015-06-02T20:47:10+08:00">2015-06-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2015/06/02/sublime-text-summary-3/" class="post-meta-item leancloud_visitors" data-flag-title="Sublime Text 使用技巧3" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="主题管理插件Themr"><a href="#主题管理插件Themr" class="headerlink" title="主题管理插件Themr"></a>主题管理插件Themr</h2><p>这个插件用命令的形式来管理、设置主题Theme，省去了点击按钮的繁琐操作，对喜爱简单操作的用户来说很有用。<br>安装方式：<strong>Package Control Install</strong>-&gt;输入<strong>Themr</strong>安装即可。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/06/02/sublime-text-summary-3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
