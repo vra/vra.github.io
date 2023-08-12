@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">162</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">172</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">163</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">173</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">162</span>
+        <span class="site-state-item-count">163</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -213,6 +213,92 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/08/12/python-parallel-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/08/12/python-parallel-function/" class="post-title-link" itemprop="url">一个简单好用的Python并行函数</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-12 23:43:21 / 修改时间：23:44:23" itemprop="dateCreated datePublished" datetime="2023-08-12T23:43:21+08:00">2023-08-12</time>
+    </span>
+
+  
+    <span id="/2023/08/12/python-parallel-function/" class="post-meta-item leancloud_visitors" data-flag-title="一个简单好用的Python并行函数" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>用Python跑有大量数据的任务的时候，启用多进程加速效果明显。但因为我之前在使用Python的多进程库时总遇到卡住的问题，后来对这块避而远之，总是用别的方法来加速。最近发现OpenMMLab的一些库提供了多进程并行的函数功能，简单好用。比如一个简单的toy例子，OpenCV读图像，resize然后保存，在8个CPU核的 Mac 上，加速比能达到3.4倍(45ms vs 13ms)，也就是以前要跑3个多小时的任务，现在1个小时就能搞定，省了不少时间，更多实际例子也证明了这个函数的加速效果，还是挺实用的。这里写个教程，希望也能方便到别的有同样需要的人，当然同类型的库应该也有很多，这里只是取一瓢饮。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/08/12/python-parallel-function/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/07/30/git-clean-tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -241,9 +327,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-07-30 00:21:01 / 修改时间：00:21:57" itemprop="dateCreated datePublished" datetime="2023-07-30T00:21:01+08:00">2023-07-30</time>
+      <time title="创建时间：2023-07-30 00:21:01" itemprop="dateCreated datePublished" datetime="2023-07-30T00:21:01+08:00">2023-07-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-09 15:08:19" itemprop="dateModified" datetime="2023-08-09T15:08:19+08:00">2023-08-09</time>
     </span>
 
   
@@ -263,7 +355,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="1-引入"><a href="#1-引入" class="headerlink" title="1. 引入"></a>1. 引入</h3><p>git clean 是用来删除git 仓库中没有被跟踪的文件的命令，在想要快速清理git仓库（比如，删除仓库中所有没有跟踪的文件，清除编译生成的临时文件）时很有用。是相比别的git子命令， git clean的配置选项比较少，使用起来简单一些，这里写一个简要教程。</p>
+          <h3 id="1-引入"><a href="#1-引入" class="headerlink" title="1. 引入"></a>1. 引入</h3><p>git clean 是用来删除 git 仓库中没有被跟踪的文件的命令，在想要快速清理 git 仓库（比如，删除仓库中所有没有跟踪的文件，清除编译生成的临时文件）时很有用。是相比别的git子命令， git clean的配置选项比较少，使用起来简单一些，这里写一个简要教程。<br>友情提示：git clean真的会删除文件，而且没法用git命令来恢复（因为没有被 git 跟踪），所以使用git clean前务必慎重，建议每次删除文件之前先加<code>--dry-run</code> 选项来验证会删除哪些文件，确保没有误删。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/07/30/git-clean-tutorial/#more" rel="contents">
@@ -1014,96 +1106,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/05/27/talkgpt4all-2-0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/27/mac-ranlib-issue/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/27/mac-ranlib-issue/" class="post-title-link" itemprop="url">mac 编译问题解决——building for macOS-x86_64 but attempting to link with file built for xxx</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-27 01:17:15 / 修改时间：01:19:20" itemprop="dateCreated datePublished" datetime="2023-05-27T01:17:15+08:00">2023-05-27</time>
-    </span>
-
-  
-    <span id="/2023/05/27/mac-ranlib-issue/" class="post-meta-item leancloud_visitors" data-flag-title="mac 编译问题解决——building for macOS-x86_64 but attempting to link with file built for xxx" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在编译TVM的一个<a target="_blank" rel="noopener" href="https://github.com/mlc-ai/relax">fork版本</a>时，遇到下面的报错：</p>
-<blockquote>
-<p>ld: warning: ignoring file libbacktrace/lib/libbacktrace.a, building for macOS-x86_64 but attempting to link with file built for unknown-unsupported file format ( 0x21 0x3C 0x61 0x72 0x63 0x68 0x3E 0x0A<br> 0x2F 0x20 0x20 0x20 0x20 0x20 0x20 0x20 )<br>Undefined symbols for architecture x86_64:<br>  “_backtrace_create_state”, referenced from:<br>      __GLOBAL__sub_I_logging.cc in logging.cc.o<br>  “_backtrace_full”, referenced from:<br>      tvm::runtime::Backtrace() in logging.cc.o<br>  “_backtrace_syminfo”, referenced from:<br>      tvm::runtime::(anonymous namespace)::BacktraceFullCallback(void*, unsigned long, char const*, int, char const*) in logging.cc.o<br>ld: symbol(s) not found for architecture x86_64<br>clang: error: linker command failed with exit code 1 (use -v to see invocation)<br>make[3]: *** [libtvm_runtime.dylib] Error 1<br>make[2]: *** [CMakeFiles/tvm_runtime.dir/all] Error 2<br>make[2]: *** Waiting for unfinished jobs….</p>
-</blockquote>
-<p>搜索了一下，发现核心原因是Mac下ranlib命令采用了GNU版本，而非Apple版本导致的，下面详细展开报错原因和解决办法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/27/mac-ranlib-issue/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
