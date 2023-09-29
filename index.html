@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">163</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">173</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">163</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">174</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -204,6 +204,116 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/09/01/fastvit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/01/fastvit/" class="post-title-link" itemprop="url">FastViT 论文阅读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-09-01 15:56:52 / 修改时间：16:03:42" itemprop="dateCreated datePublished" datetime="2023-09-01T15:56:52+08:00">2023-09-01</time>
+    </span>
+
+  
+    <span id="/2023/09/01/fastvit/" class="post-meta-item leancloud_visitors" data-flag-title="FastViT 论文阅读" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.14189">arxiv</a><br>代码地址：<a target="_blank" rel="noopener" href="https://github.com/apple/ml-fastvit">ml-fastvit</a></p>
+<p>FastViT 是苹果公司在 ICCV 2023上发表的网络结构设计的论文，在速度和精度上取得比较好的折衷，速度上既能和MobileOne这种轻量级网络匹敌，精度上也不输PoolFormer、ConvNeXt等比较新的大网络结构。<br><img data-src="/imgs/fastvit/20230901135142.png"></p>
+<p>这是网络整体的结构图：<br><img data-src="/imgs/fastvit/20230901155048.png"><br>整体还是分成Stem和4个Stage，以及最后的输出Head。可以看到所有结构都在推理时进行了重参数化，保证只有一个网络分支。虽然叫ViT，但网络的核心还是由Conv层组成。</p>
+<p>整个网络的的大部分模块是以MobileOne 的核心 MobileOneBlock 打底的，所以说是 MobileOne V2 也不为过。</p>
+<p>比较有意思的是，FastVit 这篇论文的作者列表、作者顺序都和 MobileOne 一模一样！<br><img data-src="/imgs/fastvit/20230901154317.png"><br><img data-src="/imgs/fastvit/20230901154255.png"></p>
+<p>所以可以说，FastViT 是 MobileOne 框架的延续，核心是在推理的时候保证只有一条网络分支，提升网络的推理速度。</p>
+<p>具体来说，为了提升效果，网络设计上参考了比较新的 ConvMixer 结构。然后为了保证能够重参数化，将其中的非线性层省略掉，去掉残差模块。为了缓解 Self-Attention 模块计算量太大的问题，在浅层特征图比较大的情况下，采用 Large Kernel，也就是7x7 Kernel Size 的Conv网络。</p>
+<p>下面依次对网络的几个核心模块进行说明。</p>
+<h3 id="2-RepMixer"><a href="#2-RepMixer" class="headerlink" title="2. RepMixer"></a>2. RepMixer</h3><p>ConvMixer 提出了用Conv网络替代ViT网络的方法，在效果上超越了ViT方法。</p>
+<p>已有的一些方法已经验证，Skip-Connection因为会有额外的内存访问开销，因此会显著增加网络延迟，如果能合并Skip-Connection，对于网络的加速会有很帮助。注意论文中的Skip-Connection其实指的是类似残差模块中的两个分支相加的操作（如下图），而不是更常见的Encoder和Decoder之间的跳层连接。<br><img data-src="/imgs/fastvit/20230901143032.png"></p>
+<p>FastViT利用了 ConvMixer 网络结构优异的性能，同时为了能够在推理时进行重参数化，对 ConvMixer 进行了几个修改：</p>
+<ol>
+<li>去掉非线性层，否则没法进行重参数化</li>
+<li>将BN放在DepthWiseConv之前</li>
+<li>在推理时合并 Skip-Connection，用来加速推理。</li>
+</ol>
+<p>具体代码实现时，训练时采用了2个MobileOneBlock，分别表示mixer和normal，与原始输入x相加；推理的时候去掉残差相加，直接转换为一个MobileOne模块：<br><img data-src="/imgs/fastvit/20230901144427.png"></p>
+<h3 id="3-训练时过参数化"><a href="#3-训练时过参数化" class="headerlink" title="3. 训练时过参数化"></a>3. 训练时过参数化</h3><p>过参数化是指训练的时候将结构相同的网络模块重复多遍，通过增加模型的复杂度来提点。在推理的时候，再通过重参数化trick将多个分支的结构合并到一个分支来提速。下面是过参数化的示意图（图片来自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/560894077">这里</a>):<br><img data-src="/imgs/fastvit/20230901150703.png"></p>
+<p>MobileOne 论文中就采用了过参数模块，验证可以提高网络的学习能力。</p>
+<p>在这篇论文中，为了提速，先是将普通的 KxK 的Conv修改为DepthWise KxK 的 Conv + 1x1 PointWise 的 Conv层，发现在提速后精度下降，例如论文中 Table 1 所示，这步修改后耗时从 1.58ms 下降到 1.26ms，但精度也从78.5下降到78.0:<br><img data-src="/imgs/fastvit/20230901151134.png"></p>
+<p>为了弥补这一步造成的精度损失，作者叠加了上面提到的训练时重参数化的trick，保证速度不变的情况下，效果超过了之前的方法，从78.0上升到78.9。</p>
+<p>当然这部分的结构优化其实比较”水”，是现有的两个工作的简单组合……</p>
+<h3 id="4-Large-Kernel"><a href="#4-Large-Kernel" class="headerlink" title="4. Large Kernel"></a>4. Large Kernel</h3><p>由于Transformer结构的核心模块是Self-Attention模块，而且已经被无数实验验证具有强大的特征提取能力。<br>但Self-Attention的计算量很大，要做到手机上实时难度不小。</p>
+<p>作者认为，Self-Attention 效果好跟它有很大的感受野有关系。而普通 Conv 层通过增加 Kernel. Size，也能达到提高感受野的效果。</p>
+<p>因此最终网络结构设计上，在每个Stage开始的时候，采用 7x7 的 MobileOneBlock。7x7 的 Kernel Size 也是通过实验试出来的。</p>
+<p>为了既能跟MobileOne这种轻量级网络对比，又能在 ImageNet 上和别的模型一较高下，论文中提出了7个 Fast-ViT的变种，各个变种的设置如下：<br><img data-src="/imgs/fastvit/20230901153635.png"></p>
+<h3 id="5-实验"><a href="#5-实验" class="headerlink" title="5. 实验"></a>5. 实验</h3><p>对比实验在 ImageNet-1K 分类任务、COCO 物体检测，ADE20K 语义分割等标准任务上进行了对比</p>
+<p><img data-src="/imgs/fastvit/20230901153843.png"><br><img data-src="/imgs/fastvit/20230901153923.png"><br><img data-src="/imgs/fastvit/20230901153936.png"><br>另外这篇论文还比较了FastVit在3D手重建这个下游任务上的效果，也是比MobRecon这些端侧实时的方法效果更好，当然还是刷不过MeshGraphormer等基于HRNet Backbone的模型。<br><img data-src="/imgs/fastvit/20230901135311.png"></p>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><p>整个论文是比较实用的，没有太多自己的原创性的点子，更多的是将一些现有的网络结构设计思想融合进MobileOne的推理时单分支的网络结构中来。</p>
+<p>另外一个值得注意的事情是，论文中给出的Mobile Latency都很低，像 FastVit-MA36 7.9G 的FLOPS，移动端延迟4.5毫秒。但要明白这是用iPhone 12 Pro Max上使用CoreML来测试的，本身iPhone 12 Pro Max 采用的A14芯片很强，而且CoreML针对苹果的硬件有专门的优化，所以在安卓机器或者低端一些的iPhone 上，采用别的推理引擎（如ONNX， MNN， TCNN）进行推理时，很有可能达不到这么高的速度，所以像 FastVit-MA36这种FLOPS 约为8G的模型在手机上用起来还是需要验证的。</p>
+<p>总之对于想试用 FastViT 的小伙伴来说，用就完了，代码已经开源，也不存在复现的问题，直接用起来，好用就加入到自己的任务中，效果比较差或者速度有瓶颈抛弃即可。</p>
+<p>另外 FastViT 的代码实现很简洁优雅，阅读起来很舒服，后面有空可以写一篇代码阅读的文章，欢迎感兴趣的小伙伴关注、点赞和评论区留言～</p>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -998,114 +1108,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/05/28/python-autocomplete-with-argcomplete/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/27/talkgpt4all-2-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/27/talkgpt4all-2-0/" class="post-title-link" itemprop="url">talkGPT4All 2.0</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-27 14:49:45 / 修改时间：14:58:57" itemprop="dateCreated datePublished" datetime="2023-05-27T14:49:45+08:00">2023-05-27</time>
-    </span>
-
-  
-    <span id="/2023/05/27/talkgpt4all-2-0/" class="post-meta-item leancloud_visitors" data-flag-title="talkGPT4All 2.0" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a target="_blank" rel="noopener" href="https://github.com/vra/talkGPT4All">talkGPT4All</a>是基于<a target="_blank" rel="noopener" href="https://gpt4all.io/index.html">GPT4All</a>的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。</p>
-<p>关于 talkGPT4All 1.0的介绍在<a target="_blank" rel="noopener" href="https://juejin.cn/post/7217112585802498107">这篇文章</a>。</p>
-<p>talkGPT4All 1.0的<a target="_blank" rel="noopener" href="https://www.zhihu.com/zvideo/1625779747656515584">视频效果</a>。</p>
-<p>由于GPT4All一直在迭代，相比上一篇文章发布时(2023-04-10)已经有较大的更新，今天将GPT4All的一些更新同步到talkGPT4All，由于支持的模型和运行模式都有较大的变化，因此发布 talkGPT4All 2.0。</p>
-<p>具体来说，2.0版本相比1.0有下面的更新。</p>
-<p>首先是GPT4All框架支持的语言模型从1个增加到8个，并且可以一键切换模型。具体的模型是</p>
-<ul>
-<li>  Vicuna-7B-1.1-q4_2</li>
-<li>  Vicuna-7B-1.2-q4_2</li>
-<li>  wizardLM-7B.q4_2</li>
-<li>  GPT4All</li>
-<li>  GPT4All-J</li>
-<li>  GPT4All-J-v1.1</li>
-<li>  GPT4All-J-v1.2</li>
-<li>  GPT4All-J-v1.3</li>
-</ul>
-<p>可以看到除了GPT4All系列的模型，这个框架也支持Vicuna和Wizard的模型了。更多模型因为证书和格式的问题，还在集成中。</p>
-<p>根据GPT4All的<a target="_blank" rel="noopener" href="https://gpt4all.io/index.html">文档</a>，不同模型在benchmark上的结果：</p>
-<p><img data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/988ae9ef513049d68d790e742f9e2139~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>可以看到GPT4All系列的模型的指标还是比较高的。</p>
-<p>另一个重要更新是GPT4All发布了更成熟的Python包，可以直接通过pip 来安装，因此1.0中集成的不同平台不同的GPT4All二进制包也不需要了。集成PyPI包的好处多多，既可以查看源码学习内部的实现，又更方便定位问题（之前的二进制包没法调试内部代码），且保证了不同平台安装命令一致（之前不同平台二进制包不同）。</p>
-<p>还有一个变化是GPT4All会自动按需下载模型，因此用户不需要手动下载和维护模型路径。同时将模型统一放置到<a target="_blank" rel="noopener" href="https://gpt4all.io/models/">https://gpt4all.io/models/</a> 目录下，测试国内模型下载速度也很快，大家玩起来也会更舒服。</p>
-<p>核心的更新内容就这些，下面对talkGPT4All的安装和使用进行说明，后面有空会添加一些多个语言模型效果的对比视频。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/27/talkgpt4all-2-0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

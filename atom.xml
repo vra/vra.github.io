@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-08-12T15:44:23.350Z</updated>
+  <updated>2023-09-01T08:03:42.059Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FastViT 论文阅读</title>
+    <link href="http://vra.github.io/2023/09/01/fastvit/"/>
+    <id>http://vra.github.io/2023/09/01/fastvit/</id>
+    <published>2023-09-01T07:56:52.000Z</published>
+    <updated>2023-09-01T08:03:42.059Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>论文地址：<a href="https://arxiv.org/abs/2303.14189">arxiv</a><br>代码地址：<a href="https://github.com/apple/ml-fastvit">ml-fastvit</a></p><p>FastViT 是苹果公司在 ICCV 2023上发表的网络结构设计的论文，在速度和精度上取得比较好的折衷，速度上既能和MobileOne这种轻量级网络匹敌，精度上也不输PoolFormer、ConvNeXt等比较新的大网络结构。<br><img data-src="/imgs/fastvit/20230901135142.png"></p><p>这是网络整体的结构图：<br><img data-src="/imgs/fastvit/20230901155048.png"><br>整体还是分成Stem和4个Stage，以及最后的输出Head。可以看到所有结构都在推理时进行了重参数化，保证只有一个网络分支。虽然叫ViT，但网络的核心还是由Conv层组成。</p><p>整个网络的的大部分模块是以MobileOne 的核心 MobileOneBlock 打底的，所以说是 MobileOne V2 也不为过。</p><p>比较有意思的是，FastVit 这篇论文的作者列表、作者顺序都和 MobileOne 一模一样！<br><img data-src="/imgs/fastvit/20230901154317.png"><br><img data-src="/imgs/fastvit/20230901154255.png"></p><p>所以可以说，FastViT 是 MobileOne 框架的延续，核心是在推理的时候保证只有一条网络分支，提升网络的推理速度。</p><p>具体来说，为了提升效果，网络设计上参考了比较新的 ConvMixer 结构。然后为了保证能够重参数化，将其中的非线性层省略掉，去掉残差模块。为了缓解 Self-Attention 模块计算量太大的问题，在浅层特征图比较大的情况下，采用 Large Kernel，也就是7x7 Kernel Size 的Conv网络。</p><p>下面依次对网络的几个核心模块进行说明。</p><h3 id="2-RepMixer"><a href="#2-RepMixer" class="headerlink" title="2. RepMixer"></a>2. RepMixer</h3><p>ConvMixer 提出了用Conv网络替代ViT网络的方法，在效果上超越了ViT方法。</p><p>已有的一些方法已经验证，Skip-Connection因为会有额外的内存访问开销，因此会显著增加网络延迟，如果能合并Skip-Connection，对于网络的加速会有很帮助。注意论文中的Skip-Connection其实指的是类似残差模块中的两个分支相加的操作（如下图），而不是更常见的Encoder和Decoder之间的跳层连接。<br><img data-src="/imgs/fastvit/20230901143032.png"></p><p>FastViT利用了 ConvMixer 网络结构优异的性能，同时为了能够在推理时进行重参数化，对 ConvMixer 进行了几个修改：</p><ol><li>去掉非线性层，否则没法进行重参数化</li><li>将BN放在DepthWiseConv之前</li><li>在推理时合并 Skip-Connection，用来加速推理。</li></ol><p>具体代码实现时，训练时采用了2个MobileOneBlock，分别表示mixer和normal，与原始输入x相加；推理的时候去掉残差相加，直接转换为一个MobileOne模块：<br><img data-src="/imgs/fastvit/20230901144427.png"></p><h3 id="3-训练时过参数化"><a href="#3-训练时过参数化" class="headerlink" title="3. 训练时过参数化"></a>3. 训练时过参数化</h3><p>过参数化是指训练的时候将结构相同的网络模块重复多遍，通过增加模型的复杂度来提点。在推理的时候，再通过重参数化trick将多个分支的结构合并到一个分支来提速。下面是过参数化的示意图（图片来自<a href="https://zhuanlan.zhihu.com/p/560894077">这里</a>):<br><img data-src="/imgs/fastvit/20230901150703.png"></p><p>MobileOne 论文中就采用了过参数模块，验证可以提高网络的学习能力。</p><p>在这篇论文中，为了提速，先是将普通的 KxK 的Conv修改为DepthWise KxK 的 Conv + 1x1 PointWise 的 Conv层，发现在提速后精度下降，例如论文中 Table 1 所示，这步修改后耗时从 1.58ms 下降到 1.26ms，但精度也从78.5下降到78.0:<br><img data-src="/imgs/fastvit/20230901151134.png"></p><p>为了弥补这一步造成的精度损失，作者叠加了上面提到的训练时重参数化的trick，保证速度不变的情况下，效果超过了之前的方法，从78.0上升到78.9。</p><p>当然这部分的结构优化其实比较”水”，是现有的两个工作的简单组合……</p><h3 id="4-Large-Kernel"><a href="#4-Large-Kernel" class="headerlink" title="4. Large Kernel"></a>4. Large Kernel</h3><p>由于Transformer结构的核心模块是Self-Attention模块，而且已经被无数实验验证具有强大的特征提取能力。<br>但Self-Attention的计算量很大，要做到手机上实时难度不小。</p><p>作者认为，Self-Attention 效果好跟它有很大的感受野有关系。而普通 Conv 层通过增加 Kernel. Size，也能达到提高感受野的效果。</p><p>因此最终网络结构设计上，在每个Stage开始的时候，采用 7x7 的 MobileOneBlock。7x7 的 Kernel Size 也是通过实验试出来的。</p><p>为了既能跟MobileOne这种轻量级网络对比，又能在 ImageNet 上和别的模型一较高下，论文中提出了7个 Fast-ViT的变种，各个变种的设置如下：<br><img data-src="/imgs/fastvit/20230901153635.png"></p><h3 id="5-实验"><a href="#5-实验" class="headerlink" title="5. 实验"></a>5. 实验</h3><p>对比实验在 ImageNet-1K 分类任务、COCO 物体检测，ADE20K 语义分割等标准任务上进行了对比</p><p><img data-src="/imgs/fastvit/20230901153843.png"><br><img data-src="/imgs/fastvit/20230901153923.png"><br><img data-src="/imgs/fastvit/20230901153936.png"><br>另外这篇论文还比较了FastVit在3D手重建这个下游任务上的效果，也是比MobRecon这些端侧实时的方法效果更好，当然还是刷不过MeshGraphormer等基于HRNet Backbone的模型。<br><img data-src="/imgs/fastvit/20230901135311.png"></p><h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><p>整个论文是比较实用的，没有太多自己的原创性的点子，更多的是将一些现有的网络结构设计思想融合进MobileOne的推理时单分支的网络结构中来。</p><p>另外一个值得注意的事情是，论文中给出的Mobile Latency都很低，像 FastVit-MA36 7.9G 的FLOPS，移动端延迟4.5毫秒。但要明白这是用iPhone 12 Pro Max上使用CoreML来测试的，本身iPhone 12 Pro Max 采用的A14芯片很强，而且CoreML针对苹果的硬件有专门的优化，所以在安卓机器或者低端一些的iPhone 上，采用别的推理引擎（如ONNX， MNN， TCNN）进行推理时，很有可能达不到这么高的速度，所以像 FastVit-MA36这种FLOPS 约为8G的模型在手机上用起来还是需要验证的。</p><p>总之对于想试用 FastViT 的小伙伴来说，用就完了，代码已经开源，也不存在复现的问题，直接用起来，好用就加入到自己的任务中，效果比较差或者速度有瓶颈抛弃即可。</p><p>另外 FastViT 的代码实现很简洁优雅，阅读起来很舒服，后面有空可以写一篇代码阅读的文章，欢迎感兴趣的小伙伴关注、点赞和评论区留言～</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;论文地址：&lt;a href=&quot;https://arxiv.org/abs/2303.14189&quot;&gt;arxiv&lt;/a&gt;&lt;br</summary>
+      
+    
+    
+    
+    
+    <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
+    
+    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
+    
+    <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>一个简单好用的Python并行函数</title>
@@ -610,95 +636,6 @@
     <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
     
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于 np.float 被删除的问题</title>
-    <link href="http://vra.github.io/2023/02/05/numpy-remove-np-float/"/>
-    <id>http://vra.github.io/2023/02/05/numpy-remove-np-float/</id>
-    <published>2023-02-05T03:34:04.000Z</published>
-    <updated>2023-02-13T08:37:25.163Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>在Numpy 1.24版本中，<a href="https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations">删除</a>了像<code>np.float</code>、<code>np.int</code> 这样的 Python 内置类型的 alias，因此以后在代码中使用这些类型会报错<code>AttributeError: module &#39;numpy&#39; has no attribute &#39;float&#39;</code>, 涉及的类型包括：</p><ul><li><code>numpy.bool</code></li><li><code>numpy.int</code></li><li><code>numpy.float</code></li><li><code>numpy.complex</code></li><li><code>numpy.object</code></li><li><code>numpy.str</code></li><li><code>numpy.long</code></li><li><code>numpy.unicode</code></li></ul><p>那该怎么解决这个错误呢？</p><p>TL;DR</p><ul><li>对于在标量上的操作，直接使用Python内置类型替换<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo = np.random.rand(<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 原先用法，注意foo[0]是一个标量</span></span><br><span class="line">bar = np.<span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">bar = <span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></li><li>对于在<code>np.ndarray</code> 上的操作，使用<code>np.float64</code> 或<code>np.float32</code> 来替代，具体选择哪个需要自己根据情况来确定，不同类型精度会有不同，下面举两个例子:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.float32)</span><br></pre></td></tr></table></figure></li></ul><p>这里列出来了删除类型在标量和<code>np.ndarray</code> 上的替代，方便查找</p><table><thead><tr><th>原先类型</th><th>标量替换类型</th><th><code>np.ndarray</code>替换类型</th></tr></thead><tbody><tr><td>np.int</td><td>int</td><td>np.int32/np.int64</td></tr><tr><td>np.float</td><td>float</td><td>np.float32/np.float64</td></tr><tr><td>np.bool</td><td>bool</td><td>np.bool_</td></tr><tr><td>np.complex</td><td>complex</td><td>np.complex128</td></tr><tr><td>np.object</td><td>object</td><td>-</td></tr><tr><td>np.str</td><td>str</td><td>np.str_</td></tr><tr><td>np.long</td><td>int</td><td>np.int32/np.int64</td></tr><tr><td>np.unicode</td><td>str</td><td>np.str_</td></tr></tbody></table><p>详细说明参考<a href="https://numpy.org/doc/stable/release/1.20.0-notes.html#deprecations">NumPy 1.20.0 Release Notes</a>。</p><p>下面详细说说事情的来龙去脉。</p><span id="more"></span><h3 id="2-代码验证"><a href="#2-代码验证" class="headerlink" title="2. 代码验证"></a>2. 代码验证</h3><p>下面我搭建 Numpy 1.20.0 和 1.24.0 的环境进行简单测试，以及分析为什么会弃用这些类型。</p><p>首先是 Numpy 1.20.0 环境搭建与简单测试：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m venv np1.20</span><br><span class="line"><span class="built_in">source</span> np1.20/bin/activate</span><br><span class="line">pip install numpy==1.20</span><br><span class="line">python -c <span class="string">&quot;import numpy as np; a = np.array([1.0], dtype=np.float)&quot;</span></span><br></pre></td></tr></table></figure><p>输出如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;string&gt;:1: DeprecationWarning: `np.float` is a deprecated <span class="built_in">alias</span> <span class="keyword">for</span> the <span class="built_in">builtin</span> `<span class="built_in">float</span>`. To silence this warning, use `<span class="built_in">float</span>` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar <span class="built_in">type</span>, use `np.float64` here.</span><br><span class="line">Deprecated <span class="keyword">in</span> NumPy 1.20; <span class="keyword">for</span> more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html<span class="comment">#deprecations</span></span><br></pre></td></tr></table></figure><p>仔细看这段输出的话，可以发现从 Numpy 1.20 版本开始，Numpy已经弃用<code>np.float</code> 类型了，并且给出了替换建议，以及详细的说明文档<a href="https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations">地址</a>。</p><p>而在 Numpy 1.24版本里面，正式删除了<code>np.float</code>，可以用下面的代码来测试。<br>首先我们创建一个新的环境，安装Numpy 1.24版本，然后创建一个<code>np.float</code>类型的数组：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m venv np1.24</span><br><span class="line"><span class="built_in">source</span> np1.24/bin/activate</span><br><span class="line">pip install numpy==1.24</span><br><span class="line">python -c <span class="string">&quot;import numpy as np; a = np.array([1.0], dtype=np.float)&quot;</span></span><br></pre></td></tr></table></figure><p>输出如下:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;string&gt;&quot;</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">&quot;/Users/name/np1.24/lib/python3.9/site-packages/numpy/__init__.py&quot;</span>, line 284, <span class="keyword">in</span> __getattr__</span><br><span class="line">    raise AttributeError(<span class="string">&quot;module &#123;!r&#125; has no attribute &quot;</span></span><br><span class="line">AttributeError: module <span class="string">&#x27;numpy&#x27;</span> has no attribute <span class="string">&#x27;float&#x27;</span></span><br></pre></td></tr></table></figure><p>直接就报了我们开头提到的属性错误。</p><h3 id="3-Why"><a href="#3-Why" class="headerlink" title="3. Why"></a>3. Why</h3><p>其实早在2015年，Numpy 开发者就在<a href="https://github.com/numpy/numpy/pull/6103">策划</a>删除这些类型了，只不过当时使用范围太广，删除造成的影响太大，所以在近8年，1.20-1.24 4个版本的Warning后，才正式删除。<br>为什么要删除这些操作呢？我自己觉得是因为<code>np.float</code> 这种类型太容易误用了。大家都以为<code>np.float</code>是一个Numpy的数据类型，是<code>np.float32</code>的alias，但实际它是内置类型，是<code>int</code>类型的alias。<br>就像下面这个例子：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo = np.array([<span class="number">10</span>], dtype=np.int32)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bar = np.<span class="built_in">int</span>(foo)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(bar)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">int</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">baz</span> = <span class="title">np</span>.<span class="title">int32</span>(<span class="params">foo</span>)</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span>(<span class="params">baz</span>)</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> &#x27;<span class="title">numpy</span>.<span class="title">ndarray</span>&#x27;&gt;</span></span><br></pre></td></tr></table></figure><p>可以看到，对<code>np.ndarray</code> 数组进行<code>np.int</code> 和<code>np.int32</code>的操作，一个得到<code>int</code>类型的变量，另一个得到的是<code>np.ndarray</code>类型的变量。</p><p>详细的原因可以参考上面的 issue 链接。</p><p>那最早为什么还要引入<code>np.float</code>呢？直接用Python内置的类型不好吗？其实这是在很早的Numpy版本中错误地引入的，那个版本<code>np.float</code>的含义就是<code>np.float64</code> ，只不过后来版本中<code>np.float</code> 的含义修改了，但如果直接删除<code>np.float</code>，有人使用老版本的Numpy，就会在执行<code>from numpy import *</code> 报错。当前那个老版本已经很少有人用了 ，所以就删除了。</p><h3 id="4-带来的影响"><a href="#4-带来的影响" class="headerlink" title="4. 带来的影响"></a>4. 带来的影响</h3><p>这个改动带来的影响可以说是非常大了，简单来说，在 Numpy 1.24.0以上的版本中，使用<code>np.float</code>的代码都会直接报错。而 Numpy 作为 Python 在科学计算中的基础包，被广泛使用的程度无需我赘述。<br>简单在GitHub 搜索了一下，光涉及到<code>np.float</code>的(<a href="https://github.com/search?q=np.float)++lang:Python++&ref=opensearch&type=code">结果1</a>， <a href="https://github.com/search?q=np.float(+lang:Python++&ref=opensearch&type=code">结果2</a>）就有近9万行代码，我自己短期内就在两个仓库中遇到这个问题。好在解决办法也比较直接，希望可以顺利的过渡过去。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;在Numpy 1.24版本中，&lt;a href=&quot;https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations&quot;&gt;删除&lt;/a&gt;了像&lt;code&gt;np.float&lt;/code&gt;、&lt;code&gt;np.int&lt;/code&gt; 这样的 Python 内置类型的 alias，因此以后在代码中使用这些类型会报错&lt;code&gt;AttributeError: module &amp;#39;numpy&amp;#39; has no attribute &amp;#39;float&amp;#39;&lt;/code&gt;, 涉及的类型包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;numpy.bool&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;numpy.int&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;numpy.float&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;numpy.complex&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;numpy.object&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;numpy.str&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;numpy.long&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;numpy.unicode&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;那该怎么解决这个错误呢？&lt;/p&gt;
-&lt;p&gt;TL;DR&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;对于在标量上的操作，直接使用Python内置类型替换&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 原先用法，注意foo[0]是一个标量&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;bar = np.&lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;(foo[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 新用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;bar = &lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;(foo[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
-&lt;li&gt;对于在&lt;code&gt;np.ndarray&lt;/code&gt; 上的操作，使用&lt;code&gt;np.float64&lt;/code&gt; 或&lt;code&gt;np.float32&lt;/code&gt; 来替代，具体选择哪个需要自己根据情况来确定，不同类型精度会有不同，下面举两个例子:&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 原先用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;, dtype=np.&lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 新用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;, dtype=np.float32)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 原先用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;).astype(np.&lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 新用法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;foo = np.random.rand(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;).astype(np.float32)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这里列出来了删除类型在标量和&lt;code&gt;np.ndarray&lt;/code&gt; 上的替代，方便查找&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;原先类型&lt;/th&gt;
-&lt;th&gt;标量替换类型&lt;/th&gt;
-&lt;th&gt;&lt;code&gt;np.ndarray&lt;/code&gt;替换类型&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;np.int&lt;/td&gt;
-&lt;td&gt;int&lt;/td&gt;
-&lt;td&gt;np.int32/np.int64&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;np.float&lt;/td&gt;
-&lt;td&gt;float&lt;/td&gt;
-&lt;td&gt;np.float32/np.float64&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;np.bool&lt;/td&gt;
-&lt;td&gt;bool&lt;/td&gt;
-&lt;td&gt;np.bool_&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;np.complex&lt;/td&gt;
-&lt;td&gt;complex&lt;/td&gt;
-&lt;td&gt;np.complex128&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;np.object&lt;/td&gt;
-&lt;td&gt;object&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;np.str&lt;/td&gt;
-&lt;td&gt;str&lt;/td&gt;
-&lt;td&gt;np.str_&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;np.long&lt;/td&gt;
-&lt;td&gt;int&lt;/td&gt;
-&lt;td&gt;np.int32/np.int64&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;np.unicode&lt;/td&gt;
-&lt;td&gt;str&lt;/td&gt;
-&lt;td&gt;np.str_&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;详细说明参考&lt;a href=&quot;https://numpy.org/doc/stable/release/1.20.0-notes.html#deprecations&quot;&gt;NumPy 1.20.0 Release Notes&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;下面详细说说事情的来龙去脉。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="Numpy" scheme="http://vra.github.io/tags/Numpy/"/>
     
   </entry>
   
