@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2023-09-29T02:15:14.986Z</updated>
+  <updated>2023-09-29T02:31:34.247Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>code-llama-1</title>
+    <link href="http://vra.github.io/2023/09/29/code-llama-1/"/>
+    <id>http://vra.github.io/2023/09/29/code-llama-1/</id>
+    <published>2023-09-29T02:17:04.000Z</published>
+    <updated>2023-09-29T02:31:34.247Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Code Llama 是 Meta 基于 Llama 2 的代码生成AI模型， 在同类开源模型中取得比较好的结果。这里计划写3篇系列文章，从论文细节、代码使用、效果实测方面对 Code Llama 进行解读，欢迎关注我了解后续文章。</p></blockquote><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>2023年8月24日，Meta 开源了基于 <a href="https://github.com/facebookresearch/llama">Llama 2</a>) 通用 LLM 的代码生成系列模型 <a href="https://github.com/facebookresearch/codellama">Code Llama</a>)，支持Python, C++, Java, PHP, TypeScript, C# 和 Bash 编程语言，而且支持学术研究和商业使用。</p><p>另外 Code Llama 官方代码只提供了一些简单的使用示例，没有提供生产环境可用的 VSCode 等 工具的插件，搜索了一下也没找到简单易用的第三方开发的插件。相信很快就会有人做出来的。如果你有看到基于 Code Llama 的 VSCode 或者 Vim 插件，欢迎评论指教。</p><span id="more"></span><p>一些链接：</p><ul><li>代码仓库: <a href="https://github.com/facebookresearch/codellama">https://github.com/facebookresearch/codellama</a></li><li>论文PDF: <a href="https://scontent-sjc3-1.xx.fbcdn.net/v/t39.2365-6/369856151_1754812304950972_1159666448927483931_n.pdf?_nc_cat=107&ccb=1-7&_nc_sid=3c67a6&_nc_ohc=wURKmnWKaloAX-JEHAz&_nc_ht=scontent-sjc3-1.xx&oh=00_AfBOeTPJWHrxyxjNs4TLPACB4M7xQIwQcM5SMRMzDo8uCg&oe=64EEAC4F">链接</a></li><li>Meta AI 博客文章：<a href="https://ai.meta.com/blog/code-llama-large-language-model-coding/">链接</a></li></ul><h3 id="2-数据说明"><a href="#2-数据说明" class="headerlink" title="2. 数据说明"></a>2. 数据说明</h3><p>这篇论文中提到了几个不同的数据，有一些数据的构造还是挺巧妙的，这里列出来，希望能给大家一些启发。</p><h4 id="2-1-2T-token-dataset"><a href="#2-1-2T-token-dataset" class="headerlink" title="2.1 2T token dataset"></a>2.1 2T token dataset</h4><p>首先是 Llama 2 的训练数据，虽然不是这篇论文的贡献，但因为 Code Llama 模型都是从 Llama 2 初始化的，所以 这些代码生成的特化模型也都是见过这些数据的，包含它们中的知识。</p><p>Llama 2 是使用 2T token 数据训练的，其中代码相关的部分有80B token，占比只有4%。</p><h4 id="2-2-500B-token-dataset"><a href="#2-2-500B-token-dataset" class="headerlink" title="2.2 500B token dataset"></a>2.2 500B token dataset</h4><p>这篇论文先是提出了通用的 500B tokens 数据集, 85% 都是关于代码的，所以可以认为这个500B 就是一个代码数据集。</p><h4 id="2-3-100B-token-Python-dataset"><a href="#2-3-100B-token-Python-dataset" class="headerlink" title="2.3 100B token Python dataset"></a>2.3 100B token Python dataset</h4><p>除了通用的 500B token 代码数据集，为了提高对 Python 代码的生成能力，论文又提出了 100B token Python dataset。</p><h4 id="2-4-RLHF-V5-dataset"><a href="#2-4-RLHF-V5-dataset" class="headerlink" title="2.4 RLHF V5 dataset"></a>2.4 RLHF V5 dataset</h4><p>这是 Llama 2 论文中使用的人工纠正的数据集，是为了让代码可以更好的对应回答提问者的指令，也为了生成更安全的代码（可以理解成对生成的代码中某些危险的代码进行过滤？）</p><h4 id="2-5-self-instruct-5B-token-dataset"><a href="#2-5-self-instruct-5B-token-dataset" class="headerlink" title="2.5 self-instruct 5B token dataset"></a>2.5 self-instruct 5B token dataset</h4><p>self-instruct 是一个生成代码数据集，通过给llama2提问代码任务，得到它的结果，作为gt。 会不会存在错误答案？这里论文设计了一个很精巧的方案来构造生成代码数据：</p><ol><li>让 LLama 2 70B 大模型设计 Easy 和 Medium 难度的编程题，每次出50道题目，要求不重复，且可以用一个单独的Python函数来实现。总共得到52000个去重的问题。下面是提示词和一些回答的例子：<br><img data-src="/imgs/code_llama_1/20230826223518.png"></li><li>对上面得到的每个问题，用 Code Llama 7B 模型生成 单元测试代码和10个解题的代码，然后在解题代码上运行单元测试，将第一个通过单元测试的代码加入到 self-instruct 数据集中。</li></ol><p>这是一种很巧妙的设计，通过单元测试来判断代码的对错，能够做到完全自动化地构造数据。</p><p>当然如果单元测试代码本身错，那可能会将错误的解题代码加入到训练集中。而根据<a href="https://arxiv.org/abs/2308.02312">这篇论文</a>)的分析，作为最强的 LLM，ChatGPT 生成的代码错误率为52%。所以有理由认为  Code Llama 7B 生成的单元测试代码也会有错误，因此 self-instruct 不是一个完美的数据集。</p><h3 id="3-训练策略"><a href="#3-训练策略" class="headerlink" title="3. 训练策略"></a>3. 训练策略</h3><p>论文中针对不同的模型，尝试了不同的训练策略，整体来说是和数据集比较匹配的。</p><h4 id="3-1-从头训练-vs-Finetune"><a href="#3-1-从头训练-vs-Finetune" class="headerlink" title="3.1 从头训练 vs Finetune"></a>3.1 从头训练 vs Finetune</h4><p>论文中实验发现，采用通用llm (Llama 2)初始化，再在code数据集上finetune比在code数据集上从头训练效果要好。但同时也发现，只使用 Llama 2 模型来做代码生成，效果比 Llama 2 + Code 数据集训练要差，可见 2T token  pretrain + 500B token finetune才是做通用代码生成的最好选择。</p><h4 id="3-2-代码补全功能"><a href="#3-2-代码补全功能" class="headerlink" title="3.2 代码补全功能"></a>3.2 代码补全功能</h4><p>上面的基本训练策略中只会给定前面的代码，补全或预测后面的代码，但在有些常见，是已知前面和后面的代码，给出中间的代码，比如docstring的生成，就需要知道前面的内容(函数的名字和参数)和后面的内容（函数的具体实现），才能给出比较准确的函数说明docstring。这种任务模式论文中称之为补全 (Infilling)。</p><p>这种需求跟 LLM 预测下一个 token 的任务模式是不同的，因此需要对训练模式进行改造。总体来说，论文采用了 Casual Mask 的模式来训练网络，也就是将训练序列中间的一部分移动到最后，让网络来预测这部分内容。具体来说，将训练中的token分割为前缀、中间部分和后缀部分，分割位置利用均匀分布来确定。训练时以一半的概率喂前缀-后缀-中间（PSM）格式 token 序列，一半的概率喂后缀-前缀-中间（SPM）格式的 token 序列。</p><h4 id="3-3-长上下文输入微调"><a href="#3-3-长上下文输入微调" class="headerlink" title="3.3 长上下文输入微调"></a>3.3 长上下文输入微调</h4><p>Llama 2 模型的最长 token 数目为4096，对于代码生成任务来说，还是比较小，比如分析整个仓库中的代码，可能很容易超出限制。因此 Code Llama 在 finetune 阶段将 token 数从4096 提升到16384，提升了4倍。</p><p>位置embedding 采用旋转位置embedding, query 和 key vector都是 Rxn的一个线性组合，而R是一个块对角矩阵，也就是只有对角线和附近的4个值非零，每个位置i处的R公式如下：<br><img data-src="/imgs/code_llama_1/20230827002151.png"></p><p><img data-src="/imgs/code_llama_1/20230827002347.png"><br>d为总的token 维度。</p><h4 id="3-4-指令finetune"><a href="#3-4-指令finetune" class="headerlink" title="3.4 指令finetune"></a>3.4 指令finetune</h4><p>这部分也是为了生成更安全的代码，也更好地针对提问者的问题进行更人性化的回答。个人理解，这部分本身在策略上没有太多trick，核心是数据的构造和采集。</p><h3 id="4-模型说明"><a href="#4-模型说明" class="headerlink" title="4. 模型说明"></a>4. 模型说明</h3><p>基于几种数据和几个训练策略，就能得到不同的模型。<br>Code Llama 系列包含三大类模型，每类模型包含 7B, 13B 和 34B 三种参数大小，共9个模型。</p><p><img data-src="/imgs/code_llama_1/20230826222457.png"></p><p>第一类是Code Llama 通用代码生成模型，采用 Llama 2 的模型参数初始化，在 500B token 数据集上训练。其中 7B 和 13B 模型还进行了代码补全数据集上的训练，适用于 IDE 中实时的代码补全，而 34B 因为速度问题，并不适合实时补全，更适合作为编程助手。</p><p>第二类是 Code Llama-Python，这是针对 Python 专门优化的模型，在 500B 通用数据训练的基础上，又在额外的 100B Python 数据集上进行了finetune。</p><p>第三类是 Code. Llama-Instruct，在 Code Llama 通用模型基础上，增加了在 RLHF V5 和 self-instruct 数据集上的 finetune 过程，可以生成更符合指令需求的代码。</p><h3 id="5-结果对比"><a href="#5-结果对比" class="headerlink" title="5. 结果对比"></a>5. 结果对比</h3><p>论文中比较了非常多测试集上的指标，太多反而不知道模型的效果到底怎么样，所以这里也不列出来了。下面放的是博客文章中的和别的模型的对比表格，反而比较简洁，可以做一个大致的对比。</p><p><img data-src="/imgs/code_llama_1/20230826213734.png"></p><p>当然根据我之前的 LLMs 使用经验，实际使用时的智能感受貌似不能很好地和 Benchmark 上的结果对应起来，相差几个点对最终结果的提升有多大不太好说。 所以 Code Llama 具体使用体验如何，留待下一篇文章来分析。</p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Code Llama 是 Meta 基于 Llama 2 的代码生成AI模型， 在同类开源模型中取得比较好的结果。这里计划写3篇系列文章，从论文细节、代码使用、效果实测方面对 Code Llama 进行解读，欢迎关注我了解后续文章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;1-背景&quot;&gt;&lt;a href=&quot;#1-背景&quot; class=&quot;headerlink&quot; title=&quot;1. 背景&quot;&gt;&lt;/a&gt;1. 背景&lt;/h3&gt;&lt;p&gt;2023年8月24日，Meta 开源了基于 &lt;a href=&quot;https://github.com/facebookresearch/llama&quot;&gt;Llama 2&lt;/a&gt;) 通用 LLM 的代码生成系列模型 &lt;a href=&quot;https://github.com/facebookresearch/codellama&quot;&gt;Code Llama&lt;/a&gt;)，支持Python, C++, Java, PHP, TypeScript, C# 和 Bash 编程语言，而且支持学术研究和商业使用。&lt;/p&gt;
+&lt;p&gt;另外 Code Llama 官方代码只提供了一些简单的使用示例，没有提供生产环境可用的 VSCode 等 工具的插件，搜索了一下也没找到简单易用的第三方开发的插件。相信很快就会有人做出来的。如果你有看到基于 Code Llama 的 VSCode 或者 Vim 插件，欢迎评论指教。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="LLM" scheme="http://vra.github.io/tags/LLM/"/>
+    
+    <category term="Code Llama" scheme="http://vra.github.io/tags/Code-Llama/"/>
+    
+  </entry>
   
   <entry>
     <title>FastViT 论文阅读</title>
@@ -186,9 +215,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
@@ -211,9 +240,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Vim" scheme="http://vra.github.io/tags/Vim/"/>
     
@@ -316,9 +345,9 @@
     
     <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
     
-    <category term="GPT4All" scheme="http://vra.github.io/tags/GPT4All/"/>
-    
     <category term="LLM" scheme="http://vra.github.io/tags/LLM/"/>
+    
+    <category term="GPT4All" scheme="http://vra.github.io/tags/GPT4All/"/>
     
   </entry>
   
@@ -555,9 +584,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
@@ -599,41 +628,13 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="C++" scheme="http://vra.github.io/tags/C/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
     <category term="Libtorch" scheme="http://vra.github.io/tags/Libtorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nanoGPT + 鲁迅</title>
-    <link href="http://vra.github.io/2023/02/12/nanogpt-and-luxun/"/>
-    <id>http://vra.github.io/2023/02/12/nanogpt-and-luxun/</id>
-    <published>2023-02-12T15:24:02.000Z</published>
-    <updated>2023-02-12T16:33:42.275Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-起因"><a href="#1-起因" class="headerlink" title="1. 起因"></a>1. 起因</h2><p>今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的<a href="https://til.simonwillison.net/llms/training-nanogpt-on-my-blog">实验</a>，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模型生成鲁迅风格的文字：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">故乡，债是佩服的。</span><br><span class="line"> 我一向对于新青年的态度，先来说话，谢容易做的，然而伏园已经见过几样，感觉的是另外捧之数，以为先前的例子。今但近来做了做事，自己也还不做，不能先行通，所以生在冷静和“人生”，三妇一苦闷，觉得大约是如此隔膜</span><br><span class="line">和曹操，于是非意模茶炛，可以说是太高了，所以现在便能教育，竟�如此。</span><br><span class="line"> 但汝实在有给法历代的，不久就在绝末年间，我想显出向大家饮一趟，而汉子大毒是怀旧的，就要贫足有打劫，可以永掠的。这种事情，中国有一个大官左翼阿，（陀思妥习），有敢请佛喜，总要适说一点�</span><br></pre></td></tr></table></figure><p>还算有鲁迅文字的风格，但逻辑一窍不通，整体还是难让人满意，不知道是GPT2能力的问题还是我实验设置的问题。 Anyway，这里共享一下我实验的流程，有兴趣的朋友可以参考，进行改进。本文涉及的代码修改代码已经提交到这个<a href="https://github.com/vra/nanoGPT">仓库了</a>，可以参考，文末会附上更多例子。</p><span id="more"></span><h2 id="2-操作流程"><a href="#2-操作流程" class="headerlink" title="2. 操作流程"></a>2. 操作流程</h2><h3 id="2-1-下载nanoGPT源码并安装依赖"><a href="#2-1-下载nanoGPT源码并安装依赖" class="headerlink" title="2.1 下载nanoGPT源码并安装依赖"></a>2.1 下载nanoGPT源码并安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/karpathy/nanoGPT</span><br><span class="line"><span class="built_in">cd</span> nanoGPT</span><br><span class="line">conda create --name nanogpt  python=3.9</span><br><span class="line">conda activate nanogpt</span><br><span class="line">pip install transformers datasets tiktoken tqdm wandb numpy httpx torch torchvision</span><br></pre></td></tr></table></figure><h3 id="2-2-数据预处理"><a href="#2-2-数据预处理" class="headerlink" title="2.2 数据预处理"></a>2.2 数据预处理</h3><p>进入代码目录后，重建文件夹<code>data/lunxun</code>，用于存放数据。</p><p>从<a href="https://github.com/gzx1996/luxun/blob/master/book/book.txt">这里</a>下载鲁迅全集，放到<code>data/luxun</code>目录下，然后进行下面的处理：</p><ul><li>去掉所有编者加的注释(由于注释都是以<code>[n]</code>这种形式开头的，因此在VIM中可以用<code>0,$s/^\[.\+//g</code>命令来去掉)</li><li>由于我们想要的是鲁迅白话文的风格，因此手动去掉所有文言文的作品和翻译作品(文言文在最开头的《坟》集子里，翻译作品在最后)</li><li>去掉单行的日期文字（如<code>(一九一八年二月二日)</code>，可以在VIM中用<code>g/^(一九.\+/d</code>去掉)</li></ul><p>我处理后的文本地址在<a href="https://github.com/vra/nanoGPT/tree/master/data/luxun/book.txt">这里</a>。</p><p>然后编写代码<code>prepare.py</code>, 读取文本，构造训练集和验证集，数据比例9:1。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> tiktoken</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">input_file_path = os.path.join(os.path.dirname(__file__), <span class="string">&quot;book.txt&quot;</span>)</span><br><span class="line"></span><br><span class="line">entries = []</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(input_file_path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="keyword">if</span> line.strip() <span class="keyword">and</span> <span class="built_in">len</span>(line) &gt; <span class="number">2</span>:</span><br><span class="line">            entries.append(line)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;len of lines: <span class="subst">&#123;<span class="built_in">len</span>(entries)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># Shuffle entries</span></span><br><span class="line">random.shuffle(entries)</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">len</span>(entries)</span><br><span class="line">train_entries = entries[: <span class="built_in">int</span>(n * <span class="number">0.9</span>)]</span><br><span class="line">val_entries = entries[<span class="built_in">int</span>(n * <span class="number">0.9</span>):]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Turn those into strings</span></span><br><span class="line">train_data = <span class="string">&quot; &quot;</span>.join(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(entry) <span class="keyword">for</span> entry <span class="keyword">in</span> train_entries)</span><br><span class="line">val_data = <span class="string">&quot; &quot;</span>.join(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(entry) <span class="keyword">for</span> entry <span class="keyword">in</span> val_entries)</span><br><span class="line"></span><br><span class="line"><span class="comment"># encode with tiktoken gpt2 bpe</span></span><br><span class="line">enc = tiktoken.get_encoding(<span class="string">&quot;gpt2&quot;</span>)</span><br><span class="line">train_ids = enc.encode_ordinary(train_data)</span><br><span class="line">val_ids = enc.encode_ordinary(val_data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;train has <span class="subst">&#123;<span class="built_in">len</span>(train_ids):,&#125;</span> tokens&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;val has <span class="subst">&#123;<span class="built_in">len</span>(val_ids):,&#125;</span> tokens&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># export to bin files</span></span><br><span class="line">train_ids = np.array(train_ids, dtype=np.uint16)</span><br><span class="line">val_ids = np.array(val_ids, dtype=np.uint16)</span><br><span class="line">train_ids.tofile(os.path.join(os.path.dirname(__file__), <span class="string">&quot;train.bin&quot;</span>))</span><br><span class="line">val_ids.tofile(os.path.join(os.path.dirname(__file__), <span class="string">&quot;val.bin&quot;</span>))</span><br></pre></td></tr></table></figure><p>处理好的训练验证集在<a href="https://github.com/vra/nanoGPT/tree/master/data/luxun">这里</a>，可以直接使用。</p><h3 id="2-3-训练网络"><a href="#2-3-训练网络" class="headerlink" title="2.3 训练网络"></a>2.3 训练网络</h3><p>数据集构建完成后，就可以训练模型了。在代码库根目录，执行下面的命令:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python train.py \</span><br><span class="line">  --dataset=luxun \</span><br><span class="line">--compile=False \</span><br><span class="line">--batch_size=8 \</span><br><span class="line">--dtype=float16</span><br></pre></td></tr></table></figure><p>具体训练参数可以查看<code>train.py</code>，包括训练的层数、batch size，训练后端等等。</p><p>训练的模型默认保存在<code>out/ckpt.pt</code>。</p><p>训练22000次迭代的时候我停止了实验，loss是0.15左右。</p><h3 id="2-4-测试模型"><a href="#2-4-测试模型" class="headerlink" title="2.4 测试模型"></a>2.4 测试模型</h3><p>测试代码在<code>sample.py</code>，默认提示词为空(<code>start=&#39;\n&#39;</code>)可以通过添加<code>--start=&quot;xxx&quot;</code>来修改提示词:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sample.py --start=<span class="string">&quot;故乡&quot;</span></span><br></pre></td></tr></table></figure><h2 id="3-更多例子"><a href="#3-更多例子" class="headerlink" title="3. 更多例子"></a>3. 更多例子</h2><h3 id="3-1-人工智能"><a href="#3-1-人工智能" class="headerlink" title="3.1 人工智能"></a>3.1 人工智能</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">人工智能力。两社丈一多，西辛，是发昏了的结果，但去的四五十岁，死的陈源教授却很不通，我也就不再有了。忍不知道阿Ｑ的名字是怎么写的？这不过是一个问境。他总还拿着四个年的过头放在心里，说道，“哀，遇的。他可</span><br><span class="line">是弯口，道是阿Ｑ；近来已经做了杜师长了，半年的大武人，你还和他对面具汗说：‘非常救命！’‘是情愧 夫子’的学理论矛盾的工人，……而且跳不过是这三秒……。”</span><br><span class="line"> 而已 偶战线告了一个大问题，拿去做的纠纷，而他们就癖在《试玈书》的第一幅，来因为又是删节的，还和所放的做。不过如果加以细见，不想多写了东�</span><br></pre></td></tr></table></figure><h3 id="3-2-文艺复兴"><a href="#3-2-文艺复兴" class="headerlink" title="3.2 文艺复兴"></a>3.2 文艺复兴</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">文艺复兴运动，也是指惺把文艺当承受照时代，更易于政治家，中国并不见立刻，万分折中间，更何况失了国家，只有拜读之处，这就是政治心软到新舖式的必读书。……”</span><br><span class="line"> 我们──由此满可知道河南的内心眼和明白的点灵魂。我在曾经想做以看空虚洋，决不叫看情形。因为我想，便可以支持生活的原因，至少，更进一步而到中国来，他们也给了世界上的美�家所指见的最多也并非精微坏，莫非看翻译</span><br><span class="line">，可说是不算太多了。</span><br><span class="line"> 问题。</span><br><span class="line"> “我们没有见过这种东西，便怎么办呢？”</span><br><span class="line"> 递进句也不是有许多话。</span><br><span class="line"> “可以可以，”四铭吃了点</span><br></pre></td></tr></table></figure><h3 id="3-3-新文化"><a href="#3-3-新文化" class="headerlink" title="3.3 新文化"></a>3.3 新文化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">新文化运动，也许因为他们已经有了“力”这句话的责任了。在那里和他们的风化是并不相禁多的。</span><br><span class="line"> 阿呼呜呼兮呜呼阿呼，</span><br><span class="line"> 八九年</span><br><span class="line"> 二、浙江艳七百</span><br><span class="line"> 一九二五年十二月三十日风雨之夜示，此地声声流鼓近山腌至责诼谢。</span><br><span class="line"> 阿Ｑ的讲到文学说，他们会打断了阿Ｑ的名目退向王的头发，向公司被挤出去了。</span><br><span class="line"> 最末的批评，是“没有话派的书，对于政府来往往解释，加以泄除，以政治的运命，至于失败，那倒是往往会说，我非常危险。</span><br><span class="line"> 小娘枟不用小说的经济字的由校的文章，使是屠戮政府，是凡这些的，但我知道画家一致攻，一致的经历</span><br></pre></td></tr></table></figure><p>如果本文操作中有误的地方，还请专业人士多指出讨论。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;1-起因&quot;&gt;&lt;a href=&quot;#1-起因&quot; class=&quot;headerlink&quot; title=&quot;1. 起因&quot;&gt;&lt;/a&gt;1. 起因&lt;/h2&gt;&lt;p&gt;今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的&lt;a href=&quot;https://til.simonwillison.net/llms/training-nanogpt-on-my-blog&quot;&gt;实验&lt;/a&gt;，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模型生成鲁迅风格的文字：&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;故乡，债是佩服的。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 我一向对于新青年的态度，先来说话，谢容易做的，然而伏园已经见过几样，感觉的是另外捧之数，以为先前的例子。今但近来做了做事，自己也还不做，不能先行通，所以生在冷静和“人生”，三妇一苦闷，觉得大约是如此隔膜&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;和曹操，于是非意模茶炛，可以说是太高了，所以现在便能教育，竟�如此。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 但汝实在有给法历代的，不久就在绝末年间，我想显出向大家饮一趟，而汉子大毒是怀旧的，就要贫足有打劫，可以永掠的。这种事情，中国有一个大官左翼阿，（陀思妥习），有敢请佛喜，总要适说一点�&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;还算有鲁迅文字的风格，但逻辑一窍不通，整体还是难让人满意，不知道是GPT2能力的问题还是我实验设置的问题。 Anyway，这里共享一下我实验的流程，有兴趣的朋友可以参考，进行改进。本文涉及的代码修改代码已经提交到这个&lt;a href=&quot;https://github.com/vra/nanoGPT&quot;&gt;仓库了&lt;/a&gt;，可以参考，文末会附上更多例子。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
-    
-    <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
-    
-    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
   </entry>
   
