@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Numpy是Python中常用的数值计算库，我们经常需要用到Numpy来打印数值，查看结果。为了能精确地控制Numpy打印的信息，Numpy提供了set_printoptions 函数，包含数个参数，能满足数值打印的需要。 这里以iPython中操作作为示例，从浅入深，一步步地探索set_printoptions提供的功能，如何来满足我们的打印需求。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Numpy set_printoptions函数用法">
+<meta property="og:url" content="http://vra.github.io/2023/09/30/numpy-printoptions/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="Numpy是Python中常用的数值计算库，我们经常需要用到Numpy来打印数值，查看结果。为了能精确地控制Numpy打印的信息，Numpy提供了set_printoptions 函数，包含数个参数，能满足数值打印的需要。 这里以iPython中操作作为示例，从浅入深，一步步地探索set_printoptions提供的功能，如何来满足我们的打印需求。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-30T04:57:30.000Z">
+<meta property="article:modified_time" content="2023-09-30T04:58:30.177Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Numpy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/09/30/numpy-printoptions/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/09/30/numpy-printoptions/","path":"2023/09/30/numpy-printoptions/","title":"Numpy set_printoptions函数用法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Numpy set_printoptions函数用法 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">164</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">176</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#precision"><span class="nav-number">1.</span> <span class="nav-text">precision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#suppress"><span class="nav-number">2.</span> <span class="nav-text">suppress</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#formatter"><span class="nav-number">3.</span> <span class="nav-text">formatter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#threshold%E5%92%8Cedgeitems"><span class="nav-number">4.</span> <span class="nav-text">threshold和edgeitems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linewidth"><span class="nav-number">5.</span> <span class="nav-text">linewidth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nanstr%E5%92%8Cinfstr"><span class="nav-number">6.</span> <span class="nav-text">nanstr和infstr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sign"><span class="nav-number">7.</span> <span class="nav-text">sign</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE"><span class="nav-number">8.</span> <span class="nav-text">恢复默认配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8with%E8%AF%AD%E5%8F%A5"><span class="nav-number">9.</span> <span class="nav-text">使用with语句</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">164</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/09/30/numpy-printoptions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Numpy set_printoptions函数用法 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Numpy set_printoptions函数用法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-09-30 12:57:30 / 修改时间：12:58:30" itemprop="dateCreated datePublished" datetime="2023-09-30T12:57:30+08:00">2023-09-30</time>
+    </span>
+
+  
+    <span id="/2023/09/30/numpy-printoptions/" class="post-meta-item leancloud_visitors" data-flag-title="Numpy set_printoptions函数用法" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Numpy是Python中常用的数值计算库，我们经常需要用到Numpy来打印数值，查看结果。为了能精确地控制Numpy打印的信息，Numpy提供了<code>set_printoptions</code> <a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/generated/numpy.set_printoptions.html">函数</a>，包含数个参数，能满足数值打印的需要。</p>
+<p>这里以iPython中操作作为示例，从浅入深，一步步地探索set_printoptions提供的功能，如何来满足我们的打印需求。</p>
+<span id="more"></span>
+
+<h3 id="precision"><a href="#precision" class="headerlink" title="precision"></a>precision</h3><p>首先用Numpy创建一个float64 类型的np.ndarray，并打印数值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: a = np.random.rand(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0.63039295</span> <span class="number">0.09185505</span> <span class="number">0.02203224</span>]</span><br></pre></td></tr></table></figure>
+<p>可以看到输出的float数组保留了8位小数位，这是因为Numpy默认的设置是显示8位小数位。<br>如果只想显示2位小数位，该怎么操作呢？<br>这时候就需要用到<code>set_printoptions</code>的<code>precsion</code>的选项了，它就是用来控制显示的小数位：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">4</span>]: np.set_printoptions(precision=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0.6304</span> <span class="number">0.0919</span> <span class="number">0.022</span> ]</span><br></pre></td></tr></table></figure>
+
+<p>可以看到通过设置precsion=4，显示的数组输出保留4位小数。</p>
+<p>⚠️需要注意的是，这个设置对float类型的数值无效：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">14</span>]: a = np.random.rand()</span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: <span class="built_in">type</span>(a)</span><br><span class="line">Out[<span class="number">15</span>]: <span class="built_in">float</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">16</span>]: <span class="built_in">print</span>(a)</span><br><span class="line"><span class="number">0.40944018143470295</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">17</span>]: np.set_printoptions(precision=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">18</span>]: <span class="built_in">print</span>(a)</span><br><span class="line"><span class="number">0.40944018143470295</span></span><br></pre></td></tr></table></figure>
+
+<p>所以使用时注意类型是<code>np.ndarray</code>还是<code>float</code>。</p>
+<h3 id="suppress"><a href="#suppress" class="headerlink" title="suppress"></a>suppress</h3><p>假设我们需要获取一组很小的数值，并且需要显示结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">2</span>]: a = np.random.rand(<span class="number">3</span>) * <span class="number">1e-5</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">9.49522547e-06</span> <span class="number">4.55101001e-06</span> <span class="number">4.01284118e-06</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到打印时用了科学计数法。<br>有没有办法不使用科学计数法呢，<code>set_printoptions</code>提供了<code>suppress</code>参数，将其设置为<code>True</code>，就会禁用科学计数法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">4</span>]: np.set_printoptions(suppress=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0.0000095</span>  <span class="number">0.00000455</span> <span class="number">0.00000401</span>]</span><br></pre></td></tr></table></figure>
+
+
+<p><code>suppress</code> 参数有一个例外情况，就是对于整数部分大于8位的，即使设置<code>suppress=True</code> ，仍然会显示科学计数法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">8</span>]: a = np.random.rand(<span class="number">3</span>) * <span class="number">1e10</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">9</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">9.35772525e+09</span> <span class="number">4.14513333e+09</span> <span class="number">4.59176775e+09</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">10</span>]: a = np.random.rand(<span class="number">3</span>) * <span class="number">1e8</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">11</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">37984517.91633694</span> <span class="number">87748330.34519586</span> <span class="number">21101693.42416701</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: a = np.random.rand(<span class="number">3</span>) * <span class="number">1e9</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">13</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">4.46826342e+08</span> <span class="number">5.17327105e+08</span> <span class="number">9.07218130e+08</span>]</span><br></pre></td></tr></table></figure>
+
+<p>那有没有办法解决这个问题呢？这里就需要用到<code>set_printoptions</code> 提供的另一个参数<code>formatter</code>。</p>
+<h3 id="formatter"><a href="#formatter" class="headerlink" title="formatter"></a>formatter</h3><p><code>formatter</code>接受一个dict类型的参数，其中dict的key表示参数的类型，而dict的value则是一个函数或者format字符串，表示如何对对应的类型进行打印。</p>
+<p>举个简单的例子，我想在所有float类型的数组的每个元素后面加一个字母<code>f</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">21</span>]: a = np.random.rand(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">22</span>]: np.set_printoptions(precision=<span class="number">4</span>, formatter=&#123;<span class="string">&#x27;float&#x27;</span>: <span class="keyword">lambda</span> x: <span class="built_in">str</span>(x) + <span class="string">&#x27;f&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">In [<span class="number">23</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0.6925034861246904</span>f <span class="number">0.0613911477046164</span>f <span class="number">0.3348313234151774</span>f]</span><br></pre></td></tr></table></figure>
+<p><code>formatter</code>参数是个dict，key是“float”，表示对float类型的数组进行操作，value是一个lambda函数，将输入转换为str字符串再加一个f。</p>
+<p>在这里也可以看到，np.float64数组中元素的实际长度是16位小数。默认显示的8位数值只是它的一个近似。</p>
+<p>除了lamda函数外，也可以用Python的format格式函数来作为<code>formatter</code>参数dict的value：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">33</span>]: a = np.random.rand(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">34</span>]: np.set_printoptions(formatter=&#123;<span class="string">&#x27;float&#x27;</span>: <span class="string">&#x27;&#123;:.2f&#125;&#x27;</span>.<span class="built_in">format</span>&#125;)</span><br><span class="line"></span><br><span class="line">In [<span class="number">35</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0.70</span> <span class="number">0.91</span> <span class="number">0.82</span>]</span><br></pre></td></tr></table></figure>
+<p>可以看到，这里可以用f-string和format函数中使用的语法格式，对于用惯f-string的小伙伴来说，以这种方式来控制显示格式简直太舒服了。</p>
+<p>关于python format的语法，可以参考我之前写的<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/632687543">教程</a>。</p>
+<p>另外需要注意，设置<code>formatter</code>后，会覆盖<code>precision</code>参数，也就是显示多少位数以<code>formatter</code>中设置为准:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">25</span>]: a = np.random.rand(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">26</span>]: np.set_printoptions(precision=<span class="number">4</span>, formatter=&#123;<span class="string">&#x27;float&#x27;</span>: <span class="keyword">lambda</span> x: <span class="built_in">str</span>(x) + <span class="string">&#x27;f&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">In [<span class="number">27</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0.1604388367489663</span>f <span class="number">0.6047908263355061</span>f <span class="number">0.1645621828526913</span>f]</span><br></pre></td></tr></table></figure>
+
+<p>根据Numpy 文档，<code>formatter</code>支持的类型包括下面这些：</p>
+<ul>
+<li>‘bool’</li>
+<li>‘int’</li>
+<li>‘timedelta’ : a <a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.timedelta64" title="numpy.timedelta64"><code>numpy.timedelta64</code></a></li>
+<li>‘datetime’ : a <a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.datetime64" title="numpy.datetime64"><code>numpy.datetime64</code></a></li>
+<li>‘float’</li>
+<li>‘longfloat’ : 128-bit floats</li>
+<li>‘complexfloat’</li>
+<li>‘longcomplexfloat’ : composed of two 128-bit floats</li>
+<li>‘numpystr’ : types <a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.bytes_" title="numpy.bytes_"><code>numpy.bytes_</code></a> and <a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.str_" title="numpy.str_"><code>numpy.str_</code></a></li>
+<li>‘object’ : <em>np.object</em>_ arrays</li>
+<li>‘all’ : sets all types</li>
+<li>‘int_kind’ : sets ‘int’</li>
+<li>‘float_kind’ : sets ‘float’ and ‘longfloat’</li>
+<li>‘complex_kind’ : sets ‘complexfloat’ and ‘longcomplexfloat’</li>
+<li>‘str_kind’ : sets ‘numpystr</li>
+</ul>
+<p>好了，说了这么多，那回到上面的问题，到底该怎么控制整数位大于8的float数组不用科学计数法呢？有了formatter参数，就很简单了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">36</span>]: a = np.random.rand(<span class="number">3</span>) * <span class="number">1e10</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">37</span>]: np.set_printoptions(formatter=&#123;<span class="string">&#x27;float&#x27;</span>: <span class="string">&#x27;&#123;:.8f&#125;&#x27;</span>.<span class="built_in">format</span>&#125;)</span><br><span class="line"></span><br><span class="line">In [<span class="number">38</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">7694883457.28612423</span> <span class="number">864845466.08411431</span> <span class="number">6505022487.23314571</span>]</span><br></pre></td></tr></table></figure>
+<p>使用format格式语言轻松完成。</p>
+<p>有些时候，数组中的元素长度各不相同，打印时要么对不齐不好查看，要么自动转换为科学计数法也不好分析，利用<code>formatter</code>能够显示对齐的数值，大大方便了数据查看：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: a = np.array(</span><br><span class="line">   ...: [[<span class="number">1</span>,  -<span class="number">1000</span>, <span class="number">2222222222.33333333</span>],</span><br><span class="line">   ...: [<span class="number">233</span>, <span class="number">240.03333333333333333333333333</span>, <span class="number">8.0</span>],</span><br><span class="line">   ...: [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>]]</span><br><span class="line">   ...: )</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[[ <span class="number">1.00000000e+00</span> -<span class="number">1.00000000e+03</span>  <span class="number">2.22222222e+09</span>]</span><br><span class="line"> [ <span class="number">2.33000000e+02</span>  <span class="number">2.40033333e+02</span>  <span class="number">8.00000000e+00</span>]</span><br><span class="line"> [ <span class="number">1.00000000e+00</span>  <span class="number">2.00000000e+00</span>  <span class="number">3.00000000e+00</span>]]</span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: np.set_printoptions(formatter=&#123;<span class="string">&#x27;float&#x27;</span>: <span class="string">&#x27;&#123;:&gt;20.8f&#125;&#x27;</span>.<span class="built_in">format</span>&#125;)</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[[          <span class="number">1.00000000</span>       -<span class="number">1000.00000000</span>  <span class="number">2222222222.33333349</span>]</span><br><span class="line"> [        <span class="number">233.00000000</span>         <span class="number">240.03333333</span>           <span class="number">8.00000000</span>]</span><br><span class="line"> [          <span class="number">1.00000000</span>           <span class="number">2.00000000</span>           <span class="number">3.00000000</span>]]</span><br></pre></td></tr></table></figure>
+<p>这里利用了<code>&gt;N</code>的format语法，向右对齐。</p>
+<h3 id="threshold和edgeitems"><a href="#threshold和edgeitems" class="headerlink" title="threshold和edgeitems"></a>threshold和edgeitems</h3><p>假如我们有一个很大的数组(1024x4)，打印时默认只显示开始三行和最后三行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: a = np.random.rand(<span class="number">1024</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[[<span class="number">0.5159347</span>  <span class="number">0.06396333</span> <span class="number">0.18446106</span> <span class="number">0.06163127</span>]</span><br><span class="line"> [<span class="number">0.96894042</span> <span class="number">0.278889</span>   <span class="number">0.25117021</span> <span class="number">0.9757328</span> ]</span><br><span class="line"> [<span class="number">0.42980522</span> <span class="number">0.44724705</span> <span class="number">0.89322128</span> <span class="number">0.19697129</span>]</span><br><span class="line"> ...</span><br><span class="line"> [<span class="number">0.31956847</span> <span class="number">0.4790065</span>  <span class="number">0.45595315</span> <span class="number">0.98816687</span>]</span><br><span class="line"> [<span class="number">0.35240443</span> <span class="number">0.44400784</span> <span class="number">0.76815952</span> <span class="number">0.18499155</span>]</span><br><span class="line"> [<span class="number">0.33888548</span> <span class="number">0.50811964</span> <span class="number">0.32341108</span> <span class="number">0.98617324</span>]]</span><br></pre></td></tr></table></figure>
+<p>这是因为Numpy默认设置，当数组的元素个数大于1000时，就会只显示开头和结尾部分。</p>
+<p>如果想多显示一些数据，看更多内容，该怎么操作呢？<br><code>set_printoptions</code>提供了<code>threshold</code>参数，用于控制多少个元素后显示部分，另一个参数<code>edgeitems</code>,控制显示缩略部分的行数。</p>
+<p>因此可以修改这两个参数，修改显示效果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">4</span>]: np.set_printoptions(edgeitems=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[[<span class="number">0.5159347</span>  <span class="number">0.06396333</span> <span class="number">0.18446106</span> <span class="number">0.06163127</span>]</span><br><span class="line"> [<span class="number">0.96894042</span> <span class="number">0.278889</span>   <span class="number">0.25117021</span> <span class="number">0.9757328</span> ]</span><br><span class="line"> [<span class="number">0.42980522</span> <span class="number">0.44724705</span> <span class="number">0.89322128</span> <span class="number">0.19697129</span>]</span><br><span class="line"> [<span class="number">0.41831831</span> <span class="number">0.32864348</span> <span class="number">0.9599147</span>  <span class="number">0.04244498</span>]</span><br><span class="line"> [<span class="number">0.17307071</span> <span class="number">0.70541496</span> <span class="number">0.12485861</span> <span class="number">0.68987846</span>]</span><br><span class="line"> ...</span><br><span class="line"> [<span class="number">0.36880553</span> <span class="number">0.66404444</span> <span class="number">0.12623872</span> <span class="number">0.32754608</span>]</span><br><span class="line"> [<span class="number">0.53076768</span> <span class="number">0.76770867</span> <span class="number">0.36680954</span> <span class="number">0.58596153</span>]</span><br><span class="line"> [<span class="number">0.31956847</span> <span class="number">0.4790065</span>  <span class="number">0.45595315</span> <span class="number">0.98816687</span>]</span><br><span class="line"> [<span class="number">0.35240443</span> <span class="number">0.44400784</span> <span class="number">0.76815952</span> <span class="number">0.18499155</span>]</span><br><span class="line"> [<span class="number">0.33888548</span> <span class="number">0.50811964</span> <span class="number">0.32341108</span> <span class="number">0.98617324</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="linewidth"><a href="#linewidth" class="headerlink" title="linewidth"></a>linewidth</h3><p>linewidth参数用来控制一行显示多少个字符，默认是75，通过修改这个参数，能在一行显示更多数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">n [<span class="number">3</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: a = np.random.rand(<span class="number">1024</span>,<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: np.set_printoptions(precision=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[[<span class="number">0.6151590922948798</span> <span class="number">0.8394381715187383</span> <span class="number">0.1287492144726177</span></span><br><span class="line">  <span class="number">0.432486748198503</span>  <span class="number">0.008210600687992</span>  <span class="number">0.5251777687645207</span>]</span><br><span class="line"> [<span class="number">0.8986836534319551</span> <span class="number">0.5275521098334796</span> <span class="number">0.1275787604074625</span></span><br><span class="line">  <span class="number">0.2088067024068581</span> <span class="number">0.9728215202746345</span> <span class="number">0.0222310180458779</span>]</span><br><span class="line"> [<span class="number">0.1919751621010076</span> <span class="number">0.7593251629630882</span> <span class="number">0.2216025287318845</span></span><br><span class="line">  <span class="number">0.1693395870716256</span> <span class="number">0.0447174013709218</span> <span class="number">0.2669167788671162</span>]</span><br><span class="line"> ...</span><br><span class="line"> [<span class="number">0.2056367250351134</span> <span class="number">0.1961953658298233</span> <span class="number">0.6844119224272207</span></span><br><span class="line">  <span class="number">0.396808314963211</span>  <span class="number">0.2270659358855954</span> <span class="number">0.1694468143457141</span>]</span><br><span class="line"> [<span class="number">0.0404784779577213</span> <span class="number">0.977932794679906</span>  <span class="number">0.319154876583544</span></span><br><span class="line">  <span class="number">0.6301954893143036</span> <span class="number">0.4533581710958777</span> <span class="number">0.4980767389069806</span>]</span><br><span class="line"> [<span class="number">0.5722796781670568</span> <span class="number">0.8683487818109435</span> <span class="number">0.819417328117305</span></span><br><span class="line">  <span class="number">0.5286251921005498</span> <span class="number">0.2252964609019765</span> <span class="number">0.7439441509500194</span>]]</span><br><span class="line"></span><br><span class="line">In [<span class="number">7</span>]: np.set_printoptions(linewidth=<span class="number">150</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">8</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[[<span class="number">0.6151590922948798</span> <span class="number">0.8394381715187383</span> <span class="number">0.1287492144726177</span> <span class="number">0.432486748198503</span>  <span class="number">0.008210600687992</span>  <span class="number">0.5251777687645207</span>]</span><br><span class="line"> [<span class="number">0.8986836534319551</span> <span class="number">0.5275521098334796</span> <span class="number">0.1275787604074625</span> <span class="number">0.2088067024068581</span> <span class="number">0.9728215202746345</span> <span class="number">0.0222310180458779</span>]</span><br><span class="line"> [<span class="number">0.1919751621010076</span> <span class="number">0.7593251629630882</span> <span class="number">0.2216025287318845</span> <span class="number">0.1693395870716256</span> <span class="number">0.0447174013709218</span> <span class="number">0.2669167788671162</span>]</span><br><span class="line"> ...</span><br><span class="line"> [<span class="number">0.2056367250351134</span> <span class="number">0.1961953658298233</span> <span class="number">0.6844119224272207</span> <span class="number">0.396808314963211</span>  <span class="number">0.2270659358855954</span> <span class="number">0.1694468143457141</span>]</span><br><span class="line"> [<span class="number">0.0404784779577213</span> <span class="number">0.977932794679906</span>  <span class="number">0.319154876583544</span>  <span class="number">0.6301954893143036</span> <span class="number">0.4533581710958777</span> <span class="number">0.4980767389069806</span>]</span><br><span class="line"> [<span class="number">0.5722796781670568</span> <span class="number">0.8683487818109435</span> <span class="number">0.819417328117305</span>  <span class="number">0.5286251921005498</span> <span class="number">0.2252964609019765</span> <span class="number">0.7439441509500194</span>]]</span><br></pre></td></tr></table></figure>
+<p>可以看到，增加linewidth到150后，以前一行显示不了的数据现在可以在一行上显示了。</p>
+<h3 id="nanstr和infstr"><a href="#nanstr和infstr" class="headerlink" title="nanstr和infstr"></a>nanstr和infstr</h3><p>nanstr和infstr参数用来控制nan和inf数值的显示字符，默认是<code>nan</code>和<code>inf</code>，如果好奇想修改的话，可以设置对应的参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">12</span>]: a = np.array([np.nan, np.inf])</span><br><span class="line"></span><br><span class="line">In [<span class="number">13</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[nan inf]</span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: np.set_printoptions(nanstr=<span class="string">&#x27;非数&#x27;</span>, infstr=<span class="string">&#x27;∞&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[非数  ∞]</span><br></pre></td></tr></table></figure>
+<p>有点好玩，但建议别修改，不然别人不知道你在do what 🤷</p>
+<h3 id="sign"><a href="#sign" class="headerlink" title="sign"></a>sign</h3><p>sign参数用来控制每个数字前显示的符号，默认是<code>-</code>,也就是只有负数前面显示减号。如果是<code>+</code>，则在正数前面添加加号。如果是<code> </code>,则在正数前面添加空格：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: a = np.random.rand(<span class="number">3</span>) - <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[ <span class="number">0.44889495</span> -<span class="number">0.25608263</span> -<span class="number">0.23228835</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: np.set_printoptions(sign=<span class="string">&#x27;+&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[+<span class="number">0.44889495</span> -<span class="number">0.25608263</span> -<span class="number">0.23228835</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">7</span>]: np.set_printoptions(sign=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">8</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[ <span class="number">0.44889495</span> -<span class="number">0.25608263</span> -<span class="number">0.23228835</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="恢复默认配置"><a href="#恢复默认配置" class="headerlink" title="恢复默认配置"></a>恢复默认配置</h3><p>如何恢复默认配置呢？可以这么设置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.set_printoptions(edgeitems=<span class="number">3</span>, infstr=<span class="string">&#x27;inf&#x27;</span>,linewidth=<span class="number">75</span>, nanstr=<span class="string">&#x27;nan&#x27;</span>, precision=<span class="number">8</span>,suppress=<span class="literal">False</span>, threshold=<span class="number">1000</span>, formatter=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用with语句"><a href="#使用with语句" class="headerlink" title="使用with语句"></a>使用with语句</h3><p>通过使用with语句，可以临时修改打印配置项，在退出with语句的时候恢复默认配置，这样也减少侵入式地修改，避免造成不必要的后果。<br>在使用with语句时，需要将<code>np.set_printoptions</code> 替换为<code>np.printoptions</code>，也就是去掉函数中的<code>set_</code>前缀，函数的所有参数都一样。使用例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">6</span>]: a = np.random.rand(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">7</span>]: <span class="keyword">with</span> np.printoptions(formatter=&#123;<span class="string">&#x27;float&#x27;</span>: <span class="keyword">lambda</span> x: <span class="built_in">str</span>(x)+<span class="string">&#x27;f&#x27;</span>&#125;):</span><br><span class="line">   ...:     <span class="built_in">print</span>(a)</span><br><span class="line">   ...:</span><br><span class="line">[<span class="number">0.24752544521208586</span>f <span class="number">0.01852100917834376</span>f <span class="number">0.9358432384604951</span>f]</span><br><span class="line"></span><br><span class="line">In [<span class="number">8</span>]: <span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0.24752544521208586</span>f <span class="number">0.01852100917834376</span>f <span class="number">0.9358432384604951</span>f]</span><br></pre></td></tr></table></figure>
+
+<p>这就是<code>set_printoptions</code>几乎全部的参数了，更多用法，参考官方<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/generated/numpy.set_printoptions.html">文档</a>。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/09/30/numpy-printoptions/" title="Numpy set_printoptions函数用法">http://vra.github.io/2023/09/30/numpy-printoptions/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Numpy/" rel="tag"># Numpy</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/29/code-llama-1/" rel="prev" title="Code Llama 解读系列1-论文阅读">
+                  <i class="fa fa-chevron-left"></i> Code Llama 解读系列1-论文阅读
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
