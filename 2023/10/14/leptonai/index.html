@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 背景LeptonAI是贾扬清的创业项目，正如 slogan “Build AI The Simple Way” 所表明的，LeptonAI的目标是简化AI模型的部署。 简单来说，LeptonAI 提供了 Python SDK 和云平台。Python SDK 可以让没有AI领域知识的普通开发者调用2～3行命令就能部署一个AI模型，然后用一个curl语句或几行Python代码就能完成客户端请求；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeptonAI 使用体验">
+<meta property="og:url" content="http://vra.github.io/2023/10/14/leptonai/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 背景LeptonAI是贾扬清的创业项目，正如 slogan “Build AI The Simple Way” 所表明的，LeptonAI的目标是简化AI模型的部署。 简单来说，LeptonAI 提供了 Python SDK 和云平台。Python SDK 可以让没有AI领域知识的普通开发者调用2～3行命令就能部署一个AI模型，然后用一个curl语句或几行Python代码就能完成客户端请求；">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014072616.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014080015.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014080629.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014075232.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231013220038.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014062556.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231013231215.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014003956.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014023711.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014023738.png">
+<meta property="og:image" content="http://vra.github.io/imgs/leptonai/20231014023552.png">
+<meta property="article:published_time" content="2023-10-13T16:05:35.000Z">
+<meta property="article:modified_time" content="2023-12-09T02:40:12.330Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="pip">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Pytorch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://vra.github.io/imgs/leptonai/20231014072616.png">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/10/14/leptonai/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/10/14/leptonai/","path":"2023/10/14/leptonai/","title":"LeptonAI 使用体验"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LeptonAI 使用体验 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">172</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">183</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">1. 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Playground%E6%A6%82%E8%A7%88"><span class="nav-number">2.</span> <span class="nav-text">2. Playground概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-LeptonAI-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF%E7%AE%80%E4%BB%8B"><span class="nav-number">3.</span> <span class="nav-text">3. LeptonAI  设计思路简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text">4. 部署自己的服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%9F%BA%E4%BA%8EHuggingFace"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 基于HuggingFace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%9F%BA%E4%BA%8E-GitHub-%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E7%AE%97%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 基于 GitHub 部署自己的算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%B8%80%E4%B8%AAAndroid%E7%AB%AF-AI%E7%A8%8B%E5%BA%8FDemo"><span class="nav-number">5.</span> <span class="nav-text">4. 一个Android端 AI程序Demo</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">183</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">172</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/10/14/leptonai/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LeptonAI 使用体验 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeptonAI 使用体验
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-14 00:05:35" itemprop="dateCreated datePublished" datetime="2023-10-14T00:05:35+08:00">2023-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 10:40:12" itemprop="dateModified" datetime="2023-12-09T10:40:12+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/10/14/leptonai/" class="post-meta-item leancloud_visitors" data-flag-title="LeptonAI 使用体验" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p><a target="_blank" rel="noopener" href="https://www.lepton.ai/">LeptonAI</a>是贾扬清的创业项目，正如 slogan “Build AI The Simple Way” 所表明的，LeptonAI的目标是简化AI模型的部署。</p>
+<p>简单来说，LeptonAI 提供了 <a href="(https://github.com/leptonai/leptonai">Python SDK</a> 和云平台。Python SDK 可以让没有AI领域知识的普通开发者调用2～3行命令就能部署一个AI模型，然后用一个curl语句或几行Python代码就能完成客户端请求；而 LeptonAI 云平台提供了CPU，GPU和存储资源，开发者可以把创建的AI模型部署到这里，就能提供公开对外的AI服务。</p>
+<p>AI模型创建支持 HuggingFace，也就是说可以将 HuggingFace 上海量的模型集成到自己的应用中。同时 LeptonAI 也支持从 GitHub 仓库创建 AI 模型，给了开发者更多的选择。</p>
+<p>经过一段时间的体验后发现，LeptonAI Python SDK 设计的很优雅，用起来很舒服，而云平台的操作也很丝滑，有贾扬清大神亲自操刀写代码，SDK和云平台的质量绝对是信得过的。<br><img data-src="/imgs/leptonai/20231014072616.png"></p>
+<p>那 LeptonAI 是否解决了一些 AI 部署中的痛点问题呢？我认为是的。根据之前的经验，跑一些 AI 开源模型成本还是挺高的。</p>
+<span id="more"></span>
+
+<p>简单来说，跑一个开源模型，需要下面这些流程：</p>
+<ol>
+<li>需要安装Conda虚拟环境</li>
+<li>拉取开源代码源码</li>
+<li>安装依赖 Python 包</li>
+<li>下载 Checkpoints</li>
+<li>跑 Demo 命令或 UI<br>就算整个过程中没有遇到问题，整个流程走下来，跑起来一个模型至少也得半个小时。</li>
+</ol>
+<p>而实际情况可能更糟糕，大概率会遇到下面的问题之一或者之N：</p>
+<ol>
+<li>开源代码没有指定Python版本，用新/老版本的Python运行报错</li>
+<li>开源代码没有指定CUDA版本，用新/老版本的CUDA，运行报错</li>
+<li>当前操作系统对应的CPU和GPU组合未经测试，运行报错</li>
+<li>编译Pytorch所用的cuDNN版本和系统现在的cuDNN版本不一致，Pytorch插件编译报错</li>
+<li>依赖 Python 包版本冲突，需要某个特定版本才能正常工作</li>
+<li>之前代码运行正常，更新某个包版本后运行报错</li>
+<li> 默认 Demo Python 脚本运行报错，需要查看源码定位修复问题</li>
+<li>某些OP不支持half精度，运行报错</li>
+<li>某些OP不支持mps后端，运行报错</li>
+<li>网络状况不佳导致 GitHub 拉取代码失败，HuggingFace 下载模型失败</li>
+<li>…</li>
+</ol>
+<p>以 stable-diffusion-webui 这个著名的AIGC库为例，光带<code>bug-report</code>标记的issue就有3000多个：<br><img data-src="/imgs/leptonai/20231014080015.png"></p>
+<p>随便看几个例子，都能发现上述这些问题的身影：<br><img data-src="/imgs/leptonai/20231014080629.png"><br><img data-src="/imgs/leptonai/20231014075232.png"><br>也就是说，大家在 AI 部署中遇到了非常多的问题，而不是没有问题。</p>
+<p>因此简化 AI 的部署，是很有意义的方向，做的好的话，能减轻很多人的痛苦。根据我的经历，在使用 LeptonAI 部署模型时，我还没遇到过上面提到的这些问题（当然现在使用的次数也还比较少）。</p>
+<p>LeptonAI 的盈利模式也很清晰，虽然 Python SDK 和 HuggingFace 上的模型都是开源的，但由于 LeptonAI 提供了云服务来部署算法，因此可以通过云服务的硬件资源（GPU，CPU和存储）来收费，在 Lepton Python SDK 将部署问题大大简化后，降低了AI应用的门槛，可能会出现更多的开发者来提供更好的创意，做出更多更棒的App，产生更加实际的业务成果。如果AI算法真的能提供实际的业务价值，那应用开发者肯定愿意将收入中的一部分给到 LeptonAI 平台</p>
+<p>但这里也有一个问题：LeptonAI Python SDK 似乎是可以部署到任意的云计算平台的，也就是说如果阿里云、亚马逊云提供的 GPU 价格更低，那开发者可能就会迁移自己到这些平台，也就是用 LeptonAI Python SDK，但不用你的 GPU 资源。在这个角度下，LeptonAI到底能不能赢得用户，产生正向收益，还不好说。</p>
+<p>具体到云平台的收费模式，采用 SaaS 中比较常见的基础版免费、Pro版收费的方式。基础版是每个月会给用户会赠送10美元的券，可以方便个人开发者和小的初创团队对进行前期的简单实验验证。标准版每个月100美元，还有企业可以定制：<br><img data-src="/imgs/leptonai/20231013220038.png"></p>
+<p>从现在的信息看，LeptonAI 现阶段的目标市场应该是欧美，目标客户应该是个人开发者或者中小公司，因为定价是美元，支付采用Stripe，这些都是国内用户不太方便使用的。</p>
+<p>其实国内使用还有另外一个影响很大的因素：HuggingFace 目前在国内网络访问不了（实在想不通有什么理由封禁HuggingFace)，上面的AI模型都是用不了的，想要部署 HuggingFace 上的模型要费一些周折。</p>
+<p>另外 LeptonAI 最近开始公开内测了，想要试玩的朋友可以在官网注册账号申请。</p>
+<p>在公测的<a target="_blank" rel="noopener" href="https://leptonai.medium.com/build-ai-the-easy-way-2a8b68c63723">Blog</a>中，介绍了几位创始人之前的项目经历，最后也自豪地宣称他们是”make building awesome AI applications as simple as possible”最好的人选。<br><img data-src="/imgs/leptonai/20231014062556.png"></p>
+<p>正如 Caffe 开启了深度学习框架的新时代，希望 LeptonAI 也能开启 AI 部署的新时代，未来如何发展，让我们拭目以待。</p>
+<p>后面部分会从网站提供的功能概览、部署HuggingFace上模型、部署GitHub上自己开发的模型，以及基于Lepton云服务做一个简单的Android Demo，看看开发一个应用有多简单。</p>
+<h2 id="2-Playground概览"><a href="#2-Playground概览" class="headerlink" title="2. Playground概览"></a>2. Playground概览</h2><p><a target="_blank" rel="noopener" href="https://www.lepton.ai/playground">https://www.lepton.ai/playground</a> 提供了很多LeptonAI自部署的开源模型，如SDXL，Llama 2, Code Llama等,跟HuggingFace平台功能类似。基于LeptonAI SDK，开发者可以在自己的GPU服务器上快速地搭建这些模型服务。</p>
+<p><img data-src="/imgs/leptonai/20231013231215.png"><br>以SDXL Inpainting为例，上传一张图像，mask掉一些区域，再结合一句Prompt，就能补全出对应的区域：</p>
+<h2 id="3-LeptonAI-设计思路简介"><a href="#3-LeptonAI-设计思路简介" class="headerlink" title="3. LeptonAI  设计思路简介"></a>3. LeptonAI  设计思路简介</h2><p>Lepton的含义是轻子，是一个物理学概念，根据维基百科：</p>
+<blockquote>
+<p>轻子是一种不参与强相互作用、自旋为1/2的基本粒子。电子是最为人知的一种轻子；轻子又分为两类：“带电轻子”与“中性轻子”。带电轻子包括电子、μ子、τ子，可以与其它粒子组合成复合粒子，例如原子、电子偶素等等</p>
+</blockquote>
+<p>公司命名为 LeptonAI Inc，科技属性拉满。<br>LeptonAI Python SDK 的基本模块是 Photon (光子)，基本上可以理解为算法模型，如 SDXL，Llama2 都可以看作是 Photon。<br>Lepton 一个独到的地方是，将所有不同来源的算法模型统一到Photon对象中，比如HuggingFace上的一个模型可以用来初始化Photon，也可以从GitHub上的源代码来初始化Photon。</p>
+<p>基于这种简化，所有算法模型都能通过统一的对外接口来展示，方便了模型的部署。当然为了简单统一的接口，源码内部就需要对不同来源的模型进行适配，是以内部代码的复杂度增加来换取对外接口的简洁一致。</p>
+<p>更准确、详细的内容，请参考<a target="_blank" rel="noopener" href="https://www.lepton.ai/docs">官方文档</a>。</p>
+<h2 id="4-部署自己的服务"><a href="#4-部署自己的服务" class="headerlink" title="4. 部署自己的服务"></a>4. 部署自己的服务</h2><p>使用LeptonAI的Python leptonai 包可以进行方便的Photon创建和部署。</p>
+<p>首先用pip 安装 leptonai 包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U leptonai</span><br></pre></td></tr></table></figure>
+<p>输入 <code>lep --help</code> 查看是否安装成功。<br>LeptonAI 的 CLI 命令是 <code>lep</code>，包含所有你需要的功能，如 Photon 创建、部署，登录云平台等。</p>
+<p>为了在 LeptonAI 云平台部署模型，确保你已经申请拿到了公测权限。</p>
+<h3 id="3-1-基于HuggingFace"><a href="#3-1-基于HuggingFace" class="headerlink" title="3.1 基于HuggingFace"></a>3.1 基于HuggingFace</h3><p>官方文档展示了在 LeptonAI 云平台部署 GPT-2 的操作流程，但由于GPT-2效果一般，实际上用处不大，这里以目前效果比较好的SDXL为例来展示如何部署HuggingFace到自己的 LeptonAI 实例上。</p>
+<p>首先是用 <code>lep photon create</code> 创建 Photon:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lep photon create --name sdxl --model hf:hotshotco/SDXL-512</span><br></pre></td></tr></table></figure>
+<p><code>--name</code> 是自定义的 Photon 名字，<code>--model</code> 是Photo 下载模型的地址，可以是一个HuggingFace模型名字，也可以是一个GitHub地址。这里用 <code>hf:</code> 开头表示 HuggingFace 上的模型，<code>&lt;user_name&gt;/&lt;model_name&gt;</code>表示模型的路径。</p>
+<p>这里会从 HuggingFace 上拉取模型信息，所以需要能访问 HuggingFace。国内访问hf有问题的小伙伴可以用<a target="_blank" rel="noopener" href="https://gitpod.io/">GitPod</a>这个神器。</p>
+<p>然后为了部署模型到云平台，需要登录 LeptonAI 的 dashboard，查看自己的key，复制 <code>lep login</code> 命令：<br><img data-src="/imgs/leptonai/20231014003956.png"></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lep login -<span class="keyword">c</span> xxx:xxxxxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+<p>登录成功后，就可以用 <code>lep photon push</code> 命令将本地创建好的 Photon 推送到 LeptonAI 云平台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lep photon push --name sdxl</span><br></pre></td></tr></table></figure>
+
+<p>然后在 Dashboard 网页上进行操作，对 Photon 进行部署：</p>
+<p>部署完成后，就相当于有了一个公网可以访问的AI服务，通过下面的Python命令就可以访问这个服务：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> leptonai.client <span class="keyword">import</span> Client</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">LEPTON_API_TOKEN = <span class="string">&quot;xxxxxxxxxx&quot;</span></span><br><span class="line">client = Client(<span class="string">&quot;xx&quot;</span>, <span class="string">&quot;sdxl&quot;</span>, token=LEPTON_API_TOKEN)</span><br><span class="line"></span><br><span class="line">data = client.run(</span><br><span class="line">    num_inference_steps=<span class="number">25</span>,</span><br><span class="line">    prompt=<span class="string">&quot;a photograph of an astronaut riding a horse&quot;</span>,</span><br><span class="line">    seed=<span class="number">42</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将服务返回的 bytes 数据保存为图片</span></span><br><span class="line">image_data = io.BytesIO(data)</span><br><span class="line">image = Image.<span class="built_in">open</span>(image_data)</span><br><span class="line">image.save(<span class="string">&quot;output_image.jpg&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>同理也可以用 Python 的 requests 包来发送请求，这样的好处是客户端就不需要安装 LeptonAI 的 Python包了，毕竟它的依赖还是比较多的，下一个例子中会展示requests的用法。</p>
+<h3 id="3-2-基于-GitHub-部署自己的算法"><a href="#3-2-基于-GitHub-部署自己的算法" class="headerlink" title="3.2 基于 GitHub 部署自己的算法"></a>3.2 基于 GitHub 部署自己的算法</h3><p>LeptonAI 也支持从 GitHub 创建 Photons，只要你的代码类继承了 lepton的Photo基类，就都可以正常部署，对于许多想要新建自己算法的人来说是个好消息。下面用一个简单的提取图像边缘的例子来展示怎么自定义算法并且部署到 LeptonAI 云平台。</p>
+<p>我的代码仓库在<a target="_blank" rel="noopener" href="https://github.com/vra/canny-lepton-photon%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%9C%A8">https://github.com/vra/canny-lepton-photon，实现在</a> <code>canny.py</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> leptonai.photon <span class="keyword">import</span> Photon, PNGResponse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要继承 Photon 类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Canny</span>(<span class="params">Photon</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Canny 边缘检测算子&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这里的依赖 Package 会在创建 Photon 时自动安装</span></span><br><span class="line">    requirement_dependency = [</span><br><span class="line">        <span class="string">&quot;opencv-python&quot;</span>,</span><br><span class="line">        <span class="string">&quot;numpy&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Pillow&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 用这个装饰器表示这个一个对外接口</span></span><br><span class="line"><span class="meta">    @Photon.handler(<span class="params"><span class="string">&quot;run&quot;</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self, url: <span class="built_in">str</span></span>) -&gt; PNGResponse:</span></span><br><span class="line">        <span class="comment"># 将第三方库的 import 放到实际执行代码中，否则如果本地没有这些包，</span></span><br><span class="line">        <span class="comment"># 在创建 Photon 时报错</span></span><br><span class="line">        <span class="keyword">import</span> cv2</span><br><span class="line">        <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">        <span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 读取图像数据</span></span><br><span class="line">        image = np.asarray(Image.<span class="built_in">open</span>(io.BytesIO(urlopen(url).read())))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 进行边缘检测</span></span><br><span class="line">        edges = cv2.Canny(image, <span class="number">100</span>, <span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">        edges = Image.fromarray(edges)</span><br><span class="line"></span><br><span class="line">        img_io = BytesIO()</span><br><span class="line">        edges.save(img_io, <span class="built_in">format</span>=<span class="string">&quot;PNG&quot;</span>, quality=<span class="string">&quot;keep&quot;</span>)</span><br><span class="line">        img_io.seek(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> PNGResponse(img_io)</span><br></pre></td></tr></table></figure>
+
+<p>由于GitHub不再支持命令行密码登录了，所以需要在<a target="_blank" rel="noopener" href="https://github.com/settings/tokens?type=beta">这里</a>创建token，然后用token替代密码来登录。<br>复制刚才创建的token，在环境变量中进行设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GITHUB_USER=&#123;YOUR_GITHUB_USERNAME&#125;</span><br><span class="line"><span class="built_in">export</span> GITHUB_TOKEN=&#123;THE_TOKEN_GENERATED_FROM_STEP_1&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后创建 Photon，模型名字格式是 <code>py:&#123;GIT_REPO_URL&#125;:&#123;PATH_TO_SCRIPT&#125;:&#123;CLASS_NAME&#125;</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lep photon create -n canny -m py:https://github.com/vra/canny-lepton-photon:canny.py:Canny</span><br></pre></td></tr></table></figure>
+
+<p>再推送到云平台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lep photon push -n canny</span><br></pre></td></tr></table></figure>
+
+<p>注意：可以多次修改代码，多次创建同名的 Photon，会产生不同的版本，然后推送最新的 Photon 到云平台。</p>
+<p>然后在云平台通过可视化界面部署，选择部署名字，部署的资源种类等：</p>
+<p><img data-src="/imgs/leptonai/20231014023711.png"></p>
+<p><img data-src="/imgs/leptonai/20231014023738.png"></p>
+<p>部署完成后，就可以用下面的Python代码来推理结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> leptonai.client <span class="keyword">import</span> Client</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">api_token = os.environ.get(<span class="string">&#x27;LEPTON_API_TOKEN&#x27;</span>)</span><br><span class="line">client = Client(<span class="string">&quot;lq87wh9y&quot;</span>, <span class="string">&quot;canny&quot;</span>, token=api_token)</span><br><span class="line"></span><br><span class="line">data = client.run(</span><br><span class="line">  url=<span class="string">&quot;https://i.stack.imgur.com/WsJGN.jpg&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">image_data = io.BytesIO(data)</span><br><span class="line">image = Image.<span class="built_in">open</span>(image_data)</span><br><span class="line">image.save(<span class="string">&quot;canny.jpg&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>原始图和Canny结果图：<br>![[results.png)</p>
+<p>如果不想用LeptonAI Python包，可以用 requests网络请求包来完成服务：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">api_token = os.environ.get(<span class="string">&quot;LEPTON_API_TOKEN&quot;</span>)</span><br><span class="line">url = <span class="string">&quot;https://xxxx-canny.bjz.edr.lepton.ai/run&quot;</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">    <span class="string">&quot;accept&quot;</span>: <span class="string">&quot;image/png&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Authorization&quot;</span>: <span class="string">f&quot;Bearer <span class="subst">&#123;api_token&#125;</span>&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data = &#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;https://i.stack.imgur.com/WsJGN.jpg&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">response = requests.post(url, headers=headers, json=data)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;b.png&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    file.write(response.content)</span><br></pre></td></tr></table></figure>
+
+<p>或者用部署页面提供的 cURL 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl -X <span class="string">&#x27;POST&#x27;</span> \</span><br><span class="line">  <span class="string">&#x27;https://xxxx-canny.bjz.edr.lepton.ai/run&#x27;</span> \</span><br><span class="line">  -H <span class="string">&#x27;Content-Type: application/json&#x27;</span> \</span><br><span class="line">  -H <span class="string">&#x27;accept: image/png&#x27;</span> \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer <span class="variable">$LEPTON_API_TOKEN</span>&quot;</span> \</span><br><span class="line">  --output output.png \</span><br><span class="line">  -d <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">  &quot;url&quot;: &quot;string&quot;</span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以在网页端 Deployment 页面的 Demo 模块中进行推理，输入图片 url 即可得到结果：<br><img data-src="/imgs/leptonai/20231014023552.png"></p>
+<p>这里的 Canny 算法这是一个简单的示例，实际中可以替换为任意的 AI 模型。</p>
+<p>从这个简单的例子可以看出来，LeptonAI 将 AI 部署中的网站服务后端搭建给省掉了，让开发者专注于写算法部分，而且客户端调用服务的方式也很多，尽可能地简化了AI 服务的调用。</p>
+<h2 id="4-一个Android端-AI程序Demo"><a href="#4-一个Android端-AI程序Demo" class="headerlink" title="4. 一个Android端 AI程序Demo"></a>4. 一个Android端 AI程序Demo</h2><p>为了验证 LeptonAI 对于AI App 的开发有没有提速，对于没有移动端开发的我，尝试不写一行 Java或者Object-C/Swift代码，纯粹利用 Python写一个简单的AI应用。</p>
+<p>验证发现，利用 LeptonAI 算法平台 + Beeware Python 移动端程序开发工具， 纯Python代码在手机上运行起来了一个文生图的App。</p>
+<p>视频如下：</p>
+<p>源码在这里，最核心的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">An Android Application based on Python and LeptonAI!</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> toga</span><br><span class="line"><span class="keyword">from</span> toga.style <span class="keyword">import</span> Pack</span><br><span class="line"><span class="keyword">from</span> toga.style.pack <span class="keyword">import</span> COLUMN, ROW</span><br><span class="line"><span class="keyword">from</span> toga.images <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image <span class="keyword">as</span> PIL_Image</span><br><span class="line"><span class="keyword">from</span> leptonai.client <span class="keyword">import</span> Client</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AISDK</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        LEPTON_API_TOKEN = <span class="string">&quot;xxxxxxxxxxxxxxx&quot;</span></span><br><span class="line">        self.client = Client(<span class="string">&quot;xxx&quot;</span>, <span class="string">&quot;sdxl&quot;</span>, token=LEPTON_API_TOKEN)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process</span>(<span class="params">self, prompt, img_save_path</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;ai processing begin...&#x27;</span>)</span><br><span class="line">        data = self.client.run(</span><br><span class="line">            num_inference_steps=<span class="number">25</span>,</span><br><span class="line">            prompt=prompt,</span><br><span class="line">            seed=<span class="number">42</span>,</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        image_data = io.BytesIO(data)</span><br><span class="line">        image = PIL_Image.<span class="built_in">open</span>(image_data)</span><br><span class="line">        image.save(img_save_path)</span><br><span class="line">        <span class="built_in">print</span>(image.size)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;ai processing done&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sdxlandroid</span>(<span class="params">toga.App</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">startup</span>(<span class="params">self</span>):</span></span><br><span class="line"></span><br><span class="line">        self.sdk = AISDK()</span><br><span class="line">        self.img_save_path = <span class="string">&#x27;./tmp.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line">        main_box = toga.Box(style=Pack(direction=COLUMN))</span><br><span class="line"></span><br><span class="line">        name_label = toga.Label(</span><br><span class="line">            <span class="string">&quot;Your prompt: &quot;</span>,</span><br><span class="line">            style=Pack(padding=(<span class="number">0</span>, <span class="number">5</span>))</span><br><span class="line">        )</span><br><span class="line">        self.name_input = toga.TextInput(style=Pack(flex=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        name_box = toga.Box(style=Pack(direction=ROW, padding=<span class="number">5</span>))</span><br><span class="line">        name_box.add(name_label)</span><br><span class="line">        name_box.add(self.name_input)</span><br><span class="line"></span><br><span class="line">        button = toga.Button(</span><br><span class="line">            <span class="string">&quot;Generate Image&quot;</span>,</span><br><span class="line">            on_press=self.run_aigc,</span><br><span class="line">            style=Pack(padding=<span class="number">5</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        main_box.add(name_box)</span><br><span class="line">        main_box.add(button)</span><br><span class="line"></span><br><span class="line">        self.main_window = toga.MainWindow(title=self.formal_name)</span><br><span class="line">        self.main_window.content = main_box</span><br><span class="line">        self.main_window.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run_aigc</span>(<span class="params">self, widget</span>):</span></span><br><span class="line">        prompt = self.name_input.value</span><br><span class="line">        self.sdk.process(prompt, self.img_save_path)</span><br><span class="line"></span><br><span class="line">        image = Image(self.img_save_path)</span><br><span class="line">        image_view = toga.ImageView(image)</span><br><span class="line">        self.main_window.content.add(image_view)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="keyword">return</span> sdxlandroid()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，用不到100行的 Python 代码就能做出一个 AIGC 的简易手机端 App！</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/10/14/leptonai/" title="LeptonAI 使用体验">http://vra.github.io/2023/10/14/leptonai/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/pip/" rel="tag"># pip</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/03/language-modeling-is-compression/" rel="prev" title="Language Modeling Is Compression 论文阅读">
+                  <i class="fa fa-chevron-left"></i> Language Modeling Is Compression 论文阅读
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/14/android-ai-app-in-88-lines-of-python-code/" rel="next" title="使用 Python 88 行代码写一个简易的 Android AI 程序">
+                  使用 Python 88 行代码写一个简易的 Android AI 程序 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

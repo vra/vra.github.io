@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 概述这是DeepMind 最近发表的一篇论文，题目翻译成中文是“语言模型即压缩”，是一个很简单但也有分量的观点。更有趣的是，论文中作者发现，自己的预训练大模型Chinchilla 70B只在文本训练集上训练后，在ImagNet 图像Patch上压缩率能达到43.4%，优于PNG算法的压缩率58.5%，在LibrSpeech语音数据集上，压缩率达到16.4%，优于语音压缩算法FLAC30.3%">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Language Modeling Is Compression 论文阅读">
+<meta property="og:url" content="http://vra.github.io/2023/10/03/language-modeling-is-compression/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 概述这是DeepMind 最近发表的一篇论文，题目翻译成中文是“语言模型即压缩”，是一个很简单但也有分量的观点。更有趣的是，论文中作者发现，自己的预训练大模型Chinchilla 70B只在文本训练集上训练后，在ImagNet 图像Patch上压缩率能达到43.4%，优于PNG算法的压缩率58.5%，在LibrSpeech语音数据集上，压缩率达到16.4%，优于语音压缩算法FLAC30.3%">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003142114.png">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003142945.png">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003010543.png">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003091610.png">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003092610.png">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003092857.png">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003093107.png">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003134503.png">
+<meta property="og:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003135231.png">
+<meta property="article:published_time" content="2023-10-03T04:57:30.000Z">
+<meta property="article:modified_time" content="2023-12-09T01:43:43.635Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Paper Reading">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://vra.github.io/imgs/language_modeling_is_compression/20231003142114.png">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/10/03/language-modeling-is-compression/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/10/03/language-modeling-is-compression/","path":"2023/10/03/language-modeling-is-compression/","title":"Language Modeling Is Compression 论文阅读"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Language Modeling Is Compression 论文阅读 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">172</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">183</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E5%8E%8B%E7%BC%A9%E5%8D%B3%E9%A2%84%E6%B5%8B"><span class="nav-number">2.</span> <span class="nav-text">2. 为什么说压缩即预测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%8E%8B%E7%BC%A9"><span class="nav-number">3.</span> <span class="nav-text">3. 语言模型如何进行压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E9%80%89%E6%8B%A9"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 压缩算法选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%95%B0%E6%8D%AE%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 数据设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 如何进行数据压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 压缩结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%96%91%E9%97%AE%EF%BC%8C%E6%80%9D%E8%80%83%E5%92%8C%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">5. 疑问，思考和总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">183</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">172</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/10/03/language-modeling-is-compression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Language Modeling Is Compression 论文阅读 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Language Modeling Is Compression 论文阅读
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-03 12:57:30" itemprop="dateCreated datePublished" datetime="2023-10-03T12:57:30+08:00">2023-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 09:43:43" itemprop="dateModified" datetime="2023-12-09T09:43:43+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/10/03/language-modeling-is-compression/" class="post-meta-item leancloud_visitors" data-flag-title="Language Modeling Is Compression 论文阅读" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>这是DeepMind 最近发表的一篇论文，题目翻译成中文是“语言模型即压缩”，是一个很简单但也有分量的观点。更有趣的是，论文中作者发现，自己的预训练大模型Chinchilla 70B只在文本训练集上训练后，在ImagNet 图像Patch上压缩率能达到43.4%，优于PNG算法的压缩率58.5%，在LibrSpeech语音数据集上，压缩率达到16.4%，优于语音压缩算法FLAC30.3%的压缩率。</p>
+<p>说实话看到这个结论我还是很震惊的。一个是文本数据上训练的模型居然也能用于图像和语音的压缩，而且压缩率还高于常用的领域特定的压缩算法。</p>
+<p>除了震惊，还很好奇大模型是怎么被当作压缩器来压缩文本图像和语音数据的。在好奇心的驱使下，我读了几遍这篇论文。</p>
+<span id="more"></span>
+
+<p>除了上面的结论外，论文中作者提供了许多有启迪的观点，比如：</p>
+<ol>
+<li>通过推导，说明了压缩最优即是预测最优，即压缩和预测的等价性</li>
+<li>传统压缩算法的特点是上下文很长（比如gzip 32K字节），可以利用具有丰富信息的上下文来进行压缩算法的设计，而Transformer结构的语言模型则是上下文很短（比如2048字节），通过大量参数来调节压缩的结果</li>
+<li>Transformer模型是基于tokenizer压缩的数据进行训练的，因此tokenizer也是一种压缩器</li>
+<li>从最右压缩算法的角度来看，语言模型作为压缩器，最优的模型大小是和数据强绑定的，不可能无限扩大，从这个角度一定程度给出了LLM的理论上限</li>
+<li>传统压缩算法也能当作一种生成模型，给语言模型的研究带来新的可能性</li>
+</ol>
+<p>在这篇论文阅读文章中，我尝试就这些结论和几个关心的问题给出自己的解读，如有不准确之处，欢迎指出。</p>
+<h2 id="2-为什么说压缩即预测"><a href="#2-为什么说压缩即预测" class="headerlink" title="2. 为什么说压缩即预测"></a>2. 为什么说压缩即预测</h2><p>作者首先是介绍了信息论的一些基本理论，然后结合语言模型的优化目标，引出了压缩最优即是预测最优。具体过程下面展开。</p>
+<p>对一个序列（如“AIXI”），无损压缩的过程是将其转换为一种高效的表示（如01序列），同时能从该表示序列中恢复出原始的数据。无损压缩其实是一种编码过程。</p>
+<p>对于一个离散随机变量，其信息熵表示为H(X)，计算公式为H(X) = - ∑ P(x) log2 P(x)，其中，P(x)表示随机变量X取值为x的概率。</p>
+<p>根据香农的信息熵理论，对于最优的编码方案，平均编码长度L至少应该不小于信息熵H(X)。当编码长度等于信息熵时，即L = H(X)，编码达到了最优。</p>
+<p>算术编码 (Arithmetic Coding) 是一种高效的无损压缩算法，是一种最优编码。概括来说，它将每个编码区间按照待编码序列的概率分布来进行划分，对于出现概率更大的序列元素，赋予更大的编码区间。下图演示了算数编码的过程，可以看到将4字节的输入编码为了7bit的输出，压缩率为7/(4x8) = 21.8%。具体算术编码的算法细节可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/390684936">这篇文章</a>。<br><img data-src="/imgs/language_modeling_is_compression/20231003142114.png"></p>
+<p>实际情况中，表示随机变量X取值为x的概率P(x)经常是难以获得的，因此采用P^来近似。基于这种近似，最优编码的期望长度如下，实际是一种交叉熵的表示。<br><img data-src="/imgs/language_modeling_is_compression/20231003142945.png"><br>这个表达式也刚好是现有语言模型的loss优化目标，也就是说，最小化压缩率等价于最小化语言模型的loss，即最优压缩即最优语言模型，从而证明了压缩和预测的等价性。</p>
+<p>总结来说，这一部分根据压缩的最优目标和语言模型Loss的一致性，推导出两者其实是等价的。</p>
+<h2 id="3-语言模型如何进行压缩"><a href="#3-语言模型如何进行压缩" class="headerlink" title="3. 语言模型如何进行压缩"></a>3. 语言模型如何进行压缩</h2><h3 id="3-1-压缩算法选择"><a href="#3-1-压缩算法选择" class="headerlink" title="3.1 压缩算法选择"></a>3.1 压缩算法选择</h3><p>对于传统压缩算法，作者选择了两个通用的压缩算法和两个特定模态的压缩算法。通用的压缩算法选择的是gzip和LZMA2。gzip相信大家都不陌生，用过linux的人都应该见过。而LZMA2是7z使用的压缩算法。这两者都算是久经考验的使用广泛的生产环境压缩算法，虽然不见得是最前沿的。</p>
+<p>图像领域的压缩算法是PNG，语音领域的压缩算法是FLAC，两者都是无损压缩算法。</p>
+<p>作为对比的语言模型选择了两个系列的大小不同的模型，比较小的是vanilla的只有decoder的 Transformer结构，在enwiki8上预训练（注意没有在别的数据上finetune)。比较大的是DeepMind之前提出的Chinchilla 系列模型，也只在文本上训练，没有见过图像和语音数据。</p>
+<h3 id="3-2-数据设置"><a href="#3-2-数据设置" class="headerlink" title="3.2 数据设置"></a>3.2 数据设置</h3><p>数据集的选择也是很有技巧。首先是对于传统压缩算法和LLM，应用场景大相径庭，该怎么选择测试集进行合理的比较呢。</p>
+<p>对于语言模型，由于常见模型输入context是2048，因此选择了把数据切分成N段2048字节的数据，来进行测试。<br>对于传统压缩算法，显然是可以将整个数据都作为整体进行压缩的，而切分成小块进行压缩是对结果有损害的。所以作者对传统压缩算法采用了两种处理方式。</p>
+<p>为了方便比较不同模态的数据，作者都是构造总大小为1GB的数据集。</p>
+<p>文本数据，作者采用了截止到2006年3月3日的维基百科英文预料的前1e8个字节，作为enwiki8，前1e9字节作为enwiki9。可以看到，enwiki8是包含在enwiki9中的，而enwiki9刚好是1G Bytes。</p>
+<p>图像数据采用的是ImageNet数据集，选择了488821张图片，每张图片选择32x64的patch，然后转换为灰度图(每个像素刚好1个字节），刚好是488821x32x64=1G Bytes。</p>
+<p>语音数据是从LibriSpeech数据集中选择的，每段2048字节，选择了488821段，也是刚好1G字节。</p>
+<h3 id="3-3-如何进行数据压缩"><a href="#3-3-如何进行数据压缩" class="headerlink" title="3.3 如何进行数据压缩"></a>3.3 如何进行数据压缩</h3><p>对于语言模型进行数据压缩的细节，论文没有描述，我只能说一下我的猜测。作者采用算术编码的方式，根据给定每个输入后模型的输出的概率，利用概率大小划分编码空间，对序列中所有输入元素执行完一次推理，得到最终的编码结果。</p>
+<h3 id="3-4-压缩结果"><a href="#3-4-压缩结果" class="headerlink" title="3.4 压缩结果"></a>3.4 压缩结果</h3><p>下面的表格展示了整体的压缩结果。<br>chunk size 无穷大表示不进行数据的切分，也就是传统压缩算法的压缩过程。<br>压缩率等于压缩后文件大小/原始文件大小，其中Raw压缩率没有考虑模型尺寸大小，二调整后的压缩率将模型的参数量也计算进了压缩后的文件大小中，由于语言模型参数量很大，因此调整后的压缩率甚至超过了一百。</p>
+<p><img data-src="/imgs/language_modeling_is_compression/20231003010543.png"></p>
+<p>从这个表格中可以得出一些结论：</p>
+<ol>
+<li>传统压缩算法经过分块，确实有比较大的性能下降，说明大的上下文信息对压缩至关重要</li>
+<li>针对图像设计的压缩算法PNG在语音数据上LibrSpeech也能得到较好的压缩结果</li>
+<li>LZMA2通用压缩算法在LibriSpeech数据上压缩率优于语音特定的FLAC算法，还是有点出乎意料</li>
+<li>由于传统压缩算法没有模型参数，因此调整后压缩率等于Raw压缩率</li>
+<li>在enwik8上训练的Transformer模型，增大参数后在同模态的enwiki9上效果会变好，而在不同模态的图片和语音数据上，增大参数量到一定程度后效果反而下降</li>
+<li>而Chinchilla语言模型参数量从1B到7B再到70B，压缩性能都是在稳步提升，与Vanilla Transformer呈现不同的现象</li>
+</ol>
+<p>下面图中是在enwiki8上预训练到不同参数量的Transformer在enwiki7/8/9上的压缩率，其中压缩率是调整后压缩率，也就是考虑了参数量。<br><img data-src="/imgs/language_modeling_is_compression/20231003091610.png"><br>从这里可以看出一些结论：</p>
+<ol>
+<li>随着参数量的增大，压缩性能都下降了（表现为压缩率增大），这是因为参数量的增大对结果的影响比较大</li>
+<li>对于大的数据集(enwiki9)，更多参数的模型压缩性能更好，但更大的模型在小的数据集上效果比较差，也就是说从压缩的角度看，模型的Scaling，与测试集的大小有关</li>
+</ol>
+<p>为了对比不同压缩算法的生成能力，作者比较了gzip和Chinchilla 70B 在文本，图像和语音上的生成能力，具体来说，给出前面的的内容（文本是前1948个字节预测最后100个字节，图像和语音是给出前面一半预测后面一半），让算法来预测后面一半的内容。注意这个生成过程和压缩过程是不同的。</p>
+<p>文本预测结果如下<br><img data-src="/imgs/language_modeling_is_compression/20231003092610.png"><br>可以看到语言模型预测的结果更连贯，而gzip预测的结果则没有明显的含义</p>
+<p>语音预测上，gzip的预测更自然一些，而语言模型的预测则进入了循环，类似大家使用代码补全模型时经常会遇到的循环一样，不知道是不是同样的效应。<br><img data-src="/imgs/language_modeling_is_compression/20231003092857.png"></p>
+<p>图像生成方面，语言模型和gzip都是从已知的图像信息中预测颜色值，不过两者的分布还是挺不一样的，gzip像是水平和竖直方向规律的噪声，而语言模型则明显的更能体验row-wise的效应。<br><img data-src="/imgs/language_modeling_is_compression/20231003093107.png"></p>
+<p>另外一个实验是关于序列长度对压缩性能的影响。可以看到增大序列长度，三个任务上所有压缩算法的压缩性能都提升了。而Chinchilla 的压缩性能最好。<br><img data-src="/imgs/language_modeling_is_compression/20231003134503.png"><br>理论上来讲，gzip，lzma等传统压缩算法在序列长度增大后继续增大压缩性能，直到达到非切块场景的效果。</p>
+<p>然后作者还比较了在Vanilla Transformer结构上，采用不同tokenization方法在3个不同参数的网络上的Raw压缩率。可以看到，对于比较小的网络(200K),增大tokenization的词汇大小能提高压缩性能，但针对大模型，增大词汇量压缩性能变差，可以看到tokenization的选择对结果还是有挺大影响的。<br><img data-src="/imgs/language_modeling_is_compression/20231003135231.png"></p>
+<h2 id="5-疑问，思考和总结"><a href="#5-疑问，思考和总结" class="headerlink" title="5. 疑问，思考和总结"></a>5. 疑问，思考和总结</h2><p>看论文是有一个直观的疑问：使用大模型时，对同一个问题，输出的结果每次都是不一样的，怎么能保证解压缩时的结果的一致性呢？</p>
+<p>其实大模型每次给出不同结果，是因为处理过程中故意增加了随机性，意图给出更丰富多样的回答。如果去掉随机性，得到的结果是完全一样的，比如哪个token的输出概率最大都是确定的。</p>
+<p>还有这篇文章对于语言模型进行压缩的细节描述的太少了，甚至连一个示例图片或者示例伪代码都没有，导致读论文时很难想象这部分的细节，比如几个疑问，在文本上训练的语言模型是怎么在图像和语音任务上使用的，实际中怎么将语言模型当作算术编码来使用，等等。不知道作者为什么这么处理。</p>
+<p>我觉得这篇论文可能会给相关研究方向带来新的想象空间，比如，文本语料上训练的模型也能在图像和音频数据上获得很好的压缩率，那是不是对于不同模态的输入，也可以设计同一个LLM来统一不同的任务呢？</p>
+<p>再比如，既然像gzip这种传统压缩算法也能作为一个生成模型，而且运行成本远小于现有的LLM，那能否基于这种算法进行AI模型的演进呢？也许是一个更实用的方向。</p>
+<p>总之这篇论文从压缩算法的角度提出了很多有意思有启发的观点，希望能对AI的研究产生新的前进推力。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/10/03/language-modeling-is-compression/" title="Language Modeling Is Compression 论文阅读">http://vra.github.io/2023/10/03/language-modeling-is-compression/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/Paper-Reading/" rel="tag"># Paper Reading</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/30/numpy-printoptions/" rel="prev" title="Numpy set_printoptions函数用法">
+                  <i class="fa fa-chevron-left"></i> Numpy set_printoptions函数用法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/14/leptonai/" rel="next" title="LeptonAI 使用体验">
+                  LeptonAI 使用体验 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

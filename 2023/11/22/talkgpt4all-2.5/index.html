@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 概述talkGPT4All是基于GPT4All的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。 今年4、5月份的时候，我发布了talkGPT4All 1.0版本和2.0版本，链接见下： talkGP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="talkGPT4All 2.5-更多模型以及更加真实的TTS">
+<meta property="og:url" content="http://vra.github.io/2023/11/22/talkgpt4all-2.5/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 概述talkGPT4All是基于GPT4All的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。 今年4、5月份的时候，我发布了talkGPT4All 1.0版本和2.0版本，链接见下： talkGP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-be3555b71a240b52bbc48865090126cc_1440w.png?source=d16d100b">
+<meta property="article:published_time" content="2023-11-22T04:57:30.000Z">
+<meta property="article:modified_time" content="2023-12-09T12:22:48.572Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="pip">
+<meta property="article:tag" content="Whisper">
+<meta property="article:tag" content="GPT4All">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picx.zhimg.com/80/v2-be3555b71a240b52bbc48865090126cc_1440w.png?source=d16d100b">
+
+
+<link rel="canonical" href="http://vra.github.io/2023/11/22/talkgpt4all-2.5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2023/11/22/talkgpt4all-2.5/","path":"2023/11/22/talkgpt4all-2.5/","title":"talkGPT4All 2.5-更多模型以及更加真实的TTS"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>talkGPT4All 2.5-更多模型以及更加真实的TTS | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">172</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">183</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">2. 如何使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">3.</span> <span class="nav-text">3. 实现细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-coqui-ai-TTS%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 coqui-ai&#x2F;TTS使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-GPT4All-2-5-0%E4%BB%A5%E5%90%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%B0%83%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 GPT4All 2.5.0以后模型的调用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">4. 总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">183</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">172</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/11/22/talkgpt4all-2.5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="talkGPT4All 2.5-更多模型以及更加真实的TTS | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          talkGPT4All 2.5-更多模型以及更加真实的TTS
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-22 12:57:30" itemprop="dateCreated datePublished" datetime="2023-11-22T12:57:30+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 20:22:48" itemprop="dateModified" datetime="2023-12-09T20:22:48+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/11/22/talkgpt4all-2.5/" class="post-meta-item leancloud_visitors" data-flag-title="talkGPT4All 2.5-更多模型以及更加真实的TTS" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a href="https://link.zhihu.com/?target=https://github.com/vra/talkGPT4All">talkGPT4All</a>是基于<a href="https://link.zhihu.com/?target=https://gpt4all.io/index.html">GPT4All</a>的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。</p>
+<p>今年4、5月份的时候，我发布了talkGPT4All 1.0版本和2.0版本，链接见下：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/618826760">talkGPT4All: 基于GPT4All的智能语音聊天程序</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/632592897">talkGPT4All 2.0:现在支持8个语言模型了</a></p>
+<p>大家反馈最大的问题是TTS太机械了，听着很难受（具体可以看前面两篇文章的评论区）。而最近TTS领域的进展很多，例如很受欢迎的 coqui-ai的<a target="_blank" rel="noopener" href="https://github.com/coqui-ai/TTS">TTS</a> 库，提供了TTS、声音克隆和声音变换的功能。上周末尝试了一下，发现内置了一些开箱即用的TTS模型，刚好可以集成到 talkGPT4All 中，解决目前采用的 <a target="_blank" rel="noopener" href="https://pypi.org/project/pyttsx3/">pyttsx3</a>合成声音太机械的问题。</p>
+<span id="more"></span>
+
+<p>另外查看 GPT4All 的文档，从2.5.0开始，之前的.bin 格式的模型文件不再支持，只支持.gguf 格式的模型。因此我也是将上游仓库的更新合并进来，修改一下 talkGPT4All 的接口。</p>
+<p>由于GPT4All 是从2.5.0开始不兼容.bin 格式老模型的，是一个很大的 break change。为了统一，我将更新后的 talkGPT4All 版本也命名为 2.5.0。</p>
+<p>2.5.0版本效果视频见<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/668275615">这里</a>。</p>
+<h3 id="2-如何使用"><a href="#2-如何使用" class="headerlink" title="2. 如何使用"></a>2. 如何使用</h3><p>如果想直接使用的话，采用pip安装talkGPT4All包即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install talkgpt4all</span><br></pre></td></tr></table></figure>
+
+<p>安装完后进入聊天：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">talkgpt4ll </span><br></pre></td></tr></table></figure>
+
+<p>talkGPT4All 现在支持15个模型，可以通过-m 来切换你想用的GPT模型，所有模型列表见 3.2章节。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">talkgpt4all -m gpt4all-13b-snoozy-q4_0.gguf</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-实现细节"><a href="#3-实现细节" class="headerlink" title="3. 实现细节"></a>3. 实现细节</h3><p>这里重点讲一下此次更新中涉及到的两个点：coqui-ai/TTS如何使用以及GPT4All 2.5.0以后如何调用GPT模型。</p>
+<h4 id="3-1-coqui-ai-TTS使用"><a href="#3-1-coqui-ai-TTS使用" class="headerlink" title="3.1 coqui-ai/TTS使用"></a>3.1 coqui-ai/TTS使用</h4><p>直接使用pip install TTS 即可安装 coqui-ai/TTS包，里面包含了很多功能，这里只简单展示如何调用一个现有的TTS模型。</p>
+<p>首先列出所有的TTS模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> TTS.api <span class="keyword">import</span> TTS</span><br><span class="line"><span class="built_in">print</span>(TTS().list_models()) </span><br></pre></td></tr></table></figure>
+
+
+<p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;tts_models/multilingual/multi-dataset/xtts_v2&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/multilingual/multi-dataset/xtts_v1.1&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/multilingual/multi-dataset/your_tts&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/multilingual/multi-dataset/bark&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/bg/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/cs/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/da/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/et/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/ga/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ek1/tacotron2&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/tacotron2-DDC&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/tacotron2-DDC_ph&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/glow-tts&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/speedy-speech&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/tacotron2-DCA&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/vits--neon&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/fast_pitch&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/overflow&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/ljspeech/neural_hmm&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/vctk/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/vctk/fast_pitch&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/sam/tacotron-DDC&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/blizzard2013/capacitron-t2-c50&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/blizzard2013/capacitron-t2-c150_v2&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/multi-dataset/tortoise-v2&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/en/jenny/jenny&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/es/mai/tacotron2-DDC&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/es/css10/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/fr/mai/tacotron2-DDC&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/fr/css10/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/uk/mai/glow-tts&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/uk/mai/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/zh-CN/baker/tacotron2-DDC-GST&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/nl/mai/tacotron2-DDC&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/nl/css10/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/de/thorsten/tacotron2-DCA&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/de/thorsten/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/de/thorsten/tacotron2-DDC&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/de/css10/vits-neon&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/ja/kokoro/tacotron2-DDC&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/tr/common-voice/glow-tts&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/it/mai_female/glow-tts&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/it/mai_female/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/it/mai_male/glow-tts&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/it/mai_male/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/ewe/openbible/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/hau/openbible/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/lin/openbible/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/tw_akuapem/openbible/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/tw_asante/openbible/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/yor/openbible/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/hu/css10/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/el/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/fi/css10/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/hr/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/lt/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/lv/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/mt/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/pl/mai_female/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/pt/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/ro/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/sk/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/sl/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/sv/cv/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/ca/custom/vits&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/fa/custom/glow-tts&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/bn/custom/vits-male&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/bn/custom/vits-female&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;tts_models/be/common-voice/glow-tts&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>我从英文(‘en’)的 TTS 模型中挑选了一个听起来比较好的 <code>tts_models/en/ljspeech/glow-tts</code>, 作为 talkGPT4All的默认 TTS，调用方式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> TTS.api <span class="keyword">import</span> TTS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化TTS模型</span></span><br><span class="line">tts = TTS(model_name=<span class="string">&quot;tts_models/en/ljspeech/glow-tts&quot;</span>, progress_bar=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者用离线下载的模型路径</span></span><br><span class="line">tts = TTS(model_path=<span class="string">&quot;/path/to/model&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合成文本对应的音频并保存到文件</span></span><br><span class="line">tts.tts_to_file(text=<span class="string">&quot;Hello there&quot;</span>, file_path=<span class="string">&quot;hello.wav&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>如果因为网络原因模型在Python代码中下载不了，可以手动下载模型，然后指定TTS初始化中的model_path 为模型的本地路径。</p>
+<h4 id="3-2-GPT4All-2-5-0以后模型的调用"><a href="#3-2-GPT4All-2-5-0以后模型的调用" class="headerlink" title="3.2 GPT4All 2.5.0以后模型的调用"></a>3.2 GPT4All 2.5.0以后模型的调用</h4><p>gguf 格式的模型目前有15个，各有特点：</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-be3555b71a240b52bbc48865090126cc_1440w.png?source=d16d100b"></p>
+<p>所有模型的详细信息在<a target="_blank" rel="noopener" href="https://github.com/nomic-ai/gpt4all/blob/a328f9ed3fdf238835429dd45940850724d0a652/gpt4all-chat/metadata/models2.json#L145">这里</a>，下面我列出所有支持的模型，方便命令行调用时参考：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mistral-7b-openorca.Q4_0.gguf</span><br><span class="line">mistral-7b-instruct-v0.1.Q4_0.gguf</span><br><span class="line">gpt4all-falcon-q4_0.gguf</span><br><span class="line">orca-2-7b.Q4_0.gguf</span><br><span class="line">orca-2-13b.Q4_0.gguf</span><br><span class="line">wizardlm-13b-v1.2.Q4_0.gguf</span><br><span class="line">nous-hermes-llama2-13b.Q4_0.gguf</span><br><span class="line">gpt4all-13b-snoozy-q4_0.gguf</span><br><span class="line">mpt-7b-chat-merges-q4_0.gguf</span><br><span class="line">orca-mini-3b-gguf2-q4_0.gguf</span><br><span class="line">replit-code-v1_5-3b-q4_0.gguf</span><br><span class="line">starcoder-q4_0.gguf</span><br><span class="line">rift-coder-v0-7b-q4_0.gguf</span><br><span class="line">all-MiniLM-L6-v2-f16.gguf</span><br><span class="line">em_german_mistral_v01.Q4_0.gguf</span><br></pre></td></tr></table></figure>
+
+
+<p>而 GPT4All chat 模式的调用方式也发生了变化，新版本需要这么调用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gpt_model = GPT4All(<span class="string">&quot;mistral-7b-openorca.Q4_0.gguf&quot;</span>, allow_download=<span class="literal">True</span>)       </span><br><span class="line"><span class="keyword">with</span> gpt_model.chat_session():</span><br><span class="line">    answer = gpt_model.generate(prompt=<span class="string">&quot;hello&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>需要显式地创建<code>chat_session</code> context manager。</p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h3><p>上面就是这次更新的主要内容，总的来说就是采用了更自然的TTS，更新代码以支持 GPT4All最新的break change。</p>
+<p>欢迎大家试用、反馈bug。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2023/11/22/talkgpt4all-2.5/" title="talkGPT4All 2.5-更多模型以及更加真实的TTS">http://vra.github.io/2023/11/22/talkgpt4all-2.5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/pip/" rel="tag"># pip</a>
+              <a href="/tags/Whisper/" rel="tag"># Whisper</a>
+              <a href="/tags/GPT4All/" rel="tag"># GPT4All</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/13/can-ai-explain-ancient-chinese-poetry/" rel="prev" title="AI小实验：大语言模型能否帮助我们理解古诗？">
+                  <i class="fa fa-chevron-left"></i> AI小实验：大语言模型能否帮助我们理解古诗？
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

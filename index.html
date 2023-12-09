@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">164</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">176</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">172</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">183</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">183</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">164</span>
+        <span class="site-state-item-count">172</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,6 +204,672 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/11/22/talkgpt4all-2.5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/22/talkgpt4all-2.5/" class="post-title-link" itemprop="url">talkGPT4All 2.5-更多模型以及更加真实的TTS</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-22 12:57:30" itemprop="dateCreated datePublished" datetime="2023-11-22T12:57:30+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 20:22:48" itemprop="dateModified" datetime="2023-12-09T20:22:48+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/11/22/talkgpt4all-2.5/" class="post-meta-item leancloud_visitors" data-flag-title="talkGPT4All 2.5-更多模型以及更加真实的TTS" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a href="https://link.zhihu.com/?target=https://github.com/vra/talkGPT4All">talkGPT4All</a>是基于<a href="https://link.zhihu.com/?target=https://gpt4all.io/index.html">GPT4All</a>的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。</p>
+<p>今年4、5月份的时候，我发布了talkGPT4All 1.0版本和2.0版本，链接见下：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/618826760">talkGPT4All: 基于GPT4All的智能语音聊天程序</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/632592897">talkGPT4All 2.0:现在支持8个语言模型了</a></p>
+<p>大家反馈最大的问题是TTS太机械了，听着很难受（具体可以看前面两篇文章的评论区）。而最近TTS领域的进展很多，例如很受欢迎的 coqui-ai的<a target="_blank" rel="noopener" href="https://github.com/coqui-ai/TTS">TTS</a> 库，提供了TTS、声音克隆和声音变换的功能。上周末尝试了一下，发现内置了一些开箱即用的TTS模型，刚好可以集成到 talkGPT4All 中，解决目前采用的 <a target="_blank" rel="noopener" href="https://pypi.org/project/pyttsx3/">pyttsx3</a>合成声音太机械的问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/22/talkgpt4all-2.5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/11/13/can-ai-explain-ancient-chinese-poetry/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/13/can-ai-explain-ancient-chinese-poetry/" class="post-title-link" itemprop="url">AI小实验：大语言模型能否帮助我们理解古诗？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-13 12:57:30" itemprop="dateCreated datePublished" datetime="2023-11-13T12:57:30+08:00">2023-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 20:07:50" itemprop="dateModified" datetime="2023-12-09T20:07:50+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/11/13/can-ai-explain-ancient-chinese-poetry/" class="post-meta-item leancloud_visitors" data-flag-title="AI小实验：大语言模型能否帮助我们理解古诗？" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>昨天在读龚自珍《己亥杂诗》的时候，看到一句“千秋名教吾谁愧？愧读羲之誓墓文”，怎么想都想不明白这句什么意思。<br><img data-src="/imgs/ai_explain_poetry/000.jpg"><br>突发奇想，既然大语言模型进展突飞猛进，能否帮助我来解读这句诗是什么意思呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/13/can-ai-explain-ancient-chinese-poetry/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/11/12/llava-plus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/12/llava-plus/" class="post-title-link" itemprop="url">关于LLaVA-Plus 的一些思考</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-12 12:57:30" itemprop="dateCreated datePublished" datetime="2023-11-12T12:57:30+08:00">2023-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 19:57:23" itemprop="dateModified" datetime="2023-12-09T19:57:23+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/11/12/llava-plus/" class="post-meta-item leancloud_visitors" data-flag-title="关于LLaVA-Plus 的一些思考" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://llava-vl.github.io/llava-plus">LLaVA-Plus</a> 是LLAVA团队最近放出来的LMM工作，对LLaVA进行了改进升级，相比LLaVA对输入图像只能进行文本回答的情况，LLaVA-PLUS则包含相当丰富的功能：</p>
+<ul>
+<li>可以调用SD生成与输入类似的图像</li>
+<li>可以对图像进行编辑，例如调用Instruct pix2pix在图像上放置一只动物</li>
+<li>可以对图像进行物体检测，分割，Cpation，OCR，打标签等多模态处理的功能</li>
+<li>还可以调用外部知识来对未知的信息进行检索</li>
+<li>支持用户交互，如对用户点击的区域进行实例分割</li>
+<li>对图像进行美化，然后生成可以发布到社交媒体上的文案</li>
+</ul>
+<p>那么LMM是怎么获得到这么多的多模态能力的呢？论文中提出了一个叫<code>Skill Repository</code> 的概念，就是一些AI 子任务的能力和对应的模型，利用这个Skill Repository来完成丰富的功能。也就是说LLaVA-Plus将用户输入的任务通过进行拆分，然后调用合适的子任务模型来实现，再对结果进行一定的处理返回给用户。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/12/llava-plus/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/11/04/bing-brush/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/04/bing-brush/" class="post-title-link" itemprop="url">Bing Brush-Python代码和命令行中调用必应 DALL·E 3文生图模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-04 23:22:03" itemprop="dateCreated datePublished" datetime="2023-11-04T23:22:03+08:00">2023-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 11:13:56" itemprop="dateModified" datetime="2023-12-09T11:13:56+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/11/04/bing-brush/" class="post-meta-item leancloud_visitors" data-flag-title="Bing Brush-Python代码和命令行中调用必应 DALL·E 3文生图模型" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h3><p>今早看到一个好玩的项目，利用Bing Image Creator 来生成每日诗词的图像，研究了一下，发现有人提供了<a target="_blank" rel="noopener" href="https://github.com/acheong08/BingImageCreator">BingImageCreator</a>仓库来调用Bing的API在代码中生成图像，但还需要下载源码，没有提供cli，cookie怎么获取也没有讲太细。</p>
+<p>因此我基于这个仓库，做了一些精简和封装，提供了一个可以直接pip安装的工具<a target="_blank" rel="noopener" href="https://github.com/vra/bing_brush">bing_brush</a>, 获取cookie后可以直接命令行调用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/04/bing-brush/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/10/14/android-ai-app-in-88-lines-of-python-code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/14/android-ai-app-in-88-lines-of-python-code/" class="post-title-link" itemprop="url">使用 Python 88 行代码写一个简易的 Android AI 程序</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-14 23:22:03" itemprop="dateCreated datePublished" datetime="2023-10-14T23:22:03+08:00">2023-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 10:52:12" itemprop="dateModified" datetime="2023-12-09T10:52:12+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/10/14/android-ai-app-in-88-lines-of-python-code/" class="post-meta-item leancloud_visitors" data-flag-title="使用 Python 88 行代码写一个简易的 Android AI 程序" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>TL;DR:<br>我基于 LeptonAI 和 Beeware Python 库，利用 88 行的Python，不用写一行Java代码，在手机上做了一个 SDXL text-to-image 的Demo，效果见<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/661358058">这里</a>的视频。</p>
+<p>作为一个爱折腾写Python比较多的人，我一直在想一个事情：能否将熟悉的Python技术栈的能力带到移动平台中，不用写哪些繁琐的Native开发代码，就能在移动端跑起来一个AI Demo呢？因为相比PC，移动端设备的用户数多得多，每个人都有一台手机，但并不是每个人都有一台电脑。</p>
+<p>一次偶然的机会，我发现了 <a target="_blank" rel="noopener" href="https://beeware.org/">Beeware</a>，一个目标 “Write once. Deploy everywhere.“ 的跨平台 Python 工具箱。基于 Beeware 工具箱写的 Python 程序可以在 PC，Web，Android 和 iOS 上运行，因此正是我想要的。</p>
+<p>一切听起来很美好，但实际使用时也遇到很多问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/14/android-ai-app-in-88-lines-of-python-code/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/10/14/leptonai/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/14/leptonai/" class="post-title-link" itemprop="url">LeptonAI 使用体验</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-14 00:05:35" itemprop="dateCreated datePublished" datetime="2023-10-14T00:05:35+08:00">2023-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 10:40:12" itemprop="dateModified" datetime="2023-12-09T10:40:12+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/10/14/leptonai/" class="post-meta-item leancloud_visitors" data-flag-title="LeptonAI 使用体验" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p><a target="_blank" rel="noopener" href="https://www.lepton.ai/">LeptonAI</a>是贾扬清的创业项目，正如 slogan “Build AI The Simple Way” 所表明的，LeptonAI的目标是简化AI模型的部署。</p>
+<p>简单来说，LeptonAI 提供了 <a href="(https://github.com/leptonai/leptonai">Python SDK</a> 和云平台。Python SDK 可以让没有AI领域知识的普通开发者调用2～3行命令就能部署一个AI模型，然后用一个curl语句或几行Python代码就能完成客户端请求；而 LeptonAI 云平台提供了CPU，GPU和存储资源，开发者可以把创建的AI模型部署到这里，就能提供公开对外的AI服务。</p>
+<p>AI模型创建支持 HuggingFace，也就是说可以将 HuggingFace 上海量的模型集成到自己的应用中。同时 LeptonAI 也支持从 GitHub 仓库创建 AI 模型，给了开发者更多的选择。</p>
+<p>经过一段时间的体验后发现，LeptonAI Python SDK 设计的很优雅，用起来很舒服，而云平台的操作也很丝滑，有贾扬清大神亲自操刀写代码，SDK和云平台的质量绝对是信得过的。<br><img data-src="/imgs/leptonai/20231014072616.png"></p>
+<p>那 LeptonAI 是否解决了一些 AI 部署中的痛点问题呢？我认为是的。根据之前的经验，跑一些 AI 开源模型成本还是挺高的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/14/leptonai/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/10/03/language-modeling-is-compression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/03/language-modeling-is-compression/" class="post-title-link" itemprop="url">Language Modeling Is Compression 论文阅读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-03 12:57:30" itemprop="dateCreated datePublished" datetime="2023-10-03T12:57:30+08:00">2023-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 09:43:43" itemprop="dateModified" datetime="2023-12-09T09:43:43+08:00">2023-12-09</time>
+    </span>
+
+  
+    <span id="/2023/10/03/language-modeling-is-compression/" class="post-meta-item leancloud_visitors" data-flag-title="Language Modeling Is Compression 论文阅读" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>这是DeepMind 最近发表的一篇论文，题目翻译成中文是“语言模型即压缩”，是一个很简单但也有分量的观点。更有趣的是，论文中作者发现，自己的预训练大模型Chinchilla 70B只在文本训练集上训练后，在ImagNet 图像Patch上压缩率能达到43.4%，优于PNG算法的压缩率58.5%，在LibrSpeech语音数据集上，压缩率达到16.4%，优于语音压缩算法FLAC30.3%的压缩率。</p>
+<p>说实话看到这个结论我还是很震惊的。一个是文本数据上训练的模型居然也能用于图像和语音的压缩，而且压缩率还高于常用的领域特定的压缩算法。</p>
+<p>除了震惊，还很好奇大模型是怎么被当作压缩器来压缩文本图像和语音数据的。在好奇心的驱使下，我读了几遍这篇论文。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/03/language-modeling-is-compression/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -475,642 +1141,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/08/12/python-parallel-function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/12/python-parallel-function/" class="post-title-link" itemprop="url">一个简单好用的Python并行函数</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-08-12 23:43:21 / 修改时间：23:44:23" itemprop="dateCreated datePublished" datetime="2023-08-12T23:43:21+08:00">2023-08-12</time>
-    </span>
-
-  
-    <span id="/2023/08/12/python-parallel-function/" class="post-meta-item leancloud_visitors" data-flag-title="一个简单好用的Python并行函数" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>用Python跑有大量数据的任务的时候，启用多进程加速效果明显。但因为我之前在使用Python的多进程库时总遇到卡住的问题，后来对这块避而远之，总是用别的方法来加速。最近发现OpenMMLab的一些库提供了多进程并行的函数功能，简单好用。比如一个简单的toy例子，OpenCV读图像，resize然后保存，在8个CPU核的 Mac 上，加速比能达到3.4倍(45ms vs 13ms)，也就是以前要跑3个多小时的任务，现在1个小时就能搞定，省了不少时间，更多实际例子也证明了这个函数的加速效果，还是挺实用的。这里写个教程，希望也能方便到别的有同样需要的人，当然同类型的库应该也有很多，这里只是取一瓢饮。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/12/python-parallel-function/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/07/30/git-clean-tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/30/git-clean-tutorial/" class="post-title-link" itemprop="url">git clean 教程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-07-30 00:21:01" itemprop="dateCreated datePublished" datetime="2023-07-30T00:21:01+08:00">2023-07-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-09 15:08:19" itemprop="dateModified" datetime="2023-08-09T15:08:19+08:00">2023-08-09</time>
-    </span>
-
-  
-    <span id="/2023/07/30/git-clean-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="git clean 教程" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-引入"><a href="#1-引入" class="headerlink" title="1. 引入"></a>1. 引入</h3><p>git clean 是用来删除 git 仓库中没有被跟踪的文件的命令，在想要快速清理 git 仓库（比如，删除仓库中所有没有跟踪的文件，清除编译生成的临时文件）时很有用。是相比别的git子命令， git clean的配置选项比较少，使用起来简单一些，这里写一个简要教程。<br>友情提示：git clean真的会删除文件，而且没法用git命令来恢复（因为没有被 git 跟踪），所以使用git clean前务必慎重，建议每次删除文件之前先加<code>--dry-run</code> 选项来验证会删除哪些文件，确保没有误删。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/07/30/git-clean-tutorial/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/07/14/dinov2-retrieval/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/14/dinov2-retrieval/" class="post-title-link" itemprop="url">dinov2_retrieval:一个基于DINOv2 的图片检索应用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-07-14 00:05:35 / 修改时间：00:16:35" itemprop="dateCreated datePublished" datetime="2023-07-14T00:05:35+08:00">2023-07-14</time>
-    </span>
-
-  
-    <span id="/2023/07/14/dinov2-retrieval/" class="post-meta-item leancloud_visitors" data-flag-title="dinov2_retrieval:一个基于DINOv2 的图片检索应用" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>前些天 Meta 公司发布了 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/dinov2">DINOv2</a> 视觉预训练模型。DINOv2 能够高效地提出图像中的特征，提取的特征可以直接用于像分类等任务，而且只需要一个简单的线性层就能取得比较好的结果。</p>
-<p>为了展示 DINOv2 强大的特征提取能力， Meta 提供了一个在线 <a target="_blank" rel="noopener" href="https://dinov2.metademolab.com/">Demo</a>，上传一张图片，就能从一些艺术画作中检索出最相似的作品。</p>
-<p>拿随手拍的照片体验后，DINOv2 特征提取能力确实强大，能够准确地理解图片中的语义信息。</p>
-<p><img data-src="/imgs/dinov2_retrieval/dinov2_demo_result.jpeg"></p>
-<p>由于 DINOv2 预训练模型是开源的，因为基于它来测试实际的效果是可行的。比如，我想找到相册中跟某张照片最相似的图片，就可以用 DINOv2 来测试照片和相册中所有照片的特征，然后计算相册中照片特征与测试照片最相近的那一张，就是我想要的。</p>
-<p>整体思路是很简单直接的，经过一天的开发，终于完成了一个相对完善的Python工具 <a target="_blank" rel="noopener" href="https://github.com/vra/dinov2-retrieval">dinov2_retrieval</a>，能够检索若干张图片在测试数据集中最相似的图。</p>
-<p>写完后拿最近拍的一些随机照片跑了一下，检索结果还是挺不错的。最左边是测试图片，右边的5张图是在[Caltech 256](<a target="_blank" rel="noopener" href="https://data.caltech.edu/records/nyy15-4j048">Caltech 256</a>)数据集中检索得到的top5相似的图像：<br><img data-src="/imgs/dinov2_retrieval/1688175364717_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364731_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364741_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364753_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364766_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364775_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364786_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364801_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688219476149_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688219476156_output.jpg"></p>
-<p>通过和ResNet50预训练模型提取的特征做检索对比，发现 DINOv2 提取的特征还是更准确一些，检索结果也更好。</p>
-<p>后面部分详细说说这个工具 dinov2_retrieval 的使用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/07/14/dinov2-retrieval/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/30/git-diff-a-special-use-case/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/06/30/git-diff-a-special-use-case/" class="post-title-link" itemprop="url">git diff 的一个妙用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-06-30 22:41:49 / 修改时间：22:42:42" itemprop="dateCreated datePublished" datetime="2023-06-30T22:41:49+08:00">2023-06-30</time>
-    </span>
-
-  
-    <span id="/2023/06/30/git-diff-a-special-use-case/" class="post-meta-item leancloud_visitors" data-flag-title="git diff 的一个妙用" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-git-diff-常规用法"><a href="#1-git-diff-常规用法" class="headerlink" title="1. git diff 常规用法"></a>1. git diff 常规用法</h3><p>git diff 可以用来比较在git仓库中的两次提交或两个文件的diff，常见用法如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前代码与最新commit的代码之间的差别</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存（也就是已经git add 但还没有git commit）的代码提交</span></span><br><span class="line">git diff --staged</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前代码与&lt;commit-id&gt;时代码的区别</span></span><br><span class="line">git diff &lt;commit-id&gt; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存代码与&lt;commit-id&gt;时代码的区别</span></span><br><span class="line">git diff --staged &lt;commit-id&gt; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两次commit-id之间的代码区别</span></span><br><span class="line">git diff &lt;commit-id1&gt; &lt;commit-id2&gt;  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支与 branch1 分支上的代码区别</span></span><br><span class="line">git diff &lt;branch1&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两个分支上的代码之间的区别</span></span><br><span class="line">git diff &lt;branch1&gt; &lt;branch2&gt;</span><br></pre></td></tr></table></figure>
-
-<p>所有上述命令后面都可以加一个目录或文件路径来只显示这个目录或文件中的区别：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git diff /path/to/folder</span><br><span class="line"></span><br><span class="line">git diff /path/to/file.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可用git的参数终止符号--，避免文件名和参数重名时将文件名解析为参数</span></span><br><span class="line">git diff --  /path/to/file.py</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/30/git-diff-a-special-use-case/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/30/cpp-optional-tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/06/30/cpp-optional-tutorial/" class="post-title-link" itemprop="url">C++ std::optional 使用教程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-06-30 22:39:41 / 修改时间：22:40:50" itemprop="dateCreated datePublished" datetime="2023-06-30T22:39:41+08:00">2023-06-30</time>
-    </span>
-
-  
-    <span id="/2023/06/30/cpp-optional-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="C++ std::optional 使用教程" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-std-optional-是什么"><a href="#1-std-optional-是什么" class="headerlink" title="1. std::optional 是什么"></a>1. std::optional 是什么</h3><p>C++ 17 引入了std::optional，表示一个可能有值的对象（没有值时就是默认的<code>std::nullopt</code>)，例如这个例子中，std::optional 对象 even_value，如果<code>is_even</code> 为真的话就是128，否则就是默认值<code>std::nullopt</code>: </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;optiona&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> is_even = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 没有值的情况下 std::optional 对象的值为 std::nullopt</span></span><br><span class="line">std::optional&lt;<span class="keyword">int</span>&gt; even_value = is_even ? std::optional&lt;<span class="keyword">int</span>&gt;(<span class="number">128</span>) : std::nullopt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以用 std::optional 对象是否等于 std::nullopt 来判断 std::optional 对象是否有值</span></span><br><span class="line"><span class="keyword">if</span> (even_value != std::nullopt) &#123;</span><br><span class="line">    <span class="comment">// 采用.value 获取 std::optional 对象的值</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;has value, which is &quot;</span> &lt;&lt; even_value.<span class="built_in">value</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;no value&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其实std::optional的作用和Python里面的<code>None</code>比较像，例如上面的例子用Python来写就是这样：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">is_even = <span class="literal">True</span></span><br><span class="line">even_value = <span class="number">128</span> <span class="keyword">if</span> is_even <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line"><span class="keyword">if</span> even_value <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;has value, which is&quot;</span>, even_value)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;no value&quot;</span>)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/30/cpp-optional-tutorial/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/30/libtorch-tutorial3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/06/30/libtorch-tutorial3/" class="post-title-link" itemprop="url">libtorch系列教程3：优雅地训练MNIST分类模型</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-06-30 22:38:16 / 修改时间：22:39:28" itemprop="dateCreated datePublished" datetime="2023-06-30T22:38:16+08:00">2023-06-30</time>
-    </span>
-
-  
-    <span id="/2023/06/30/libtorch-tutorial3/" class="post-meta-item leancloud_visitors" data-flag-title="libtorch系列教程3：优雅地训练MNIST分类模型" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在这篇文章中，我们对如何使用Libtorch进行MNIST分类模型的训练和测试进行详细描述。首先会浏览官方MNIST示例，然后对其进行模块化重构，为后续别的模型的训练提供 codebase。</p>
-<p>由于Libtorch中包含很多和Pytorch中没有的类型，所以看Libtorch代码的时候时常会遇到不了解的函数或者类，这时候可以在<a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch">这里</a>查找对应的类的实现，了解其作用。Libtorch C++ 代码中的注释虽然不多但基本够用了。</p>
-<p>这里列举一些常见的类的代码路径，方便查询：</p>
-<ul>
-<li>Datasets: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/base.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/base.h</a></li>
-<li>DataLoader:<a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch/data/dataloader/base.h">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch/data/dataloader/base.h</a></li>
-<li>MNIST: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/mnist.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/mnist.h</a></li>
-<li>Stack: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/transforms/stack.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/transforms/stack.h</a></li>
-<li>RandomSampler:  <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/random.cpp">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/random.cpp</a></li>
-<li>SequentialSampler: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/sequential.cpp">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/sequential.cpp</a></li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/30/libtorch-tutorial3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/17/neoformat-python-cpp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/06/17/neoformat-python-cpp/" class="post-title-link" itemprop="url">NeoVim 代码格式化教程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-06-17 09:54:45 / 修改时间：11:20:33" itemprop="dateCreated datePublished" datetime="2023-06-17T09:54:45+08:00">2023-06-17</time>
-    </span>
-
-  
-    <span id="/2023/06/17/neoformat-python-cpp/" class="post-meta-item leancloud_visitors" data-flag-title="NeoVim 代码格式化教程" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a target="_blank" rel="noopener" href="https://github.com/sbdchd/neoformat">neoformat</a> 是 (Neo)Vim 的代码格式化插件，支持多种语言的格式化。这篇文章覆盖 Neoformat 对 Python 和 C++ 进行格式化的配置，以及如何在保存代码时自动进行格式化，可以直接应用的配置代码段在文章最后。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/17/neoformat-python-cpp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
