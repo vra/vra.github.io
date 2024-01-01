@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">172</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">183</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">172</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">184</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">183</span>
+          <span class="site-state-item-count">184</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -204,6 +204,166 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/05/numpy-remove-np-float/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/05/numpy-remove-np-float/" class="post-title-link" itemprop="url">关于 np.float 被删除的问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-05 11:34:04" itemprop="dateCreated datePublished" datetime="2023-02-05T11:34:04+08:00">2023-02-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-13 16:37:25" itemprop="dateModified" datetime="2023-02-13T16:37:25+08:00">2023-02-13</time>
+    </span>
+
+  
+    <span id="/2023/02/05/numpy-remove-np-float/" class="post-meta-item leancloud_visitors" data-flag-title="关于 np.float 被删除的问题" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>在Numpy 1.24版本中，<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations">删除</a>了像<code>np.float</code>、<code>np.int</code> 这样的 Python 内置类型的 alias，因此以后在代码中使用这些类型会报错<code>AttributeError: module &#39;numpy&#39; has no attribute &#39;float&#39;</code>, 涉及的类型包括：</p>
+<ul>
+<li><code>numpy.bool</code></li>
+<li><code>numpy.int</code></li>
+<li><code>numpy.float</code></li>
+<li><code>numpy.complex</code></li>
+<li><code>numpy.object</code></li>
+<li><code>numpy.str</code></li>
+<li><code>numpy.long</code></li>
+<li><code>numpy.unicode</code></li>
+</ul>
+<p>那该怎么解决这个错误呢？</p>
+<p>TL;DR</p>
+<ul>
+<li>对于在标量上的操作，直接使用Python内置类型替换<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo = np.random.rand(<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 原先用法，注意foo[0]是一个标量</span></span><br><span class="line">bar = np.<span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">bar = <span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></li>
+<li>对于在<code>np.ndarray</code> 上的操作，使用<code>np.float64</code> 或<code>np.float32</code> 来替代，具体选择哪个需要自己根据情况来确定，不同类型精度会有不同，下面举两个例子:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.float32)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>这里列出来了删除类型在标量和<code>np.ndarray</code> 上的替代，方便查找</p>
+<table>
+<thead>
+<tr>
+<th>原先类型</th>
+<th>标量替换类型</th>
+<th><code>np.ndarray</code>替换类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.int</td>
+<td>int</td>
+<td>np.int32/np.int64</td>
+</tr>
+<tr>
+<td>np.float</td>
+<td>float</td>
+<td>np.float32/np.float64</td>
+</tr>
+<tr>
+<td>np.bool</td>
+<td>bool</td>
+<td>np.bool_</td>
+</tr>
+<tr>
+<td>np.complex</td>
+<td>complex</td>
+<td>np.complex128</td>
+</tr>
+<tr>
+<td>np.object</td>
+<td>object</td>
+<td>-</td>
+</tr>
+<tr>
+<td>np.str</td>
+<td>str</td>
+<td>np.str_</td>
+</tr>
+<tr>
+<td>np.long</td>
+<td>int</td>
+<td>np.int32/np.int64</td>
+</tr>
+<tr>
+<td>np.unicode</td>
+<td>str</td>
+<td>np.str_</td>
+</tr>
+</tbody></table>
+<p>详细说明参考<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/release/1.20.0-notes.html#deprecations">NumPy 1.20.0 Release Notes</a>。</p>
+<p>下面详细说说事情的来龙去脉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/05/numpy-remove-np-float/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1025,91 +1185,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/11/07/du-show-hidden-folders/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/07/du-show-hidden-folders/" class="post-title-link" itemprop="url">执行du命令时统计隐藏文件和目录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-11-07 23:32:23 / 修改时间：23:38:24" itemprop="dateCreated datePublished" datetime="2022-11-07T23:32:23+08:00">2022-11-07</time>
-    </span>
-
-  
-    <span id="/2022/11/07/du-show-hidden-folders/" class="post-meta-item leancloud_visitors" data-flag-title="执行du命令时统计隐藏文件和目录" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在Linux和Mac下，执行<code>du -sh</code> 来统计目录大小时，默认不统计以点开头的文件或者目录，比如<code>.local</code>，因此得到不准确的统计结果。从<a target="_blank" rel="noopener" href="https://superuser.com/a/633808">这里</a>知道，要统计隐藏文件和目录，可以这么用:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只统计隐藏文件或者目录</span></span><br><span class="line">du -sh .[^.]*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计隐藏文件或者目录和常规文件</span></span><br><span class="line">du -sh .[^.]* *</span><br></pre></td></tr></table></figure>
-<p>结合 <code>sort -h</code>，可以快速得到比较大的目录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh .[^.]* * |sort -h</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1123,7 +1198,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
