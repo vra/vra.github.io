@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">172</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">184</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">187</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">191</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">172</span>
+        <span class="site-state-item-count">187</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,6 +204,667 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2019/09/07/install-old-version-of-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/09/07/install-old-version-of-python/" class="post-title-link" itemprop="url">你不应该知道的知识之如何安装老版本的Python</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-09-07 22:12:13" itemprop="dateCreated datePublished" datetime="2019-09-07T22:12:13+08:00">2019-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2019/09/07/install-old-version-of-python/" class="post-meta-item leancloud_visitors" data-flag-title="你不应该知道的知识之如何安装老版本的Python" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>由于某些奇怪的原因（如项目中要用某个用Python3.4编译的库），你可能需要安装官方停止支持的Python版本（如Python2.5, Python2.6, Python3.3, Python 3.4或者更老的版本），<br>直接通过<code>sudo apt install python3.4</code>是没法安装的，因为Ubuntu 16.04移除了对Python3.4的支持。<br>作为不应该知道的知识的一部分，这里详细记录下在Ubuntu 16.04下安装旧版本的Python的方式，如果在2029年，因项目你需要安装Python3.4，或许本文可以帮到你。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/07/install-old-version-of-python/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2019/05/07/my-dot-file/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/05/07/my-dot-file/" class="post-title-link" itemprop="url">my-dot-file</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-05-07 16:58:13" itemprop="dateCreated datePublished" datetime="2019-05-07T16:58:13+08:00">2019-05-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2019/05/07/my-dot-file/" class="post-meta-item leancloud_visitors" data-flag-title="my-dot-file" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="oh-my-zsh"><a href="#oh-my-zsh" class="headerlink" title="oh-my-zsh"></a>oh-my-zsh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">&quot;<span class="subst">$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改SHELL为zsh"><a href="#修改SHELL为zsh" class="headerlink" title="修改SHELL为zsh"></a>修改SHELL为zsh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -s /bin/zsh $(whoami)</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装fzf"><a href="#安装fzf" class="headerlink" title="安装fzf"></a>安装fzf</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/junegunn/fzf.git ~/.fzf</span><br><span class="line">~/.fzf/install</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-alias设置"><a href="#git-alias设置" class="headerlink" title="git alias设置"></a>git alias设置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.a add  </span><br><span class="line">git config --global alias.p push </span><br><span class="line">git config --global alias.pu pull</span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global alias.unstage <span class="string">&#x27;reset HEAD&#x27;</span></span><br><span class="line">git config --global alias.last <span class="string">&#x27;log -1&#x27;</span></span><br><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.lg <span class="string">&quot;log --color --graph --pretty=format:&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27; --abbrev-commit&quot;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2019/05/03/ubuntu-install-python3-6-python3-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/05/03/ubuntu-install-python3-6-python3-7/" class="post-title-link" itemprop="url">Ubuntu上安装Python3.7</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-05-03 20:20:45" itemprop="dateCreated datePublished" datetime="2019-05-03T20:20:45+08:00">2019-05-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:00" itemprop="dateModified" datetime="2021-08-20T23:48:00+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2019/05/03/ubuntu-install-python3-6-python3-7/" class="post-meta-item leancloud_visitors" data-flag-title="Ubuntu上安装Python3.7" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在有些情况下，如安装某个比较Cool的工具的时候，需要用到Python3.6+。这时候，可以选择从<a target="_blank" rel="noopener" href="https://www.python.org/">Python官网</a>下载源代码，然后编译。不过编译可能会因为各种各样的问题而出错。对于只是想<strong>安装</strong>高版本的Python以便来使用Cool的工具的我来说，<br>从头一步步地解决这些编译问题，并不是我想要的，因此能不能有一种直接<code>apt install</code>来安装Python的途径呢？答案是Yes，下面详述（也就三条命令）。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/05/03/ubuntu-install-python3-6-python3-7/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2019/03/18/numpy-array-contiguous/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/18/numpy-array-contiguous/" class="post-title-link" itemprop="url">从Numpy中的ascontiguousarray说起</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-18 23:02:58" itemprop="dateCreated datePublished" datetime="2019-03-18T23:02:58+08:00">2019-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2019/03/18/numpy-array-contiguous/" class="post-meta-item leancloud_visitors" data-flag-title="从Numpy中的ascontiguousarray说起" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在使用Numpy的时候，有时候会遇到下面的错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: incompatible shape <span class="keyword">for</span> a non-contiguous array</span><br></pre></td></tr></table></figure>
+<p>看报错的字面意思，好像是不连续数组的shape不兼容。</p>
+<p>有的时候，在看别人代码时会时不时看到<code>ascontiguous()</code>这样的一个函数，查<a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ascontiguousarray.html">文档</a>会发现函数说明只有一句话：“Return a contiguous array (ndim &gt;= 1) in memory (C order).”</p>
+<p>光靠这些信息，似乎没能道出Numpy里面contiguous array和non-contiguous array有什么区别，以及为什么需要进行<code>ascontiguous</code>操作？带着这些疑问，我搜了比较多的资料，在stack overflow上发现一个比较详细的<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/26998223/what-is-the-difference-between-contiguous-and-non-contiguous-arrays">回答</a>，简单明白地将Numpy里面的数组的连续性问题解释清楚了，因此这里翻译过来，希望能帮助到别的有同样疑问的小伙伴。</p>
+<h2 id="2-额外知识：-C-order-vs-Fortran-order"><a href="#2-额外知识：-C-order-vs-Fortran-order" class="headerlink" title="2. 额外知识： C order vs Fortran order"></a>2. 额外知识： C order vs Fortran order</h2><p>所谓<code>C order</code>，指的是行优先的顺序（Row-major Order)，即内存中同行的存在一起，而<code>Fortran Order</code>则指的是列优先的顺序（Column-major Order)，即内存中同列的存在一起。这种命名方式是根据C语言和Fortran语言中数组在内存中的存储方式不同而来的。Pascal, C，C++，Python都是行优先存储的，而Fortran，MatLab是列优先存储的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/18/numpy-array-contiguous/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2019/03/13/ubuntu-install-neovim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/13/ubuntu-install-neovim/" class="post-title-link" itemprop="url">Ubuntu安装NeoVim:一种最简单的方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-13 13:36:51" itemprop="dateCreated datePublished" datetime="2019-03-13T13:36:51+08:00">2019-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2019/03/13/ubuntu-install-neovim/" class="post-meta-item leancloud_visitors" data-flag-title="Ubuntu安装NeoVim:一种最简单的方法" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://neovim.io/">NeoVim</a>是Vim的一个拓展版本，用起来比Vim爽一些。下面简要记录下在Ubuntu 16.04上安装NeoVim的过程，其实比较简单。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/13/ubuntu-install-neovim/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2019/03/12/vim-plug-intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/12/vim-plug-intro/" class="post-title-link" itemprop="url">vim-plug：简洁高效的Vim插件管理工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-12 22:20:26" itemprop="dateCreated datePublished" datetime="2019-03-12T22:20:26+08:00">2019-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2019/03/12/vim-plug-intro/" class="post-meta-item leancloud_visitors" data-flag-title="vim-plug：简洁高效的Vim插件管理工具" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天无意中发现了这个<a target="_blank" rel="noopener" href="https://github.com/junegunn/vim-plug">vim-plug</a>这个简洁又高效的Vim插件管理工具，试了下，安装插件简直没法再容易，大大减小了配置难度，对于我这种既想要Vim及插件强大的功能但又不想花费太多时间到配置上的懒人来说，Vim-plug简直就是神器了。<br>借用作者的原话，Vim-plugin有下面的优点：</p>
+<blockquote>
+<ol>
+<li>Easier to setup: Single file. No boilerplate code required.</li>
+<li>Easier to use: Concise, intuitive syntax</li>
+<li>Super-fast parallel installation/update (with any of +job, +python, +python3, +ruby, or Neovim)</li>
+<li>Creates shallow clones to minimize disk space usage and download time</li>
+<li>On-demand loading for faster startup time</li>
+<li>Can review and rollback updates</li>
+<li>Branch/tag/commit support</li>
+<li>Post-update hooks</li>
+<li>Support for externally managed plugins</li>
+</ol>
+</blockquote>
+<p>既然配置又简单，功能又强大，为甚不小小折腾一番，提高工作效率呢？下面我以在Vim中安装一个Python的检查器为例，对Vim-plugin的使用进行说明。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/12/vim-plug-intro/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2019/03/10/git-reject-large-file-when-commit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/10/git-reject-large-file-when-commit/" class="post-title-link" itemprop="url">Git禁止大文件提交到仓库中</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-10 12:23:54" itemprop="dateCreated datePublished" datetime="2019-03-10T12:23:54+08:00">2019-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2019/03/10/git-reject-large-file-when-commit/" class="post-meta-item leancloud_visitors" data-flag-title="Git禁止大文件提交到仓库中" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Git提交的时候，有的时候很容易将目录下的非源代码的文件（如二进制文件、模型等）提交到Git仓库里，给后续的使用造成麻烦。那么有没有一种方法来限制提交到Git的文件的大小呢，答案是Yes，下面我来大概介绍下吧。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/10/git-reject-large-file-when-commit/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -482,657 +1143,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2018/10/21/begin-agin-2018/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/10/21/begin-agin-2018/" class="post-title-link" itemprop="url">Begin Again</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-10-21 13:44:42" itemprop="dateCreated datePublished" datetime="2018-10-21T13:44:42+08:00">2018-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2018/10/21/begin-agin-2018/" class="post-meta-item leancloud_visitors" data-flag-title="Begin Again" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>自从今年七月份工作后，就一直没有更新过博客，之前坚持了一年多的每个月写一篇博客的记录也被打断了，一方面是因为工作太忙了，另一方面是因为自己做的都是一些项目相关的东西，没什么可以写的，只有论文分享比较合适，不过我也没有看太多论文……这周末将之前的MarkDown文件整理了下，将七牛云上没法访问的图片迁移到了Hexo项目的<code>img</code>目录下（具体做法可以参考<a target="_blank" rel="noopener" href="https://github.com/qiniu/qshell/issues/188#issuecomment-430862857">这里</a>），因为GitHub的学生优惠也到期了，没法创建私有仓库，所以以后会将blog的源文件托管到GitLab.com上，一切准备妥当，Begin Again!</p>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2018/05/20/git-remove-large-file/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/05/20/git-remove-large-file/" class="post-title-link" itemprop="url">删除Git仓库中的大文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-05-20 08:51:22" itemprop="dateCreated datePublished" datetime="2018-05-20T08:51:22+08:00">2018-05-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2018/05/20/git-remove-large-file/" class="post-meta-item leancloud_visitors" data-flag-title="删除Git仓库中的大文件" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Git是用来管理源代码的一个工具，很多时候，我们不想让Git来跟踪较大的二进制文件。但是如果不小心将某个文件加入到Git的缓存区后，不管后面怎么删除这个大文件，Git始终都保存有这个文件的历史记录，因此项目会很大。拿下面例子来说，我们有个500M的文件<code>cnn.model</code>，通过下面的命令加入到git暂存区或提交到远端（提交时自动执行git gc命令，生成pack文件）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add cnn.model</span><br><span class="line">$ git commit -m <span class="string">&quot;add file cnn.model&quot;</span></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
-<p>经过这步操作，用<code>du -sh .</code>命令查看项目大小的话，发现足足有1000多M，因为本地文件<code>cnn.model</code>以及<code>.git</code>目录中的object也有一份这个文件的记录。<br>即使使用<code>git rm</code>命令删除当前的<code>cnn.model</code>文件，<code>.git</code>目录中还是记录有这个大文件的记录，因此后面别人clone这个项目后，项目还是很大。因此这里需要使用<code>git filter-branch</code>命令来删除<code>.git</code>目录中的文件记录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git filter-branch --index-filter <span class="string">&#x27;git rm -r --cached --ignore-unmatch &lt;file/dir&gt;&#x27;</span> -- --all</span><br></pre></td></tr></table></figure>
-<p>这是在你已知大文件的名字和目录情况下的删除过程。如果过了很久或者是有很多大文件，我们需要有一系列的命令来找出大文件，然后对其进行过滤。下面详细阐述整个过程。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/20/git-remove-large-file/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2018/04/18/mirrors-speedup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/04/18/mirrors-speedup/" class="post-title-link" itemprop="url">利用国内开源镜像加速你的包安装</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-04-18 15:53:35" itemprop="dateCreated datePublished" datetime="2018-04-18T15:53:35+08:00">2018-04-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2018/04/18/mirrors-speedup/" class="post-meta-item leancloud_visitors" data-flag-title="利用国内开源镜像加速你的包安装" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>由于许多包的存放服务器在国外，国内安装比较慢，因此本文总结了常见的包（例如Python包，Linux不同发行版的包）在国内的开源镜像，加速你的下载，提高安装体验。下面总结了PyPi，Anacoda，NPM， Docker，RubyGems和Linux的国内镜像，并且在GitHub上放置了本文提到的所有的包的配置文件，直接下载使用，具体使用说明访问<a target="_blank" rel="noopener" href="https://github.com/vra/mirrors-china">这里</a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/04/18/mirrors-speedup/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2018/04/14/paper-what/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/04/14/paper-what/" class="post-title-link" itemprop="url">What Makes a Video a Video Analyzing Temporal Information in Video Understanding Models and Datasets 论文阅读</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-04-14 22:14:00" itemprop="dateCreated datePublished" datetime="2018-04-14T22:14:00+08:00">2018-04-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2018/04/14/paper-what/" class="post-meta-item leancloud_visitors" data-flag-title="What Makes a Video a Video Analyzing Temporal Information in Video Understanding Models and Datasets 论文阅读" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>论文链接：<a target="_blank" rel="noopener" href="http://ai.stanford.edu/~dahuang/papers/cvpr18-fb.pdf">点击查看PDF</a><br>作者主页：<a target="_blank" rel="noopener" href="http://ai.stanford.edu/~dahuang/">De-An Huang</a></p>
-<p>论文主要目的：显式地用量化的方法来分析motion对于视频理解的作用有多大，在整个视频分析过程中起到了多大的效果。这也是我了解的第一篇用量化的方法来探讨motion信息的贡献的论文，文中逐类的分析motion带来的性能增益（图4）也是第一次见到。</p>
-<p>这篇论文的出发点是分析在某个网络结构（例如C3D）上训练好的模型在对测试视频进行分类的时候，是否真正地用到了运动信息（motion），或者说运动信息真正起到了作用。一个简单的验证实验是在在测试视频中选一帧，然后重复N次构成一个clip（如在C3D中，N=16）。作者实验发现这种情况性能下降了25%。但这25%的性能下降不光是motion丢失带来的，作者认为这里还引入了另外两个问题：（1）改变了视频帧的时间上分布（temporal distribution），因为训练时使用的是16帧的clip，而测试采用采样过的帧构成的clip，训练和测试数据的分布不一致。（2）可能将视频中最重要的帧，对视频分类最有用的帧给丢掉了。</p>
-<p>为了解决上面提到的两个问题，这篇论文提出了两个针对性的框架：首先是在低帧率（例如相比C3D中采用的16帧的clip，这里采用1帧的clip）的情况下，基于cycleGAN的类别无关（class-agnostic）的时域生成器（temporal generator, 英文不好，暂时这样翻译了，如果有更准确的翻译请告知）来生成帧，构成视频输入到训练好的网络中。为了使得训练收敛，作者采用了perceptual loss。第二个框架是运动不变（motion-invariant）的关键帧选择器，通过选择一个关键帧进行视频分类的任务。</p>
-<p>具体实验是采用C3D模型，在UCF101和Kinetics这两个数据集上进行。通过使用作者提出的两个框架，使得在UCF101上，单帧clip相比16帧的clip的性能下降从25%减小到6%，在Kinetics上性能下降从15%减小到5%。同时作者用实验表明，40%的UCF101测试视频（split1）和35%的Kinetics测试视频不需要motion信息就能达到平均的分类性能。此外，在使用了作者提出的两个框架后，采用4帧的clip就能达到原来16帧的clip下的性能。至于引入的额外的计算开销作者在论文中没有进行讨论。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/04/14/paper-what/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2018/03/23/note-closer-look-3d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/03/23/note-closer-look-3d/" class="post-title-link" itemprop="url">论文阅读：A Closer Look at Spatiotemporal Convolutions for Action Recognition</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-03-23 23:39:59" itemprop="dateCreated datePublished" datetime="2018-03-23T23:39:59+08:00">2018-03-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2018/03/23/note-closer-look-3d/" class="post-meta-item leancloud_visitors" data-flag-title="论文阅读：A Closer Look at Spatiotemporal Convolutions for Action Recognition" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <script type="text/javascript"
-   src="https://cdn.staticfile.org/MathJax/MathJax-2.6-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这篇论文是CVPR2018年的录取论文，主要讨论了时空卷积的几种网络结构，在Action Recognition 的几个标准数据集上也取得了媲美最好方法的效果。作者是FAIR的工作人员，其中包括Du Tran(C3D)作者，Heng Wang(iDT)作者和Yann LecCun等，可谓是大牛云集。论文可以在<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.11248">这里</a>下载。这里大概介绍下论文中的内容，可以看作是原论文的一个翻译。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/03/23/note-closer-look-3d/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2018/03/18/keras-callbacks-remote-monitor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/03/18/keras-callbacks-remote-monitor/" class="post-title-link" itemprop="url">Keras Callback之RemoteMonitor</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-03-18 18:35:41" itemprop="dateCreated datePublished" datetime="2018-03-18T18:35:41+08:00">2018-03-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2018/03/18/keras-callbacks-remote-monitor/" class="post-meta-item leancloud_visitors" data-flag-title="Keras Callback之RemoteMonitor" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Keras提供了一系列的回调函数，用来在训练网络的过程中，查看网络的内部信息，或者控制网络训练的过程。<code>BaseLogger</code>、<code>ProgbarLogger</code>用来在命令行输出Log信息（默认会调用）， <code>EarlyStopping</code>、<code>ReduceLROnPlateu</code>分别用来提前终止训练和自动调整学习率，改变网络训练过程；而今天要介绍的<code>RemoteMonitor</code>则用来<strong>实时</strong>输出网络训练过程中的结果变化情况，包括训练集准确率(<code>accu</code>)、训练集损失值(<code>loss</code>)、验证集准确率(<code>val_acc</code>)、验证集损失值(<code>val_loss</code>)，用户也可以自己修改需要显示的数据。一图胜千言，看看下面的结果图吧：<br><img data-src="/imgs/keras_viz.png"></p>
-<p>这个图是在浏览器中打开得到，Keras使用了Flask搭建了一个简单的服务器，然后采用D3.js来可视化数据。下面详细介绍可视化的过程吧</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/03/18/keras-callbacks-remote-monitor/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2018/01/27/linux-cmdline-edit-shortcuts/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/27/linux-cmdline-edit-shortcuts/" class="post-title-link" itemprop="url">Linux 命令行文本操作快捷键</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-01-27 16:55:35" itemprop="dateCreated datePublished" datetime="2018-01-27T16:55:35+08:00">2018-01-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-
-  
-    <span id="/2018/01/27/linux-cmdline-edit-shortcuts/" class="post-meta-item leancloud_visitors" data-flag-title="Linux 命令行文本操作快捷键" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>可能有些人不知道，Linux命令行也有一些方便文本操作的快捷键，如跳到行首的快捷键是<code>Ctrl-a</code>,，跳到行尾的快捷键是<code>Ctrl-e</code>,删除光标所在处的字符的快捷键是<code>Ctrl-d</code>。 虽然这些快捷键很多时候都可以被小键盘的左右移动键、Home和End键替代，但是对于比较长的命令的修改，快捷键的操作还是比较快的。因为我平时用Vim比较多，而Linux命令行绑定的是Emacs的快捷键方式，虽然可以通过在命令行执行<code>set -o vi</code>修改为Vim的快捷键方式，但是这样会影响常用的像<code>Ctrl-p</code>，<code>Ctrl-n</code>等操作，因此我还是打算将这些难记的<strong>文本操作快捷键</strong>总结下来，让自己多练习，以后能更熟练地使用。注意这里我只列了文本操作的快捷键，像别的历史命令查询<code>Ctrl-r</code>和清屏操作<code>Ctrl-l</code>等快捷操作，大家可以参考我写的<a href="https://vra.github.io/2017/10/29/linux-skills/">这篇博客</a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/01/27/linux-cmdline-edit-shortcuts/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
