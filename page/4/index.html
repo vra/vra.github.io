@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">187</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">191</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">187</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">192</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">192</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -204,6 +204,116 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/17/mkdocs-material-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/17/mkdocs-material-tutorial/" class="post-title-link" itemprop="url">用 Material for MkDocs 来生成专业的技术文档</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-17 19:31:37 / 修改时间：19:37:34" itemprop="dateCreated datePublished" datetime="2023-05-17T19:31:37+08:00">2023-05-17</time>
+    </span>
+
+  
+    <span id="/2023/05/17/mkdocs-material-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="用 Material for MkDocs 来生成专业的技术文档" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdown来简便地写出技术文档，并且 通过GitHub Pages等工具快速地进行技术文档的部署。</p>
+<p>虽然GItHub Pages默认支持静态文档框架<a target="_blank" rel="noopener" href="https://jekyllrb.com/">Jekyll</a>，也包含一些简单的<a target="_blank" rel="noopener" href="https://pages.github.com/themes/">主题</a>，但对于文档和教程比较多的项目来说，使用GitHub Pages的默认部署工具还不够用，主要体现在下面几个方面：</p>
+<ul>
+<li>Markdown本身支持的语法比较简单，一些复杂的像Warning等提示没法直接用Pages的默认主题来实现</li>
+<li>Pages 默认显示的是单页文档，没有侧边栏、导航栏等工具</li>
+<li>Pages 默认主题无法搜索文档内容</li>
+<li>Pages 不支持选择<code>Linux</code>或<code>Windows</code> 后显示不同执行语句的功能</li>
+<li>…</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> 是 <a target="_blank" rel="noopener" href="https://www.mkdocs.org/">MkDocs</a>的一个主题配置，同时也是一个功能齐全的静态网站生成工具，能够解决上面提到的GitHub Pages的问题。</p>
+<p>Material for MkDocs 使用广泛，下面是一些大公司和知名开源项目的使用例子：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://aws.github.io/copilot-cli/">AWS Copilot CLI </a></li>
+<li><a target="_blank" rel="noopener" href="https://google.github.io/accompanist/">Google Accompanist</a></li>
+<li><a target="_blank" rel="noopener" href="https://microsoft.github.io/code-with-engineering-playbook/">MicroSoft Code With Engineering Playbook</a></li>
+<li><a target="_blank" rel="noopener" href="https://mozillafoundation.github.io/engineering-handbook/">Mozilla Foundation Engineering Handbook</a></li>
+<li><a target="_blank" rel="noopener" href="https://netflix.github.io/titus/">Netflix Titus</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.infra.centos.org/">CentOS Infra docs</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.electron.build/">electron-builder</a></li>
+<li><a target="_blank" rel="noopener" href="https://kops.sigs.k8s.io/">Kubernetes</a></li>
+</ul>
+<p>虽然我还没有比较复杂的开源项目需要用mkdocs-material来管理文档，但看到GitHub Pages的一些限制，最近有空还是学了一下这个工具，以备后续项目中使用。这里做一些简单记录，方便以后查找。</p>
+<p>需要说明的是，Material for MkDocs 是一个比较复杂的工具，很多配置项这里没有提到，根据需要在官方<a target="_blank" rel="noopener" href="https://squidfunk.github.io/mkdocs-material/setup/">Setup</a>文档中查看使用说明。</p>
+<p>另外一种学习配置的方式是直接查看上面提到的开源项目源码根目录下的<code>mkdocs.yml</code>文件，复制这个文件过去，就能得到类似的布局效果。</p>
+<p>这个教程里面的示例页面：<a href="https://vra.github.io/mkdocs-material-example/">https://vra.github.io/mkdocs-material-example/</a><br>示例页面的配置文件：<a target="_blank" rel="noopener" href="https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml">https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/17/mkdocs-material-tutorial/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1147,97 +1257,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/01/20/linux-delete-empty-files/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/20/linux-delete-empty-files/" class="post-title-link" itemprop="url">Linux小技巧：使用find命令来删除空文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-01-20 14:36:13 / 修改时间：15:16:39" itemprop="dateCreated datePublished" datetime="2023-01-20T14:36:13+08:00">2023-01-20</time>
-    </span>
-
-  
-    <span id="/2023/01/20/linux-delete-empty-files/" class="post-meta-item leancloud_visitors" data-flag-title="Linux小技巧：使用find命令来删除空文件" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在某个目录下有很多代码创建的空文件，分布在不同层级的子目录中，我们有没有办法可以快速地全部把它们删掉呢？</p>
-<p><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/find.1.html">find</a>是Linux系统中的一个强大的命令，通过它我们可以找到空文件，然后将它们进行删除。</p>
-<p>TL;DR<br>最终命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f -size 0 -<span class="built_in">print</span> -delete</span><br></pre></td></tr></table></figure>
-
-<p>几个参数详细的说明见下。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/01/20/linux-delete-empty-files/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1251,7 +1270,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
