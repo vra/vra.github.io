@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">187</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">192</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">188</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">193</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">192</span>
+          <span class="site-state-item-count">193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">187</span>
+        <span class="site-state-item-count">188</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,6 +204,96 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/27/mac-ranlib-issue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/27/mac-ranlib-issue/" class="post-title-link" itemprop="url">mac 编译问题解决——building for macOS-x86_64 but attempting to link with file built for xxx</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-27 01:17:15 / 修改时间：01:19:20" itemprop="dateCreated datePublished" datetime="2023-05-27T01:17:15+08:00">2023-05-27</time>
+    </span>
+
+  
+    <span id="/2023/05/27/mac-ranlib-issue/" class="post-meta-item leancloud_visitors" data-flag-title="mac 编译问题解决——building for macOS-x86_64 but attempting to link with file built for xxx" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在编译TVM的一个<a target="_blank" rel="noopener" href="https://github.com/mlc-ai/relax">fork版本</a>时，遇到下面的报错：</p>
+<blockquote>
+<p>ld: warning: ignoring file libbacktrace/lib/libbacktrace.a, building for macOS-x86_64 but attempting to link with file built for unknown-unsupported file format ( 0x21 0x3C 0x61 0x72 0x63 0x68 0x3E 0x0A<br> 0x2F 0x20 0x20 0x20 0x20 0x20 0x20 0x20 )<br>Undefined symbols for architecture x86_64:<br>  “_backtrace_create_state”, referenced from:<br>      __GLOBAL__sub_I_logging.cc in logging.cc.o<br>  “_backtrace_full”, referenced from:<br>      tvm::runtime::Backtrace() in logging.cc.o<br>  “_backtrace_syminfo”, referenced from:<br>      tvm::runtime::(anonymous namespace)::BacktraceFullCallback(void*, unsigned long, char const*, int, char const*) in logging.cc.o<br>ld: symbol(s) not found for architecture x86_64<br>clang: error: linker command failed with exit code 1 (use -v to see invocation)<br>make[3]: *** [libtvm_runtime.dylib] Error 1<br>make[2]: *** [CMakeFiles/tvm_runtime.dir/all] Error 2<br>make[2]: *** Waiting for unfinished jobs….</p>
+</blockquote>
+<p>搜索了一下，发现核心原因是Mac下ranlib命令采用了GNU版本，而非Apple版本导致的，下面详细展开报错原因和解决办法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/27/mac-ranlib-issue/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1147,92 +1237,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/02/05/numpy-remove-np-float/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/01/27/arxiv-on-mobile/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/27/arxiv-on-mobile/" class="post-title-link" itemprop="url">手机上看arxiv上论文的方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-01-27 22:44:41 / 修改时间：23:16:22" itemprop="dateCreated datePublished" datetime="2023-01-27T22:44:41+08:00">2023-01-27</time>
-    </span>
-
-  
-    <span id="/2023/01/27/arxiv-on-mobile/" class="post-meta-item leancloud_visitors" data-flag-title="手机上看arxiv上论文的方法" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>有时候想要在手机上访问Arxiv上的论文，打开arxiv.com，发现体验比较差，没有响应式设计，需要不断移动页面才能读完一行文字，影响阅读。偶然发现了<a target="_blank" rel="noopener" href="https://www.arxiv-vanity.com/">arxiv-vanity</a>这个网站，发现能很好的满足手机上看arxiv论文的需求，收藏了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/01/27/arxiv-on-mobile/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

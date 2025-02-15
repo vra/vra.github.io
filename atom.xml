@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2025-01-01T15:03:04.676Z</updated>
+  <updated>2025-02-15T07:26:31.769Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客新计划</title>
+    <link href="http://vra.github.io/2025/02/15/blog-new-plan-2025/"/>
+    <id>http://vra.github.io/2025/02/15/blog-new-plan-2025/</id>
+    <published>2025-02-15T07:09:36.000Z</published>
+    <updated>2025-02-15T07:26:31.769Z</updated>
+    
+    <content type="html"><![CDATA[<p>AI技术日新月异，能用AI做的事情越来越多。</p><p>作为一个普通人，知识和技能唾手可得，记忆性的东西不再重要，而独特的思维方式则是你区别于别人的重要标签。在这样的时代背景下，每个人越来越需要独立思考的能力，因此每个自己的独特想法、见解都值得被记录下来。</p><p>而作为一个blogger，也许在未来（或现在?)，利用你的博客内容，AI可以重建你的思考方式，针对每一个新的事件，AI会给出你的评价，然后在跟自己真实的看法进行对照，是不是很有意思呢？。</p><p>基于上面的思考，我决定事无巨细地在这个博客中更新自己的技术内容，包括看到的技术内容引用，简单的comments，尝试新东西的过程，阅读技术代码的历程，造轮子的步骤，等等，总之就是不论大小，一概记录，相信当内容积攒越来越多后，基于这个博客的语料数据，结合我编写的代码，AI能够准确地重建一个我的程序员分身，这样未来也许我就不需要写代码了哈哈。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;AI技术日新月异，能用AI做的事情越来越多。&lt;/p&gt;
+&lt;p&gt;作为一个普通人，知识和技能唾手可得，记忆性的东西不再重要，而独特的思维方式则是你区别于别人的重要标签。在这样的时代背景下，每个人越来越需要独立思考的能力，因此每个自己的独特想法、见解都值得被记录下来。&lt;/p&gt;
+&lt;p</summary>
+      
+    
+    
+    
+    
+    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="meta" scheme="http://vra.github.io/tags/meta/"/>
+    
+  </entry>
   
   <entry>
     <title>2024年终总结</title>
@@ -398,9 +424,9 @@
     
     
     
-    <category term="LeptonAI" scheme="http://vra.github.io/tags/LeptonAI/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="LeptonAI" scheme="http://vra.github.io/tags/LeptonAI/"/>
     
     <category term="Android" scheme="http://vra.github.io/tags/Android/"/>
     
@@ -536,27 +562,6 @@
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
     <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>一个简单好用的Python并行函数</title>
-    <link href="http://vra.github.io/2023/08/12/python-parallel-function/"/>
-    <id>http://vra.github.io/2023/08/12/python-parallel-function/</id>
-    <published>2023-08-12T15:43:21.000Z</published>
-    <updated>2023-08-12T15:44:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>用Python跑有大量数据的任务的时候，启用多进程加速效果明显。但因为我之前在使用Python的多进程库时总遇到卡住的问题，后来对这块避而远之，总是用别的方法来加速。最近发现OpenMMLab的一些库提供了多进程并行的函数功能，简单好用。比如一个简单的toy例子，OpenCV读图像，resize然后保存，在8个CPU核的 Mac 上，加速比能达到3.4倍(45ms vs 13ms)，也就是以前要跑3个多小时的任务，现在1个小时就能搞定，省了不少时间，更多实际例子也证明了这个函数的加速效果，还是挺实用的。这里写个教程，希望也能方便到别的有同样需要的人，当然同类型的库应该也有很多，这里只是取一瓢饮。</p><span id="more"></span><h3 id="2-函数实现"><a href="#2-函数实现" class="headerlink" title="2. 函数实现"></a>2. 函数实现</h3><p>具体实现是<a href="https://github.com/open-mmlab/mmengine">mmengine</a>中的<a href="https://github.com/open-mmlab/mmengine/blob/main/mmengine/utils/progressbar.py#L109">track_parallel_progress</a>函数，它底层也是调用了Python系统库的<a href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing</a>，进行多进程加速脚本的运行。所以原理上来说我们也可以不用这个函数，自己写multiprocessing调用代码。但mmengine的这个封装，给我们省去了写multiprocessing比较复杂的调度代码的时间，拿来直接用还是能加速代码的开发节奏。</p><p>大致的调用框架:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"><span class="keyword">import</span> mmengine</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mmengine_track_func</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="comment"># wraps的作用是将装饰器的信息都传递给被装饰的函数，</span></span><br><span class="line">    <span class="comment"># 参考：https://stackoverflow.com/a/309000</span></span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapped_func</span>(<span class="params">args</span>):</span></span><br><span class="line">        <span class="keyword">return</span> func(*args)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapped_func</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@mmengine_track_func</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">your_func</span>(<span class="params">arg1, arg2</span>):</span></span><br><span class="line">    <span class="comment"># your code here</span></span><br><span class="line">    <span class="keyword">return</span> results</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进程数</span></span><br><span class="line">NUM_PROC = <span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造调用参数</span></span><br><span class="line">params = [(arg1, arg2) <span class="keyword">for</span> arg1, arg2 <span class="keyword">in</span> <span class="built_in">zip</span>(arg1_list, arg2_list)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用mmengine封装好的多进程函数</span></span><br><span class="line">results = mmengine.track_parallel_progress(your_func, params, nproc=NUM_PROC)</span><br></pre></td></tr></table></figure><p>使用时需要先 <code>pip install mmengine</code>来安装依赖库 mmengine。</p><p>然后这里构造了一个装饰器<code>mmengine_track_func</code>，对实际调用的函数<code>your_func</code>进行封装。其中用到了functools中的wraps函数，它的作用是将装饰器的信息都传递给被装饰的函数，具体例子可以参考这个<a href="https://stackoverflow.com/a/309000">回答</a>。</p><p>实际使用时<code>mmengine_track_func</code> 不需要修改，直接采用这种形式。</p><p>然后是设置进程数，构造你自己函数的参数，再调用<code>mmengine.track_parallel_progress</code> 即可，它的必需的三个参数分别是:</p><ol><li>你的函数名</li><li>函数参数list</li><li>设置的进程数</li></ol><p>别的非必需参数可以参考<a href="https://github.com/open-mmlab/mmengine/blob/main/mmengine/utils/progressbar.py#L109">源码</a>。</p><h3 id="3-toy-例子"><a href="#3-toy-例子" class="headerlink" title="3. toy 例子"></a>3. toy 例子</h3><p>这里举一个简单的伪造例子，读取本地某个目录下的png图像，将它们都缩放到200x200，再保存到本地。完整代码如下:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> mmengine</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mmengine_track_func</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="comment"># wraps的作用是将装饰器的信息都传递给被装饰的函数，</span></span><br><span class="line">    <span class="comment"># 参考：https://stackoverflow.com/a/309000</span></span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapped_func</span>(<span class="params">args</span>):</span></span><br><span class="line">        <span class="keyword">return</span> func(*args)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapped_func</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@mmengine_track_func</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">idx, img_path</span>):</span></span><br><span class="line">    img = cv2.imread(img_path)</span><br><span class="line">    img = cv2.resize(img, (<span class="number">200</span>, <span class="number">200</span>))</span><br><span class="line"></span><br><span class="line">    op = <span class="string">f&quot;<span class="subst">&#123;idx&#125;</span>.jpg&quot;</span></span><br><span class="line">    cv2.imwrite(op, img)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment"># 获取所有图片路径</span></span><br><span class="line">    img_paths = glob.glob(<span class="string">&quot;/path/to/folder/*.png&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 测试开多线程版本，耗时 13ms</span></span><br><span class="line">    params = [(idx, img_path) <span class="keyword">for</span> idx, img_path <span class="keyword">in</span> <span class="built_in">enumerate</span>(img_paths)]</span><br><span class="line">    mmengine.track_parallel_progress(run, params, nproc=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 测试不开多线程版本，耗时45ms</span></span><br><span class="line">    t0 = time.time()</span><br><span class="line">    <span class="keyword">for</span> idx, ip <span class="keyword">in</span> tqdm(<span class="built_in">enumerate</span>(img_paths)):</span><br><span class="line">        run.__wrapped__(idx, ip)</span><br><span class="line">    t1 = time.time()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;time:&quot;</span>, t1 - t0)</span><br></pre></td></tr></table></figure><p>这里有一个小的Python知识点：可以通过<code>func.__wrapped__</code> 属性来获取 <em>被装饰的函数</em> 对应的原始函数。</p><p>输出结果如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;] 4000/4000, 316.3 task/s, elapsed: 13s, ETA:     0s</span><br><span class="line">4000it [00:45, 88.84it/s]</span><br><span class="line">time: 45.0268120765686</span><br></pre></td></tr></table></figure><p>可以看到耗时从45ms下降到13ms，加速比3.4倍。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;1-背景&quot;&gt;&lt;a href=&quot;#1-背景&quot; class=&quot;headerlink&quot; title=&quot;1. 背景&quot;&gt;&lt;/a&gt;1. 背景&lt;/h3&gt;&lt;p&gt;用Python跑有大量数据的任务的时候，启用多进程加速效果明显。但因为我之前在使用Python的多进程库时总遇到卡住的问题，后来对这块避而远之，总是用别的方法来加速。最近发现OpenMMLab的一些库提供了多进程并行的函数功能，简单好用。比如一个简单的toy例子，OpenCV读图像，resize然后保存，在8个CPU核的 Mac 上，加速比能达到3.4倍(45ms vs 13ms)，也就是以前要跑3个多小时的任务，现在1个小时就能搞定，省了不少时间，更多实际例子也证明了这个函数的加速效果，还是挺实用的。这里写个教程，希望也能方便到别的有同样需要的人，当然同类型的库应该也有很多，这里只是取一瓢饮。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="mmengine" scheme="http://vra.github.io/tags/mmengine/"/>
     
   </entry>
   
