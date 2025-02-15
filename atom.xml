@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2025-02-15T07:49:43.730Z</updated>
+  <updated>2025-02-15T07:52:39.735Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://vra.github.io/2025/02/15/as-a-junior-engineer/"/>
     <id>http://vra.github.io/2025/02/15/as-a-junior-engineer/</id>
     <published>2025-02-15T07:45:10.000Z</published>
-    <updated>2025-02-15T07:49:43.730Z</updated>
+    <updated>2025-02-15T07:52:39.735Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>As a junior engineer, there’s simply no substitute for getting the first 100K lines of code under your belt. The “start over each day” method will help get you to those 100K lines faster.You might think covering the same ground multiple times isn’t as valuable as getting 100K diverse lines of code. I disagree. Solving the same problem repeatedly is actually really beneficial for retaining knowledge of patterns you figure out.You only need 5K perfect lines to see all the major patterns once. The other 95K lines are repetition to rewire your neurons.</p></blockquote><p><a href="https://link.zhihu.com/?target=https://grantslatton.com/software-pathfinding%23quantity-has-a-quality-all-of-its-own">from</a>,很有同感的一段话，很多事情只有不断重复才能真正掌握它，例如走路，会走一次，不能算学会走路，只有不断地走，直到忽略你在走路这个事实之后，才算真正地学会了走路。</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>As a junior engineer, there’s simply no substitute for getting the first 100K lines of code under your belt. The “start over each day” method will help get you to those 100K lines faster.You might think covering the same ground multiple times isn’t as valuable as getting 100K diverse lines of code. I disagree. Solving the same problem repeatedly is actually really beneficial for retaining knowledge of patterns you figure out.You only need 5K perfect lines to see all the major patterns once. The other 95K lines are repetition to rewire your neurons.</p></blockquote><p><a href="https://grantslatton.com/software-pathfinding#quantity-has-a-quality-all-of-its-own">Algorithms we develop software by</a>,很有同感的一段话，很多事情只有不断重复才能真正掌握它，例如走路，会走一次，不能算学会走路，只有不断地走，直到忽略你在走路这个事实之后，才算真正地学会了走路。</p>]]></content>
     
     
       
@@ -185,11 +185,11 @@
     
     <category term="LLM" scheme="http://vra.github.io/tags/LLM/"/>
     
-    <category term="GPT-4o" scheme="http://vra.github.io/tags/GPT-4o/"/>
-    
     <category term="LVM" scheme="http://vra.github.io/tags/LVM/"/>
     
     <category term="Qwen" scheme="http://vra.github.io/tags/Qwen/"/>
+    
+    <category term="GPT-4o" scheme="http://vra.github.io/tags/GPT-4o/"/>
     
     <category term="Qwen2-VL" scheme="http://vra.github.io/tags/Qwen2-VL/"/>
     
@@ -473,9 +473,9 @@
     
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="LeptonAI" scheme="http://vra.github.io/tags/LeptonAI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Android" scheme="http://vra.github.io/tags/Android/"/>
     
