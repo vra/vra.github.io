@@ -373,7 +373,7 @@
     <link href="http://vra.github.io/2024/09/14/speedup-github-clone/"/>
     <id>http://vra.github.io/2024/09/14/speedup-github-clone/</id>
     <published>2024-09-14T00:47:18.000Z</published>
-    <updated>2024-10-23T00:49:13.736Z</updated>
+    <updated>2025-02-15T09:06:46.294Z</updated>
     
     <content type="html"><![CDATA[<p>国内下载 GitHub 上代码一直是一件让人很头疼的事情，相信大家都深有体会。</p><p>最近偶然发现一个比较好用的解决方案，是采用<a href="http://gitclone.com/">http://gitclone.com</a>的加速，这里记录一下。</p><p>具体来说，在仓库url中增加<code>gitclone.com</code>的前缀，别的地方不变，即<code>https://github.com/</code>修改为<code>https://gitclone.com/github.com/</code>，例如原始的clone命令是:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/huggingface/transformers</span><br></pre></td></tr></table></figure><p>替换成下面的命令即可：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitclone.com/github.com/huggingface/transformers</span><br></pre></td></tr></table></figure><p>实测基本上能做到1M/s的下载速度。</p><p>这种加速目前只支持git clone 和git pull 命令，所以适用于拉取别人代码进行本地查看的应用场景。</p><p>另外发现这种加速方式下载的仓库，有一些只有最新的一次提交，有一些则包含完整提交，原因未知。</p><p>此外，请确认克隆的代码是否与GitHub上一致，我们无法保证拉取的代码是否被修改过。</p>]]></content>
     
@@ -387,9 +387,9 @@
     
     
     
-    <category term="GitHub" scheme="http://vra.github.io/tags/GitHub/"/>
+    <category term="Git" scheme="http://vra.github.io/tags/Git/"/>
     
-    <category term="git" scheme="http://vra.github.io/tags/git/"/>
+    <category term="GitHub" scheme="http://vra.github.io/tags/GitHub/"/>
     
   </entry>
   
