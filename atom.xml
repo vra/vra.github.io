@@ -284,9 +284,9 @@
     
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
     
-    <category term="ChatGPT" scheme="http://vra.github.io/tags/ChatGPT/"/>
-    
     <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
+    
+    <category term="ChatGPT" scheme="http://vra.github.io/tags/ChatGPT/"/>
     
     <category term="Prompt" scheme="http://vra.github.io/tags/Prompt/"/>
     
