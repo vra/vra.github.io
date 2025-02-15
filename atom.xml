@@ -43,13 +43,13 @@
   </entry>
   
   <entry>
-    <title>reflect-on-life</title>
+    <title>Quotation Armin Ronacher&#39;s Reflecting on Life</title>
     <link href="http://vra.github.io/2025/02/15/reflect-on-life/"/>
     <id>http://vra.github.io/2025/02/15/reflect-on-life/</id>
     <published>2025-02-15T08:29:13.000Z</published>
-    <updated>2025-02-15T08:30:08.333Z</updated>
+    <updated>2025-02-15T13:44:13.365Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>Whether it’s working on a project, solving a difficult problem, or even refining soft skills like communication, the act of showing up and putting in the hours is essential. Practice makes perfect, but more so it’s all about progress rather than perfection. Each hour you spend iterating, refining, failing and retrying brings you closer to excellence. It doesn’t always feel that way in the moment but when you look back at what you did before, you will see your progress. And that act of looking back, and seeing how you improved, is immensely rewarding and in turn makes you enjoy your work.</p></blockquote><p><a href="https://lucumr.pocoo.org/2024/12/26/reflecting-on-life/">Reflecting on Life</a></p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>Whether it’s working on a project, solving a difficult problem, or even refining soft skills like communication, the act of showing up and putting in the hours is essential. Practice makes perfect, but more so it’s all about progress rather than perfection. Each hour you spend iterating, refining, failing and retrying brings you closer to excellence. It doesn’t always feel that way in the moment but when you look back at what you did before, you will see your progress. And that act of looking back, and seeing how you improved, is immensely rewarding and in turn makes you enjoy your work.</p></blockquote><p><a href="https://lucumr.pocoo.org/2024/12/26/reflecting-on-life/">Armin Ronacher’s Reflecting on Life</a></p>]]></content>
     
     
       
@@ -284,9 +284,9 @@
     
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
     
-    <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
-    
     <category term="ChatGPT" scheme="http://vra.github.io/tags/ChatGPT/"/>
+    
+    <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
     
     <category term="Prompt" scheme="http://vra.github.io/tags/Prompt/"/>
     
@@ -440,9 +440,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
     
@@ -500,9 +500,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="pip" scheme="http://vra.github.io/tags/pip/"/>
     
