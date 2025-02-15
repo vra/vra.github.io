@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">190</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">195</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">195</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">197</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">190</span>
+        <span class="site-state-item-count">195</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,6 +204,196 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/10/10/django-template-generate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/10/10/django-template-generate/" class="post-title-link" itemprop="url">将现有的Web前端项目生成导入到Django的Template</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-10-10 22:43:43" itemprop="dateCreated datePublished" datetime="2015-10-10T22:43:43+08:00">2015-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2015/10/10/django-template-generate/" class="post-meta-item leancloud_visitors" data-flag-title="将现有的Web前端项目生成导入到Django的Template" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>实际项目中，会遇到这样的问题：没有使用任何服务器端框架的前端代码，即包含html网页文件，也包含js和css的代码，如何将这些现有的项目做最少的修改而引入到Django框架中呢？Django官网上给出了解决方法，使用<code>static</code>目录来存放<code>css</code>和<code>js</code>代码（虽然<code>js</code>是动态代码，但Django将其与<code>css</code>等同为<code>静态</code>代码，因为在后端看来，前端代码是静态的），然后在<code>html</code>文件里面，将原先的<code>href</code>引用改为通过<code>static</code>目录来引用。可以看<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/">这里</a>，但里面讲的不是很清楚，我在查了一些资料后才搞定这个问题，所以这里写个总结来总结总结。  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/10/10/django-template-generate/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/09/12/gpu-programming-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/09/12/gpu-programming-2/" class="post-title-link" itemprop="url">GPU并行计算和CUDA编程(2)-GPU体系架构概述</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-09-12 23:14:18" itemprop="dateCreated datePublished" datetime="2015-09-12T23:14:18+08:00">2015-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+
+  
+    <span id="/2015/09/12/gpu-programming-2/" class="post-meta-item leancloud_visitors" data-flag-title="GPU并行计算和CUDA编程(2)-GPU体系架构概述" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="并行计算"><a href="#并行计算" class="headerlink" title="并行计算"></a>并行计算</h2><p>并行计算的定义： 应用多个计算资源来解决<strong>同一个计算问题</strong></p>
+<h3 id="一些名词"><a href="#一些名词" class="headerlink" title="一些名词"></a>一些名词</h3><ol>
+<li>Flynn矩阵：<br>SISD(Single Instruction Single Data),<br>SIMD(Single Instruction Multiple Data),<br>MISD(Multiple Instruction Single Data),<br>MIMD(Multiple Instruction Multiple Data),<br>由 SISD,SIMD，MISD，MIMD组成的矩阵就是Flynn矩阵。从前往后，4种结构越来越复杂。 </li>
+<li>共享存储和分布式存储   </li>
+<li>通信和同步  </li>
+<li>加速比，并行开销，拓展性</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/09/12/gpu-programming-2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -942,226 +1132,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2015/05/27/sublime-text-summary-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/04/25/opencv-linux-install/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/04/25/opencv-linux-install/" class="post-title-link" itemprop="url">OpenCV配置——在Linux中使用OpenCV</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2015-04-25 10:37:40" itemprop="dateCreated datePublished" datetime="2015-04-25T10:37:40+08:00">2015-04-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2015/04/25/opencv-linux-install/" class="post-meta-item leancloud_visitors" data-flag-title="OpenCV配置——在Linux中使用OpenCV" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这篇博客介绍在Linux中的gcc和g++编译环境下如何使用cmake来编译OpenCV源代码。我基本是按照OpenCV官方的<a target="_blank" rel="noopener" href="http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html">说明文档</a>，一步步地进行的，所以表述不清楚的地方还请参照原文。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/04/25/opencv-linux-install/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/04/22/opencv-vs-config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/04/22/opencv-vs-config/" class="post-title-link" itemprop="url">OpenCV配置——在Visual Studio中使用OpenCV</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2015-04-22 23:01:24" itemprop="dateCreated datePublished" datetime="2015-04-22T23:01:24+08:00">2015-04-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-20 23:48:00" itemprop="dateModified" datetime="2021-08-20T23:48:00+08:00">2021-08-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2015/04/22/opencv-vs-config/" class="post-meta-item leancloud_visitors" data-flag-title="OpenCV配置——在Visual Studio中使用OpenCV" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="http://opencv.org/">OpenCV</a>是图像领域经常会用到的工具库函数的集合，有C/C++,Java和Python等语言的接口，并且适用于Windows，Linux，Mac OS桌面开发平台和Android 和IOS移动开发平台。目前已经出了1.x系列和2.x系列，3.0 Beta版也已经出了。OpenCV配置起来还是挺费事的，虽然网上已经有很多很全面也很有用的参考文章，我还是打算把自己配置的过程写下来，以后肯定还会配置这个东西，希望到时候有个方便的参考。</p>
-<p>这篇文章记录在Windows平台上，如何安装OpenCV并且在Visual Studio 的C/C++开发环境中使用之。</p>
-<p>我用的是Windows 7，Visual tudio 2012 Ultimate。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/04/22/opencv-vs-config/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
