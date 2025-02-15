@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 用法说明functools.cache和functools.lru_cache都是Python标准库functools模块提供的装饰器，用于缓存函数的计算结果，以提高函数的执行效率。 举一个简单的例子： 12345678910111213from functools import lru_cacheimport timeit@lru_cachedef factorial(n):    ret">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python lru_cache 使用与源码解读">
+<meta property="og:url" content="http://vra.github.io/2025/01/29/lru-cache-tutorial/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 用法说明functools.cache和functools.lru_cache都是Python标准库functools模块提供的装饰器，用于缓存函数的计算结果，以提高函数的执行效率。 举一个简单的例子： 12345678910111213from functools import lru_cacheimport timeit@lru_cachedef factorial(n):    ret">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-29T08:35:03.000Z">
+<meta property="article:modified_time" content="2025-02-15T08:37:37.820Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="LRU">
+<meta property="article:tag" content="LRU Cache">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://vra.github.io/2025/01/29/lru-cache-tutorial/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2025/01/29/lru-cache-tutorial/","path":"2025/01/29/lru-cache-tutorial/","title":"Python lru_cache 使用与源码解读"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python lru_cache 使用与源码解读 | Yunfeng's Simple Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">203</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%94%A8%E6%B3%95%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">1. 用法说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%99%85%E4%BD%BF%E7%94%A8%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">2. 实际使用例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-get-available-devices"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.1 get_available_devices</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-API%E8%AF%B7%E6%B1%82%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">2.2 API请求缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">2.3 读取配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%8C%85%E5%90%AB%E5%8F%82%E6%95%B0%E7%9A%84%E8%B5%84%E6%BA%90%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 包含参数的资源初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-lru-cache%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">3. lru_cache源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-lru-cache%E5%92%8Ccache%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">4. lru_cache和cache的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%B8%8D%E9%80%82%E5%90%88%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.</span> <span class="nav-text">5. 不适合的应用场景</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">203</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">204</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/01/29/lru-cache-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python lru_cache 使用与源码解读 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python lru_cache 使用与源码解读
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-29 16:35:03" itemprop="dateCreated datePublished" datetime="2025-01-29T16:35:03+08:00">2025-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-15 16:37:37" itemprop="dateModified" datetime="2025-02-15T16:37:37+08:00">2025-02-15</time>
+    </span>
+
+  
+    <span id="/2025/01/29/lru-cache-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="Python lru_cache 使用与源码解读" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-用法说明"><a href="#1-用法说明" class="headerlink" title="1. 用法说明"></a>1. 用法说明</h2><p><code>functools.cache</code>和<code>functools.lru_cache</code>都是Python标准库<code>functools</code>模块提供的装饰器，用于缓存函数的计算结果，以提高函数的执行效率。</p>
+<p>举一个简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line"><span class="meta">@lru_cache</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> n * factorial(n-<span class="number">1</span>) <span class="keyword">if</span> n <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">execution_time1 = timeit.timeit(<span class="string">&quot;factorial(64)&quot;</span>, <span class="built_in">globals</span>=<span class="built_in">globals</span>(), number=<span class="number">10000</span>)</span><br><span class="line">execution_time2 = timeit.timeit(<span class="string">&quot;factorial.__wrapped__(64)&quot;</span>, <span class="built_in">globals</span>=<span class="built_in">globals</span>(), number=<span class="number">10000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Execution time1: <span class="subst">&#123;execution_time1:<span class="number">.4</span>f&#125;</span> seconds&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Execution time2: <span class="subst">&#123;execution_time2:<span class="number">.4</span>f&#125;</span> seconds&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Speedup: <span class="subst">&#123;execution_time2/execution_time1:<span class="number">.4</span>f&#125;</span> times&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>其中<code>__wrapped__</code> 表示装饰器中原始的函数，也就是没有作用装饰器之前的裸函数。</p>
+<p>代码输出如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Execution time1: 0.0004 seconds</span><br><span class="line">Execution time2: 0.0016 seconds</span><br><span class="line">Speedup: 3.5078 <span class="built_in">times</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，通过lru_cache保存factorial函数的中间结果，得到了3.5倍的加速。<br>通过这里例子，我们可以看到<code>lru_cache</code>的使用方式，也是比较简单：</p>
+<ol>
+<li>import <code>lru_cache:</code>: <code>from functoools import lru_cache</code></li>
+<li>给函数添加<code>@lru_cache</code>装饰器。</li>
+</ol>
+<p>通过查看源码，可以看到<code>lru_cache</code>函数签名如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lru_cache</span>(<span class="params">maxsize=<span class="number">128</span>, typed=<span class="literal">False</span></span>):</span></span><br></pre></td></tr></table></figure>
+<p>其中<code>maxsize</code> 参数表示缓存的最多结果数，默认是128。如果计算结果超过128，则遵循Least-recently-used (LRU)原则，将最近使用次数最少的缓存结果替换为当前的结果。如果设置<code>maxsize=None</code>，则缓存无上限，但内存占用也可能会增大，使用时多观察。</p>
+<p><code>typed</code>参数表示是否按类型缓存不同变量，即使数值一样。例如<code>typed=True</code>，那么<code>f(decimal.Decimal(&quot;3.0&quot;))</code> 和 <code>f(3.0)</code>也会分开缓存。</p>
+<span id="more"></span>
+
+<h3 id="2-实际使用例子"><a href="#2-实际使用例子" class="headerlink" title="2. 实际使用例子"></a>2. 实际使用例子</h3><p>上面只是一个玩具例子，实际代码中，<code>lru_cache</code>用法还是挺多的，这里举一些实际使用例子，来更清晰地理解它的功能。</p>
+<h4 id="2-1-get-available-devices"><a href="#2-1-get-available-devices" class="headerlink" title="2.1 get_available_devices"></a>2.1 get_available_devices</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@lru_cache()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_available_devices</span>() -&gt; FrozenSet[<span class="built_in">str</span>]:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Returns a frozenset of devices available for the current PyTorch installation.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    devices = &#123;<span class="string">&quot;cpu&quot;</span>&#125;  <span class="comment"># `cpu` is always supported as a device in PyTorch</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> is_torch_cuda_available():</span><br><span class="line">        devices.add(<span class="string">&quot;cuda&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> is_torch_mps_available():</span><br><span class="line">        devices.add(<span class="string">&quot;mps&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> is_torch_xpu_available():</span><br><span class="line">        devices.add(<span class="string">&quot;xpu&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> is_torch_npu_available():</span><br><span class="line">        devices.add(<span class="string">&quot;npu&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> is_torch_mlu_available():</span><br><span class="line">        devices.add(<span class="string">&quot;mlu&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> is_torch_musa_available():</span><br><span class="line">        devices.add(<span class="string">&quot;musa&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">frozenset</span>(devices)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>代码地址： <a target="_blank" rel="noopener" href="https://github.com/huggingface/transformers/blob/f11f57c92579aa311dbde5267bc0d8d6f2545f7b/src/transformers/utils/__init__.py#L298">https://github.com/huggingface/transformers/blob/f11f57c92579aa311dbde5267bc0d8d6f2545f7b/src/transformers/utils/__init__.py#L298</a><br>这是获取所有可用 torch devices的代码，通过增加lru_cache进行缓存。</p>
+<h3 id="2-2-API请求缓存"><a href="#2-2-API请求缓存" class="headerlink" title="2.2 API请求缓存"></a>2.2 API请求缓存</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"></span><br><span class="line"><span class="meta">@lru_cache(<span class="params">maxsize=<span class="number">32</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_weather</span>(<span class="params">city: <span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span></span><br><span class="line">    url = <span class="string">f&quot;https://api.weather.com/<span class="subst">&#123;city&#125;</span>&quot;</span></span><br><span class="line">    response = requests.get(url)</span><br><span class="line">    <span class="keyword">return</span> response.json()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多次调用相同城市时，直接从缓存读取</span></span><br><span class="line"><span class="built_in">print</span>(get_weather(<span class="string">&quot;beijing&quot;</span>))  <span class="comment"># 真实请求</span></span><br><span class="line"><span class="built_in">print</span>(get_weather(<span class="string">&quot;beijing&quot;</span>))  <span class="comment"># 命中缓存</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-读取配置"><a href="#2-3-读取配置" class="headerlink" title="2.3 读取配置"></a>2.3 读取配置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"></span><br><span class="line"><span class="meta">@lru_cache(<span class="params">maxsize=<span class="number">1</span></span>)  </span><span class="comment"># 只需缓存最新配置</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_config</span>(<span class="params">config_path: <span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span></span><br><span class="line">    config = configparser.ConfigParser()</span><br><span class="line">    config.read(config_path)</span><br><span class="line">    <span class="keyword">return</span> &#123;section: <span class="built_in">dict</span>(config[section]) <span class="keyword">for</span> section <span class="keyword">in</span> config.sections()&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多次读取同一配置文件时，直接返回缓存对象</span></span><br><span class="line">config = load_config(<span class="string">&quot;app.ini&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-包含参数的资源初始化"><a href="#2-4-包含参数的资源初始化" class="headerlink" title="2.4 包含参数的资源初始化"></a>2.4 包含参数的资源初始化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="meta">@lru_cache(<span class="params">maxsize=<span class="number">2</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_model</span>(<span class="params">model_name: <span class="built_in">str</span></span>) -&gt; tf.keras.Model:</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Loading <span class="subst">&#123;model_name&#125;</span>...&quot;</span>)  <span class="comment"># 仅首次加载时打印</span></span><br><span class="line">    <span class="keyword">return</span> tf.keras.models.load_model(<span class="string">f&quot;models/<span class="subst">&#123;model_name&#125;</span>.h5&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重复调用时直接返回已加载模型</span></span><br><span class="line">model1 = load_model(<span class="string">&quot;resnet50&quot;</span>)  <span class="comment"># 真实加载</span></span><br><span class="line">model2 = load_model(<span class="string">&quot;resnet50&quot;</span>)  <span class="comment"># 命中缓存</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-lru-cache源码分析"><a href="#3-lru-cache源码分析" class="headerlink" title="3. lru_cache源码分析"></a>3. lru_cache源码分析</h2><p>lru_cache源码在CPython源码目录的<code>Lib/functools.py</code>中，可以在GitHub上<a target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/main/Lib/functools.py#L480">查看</a>。<br>下面通过代码截图的方式详细分析源码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lru_cache</span>(<span class="params">maxsize=<span class="number">128</span>, typed=<span class="literal">False</span></span>):</span></span><br><span class="line">	</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(maxsize, <span class="built_in">int</span>):</span><br><span class="line">        <span class="comment"># 如果maxsize为负数，则设置maxsize=0，也就是无缓存</span></span><br><span class="line">        <span class="keyword">if</span> maxsize &lt; <span class="number">0</span>:</span><br><span class="line">            maxsize = <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">callable</span>(maxsize) <span class="keyword">and</span> <span class="built_in">isinstance</span>(typed, <span class="built_in">bool</span>):</span><br><span class="line">        <span class="comment"># maxsize没有传入，直接传入的是用户定义函数</span></span><br><span class="line">        user_function, maxsize = maxsize, <span class="number">128</span></span><br><span class="line">        <span class="comment"># 调用_lru_cache_wrapper创建wrapper，具体实现在底下</span></span><br><span class="line">        wrapper = _lru_cache_wrapper(user_function, maxsize, typed, _CacheInfo)</span><br><span class="line">        wrapper.cache_parameters = <span class="keyword">lambda</span> : &#123;<span class="string">&#x27;maxsize&#x27;</span>: maxsize, <span class="string">&#x27;typed&#x27;</span>: typed&#125;</span><br><span class="line">        <span class="comment"># 调用update_wrapper来更新wrapper的元数据，使得与user_function一致</span></span><br><span class="line">        <span class="keyword">return</span> update_wrapper(wrapper, user_function)</span><br><span class="line">    <span class="keyword">elif</span> maxsize <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> TypeError(</span><br><span class="line">            <span class="string">&#x27;Expected first argument to be an integer, a callable, or None&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorating_function</span>(<span class="params">user_function</span>):</span></span><br><span class="line">        wrapper = _lru_cache_wrapper(user_function, maxsize, typed, _CacheInfo)</span><br><span class="line">        wrapper.cache_parameters = <span class="keyword">lambda</span> : &#123;<span class="string">&#x27;maxsize&#x27;</span>: maxsize, <span class="string">&#x27;typed&#x27;</span>: typed&#125;</span><br><span class="line">        <span class="keyword">return</span> update_wrapper(wrapper, user_function)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> decorating_function</span><br><span class="line"></span><br><span class="line"><span class="comment"># LRU装饰器具体实现函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_lru_cache_wrapper</span>(<span class="params">user_function, maxsize, typed, _CacheInfo</span>):</span></span><br><span class="line">    <span class="comment"># Constants shared by all lru cache instances:</span></span><br><span class="line">    <span class="comment"># 每个object()得到的ID都是唯一的</span></span><br><span class="line">    sentinel = <span class="built_in">object</span>()          <span class="comment"># unique object used to signal cache misses</span></span><br><span class="line">    make_key = _make_key         <span class="comment"># build a key from the function arguments</span></span><br><span class="line">    PREV, NEXT, KEY, RESULT = <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>   <span class="comment"># names for the link fields</span></span><br><span class="line"></span><br><span class="line">    cache = &#123;&#125;</span><br><span class="line">    hits = misses = <span class="number">0</span></span><br><span class="line">    full = <span class="literal">False</span></span><br><span class="line">    cache_get = cache.get    <span class="comment"># bound method to lookup a key or return None</span></span><br><span class="line">    cache_len = cache.__len__  <span class="comment"># get cache size without calling len()</span></span><br><span class="line">    lock = RLock()           <span class="comment"># because linkedlist updates aren&#x27;t threadsafe</span></span><br><span class="line">    root = []                <span class="comment"># root of the circular doubly linked list</span></span><br><span class="line">    root[:] = [root, root, <span class="literal">None</span>, <span class="literal">None</span>]     <span class="comment"># initialize by pointing to self</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> maxsize == <span class="number">0</span>:</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwds</span>):</span></span><br><span class="line">            <span class="comment"># maxsize=0，说明无缓存，直接调用用户函数并返回结果</span></span><br><span class="line">            <span class="keyword">nonlocal</span> misses</span><br><span class="line">            misses += <span class="number">1</span></span><br><span class="line">            result = user_function(*args, **kwds)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> maxsize <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwds</span>):</span></span><br><span class="line">            <span class="comment"># 无限缓存情况，不用考虑LRU替换，直接匹配</span></span><br><span class="line">            <span class="keyword">nonlocal</span> hits, misses</span><br><span class="line">            <span class="comment"># 生成包含args, kwds和typed的唯一的key</span></span><br><span class="line">            key = make_key(args, kwds, typed)</span><br><span class="line">            result = cache_get(key, sentinel)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> result <span class="keyword">is</span> <span class="keyword">not</span> sentinel:</span><br><span class="line">	            <span class="comment"># 找到了key，说明已经有缓存了</span></span><br><span class="line">                hits += <span class="number">1</span></span><br><span class="line">                <span class="keyword">return</span> result</span><br><span class="line">            misses += <span class="number">1</span></span><br><span class="line">            result = user_function(*args, **kwds)</span><br><span class="line">            <span class="comment"># 将本次结果进行缓存</span></span><br><span class="line">            cache[key] = result</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">		<span class="comment"># 有缓存大小的情况，需要进行LRU替换</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwds</span>):</span></span><br><span class="line">            <span class="comment"># Size limited caching that tracks accesses by recency</span></span><br><span class="line">            <span class="keyword">nonlocal</span> root, hits, misses, full</span><br><span class="line">            key = make_key(args, kwds, typed)</span><br><span class="line">            <span class="keyword">with</span> lock:</span><br><span class="line">                link = cache_get(key)</span><br><span class="line">                <span class="keyword">if</span> link <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    <span class="comment"># 使用双向链表结构体</span></span><br><span class="line">                    <span class="comment"># 在链表中删除命中的节点</span></span><br><span class="line">                    link_prev, link_next, _key, result = link</span><br><span class="line">                    link_prev[NEXT] = link_next</span><br><span class="line">                    link_next[PREV] = link_prev</span><br><span class="line">				    <span class="comment"># 将命中的节点移动到最后位置，root为最开始位置，表示最旧没用的数据，而last表示最新使用的数据</span></span><br><span class="line">                    last = root[PREV]</span><br><span class="line">                    last[NEXT] = root[PREV] = link</span><br><span class="line">                    link[PREV] = last</span><br><span class="line">                    link[NEXT] = root</span><br><span class="line">                    hits += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">return</span> result</span><br><span class="line">                misses += <span class="number">1</span></span><br><span class="line">            result = user_function(*args, **kwds)</span><br><span class="line">	        </span><br><span class="line">	        <span class="comment">#处理没命中的情况，因为如果命中的话，前面已经return了</span></span><br><span class="line">            <span class="keyword">with</span> lock:</span><br><span class="line">                <span class="keyword">if</span> key <span class="keyword">in</span> cache:</span><br><span class="line">                    <span class="comment"># 这种情况说明别的线程写入了key，由于节点已经移动到最开始位置了，这里不需要做操作，只需要确保结果最后会返回</span></span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">                <span class="keyword">elif</span> full:</span><br><span class="line">		            <span class="comment"># 缓存已满，需要LRU替换</span></span><br><span class="line">                    <span class="comment"># 使用要删除的节点保存新插入的数据，避免额外的内存申请</span></span><br><span class="line">                    oldroot = root</span><br><span class="line">                    oldroot[KEY] = key</span><br><span class="line">                    oldroot[RESULT] = result</span><br><span class="line">					</span><br><span class="line">                    root = oldroot[NEXT]</span><br><span class="line">                    oldkey = root[KEY]</span><br><span class="line">                    oldresult = root[RESULT]</span><br><span class="line">                    root[KEY] = root[RESULT] = <span class="literal">None</span></span><br><span class="line">                    <span class="comment"># Now update the cache dictionary.</span></span><br><span class="line">                    <span class="keyword">del</span> cache[oldkey]</span><br><span class="line">                    <span class="comment"># Save the potentially reentrant cache[key] assignment</span></span><br><span class="line">                    <span class="comment"># for last, after the root and links have been put in</span></span><br><span class="line">                    <span class="comment"># a consistent state.</span></span><br><span class="line">                    cache[key] = oldroot</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 没满的时候，直接插入link到最后</span></span><br><span class="line">                    last = root[PREV]</span><br><span class="line">                    link = [last, root, key, result]</span><br><span class="line">                    last[NEXT] = root[PREV] = cache[key] = link</span><br><span class="line">                    <span class="comment"># 检查缓存是否满了，使用cache_len而不是len()，因为len()可能会被lru_cache缓存,但属性不会，cache_len = cache.__len__</span></span><br><span class="line">                    full = (cache_len() &gt;= maxsize)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cache_info</span>():</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Report cache statistics&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">with</span> lock:</span><br><span class="line">            <span class="keyword">return</span> _CacheInfo(hits, misses, maxsize, cache_len())</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cache_clear</span>():</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Clear the cache and cache statistics&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 清空cache</span></span><br><span class="line">        <span class="keyword">nonlocal</span> hits, misses, full</span><br><span class="line">        <span class="keyword">with</span> lock:</span><br><span class="line">            cache.clear()</span><br><span class="line">            root[:] = [root, root, <span class="literal">None</span>, <span class="literal">None</span>]</span><br><span class="line">            hits = misses = <span class="number">0</span></span><br><span class="line">            full = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    wrapper.cache_info = cache_info</span><br><span class="line">    wrapper.cache_clear = cache_clear</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="4-lru-cache和cache的区别"><a href="#4-lru-cache和cache的区别" class="headerlink" title="4. lru_cache和cache的区别"></a>4. lru_cache和cache的区别</h2><p><code>functools.cache</code>是Python 3.9引入的新特性，作为<code>lru_cache</code>的无缓存大小限制的一个alias。<br>具体来说，通过查看<a target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/main/Lib/functools.py#L653">源码</a>，可以发现<code>cache</code>是<code>lru_cache</code>的一个特例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cache</span>(<span class="params">user_function, /</span>):</span></span><br><span class="line">    <span class="string">&#x27;Simple lightweight unbounded cache.  Sometimes called &quot;memoize&quot;.&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> lru_cache(maxsize=<span class="literal">None</span>)(user_function)</span><br></pre></td></tr></table></figure>
+<p>而<code>lru_cache</code> 的函数签名如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lru_cache</span>(<span class="params">maxsize=<span class="number">128</span>, typed=<span class="literal">False</span></span>):</span></span><br></pre></td></tr></table></figure>
+<p>因此可以看出<code>cache=lru_cache(maxsize=None, typed=False)</code> 。因此<code>cache</code>函数有两个重要的特点：</p>
+<ol>
+<li>缓存空间无限大，也就是说不存在缓存的字典的key值超过上限，需要替换掉那些最不常用的key的情况，可以保证所有函数都能命中，但代价是会占用更多的内存。</li>
+<li>typed=False，表明不同类型的具有相同类型的数值会被当作一个值来缓存。</li>
+</ol>
+<h3 id="5-不适合的应用场景"><a href="#5-不适合的应用场景" class="headerlink" title="5. 不适合的应用场景"></a>5. 不适合的应用场景</h3><ol>
+<li><strong>返回可变对象</strong>（如列表、字典）时，缓存的是对象引用，可能导致意外修改</li>
+<li><strong>函数有副作用</strong>（如写入文件、修改全局变量）</li>
+<li><strong>参数不可哈希</strong>（如传递字典、列表等可变类型）</li>
+<li><strong>参数组合可能性无限</strong>（导致缓存无限膨胀）</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2025/01/29/lru-cache-tutorial/" title="Python lru_cache 使用与源码解读">http://vra.github.io/2025/01/29/lru-cache-tutorial/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/LRU/" rel="tag"># LRU</a>
+              <a href="/tags/LRU-Cache/" rel="tag"># LRU Cache</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/29/coolshell/" rel="prev" title="coolshell">
+                  <i class="fa fa-chevron-left"></i> coolshell
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/01/29/TransformerEncoder-onnx-export-issue/" rel="next" title="TransformerEncoder导出onnx问题解决">
+                  TransformerEncoder导出onnx问题解决 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
