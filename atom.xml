@@ -188,9 +188,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Transformers" scheme="http://vra.github.io/tags/Transformers/"/>
     
@@ -412,13 +412,13 @@
     
     <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
     
+    <category term="Qwen" scheme="http://vra.github.io/tags/Qwen/"/>
+    
     <category term="LLM" scheme="http://vra.github.io/tags/LLM/"/>
     
     <category term="GPT-4o" scheme="http://vra.github.io/tags/GPT-4o/"/>
     
     <category term="LVM" scheme="http://vra.github.io/tags/LVM/"/>
-    
-    <category term="Qwen" scheme="http://vra.github.io/tags/Qwen/"/>
     
     <category term="Qwen2-VL" scheme="http://vra.github.io/tags/Qwen2-VL/"/>
     
@@ -440,9 +440,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
     
@@ -500,9 +500,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="pip" scheme="http://vra.github.io/tags/pip/"/>
     
