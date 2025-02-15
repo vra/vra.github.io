@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">188</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">193</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">190</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">195</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">195</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">188</span>
+        <span class="site-state-item-count">190</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,6 +204,261 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/12/nanogpt-and-luxun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/12/nanogpt-and-luxun/" class="post-title-link" itemprop="url">nanoGPT + 鲁迅</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-12 23:24:02" itemprop="dateCreated datePublished" datetime="2023-02-12T23:24:02+08:00">2023-02-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-13 00:33:42" itemprop="dateModified" datetime="2023-02-13T00:33:42+08:00">2023-02-13</time>
+    </span>
+
+  
+    <span id="/2023/02/12/nanogpt-and-luxun/" class="post-meta-item leancloud_visitors" data-flag-title="nanoGPT + 鲁迅" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-起因"><a href="#1-起因" class="headerlink" title="1. 起因"></a>1. 起因</h2><p>今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的<a target="_blank" rel="noopener" href="https://til.simonwillison.net/llms/training-nanogpt-on-my-blog">实验</a>，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模型生成鲁迅风格的文字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">故乡，债是佩服的。</span><br><span class="line"> 我一向对于新青年的态度，先来说话，谢容易做的，然而伏园已经见过几样，感觉的是另外捧之数，以为先前的例子。今但近来做了做事，自己也还不做，不能先行通，所以生在冷静和“人生”，三妇一苦闷，觉得大约是如此隔膜</span><br><span class="line">和曹操，于是非意模茶炛，可以说是太高了，所以现在便能教育，竟�如此。</span><br><span class="line"> 但汝实在有给法历代的，不久就在绝末年间，我想显出向大家饮一趟，而汉子大毒是怀旧的，就要贫足有打劫，可以永掠的。这种事情，中国有一个大官左翼阿，（陀思妥习），有敢请佛喜，总要适说一点�</span><br></pre></td></tr></table></figure>
+
+<p>还算有鲁迅文字的风格，但逻辑一窍不通，整体还是难让人满意，不知道是GPT2能力的问题还是我实验设置的问题。 Anyway，这里共享一下我实验的流程，有兴趣的朋友可以参考，进行改进。本文涉及的代码修改代码已经提交到这个<a target="_blank" rel="noopener" href="https://github.com/vra/nanoGPT">仓库了</a>，可以参考，文末会附上更多例子。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/12/nanogpt-and-luxun/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/05/numpy-remove-np-float/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/05/numpy-remove-np-float/" class="post-title-link" itemprop="url">关于 np.float 被删除的问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-05 11:34:04" itemprop="dateCreated datePublished" datetime="2023-02-05T11:34:04+08:00">2023-02-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-13 16:37:25" itemprop="dateModified" datetime="2023-02-13T16:37:25+08:00">2023-02-13</time>
+    </span>
+
+  
+    <span id="/2023/02/05/numpy-remove-np-float/" class="post-meta-item leancloud_visitors" data-flag-title="关于 np.float 被删除的问题" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>在Numpy 1.24版本中，<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations">删除</a>了像<code>np.float</code>、<code>np.int</code> 这样的 Python 内置类型的 alias，因此以后在代码中使用这些类型会报错<code>AttributeError: module &#39;numpy&#39; has no attribute &#39;float&#39;</code>, 涉及的类型包括：</p>
+<ul>
+<li><code>numpy.bool</code></li>
+<li><code>numpy.int</code></li>
+<li><code>numpy.float</code></li>
+<li><code>numpy.complex</code></li>
+<li><code>numpy.object</code></li>
+<li><code>numpy.str</code></li>
+<li><code>numpy.long</code></li>
+<li><code>numpy.unicode</code></li>
+</ul>
+<p>那该怎么解决这个错误呢？</p>
+<p>TL;DR</p>
+<ul>
+<li>对于在标量上的操作，直接使用Python内置类型替换<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo = np.random.rand(<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 原先用法，注意foo[0]是一个标量</span></span><br><span class="line">bar = np.<span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">bar = <span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></li>
+<li>对于在<code>np.ndarray</code> 上的操作，使用<code>np.float64</code> 或<code>np.float32</code> 来替代，具体选择哪个需要自己根据情况来确定，不同类型精度会有不同，下面举两个例子:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.float32)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>这里列出来了删除类型在标量和<code>np.ndarray</code> 上的替代，方便查找</p>
+<table>
+<thead>
+<tr>
+<th>原先类型</th>
+<th>标量替换类型</th>
+<th><code>np.ndarray</code>替换类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.int</td>
+<td>int</td>
+<td>np.int32/np.int64</td>
+</tr>
+<tr>
+<td>np.float</td>
+<td>float</td>
+<td>np.float32/np.float64</td>
+</tr>
+<tr>
+<td>np.bool</td>
+<td>bool</td>
+<td>np.bool_</td>
+</tr>
+<tr>
+<td>np.complex</td>
+<td>complex</td>
+<td>np.complex128</td>
+</tr>
+<tr>
+<td>np.object</td>
+<td>object</td>
+<td>-</td>
+</tr>
+<tr>
+<td>np.str</td>
+<td>str</td>
+<td>np.str_</td>
+</tr>
+<tr>
+<td>np.long</td>
+<td>int</td>
+<td>np.int32/np.int64</td>
+</tr>
+<tr>
+<td>np.unicode</td>
+<td>str</td>
+<td>np.str_</td>
+</tr>
+</tbody></table>
+<p>详细说明参考<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/release/1.20.0-notes.html#deprecations">NumPy 1.20.0 Release Notes</a>。</p>
+<p>下面详细说说事情的来龙去脉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/05/numpy-remove-np-float/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -919,178 +1174,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/11/12/git-add-file-to-last-commit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/12/git-add-file-to-last-commit/" class="post-title-link" itemprop="url">git如何添加文件到最新的提交</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-11-12 17:54:22" itemprop="dateCreated datePublished" datetime="2022-11-12T17:54:22+08:00">2022-11-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-16 08:54:01" itemprop="dateModified" datetime="2022-12-16T08:54:01+08:00">2022-12-16</time>
-    </span>
-
-  
-    <span id="/2022/11/12/git-add-file-to-last-commit/" class="post-meta-item leancloud_visitors" data-flag-title="git如何添加文件到最新的提交" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>有时候，在git commit后，我们会发现一些文件忘了提交了，或者需要修改，而且这些提交和修改是与上一次commit的主题一致的，这时候再执行一遍相同的git commit就会让提交记录显得比较冗余，有没有办法将修改后的文件加到最后一次的提交记录里面呢？搜索后发现<a target="_blank" rel="noopener" href="https://stackoverflow.com/a/40503483">这里</a>给了一个解决办法，git add文件后调用<code>git commit --amend -no-edit</code>即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file_path&gt;</span><br><span class="line">git commit --amend --no-edit</span><br></pre></td></tr></table></figure>
-<p><strong>注意：如果之前的代码已经提交的话，需要执行<code>git push --force</code>来推送代码以替代之前的提交记录。</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2022/11/07/du-show-hidden-folders/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/07/du-show-hidden-folders/" class="post-title-link" itemprop="url">执行du命令时统计隐藏文件和目录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-11-07 23:32:23 / 修改时间：23:38:24" itemprop="dateCreated datePublished" datetime="2022-11-07T23:32:23+08:00">2022-11-07</time>
-    </span>
-
-  
-    <span id="/2022/11/07/du-show-hidden-folders/" class="post-meta-item leancloud_visitors" data-flag-title="执行du命令时统计隐藏文件和目录" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在Linux和Mac下，执行<code>du -sh</code> 来统计目录大小时，默认不统计以点开头的文件或者目录，比如<code>.local</code>，因此得到不准确的统计结果。从<a target="_blank" rel="noopener" href="https://superuser.com/a/633808">这里</a>知道，要统计隐藏文件和目录，可以这么用:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只统计隐藏文件或者目录</span></span><br><span class="line">du -sh .[^.]*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计隐藏文件或者目录和常规文件</span></span><br><span class="line">du -sh .[^.]* *</span><br></pre></td></tr></table></figure>
-<p>结合 <code>sort -h</code>，可以快速得到比较大的目录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh .[^.]* * |sort -h</span><br></pre></td></tr></table></figure>
-
-
-
-
       
     </div>
 

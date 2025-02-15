@@ -6,7 +6,7 @@
   <link href="http://vra.github.io/atom.xml" rel="self"/>
   
   <link href="http://vra.github.io/"/>
-  <updated>2025-02-15T07:26:31.769Z</updated>
+  <updated>2025-02-15T07:49:43.730Z</updated>
   <id>http://vra.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>as-a-junior-engineer</title>
+    <link href="http://vra.github.io/2025/02/15/as-a-junior-engineer/"/>
+    <id>http://vra.github.io/2025/02/15/as-a-junior-engineer/</id>
+    <published>2025-02-15T07:45:10.000Z</published>
+    <updated>2025-02-15T07:49:43.730Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>As a junior engineer, there’s simply no substitute for getting the first 100K lines of code under your belt. The “start over each day” method will help get you to those 100K lines faster.You might think covering the same ground multiple times isn’t as valuable as getting 100K diverse lines of code. I disagree. Solving the same problem repeatedly is actually really beneficial for retaining knowledge of patterns you figure out.You only need 5K perfect lines to see all the major patterns once. The other 95K lines are repetition to rewire your neurons.</p></blockquote><p><a href="https://link.zhihu.com/?target=https://grantslatton.com/software-pathfinding%23quantity-has-a-quality-all-of-its-own">from</a>,很有同感的一段话，很多事情只有不断重复才能真正掌握它，例如走路，会走一次，不能算学会走路，只有不断地走，直到忽略你在走路这个事实之后，才算真正地学会了走路。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;As a junior engineer, there’s simply no substitute for getting the first 100K lines of code under your belt. The “start over</summary>
+      
+    
+    
+    
+    
+    <category term="quato" scheme="http://vra.github.io/tags/quato/"/>
+    
+  </entry>
   
   <entry>
     <title>博客新计划</title>
@@ -63,6 +86,30 @@
     
     
     <category term="年终总结" scheme="http://vra.github.io/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1-bit-embedding</title>
+    <link href="http://vra.github.io/2024/11/12/1-bit-embedding/"/>
+    <id>http://vra.github.io/2024/11/12/1-bit-embedding/</id>
+    <published>2024-11-12T00:30:28.000Z</published>
+    <updated>2025-02-15T07:43:53.670Z</updated>
+    
+    <content type="html"><![CDATA[<p> <a href="https://emschwartz.me/binary-vector-embeddings-are-so-cool/">这里</a>是一篇1bit 量化embedding模型的介绍，相似度计算要快不少，以32倍的压缩率，25倍的检索速度，得到95%的检索准确率，very impressive!</p><p> 同时也提到了 <a href="https://huggingface.co/sentence-transformers">Sentence Transformers</a>这个专门做embedding的库，支持<a href="https://huggingface.co/models?library=sentence-transformers&amp;author=sentence-transformels">1万多个</a>embedding模型，有点厉害了！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt; &lt;a href=&quot;https://emschwartz.me/binary-vector-embeddings-are-so-cool/&quot;&gt;这里&lt;/a&gt;是一篇1bit 量化embedding模型的介绍，相似度计算要快不少，以32倍的压缩率，25倍的检索速度，得到95%的检</summary>
+      
+    
+    
+    
+    
+    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="embedding" scheme="http://vra.github.io/tags/embedding/"/>
     
   </entry>
   
@@ -164,9 +211,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
     
@@ -224,9 +271,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="pip" scheme="http://vra.github.io/tags/pip/"/>
     
@@ -307,9 +354,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="pip" scheme="http://vra.github.io/tags/pip/"/>
     
@@ -394,9 +441,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="pip" scheme="http://vra.github.io/tags/pip/"/>
     
@@ -424,13 +471,13 @@
     
     
     
+    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="LeptonAI" scheme="http://vra.github.io/tags/LeptonAI/"/>
     
     <category term="Android" scheme="http://vra.github.io/tags/Android/"/>
-    
-    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
     
   </entry>
   
@@ -453,9 +500,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="pip" scheme="http://vra.github.io/tags/pip/"/>
     
@@ -509,59 +556,6 @@
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Numpy" scheme="http://vra.github.io/tags/Numpy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Code Llama 解读系列1-论文阅读</title>
-    <link href="http://vra.github.io/2023/09/29/code-llama-1/"/>
-    <id>http://vra.github.io/2023/09/29/code-llama-1/</id>
-    <published>2023-09-29T02:17:04.000Z</published>
-    <updated>2023-09-29T02:40:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Code Llama 是 Meta 基于 Llama 2 的代码生成AI模型， 在同类开源模型中取得比较好的结果。这里计划写3篇系列文章，从论文细节、代码使用、效果实测方面对 Code Llama 进行解读，欢迎关注我了解后续文章。</p></blockquote><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>2023年8月24日，Meta 开源了基于 <a href="https://github.com/facebookresearch/llama">Llama 2</a>) 通用 LLM 的代码生成系列模型 <a href="https://github.com/facebookresearch/codellama">Code Llama</a>)，支持Python, C++, Java, PHP, TypeScript, C# 和 Bash 编程语言，而且支持学术研究和商业使用。</p><p>另外 Code Llama 官方代码只提供了一些简单的使用示例，没有提供生产环境可用的 VSCode 等 工具的插件，搜索了一下也没找到简单易用的第三方开发的插件。相信很快就会有人做出来的。如果你有看到基于 Code Llama 的 VSCode 或者 Vim 插件，欢迎评论指教。</p><span id="more"></span><p>一些链接：</p><ul><li>代码仓库: <a href="https://github.com/facebookresearch/codellama">https://github.com/facebookresearch/codellama</a></li><li>论文PDF: <a href="https://scontent-sjc3-1.xx.fbcdn.net/v/t39.2365-6/369856151_1754812304950972_1159666448927483931_n.pdf?_nc_cat=107&ccb=1-7&_nc_sid=3c67a6&_nc_ohc=wURKmnWKaloAX-JEHAz&_nc_ht=scontent-sjc3-1.xx&oh=00_AfBOeTPJWHrxyxjNs4TLPACB4M7xQIwQcM5SMRMzDo8uCg&oe=64EEAC4F">链接</a></li><li>Meta AI 博客文章：<a href="https://ai.meta.com/blog/code-llama-large-language-model-coding/">链接</a></li></ul><h3 id="2-数据说明"><a href="#2-数据说明" class="headerlink" title="2. 数据说明"></a>2. 数据说明</h3><p>这篇论文中提到了几个不同的数据，有一些数据的构造还是挺巧妙的，这里列出来，希望能给大家一些启发。</p><h4 id="2-1-2T-token-dataset"><a href="#2-1-2T-token-dataset" class="headerlink" title="2.1 2T token dataset"></a>2.1 2T token dataset</h4><p>首先是 Llama 2 的训练数据，虽然不是这篇论文的贡献，但因为 Code Llama 模型都是从 Llama 2 初始化的，所以 这些代码生成的特化模型也都是见过这些数据的，包含它们中的知识。</p><p>Llama 2 是使用 2T token 数据训练的，其中代码相关的部分有80B token，占比只有4%。</p><h4 id="2-2-500B-token-dataset"><a href="#2-2-500B-token-dataset" class="headerlink" title="2.2 500B token dataset"></a>2.2 500B token dataset</h4><p>这篇论文先是提出了通用的 500B tokens 数据集, 85% 都是关于代码的，所以可以认为这个500B 就是一个代码数据集。</p><h4 id="2-3-100B-token-Python-dataset"><a href="#2-3-100B-token-Python-dataset" class="headerlink" title="2.3 100B token Python dataset"></a>2.3 100B token Python dataset</h4><p>除了通用的 500B token 代码数据集，为了提高对 Python 代码的生成能力，论文又提出了 100B token Python dataset。</p><h4 id="2-4-RLHF-V5-dataset"><a href="#2-4-RLHF-V5-dataset" class="headerlink" title="2.4 RLHF V5 dataset"></a>2.4 RLHF V5 dataset</h4><p>这是 Llama 2 论文中使用的人工纠正的数据集，是为了让代码可以更好的对应回答提问者的指令，也为了生成更安全的代码（可以理解成对生成的代码中某些危险的代码进行过滤？）</p><h4 id="2-5-self-instruct-5B-token-dataset"><a href="#2-5-self-instruct-5B-token-dataset" class="headerlink" title="2.5 self-instruct 5B token dataset"></a>2.5 self-instruct 5B token dataset</h4><p>self-instruct 是一个生成代码数据集，通过给llama2提问代码任务，得到它的结果，作为gt。 会不会存在错误答案？这里论文设计了一个很精巧的方案来构造生成代码数据：</p><ol><li>让 LLama 2 70B 大模型设计 Easy 和 Medium 难度的编程题，每次出50道题目，要求不重复，且可以用一个单独的Python函数来实现。总共得到52000个去重的问题。下面是提示词和一些回答的例子：<br><img data-src="/imgs/code_llama_1/20230826223518.png"></li><li>对上面得到的每个问题，用 Code Llama 7B 模型生成 单元测试代码和10个解题的代码，然后在解题代码上运行单元测试，将第一个通过单元测试的代码加入到 self-instruct 数据集中。</li></ol><p>这是一种很巧妙的设计，通过单元测试来判断代码的对错，能够做到完全自动化地构造数据。</p><p>当然如果单元测试代码本身错，那可能会将错误的解题代码加入到训练集中。而根据<a href="https://arxiv.org/abs/2308.02312">这篇论文</a>)的分析，作为最强的 LLM，ChatGPT 生成的代码错误率为52%。所以有理由认为  Code Llama 7B 生成的单元测试代码也会有错误，因此 self-instruct 不是一个完美的数据集。</p><h3 id="3-训练策略"><a href="#3-训练策略" class="headerlink" title="3. 训练策略"></a>3. 训练策略</h3><p>论文中针对不同的模型，尝试了不同的训练策略，整体来说是和数据集比较匹配的。</p><h4 id="3-1-从头训练-vs-Finetune"><a href="#3-1-从头训练-vs-Finetune" class="headerlink" title="3.1 从头训练 vs Finetune"></a>3.1 从头训练 vs Finetune</h4><p>论文中实验发现，采用通用llm (Llama 2)初始化，再在code数据集上finetune比在code数据集上从头训练效果要好。但同时也发现，只使用 Llama 2 模型来做代码生成，效果比 Llama 2 + Code 数据集训练要差，可见 2T token  pretrain + 500B token finetune才是做通用代码生成的最好选择。</p><h4 id="3-2-代码补全功能"><a href="#3-2-代码补全功能" class="headerlink" title="3.2 代码补全功能"></a>3.2 代码补全功能</h4><p>上面的基本训练策略中只会给定前面的代码，补全或预测后面的代码，但在有些常见，是已知前面和后面的代码，给出中间的代码，比如docstring的生成，就需要知道前面的内容(函数的名字和参数)和后面的内容（函数的具体实现），才能给出比较准确的函数说明docstring。这种任务模式论文中称之为补全 (Infilling)。</p><p>这种需求跟 LLM 预测下一个 token 的任务模式是不同的，因此需要对训练模式进行改造。总体来说，论文采用了 Casual Mask 的模式来训练网络，也就是将训练序列中间的一部分移动到最后，让网络来预测这部分内容。具体来说，将训练中的token分割为前缀、中间部分和后缀部分，分割位置利用均匀分布来确定。训练时以一半的概率喂前缀-后缀-中间（PSM）格式 token 序列，一半的概率喂后缀-前缀-中间（SPM）格式的 token 序列。</p><h4 id="3-3-长上下文输入微调"><a href="#3-3-长上下文输入微调" class="headerlink" title="3.3 长上下文输入微调"></a>3.3 长上下文输入微调</h4><p>Llama 2 模型的最长 token 数目为4096，对于代码生成任务来说，还是比较小，比如分析整个仓库中的代码，可能很容易超出限制。因此 Code Llama 在 finetune 阶段将 token 数从4096 提升到16384，提升了4倍。</p><p>位置embedding 采用旋转位置embedding, query 和 key vector都是 Rxn的一个线性组合，而R是一个块对角矩阵，也就是只有对角线和附近的4个值非零，每个位置i处的R公式如下：<br><img data-src="/imgs/code_llama_1/20230827002151.png"></p><p><img data-src="/imgs/code_llama_1/20230827002347.png"><br>d为总的token 维度。</p><h4 id="3-4-指令finetune"><a href="#3-4-指令finetune" class="headerlink" title="3.4 指令finetune"></a>3.4 指令finetune</h4><p>这部分也是为了生成更安全的代码，也更好地针对提问者的问题进行更人性化的回答。个人理解，这部分本身在策略上没有太多trick，核心是数据的构造和采集。</p><h3 id="4-模型说明"><a href="#4-模型说明" class="headerlink" title="4. 模型说明"></a>4. 模型说明</h3><p>基于几种数据和几个训练策略，就能得到不同的模型。<br>Code Llama 系列包含三大类模型，每类模型包含 7B, 13B 和 34B 三种参数大小，共9个模型。</p><p><img data-src="/imgs/code_llama_1/20230826222457.png"></p><p>第一类是Code Llama 通用代码生成模型，采用 Llama 2 的模型参数初始化，在 500B token 数据集上训练。其中 7B 和 13B 模型还进行了代码补全数据集上的训练，适用于 IDE 中实时的代码补全，而 34B 因为速度问题，并不适合实时补全，更适合作为编程助手。</p><p>第二类是 Code Llama-Python，这是针对 Python 专门优化的模型，在 500B 通用数据训练的基础上，又在额外的 100B Python 数据集上进行了finetune。</p><p>第三类是 Code. Llama-Instruct，在 Code Llama 通用模型基础上，增加了在 RLHF V5 和 self-instruct 数据集上的 finetune 过程，可以生成更符合指令需求的代码。</p><h3 id="5-结果对比"><a href="#5-结果对比" class="headerlink" title="5. 结果对比"></a>5. 结果对比</h3><p>论文中比较了非常多测试集上的指标，太多反而不知道模型的效果到底怎么样，所以这里也不列出来了。下面放的是博客文章中的和别的模型的对比表格，反而比较简洁，可以做一个大致的对比。</p><p><img data-src="/imgs/code_llama_1/20230826213734.png"></p><p>当然根据我之前的 LLMs 使用经验，实际使用时的智能感受貌似不能很好地和 Benchmark 上的结果对应起来，相差几个点对最终结果的提升有多大不太好说。 所以 Code Llama 具体使用体验如何，留待下一篇文章来分析。</p>]]></content>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;Code Llama 是 Meta 基于 Llama 2 的代码生成AI模型， 在同类开源模型中取得比较好的结果。这里计划写3篇系列文章，从论文细节、代码使用、效果实测方面对 Code Llama 进行解读，欢迎关注我了解后续文章。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;1-背景&quot;&gt;&lt;a href=&quot;#1-背景&quot; class=&quot;headerlink&quot; title=&quot;1. 背景&quot;&gt;&lt;/a&gt;1. 背景&lt;/h3&gt;&lt;p&gt;2023年8月24日，Meta 开源了基于 &lt;a href=&quot;https://github.com/facebookresearch/llama&quot;&gt;Llama 2&lt;/a&gt;) 通用 LLM 的代码生成系列模型 &lt;a href=&quot;https://github.com/facebookresearch/codellama&quot;&gt;Code Llama&lt;/a&gt;)，支持Python, C++, Java, PHP, TypeScript, C# 和 Bash 编程语言，而且支持学术研究和商业使用。&lt;/p&gt;
-&lt;p&gt;另外 Code Llama 官方代码只提供了一些简单的使用示例，没有提供生产环境可用的 VSCode 等 工具的插件，搜索了一下也没找到简单易用的第三方开发的插件。相信很快就会有人做出来的。如果你有看到基于 Code Llama 的 VSCode 或者 Vim 插件，欢迎评论指教。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
-    <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
-    
-    <category term="LLM" scheme="http://vra.github.io/tags/LLM/"/>
-    
-    <category term="Code Llama" scheme="http://vra.github.io/tags/Code-Llama/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FastViT 论文阅读</title>
-    <link href="http://vra.github.io/2023/09/01/fastvit/"/>
-    <id>http://vra.github.io/2023/09/01/fastvit/</id>
-    <published>2023-09-01T07:56:52.000Z</published>
-    <updated>2023-09-29T02:15:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>论文地址：<a href="https://arxiv.org/abs/2303.14189">arxiv</a><br>代码地址：<a href="https://github.com/apple/ml-fastvit">ml-fastvit</a></p><p>FastViT 是苹果公司在 ICCV 2023上发表的网络结构设计的论文，在速度和精度上取得比较好的折衷，速度上既能和MobileOne这种轻量级网络匹敌，精度上也不输PoolFormer、ConvNeXt等比较新的大网络结构。</p><span id="more"></span><p><img data-src="/imgs/fastvit/20230901135142.png"></p><p>这是网络整体的结构图：<br><img data-src="/imgs/fastvit/20230901155048.png"><br>整体还是分成Stem和4个Stage，以及最后的输出Head。可以看到所有结构都在推理时进行了重参数化，保证只有一个网络分支。虽然叫ViT，但网络的核心还是由Conv层组成。</p><p>整个网络的的大部分模块是以MobileOne 的核心 MobileOneBlock 打底的，所以说是 MobileOne V2 也不为过。</p><p>比较有意思的是，FastVit 这篇论文的作者列表、作者顺序都和 MobileOne 一模一样！<br><img data-src="/imgs/fastvit/20230901154317.png"><br><img data-src="/imgs/fastvit/20230901154255.png"></p><p>所以可以说，FastViT 是 MobileOne 框架的延续，核心是在推理的时候保证只有一条网络分支，提升网络的推理速度。</p><p>具体来说，为了提升效果，网络设计上参考了比较新的 ConvMixer 结构。然后为了保证能够重参数化，将其中的非线性层省略掉，去掉残差模块。为了缓解 Self-Attention 模块计算量太大的问题，在浅层特征图比较大的情况下，采用 Large Kernel，也就是7x7 Kernel Size 的Conv网络。</p><p>下面依次对网络的几个核心模块进行说明。</p><h3 id="2-RepMixer"><a href="#2-RepMixer" class="headerlink" title="2. RepMixer"></a>2. RepMixer</h3><p>ConvMixer 提出了用Conv网络替代ViT网络的方法，在效果上超越了ViT方法。</p><p>已有的一些方法已经验证，Skip-Connection因为会有额外的内存访问开销，因此会显著增加网络延迟，如果能合并Skip-Connection，对于网络的加速会有很帮助。注意论文中的Skip-Connection其实指的是类似残差模块中的两个分支相加的操作（如下图），而不是更常见的Encoder和Decoder之间的跳层连接。<br><img data-src="/imgs/fastvit/20230901143032.png"></p><p>FastViT利用了 ConvMixer 网络结构优异的性能，同时为了能够在推理时进行重参数化，对 ConvMixer 进行了几个修改：</p><ol><li>去掉非线性层，否则没法进行重参数化</li><li>将BN放在DepthWiseConv之前</li><li>在推理时合并 Skip-Connection，用来加速推理。</li></ol><p>具体代码实现时，训练时采用了2个MobileOneBlock，分别表示mixer和normal，与原始输入x相加；推理的时候去掉残差相加，直接转换为一个MobileOne模块：<br><img data-src="/imgs/fastvit/20230901144427.png"></p><h3 id="3-训练时过参数化"><a href="#3-训练时过参数化" class="headerlink" title="3. 训练时过参数化"></a>3. 训练时过参数化</h3><p>过参数化是指训练的时候将结构相同的网络模块重复多遍，通过增加模型的复杂度来提点。在推理的时候，再通过重参数化trick将多个分支的结构合并到一个分支来提速。下面是过参数化的示意图（图片来自<a href="https://zhuanlan.zhihu.com/p/560894077">这里</a>):<br><img data-src="/imgs/fastvit/20230901150703.png"></p><p>MobileOne 论文中就采用了过参数模块，验证可以提高网络的学习能力。</p><p>在这篇论文中，为了提速，先是将普通的 KxK 的Conv修改为DepthWise KxK 的 Conv + 1x1 PointWise 的 Conv层，发现在提速后精度下降，例如论文中 Table 1 所示，这步修改后耗时从 1.58ms 下降到 1.26ms，但精度也从78.5下降到78.0:<br><img data-src="/imgs/fastvit/20230901151134.png"></p><p>为了弥补这一步造成的精度损失，作者叠加了上面提到的训练时重参数化的trick，保证速度不变的情况下，效果超过了之前的方法，从78.0上升到78.9。</p><p>当然这部分的结构优化其实比较”水”，是现有的两个工作的简单组合……</p><h3 id="4-Large-Kernel"><a href="#4-Large-Kernel" class="headerlink" title="4. Large Kernel"></a>4. Large Kernel</h3><p>由于Transformer结构的核心模块是Self-Attention模块，而且已经被无数实验验证具有强大的特征提取能力。<br>但Self-Attention的计算量很大，要做到手机上实时难度不小。</p><p>作者认为，Self-Attention 效果好跟它有很大的感受野有关系。而普通 Conv 层通过增加 Kernel. Size，也能达到提高感受野的效果。</p><p>因此最终网络结构设计上，在每个Stage开始的时候，采用 7x7 的 MobileOneBlock。7x7 的 Kernel Size 也是通过实验试出来的。</p><p>为了既能跟MobileOne这种轻量级网络对比，又能在 ImageNet 上和别的模型一较高下，论文中提出了7个 Fast-ViT的变种，各个变种的设置如下：<br><img data-src="/imgs/fastvit/20230901153635.png"></p><h3 id="5-实验"><a href="#5-实验" class="headerlink" title="5. 实验"></a>5. 实验</h3><p>对比实验在 ImageNet-1K 分类任务、COCO 物体检测，ADE20K 语义分割等标准任务上进行了对比</p><p><img data-src="/imgs/fastvit/20230901153843.png"><br><img data-src="/imgs/fastvit/20230901153923.png"><br><img data-src="/imgs/fastvit/20230901153936.png"><br>另外这篇论文还比较了FastVit在3D手重建这个下游任务上的效果，也是比MobRecon这些端侧实时的方法效果更好，当然还是刷不过MeshGraphormer等基于HRNet Backbone的模型。<br><img data-src="/imgs/fastvit/20230901135311.png"></p><h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><p>整个论文是比较实用的，没有太多自己的原创性的点子，更多的是将一些现有的网络结构设计思想融合进MobileOne的推理时单分支的网络结构中来。</p><p>另外一个值得注意的事情是，论文中给出的Mobile Latency都很低，像 FastVit-MA36 7.9G 的FLOPS，移动端延迟4.5毫秒。但要明白这是用iPhone 12 Pro Max上使用CoreML来测试的，本身iPhone 12 Pro Max 采用的A14芯片很强，而且CoreML针对苹果的硬件有专门的优化，所以在安卓机器或者低端一些的iPhone 上，采用别的推理引擎（如ONNX， MNN， TCNN）进行推理时，很有可能达不到这么高的速度，所以像 FastVit-MA36这种FLOPS 约为8G的模型在手机上用起来还是需要验证的。</p><p>总之对于想试用 FastViT 的小伙伴来说，用就完了，代码已经开源，也不存在复现的问题，直接用起来，好用就加入到自己的任务中，效果比较差或者速度有瓶颈抛弃即可。</p><p>另外 FastViT 的代码实现很简洁优雅，阅读起来很舒服，后面有空可以写一篇代码阅读的文章，欢迎感兴趣的小伙伴关注、点赞和评论区留言～</p>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1. 概述&quot;&gt;&lt;/a&gt;1. 概述&lt;/h3&gt;&lt;p&gt;论文地址：&lt;a href=&quot;https://arxiv.org/abs/2303.14189&quot;&gt;arxiv&lt;/a&gt;&lt;br&gt;代码地址：&lt;a href=&quot;https://github.com/apple/ml-fastvit&quot;&gt;ml-fastvit&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;FastViT 是苹果公司在 ICCV 2023上发表的网络结构设计的论文，在速度和精度上取得比较好的折衷，速度上既能和MobileOne这种轻量级网络匹敌，精度上也不输PoolFormer、ConvNeXt等比较新的大网络结构。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
-    
-    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
-    
-    <category term="论文阅读" scheme="http://vra.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   

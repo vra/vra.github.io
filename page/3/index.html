@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">188</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">193</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">190</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">195</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">195</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">188</span>
+        <span class="site-state-item-count">190</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,6 +204,189 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/09/29/code-llama-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/29/code-llama-1/" class="post-title-link" itemprop="url">Code Llama 解读系列1-论文阅读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-09-29 10:17:04 / 修改时间：10:40:12" itemprop="dateCreated datePublished" datetime="2023-09-29T10:17:04+08:00">2023-09-29</time>
+    </span>
+
+  
+    <span id="/2023/09/29/code-llama-1/" class="post-meta-item leancloud_visitors" data-flag-title="Code Llama 解读系列1-论文阅读" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>Code Llama 是 Meta 基于 Llama 2 的代码生成AI模型， 在同类开源模型中取得比较好的结果。这里计划写3篇系列文章，从论文细节、代码使用、效果实测方面对 Code Llama 进行解读，欢迎关注我了解后续文章。</p>
+</blockquote>
+<h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>2023年8月24日，Meta 开源了基于 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/llama">Llama 2</a>) 通用 LLM 的代码生成系列模型 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/codellama">Code Llama</a>)，支持Python, C++, Java, PHP, TypeScript, C# 和 Bash 编程语言，而且支持学术研究和商业使用。</p>
+<p>另外 Code Llama 官方代码只提供了一些简单的使用示例，没有提供生产环境可用的 VSCode 等 工具的插件，搜索了一下也没找到简单易用的第三方开发的插件。相信很快就会有人做出来的。如果你有看到基于 Code Llama 的 VSCode 或者 Vim 插件，欢迎评论指教。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/29/code-llama-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/09/01/fastvit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/01/fastvit/" class="post-title-link" itemprop="url">FastViT 论文阅读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-01 15:56:52" itemprop="dateCreated datePublished" datetime="2023-09-01T15:56:52+08:00">2023-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-29 10:15:14" itemprop="dateModified" datetime="2023-09-29T10:15:14+08:00">2023-09-29</time>
+    </span>
+
+  
+    <span id="/2023/09/01/fastvit/" class="post-meta-item leancloud_visitors" data-flag-title="FastViT 论文阅读" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.14189">arxiv</a><br>代码地址：<a target="_blank" rel="noopener" href="https://github.com/apple/ml-fastvit">ml-fastvit</a></p>
+<p>FastViT 是苹果公司在 ICCV 2023上发表的网络结构设计的论文，在速度和精度上取得比较好的折衷，速度上既能和MobileOne这种轻量级网络匹敌，精度上也不输PoolFormer、ConvNeXt等比较新的大网络结构。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/01/fastvit/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -903,214 +1086,6 @@
 <p>可以添加下面的语句到你的.bashrc或.zshrc中，重启shell即生效:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HOMEBREW_NO_AUTO_UPDATE=1</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/28/python-autocomplete-with-argcomplete/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/28/python-autocomplete-with-argcomplete/" class="post-title-link" itemprop="url">Python 命令补全神器 argcomplete</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-28 10:33:12" itemprop="dateCreated datePublished" datetime="2023-05-28T10:33:12+08:00">2023-05-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-09 23:44:59" itemprop="dateModified" datetime="2023-06-09T23:44:59+08:00">2023-06-09</time>
-    </span>
-
-  
-    <span id="/2023/05/28/python-autocomplete-with-argcomplete/" class="post-meta-item leancloud_visitors" data-flag-title="Python 命令补全神器 argcomplete" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在使用Python 命令或者 Python的命令行工具的时候，一个痛点是没有补全。比如<code>python -m</code>后面输入包名字，就没有提示，每次想运行一个http server的时候，都需要搜索一下http服务的包名。另外，像pip，pipx等命令也没有提示，使用不太方便。</p>
-<p>偶然看到<a target="_blank" rel="noopener" href="https://github.com/kislyuk/argcomplete">argcomplete</a>这个库，按tab键就可以给Python的命令行添加自动补全，简直是使用Python的一个神器。</p>
-<p>具体来说，argcomplete有下面的特点</p>
-<ul>
-<li>官方支持支持bash和zsh两种shell，对tcsh和fish有第三方贡献者提供的支持（不好意思Windows用户这里又被当做二等公民了😂）</li>
-<li>可以对python命令和pip命令进行补全</li>
-<li>其他任何以argparse解析的第三方包的命令都可以用自动补全，添加argcomplete的几行代码就行</li>
-</ul>
-<p>下面具体展开怎么对已有的工具启用自动补全，以及如何让自己的Python包支持argcomplete。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/28/python-autocomplete-with-argcomplete/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/27/talkgpt4all-2-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/27/talkgpt4all-2-0/" class="post-title-link" itemprop="url">talkGPT4All 2.0</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-27 14:49:45 / 修改时间：14:58:57" itemprop="dateCreated datePublished" datetime="2023-05-27T14:49:45+08:00">2023-05-27</time>
-    </span>
-
-  
-    <span id="/2023/05/27/talkgpt4all-2-0/" class="post-meta-item leancloud_visitors" data-flag-title="talkGPT4All 2.0" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a target="_blank" rel="noopener" href="https://github.com/vra/talkGPT4All">talkGPT4All</a>是基于<a target="_blank" rel="noopener" href="https://gpt4all.io/index.html">GPT4All</a>的一个语音聊天程序，运行在本地CPU上，支持Linux，Mac和Windows。它利用OpenAI的Whisper模型将用户输入的语音转换为文本，再调用GPT4All的语言模型得到回答文本，最后利用文本转语音(TTS)的程序将回答文本朗读出来。</p>
-<p>关于 talkGPT4All 1.0的介绍在<a target="_blank" rel="noopener" href="https://juejin.cn/post/7217112585802498107">这篇文章</a>。</p>
-<p>talkGPT4All 1.0的<a target="_blank" rel="noopener" href="https://www.zhihu.com/zvideo/1625779747656515584">视频效果</a>。</p>
-<p>由于GPT4All一直在迭代，相比上一篇文章发布时(2023-04-10)已经有较大的更新，今天将GPT4All的一些更新同步到talkGPT4All，由于支持的模型和运行模式都有较大的变化，因此发布 talkGPT4All 2.0。</p>
-<p>具体来说，2.0版本相比1.0有下面的更新。</p>
-<p>首先是GPT4All框架支持的语言模型从1个增加到8个，并且可以一键切换模型。具体的模型是</p>
-<ul>
-<li>  Vicuna-7B-1.1-q4_2</li>
-<li>  Vicuna-7B-1.2-q4_2</li>
-<li>  wizardLM-7B.q4_2</li>
-<li>  GPT4All</li>
-<li>  GPT4All-J</li>
-<li>  GPT4All-J-v1.1</li>
-<li>  GPT4All-J-v1.2</li>
-<li>  GPT4All-J-v1.3</li>
-</ul>
-<p>可以看到除了GPT4All系列的模型，这个框架也支持Vicuna和Wizard的模型了。更多模型因为证书和格式的问题，还在集成中。</p>
-<p>根据GPT4All的<a target="_blank" rel="noopener" href="https://gpt4all.io/index.html">文档</a>，不同模型在benchmark上的结果：</p>
-<p><img data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/988ae9ef513049d68d790e742f9e2139~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>可以看到GPT4All系列的模型的指标还是比较高的。</p>
-<p>另一个重要更新是GPT4All发布了更成熟的Python包，可以直接通过pip 来安装，因此1.0中集成的不同平台不同的GPT4All二进制包也不需要了。集成PyPI包的好处多多，既可以查看源码学习内部的实现，又更方便定位问题（之前的二进制包没法调试内部代码），且保证了不同平台安装命令一致（之前不同平台二进制包不同）。</p>
-<p>还有一个变化是GPT4All会自动按需下载模型，因此用户不需要手动下载和维护模型路径。同时将模型统一放置到<a target="_blank" rel="noopener" href="https://gpt4all.io/models/">https://gpt4all.io/models/</a> 目录下，测试国内模型下载速度也很快，大家玩起来也会更舒服。</p>
-<p>核心的更新内容就这些，下面对talkGPT4All的安装和使用进行说明，后面有空会添加一些多个语言模型效果的对比视频。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/27/talkgpt4all-2-0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
