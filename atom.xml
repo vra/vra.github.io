@@ -34,9 +34,9 @@
     
     
     
-    <category term="Markdown" scheme="http://vra.github.io/tags/Markdown/"/>
-    
     <category term="Vim" scheme="http://vra.github.io/tags/Vim/"/>
+    
+    <category term="Markdown" scheme="http://vra.github.io/tags/Markdown/"/>
     
     <category term="NeoVim" scheme="http://vra.github.io/tags/NeoVim/"/>
     
@@ -188,9 +188,9 @@
     
     
     
-    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
     
     <category term="Transformer" scheme="http://vra.github.io/tags/Transformer/"/>
     
@@ -416,9 +416,9 @@
     
     <category term="LLM" scheme="http://vra.github.io/tags/LLM/"/>
     
-    <category term="GPT-4o" scheme="http://vra.github.io/tags/GPT-4o/"/>
-    
     <category term="LVM" scheme="http://vra.github.io/tags/LVM/"/>
+    
+    <category term="GPT-4o" scheme="http://vra.github.io/tags/GPT-4o/"/>
     
     <category term="Qwen2-VL" scheme="http://vra.github.io/tags/Qwen2-VL/"/>
     
@@ -479,9 +479,9 @@
     
     <category term="GPT-4o" scheme="http://vra.github.io/tags/GPT-4o/"/>
     
-    <category term="README" scheme="http://vra.github.io/tags/README/"/>
-    
     <category term="Markdown" scheme="http://vra.github.io/tags/Markdown/"/>
+    
+    <category term="README" scheme="http://vra.github.io/tags/README/"/>
     
   </entry>
   
