@@ -188,9 +188,9 @@
     
     
     
-    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
-    
     <category term="Pytorch" scheme="http://vra.github.io/tags/Pytorch/"/>
+    
+    <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
     
     <category term="Transformer" scheme="http://vra.github.io/tags/Transformer/"/>
     
@@ -284,9 +284,9 @@
     
     <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
     
-    <category term="ChatGPT" scheme="http://vra.github.io/tags/ChatGPT/"/>
-    
     <category term="GPT" scheme="http://vra.github.io/tags/GPT/"/>
+    
+    <category term="ChatGPT" scheme="http://vra.github.io/tags/ChatGPT/"/>
     
     <category term="Prompt" scheme="http://vra.github.io/tags/Prompt/"/>
     
@@ -440,9 +440,9 @@
     
     
     
-    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
     
     <category term="Deep Learning" scheme="http://vra.github.io/tags/Deep-Learning/"/>
     
@@ -479,9 +479,9 @@
     
     <category term="GPT-4o" scheme="http://vra.github.io/tags/GPT-4o/"/>
     
-    <category term="Markdown" scheme="http://vra.github.io/tags/Markdown/"/>
-    
     <category term="README" scheme="http://vra.github.io/tags/README/"/>
+    
+    <category term="Markdown" scheme="http://vra.github.io/tags/Markdown/"/>
     
   </entry>
   
@@ -500,9 +500,9 @@
     
     
     
-    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
-    
     <category term="Python" scheme="http://vra.github.io/tags/Python/"/>
+    
+    <category term="AI" scheme="http://vra.github.io/tags/AI/"/>
     
     <category term="pip" scheme="http://vra.github.io/tags/pip/"/>
     
