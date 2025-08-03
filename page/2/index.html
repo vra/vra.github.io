@@ -91,7 +91,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">189</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">203</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">215</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">203</span>
+          <span class="site-state-item-count">215</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -171,7 +171,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">189</span>
+        <span class="site-state-item-count">204</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -216,7 +216,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/12/31/summary-2024/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/02/git-lfs-should-have-been-a-pointer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -234,7 +234,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/12/31/summary-2024/" class="post-title-link" itemprop="url">2024年终总结</a>
+          <a href="/2025/06/02/git-lfs-should-have-been-a-pointer/" class="post-title-link" itemprop="url">git lfs pointer 报错解决</a>
         </h2>
 
         <div class="post-meta-container">
@@ -245,18 +245,18 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-12-31 22:58:13" itemprop="dateCreated datePublished" datetime="2024-12-31T22:58:13+08:00">2024-12-31</time>
+      <time title="创建时间：2025-06-02 15:38:31" itemprop="dateCreated datePublished" datetime="2025-06-02T15:38:31+08:00">2025-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-01 23:03:04" itemprop="dateModified" datetime="2025-01-01T23:03:04+08:00">2025-01-01</time>
+      <time title="修改时间：2025-08-03 15:51:37" itemprop="dateModified" datetime="2025-08-03T15:51:37+08:00">2025-08-03</time>
     </span>
 
   
-    <span id="/2024/12/31/summary-2024/" class="post-meta-item leancloud_visitors" data-flag-title="2024年终总结" title="阅读次数">
+    <span id="/2025/06/02/git-lfs-should-have-been-a-pointer/" class="post-meta-item leancloud_visitors" data-flag-title="git lfs pointer 报错解决" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -272,15 +272,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>2024年是幸福的一年，因为每天有可爱女儿的陪伴，正如此刻，她在旁边吃着山楂棒，看着我打下这行字。</p>
-<p>父母回老家了，大家庭变成了小家庭，我们也在3月份搬进了自己的房子，老婆在家全职带娃，我上班离公司更近了，骑电瓶车15分钟到公司，大家都皆大欢喜。</p>
-<p>工作内容也从纯视觉算法变化到了多模态算法，语音文本图像，都需要考虑。这种任务其实很有意思，更接近真人处理问题的情况。但难度也不小，未来继续加油吧。</p>
-<p>平时上班，周末大部分时间都在陪娃，自己可支配的时间大大减少，因此写博客和开源项目上没太多产出，总共写了个8篇知乎文章，2个开源项目，一个是关于实时图片驱动人头项目，基于快手LivePortrait坐了一个实时版本的封装，另一个是基于LLM给代码仓库打分网站，可以在这里<a target="_blank" rel="noopener" href="https://lcs.simpleai.site/">访问</a>。</p>
-<p>第二个项目其实是一个基于AI驱动的产品尝试。由于AI能力的不断提升，写代码或者说技术壁垒成为一个门槛很低的事情，许多以前没法做的东西，现在在AI的帮助下可以很快地实现，例如那个项目中的Vue代码，完全是大模型不断地根据我的要求生成的，工作的很好。所以我觉得未来成功的产品是体现在创意上，目前来看似乎还没有那个AI产品有很好的创意而引爆C端市场。希望未来有更多的创客借助AI创造出精彩的产品。</p>
-<p>这一年也是不断思考人和AI关系的一年，从实际问题到哲学命题，AI与人类的关系，我觉得在未来几年也会一直被讨论。但无法忽视的事实是，AI的能力提升飞快，已经在很多方面超过了顶尖的人类了。从Assistants，到Copilots，再到Colleagues，再到Critics，再到Twins，这种快速的关系变化可能从根本上改变人类对自己的认知。相信在2025年，还会有更多精彩被创造，希望在这个exciting的时代，能做出自己的一点贡献。</p>
+          <h3 id="1-问题说明"><a href="#1-问题说明" class="headerlink" title="1. 问题说明"></a>1. 问题说明</h3><p>在git管理中，有时候会遇到下面的报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Encountered 1 file that should have been a pointer, but wasn<span class="string">&#x27;t:</span></span><br><span class="line"><span class="string">    /path/to/file</span></span><br></pre></td></tr></table></figure>
+
+<p>或像下面这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Encountered &lt;n&gt; files that should have been pointers, but weren<span class="string">&#x27;t:</span></span><br><span class="line"><span class="string">    /path/to/file1</span></span><br><span class="line"><span class="string">    /path/to/file2</span></span><br></pre></td></tr></table></figure>
+
+<p>调查一番后发现，这种报错的核心原因是本应该用Git LFS管理的文件，直接被git来管理了。报错中提到的pointer ，实际上指的就是Git LFS 格式的文件，它不包含完整的数据，而只是一个指向完整数据的指针。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/12/31/summary-2024/#more" rel="contents">
+              <a class="btn" href="/2025/06/02/git-lfs-should-have-been-a-pointer/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -313,7 +314,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/11/12/1-bit-embedding/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/04/20/bitnet-b1-58-2b-4t/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -331,7 +332,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/12/1-bit-embedding/" class="post-title-link" itemprop="url">1-bit-embedding</a>
+          <a href="/2025/04/20/bitnet-b1-58-2b-4t/" class="post-title-link" itemprop="url">bitnet-b1.58-2b-4t</a>
         </h2>
 
         <div class="post-meta-container">
@@ -342,18 +343,18 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-11-12 08:30:28" itemprop="dateCreated datePublished" datetime="2024-11-12T08:30:28+08:00">2024-11-12</time>
+      <time title="创建时间：2025-04-20 15:27:29" itemprop="dateCreated datePublished" datetime="2025-04-20T15:27:29+08:00">2025-04-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-15 15:43:53" itemprop="dateModified" datetime="2025-02-15T15:43:53+08:00">2025-02-15</time>
+      <time title="修改时间：2025-08-03 15:31:50" itemprop="dateModified" datetime="2025-08-03T15:31:50+08:00">2025-08-03</time>
     </span>
 
   
-    <span id="/2024/11/12/1-bit-embedding/" class="post-meta-item leancloud_visitors" data-flag-title="1-bit-embedding" title="阅读次数">
+    <span id="/2025/04/20/bitnet-b1-58-2b-4t/" class="post-meta-item leancloud_visitors" data-flag-title="bitnet-b1.58-2b-4t" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -369,97 +370,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p> <a target="_blank" rel="noopener" href="https://emschwartz.me/binary-vector-embeddings-are-so-cool/">这里</a>是一篇1bit 量化embedding模型的介绍，相似度计算要快不少，以32倍的压缩率，25倍的检索速度，得到95%的检索准确率，very impressive!</p>
-<p> 同时也提到了 <a target="_blank" rel="noopener" href="https://huggingface.co/sentence-transformers">Sentence Transformers</a>这个专门做embedding的库，支持<a target="_blank" rel="noopener" href="https://huggingface.co/models?library=sentence-transformers&amp;author=sentence-transformels">1万多个</a>embedding模型，有点厉害了！</p>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/09/14/github-models/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/14/github-models/" class="post-title-link" itemprop="url">GitHub Models-免费的大模型Playgroud和API服务</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-14 08:50:04" itemprop="dateCreated datePublished" datetime="2024-09-14T08:50:04+08:00">2024-09-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-23 09:08:07" itemprop="dateModified" datetime="2024-10-23T09:08:07+08:00">2024-10-23</time>
-    </span>
-
-  
-    <span id="/2024/09/14/github-models/" class="post-meta-item leancloud_visitors" data-flag-title="GitHub Models-免费的大模型Playgroud和API服务" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-功能说明"><a href="#1-功能说明" class="headerlink" title="1. 功能说明"></a>1. 功能说明</h3><p>GitHub在2024年8月10号左右的时候推出了GitHub Models新功能，提供运行大模型的Playground和免费API服务，用于进行AI大模型的实验和AI应用的原型验证。目前已经支持的模型包括GPT-4o系列，phi-3系列，Llama-3系列，以及一些Embedding模型等（OpenAI o1-mini和o1-preview虽然列出来了，但需要登陆Azure来使用）。</p>
-<p><img data-src="/imgs/github-models/20240914083033.png"></p>
+          <h3 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h3><p>看到最近为微软更新了一个BitNet新版本<a target="_blank" rel="noopener" href="https://huggingface.co/microsoft/bitnet-b1.58-2B-4T">bitnet-b1.58-2B-4T</a>，参数只采用{-1, 0, 1}来表示，在普通CPU上性能挺好，而网络上测试结果不多，因此这里试试看到底效果怎么样。</p>
+<p>这里尝试了2种方式，一个是利用官方提供的网站，进行效果测试，另一个是下载模型自己本地搭建C++推理环境，两种情况都只在CPU上进行测试。整体测试下来，两种情况的效果都还是不能让人满意，有一点智商但不高，速度倒确实挺快的。不过随着模型不断迭代，或许未来能走出跟云端GPU环境部署的模型完全不一样的道路。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/09/14/github-models/#more" rel="contents">
+              <a class="btn" href="/2025/04/20/bitnet-b1-58-2b-4t/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -492,7 +407,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/09/14/speedup-github-clone/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/neovim-markdown-conceal-issue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -510,7 +425,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/14/speedup-github-clone/" class="post-title-link" itemprop="url">国内加速 GitHub 代码克隆的一种方案</a>
+          <a href="/2025/02/15/neovim-markdown-conceal-issue/" class="post-title-link" itemprop="url">Neovim conceal机制导致markdown语法隐藏的问题</a>
         </h2>
 
         <div class="post-meta-container">
@@ -520,19 +435,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-09-14 08:47:18" itemprop="dateCreated datePublished" datetime="2024-09-14T08:47:18+08:00">2024-09-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-15 17:06:46" itemprop="dateModified" datetime="2025-02-15T17:06:46+08:00">2025-02-15</time>
+      <time title="创建时间：2025-02-15 16:40:47 / 修改时间：16:58:11" itemprop="dateCreated datePublished" datetime="2025-02-15T16:40:47+08:00">2025-02-15</time>
     </span>
 
   
-    <span id="/2024/09/14/speedup-github-clone/" class="post-meta-item leancloud_visitors" data-flag-title="国内加速 GitHub 代码克隆的一种方案" title="阅读次数">
+    <span id="/2025/02/15/neovim-markdown-conceal-issue/" class="post-meta-item leancloud_visitors" data-flag-title="Neovim conceal机制导致markdown语法隐藏的问题" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -548,17 +457,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>国内下载 GitHub 上代码一直是一件让人很头疼的事情，相信大家都深有体会。</p>
-<p>最近偶然发现一个比较好用的解决方案，是采用<a target="_blank" rel="noopener" href="http://gitclone.com/">http://gitclone.com</a>的加速，这里记录一下。</p>
-<p>具体来说，在仓库url中增加<code>gitclone.com</code>的前缀，别的地方不变，即<code>https://github.com/</code>修改为<code>https://gitclone.com/github.com/</code>，例如原始的clone命令是:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/huggingface/transformers</span><br></pre></td></tr></table></figure>
-<p>替换成下面的命令即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitclone.com/github.com/huggingface/transformers</span><br></pre></td></tr></table></figure>
-
-<p>实测基本上能做到1M/s的下载速度。</p>
-<p>这种加速目前只支持git clone 和git pull 命令，所以适用于拉取别人代码进行本地查看的应用场景。</p>
-<p>另外发现这种加速方式下载的仓库，有一些只有最新的一次提交，有一些则包含完整提交，原因未知。</p>
-<p>此外，请确认克隆的代码是否与GitHub上一致，我们无法保证拉取的代码是否被修改过。</p>
+          <p><code>conceal</code> 是 Vim/Neovim 中一个用于<strong>优化显示效果</strong>的机制，它可以将某些语法符号替换为更简洁的视觉表示（或完全隐藏）。这在 Markdown、LaTeX 等格式中常用于提升可读性，但有一个问题：不太好确定自己的markdown标签是否写完了，因此markdown文件可能最后少了一个```，渲染结果出错。而对于我来说，我不需要在编辑器里面看到最终的渲染效果，所以这个功能完全可以去掉。</p>
+<p>为了确定是插件导致的还是Neovim自带的功能，我用下面的命令打开不启用所有插件的Neovim:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvim -u NORC /path/to/file</span><br></pre></td></tr></table></figure>
+<p>结果markdown渲染正常，因此确认问题是由某个插件引入的。</p>
+<p>然后可以通过一个个启用插件的方式，来验证是哪个插件导致的问题，但由于插件太多，太麻烦，我问了DeepSeek R1，验证下面的语句可以解决这个问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> g:vim_markdown_conceal = 0</span><br><span class="line"><span class="built_in">let</span> g:vim_markdown_conceal_code_blocks = 0</span><br></pre></td></tr></table></figure>
+<p>也有人说是<code>indentLine</code>设置导致的，但没有再验证。</p>
+<p>也是通过这次搜索，了解了conceal这个术语。</p>
 
       
     </div>
@@ -587,7 +493,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/09/01/hangzhou-line1-benchmark/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/reflect-on-life/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -605,7 +511,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/01/hangzhou-line1-benchmark/" class="post-title-link" itemprop="url">hangzhou-line1-benchmark-一个简单的图片理解问题集</a>
+          <a href="/2025/02/15/reflect-on-life/" class="post-title-link" itemprop="url">Quotation Armin Ronacher's Reflecting on Life</a>
         </h2>
 
         <div class="post-meta-container">
@@ -615,19 +521,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-09-01 08:44:16" itemprop="dateCreated datePublished" datetime="2024-09-01T08:44:16+08:00">2024-09-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-23 09:04:02" itemprop="dateModified" datetime="2024-10-23T09:04:02+08:00">2024-10-23</time>
+      <time title="创建时间：2025-02-15 16:29:13 / 修改时间：21:44:13" itemprop="dateCreated datePublished" datetime="2025-02-15T16:29:13+08:00">2025-02-15</time>
     </span>
 
   
-    <span id="/2024/09/01/hangzhou-line1-benchmark/" class="post-meta-item leancloud_visitors" data-flag-title="hangzhou-line1-benchmark-一个简单的图片理解问题集" title="阅读次数">
+    <span id="/2025/02/15/reflect-on-life/" class="post-meta-item leancloud_visitors" data-flag-title="Quotation Armin Ronacher's Reflecting on Life" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -643,15 +543,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h3><p>最近qwen2发布了多模态系列模型Qwen2-VL，查看blog发现，72B的模型在很多benchmark上都超过了GPT-4o，而根据之前的经验，标准测试集上的效果与实际使用体验并不总是一致的。之前在某个多模态模型出来的时候，随手拍了一张地铁线路图做测试，发现效果不尽如人意。这两天花时间将这张地铁线路截图中的问题进行了标准化，构建了一个简单的图片理解测试集，让我们看看Qwen2-VL到底行不行。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/01/hangzhou-line1-benchmark/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <blockquote>
+<p>Whether it’s working on a project, solving a difficult problem, or even refining soft skills like communication, the act of showing up and putting in the hours is essential. Practice makes perfect, but more so it’s all about progress rather than perfection. Each hour you spend iterating, refining, failing and retrying brings you closer to excellence. It doesn’t always feel that way in the moment but when you look back at what you did before, you will see your progress. And that act of looking back, and seeing how you improved, is immensely rewarding and in turn makes you enjoy your work.</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://lucumr.pocoo.org/2024/12/26/reflecting-on-life/">Armin Ronacher’s Reflecting on Life</a></p>
+
       
     </div>
 
@@ -679,7 +575,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/08/29/gemini-python-api/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/gitpod-intro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -697,7 +593,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/08/29/gemini-python-api/" class="post-title-link" itemprop="url">谷歌Gemini和Gemma大模型的Python调用</a>
+          <a href="/2025/02/15/gitpod-intro/" class="post-title-link" itemprop="url">GitPod简单使用说明</a>
         </h2>
 
         <div class="post-meta-container">
@@ -707,19 +603,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-08-29 08:30:32" itemprop="dateCreated datePublished" datetime="2024-08-29T08:30:32+08:00">2024-08-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-23 08:46:41" itemprop="dateModified" datetime="2024-10-23T08:46:41+08:00">2024-10-23</time>
+      <time title="创建时间：2025-02-15 16:22:38 / 修改时间：16:28:08" itemprop="dateCreated datePublished" datetime="2025-02-15T16:22:38+08:00">2025-02-15</time>
     </span>
 
   
-    <span id="/2024/08/29/gemini-python-api/" class="post-meta-item leancloud_visitors" data-flag-title="谷歌Gemini和Gemma大模型的Python调用" title="阅读次数">
+    <span id="/2025/02/15/gitpod-intro/" class="post-meta-item leancloud_visitors" data-flag-title="GitPod简单使用说明" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -735,16 +625,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h2><p>Google 发布了Python 包google-generativeai，可以方便地调用Gemini和Gemma 系列的模型，免费模型只需要申请一个Key，无需任何费用。<br><img data-src="/imgs/gemini-python-api/gemini-1.png"></p>
-<p>而且Gemini 1.5 Pro模型还支持一些多模态任务，例如检测bbox，实际测试下来效果还不错。<br>这里简单写一个流程，体验效果。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/08/29/gemini-python-api/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>GitPod是一个云端开发IDE，可以访问<code>gitpod.io</code>，绑定GitHub账号后打开GitHub上的任意项目，也可以通过安装浏览器插件，直接在GitHub网站打开IDE。</p>
+<p>GitPod打开后默认是个VS Code在线环境，有一台国外的容器可以使用，机器配置如下：</p>
+<ul>
+<li>CPU: 16核，型号AMD EPYC 7B13</li>
+<li>内存：64G</li>
+<li>存储：30G</li>
+</ul>
+<p>由于它的服务器在国外，因此可以快速下载GitHub, Google Drive或Hugging Face上的一些模型，然后用Python开一个简单的网页服务(<code>python -m http.server</code>)，再在本地用wget下载模型，速度还可以。</p>
+<p>GitPod主打的一个点是快速启动开发环境，可以通过在<a target="_blank" rel="noopener" href="https://gitpod.io/user/preferences">https://gitpod.io/user/preferences</a> 设置中指定dotfile来设置启动环境</p>
+<p>这个dotfiles仓库可以保存你常用的rc文件等，保证熟悉的环境能够快速上手，例如我将自己的常用配置放到<a target="_blank" rel="noopener" href="https://github.com/vra/dotfiles">https://github.com/vra/dotfiles</a>，开机就能用上熟悉的开发环境了。</p>
+<p>总之，GitPod可以作为一个免费的临时服务器和在线IDE，偶尔用用还不错。</p>
+
       
     </div>
 
@@ -772,7 +664,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/07/28/gpt-write-readme/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/poetrystrands/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -790,7 +682,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/28/gpt-write-readme/" class="post-title-link" itemprop="url">GPT实用功能之润色README</a>
+          <a href="/2025/02/15/poetrystrands/" class="post-title-link" itemprop="url">poetrystrands</a>
         </h2>
 
         <div class="post-meta-container">
@@ -800,19 +692,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-07-28 08:18:25" itemprop="dateCreated datePublished" datetime="2024-07-28T08:18:25+08:00">2024-07-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-23 08:43:00" itemprop="dateModified" datetime="2024-10-23T08:43:00+08:00">2024-10-23</time>
+      <time title="创建时间：2025-02-15 16:03:26 / 修改时间：21:42:55" itemprop="dateCreated datePublished" datetime="2025-02-15T16:03:26+08:00">2025-02-15</time>
     </span>
 
   
-    <span id="/2024/07/28/gpt-write-readme/" class="post-meta-item leancloud_visitors" data-flag-title="GPT实用功能之润色README" title="阅读次数">
+    <span id="/2025/02/15/poetrystrands/" class="post-meta-item leancloud_visitors" data-flag-title="poetrystrands" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -828,15 +714,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>今天发现GPT-4o对于GitHub Readme文档的润色还是很不错的，很自动添加一些花里胡哨的功能，看起来很fancy。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/28/gpt-write-readme/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>发现一个挺有意思的古诗词连线网站<a target="_blank" rel="noopener" href="https://poetrystrands.com/">PoetryStrands</a>，网站简洁风，有空可以玩一玩，复习古诗词。这种简单创意网站值得被记录。</p>
+
       
     </div>
 
@@ -864,7 +743,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/07/13/mimic-head/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/as-a-junior-engineer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -882,7 +761,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/13/mimic-head/" class="post-title-link" itemprop="url">mimic-head-实时摄像头驱动图片动起来</a>
+          <a href="/2025/02/15/as-a-junior-engineer/" class="post-title-link" itemprop="url">as-a-junior-engineer</a>
         </h2>
 
         <div class="post-meta-container">
@@ -892,19 +771,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-07-13 08:08:12" itemprop="dateCreated datePublished" datetime="2024-07-13T08:08:12+08:00">2024-07-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-23 08:28:53" itemprop="dateModified" datetime="2024-10-23T08:28:53+08:00">2024-10-23</time>
+      <time title="创建时间：2025-02-15 15:45:10 / 修改时间：16:01:58" itemprop="dateCreated datePublished" datetime="2025-02-15T15:45:10+08:00">2025-02-15</time>
     </span>
 
   
-    <span id="/2024/07/13/mimic-head/" class="post-meta-item leancloud_visitors" data-flag-title="mimic-head-实时摄像头驱动图片动起来" title="阅读次数">
+    <span id="/2025/02/15/as-a-junior-engineer/" class="post-meta-item leancloud_visitors" data-flag-title="as-a-junior-engineer" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -920,15 +793,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>整了一个快手人头驱动项目<a target="_blank" rel="noopener" href="https://github.com/KwaiVGI/LivePortrait">LivePortrait</a>的demo，一键安装（自动下载模型），同时增加了官方demo中没有的实时摄像头驱动，也支持cpu和mps这两个后端了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/13/mimic-head/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <blockquote>
+<p>As a junior engineer, there’s simply no substitute for getting the first 100K lines of code under your belt. The “start over each day” method will help get you to those 100K lines faster.You might think covering the same ground multiple times isn’t as valuable as getting 100K diverse lines of code. I disagree. Solving the same problem repeatedly is actually really beneficial for retaining knowledge of patterns you figure out.You only need 5K perfect lines to see all the major patterns once. The other 95K lines are repetition to rewire your neurons.</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://grantslatton.com/software-pathfinding#quantity-has-a-quality-all-of-its-own">Algorithms we develop software by</a>,很有同感的一段话，很多事情只有不断重复才能真正掌握它，例如走路，会走一次，不能算学会走路，只有不断地走，直到忽略你在走路这个事实之后，才算真正地学会了走路。</p>
+
       
     </div>
 
@@ -956,7 +825,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2024/03/31/uv-tutorial1/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/blog-new-plan-2025/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -974,7 +843,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/31/uv-tutorial1/" class="post-title-link" itemprop="url">uv-速度飞快的pip替代</a>
+          <a href="/2025/02/15/blog-new-plan-2025/" class="post-title-link" itemprop="url">博客新计划</a>
         </h2>
 
         <div class="post-meta-container">
@@ -984,19 +853,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-03-31 08:03:13" itemprop="dateCreated datePublished" datetime="2024-03-31T08:03:13+08:00">2024-03-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-23 08:07:04" itemprop="dateModified" datetime="2024-10-23T08:07:04+08:00">2024-10-23</time>
+      <time title="创建时间：2025-02-15 15:09:36 / 修改时间：15:26:31" itemprop="dateCreated datePublished" datetime="2025-02-15T15:09:36+08:00">2025-02-15</time>
     </span>
 
   
-    <span id="/2024/03/31/uv-tutorial1/" class="post-meta-item leancloud_visitors" data-flag-title="uv-速度飞快的pip替代" title="阅读次数">
+    <span id="/2025/02/15/blog-new-plan-2025/" class="post-meta-item leancloud_visitors" data-flag-title="博客新计划" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -1012,18 +875,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-uv是什么"><a href="#1-uv是什么" class="headerlink" title="1. uv是什么"></a>1. uv是什么</h2><p><a target="_blank" rel="noopener" href="https://github.com/astral-sh/uv">uv</a>是开发ruff的公司 Astral 前一段时间发布的高性能Python工具，用途是安装python包，以及解析包版本之间的依赖。它的最大特点是快，相比现有的的工具都能够快一大截（如下图），<br>![[Pasted image 20240329074004.png]]</p>
-<p>发布uv的愿景，是希望构造类似Rust的cargo，快速、可依赖，易用的包管理工具。</p>
-<p>通过在不同的系统进行几个常见包的测试，uv相比pip，加速比在1～13之间，因此是一个值得一试的工具。</p>
-<p>下面我先介绍一下uv的安装和使用，然后从一个普通用户使用pip的标准流程，尝试用uv替代pip，进行Windows, Linux 和macOS上实测速度对比，最后对uv发展的现状做一个说明，以及我的一些看法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/03/31/uv-tutorial1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>AI技术日新月异，能用AI做的事情越来越多。</p>
+<p>作为一个普通人，知识和技能唾手可得，记忆性的东西不再重要，而独特的思维方式则是你区别于别人的重要标签。在这样的时代背景下，每个人越来越需要独立思考的能力，因此每个自己的独特想法、见解都值得被记录下来。</p>
+<p>而作为一个blogger，也许在未来（或现在?)，利用你的博客内容，AI可以重建你的思考方式，针对每一个新的事件，AI会给出你的评价，然后在跟自己真实的看法进行对照，是不是很有意思呢？。</p>
+<p>基于上面的思考，我决定事无巨细地在这个博客中更新自己的技术内容，包括看到的技术内容引用，简单的comments，尝试新东西的过程，阅读技术代码的历程，造轮子的步骤，等等，总之就是不论大小，一概记录，相信当内容积攒越来越多后，基于这个博客的语料数据，结合我编写的代码，AI能够准确地重建一个我的程序员分身，这样未来也许我就不需要写代码了哈哈。</p>
+
       
     </div>
 
@@ -1051,7 +907,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/12/31/summary-2023/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/01/29/TransformerEncoder-onnx-export-issue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1069,7 +925,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/31/summary-2023/" class="post-title-link" itemprop="url">2023年终总结</a>
+          <a href="/2025/01/29/TransformerEncoder-onnx-export-issue/" class="post-title-link" itemprop="url">TransformerEncoder导出onnx问题解决</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1080,18 +936,18 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-12-31 19:43:26" itemprop="dateCreated datePublished" datetime="2023-12-31T19:43:26+08:00">2023-12-31</time>
+      <time title="创建时间：2025-01-29 16:38:07" itemprop="dateCreated datePublished" datetime="2025-01-29T16:38:07+08:00">2025-01-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-15 15:06:22" itemprop="dateModified" datetime="2025-02-15T15:06:22+08:00">2025-02-15</time>
+      <time title="修改时间：2025-02-15 17:15:20" itemprop="dateModified" datetime="2025-02-15T17:15:20+08:00">2025-02-15</time>
     </span>
 
   
-    <span id="/2023/12/31/summary-2023/" class="post-meta-item leancloud_visitors" data-flag-title="2023年终总结" title="阅读次数">
+    <span id="/2025/01/29/TransformerEncoder-onnx-export-issue/" class="post-meta-item leancloud_visitors" data-flag-title="TransformerEncoder导出onnx问题解决" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -1107,10 +963,136 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>2023年对我来说是一个惊喜的年份，因为可爱的女儿降生了。也是一个难言的年份，在零基础学带娃+长途通勤+家庭矛盾+工作压力的组合作用下，时常burnout，切身体会到人到中年的不容易。好在娃娃的每一个笑容都如此治愈，陪我度过艰难的2023。</p>
+          <h3 id="1-问题说明"><a href="#1-问题说明" class="headerlink" title="1. 问题说明"></a>1. 问题说明</h3><p>在使用Pytorch的TransformerEncoder时，导出onnx会将时序长度固定，导致没法采用变长输入，例如下面的简单例子复现了这个问题：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleTransformer</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_dim=<span class="number">512</span>, num_layers=<span class="number">6</span>, nhead=<span class="number">8</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="comment"># 创建Transformer编码器层</span></span><br><span class="line">        encoder_layer = nn.TransformerEncoderLayer(</span><br><span class="line">            d_model=input_dim,</span><br><span class="line">            nhead=nhead,</span><br><span class="line">            dim_feedforward=<span class="number">2048</span>,</span><br><span class="line">            dropout=<span class="number">0.1</span>,</span><br><span class="line">            activation=<span class="string">&quot;relu&quot;</span>,</span><br><span class="line">            batch_first=<span class="literal">True</span>,  <span class="comment"># 使用batch_first格式</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 创建Transformer编码器</span></span><br><span class="line">        self.transformer_encoder = nn.TransformerEncoder(</span><br><span class="line">            encoder_layer, num_layers=num_layers</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="comment"># 输入形状: (batch_size, seq_len, input_dim)</span></span><br><span class="line">        x = self.input_proj(x)</span><br><span class="line">        output = self.transformer_encoder(x)</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例化模型</span></span><br><span class="line">model = SimpleTransformer(input_dim=<span class="number">512</span>, num_layers=<span class="number">2</span>, nhead=<span class="number">8</span>)</span><br><span class="line">model.<span class="built_in">eval</span>()  <span class="comment"># 设置为评估模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建示例输入（batch_size=2, seq_len=10, input_dim=512）</span></span><br><span class="line">dummy_input = torch.randn(<span class="number">2</span>, <span class="number">10</span>, <span class="number">512</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出ONNX模型</span></span><br><span class="line">torch.onnx.export(</span><br><span class="line">    model,</span><br><span class="line">    (dummy_input,),</span><br><span class="line">    <span class="string">&quot;transformer_encoder.onnx&quot;</span>,</span><br><span class="line">    do_constant_folding=<span class="literal">True</span>,  <span class="comment"># 优化常量折叠</span></span><br><span class="line">    input_names=[<span class="string">&quot;input&quot;</span>],  <span class="comment"># 输入节点名称</span></span><br><span class="line">    output_names=[<span class="string">&quot;output&quot;</span>],  <span class="comment"># 输出节点名称</span></span><br><span class="line">    dynamo=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;ONNX model exported successfully!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证导出的模型</span></span><br><span class="line"><span class="keyword">import</span> onnxruntime <span class="keyword">as</span> ort</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dummy_input2 = torch.randn(<span class="number">2</span>, <span class="number">11</span>, <span class="number">512</span>)</span><br><span class="line">ort_session = ort.InferenceSession(<span class="string">&quot;transformer_encoder.onnx&quot;</span>)</span><br><span class="line">outputs = ort_session.run(</span><br><span class="line">    <span class="literal">None</span>,</span><br><span class="line">    &#123;<span class="string">&quot;input&quot;</span>: dummy_input2.numpy()&#125;</span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;ONNX output shape:&quot;</span>, outputs[<span class="number">0</span>].shape)</span><br></pre></td></tr></table></figure>
+<p>导出onnx时采用的时序长度是10，验证时采用时序长度11，运行时会报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">2025-01-29 14:17:25.266794 [E:onnxruntime:, sequential_executor.cc:516 ExecuteKernel] Non-zero status code returned <span class="keyword">while</span> running Reshape node. Name:<span class="string">&#x27;/transformer_encoder/layers.0/self_attn/Reshape_4&#x27;</span> Status Message: /Users/runner/work/1/s/onnxruntime/core/providers/cpu/tensor/reshape_helper.h:47 onnxruntime::ReshapeHelper::ReshapeHelper(const onnxruntime::TensorShape &amp;, onnxruntime::TensorShapeVector &amp;, bool) input_shape_size == size was <span class="literal">false</span>. The input tensor cannot be reshaped to the requested shape. Input shape:&#123;11,2,512&#125;, requested shape:&#123;10,16,64&#125;</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/Users/ws/export.py&quot;</span>, line 63, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    outputs = ort_session.run(</span><br><span class="line">              ^^^^^^^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/Users/ws/miniforge3/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py&quot;</span>, line 266, <span class="keyword">in</span> run</span><br><span class="line">    <span class="built_in">return</span> self._sess.run(output_names, input_feed, run_options)</span><br><span class="line">           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span><br><span class="line">onnxruntime.capi.onnxruntime_pybind11_state.RuntimeException: [ONNXRuntimeError] : 6 : RUNTIME_EXCEPTION : Non-zero status code returned <span class="keyword">while</span> running Reshape node. Name:<span class="string">&#x27;/transformer_encoder/layers.0/self_attn/Reshape_4&#x27;</span> Status Message: /Users/runner/work/1/s/onnxruntime/core/providers/cpu/tensor/reshape_helper.h:47 onnxruntime::ReshapeHelper::ReshapeHelper(const onnxruntime::TensorShape &amp;, onnxruntime::TensorShapeVector &amp;, bool) input_shape_size == size was <span class="literal">false</span>. The input tensor cannot be reshaped to the requested shape. Input shape:&#123;11,2,512&#125;, requested shape:&#123;10,16,64&#125;</span><br></pre></td></tr></table></figure>
+
+<p>尝试了Pytorch 2+ 提供的TorchDynamo-based ONNX Exporter（torch.onnx.export增加<code>dynamo=True</code>参数），也是同样的报错。</p>
+<h3 id="2-如何解决"><a href="#2-如何解决" class="headerlink" title="2. 如何解决"></a>2. 如何解决</h3><p>这个问题在Pytorch的GitHub 上有几个issue都在讨论，并且也给出了解决方案，不过不知道为什么官方一直没有集成修复代码。</p>
+<p>修复方式也比较简单，修改<code>torch/nn.functional.py</code>中的两行代码即可。具体操作如下。</p>
+<p>首先定位到当前python环境的functional.py的路径，采用下面的一行命令即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c <span class="string">&quot;import torch, os; print(os.path.join(os.path.dirname(torch.__file__), &#x27;nn&#x27;, &#x27;functional.py&#x27;))&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后打开这个文件，搜索<code>k = k.view(k.shape[0</code>，只有一处匹配，大概在6200行，内容是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k = k.view(k.shape[<span class="number">0</span>], bsz * num_heads, head_dim).transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>可用看到这里调用了k.shape[0]，在导出onnx时被固定了。将这一句修改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k = k.view(-<span class="number">1</span>, bsz * num_heads, head_dim).transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>同样的，搜索<code>v = v.view(v.shape[0]</code>，也只有一处匹配，紧接着上面的代码，原始内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v = v.view(v.shape[<span class="number">0</span>], bsz * num_heads, head_dim).transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>修改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v = v.view(-<span class="number">1</span>, bsz * num_heads, head_dim).transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>保存文件，再运行上面导出和验证onnx的脚本，一切正常了。</p>
+<p>这种方式需要修改Pytorch源码，还是不太方便的，换一个环境，换一个机器，都得操作一遍，希望官方早日解决这个问题。</p>
+<h3 id="3-相关Issues"><a href="#3-相关Issues" class="headerlink" title="3. 相关Issues"></a>3. 相关Issues</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/122321">https://github.com/pytorch/pytorch/issues/122321</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/122865">https://github.com/pytorch/pytorch/issues/122865</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/99701">https://github.com/pytorch/pytorch/issues/99701</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/117209">https://github.com/pytorch/pytorch/issues/117209</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/01/29/lru-cache-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/01/29/lru-cache-tutorial/" class="post-title-link" itemprop="url">Python lru_cache 使用与源码解读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-29 16:35:03" itemprop="dateCreated datePublished" datetime="2025-01-29T16:35:03+08:00">2025-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-15 16:37:37" itemprop="dateModified" datetime="2025-02-15T16:37:37+08:00">2025-02-15</time>
+    </span>
+
+  
+    <span id="/2025/01/29/lru-cache-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="Python lru_cache 使用与源码解读" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-用法说明"><a href="#1-用法说明" class="headerlink" title="1. 用法说明"></a>1. 用法说明</h2><p><code>functools.cache</code>和<code>functools.lru_cache</code>都是Python标准库<code>functools</code>模块提供的装饰器，用于缓存函数的计算结果，以提高函数的执行效率。</p>
+<p>举一个简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line"><span class="meta">@lru_cache</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> n * factorial(n-<span class="number">1</span>) <span class="keyword">if</span> n <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">execution_time1 = timeit.timeit(<span class="string">&quot;factorial(64)&quot;</span>, <span class="built_in">globals</span>=<span class="built_in">globals</span>(), number=<span class="number">10000</span>)</span><br><span class="line">execution_time2 = timeit.timeit(<span class="string">&quot;factorial.__wrapped__(64)&quot;</span>, <span class="built_in">globals</span>=<span class="built_in">globals</span>(), number=<span class="number">10000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Execution time1: <span class="subst">&#123;execution_time1:<span class="number">.4</span>f&#125;</span> seconds&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Execution time2: <span class="subst">&#123;execution_time2:<span class="number">.4</span>f&#125;</span> seconds&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Speedup: <span class="subst">&#123;execution_time2/execution_time1:<span class="number">.4</span>f&#125;</span> times&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>其中<code>__wrapped__</code> 表示装饰器中原始的函数，也就是没有作用装饰器之前的裸函数。</p>
+<p>代码输出如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Execution time1: 0.0004 seconds</span><br><span class="line">Execution time2: 0.0016 seconds</span><br><span class="line">Speedup: 3.5078 <span class="built_in">times</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，通过lru_cache保存factorial函数的中间结果，得到了3.5倍的加速。<br>通过这里例子，我们可以看到<code>lru_cache</code>的使用方式，也是比较简单：</p>
+<ol>
+<li>import <code>lru_cache:</code>: <code>from functoools import lru_cache</code></li>
+<li>给函数添加<code>@lru_cache</code>装饰器。</li>
+</ol>
+<p>通过查看源码，可以看到<code>lru_cache</code>函数签名如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lru_cache</span>(<span class="params">maxsize=<span class="number">128</span>, typed=<span class="literal">False</span></span>):</span></span><br></pre></td></tr></table></figure>
+<p>其中<code>maxsize</code> 参数表示缓存的最多结果数，默认是128。如果计算结果超过128，则遵循Least-recently-used (LRU)原则，将最近使用次数最少的缓存结果替换为当前的结果。如果设置<code>maxsize=None</code>，则缓存无上限，但内存占用也可能会增大，使用时多观察。</p>
+<p><code>typed</code>参数表示是否按类型缓存不同变量，即使数值一样。例如<code>typed=True</code>，那么<code>f(decimal.Decimal(&quot;3.0&quot;))</code> 和 <code>f(3.0)</code>也会分开缓存。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/12/31/summary-2023/#more" rel="contents">
+              <a class="btn" href="/2025/01/29/lru-cache-tutorial/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1136,7 +1118,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

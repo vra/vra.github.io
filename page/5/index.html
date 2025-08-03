@@ -91,7 +91,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">189</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">203</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">215</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">203</span>
+          <span class="site-state-item-count">215</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -171,7 +171,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">189</span>
+        <span class="site-state-item-count">204</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -216,7 +216,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/27/mac-ranlib-issue/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/09/29/code-llama-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -234,7 +234,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/27/mac-ranlib-issue/" class="post-title-link" itemprop="url">mac 编译问题解决——building for macOS-x86_64 but attempting to link with file built for xxx</a>
+          <a href="/2023/09/29/code-llama-1/" class="post-title-link" itemprop="url">Code Llama 解读系列1-论文阅读</a>
         </h2>
 
         <div class="post-meta-container">
@@ -246,11 +246,11 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-05-27 01:17:15 / 修改时间：01:19:20" itemprop="dateCreated datePublished" datetime="2023-05-27T01:17:15+08:00">2023-05-27</time>
+      <time title="创建时间：2023-09-29 10:17:04 / 修改时间：10:40:12" itemprop="dateCreated datePublished" datetime="2023-09-29T10:17:04+08:00">2023-09-29</time>
     </span>
 
   
-    <span id="/2023/05/27/mac-ranlib-issue/" class="post-meta-item leancloud_visitors" data-flag-title="mac 编译问题解决——building for macOS-x86_64 but attempting to link with file built for xxx" title="阅读次数">
+    <span id="/2023/09/29/code-llama-1/" class="post-meta-item leancloud_visitors" data-flag-title="Code Llama 解读系列1-论文阅读" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -266,14 +266,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在编译TVM的一个<a target="_blank" rel="noopener" href="https://github.com/mlc-ai/relax">fork版本</a>时，遇到下面的报错：</p>
-<blockquote>
-<p>ld: warning: ignoring file libbacktrace/lib/libbacktrace.a, building for macOS-x86_64 but attempting to link with file built for unknown-unsupported file format ( 0x21 0x3C 0x61 0x72 0x63 0x68 0x3E 0x0A<br> 0x2F 0x20 0x20 0x20 0x20 0x20 0x20 0x20 )<br>Undefined symbols for architecture x86_64:<br>  “_backtrace_create_state”, referenced from:<br>      __GLOBAL__sub_I_logging.cc in logging.cc.o<br>  “_backtrace_full”, referenced from:<br>      tvm::runtime::Backtrace() in logging.cc.o<br>  “_backtrace_syminfo”, referenced from:<br>      tvm::runtime::(anonymous namespace)::BacktraceFullCallback(void*, unsigned long, char const*, int, char const*) in logging.cc.o<br>ld: symbol(s) not found for architecture x86_64<br>clang: error: linker command failed with exit code 1 (use -v to see invocation)<br>make[3]: *** [libtvm_runtime.dylib] Error 1<br>make[2]: *** [CMakeFiles/tvm_runtime.dir/all] Error 2<br>make[2]: *** Waiting for unfinished jobs….</p>
+          <blockquote>
+<p>Code Llama 是 Meta 基于 Llama 2 的代码生成AI模型， 在同类开源模型中取得比较好的结果。这里计划写3篇系列文章，从论文细节、代码使用、效果实测方面对 Code Llama 进行解读，欢迎关注我了解后续文章。</p>
 </blockquote>
-<p>搜索了一下，发现核心原因是Mac下ranlib命令采用了GNU版本，而非Apple版本导致的，下面详细展开报错原因和解决办法。</p>
+<h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>2023年8月24日，Meta 开源了基于 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/llama">Llama 2</a>) 通用 LLM 的代码生成系列模型 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/codellama">Code Llama</a>)，支持Python, C++, Java, PHP, TypeScript, C# 和 Bash 编程语言，而且支持学术研究和商业使用。</p>
+<p>另外 Code Llama 官方代码只提供了一些简单的使用示例，没有提供生产环境可用的 VSCode 等 工具的插件，搜索了一下也没找到简单易用的第三方开发的插件。相信很快就会有人做出来的。如果你有看到基于 Code Llama 的 VSCode 或者 Vim 插件，欢迎评论指教。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/27/mac-ranlib-issue/#more" rel="contents">
+              <a class="btn" href="/2023/09/29/code-llama-1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -306,7 +306,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/17/mkdocs-material-tutorial/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/09/01/fastvit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -324,418 +324,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/17/mkdocs-material-tutorial/" class="post-title-link" itemprop="url">用 Material for MkDocs 来生成专业的技术文档</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-17 19:31:37 / 修改时间：19:37:34" itemprop="dateCreated datePublished" datetime="2023-05-17T19:31:37+08:00">2023-05-17</time>
-    </span>
-
-  
-    <span id="/2023/05/17/mkdocs-material-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="用 Material for MkDocs 来生成专业的技术文档" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>对于程序员来说，写技术文档是一项必备的技能。由于GitHub和Markdown格式的普及，很多时候我们可以用markdown来简便地写出技术文档，并且 通过GitHub Pages等工具快速地进行技术文档的部署。</p>
-<p>虽然GItHub Pages默认支持静态文档框架<a target="_blank" rel="noopener" href="https://jekyllrb.com/">Jekyll</a>，也包含一些简单的<a target="_blank" rel="noopener" href="https://pages.github.com/themes/">主题</a>，但对于文档和教程比较多的项目来说，使用GitHub Pages的默认部署工具还不够用，主要体现在下面几个方面：</p>
-<ul>
-<li>Markdown本身支持的语法比较简单，一些复杂的像Warning等提示没法直接用Pages的默认主题来实现</li>
-<li>Pages 默认显示的是单页文档，没有侧边栏、导航栏等工具</li>
-<li>Pages 默认主题无法搜索文档内容</li>
-<li>Pages 不支持选择<code>Linux</code>或<code>Windows</code> 后显示不同执行语句的功能</li>
-<li>…</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> 是 <a target="_blank" rel="noopener" href="https://www.mkdocs.org/">MkDocs</a>的一个主题配置，同时也是一个功能齐全的静态网站生成工具，能够解决上面提到的GitHub Pages的问题。</p>
-<p>Material for MkDocs 使用广泛，下面是一些大公司和知名开源项目的使用例子：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://aws.github.io/copilot-cli/">AWS Copilot CLI </a></li>
-<li><a target="_blank" rel="noopener" href="https://google.github.io/accompanist/">Google Accompanist</a></li>
-<li><a target="_blank" rel="noopener" href="https://microsoft.github.io/code-with-engineering-playbook/">MicroSoft Code With Engineering Playbook</a></li>
-<li><a target="_blank" rel="noopener" href="https://mozillafoundation.github.io/engineering-handbook/">Mozilla Foundation Engineering Handbook</a></li>
-<li><a target="_blank" rel="noopener" href="https://netflix.github.io/titus/">Netflix Titus</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.infra.centos.org/">CentOS Infra docs</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.electron.build/">electron-builder</a></li>
-<li><a target="_blank" rel="noopener" href="https://kops.sigs.k8s.io/">Kubernetes</a></li>
-</ul>
-<p>虽然我还没有比较复杂的开源项目需要用mkdocs-material来管理文档，但看到GitHub Pages的一些限制，最近有空还是学了一下这个工具，以备后续项目中使用。这里做一些简单记录，方便以后查找。</p>
-<p>需要说明的是，Material for MkDocs 是一个比较复杂的工具，很多配置项这里没有提到，根据需要在官方<a target="_blank" rel="noopener" href="https://squidfunk.github.io/mkdocs-material/setup/">Setup</a>文档中查看使用说明。</p>
-<p>另外一种学习配置的方式是直接查看上面提到的开源项目源码根目录下的<code>mkdocs.yml</code>文件，复制这个文件过去，就能得到类似的布局效果。</p>
-<p>这个教程里面的示例页面：<a href="https://vra.github.io/mkdocs-material-example/">https://vra.github.io/mkdocs-material-example/</a><br>示例页面的配置文件：<a target="_blank" rel="noopener" href="https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml">https://github.com/vra/mkdocs-material-example/blob/main/mkdocs.yml</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/17/mkdocs-material-tutorial/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/17/rye-intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/17/rye-intro/" class="post-title-link" itemprop="url">Rye:一个实验性质的Python包管理系统</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-17 10:08:32 / 修改时间：10:17:20" itemprop="dateCreated datePublished" datetime="2023-05-17T10:08:32+08:00">2023-05-17</time>
-    </span>
-
-  
-    <span id="/2023/05/17/rye-intro/" class="post-meta-item leancloud_visitors" data-flag-title="Rye:一个实验性质的Python包管理系统" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://mitsuhiko.github.io/rye/">Rye</a> 是<a target="_blank" rel="noopener" href="https://flask.palletsprojects.com/en/2.3.x/">Flask</a>的作者<a target="_blank" rel="noopener" href="https://github.com/mitsuhiko">Armin Ronacher</a>最近推出的一个实验性质的Python包管理系统，目的是解决Python包管理目前面临的工具链碎片化的问题。</p>
-<p>大家知道，Python目前的包管理系统很多，包括 poetry, pip, pipenv, pyenv, venv, virtualenv, pdm, hatch 等等，它们都是优秀的工具，提出时都是解决了一定的问题，但没有哪个工具能够做到主流，因此也增加了系统的碎片化程度。</p>
-<p>另一方面，conda等工具能提供不同版本的 Python，管理不同的环境，但每个环境的 Python 不是共享的，环境创建一多，环境目录就变得很大，且内部机制很不透明，有时也会遇到冲突没法解决的问题。</p>
-<p>另一方面，Python 在Linux/macOS上的安装也面临一些问题，例如用包管理器安装的  Python和用户手动安装的 Python 有的时候会混淆，导致一些混乱，例如在 Fedora 上，用<code>pip install</code> 安装包可能会导致系统的包管理命令<code>dnf</code> 出错。<a target="_blank" rel="noopener" href="https://peps.python.org/pep-0668">PEP 668</a>尝试对这些问题给出一个解决方案，但也需要不同的系统来支持，目前看还任重道远。</p>
-<p>由于Armin也是一个Rust 开发者，而Rust基于标准化的<code>rustup</code>和<code>cargo</code>两个工具，配合配置文件来进行包管理，目前做的比较好，没有Python面临的碎片化问题。受Rust的启发，作者提出了Rye，并且期望能够启发Python社区提出类似Rust的标准包管理工具。</p>
-<p>具体来说，Rye 提出了一些解决这些问题的思路：</p>
-<ul>
-<li>提出一个workspace的概念，workspace类似一个项目目录，或者一个git仓库，一个workspace下只有一个Python版本，不同workspace Python版本相互隔离，每个项目采用<code>pyproject.toml</code>来进行配置</li>
-<li>不使用系统自带的Python，相反地，在每个项目目录的中下载一个standalone的python，解决不同版本的冲突问题</li>
-<li>不暴露pip命令，通过<code>rye add</code> + <code>rye sync</code> 来管理包的依赖，避免包A和包B依赖不同版本的包C而导致的不兼容问题</li>
-<li>区分开发环境和正式环境，因为一些包在开发时会用到一些调试工具，但作为第三方库被引入的时候并不需要</li>
-<li>支持import本地workspace作为第三方库包</li>
-</ul>
-<p>但同时也有一个问题：rye会不会是另一个做不到主流的Python包管理系统，从而进一步增加Python包管理的碎片化呢？作者也有这个考虑，因此写了一个讨论帖 <a target="_blank" rel="noopener" href="https://github.com/mitsuhiko/rye/discussions/6">Should Rye Exist?</a>来讨论这个问题，同时关于Rye的设计初衷，可以参考<a target="_blank" rel="noopener" href="https://mitsuhiko.github.io/rye/philosophy/">这里</a>作者的思考。</p>
-<p>个人观点：Rye的出现给Python社区引入了一些新鲜的解决现有问题的思路。使用Rye一段时间后，发现至少使用standalone 的Python版本是一个解决冲突的好的方式。通过几个简单的命令来解决版本管理的问题是比较直观的，提出Rye应该是利大于弊的，也就是有益程度大于碎片化增加的程度。</p>
-<p>总之不管是<a target="_blank" rel="noopener" href="https://peps.python.org/pep-0668">PEP 668</a>中标记版本管理是系统的还是Python的，还是<a target="_blank" rel="noopener" href="https://peps.python.org/pep-0711/">PEP 711</a>来单独下发Python解释器二进制文件，还是Rye的出现，都是Python社区意识到Python包管理问题的严重性，进而做出的一些有益尝试。期待在未来，有更标准化的工具，Python的开发也更容易。</p>
-<p>下面将对Rye的安装和使用进行简单介绍。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/17/rye-intro/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/05/16/git-roll-back-code-and-save-commit-history/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/16/git-roll-back-code-and-save-commit-history/" class="post-title-link" itemprop="url">git 回滚代码并保留提交历史</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-16 15:55:28 / 修改时间：15:56:23" itemprop="dateCreated datePublished" datetime="2023-05-16T15:55:28+08:00">2023-05-16</time>
-    </span>
-
-  
-    <span id="/2023/05/16/git-roll-back-code-and-save-commit-history/" class="post-meta-item leancloud_visitors" data-flag-title="git 回滚代码并保留提交历史" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在使用git时，有时候需要回退最新代码到之前的某次提交或某个tag，将中间的所有代码提交去掉。同时保持中间的提交记录。实际应用时发现这个动作没有比较好的实现方式。</p>
-<p>例如，如果使用<code>git revert commit-id</code>, 那么只会会退<code>commit-id</code> 对应的那次提交，之后的提交不受影响，仍然存在，不是我们想要的效果。</p>
-<p>如果使用<code>git reset</code>, 那操作就比较麻烦，需要使用<code>--hard</code> 和<code>--force</code> 等比较危险的命令，具体如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard commit-id</span><br><span class="line">git push --force</span><br></pre></td></tr></table></figure>
-<p>这样做除了使用比较危险的命令选项外，还有个问题是没法保留中间的提交历史，这不是我们想要的。</p>
-<p>搜索发现，利用git diff和git apply可以来比较清晰的完成这个需求，整体的思路是：</p>
-<ol>
-<li>得到当前最新提交到回退提交之间的代码diff，将diff保存为文件</li>
-<li>利用<code>git apply</code> 将diff作用到代码上，回到之前的代码状态</li>
-<li>提交代码</li>
-</ol>
-<p>具体来说，假设当前最新提交就在分支<code>current-branch</code>上，回退提交为<code>prev-commit</code>,这个回退提交可以是一次commit id，也可以是一个tag，也可以是一个分支名。执行命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout prev-commit</span><br><span class="line">git diff current-branch &gt; ~/diff.patch</span><br><span class="line">git checkout current-branch</span><br><span class="line">cat ~/diff.patch | git apply</span><br><span class="line">git commit -am <span class="string">&quot;roll back to prev-commit&quot;</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-
-<p>这样就能既回退代码，又保留提交历史。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/33890073">https://stackoverflow.com/a/33890073</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/04/02/chatbot4all/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/02/chatbot4all/" class="post-title-link" itemprop="url">talkGPT4All</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-04-02 06:11:54 / 修改时间：08:45:18" itemprop="dateCreated datePublished" datetime="2023-04-02T06:11:54+08:00">2023-04-02</time>
-    </span>
-
-  
-    <span id="/2023/04/02/chatbot4all/" class="post-meta-item leancloud_visitors" data-flag-title="talkGPT4All" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>TL;DR: talkGPT4All 是一个在PC本地运行的基于talkGPT和GPT4All的语音聊天程序，通过OpenAI Whisper将输入语音转文本，再将输入文本传给GPT4All获取回答文本，最后利用发音程序将文本读出来，构建了完整的语音交互聊天过程。</p>
-<p>实际使用效果<a target="_blank" rel="noopener" href="https://www.zhihu.com/zvideo/1625779747656515584">视频</a>。</p>
-<p>实际上，它只是几个工具的简易组合，没有什么创新的地方（甚至不支持多轮聊天，只支持英文），但 talkGPT4All 有下面几个比较好的特点</p>
-<ul>
-<li>所有算法本地运行，不涉及API的调用，避免了国内无法访问OpenAI API的问题</li>
-<li>CPU 运行，无须 GPU 显卡</li>
-<li>占内存小，实测8G内存就可以跑起来</li>
-<li>速度还可以，测试8G Windows 一轮聊天小于1分钟， 16G Mac 一轮聊天小于30秒</li>
-<li>集成的AI还算智能，至少答能对题，回答看起来是符合英语语法的</li>
-</ul>
-<p>目前支持平台和验证的情况如下:</p>
-<ul>
-<li>Mac M1，已经验证可用</li>
-<li>Windows，已经验证可用</li>
-<li>Mac intel，未验证</li>
-<li>Linux，未验证<br>如果有对应机器的朋友感兴趣的话，可以帮忙验证一下，有问题可以提PR和issue。</li>
-</ul>
-<p>想体验的朋友可以参考 GitHub README进行快速安装，也可以在这篇文章中跟着我一步步来进行。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/02/chatbot4all/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/03/28/neovim-telescope/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/28/neovim-telescope/" class="post-title-link" itemprop="url">neovim telescope 插件简要教程</a>
+          <a href="/2023/09/01/fastvit/" class="post-title-link" itemprop="url">FastViT 论文阅读</a>
         </h2>
 
         <div class="post-meta-container">
@@ -746,18 +335,18 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-03-28 23:44:37" itemprop="dateCreated datePublished" datetime="2023-03-28T23:44:37+08:00">2023-03-28</time>
+      <time title="创建时间：2023-09-01 15:56:52" itemprop="dateCreated datePublished" datetime="2023-09-01T15:56:52+08:00">2023-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-29 00:23:19" itemprop="dateModified" datetime="2023-03-29T00:23:19+08:00">2023-03-29</time>
+      <time title="修改时间：2023-09-29 10:15:14" itemprop="dateModified" datetime="2023-09-29T10:15:14+08:00">2023-09-29</time>
     </span>
 
   
-    <span id="/2023/03/28/neovim-telescope/" class="post-meta-item leancloud_visitors" data-flag-title="neovim telescope 插件简要教程" title="阅读次数">
+    <span id="/2023/09/01/fastvit/" class="post-meta-item leancloud_visitors" data-flag-title="FastViT 论文阅读" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -773,10 +362,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p><a target="_blank" rel="noopener" href="https://github.com/nvim-telescope/telescope.nvim/">telescope</a> 是一款强大的 neovim 插件，可以在 neovim 中提供文件名搜索和文本内容搜索的功能，以及更多复杂的功能，具体的show case可以看<a target="_blank" rel="noopener" href="https://github.com/nvim-telescope/telescope.nvim/wiki/Showcase">这里</a>。我安装 telescope 主要是想利用它在大型项目中的文件名搜索和文本内容搜索能力，这里记录一下安装流程和使用概要。</p>
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.14189">arxiv</a><br>代码地址：<a target="_blank" rel="noopener" href="https://github.com/apple/ml-fastvit">ml-fastvit</a></p>
+<p>FastViT 是苹果公司在 ICCV 2023上发表的网络结构设计的论文，在速度和精度上取得比较好的折衷，速度上既能和MobileOne这种轻量级网络匹敌，精度上也不输PoolFormer、ConvNeXt等比较新的大网络结构。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/03/28/neovim-telescope/#more" rel="contents">
+              <a class="btn" href="/2023/09/01/fastvit/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -809,7 +399,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/25/libtorch-tutorial2/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/08/12/python-parallel-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -827,7 +417,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/25/libtorch-tutorial2/" class="post-title-link" itemprop="url">libtorch系列教程2：torch::Tensor的使用</a>
+          <a href="/2023/08/12/python-parallel-function/" class="post-title-link" itemprop="url">一个简单好用的Python并行函数</a>
         </h2>
 
         <div class="post-meta-container">
@@ -837,19 +427,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-02-25 17:15:46" itemprop="dateCreated datePublished" datetime="2023-02-25T17:15:46+08:00">2023-02-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-27 12:48:49" itemprop="dateModified" datetime="2023-02-27T12:48:49+08:00">2023-02-27</time>
+      <time title="创建时间：2023-08-12 23:43:21 / 修改时间：23:44:23" itemprop="dateCreated datePublished" datetime="2023-08-12T23:43:21+08:00">2023-08-12</time>
     </span>
 
   
-    <span id="/2023/02/25/libtorch-tutorial2/" class="post-meta-item leancloud_visitors" data-flag-title="libtorch系列教程2：torch::Tensor的使用" title="阅读次数">
+    <span id="/2023/08/12/python-parallel-function/" class="post-meta-item leancloud_visitors" data-flag-title="一个简单好用的Python并行函数" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -865,15 +449,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>系列教程列表：</p>
-<ul>
-<li><a href="https://vra.github.io/2023/02/25/libtorch-tutorial1/">Libtorch系列教程1：一个丝滑的C++ Tensor库</a> </li>
-<li><a href="https://vra.github.io/2023/02/25/libtorch-tutorial2/">Libtorch系列教程2：torch::Tensor的使用</a> </li>
-</ul>
-<p>这篇文章中，我们暂时忽略网络训练和推理，详细展开Libtorch中Tensor对象的使用，看看将Libtorch当作一个纯粹的Tensor库来使用时，有哪些注意事项。如有未涉及的内容，请访问Libtorch<a target="_blank" rel="noopener" href="https://pytorch.org/cppdocs/">官方文档</a>，通过搜索框获取更多的信息。Libtorch的环境搭建参考<a href="https://vra.github.io/2023/02/25/libtorch-tutorial1/">上一篇文章</a>。</p>
+          <h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>用Python跑有大量数据的任务的时候，启用多进程加速效果明显。但因为我之前在使用Python的多进程库时总遇到卡住的问题，后来对这块避而远之，总是用别的方法来加速。最近发现OpenMMLab的一些库提供了多进程并行的函数功能，简单好用。比如一个简单的toy例子，OpenCV读图像，resize然后保存，在8个CPU核的 Mac 上，加速比能达到3.4倍(45ms vs 13ms)，也就是以前要跑3个多小时的任务，现在1个小时就能搞定，省了不少时间，更多实际例子也证明了这个函数的加速效果，还是挺实用的。这里写个教程，希望也能方便到别的有同样需要的人，当然同类型的库应该也有很多，这里只是取一瓢饮。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/02/25/libtorch-tutorial2/#more" rel="contents">
+              <a class="btn" href="/2023/08/12/python-parallel-function/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -906,7 +485,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/25/libtorch-tutorial1/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/07/30/git-clean-tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -924,7 +503,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/25/libtorch-tutorial1/" class="post-title-link" itemprop="url">Libtorch系列教程1：一个丝滑的C++ Tensor库</a>
+          <a href="/2023/07/30/git-clean-tutorial/" class="post-title-link" itemprop="url">git clean 教程</a>
         </h2>
 
         <div class="post-meta-container">
@@ -935,18 +514,18 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-02-25 03:03:51" itemprop="dateCreated datePublished" datetime="2023-02-25T03:03:51+08:00">2023-02-25</time>
+      <time title="创建时间：2023-07-30 00:21:01" itemprop="dateCreated datePublished" datetime="2023-07-30T00:21:01+08:00">2023-07-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-27 08:32:59" itemprop="dateModified" datetime="2023-02-27T08:32:59+08:00">2023-02-27</time>
+      <time title="修改时间：2023-08-09 15:08:19" itemprop="dateModified" datetime="2023-08-09T15:08:19+08:00">2023-08-09</time>
     </span>
 
   
-    <span id="/2023/02/25/libtorch-tutorial1/" class="post-meta-item leancloud_visitors" data-flag-title="Libtorch系列教程1：一个丝滑的C++ Tensor库" title="阅读次数">
+    <span id="/2023/07/30/git-clean-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="git clean 教程" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -962,29 +541,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>系列教程列表：</p>
-<ul>
-<li><a href="https://vra.github.io/2023/02/25/libtorch-tutorial1/">Libtorch系列教程1：一个丝滑的C++ Tensor库</a> </li>
-<li><a href="https://vra.github.io/2023/02/25/libtorch-tutorial2/">Libtorch系列教程2：torch::Tensor的使用</a> </li>
-</ul>
-<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p><a target="_blank" rel="noopener" href="https://pytorch.org/cppdocs/installing.html">Libtorch</a>是Pytorch的C++接口，实现了在C++中进行网络训练、网络推理的功能。</p>
-<p>除此之外，由于Libtorch中的大部份接口都是与Pytorch一致的，所以Libtorch还是一个很强大的张量库，有着类似Pytorch的清晰接口，这在C++中很难得的。如果你用过C++ Tensor库，就会发现写法比较复杂，学习成本。因为强类型的限制和通用容器类型的缺失，C++相比Python天然更复杂，库设计者因为语言使用习惯，以及为了性能等因素，设计的接口一般都是高效但难用的。而Libtorch采用了与Pytorch类似的函数接口，如果你使用过Pytorch的话，使用Libtorch学习成本很低，后面会看到具体的例子。</p>
-<p>另一个问题是，很多Python库中基础的操作，例如<code>numpy.einsum</code>函数，在C++中没有合适的替代，看看<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/65347170/numpy-einsum-equivalent-for-xtensor-c">这些</a>搜索你就知道了。Libtorch解决了这个问题，Pytorch中有的它都有，所以在C++中可以简单地用<code>torch::einsum</code>来使用einsum函数，简直是C++开发者的福音。</p>
-<p>此外Libtorch 是支持GPU的，主要用于模型的推理过程，但我猜测使用GPU的话，Libtorch的Tensor操作在速度上相比别的C++ Tensor 库可能有优势，具体速度需要测试对比。当然使用C++代码的话速度不是瓶颈，本身CPU代码就够快了。</p>
-<p>Libtorch另一个优势是编译简单，只要你安装了Pytorch，Libtorch就可以直接使用，省去了复杂的安装和配置，一分钟内就能跑起来一个简单的的示例程序。</p>
-<p>总结来说，Libtorch有以下很吸引人的特性：</p>
-<ul>
-<li>强大如Numpy和Pytorch的C++ Tensor库，写法优雅丝滑，并且是支持GPU的。</li>
-<li>可以训练神经网络</li>
-<li>可以推理神经网络模型，用在C++环境的模型部署场景</li>
-<li>编译简单</li>
-</ul>
-<p>由于Pytorch开发团队是以Python优先的思路来进行Pytorch的开发的，因此我感觉Libtorch的重视程度不是很高，文档和教程也比较少，官网的示例也几乎没有，因此写一个比较完善的教程是比较有意义的。</p>
-<p>这个系列文章中，我会对Libtorch 的Tensor库和推理神经网络过程进行介绍，因为这些内容在实际对于用Libtorch来进行网络训练的部分进行跳过，因为这部分使用的场景不是很多（用Python训练网络比C++香多了)。</p>
-<p>本篇以Mac下的操作为例，对Libtorch的安装和简单使用进行介绍，后续内容近期会更新，敬请关注。</p>
+          <h3 id="1-引入"><a href="#1-引入" class="headerlink" title="1. 引入"></a>1. 引入</h3><p>git clean 是用来删除 git 仓库中没有被跟踪的文件的命令，在想要快速清理 git 仓库（比如，删除仓库中所有没有跟踪的文件，清除编译生成的临时文件）时很有用。是相比别的git子命令， git clean的配置选项比较少，使用起来简单一些，这里写一个简要教程。<br>友情提示：git clean真的会删除文件，而且没法用git命令来恢复（因为没有被 git 跟踪），所以使用git clean前务必慎重，建议每次删除文件之前先加<code>--dry-run</code> 选项来验证会删除哪些文件，确保没有误删。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/02/25/libtorch-tutorial1/#more" rel="contents">
+              <a class="btn" href="/2023/07/30/git-clean-tutorial/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1017,7 +577,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/12/nanogpt-and-luxun/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/07/14/dinov2-retrieval/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1035,7 +595,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/12/nanogpt-and-luxun/" class="post-title-link" itemprop="url">nanoGPT + 鲁迅</a>
+          <a href="/2023/07/14/dinov2-retrieval/" class="post-title-link" itemprop="url">dinov2_retrieval:一个基于DINOv2 的图片检索应用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1045,19 +605,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-02-12 23:24:02" itemprop="dateCreated datePublished" datetime="2023-02-12T23:24:02+08:00">2023-02-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-13 00:33:42" itemprop="dateModified" datetime="2023-02-13T00:33:42+08:00">2023-02-13</time>
+      <time title="创建时间：2023-07-14 00:05:35 / 修改时间：00:16:35" itemprop="dateCreated datePublished" datetime="2023-07-14T00:05:35+08:00">2023-07-14</time>
     </span>
 
   
-    <span id="/2023/02/12/nanogpt-and-luxun/" class="post-meta-item leancloud_visitors" data-flag-title="nanoGPT + 鲁迅" title="阅读次数">
+    <span id="/2023/07/14/dinov2-retrieval/" class="post-meta-item leancloud_visitors" data-flag-title="dinov2_retrieval:一个基于DINOv2 的图片检索应用" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -1073,13 +627,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-起因"><a href="#1-起因" class="headerlink" title="1. 起因"></a>1. 起因</h2><p>今晚看到了Simon Willison 的只使用自己的博客内容来训练nanoGPT的<a target="_blank" rel="noopener" href="https://til.simonwillison.net/llms/training-nanogpt-on-my-blog">实验</a>，觉得挺有意思，突发奇想，能不能在鲁迅的文集上训练一个nanoGPT，然后生成很具辨识度的鲁迅风格的文字呢？由于nanoGPT结构简单，鲁迅的文集在GitHub上可以下载到，因此通过简单的代码修改加实验，就得到一个在鲁迅作品上训练的GPT2模型(无别的语料库的预训练），简单测试下，以“故乡”开头，让模型生成鲁迅风格的文字：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">故乡，债是佩服的。</span><br><span class="line"> 我一向对于新青年的态度，先来说话，谢容易做的，然而伏园已经见过几样，感觉的是另外捧之数，以为先前的例子。今但近来做了做事，自己也还不做，不能先行通，所以生在冷静和“人生”，三妇一苦闷，觉得大约是如此隔膜</span><br><span class="line">和曹操，于是非意模茶炛，可以说是太高了，所以现在便能教育，竟�如此。</span><br><span class="line"> 但汝实在有给法历代的，不久就在绝末年间，我想显出向大家饮一趟，而汉子大毒是怀旧的，就要贫足有打劫，可以永掠的。这种事情，中国有一个大官左翼阿，（陀思妥习），有敢请佛喜，总要适说一点�</span><br></pre></td></tr></table></figure>
-
-<p>还算有鲁迅文字的风格，但逻辑一窍不通，整体还是难让人满意，不知道是GPT2能力的问题还是我实验设置的问题。 Anyway，这里共享一下我实验的流程，有兴趣的朋友可以参考，进行改进。本文涉及的代码修改代码已经提交到这个<a target="_blank" rel="noopener" href="https://github.com/vra/nanoGPT">仓库了</a>，可以参考，文末会附上更多例子。</p>
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>前些天 Meta 公司发布了 <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/dinov2">DINOv2</a> 视觉预训练模型。DINOv2 能够高效地提出图像中的特征，提取的特征可以直接用于像分类等任务，而且只需要一个简单的线性层就能取得比较好的结果。</p>
+<p>为了展示 DINOv2 强大的特征提取能力， Meta 提供了一个在线 <a target="_blank" rel="noopener" href="https://dinov2.metademolab.com/">Demo</a>，上传一张图片，就能从一些艺术画作中检索出最相似的作品。</p>
+<p>拿随手拍的照片体验后，DINOv2 特征提取能力确实强大，能够准确地理解图片中的语义信息。</p>
+<p><img data-src="/imgs/dinov2_retrieval/dinov2_demo_result.jpeg"></p>
+<p>由于 DINOv2 预训练模型是开源的，因为基于它来测试实际的效果是可行的。比如，我想找到相册中跟某张照片最相似的图片，就可以用 DINOv2 来测试照片和相册中所有照片的特征，然后计算相册中照片特征与测试照片最相近的那一张，就是我想要的。</p>
+<p>整体思路是很简单直接的，经过一天的开发，终于完成了一个相对完善的Python工具 <a target="_blank" rel="noopener" href="https://github.com/vra/dinov2-retrieval">dinov2_retrieval</a>，能够检索若干张图片在测试数据集中最相似的图。</p>
+<p>写完后拿最近拍的一些随机照片跑了一下，检索结果还是挺不错的。最左边是测试图片，右边的5张图是在[Caltech 256](<a target="_blank" rel="noopener" href="https://data.caltech.edu/records/nyy15-4j048">Caltech 256</a>)数据集中检索得到的top5相似的图像：<br><img data-src="/imgs/dinov2_retrieval/1688175364717_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364731_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364741_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364753_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364766_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364775_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364786_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688175364801_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688219476149_output.jpg"><br><img data-src="/imgs/dinov2_retrieval/1688219476156_output.jpg"></p>
+<p>通过和ResNet50预训练模型提取的特征做检索对比，发现 DINOv2 提取的特征还是更准确一些，检索结果也更好。</p>
+<p>后面部分详细说说这个工具 dinov2_retrieval 的使用。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/02/12/nanogpt-and-luxun/#more" rel="contents">
+              <a class="btn" href="/2023/07/14/dinov2-retrieval/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1112,7 +671,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/02/05/numpy-remove-np-float/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/30/git-diff-a-special-use-case/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1130,7 +689,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/05/numpy-remove-np-float/" class="post-title-link" itemprop="url">关于 np.float 被删除的问题</a>
+          <a href="/2023/06/30/git-diff-a-special-use-case/" class="post-title-link" itemprop="url">git diff 的一个妙用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1140,19 +699,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-02-05 11:34:04" itemprop="dateCreated datePublished" datetime="2023-02-05T11:34:04+08:00">2023-02-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-13 16:37:25" itemprop="dateModified" datetime="2023-02-13T16:37:25+08:00">2023-02-13</time>
+      <time title="创建时间：2023-06-30 22:41:49 / 修改时间：22:42:42" itemprop="dateCreated datePublished" datetime="2023-06-30T22:41:49+08:00">2023-06-30</time>
     </span>
 
   
-    <span id="/2023/02/05/numpy-remove-np-float/" class="post-meta-item leancloud_visitors" data-flag-title="关于 np.float 被删除的问题" title="阅读次数">
+    <span id="/2023/06/30/git-diff-a-special-use-case/" class="post-meta-item leancloud_visitors" data-flag-title="git diff 的一个妙用" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -1168,83 +721,374 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>在Numpy 1.24版本中，<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations">删除</a>了像<code>np.float</code>、<code>np.int</code> 这样的 Python 内置类型的 alias，因此以后在代码中使用这些类型会报错<code>AttributeError: module &#39;numpy&#39; has no attribute &#39;float&#39;</code>, 涉及的类型包括：</p>
-<ul>
-<li><code>numpy.bool</code></li>
-<li><code>numpy.int</code></li>
-<li><code>numpy.float</code></li>
-<li><code>numpy.complex</code></li>
-<li><code>numpy.object</code></li>
-<li><code>numpy.str</code></li>
-<li><code>numpy.long</code></li>
-<li><code>numpy.unicode</code></li>
-</ul>
-<p>那该怎么解决这个错误呢？</p>
-<p>TL;DR</p>
-<ul>
-<li>对于在标量上的操作，直接使用Python内置类型替换<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo = np.random.rand(<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 原先用法，注意foo[0]是一个标量</span></span><br><span class="line">bar = np.<span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">bar = <span class="built_in">float</span>(foo[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></li>
-<li>对于在<code>np.ndarray</code> 上的操作，使用<code>np.float64</code> 或<code>np.float32</code> 来替代，具体选择哪个需要自己根据情况来确定，不同类型精度会有不同，下面举两个例子:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原先用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 新用法</span></span><br><span class="line">foo = np.random.rand(<span class="number">10</span>).astype(np.float32)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>这里列出来了删除类型在标量和<code>np.ndarray</code> 上的替代，方便查找</p>
-<table>
-<thead>
-<tr>
-<th>原先类型</th>
-<th>标量替换类型</th>
-<th><code>np.ndarray</code>替换类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>np.int</td>
-<td>int</td>
-<td>np.int32/np.int64</td>
-</tr>
-<tr>
-<td>np.float</td>
-<td>float</td>
-<td>np.float32/np.float64</td>
-</tr>
-<tr>
-<td>np.bool</td>
-<td>bool</td>
-<td>np.bool_</td>
-</tr>
-<tr>
-<td>np.complex</td>
-<td>complex</td>
-<td>np.complex128</td>
-</tr>
-<tr>
-<td>np.object</td>
-<td>object</td>
-<td>-</td>
-</tr>
-<tr>
-<td>np.str</td>
-<td>str</td>
-<td>np.str_</td>
-</tr>
-<tr>
-<td>np.long</td>
-<td>int</td>
-<td>np.int32/np.int64</td>
-</tr>
-<tr>
-<td>np.unicode</td>
-<td>str</td>
-<td>np.str_</td>
-</tr>
-</tbody></table>
-<p>详细说明参考<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/release/1.20.0-notes.html#deprecations">NumPy 1.20.0 Release Notes</a>。</p>
-<p>下面详细说说事情的来龙去脉。</p>
+          <h3 id="1-git-diff-常规用法"><a href="#1-git-diff-常规用法" class="headerlink" title="1. git diff 常规用法"></a>1. git diff 常规用法</h3><p>git diff 可以用来比较在git仓库中的两次提交或两个文件的diff，常见用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前代码与最新commit的代码之间的差别</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存（也就是已经git add 但还没有git commit）的代码提交</span></span><br><span class="line">git diff --staged</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前代码与&lt;commit-id&gt;时代码的区别</span></span><br><span class="line">git diff &lt;commit-id&gt; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存代码与&lt;commit-id&gt;时代码的区别</span></span><br><span class="line">git diff --staged &lt;commit-id&gt; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两次commit-id之间的代码区别</span></span><br><span class="line">git diff &lt;commit-id1&gt; &lt;commit-id2&gt;  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支与 branch1 分支上的代码区别</span></span><br><span class="line">git diff &lt;branch1&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两个分支上的代码之间的区别</span></span><br><span class="line">git diff &lt;branch1&gt; &lt;branch2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>所有上述命令后面都可以加一个目录或文件路径来只显示这个目录或文件中的区别：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git diff /path/to/folder</span><br><span class="line"></span><br><span class="line">git diff /path/to/file.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可用git的参数终止符号--，避免文件名和参数重名时将文件名解析为参数</span></span><br><span class="line">git diff --  /path/to/file.py</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/02/05/numpy-remove-np-float/#more" rel="contents">
+              <a class="btn" href="/2023/06/30/git-diff-a-special-use-case/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/30/cpp-optional-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/06/30/cpp-optional-tutorial/" class="post-title-link" itemprop="url">C++ std::optional 使用教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-30 22:39:41 / 修改时间：22:40:50" itemprop="dateCreated datePublished" datetime="2023-06-30T22:39:41+08:00">2023-06-30</time>
+    </span>
+
+  
+    <span id="/2023/06/30/cpp-optional-tutorial/" class="post-meta-item leancloud_visitors" data-flag-title="C++ std::optional 使用教程" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-std-optional-是什么"><a href="#1-std-optional-是什么" class="headerlink" title="1. std::optional 是什么"></a>1. std::optional 是什么</h3><p>C++ 17 引入了std::optional，表示一个可能有值的对象（没有值时就是默认的<code>std::nullopt</code>)，例如这个例子中，std::optional 对象 even_value，如果<code>is_even</code> 为真的话就是128，否则就是默认值<code>std::nullopt</code>: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;optiona&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> is_even = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 没有值的情况下 std::optional 对象的值为 std::nullopt</span></span><br><span class="line">std::optional&lt;<span class="keyword">int</span>&gt; even_value = is_even ? std::optional&lt;<span class="keyword">int</span>&gt;(<span class="number">128</span>) : std::nullopt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以用 std::optional 对象是否等于 std::nullopt 来判断 std::optional 对象是否有值</span></span><br><span class="line"><span class="keyword">if</span> (even_value != std::nullopt) &#123;</span><br><span class="line">    <span class="comment">// 采用.value 获取 std::optional 对象的值</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;has value, which is &quot;</span> &lt;&lt; even_value.<span class="built_in">value</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;no value&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实std::optional的作用和Python里面的<code>None</code>比较像，例如上面的例子用Python来写就是这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">is_even = <span class="literal">True</span></span><br><span class="line">even_value = <span class="number">128</span> <span class="keyword">if</span> is_even <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line"><span class="keyword">if</span> even_value <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;has value, which is&quot;</span>, even_value)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;no value&quot;</span>)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/30/cpp-optional-tutorial/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/30/libtorch-tutorial3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/06/30/libtorch-tutorial3/" class="post-title-link" itemprop="url">libtorch系列教程3：优雅地训练MNIST分类模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-30 22:38:16 / 修改时间：22:39:28" itemprop="dateCreated datePublished" datetime="2023-06-30T22:38:16+08:00">2023-06-30</time>
+    </span>
+
+  
+    <span id="/2023/06/30/libtorch-tutorial3/" class="post-meta-item leancloud_visitors" data-flag-title="libtorch系列教程3：优雅地训练MNIST分类模型" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在这篇文章中，我们对如何使用Libtorch进行MNIST分类模型的训练和测试进行详细描述。首先会浏览官方MNIST示例，然后对其进行模块化重构，为后续别的模型的训练提供 codebase。</p>
+<p>由于Libtorch中包含很多和Pytorch中没有的类型，所以看Libtorch代码的时候时常会遇到不了解的函数或者类，这时候可以在<a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch">这里</a>查找对应的类的实现，了解其作用。Libtorch C++ 代码中的注释虽然不多但基本够用了。</p>
+<p>这里列举一些常见的类的代码路径，方便查询：</p>
+<ul>
+<li>Datasets: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/base.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/base.h</a></li>
+<li>DataLoader:<a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch/data/dataloader/base.h">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/include/torch/data/dataloader/base.h</a></li>
+<li>MNIST: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/mnist.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/datasets/mnist.h</a></li>
+<li>Stack: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/transforms/stack.h">https://github.com/pytorch/pytorch/blob/main/torch/csrc/api/include/torch/data/transforms/stack.h</a></li>
+<li>RandomSampler:  <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/random.cpp">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/random.cpp</a></li>
+<li>SequentialSampler: <a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/sequential.cpp">https://github.com/pytorch/pytorch/tree/main/torch/csrc/api/src/data/samplers/sequential.cpp</a></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/30/libtorch-tutorial3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/17/neoformat-python-cpp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/06/17/neoformat-python-cpp/" class="post-title-link" itemprop="url">NeoVim 代码格式化教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-17 09:54:45 / 修改时间：11:20:33" itemprop="dateCreated datePublished" datetime="2023-06-17T09:54:45+08:00">2023-06-17</time>
+    </span>
+
+  
+    <span id="/2023/06/17/neoformat-python-cpp/" class="post-meta-item leancloud_visitors" data-flag-title="NeoVim 代码格式化教程" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p><a target="_blank" rel="noopener" href="https://github.com/sbdchd/neoformat">neoformat</a> 是 (Neo)Vim 的代码格式化插件，支持多种语言的格式化。这篇文章覆盖 Neoformat 对 Python 和 C++ 进行格式化的配置，以及如何在保存代码时自动进行格式化，可以直接应用的配置代码段在文章最后。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/17/neoformat-python-cpp/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2023/06/08/homebrew-disable-auto-update/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/06/08/homebrew-disable-auto-update/" class="post-title-link" itemprop="url">homebrew禁止执行install命令时自动更新</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-08 22:02:49 / 修改时间：22:13:49" itemprop="dateCreated datePublished" datetime="2023-06-08T22:02:49+08:00">2023-06-08</time>
+    </span>
+
+  
+    <span id="/2023/06/08/homebrew-disable-auto-update/" class="post-meta-item leancloud_visitors" data-flag-title="homebrew禁止执行install命令时自动更新" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a> 是 macOS 下的默认的包管理器，不需要sudo权限就可以安装包，比较好用。</p>
+<p>不过用<code>brew install</code>安装包时有个问题，它默认会先执行<code>brew update</code>来更新brew的版本。但由于brew 的源国内访问比较慢，常常<code>brew update</code>执行耗时比较久，影响每次安装包的体验。</p>
+<p>解决办法是设置<code>HOMEBREW_NO_AUTO_UPDATE</code>环境变量为1，这样每次<code>brew install</code>时跳过更新brew的步骤，实际体验安装包速度提升明显。</p>
+<p>可以添加下面的语句到你的.bashrc或.zshrc中，重启shell即生效:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HOMEBREW_NO_AUTO_UPDATE=1</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -1265,7 +1109,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

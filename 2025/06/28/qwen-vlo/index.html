@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="2025年6月26日，Qwen团队发布了Qwen VLo，一个定位是“unified multimodal understanding and generation model”的模型，包括多模态的理解和生成。 根据官方的介绍博客，Qwen VLo包含下面的功能：  图像生成：文生图、2D卡通图像转真实图像 图像编辑：例如修改某个主体、更换颜色、更换风格 图像算法能力：例如检测框、canny 算子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qwen VLo 效果实测">
+<meta property="og:url" content="http://vra.github.io/2025/06/28/qwen-vlo/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="2025年6月26日，Qwen团队发布了Qwen VLo，一个定位是“unified multimodal understanding and generation model”的模型，包括多模态的理解和生成。 根据官方的介绍博客，Qwen VLo包含下面的功能：  图像生成：文生图、2D卡通图像转真实图像 图像编辑：例如修改某个主体、更换颜色、更换风格 图像算法能力：例如检测框、canny 算子">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pica.zhimg.com/80/v2-79d23c688b13f9ef527c027eb7490606_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-2ee4e44f09de62236731920c5e0f2012_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-32a83896ac5590986dae555a89beea1b_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-c6ecaddf7ef4d0672bc87e18e55faa18_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-eb21b8fe63276e2df68bfdf4a887e36b_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-9a918856f59450c7070c64800b840c1e_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pica.zhimg.com/80/v2-50d03af5ae8c125ef28c7c75a2cf3b23_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-d5c7c41ed2e8b1b0e9bdb0d920ce5138_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-4f62957a638c6ac7eebd813b9765fa15_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-c9d09227d81154891554307b922a85ad_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-62044f8b726e8728265b5dba394c87d2_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-97087894cecee8a828f97734d1d1f8c5_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-4ef0c84e6bd9673ed05aaf5c3f82b6f5_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-62636d31bb18798de5fec9fe3776c8b8_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pica.zhimg.com/80/v2-7d8611e5133e19e6c969162cad3bd548_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-ae8a0d63a7a3b5f7dee8fb6d13759aa6_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-1b11a5328836f2307c8d5d0af33cb757_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-0b610e6508e929ceae86517e529703c3_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-6449f7fbb299057225d9e203c9b82f8d_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-d12570a282160c55976ffecf939d04ef_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-6c46fc8d559a0456a687ec103e6c3aae_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-d8ef71c7d15bceb8b992474cc3ddda9d_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-5dd8a0bab0cf5fcc43528bc238323bb6_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-aa3dd4cfa626e5fd501bf0f6af3bb2e7_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-1f37db024e55e47c8bc374c9afc32c36_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pica.zhimg.com/80/v2-962b5ee906c22acbaba775bce203a0ab_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-202e15b58472a07a1dd76bf85de021c7_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-1eb51f439e820b6bf8271e2b68fd452a_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-001dd96d18a9d3402105ec3669b07c25_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pica.zhimg.com/80/v2-c5e8d72d393b2ff6b0e1683f4dd1b64c_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-d55a163ca76a6bccf107a8a6f85d6869_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-9dd26a9556f64fcedfb64fc85a4e2d06_1440w.jpeg?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-b3c78ec2c15eafac638fefecccf55e4a_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-f294f5b148e084e71edbba1b3c4703e4_1440w.png?source=d16d100b">
+<meta property="article:published_time" content="2025-06-28T11:06:35.000Z">
+<meta property="article:modified_time" content="2025-08-03T11:10:37.953Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Qwen">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="AIGC">
+<meta property="article:tag" content="Diffusion">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pica.zhimg.com/80/v2-79d23c688b13f9ef527c027eb7490606_1440w.png?source=d16d100b">
+
+
+<link rel="canonical" href="http://vra.github.io/2025/06/28/qwen-vlo/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2025/06/28/qwen-vlo/","path":"2025/06/28/qwen-vlo/","title":"Qwen VLo 效果实测"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Qwen VLo 效果实测 | Yunfeng's Simple Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERXYNX7C7P"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ERXYNX7C7P","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">215</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%94%9F%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">1. 生图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%A3%8E%E6%A0%BC%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text">2. 风格转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9B%BE%E5%83%8F%E7%BC%96%E8%BE%91"><span class="nav-number">3.</span> <span class="nav-text">3. 图像编辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A3%80%E6%B5%8B%E6%A1%86"><span class="nav-number">4.</span> <span class="nav-text">4. 检测框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%88%86%E5%89%B2%E5%9B%BE"><span class="nav-number">5.</span> <span class="nav-text">5. 分割图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Canny%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text">6. Canny效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">7. 其他问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">8. 总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">204</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/28/qwen-vlo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Qwen VLo 效果实测 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Qwen VLo 效果实测
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-28 19:06:35" itemprop="dateCreated datePublished" datetime="2025-06-28T19:06:35+08:00">2025-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-03 19:10:37" itemprop="dateModified" datetime="2025-08-03T19:10:37+08:00">2025-08-03</time>
+    </span>
+
+  
+    <span id="/2025/06/28/qwen-vlo/" class="post-meta-item leancloud_visitors" data-flag-title="Qwen VLo 效果实测" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>2025年6月26日，Qwen团队发布了<a target="_blank" rel="noopener" href="https://qwenlm.github.io/blog/qwen-vlo/">Qwen VLo</a>，一个定位是“unified multimodal understanding and generation model”的模型，包括多模态的理解和生成。</p>
+<p>根据官方的介绍博客，Qwen VLo包含下面的功能：</p>
+<ul>
+<li>图像生成：文生图、2D卡通图像转真实图像</li>
+<li>图像编辑：例如修改某个主体、更换颜色、更换风格</li>
+<li>图像算法能力：例如检测框、canny 算子、图像分割结果</li>
+</ul>
+<p>经过一段时间的测试，我个人的总结是：</p>
+<ol>
+<li>生图能力：效果比较差，感觉是一两年前生图模型的水平</li>
+<li>图像风格转换：效果比较稳定，生图有美感</li>
+<li>图像编辑能力：还算可以，有一些case做不好</li>
+<li>检测框：能稳定生成，单人没问题，多人场景下也不算很准</li>
+<li>图像分割：没有成功</li>
+<li>canny算子：细节更丰富，但有一些地方与原图并非完全对齐</li>
+</ol>
+<p>再单独吐槽一个点，刚开始没找到Qwen VLo的入口，看微信公众号文章的留言才发现，并不是以一个模型列在可选模型列表中的，而是不管选择什么模型，只要做生图任务或者上传图片进行对话，都调用Qwen VLo。这种不遵从用户已有习惯的设置，随意而为的做法，用户体验很差，要是没看到留言回复，真的不知道怎么用。</p>
+<p>下面详细展开我上面总结中各个条目的实际结果。</p>
+<span id="more"></span>
+
+<h2 id="1-生图"><a href="#1-生图" class="headerlink" title="1. 生图"></a>1. 生图</h2><p>用最简单的提示词来生成图，下面是一些结果和对应的提示词。</p>
+<p>Prompt: 画一个哪吒</p>
+<p><img data-src="https://pica.zhimg.com/80/v2-79d23c688b13f9ef527c027eb7490606_1440w.png?source=d16d100b"></p>
+<p>Prompt: 画一个哪吒</p>
+<p>Prompt: 画一个哪吒骑在龙上的照片</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-2ee4e44f09de62236731920c5e0f2012_1440w.png?source=d16d100b"></p>
+<p>Prompt: 画一个哪吒骑在龙上的照片</p>
+<p>没有处理好”骑”这个动作。</p>
+<p>Prompt: 生成一个大象和巨龙战斗的图片</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-32a83896ac5590986dae555a89beea1b_1440w.png?source=d16d100b"></p>
+<p>Prompt: 生成一个大象和巨龙战斗的图片</p>
+<p>大象长翅膀了？？</p>
+<p>Prompt: 画一幅李白和杜甫打篮球的图片</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-c6ecaddf7ef4d0672bc87e18e55faa18_1440w.png?source=d16d100b"></p>
+<p>Prompt: 画一幅李白和杜甫打篮球的图片</p>
+<p>非常奇葩的效果：自动将上一轮的图像用上了，虽然提示词根本没有提上一轮的内容。</p>
+<p>新开一轮，同样的提示词，结果如下：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-eb21b8fe63276e2df68bfdf4a887e36b_1440w.png?source=d16d100b"></p>
+<p>Prompt: 画一幅李白和杜甫打篮球的图片</p>
+<p>似乎看到了两三年前生图模型的效果…</p>
+<p>看看同样提示词，豆包的生成结果：</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-9a918856f59450c7070c64800b840c1e_1440w.png?source=d16d100b"></p>
+<p>豆包网页版效果，Prompt: 画一幅李白和杜甫打篮球的图片</p>
+<p>数数也数不对：</p>
+<p><img data-src="https://pica.zhimg.com/80/v2-50d03af5ae8c125ef28c7c75a2cf3b23_1440w.png?source=d16d100b"></p>
+<p>Prompt: 画一幅包含四个苹果的静物图</p>
+<p>总结：感觉Qwen VLo的画图还是玩具级别，距离真实场景下的使用，还差比较远。</p>
+<h2 id="2-风格转换"><a href="#2-风格转换" class="headerlink" title="2. 风格转换"></a>2. 风格转换</h2><p>尝试了三组图像风格转换，包括吉卜力风格、3D风格、像素风格。</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-d5c7c41ed2e8b1b0e9bdb0d920ce5138_1440w.png?source=d16d100b"></p>
+<p>输入图像</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-4f62957a638c6ac7eebd813b9765fa15_1440w.png?source=d16d100b"></p>
+<p>Prompt: 将图片变成吉卜力风格</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-c9d09227d81154891554307b922a85ad_1440w.png?source=d16d100b"></p>
+<p>Prompt: 将上面的图片转换成3D风格</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-62044f8b726e8728265b5dba394c87d2_1440w.png?source=d16d100b"></p>
+<p>输入图像</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-97087894cecee8a828f97734d1d1f8c5_1440w.png?source=d16d100b"></p>
+<p>Prompt: 转换成吉卜力风格</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-4ef0c84e6bd9673ed05aaf5c3f82b6f5_1440w.png?source=d16d100b"></p>
+<p>提示词：转换为3D风格</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-62636d31bb18798de5fec9fe3776c8b8_1440w.png?source=d16d100b"></p>
+<p>输入图像</p>
+<p><img data-src="https://pica.zhimg.com/80/v2-7d8611e5133e19e6c969162cad3bd548_1440w.png?source=d16d100b"></p>
+<p>Prompt: 转换为真人照片</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-ae8a0d63a7a3b5f7dee8fb6d13759aa6_1440w.png?source=d16d100b"></p>
+<p>Prompt: 转换为吉卜力风格</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-1b11a5328836f2307c8d5d0af33cb757_1440w.png?source=d16d100b"></p>
+<p>Prompt: 转换为3D风格</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-0b610e6508e929ceae86517e529703c3_1440w.png?source=d16d100b"></p>
+<p>Prompt: Prompt: 转换为像素风风格</p>
+<p>结论：吉卜力风格，3D风格和像素风格生成的图片还是挺不错的，草稿转真人恐怖谷拉满。</p>
+<h2 id="3-图像编辑"><a href="#3-图像编辑" class="headerlink" title="3. 图像编辑"></a>3. 图像编辑</h2><p>基于这张著名的合影做了一些有意思的图像编辑功能：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-6449f7fbb299057225d9e203c9b82f8d_1440w.png?source=d16d100b"></p>
+<p>输入图像</p>
+<p>图像上色：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-d12570a282160c55976ffecf939d04ef_1440w.png?source=d16d100b"></p>
+<p>Prompt: 给图片上色</p>
+<p>上色对照片的内容改变太多，而且衣服一部分蓝色，一部分黑色，也有点奇怪。</p>
+<p>给这些物理学大佬一人戴一个博士帽如何？</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-6c46fc8d559a0456a687ec103e6c3aae_1440w.png?source=d16d100b"></p>
+<p>Prompt: 给所有人加一顶博士帽</p>
+<p>结果一般般，有一些加了博士帽，效果还可以，有一些没有加上去，图像的内容还是变了，爱因斯坦都不像了。</p>
+<p>每个人戴一个诺贝尔奖牌：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-d8ef71c7d15bceb8b992474cc3ddda9d_1440w.png?source=d16d100b"></p>
+<p>Prompt: 给每个人的脖子上挂一个诺贝尔奖牌</p>
+<p>这个奖牌效果还可以，除了有一个大佬头变大了很多，有点鬼畜，但三排变成了两排，而且画面变化太大了，人物都没一个认识的了……</p>
+<p>露齿微笑：</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-5dd8a0bab0cf5fcc43528bc238323bb6_1440w.png?source=d16d100b"></p>
+<p>Prompt: 让画面中的每个人都露齿微笑</p>
+<p>这个效果还行.</p>
+<p>头变成流汗的emoji:</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-aa3dd4cfa626e5fd501bf0f6af3bb2e7_1440w.png?source=d16d100b"></p>
+<p>Prompt: 把每个人的头都变成流汗的emoji</p>
+<p>怎么都变成了外星人，还有一个拿着头。。</p>
+<p>变动物怎么样？</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-1f37db024e55e47c8bc374c9afc32c36_1440w.png?source=d16d100b"></p>
+<p>Prompt: 把每个人的头都变成一种动物</p>
+<p>左上角的🦁亮眼，别的都是什么呀…</p>
+<p>结论：图像编辑整体差强人意，一些需求会出现鬼畜效果。对于这种真人照片，致命问题是图像变化太影响ID的稳定性了，可能对于卡通图中的形象，画面变一点还能接受，真人图的细节变化，可能就完全像是换了一个人。</p>
+<h2 id="4-检测框"><a href="#4-检测框" class="headerlink" title="4. 检测框"></a>4. 检测框</h2><p><img data-src="https://pica.zhimg.com/80/v2-962b5ee906c22acbaba775bce203a0ab_1440w.png?source=d16d100b"></p>
+<p>Prompt: 将图片中的人用bbox框起来</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-202e15b58472a07a1dd76bf85de021c7_1440w.png?source=d16d100b"></p>
+<p>有时候Prompt会失效：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-1eb51f439e820b6bf8271e2b68fd452a_1440w.png?source=d16d100b"></p>
+<h2 id="5-分割图"><a href="#5-分割图" class="headerlink" title="5. 分割图"></a>5. 分割图</h2><p>分割功能我还没成功实现过，尝试了几次，要么出来文本回答，要么直接返回一张原图</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-001dd96d18a9d3402105ec3669b07c25_1440w.png?source=d16d100b"></p>
+<p><img data-src="https://pica.zhimg.com/80/v2-c5e8d72d393b2ff6b0e1683f4dd1b64c_1440w.png?source=d16d100b"></p>
+<h2 id="6-Canny效果图"><a href="#6-Canny效果图" class="headerlink" title="6. Canny效果图"></a>6. Canny效果图</h2><p>上面的小狗图片得到的Canny结果如下：</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-d55a163ca76a6bccf107a8a6f85d6869_1440w.png?source=d16d100b"></p>
+<p>Prompt: 给出图片的canny算子结果图</p>
+<p>用OpenCV计算得到的结果如下：</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-9dd26a9556f64fcedfb64fc85a4e2d06_1440w.jpeg?source=d16d100b"></p>
+<p>可以看到，并不是完全一样，AI生成的Canny细节更丰富，但一些地方并不是与原图完全对齐（例如鼻子），不知道对结果有多大影响？</p>
+<h2 id="7-其他问题"><a href="#7-其他问题" class="headerlink" title="7. 其他问题"></a>7. 其他问题</h2><p>多次对话后，指令遵循能力下降：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-b3c78ec2c15eafac638fefecccf55e4a_1440w.png?source=d16d100b"></p>
+<p>新开一次会话就可以了：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-f294f5b148e084e71edbba1b3c4703e4_1440w.png?source=d16d100b"></p>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h2><p>总体来说，比较有意思的是风格转换和图像编辑功能，生图功能不知道为什么做的这么差，检测框和Canny还行，分割图没试出来。</p>
+<p>这个模型的发布，说明Qwen团队也尝试对偏向应用的生图、编辑图功能进行探索，但相比豆包等长期积累，有大量用户体验上优化、长期生图效果迭代的选手，目前这个模型还不能让人满意。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2025/06/28/qwen-vlo/" title="Qwen VLo 效果实测">http://vra.github.io/2025/06/28/qwen-vlo/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/Qwen/" rel="tag"># Qwen</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/AIGC/" rel="tag"># AIGC</a>
+              <a href="/tags/Diffusion/" rel="tag"># Diffusion</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/12/meituan-nocode/" rel="prev" title="美团 NoCode 简单使用体验">
+                  <i class="fa fa-chevron-left"></i> 美团 NoCode 简单使用体验
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/07/02/mingchaoping/" rel="next" title="张小珺明超平访谈观点总结">
+                  张小珺明超平访谈观点总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

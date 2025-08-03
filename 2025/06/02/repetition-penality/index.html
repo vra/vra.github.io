@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 原理说明在跑LLM推理的时候，有时候会出现模型不断复读的现象，也就是模型一直输出同一个token或者token序列，不结束输出。transformers库中有一个参数repetition_penality专门针对此现象进行优化，通过将其设置为大于1.0的一个浮点数（如1.05， 1.1， 1.2等），有些情况下能缓解重复问题。 这个优化思路是在2019年的论文CTRL中提出的。 那这个参数是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="repetition_penality的作用与实现">
+<meta property="og:url" content="http://vra.github.io/2025/06/02/repetition-penality/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 原理说明在跑LLM推理的时候，有时候会出现模型不断复读的现象，也就是模型一直输出同一个token或者token序列，不结束输出。transformers库中有一个参数repetition_penality专门针对此现象进行优化，通过将其设置为大于1.0的一个浮点数（如1.05， 1.1， 1.2等），有些情况下能缓解重复问题。 这个优化思路是在2019年的论文CTRL中提出的。 那这个参数是">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-06-02T07:49:48.000Z">
+<meta property="article:modified_time" content="2025-08-03T10:41:17.902Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Transformers">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://vra.github.io/2025/06/02/repetition-penality/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2025/06/02/repetition-penality/","path":"2025/06/02/repetition-penality/","title":"repetition_penality的作用与实现"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>repetition_penality的作用与实现 | Yunfeng's Simple Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERXYNX7C7P"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ERXYNX7C7P","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">215</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8E%9F%E7%90%86%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">1. 原理说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%88%E6%9E%9C%E5%AE%9E%E6%B5%8B"><span class="nav-number">2.</span> <span class="nav-text">2. 效果实测</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">204</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/02/repetition-penality/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="repetition_penality的作用与实现 | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          repetition_penality的作用与实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-02 15:49:48" itemprop="dateCreated datePublished" datetime="2025-06-02T15:49:48+08:00">2025-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-03 18:41:17" itemprop="dateModified" datetime="2025-08-03T18:41:17+08:00">2025-08-03</time>
+    </span>
+
+  
+    <span id="/2025/06/02/repetition-penality/" class="post-meta-item leancloud_visitors" data-flag-title="repetition_penality的作用与实现" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="1-原理说明"><a href="#1-原理说明" class="headerlink" title="1. 原理说明"></a>1. 原理说明</h3><p>在跑LLM推理的时候，有时候会出现模型不断复读的现象，也就是模型一直输出同一个token或者token序列，不结束输出。transformers库中有一个参数<code>repetition_penality</code>专门针对此现象进行优化，通过将其设置为大于1.0的一个浮点数（如1.05， 1.1， 1.2等），有些情况下能缓解重复问题。 这个优化思路是在2019年的论文<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1909.05858">CTRL</a>中提出的。</p>
+<p>那这个参数是怎么解决重复问题的呢？其实实现原理很简单：对于之前出现过的token，在其logits（没有经过softmax的raw score)上作用一个<code>repetition_penality</code> 系数，使得它的logits数值降低，进而减少被选做下一个token的概率。</p>
+<span id="more"></span>
+
+<p>原理上，可以设置<code>repetition_penality</code> 为一个小于1.0的浮点数，使得模型增加前面token重复输出的概率，构造一个复读机，虽然好像实际没什么作用。</p>
+<p>这个功能在transformers库中的核心代码如下（完整代码参见<code>RepetitionPenaltyLogitsProcessor</code>类的<a target="_blank" rel="noopener" href="https://github.com/huggingface/transformers/blob/main/src/transformers/generation/logits_process.py#L296">实现</a>）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> self.prompt_ignore_length:</span><br><span class="line">    input_ids = input_ids[:, self.prompt_ignore_length :]</span><br><span class="line">score = torch.gather(scores, <span class="number">1</span>, input_ids)</span><br><span class="line"><span class="comment"># if score &lt; 0 then repetition penalty has to be multiplied to reduce the token probabilities</span></span><br><span class="line">score = torch.where(score &lt; <span class="number">0</span>, score * self.penalty, score / self.penalty)</span><br><span class="line">scores_processed = scores.scatter(<span class="number">1</span>, input_ids, score)</span><br></pre></td></tr></table></figure>
+
+<p>代码解释如下：</p>
+<ol>
+<li>1-2行：如果设置了<code>prompt_ignore_length</code>（一般是用户的原始input的长度），则忽略 原始input，也就是不对问题token作用惩罚系数，注意这里原始的input_ids既包含输入又包含之前预测tokens。</li>
+<li>3行：获取所有的<code>scores (logits)</code>中input_ids 对应的score</li>
+<li>4行：如果<code>score &lt;0</code>，则乘以惩罚系数，使得logits变得更小(例如-0.5*1.1-&gt;-0.55)，如果<code>score&gt;0</code>，则除以惩罚系数，使得logits变得更小(例如0.5/1.1-&gt;0.454)</li>
+<li>5行：将经过惩罚系数作用后的score写入到大的scores中<br>可以看到这个功能的实现是比较简单直接的，没有太多弯弯绕绕的东西。</li>
+</ol>
+<h3 id="2-效果实测"><a href="#2-效果实测" class="headerlink" title="2. 效果实测"></a>2. 效果实测</h3><p>利用下面代码可以明显地看到这个参数对输出的影响，输入<code>I love coding. I love</code>，预测下一个token：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModelForCausalLM, AutoTokenizer</span><br><span class="line"><span class="keyword">from</span> transformers.generation.logits_process <span class="keyword">import</span> RepetitionPenaltyLogitsProcessor</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_top_tokens</span>(<span class="params">tokenizer, scores, message=<span class="string">&quot;&quot;</span></span>):</span></span><br><span class="line">    <span class="comment"># 获取top 5的token和它们的概率</span></span><br><span class="line">    probs = F.softmax(scores, dim=-<span class="number">1</span>)</span><br><span class="line">    top_scores = torch.topk(scores[<span class="number">0</span>], <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;\n<span class="subst">&#123;message&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">50</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;<span class="string">&#x27;Token&#x27;</span>:&lt;<span class="number">15</span>&#125;</span> <span class="subst">&#123;<span class="string">&#x27;Raw Score&#x27;</span>:&lt;<span class="number">15</span>&#125;</span> <span class="subst">&#123;<span class="string">&#x27;Probability&#x27;</span>:&lt;<span class="number">15</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> idx, (score, prob) <span class="keyword">in</span> <span class="built_in">enumerate</span>(</span><br><span class="line">        <span class="built_in">zip</span>(top_scores.values, probs[<span class="number">0</span>][top_scores.indices])</span><br><span class="line">    ):</span><br><span class="line">        token = tokenizer.decode([top_scores.indices[idx]])</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;token:&lt;<span class="number">15</span>&#125;</span> <span class="subst">&#123;score.item():&gt;<span class="number">8.3</span>f&#125;</span>       <span class="subst">&#123;prob.item():&gt;<span class="number">8.6</span>f&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loda模型和Tokenizer</span></span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(<span class="string">&quot;Qwen/Qwen3-4B&quot;</span>)</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;Qwen/Qwen3-4B&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入文本</span></span><br><span class="line">text = <span class="string">&quot;I love coding. I love&quot;</span></span><br><span class="line">input_ids = tokenizer.encode(text, return_tensors=<span class="string">&quot;pt&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取模型输出的logits</span></span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    outputs = model(input_ids)</span><br><span class="line">    original_scores = outputs.logits[:, -<span class="number">1</span>, :].clone()  <span class="comment"># 获取最后一个位置的logits</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建不同penalty值的处理器</span></span><br><span class="line">    penalty_values = [<span class="number">0.8</span>, <span class="number">1.2</span>, <span class="number">2.0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;输入文本: <span class="subst">&#123;text&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印原始分数</span></span><br><span class="line">    print_top_tokens(tokenizer, original_scores, <span class="string">&quot;原始输出 (无repetition penalty)&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对比不同penalty值的效果</span></span><br><span class="line">    <span class="keyword">for</span> penalty <span class="keyword">in</span> penalty_values:</span><br><span class="line">        processor = RepetitionPenaltyLogitsProcessor(penalty=penalty)</span><br><span class="line">        processed_scores = processor(input_ids, original_scores.clone())</span><br><span class="line">        print_top_tokens(</span><br><span class="line">            tokenizer, processed_scores, <span class="string">f&quot;应用repetition penalty = <span class="subst">&#123;penalty&#125;</span>后的输出&quot;</span></span><br><span class="line">        )</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">输入文本: I love coding. I love</span><br><span class="line">原始输出 (无repetition penalty)</span><br><span class="line">--------------------------------------------------</span><br><span class="line">Token           Raw Score       Probability</span><br><span class="line">--------------------------------------------------</span><br><span class="line"> the              16.583       0.176431</span><br><span class="line"> to               15.963       0.094929</span><br><span class="line"> learning         15.550       0.062831</span><br><span class="line"> solving          15.482       0.058693</span><br><span class="line"> programming      15.221       0.045199</span><br><span class="line"></span><br><span class="line">应用repetition penalty = 0.8后的输出</span><br><span class="line">--------------------------------------------------</span><br><span class="line">Token           Raw Score       Probability</span><br><span class="line">--------------------------------------------------</span><br><span class="line"> coding           18.377       0.519966</span><br><span class="line"> the              16.583       0.086431</span><br><span class="line"> to               15.963       0.046504</span><br><span class="line"> learning         15.550       0.030780</span><br><span class="line"> solving          15.482       0.028753</span><br><span class="line"></span><br><span class="line">应用repetition penalty = 1.2后的输出</span><br><span class="line">--------------------------------------------------</span><br><span class="line">Token           Raw Score       Probability</span><br><span class="line">--------------------------------------------------</span><br><span class="line"> the              16.583       0.180972</span><br><span class="line"> to               15.963       0.097372</span><br><span class="line"> learning         15.550       0.064449</span><br><span class="line"> solving          15.482       0.060203</span><br><span class="line"> programming      15.221       0.046362</span><br><span class="line"></span><br><span class="line">应用repetition penalty = 2.0后的输出</span><br><span class="line">--------------------------------------------------</span><br><span class="line">Token           Raw Score       Probability</span><br><span class="line">--------------------------------------------------</span><br><span class="line"> the              16.583       0.181423</span><br><span class="line"> to               15.963       0.097615</span><br><span class="line"> learning         15.550       0.064609</span><br><span class="line"> solving          15.482       0.060353</span><br><span class="line"> programming      15.221       0.046477</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，通过设置repetition_penality 为0.8后，预测的概率最大token为coding，概率为0.519966，而设置repetition_penality为1.2和2.0，提高了预测token the 的出现概率。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2025/06/02/repetition-penality/" title="repetition_penality的作用与实现">http://vra.github.io/2025/06/02/repetition-penality/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/Transformers/" rel="tag"># Transformers</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/02/git-lfs-should-have-been-a-pointer/" rel="prev" title="git lfs pointer 报错解决">
+                  <i class="fa fa-chevron-left"></i> git lfs pointer 报错解决
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/06/04/graio-mcp-server/" rel="next" title="用gradio部署mcp server">
+                  用gradio部署mcp server <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

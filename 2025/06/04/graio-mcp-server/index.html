@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 说明mcp是一种创新的开源协议，用于规范大模型对外部工具的调用流程。mcp服务是供大模型调用的外部服务，用于增强大模型解决问题的能力。 mcp服务可以用mcp python-sdk来搭建，官方教程在这里。对第一次尝试的同学来说，官方的sdk还是有一定门槛的。 最近发现gradio 默认支持mcp server的部署，也就是launch一个gradio demo后，默认就起一个mcp服务，无需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用gradio部署mcp server">
+<meta property="og:url" content="http://vra.github.io/2025/06/04/graio-mcp-server/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="1. 说明mcp是一种创新的开源协议，用于规范大模型对外部工具的调用流程。mcp服务是供大模型调用的外部服务，用于增强大模型解决问题的能力。 mcp服务可以用mcp python-sdk来搭建，官方教程在这里。对第一次尝试的同学来说，官方的sdk还是有一定门槛的。 最近发现gradio 默认支持mcp server的部署，也就是launch一个gradio demo后，默认就起一个mcp服务，无需">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-14c9e62f59ecb1b2dc101f3841a169a3_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-1afddff05619d73f4d8fc3b630045ad6_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://picx.zhimg.com/80/v2-5413b180bb8c4ce6c5a45ba5ac817238_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-20477c48a3d7e437f8fb828575e45179_1440w.png?source=d16d100b">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-381f0e69c59c0c6dd333c475690499f0_1440w.png?source=d16d100b">
+<meta property="article:published_time" content="2025-06-04T10:41:54.000Z">
+<meta property="article:modified_time" content="2025-08-03T10:45:46.244Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Gradio">
+<meta property="article:tag" content="MCP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-14c9e62f59ecb1b2dc101f3841a169a3_1440w.png?source=d16d100b">
+
+
+<link rel="canonical" href="http://vra.github.io/2025/06/04/graio-mcp-server/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2025/06/04/graio-mcp-server/","path":"2025/06/04/graio-mcp-server/","title":"用gradio部署mcp server"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用gradio部署mcp server | Yunfeng's Simple Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERXYNX7C7P"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ERXYNX7C7P","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">215</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">1. 说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-mcp-server%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">2. mcp server搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-mcp-client%E4%B8%AD%E8%B0%83%E7%94%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">3. mcp client中调用服务</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">204</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/04/graio-mcp-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="用gradio部署mcp server | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用gradio部署mcp server
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-04 18:41:54" itemprop="dateCreated datePublished" datetime="2025-06-04T18:41:54+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-03 18:45:46" itemprop="dateModified" datetime="2025-08-03T18:45:46+08:00">2025-08-03</time>
+    </span>
+
+  
+    <span id="/2025/06/04/graio-mcp-server/" class="post-meta-item leancloud_visitors" data-flag-title="用gradio部署mcp server" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h3><p>mcp是一种创新的开源协议，用于规范大模型对外部工具的调用流程。mcp服务是供大模型调用的外部服务，用于增强大模型解决问题的能力。</p>
+<p>mcp服务可以用mcp python-sdk来搭建，官方教程在<a target="_blank" rel="noopener" href="https://github.com/modelcontextprotocol/python-sdk">这里</a>。对第一次尝试的同学来说，官方的sdk还是有一定门槛的。</p>
+<p>最近发现gradio 默认支持mcp server的<a target="_blank" rel="noopener" href="https://www.gradio.app/guides/building-mcp-server-with-gradio">部署</a>，也就是launch一个gradio demo后，默认就起一个mcp服务，无需额外学习mcp python sdk的使用。这对于已经熟悉gradio demo搭建的同学来说，方便了不少。下面我将展示一个简单的基于gradio的mcp server搭建，以及在一个mcp client中调用。</p>
+<span id="more"></span>
+
+<h3 id="2-mcp-server搭建"><a href="#2-mcp-server搭建" class="headerlink" title="2. mcp server搭建"></a>2. mcp server搭建</h3><p>首先需要安装graidio[mcp]，一行命令搞定:<code>pip install -U &quot;gradio[mcp]&quot;</code>。</p>
+<p>使用时，在demo.launch函数调用中增加一个参数<code> mcp_server=True</code> 即可，下面是一个最简单例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_two_values</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Sum value a and b</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        a (str): The first value</span></span><br><span class="line"><span class="string">        b (str): The second value</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        int: result of a + b</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(a) + <span class="built_in">int</span>(b)</span><br><span class="line"></span><br><span class="line">demo = gr.Interface(</span><br><span class="line">    fn=sum_two_values,</span><br><span class="line">    inputs=[gr.Textbox(<span class="number">1024</span>), gr.Textbox(<span class="number">512</span>)],</span><br><span class="line">    outputs=[gr.Number()],</span><br><span class="line">    title=<span class="string">&quot;Sum Two Values&quot;</span>,</span><br><span class="line">    description=<span class="string">&quot;Input two values and I will return the sum of them&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    demo.launch(mcp_server=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们写了一个把两个数相加的函数<code>sum_two_values</code>，通过详细的docstring对函数功能、输入参数、输出参数的类型、含义进行说明，这有助于大模型来正确地调用工具。</p>
+<p>然后创建了一个gradio的<code>Interface</code>界面，设计输入输出，调用上面的函数。</p>
+<p>最后启动interface界面，设置<code>mcp_server=True</code>。</p>
+<p>执行这个脚本后，log输出如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> Running on <span class="built_in">local</span> URL:  http://127.0.0.1:7860</span><br><span class="line">* To create a public link, <span class="built_in">set</span> `share=True` <span class="keyword">in</span> `launch()`.</span><br><span class="line"></span><br><span class="line">🔨 MCP server (using SSE) running at: http://127.0.0.1:7860/gradio_api/mcp/sse</span><br></pre></td></tr></table></figure>
+
+
+<p>首先是跟普通的gradio demo一样，列出网页服务的ip和端口。</p>
+<p>然后列出了mcp server的地址，这个地址就可以加到mcp client 里面，进行mcp server的调用（具体见下章节）。</p>
+<p>我们打开网页服务的网址，网页底下有通过 API 或 MCP 使用 按钮，点击之后选择MCP tab，也会给出MCP的地址：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-14c9e62f59ecb1b2dc101f3841a169a3_1440w.png?source=d16d100b"></p>
+<p><img data-src="https://picx.zhimg.com/80/v2-1afddff05619d73f4d8fc3b630045ad6_1440w.png?source=d16d100b"></p>
+<h3 id="3-mcp-client中调用服务"><a href="#3-mcp-client中调用服务" class="headerlink" title="3. mcp client中调用服务"></a>3. mcp client中调用服务</h3><p>mcp client有很多选择，cursor, cline, trae，通义灵码等。这里以通义灵码 IDE为例，展示添加mcp server 地址并调用的流程，别的工具几乎也是一样的使用流程。</p>
+<p>打开IDE，选择智能体模式，点击智能会话底部的MCP工具链接，进入配置：</p>
+<p><img data-src="https://picx.zhimg.com/80/v2-5413b180bb8c4ce6c5a45ba5ac817238_1440w.png?source=d16d100b"></p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-20477c48a3d7e437f8fb828575e45179_1440w.png?source=d16d100b"></p>
+<p>配置文件如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;gradio&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;http://127.0.0.1:7860/gradio_api/mcp/sse&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>服务添加好以后，就可以在聊天的时候进行使用了：</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-381f0e69c59c0c6dd333c475690499f0_1440w.png?source=d16d100b"></p>
+<p>mcp server的功能五花八门，通过这些工具，能对大模型的能力进行补充，完成更复杂的任务。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2025/06/04/graio-mcp-server/" title="用gradio部署mcp server">http://vra.github.io/2025/06/04/graio-mcp-server/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/Gradio/" rel="tag"># Gradio</a>
+              <a href="/tags/MCP/" rel="tag"># MCP</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/02/repetition-penality/" rel="prev" title="repetition_penality的作用与实现">
+                  <i class="fa fa-chevron-left"></i> repetition_penality的作用与实现
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/06/08/comma-v0-1/" rel="next" title="Comma v0.1 -全开源数据训练的可复现大模型">
+                  Comma v0.1 -全开源数据训练的可复现大模型 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

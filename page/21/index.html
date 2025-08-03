@@ -91,7 +91,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">189</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">203</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">215</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">203</span>
+          <span class="site-state-item-count">215</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -171,7 +171,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">189</span>
+        <span class="site-state-item-count">204</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -216,7 +216,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2014/10/19/e7-a7-8b-e5-a4-a9-e7-9a-84-e8-af-97/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/03/31/cpp-type-cast/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -234,7 +234,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2014/10/19/e7-a7-8b-e5-a4-a9-e7-9a-84-e8-af-97/" class="post-title-link" itemprop="url">秋天的诗</a>
+          <a href="/2015/03/31/cpp-type-cast/" class="post-title-link" itemprop="url">C++学习总结4——类型转换</a>
         </h2>
 
         <div class="post-meta-container">
@@ -245,7 +245,536 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2014-10-19 20:07:53" itemprop="dateCreated datePublished" datetime="2014-10-19T20:07:53+08:00">2014-10-19</time>
+      <time title="创建时间：2015-03-31 19:52:17" itemprop="dateCreated datePublished" datetime="2015-03-31T19:52:17+08:00">2015-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2015/03/31/cpp-type-cast/" class="post-meta-item leancloud_visitors" data-flag-title="C++学习总结4——类型转换" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在写程序的时候有时会遇到类型转换的问题，而这些问题的解答每次都记不住，每次都得上网查找，经常下来，也觉得很浪费时间。所以这里我把C语言和C++里面一些常用的类型转换方式写下来，一方面为了以后查找方便，另一方面也是希望通过敲一遍能尽可能地记住转换的思路。所有这些转换的代码我已经放到了<a target="_blank" rel="noopener" href="https://github.com/vra/cast-utilities">github</a>上，或许可以帮到你。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/03/31/cpp-type-cast/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/03/21/leisun-phd-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/03/21/leisun-phd-note/" class="post-title-link" itemprop="url">听孙雷博士论文答辩记录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-03-21 11:29:52" itemprop="dateCreated datePublished" datetime="2015-03-21T11:29:52+08:00">2015-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%80%9F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">速记</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2015/03/21/leisun-phd-note/" class="post-meta-item leancloud_visitors" data-flag-title="听孙雷博士论文答辩记录" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>任务目标：自然场景图片中的文字提取</p>
+<p>答辩人：孙雷</p>
+<p>答辩时间：2015.3.21早上9：00</p>
+<p>答辩老师：霍强，李厚强，俞能海，汪勇，刘老师，还有另外一位老师</p>
+<p>下面听答辩的学生有董政，我，研一的联合培养的记录员师兄，还有一位从ubc回国到合工大任教的博士师兄。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/03/21/leisun-phd-note/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/01/25/cpp-new-and-delete/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/01/25/cpp-new-and-delete/" class="post-title-link" itemprop="url">C++学习总结3——动态创建对象及其撤销</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-01-25 15:36:25" itemprop="dateCreated datePublished" datetime="2015-01-25T15:36:25+08:00">2015-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2015/01/25/cpp-new-and-delete/" class="post-meta-item leancloud_visitors" data-flag-title="C++学习总结3——动态创建对象及其撤销" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这里的动态创建对象，特指在程序中通过new命令创建对象；而撤销，特指通过delete命令来删除对象并释放其内存空间。</p>
+<h2 id="new和delete的基本用法"><a href="#new和delete的基本用法" class="headerlink" title="new和delete的基本用法"></a>new和delete的基本用法</h2><p><code>new</code>命令会在堆区域分配创建一个对象，而后返回此对象的地址。<br><code>delete</code>命令会释放指针指向的对象所占用的内存空间，而此后指针指向的地址是没有意义的，为了避免错误，一般来说，应该在delete后立即将指针置为NULL。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *pi=<span class="keyword">new</span> <span class="keyword">int</span>;    <span class="comment">//动态创建对象</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> pi;    <span class="comment">//删除动态创建对象</span></span><br><span class="line"></span><br><span class="line">pi=<span class="literal">NULL</span>;    <span class="comment">//将指针置为NULL</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：<code>delete</code>命令只能用来释放由<code>new</code>获得的指针，而且<code>new</code>得到的指针必须通过<code>delete</code>释放掉，否则会有内存泄漏的问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/01/25/cpp-new-and-delete/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/01/25/cpp-memory-mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/01/25/cpp-memory-mode/" class="post-title-link" itemprop="url">C++学习总结2——C++内存模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-01-25 11:31:31" itemprop="dateCreated datePublished" datetime="2015-01-25T11:31:31+08:00">2015-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2015/01/25/cpp-memory-mode/" class="post-meta-item leancloud_visitors" data-flag-title="C++学习总结2——C++内存模型" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>为了更直观的理解这部分内容，使用如下的程序实例进行说明：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/01/25/cpp-memory-mode/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2015/01/24/cpp-concepts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/01/24/cpp-concepts/" class="post-title-link" itemprop="url">C++学习总结1——几个基本概念</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-01-24 17:15:14" itemprop="dateCreated datePublished" datetime="2015-01-24T17:15:14+08:00">2015-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2015/01/24/cpp-concepts/" class="post-meta-item leancloud_visitors" data-flag-title="C++学习总结1——几个基本概念" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近我在做毕设。写程序的时候，总是被C++里面的指针搞得头昏脑胀。刚开始的时候还有些浮躁，不想静下心来仔细看看指针使用的细节。过了几天发现只在Visual Studio里面调试怎么也搞不定，只好硬着头皮，重新学习指针的用法。在看书和看别人写的博客后，感觉学到了许多新的东西，不光是关于指针，还有其他一些以前我不太清楚的内容。这些知识如果不常用或不记录下来的话，肯定会忘掉的，所以我就把它们都写下来，避免以后犯同样的错误。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/01/24/cpp-concepts/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2014/12/31/some-new-poems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2014/12/31/some-new-poems/" class="post-title-link" itemprop="url">一些新看到的诗词</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2014-12-31 12:42:52" itemprop="dateCreated datePublished" datetime="2014-12-31T12:42:52+08:00">2014-12-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,7 +794,7 @@
     </span>
 
   
-    <span id="/2014/10/19/e7-a7-8b-e5-a4-a9-e7-9a-84-e8-af-97/" class="post-meta-item leancloud_visitors" data-flag-title="秋天的诗" title="阅读次数">
+    <span id="/2014/12/31/some-new-poems/" class="post-meta-item leancloud_visitors" data-flag-title="一些新看到的诗词" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -281,12 +810,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>震落了清晨满披着的露珠，<br>伐木声丁丁地飘出幽谷。<br>放下饱食过稻香的镰刀，<br>用背篓来装竹篱间肥硕的瓜果。<br>秋天栖息在农家里。<br>向江面的冷雾撒下圆圆的网，<br>收起青鳊鱼似的乌桕叶的影子。<br>芦蓬上满载着白霜，<br>轻轻摇着归泊的小桨。<br>秋天游戏在渔船上。<br>草野在蟋蟀声中更寥阔了。<br>溪水因枯涸见石更清洌了。<br>牛背上的笛声何处去了，<br>那满流着夏夜的香与热的笛孔？<br>秋天梦寐在牧羊女的眼里。</p>
-<p>——–秋天，何其芳</p>
-<p>每年到秋天都会想起这首初中学的诗，虽然在城市里、在校园里没有农人家，没有渔船更无牧羊女，只有银杏叶渐渐变黄而摇落，晚樱树的叶子经霜变红变黄而色彩斑斓。</p>
-<p>&nbsp;</p>
-<p><a href="/uploads/2014/10/7427ea21079d13a655072d.jpg"><img data-src="/uploads/2014/10/7427ea21079d13a655072d.jpg" alt="7427ea21079d13a655072d"></a></p>
-
+          <p><span style="color: #000000;"> </span></p>
+<p><span style="color: #000000;">今天是2014年的最后一天。昨天无聊的时候，翻着手机里面的照片，看到了玩么么答游戏时，不会的题目的截屏。其中大多数是诗词这个类别的题目，于是我便百度了这些诗词的完整的内容。因为这些诗词都是我之前不知道的，所以记录下来，用手敲一遍可能会对记忆有帮助吧，说不定以后就能融为自身的一部分呢。所以就抄录如下了。</span></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2014/12/31/some-new-poems/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -314,7 +847,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2014/06/07/e5-a4-a9-e7-a9-ba/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2014/12/15/devices-partition-filesystem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -332,7 +865,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2014/06/07/e5-a4-a9-e7-a9-ba/" class="post-title-link" itemprop="url">天空</a>
+          <a href="/2014/12/15/devices-partition-filesystem/" class="post-title-link" itemprop="url">设备文件,分区和文件系统辨析</a>
         </h2>
 
         <div class="post-meta-container">
@@ -343,7 +876,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2014-06-07 11:25:57" itemprop="dateCreated datePublished" datetime="2014-06-07T11:25:57+08:00">2014-06-07</time>
+      <time title="创建时间：2014-12-15 14:57:56" itemprop="dateCreated datePublished" datetime="2014-12-15T14:57:56+08:00">2014-12-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -358,12 +891,12 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9C%9D%E8%8A%B1%E5%A4%95%E6%8B%BE/" itemprop="url" rel="index"><span itemprop="name">朝花夕拾</span></a>
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
         </span>
     </span>
 
   
-    <span id="/2014/06/07/e5-a4-a9-e7-a9-ba/" class="post-meta-item leancloud_visitors" data-flag-title="天空" title="阅读次数">
+    <span id="/2014/12/15/devices-partition-filesystem/" class="post-meta-item leancloud_visitors" data-flag-title="设备文件,分区和文件系统辨析" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -379,10 +912,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>关于天空我有两段记忆特别深刻，一个是在某个秋天，爷爷，云亮和我去地里拉玉米秆时，我看到的傍晚的天空，还有一个是在初三从杜家塄上搬到渭河边后，每天傍晚，吃过饭后，在院子中闲坐时的天空。</p>
-<p>我向天空望了望，看到了天上稀疏的云彩，被风扯成丝带状。天空比以往时候都要清澈，仿佛秋天的风拂去了平日里飘在天幕下的灰尘，而今可以看到一尘不染的真正的天空。秋天的风略微有些冷，太阳也还未下山，向这片川道里投下最后的光。</p>
-<p>&nbsp;</p>
-
+          <p>在写上一篇博客时,我发现我没搞清楚块设备(block device),分区(partion)和文件系统(filesystem)这几个概念之间的关系,今早查了一些资料才慢慢理解了它们之间的关系,所以我想写出来,看看我能不能将一个问题描述清楚.下面我依次描述设备文件,分区和文件系统这三个概念.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2014/12/15/devices-partition-filesystem/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -410,7 +948,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2013/12/11/e4-bd-99-e5-bf-86-e7-ab-a5-e7-a8-9a-e6-97-b6-e5-bc-80-e7-af-87/">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2014/12/14/fstab-automount-windows-partitions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -428,7 +966,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2013/12/11/e4-bd-99-e5-bf-86-e7-ab-a5-e7-a8-9a-e6-97-b6-e5-bc-80-e7-af-87/" class="post-title-link" itemprop="url">余忆童稚时--开篇</a>
+          <a href="/2014/12/14/fstab-automount-windows-partitions/" class="post-title-link" itemprop="url">Linux下通过修改fstab来自动挂载Windows 分区</a>
         </h2>
 
         <div class="post-meta-container">
@@ -439,7 +977,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2013-12-11 23:05:49" itemprop="dateCreated datePublished" datetime="2013-12-11T23:05:49+08:00">2013-12-11</time>
+      <time title="创建时间：2014-12-14 21:14:47" itemprop="dateCreated datePublished" datetime="2014-12-14T21:14:47+08:00">2014-12-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -454,12 +992,12 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9C%9D%E8%8A%B1%E5%A4%95%E6%8B%BE/" itemprop="url" rel="index"><span itemprop="name">朝花夕拾</span></a>
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
         </span>
     </span>
 
   
-    <span id="/2013/12/11/e4-bd-99-e5-bf-86-e7-ab-a5-e7-a8-9a-e6-97-b6-e5-bc-80-e7-af-87/" class="post-meta-item leancloud_visitors" data-flag-title="余忆童稚时--开篇" title="阅读次数">
+    <span id="/2014/12/14/fstab-automount-windows-partitions/" class="post-meta-item leancloud_visitors" data-flag-title="Linux下通过修改fstab来自动挂载Windows 分区" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -475,9 +1013,218 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>我最近时常想起一些小时候——也就是从我出生到我离开家乡去县城读初中之前——的事情，不知道是何缘由，或许是因为最近几年奶奶，爷爷和姥姥的相继离世吧。</p>
-<p>想起这些事我总是觉得有必要将它们记录下来，尽管它们一直在我的脑海里不会丢掉，但我更喜欢文字记录下的那种字字句句的真实的存在，所以呢，我打算在科大博客上写一系列的回忆童年的日志，当作对奶奶，爷爷和外婆的纪念。</p>
+          <p>我电脑装的是Windows和Linux双系统,以前在Linux下,要打开Windows系统的C盘或D盘,总是要输入密码,很麻烦,而且麻烦了很长时间.</p>
+<p>后来有一天浩哥看到了,说可以在Linux开机时自动挂载Windows分区,修改<code>/etc/fstab</code>这个文件,可以采用每个分区的UUID.后来校长也看到了我每次麻烦的操作,说是确实可以搞,而且他已经搞定了.我想我也得搞搞了.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2014/12/14/fstab-automount-windows-partitions/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2014/12/14/debian-discuz/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2014/12/14/debian-discuz/" class="post-title-link" itemprop="url">Debian 下搭建Discuz!论坛</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2014-12-14 15:22:52" itemprop="dateCreated datePublished" datetime="2014-12-14T15:22:52+08:00">2014-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2014/12/14/debian-discuz/" class="post-meta-item leancloud_visitors" data-flag-title="Debian 下搭建Discuz!论坛" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="http://www.discuz.net/">Discuz!</a>是一个用PHP编写的论坛框架,像<a target="_blank" rel="noopener" href="http://bt.neu6.edu.cn/" title="六维">六维</a>以及我们学校少年班学院的<a target="_blank" rel="noopener" href="https://gewu.ustc.edu.cn/">格物致知论坛</a>都是搭建在Discuz!上面的,看论坛页面左下角,都写着”Powered by Discuz!_xxx”,_其中xxx表示Discuz!的版本号.因为我们实验室师兄用内网搭建了个服务器管理的论坛,而且我之前也尝试过搭建wordpress博客(详细过程可以看我<a target="_blank" rel="noopener" href="https://vra.blog.ustc.edu.cn/debian-wordpress/">这篇博客</a>)而且成功了(其实没什么技术含量….),估计这个过程也差不多,所以我就想试试Discuz!能否搞定.但我们学校有规定,不能用freeshell搭建网络论坛的,所以我就在我电脑上试着搞搞Discuz!玩玩.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2014/12/14/debian-discuz/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2014/12/13/our-record/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2014/12/13/our-record/" class="post-title-link" itemprop="url">记录我们的点点滴滴</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2014-12-13 22:51:48" itemprop="dateCreated datePublished" datetime="2014-12-13T22:51:48+08:00">2014-12-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-20 23:48:01" itemprop="dateModified" datetime="2021-08-20T23:48:01+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%88%91%E4%BB%AC%E7%9A%84%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">我们的记录</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2014/12/13/our-record/" class="post-meta-item leancloud_visitors" data-flag-title="记录我们的点点滴滴" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>还记得你初次敲代码时专注的模样</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2014/12/13/our-record/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -498,7 +1245,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span>
+    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
