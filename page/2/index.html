@@ -91,7 +91,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">216</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">221</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">216</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -207,6 +207,496 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/28/qwen-vlo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/28/qwen-vlo/" class="post-title-link" itemprop="url">Qwen VLo 效果实测</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-28 19:06:35" itemprop="dateCreated datePublished" datetime="2025-06-28T19:06:35+08:00">2025-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-03 19:10:37" itemprop="dateModified" datetime="2025-08-03T19:10:37+08:00">2025-08-03</time>
+    </span>
+
+  
+    <span id="/2025/06/28/qwen-vlo/" class="post-meta-item leancloud_visitors" data-flag-title="Qwen VLo 效果实测" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>2025年6月26日，Qwen团队发布了<a target="_blank" rel="noopener" href="https://qwenlm.github.io/blog/qwen-vlo/">Qwen VLo</a>，一个定位是“unified multimodal understanding and generation model”的模型，包括多模态的理解和生成。</p>
+<p>根据官方的介绍博客，Qwen VLo包含下面的功能：</p>
+<ul>
+<li>图像生成：文生图、2D卡通图像转真实图像</li>
+<li>图像编辑：例如修改某个主体、更换颜色、更换风格</li>
+<li>图像算法能力：例如检测框、canny 算子、图像分割结果</li>
+</ul>
+<p>经过一段时间的测试，我个人的总结是：</p>
+<ol>
+<li>生图能力：效果比较差，感觉是一两年前生图模型的水平</li>
+<li>图像风格转换：效果比较稳定，生图有美感</li>
+<li>图像编辑能力：还算可以，有一些case做不好</li>
+<li>检测框：能稳定生成，单人没问题，多人场景下也不算很准</li>
+<li>图像分割：没有成功</li>
+<li>canny算子：细节更丰富，但有一些地方与原图并非完全对齐</li>
+</ol>
+<p>再单独吐槽一个点，刚开始没找到Qwen VLo的入口，看微信公众号文章的留言才发现，并不是以一个模型列在可选模型列表中的，而是不管选择什么模型，只要做生图任务或者上传图片进行对话，都调用Qwen VLo。这种不遵从用户已有习惯的设置，随意而为的做法，用户体验很差，要是没看到留言回复，真的不知道怎么用。</p>
+<p>下面详细展开我上面总结中各个条目的实际结果。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/06/28/qwen-vlo/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/12/meituan-nocode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/12/meituan-nocode/" class="post-title-link" itemprop="url">美团 NoCode 简单使用体验</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-12 19:02:05" itemprop="dateCreated datePublished" datetime="2025-06-12T19:02:05+08:00">2025-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-03 19:20:58" itemprop="dateModified" datetime="2025-08-03T19:20:58+08:00">2025-08-03</time>
+    </span>
+
+  
+    <span id="/2025/06/12/meituan-nocode/" class="post-meta-item leancloud_visitors" data-flag-title="美团 NoCode 简单使用体验" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>网站地址：<a target="_blank" rel="noopener" href="https://nocode.cn/">NoCode-零代码应用生成平台</a></p>
+<p>简单使用了下，生成代码速度挺快的，NoCode的UI设计也简洁好用，但试了几次官方的实例（）生成的代码也没跑起来。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/06/12/meituan-nocode/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/08/text-friendly-product/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/08/text-friendly-product/" class="post-title-link" itemprop="url">AI时代的产品文本化</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-08 18:57:25" itemprop="dateCreated datePublished" datetime="2025-06-08T18:57:25+08:00">2025-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-03 18:59:49" itemprop="dateModified" datetime="2025-08-03T18:59:49+08:00">2025-08-03</time>
+    </span>
+
+  
+    <span id="/2025/06/08/text-friendly-product/" class="post-meta-item leancloud_visitors" data-flag-title="AI时代的产品文本化" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Andrej Karpathy 有一条关于AI时代产品文本化的推文如下：</p>
+<blockquote>
+<p>Products with extensive/rich UIs lots of sliders, switches, menus, with no scripting support, and built on opaque, custom, binary formats are ngmi in the era of heavy human+AI collaboration.</p>
+<p>If an LLM can’t read the underlying representations and manipulate them and all of the related settings via scripting, then it also can’t co-pilot your product with existing professionals and it doesn’t allow vibe coding for the 100X more aspiring prosumers.</p>
+<p>Example high risk (binary objects/artifacts, no text DSL): every Adobe product, DAWs, CAD/3D Example medium-high risk (already partially text scriptable): Blender, Unity<br>Example medium-low risk (mostly but not entirely text already, some automation/plugins ecosystem): Excel<br>Example low risk (already just all text, lucky!): IDEs like VS Code, Figma, Jupyter, Obsidian, …</p>
+<p>Al’s will get better and better at human UIUX (Operator and friends), but I suspect the products that attempt to exclusively wait for this future without trying to meet the technology halfway where it is today are not going to have a good time.</p>
+</blockquote>
+<p>以下是我的一些见解。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/06/08/text-friendly-product/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/08/comma-v0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/08/comma-v0-1/" class="post-title-link" itemprop="url">Comma v0.1 -全开源数据训练的可复现大模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-08 18:47:57" itemprop="dateCreated datePublished" datetime="2025-06-08T18:47:57+08:00">2025-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-03 18:49:19" itemprop="dateModified" datetime="2025-08-03T18:49:19+08:00">2025-08-03</time>
+    </span>
+
+  
+    <span id="/2025/06/08/comma-v0-1/" class="post-meta-item leancloud_visitors" data-flag-title="Comma v0.1 -全开源数据训练的可复现大模型" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>credit: <a target="_blank" rel="noopener" href="https://simonwillison.net/2025/Jun/7/comma/">via</a></p>
+</blockquote>
+<p>近期，<a target="_blank" rel="noopener" href="https://huggingface.co/common-pile">Common Pile</a> 团队开源了利用开放数据训练的7B LLM模型Comma v0.1 1T和2T，训练数据采用的是这个团队采集的<a target="_blank" rel="noopener" href="https://huggingface.co/collections/common-pile/common-pile-v01-68307d37df48e36f02717f21">Common Pile v0.1</a>，1个8T的数据集，包含公开数据，以及开放证书的数据，也就是训练大模型都是合法的，没有采用带版权的数据。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/06/08/comma-v0-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/04/graio-mcp-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/04/graio-mcp-server/" class="post-title-link" itemprop="url">用gradio部署mcp server</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-04 18:41:54" itemprop="dateCreated datePublished" datetime="2025-06-04T18:41:54+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-03 18:45:46" itemprop="dateModified" datetime="2025-08-03T18:45:46+08:00">2025-08-03</time>
+    </span>
+
+  
+    <span id="/2025/06/04/graio-mcp-server/" class="post-meta-item leancloud_visitors" data-flag-title="用gradio部署mcp server" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h3><p>mcp是一种创新的开源协议，用于规范大模型对外部工具的调用流程。mcp服务是供大模型调用的外部服务，用于增强大模型解决问题的能力。</p>
+<p>mcp服务可以用mcp python-sdk来搭建，官方教程在<a target="_blank" rel="noopener" href="https://github.com/modelcontextprotocol/python-sdk">这里</a>。对第一次尝试的同学来说，官方的sdk还是有一定门槛的。</p>
+<p>最近发现gradio 默认支持mcp server的<a target="_blank" rel="noopener" href="https://www.gradio.app/guides/building-mcp-server-with-gradio">部署</a>，也就是launch一个gradio demo后，默认就起一个mcp服务，无需额外学习mcp python sdk的使用。这对于已经熟悉gradio demo搭建的同学来说，方便了不少。下面我将展示一个简单的基于gradio的mcp server搭建，以及在一个mcp client中调用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/06/04/graio-mcp-server/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -660,452 +1150,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/gitpod-intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/15/gitpod-intro/" class="post-title-link" itemprop="url">GitPod简单使用说明</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-15 16:22:38 / 修改时间：16:28:08" itemprop="dateCreated datePublished" datetime="2025-02-15T16:22:38+08:00">2025-02-15</time>
-    </span>
-
-  
-    <span id="/2025/02/15/gitpod-intro/" class="post-meta-item leancloud_visitors" data-flag-title="GitPod简单使用说明" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>GitPod是一个云端开发IDE，可以访问<code>gitpod.io</code>，绑定GitHub账号后打开GitHub上的任意项目，也可以通过安装浏览器插件，直接在GitHub网站打开IDE。</p>
-<p>GitPod打开后默认是个VS Code在线环境，有一台国外的容器可以使用，机器配置如下：</p>
-<ul>
-<li>CPU: 16核，型号AMD EPYC 7B13</li>
-<li>内存：64G</li>
-<li>存储：30G</li>
-</ul>
-<p>由于它的服务器在国外，因此可以快速下载GitHub, Google Drive或Hugging Face上的一些模型，然后用Python开一个简单的网页服务(<code>python -m http.server</code>)，再在本地用wget下载模型，速度还可以。</p>
-<p>GitPod主打的一个点是快速启动开发环境，可以通过在<a target="_blank" rel="noopener" href="https://gitpod.io/user/preferences">https://gitpod.io/user/preferences</a> 设置中指定dotfile来设置启动环境</p>
-<p>这个dotfiles仓库可以保存你常用的rc文件等，保证熟悉的环境能够快速上手，例如我将自己的常用配置放到<a target="_blank" rel="noopener" href="https://github.com/vra/dotfiles">https://github.com/vra/dotfiles</a>，开机就能用上熟悉的开发环境了。</p>
-<p>总之，GitPod可以作为一个免费的临时服务器和在线IDE，偶尔用用还不错。</p>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/poetrystrands/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/15/poetrystrands/" class="post-title-link" itemprop="url">poetrystrands</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-15 16:03:26 / 修改时间：21:42:55" itemprop="dateCreated datePublished" datetime="2025-02-15T16:03:26+08:00">2025-02-15</time>
-    </span>
-
-  
-    <span id="/2025/02/15/poetrystrands/" class="post-meta-item leancloud_visitors" data-flag-title="poetrystrands" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>发现一个挺有意思的古诗词连线网站<a target="_blank" rel="noopener" href="https://poetrystrands.com/">PoetryStrands</a>，网站简洁风，有空可以玩一玩，复习古诗词。这种简单创意网站值得被记录。</p>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/as-a-junior-engineer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/15/as-a-junior-engineer/" class="post-title-link" itemprop="url">as-a-junior-engineer</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-15 15:45:10 / 修改时间：16:01:58" itemprop="dateCreated datePublished" datetime="2025-02-15T15:45:10+08:00">2025-02-15</time>
-    </span>
-
-  
-    <span id="/2025/02/15/as-a-junior-engineer/" class="post-meta-item leancloud_visitors" data-flag-title="as-a-junior-engineer" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>As a junior engineer, there’s simply no substitute for getting the first 100K lines of code under your belt. The “start over each day” method will help get you to those 100K lines faster.You might think covering the same ground multiple times isn’t as valuable as getting 100K diverse lines of code. I disagree. Solving the same problem repeatedly is actually really beneficial for retaining knowledge of patterns you figure out.You only need 5K perfect lines to see all the major patterns once. The other 95K lines are repetition to rewire your neurons.</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://grantslatton.com/software-pathfinding#quantity-has-a-quality-all-of-its-own">Algorithms we develop software by</a>,很有同感的一段话，很多事情只有不断重复才能真正掌握它，例如走路，会走一次，不能算学会走路，只有不断地走，直到忽略你在走路这个事实之后，才算真正地学会了走路。</p>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/02/15/blog-new-plan-2025/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/15/blog-new-plan-2025/" class="post-title-link" itemprop="url">博客新计划</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-15 15:09:36 / 修改时间：15:26:31" itemprop="dateCreated datePublished" datetime="2025-02-15T15:09:36+08:00">2025-02-15</time>
-    </span>
-
-  
-    <span id="/2025/02/15/blog-new-plan-2025/" class="post-meta-item leancloud_visitors" data-flag-title="博客新计划" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>AI技术日新月异，能用AI做的事情越来越多。</p>
-<p>作为一个普通人，知识和技能唾手可得，记忆性的东西不再重要，而独特的思维方式则是你区别于别人的重要标签。在这样的时代背景下，每个人越来越需要独立思考的能力，因此每个自己的独特想法、见解都值得被记录下来。</p>
-<p>而作为一个blogger，也许在未来（或现在?)，利用你的博客内容，AI可以重建你的思考方式，针对每一个新的事件，AI会给出你的评价，然后在跟自己真实的看法进行对照，是不是很有意思呢？。</p>
-<p>基于上面的思考，我决定事无巨细地在这个博客中更新自己的技术内容，包括看到的技术内容引用，简单的comments，尝试新东西的过程，阅读技术代码的历程，造轮子的步骤，等等，总之就是不论大小，一概记录，相信当内容积攒越来越多后，基于这个博客的语料数据，结合我编写的代码，AI能够准确地重建一个我的程序员分身，这样未来也许我就不需要写代码了哈哈。</p>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/01/29/TransformerEncoder-onnx-export-issue/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/01/29/TransformerEncoder-onnx-export-issue/" class="post-title-link" itemprop="url">TransformerEncoder导出onnx问题解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-01-29 16:38:07" itemprop="dateCreated datePublished" datetime="2025-01-29T16:38:07+08:00">2025-01-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-15 17:15:20" itemprop="dateModified" datetime="2025-02-15T17:15:20+08:00">2025-02-15</time>
-    </span>
-
-  
-    <span id="/2025/01/29/TransformerEncoder-onnx-export-issue/" class="post-meta-item leancloud_visitors" data-flag-title="TransformerEncoder导出onnx问题解决" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-问题说明"><a href="#1-问题说明" class="headerlink" title="1. 问题说明"></a>1. 问题说明</h3><p>在使用Pytorch的TransformerEncoder时，导出onnx会将时序长度固定，导致没法采用变长输入，例如下面的简单例子复现了这个问题：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleTransformer</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_dim=<span class="number">512</span>, num_layers=<span class="number">6</span>, nhead=<span class="number">8</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="comment"># 创建Transformer编码器层</span></span><br><span class="line">        encoder_layer = nn.TransformerEncoderLayer(</span><br><span class="line">            d_model=input_dim,</span><br><span class="line">            nhead=nhead,</span><br><span class="line">            dim_feedforward=<span class="number">2048</span>,</span><br><span class="line">            dropout=<span class="number">0.1</span>,</span><br><span class="line">            activation=<span class="string">&quot;relu&quot;</span>,</span><br><span class="line">            batch_first=<span class="literal">True</span>,  <span class="comment"># 使用batch_first格式</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 创建Transformer编码器</span></span><br><span class="line">        self.transformer_encoder = nn.TransformerEncoder(</span><br><span class="line">            encoder_layer, num_layers=num_layers</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="comment"># 输入形状: (batch_size, seq_len, input_dim)</span></span><br><span class="line">        x = self.input_proj(x)</span><br><span class="line">        output = self.transformer_encoder(x)</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例化模型</span></span><br><span class="line">model = SimpleTransformer(input_dim=<span class="number">512</span>, num_layers=<span class="number">2</span>, nhead=<span class="number">8</span>)</span><br><span class="line">model.<span class="built_in">eval</span>()  <span class="comment"># 设置为评估模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建示例输入（batch_size=2, seq_len=10, input_dim=512）</span></span><br><span class="line">dummy_input = torch.randn(<span class="number">2</span>, <span class="number">10</span>, <span class="number">512</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出ONNX模型</span></span><br><span class="line">torch.onnx.export(</span><br><span class="line">    model,</span><br><span class="line">    (dummy_input,),</span><br><span class="line">    <span class="string">&quot;transformer_encoder.onnx&quot;</span>,</span><br><span class="line">    do_constant_folding=<span class="literal">True</span>,  <span class="comment"># 优化常量折叠</span></span><br><span class="line">    input_names=[<span class="string">&quot;input&quot;</span>],  <span class="comment"># 输入节点名称</span></span><br><span class="line">    output_names=[<span class="string">&quot;output&quot;</span>],  <span class="comment"># 输出节点名称</span></span><br><span class="line">    dynamo=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;ONNX model exported successfully!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证导出的模型</span></span><br><span class="line"><span class="keyword">import</span> onnxruntime <span class="keyword">as</span> ort</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dummy_input2 = torch.randn(<span class="number">2</span>, <span class="number">11</span>, <span class="number">512</span>)</span><br><span class="line">ort_session = ort.InferenceSession(<span class="string">&quot;transformer_encoder.onnx&quot;</span>)</span><br><span class="line">outputs = ort_session.run(</span><br><span class="line">    <span class="literal">None</span>,</span><br><span class="line">    &#123;<span class="string">&quot;input&quot;</span>: dummy_input2.numpy()&#125;</span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;ONNX output shape:&quot;</span>, outputs[<span class="number">0</span>].shape)</span><br></pre></td></tr></table></figure>
-<p>导出onnx时采用的时序长度是10，验证时采用时序长度11，运行时会报错：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">2025-01-29 14:17:25.266794 [E:onnxruntime:, sequential_executor.cc:516 ExecuteKernel] Non-zero status code returned <span class="keyword">while</span> running Reshape node. Name:<span class="string">&#x27;/transformer_encoder/layers.0/self_attn/Reshape_4&#x27;</span> Status Message: /Users/runner/work/1/s/onnxruntime/core/providers/cpu/tensor/reshape_helper.h:47 onnxruntime::ReshapeHelper::ReshapeHelper(const onnxruntime::TensorShape &amp;, onnxruntime::TensorShapeVector &amp;, bool) input_shape_size == size was <span class="literal">false</span>. The input tensor cannot be reshaped to the requested shape. Input shape:&#123;11,2,512&#125;, requested shape:&#123;10,16,64&#125;</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/Users/ws/export.py&quot;</span>, line 63, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    outputs = ort_session.run(</span><br><span class="line">              ^^^^^^^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/Users/ws/miniforge3/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py&quot;</span>, line 266, <span class="keyword">in</span> run</span><br><span class="line">    <span class="built_in">return</span> self._sess.run(output_names, input_feed, run_options)</span><br><span class="line">           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span><br><span class="line">onnxruntime.capi.onnxruntime_pybind11_state.RuntimeException: [ONNXRuntimeError] : 6 : RUNTIME_EXCEPTION : Non-zero status code returned <span class="keyword">while</span> running Reshape node. Name:<span class="string">&#x27;/transformer_encoder/layers.0/self_attn/Reshape_4&#x27;</span> Status Message: /Users/runner/work/1/s/onnxruntime/core/providers/cpu/tensor/reshape_helper.h:47 onnxruntime::ReshapeHelper::ReshapeHelper(const onnxruntime::TensorShape &amp;, onnxruntime::TensorShapeVector &amp;, bool) input_shape_size == size was <span class="literal">false</span>. The input tensor cannot be reshaped to the requested shape. Input shape:&#123;11,2,512&#125;, requested shape:&#123;10,16,64&#125;</span><br></pre></td></tr></table></figure>
-
-<p>尝试了Pytorch 2+ 提供的TorchDynamo-based ONNX Exporter（torch.onnx.export增加<code>dynamo=True</code>参数），也是同样的报错。</p>
-<h3 id="2-如何解决"><a href="#2-如何解决" class="headerlink" title="2. 如何解决"></a>2. 如何解决</h3><p>这个问题在Pytorch的GitHub 上有几个issue都在讨论，并且也给出了解决方案，不过不知道为什么官方一直没有集成修复代码。</p>
-<p>修复方式也比较简单，修改<code>torch/nn.functional.py</code>中的两行代码即可。具体操作如下。</p>
-<p>首先定位到当前python环境的functional.py的路径，采用下面的一行命令即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c <span class="string">&quot;import torch, os; print(os.path.join(os.path.dirname(torch.__file__), &#x27;nn&#x27;, &#x27;functional.py&#x27;))&quot;</span></span><br></pre></td></tr></table></figure>
-<p>然后打开这个文件，搜索<code>k = k.view(k.shape[0</code>，只有一处匹配，大概在6200行，内容是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k = k.view(k.shape[<span class="number">0</span>], bsz * num_heads, head_dim).transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>可用看到这里调用了k.shape[0]，在导出onnx时被固定了。将这一句修改为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k = k.view(-<span class="number">1</span>, bsz * num_heads, head_dim).transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>同样的，搜索<code>v = v.view(v.shape[0]</code>，也只有一处匹配，紧接着上面的代码，原始内容：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v = v.view(v.shape[<span class="number">0</span>], bsz * num_heads, head_dim).transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>修改为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v = v.view(-<span class="number">1</span>, bsz * num_heads, head_dim).transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>保存文件，再运行上面导出和验证onnx的脚本，一切正常了。</p>
-<p>这种方式需要修改Pytorch源码，还是不太方便的，换一个环境，换一个机器，都得操作一遍，希望官方早日解决这个问题。</p>
-<h3 id="3-相关Issues"><a href="#3-相关Issues" class="headerlink" title="3. 相关Issues"></a>3. 相关Issues</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/122321">https://github.com/pytorch/pytorch/issues/122321</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/122865">https://github.com/pytorch/pytorch/issues/122865</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/99701">https://github.com/pytorch/pytorch/issues/99701</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/117209">https://github.com/pytorch/pytorch/issues/117209</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

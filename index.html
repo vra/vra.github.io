@@ -91,7 +91,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">216</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">221</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">216</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -298,6 +298,546 @@
 <li>片场风云 第一季</li>
 <li>匹兹堡医护前线 第一季</li>
 </ul>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/12/20/lyrichroma/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/20/lyrichroma/" class="post-title-link" itemprop="url">lyrichroma-一键将语音转换为视频的Python命令行工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-20 16:56:43" itemprop="dateCreated datePublished" datetime="2025-12-20T16:56:43+08:00">2025-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-01 17:00:08" itemprop="dateModified" datetime="2026-01-01T17:00:08+08:00">2026-01-01</time>
+    </span>
+
+  
+    <span id="/2025/12/20/lyrichroma/" class="post-meta-item leancloud_visitors" data-flag-title="lyrichroma-一键将语音转换为视频的Python命令行工具" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>最近有个工作需要一个宣传视频，我希望将声音转换为黑白背景的视频，并且将声音对应的文字通过字幕形式显示出来，但没找到合适的工具。剪映语音识别字幕当然做的很好，但是要开VIP；必剪语音识别时候卡死……而刚好最近AI Coding工具越来越强，我在想，何不自己做一个顺手的工具呢，于是就有了这个极简的Python 命令行工具lyrichroma，一键音频转视频，可以设置背景，可以调整字幕位置，可以手动修改ASR识别的字幕错误，等等功能。</p>
+<p>代码仓库: <a target="_blank" rel="noopener" href="https://github.com/vra/lyrichroma">https://github.com/vra/lyrichroma</a></p>
+<h2 id="主要功能一览"><a href="#主要功能一览" class="headerlink" title="主要功能一览"></a>主要功能一览</h2><p>在详细介绍如何使用之前，让我们先来看看 lyrichroma 的主要特性：</p>
+<p>自动语音识别（ASR）：基于 faster-whisper 引擎，支持多种语言（包括中文），并提供词级别的时间戳，支持切换ASR模型<br>动态背景效果：内置多种炫酷的动态背景，比如极光、日落、海洋、赛博朋克和森林主题<br>卡拉OK样式字幕：实时高亮当前朗读的单词，营造卡拉OK效果<br>高度可定制化：支持调整字体大小、颜色、高亮颜色和字幕位置<br>字幕编辑功能：可导出字幕为 JSON 文件进行人工校对，再重新导入生成视频</p>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>最简单的安装方式是使用pip：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install lyrichroma</span><br></pre></td></tr></table></figure>
+<p>另外，如果想想源码使用也是可以的，lyrichroma 使用 uv 进行管理，因此使用非常方便</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先安装 uv（如果尚未安装）</span></span><br><span class="line">pip install uv</span><br><span class="line"></span><br><span class="line"><span class="comment"># clone 代码</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/vra/lyrichroma</span><br><span class="line"><span class="built_in">cd</span> lyrichroma</span><br><span class="line"></span><br><span class="line"><span class="comment">#同步依赖</span></span><br><span class="line">uv sync</span><br></pre></td></tr></table></figure>
+<p>就是这么简单！接下来我们就可以开始使用了。</p>
+<h2 id="基础使用方法"><a href="#基础使用方法" class="headerlink" title="基础使用方法"></a>基础使用方法</h2><p>最基本的用法只需要一行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lyrichroma --input audio.mp3 --output video.mp4</span><br></pre></td></tr></table></figure>
+<p>这条命令会将 audio.mp3 转换为 video.mp4，并配有黑色背景和白色字幕。</p>
+<h2 id="进阶使用技巧"><a href="#进阶使用技巧" class="headerlink" title="进阶使用技巧"></a>进阶使用技巧</h2><ol>
+<li>动态背景效果<br>如果你觉得纯色背景太单调，lyrichroma 内置了几种炫酷的动态背景：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lyrichroma --input audio.mp3 --output video.mp4 --bg-type dynamic --bg-value aurora</span><br></pre></td></tr></table></figure>
+目前支持的调色板包括：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">aurora（极光效果，默认）</span><br><span class="line">sunset（日落效果）</span><br><span class="line">ocean（海洋效果）</span><br><span class="line">cyberpunk（赛博朋克效果）</span><br><span class="line">forest（森林效果）</span><br></pre></td></tr></table></figure>
+<h2 id="2-自定义静态背景"><a href="#2-自定义静态背景" class="headerlink" title="2. 自定义静态背景"></a>2. 自定义静态背景</h2>除了动态背景，你还可以使用纯色或图片作为背景：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用纯色背景</span></span><br><span class="line">lyrichroma --input audio.mp3 --output video.mp4 --bg-type color --bg-value <span class="string">&quot;#FF5733&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用图片背景</span></span><br><span class="line">lyrichroma --input audio.mp3 --output video.mp4 --bg-type image --bg-value background.jpg</span><br></pre></td></tr></table></figure>
+<h2 id="3-字幕样式定制"><a href="#3-字幕样式定制" class="headerlink" title="3. 字幕样式定制"></a>3. 字幕样式定制</h2><p>lyrichroma 提供了样式定制选项：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lyrichroma \</span><br><span class="line">  --input audio.mp3 \</span><br><span class="line">  --output video.mp4 \</span><br><span class="line">  --font-size 60 \</span><br><span class="line">  --font-color <span class="string">&quot;#FFFFFF&quot;</span> \</span><br><span class="line">  --highlight-color <span class="string">&quot;#FF0000&quot;</span> \</span><br><span class="line">  --text-y 0.8</span><br></pre></td></tr></table></figure>
+<p>各参数含义：<br>–font-size：设置字幕字体大小（默认40）<br>–font-color：设置字幕颜色（默认白色）<br>–highlight-color：设置当前朗读词的高亮颜色（默认黄色）<br>–text-y：设置字幕垂直位置，范围0.0（顶部）到1.0（底部）（默认0.8）</p>
+<h2 id="4-字幕编辑工作流"><a href="#4-字幕编辑工作流" class="headerlink" title="4. 字幕编辑工作流"></a>4. 字幕编辑工作流</h2><p>对于需要精确控制字幕内容的场景，lyrichroma 提供了字幕编辑工作流，这是该工具的一大亮点。由于自动语音识别技术并非完美，有时会出现识别错误，这时就需要人工干预。</p>
+<p>LyriChroma 的字幕编辑工作流分为三步：</p>
+<p>第一步：只生成字幕文件（不生成视频）：</p>
+<p>lyrichroma –input audio.mp3 –save-transcript transcript.json<br>执行这个命令后，你会得到一个名为 transcript.json 的文件，它包含了所有的识别结果和时间戳信息。</p>
+<p>第二步：手动编辑生成的 transcript.json 文件</p>
+<p>打开这个 JSON 文件，你会发现它的结构类似于：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;start&quot;</span>: <span class="number">0.0</span>,</span><br><span class="line">    <span class="attr">&quot;end&quot;</span>: <span class="number">3.0</span>,</span><br><span class="line">    <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;你好世界&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;words&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">&quot;start&quot;</span>: <span class="number">0.0</span>,</span><br><span class="line">        <span class="attr">&quot;end&quot;</span>: <span class="number">1.5</span>,</span><br><span class="line">        <span class="attr">&quot;word&quot;</span>: <span class="string">&quot;你好&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;probability&quot;</span>: <span class="number">0.9</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">&quot;start&quot;</span>: <span class="number">1.5</span>,</span><br><span class="line">        <span class="attr">&quot;end&quot;</span>: <span class="number">3.0</span>,</span><br><span class="line">        <span class="attr">&quot;word&quot;</span>: <span class="string">&quot;世界&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;probability&quot;</span>: <span class="number">0.85</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>在这个文件中，你可以：</p>
+<p>更正识别错误的文字内容<br>调整时间戳以改善同步效果<br>删除不必要的段落<br>添加遗漏的内容<br>例如，如果某个词被错误识别，你可以直接修改对应的 word 或 text 字段。如果你发现某个时间段的字幕时间不对，可以调整 start 和 end 时间戳。</p>
+<h2 id="第三步：使用编辑后的字幕生成视频："><a href="#第三步：使用编辑后的字幕生成视频：" class="headerlink" title="第三步：使用编辑后的字幕生成视频："></a>第三步：使用编辑后的字幕生成视频：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lyrichroma --input audio.mp3 --output video.mp4 --load-transcript transcript.json</span><br></pre></td></tr></table></figure>
+<p>这样就能生成带有经过人工修正的高质量字幕的视频了。</p>
+<p>这种方式特别适合需要对自动识别结果进行校正的场景，比如：</p>
+<p>专业术语识别不准确<br>人名、地名识别错误<br>方言口音导致的识别偏差<br>背景噪音影响识别准确性</p>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/11/23/jit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/11/23/jit/" class="post-title-link" itemprop="url">JiT论文阅读Back to Basics-Let Denoising Generative Models Denoise</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-11-23 16:55:40" itemprop="dateCreated datePublished" datetime="2025-11-23T16:55:40+08:00">2025-11-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-01 17:00:38" itemprop="dateModified" datetime="2026-01-01T17:00:38+08:00">2026-01-01</time>
+    </span>
+
+  
+    <span id="/2025/11/23/jit/" class="post-meta-item leancloud_visitors" data-flag-title="JiT论文阅读Back to Basics-Let Denoising Generative Models Denoise" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h3><p>前几天在GitHub上看到点赞了JiT的代码仓库，进去看了下，发现是kaiming he的新论文，这几天看完后，发现是一篇非常极简，优雅，结论清晰的论文，这里记录一下笔者的阅读笔记。</p>
+<p>论文提出了一个非常核心的观点：在流假设里面，自然图像是在低维度空间的，而噪声是在高维度空间，现有的一些方法通过预测高维度的噪声来去噪，本身提高了任务的难度，而如果在自然图像维度来学习的话，难度会下降很多，因此不需要太大的模型参数。<br>另一方面，高维度的噪声学习难度大，为了不断提高拟合这些维度的精度，就需要不断增大网络的尺寸，可能不是一个合理的方向。<br>由于Diffusion模型和Flow Matching模型都可以归纳成ODE(Ordinary Differential Equation, 常微分方程)形式，因此论文从flow-based的角度出发，系统地总结了 三个预测空间v, x, or ϵ.和三个loss空间，并通过实验证明，在x预测空间，不管什么loss设计，都能比较好地学习降噪效果；而在v预测空间和ϵ预测空间，则不管什么loss，网络学习到误差都比较大。</p>
+<p>论文通过一个toy实验先验证低的x空间被融合在高维度的噪声空间中的时候，采用v, x, 和 ϵ预测，哪个能恢复原始的数据，最后实验发现，在噪声维度本身比较低的时候，几种方案都可以，但维度过高，超过模型的能力的时候，只有x预测才work。</p>
+<p>当然论文中的x-Prediction之前的人也研究过，只不过这里作者给出了一个更系统的验证，部分结论跟之前论文是一致的。</p>
+<p>虽然论文前面部分对现有的swiGLU, RSNNorm, RopE，CFG等现有Diffusion的标配组件没有太多涉及，但在后续部分也指出了论文中的实验也采用了这些标配组件。</p>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><p>论文中的方法能否用来做生图？<br>论文的这种方法是用来降噪的，且一个前提是自然图像在流假设中是低维度的，但AI生成的图像未必跟自然图像一样，都是低维度的，所以是不是不能用来生图？笔者对这块没想清楚，希望懂的朋友们多赐教。</p>
+<h3 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h3><p>读下来几点感受：</p>
+<ul>
+<li>思路非常清晰，行文的逻辑非常通畅，跟之前作者的一些论文风格很一致</li>
+<li>专门标注了筛选的结果和非筛选过的结果，对实验用到的trick都进行了脚注说明，非常坦诚，值得科研工作者学习</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/10/04/lepton-ai-part2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/04/lepton-ai-part2/" class="post-title-link" itemprop="url">Lepton AI后续</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-04 16:53:08" itemprop="dateCreated datePublished" datetime="2025-10-04T16:53:08+08:00">2025-10-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-01 16:54:13" itemprop="dateModified" datetime="2026-01-01T16:54:13+08:00">2026-01-01</time>
+    </span>
+
+  
+    <span id="/2025/10/04/lepton-ai-part2/" class="post-meta-item leancloud_visitors" data-flag-title="Lepton AI后续" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>2023年11月份的时候，我写过一篇介绍贾扬清创业项目LeptonAI的文章，当时的感受是，项目对应的python包leptonai API设计优雅，对应的云端平台体验也很丝滑。后面看到团队又更新了叫gupd的一个仓库，这是一个轻量级、生产级的 GPU 监控与管理工具，为保障 GPU 在 AI和机器学习环境下的可靠性和高效性设计的。整体看起来，团队做的事情是AI Infra的基建构建。</p>
+<p>2025年4月份的时候，有消息说英伟达收购LeptonAI。而在4月17日，我收到一份Lepton AI发的邮件:</p>
+<p>简单翻译如下：</p>
+<p>尊敬的客户：<br>我们谨此通知您，Lepton 服务将停止运营，并将于 2025 年 5 月 20 日正式终止。<br>自该日起，您将无法再访问 Lepton AI 平台提供的任何服务，也无法获取您提交至该平台的数据。我们建议您务必在此日期前下载并保存所有必要数据，因为 5 月 20 日之后将无法再访问任何内容。<br>此外，服务终止时您账户中剩余的未使用积分将在服务关闭后予以退还。<br>感谢您一直以来对 Lepton 的支持与信任。<br>Lepton AI 团队<br>可见在2025年4月17日的时间节点，LeptonAI 已经确定收购意向，并且决定关停服务了。</p>
+<p>这个有个小细节，Lepton AI发邮件的时候，貌似给所有用户一起发或者按批次发的邮件，所以能看到所有收件人的邮箱，我统计了一下，总共50个收件人，我不知道这是LeptonAI总的客户数，还是他们按照50个人，50个人来发邮件的。</p>
+<p>团队貌似没有真正官宣过这起收购事件（没有上X看过），但现在看贾扬清的领英介绍，已经显示最新工作单位是英伟达了。</p>
+<p>现在有半年过去了，我好奇LeptonAI的那套SDK和别的工程的东西现在发展怎么样了，还在更新吗，于是最近去看了一下，简单研究后我认为，LeptonAI团队虽然被收购了，但做的事情跟LeptonAI独立公司阶段没有大的区别。</p>
+<p>首先是官方网站，访问原始域名lepton.ai，会跳转到<a target="_blank" rel="noopener" href="https://www.nvidia.com/en-us/data-center/dgx-cloud-lepton/%EF%BC%8C%E4%BB%8B%E7%BB%8D%E5%86%85%E5%AE%B9%E6%94%B9%E5%8F%98%E6%AF%94%E8%BE%83%E5%A4%A7%EF%BC%8C%E9%A3%8E%E6%A0%BC%E4%B9%9F%E4%BB%8E%E6%9E%81%E7%AE%80%E9%A3%8E%E6%94%B9%E6%88%90%E8%8B%B1%E4%BC%9F%E8%BE%BE%E7%BB%BF%E8%89%B2%E9%85%8D%E8%89%B2%E4%B8%BA%E4%B8%BB%E3%80%82">https://www.nvidia.com/en-us/data-center/dgx-cloud-lepton/，介绍内容改变比较大，风格也从极简风改成英伟达绿色配色为主。</a></p>
+<p>互联网博物馆看到的LeptonAI 2024年11月的网站</p>
+<p>Nvidia DGX Cloud Lepton 网站<br>可以看到，LeptonAI现在变成了Nvidia DGX Cloud的一部分，名字就叫 NVDIA DGX Cloud Lepton。DGX Cloud是英伟达2023年推出的云托管的AI超级计算服务，不光提供月租的GPU卡，还包括模型训练、部署等一套软件设施。这样一看，Lepton被集成进DGX Cloud，是非常合理的。</p>
+<p>技术文档在这个地址：<a target="_blank" rel="noopener" href="https://docs.nvidia.com/dgx-cloud/lepton%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E7%9B%B8%E6%AF%94GitHub%E7%9A%84README,%E4%BB%8B%E7%BB%8D%E5%86%85%E5%AE%B9%E8%BF%98%E6%98%AF%E5%8F%91%E7%94%9F%E4%BA%86%E4%B8%8D%E5%B0%91%E5%8F%98%E5%8C%96%EF%BC%8C%E4%BB%8EDGX">https://docs.nvidia.com/dgx-cloud/lepton，可以看到相比GitHub的README,介绍内容还是发生了不少变化，从DGX</a> Cloud的组件角度来看整个工具了：</p>
+<p>使用方式没什么变化，还是同一个包名</p>
+<p>然后项目也是正常迭代，包括代码提交，版本发布，以及更新的节奏：</p>
+<p>所以总结来说，做的事情没什么大的变化，只不过由创业公司的高不确定性到大公司的高确定性的变化而已。</p>
+<p>我觉得这个是好事，因为不需要作为乙方，买英伟达的卡，再提供给客户来使用，毕竟自家的卡用起来又不花钱。</p>
+<p>而且LeptonAI的这套基建，在英伟达显卡一家独大的情况下，服务好了英伟达，也就是服务好了大部分GPU市场，从这个角度讲，他们在里面做跟在外面做没什么区别。</p>
+<p>总之LeptonAI的故事告一段落了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/08/23/llm-code-score/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/08/23/llm-code-score/" class="post-title-link" itemprop="url">llm-code-scorer</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-23 16:47:27" itemprop="dateCreated datePublished" datetime="2025-08-23T16:47:27+08:00">2025-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-01 16:51:49" itemprop="dateModified" datetime="2026-01-01T16:51:49+08:00">2026-01-01</time>
+    </span>
+
+  
+    <span id="/2025/08/23/llm-code-score/" class="post-meta-item leancloud_visitors" data-flag-title="llm-code-scorer" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>这是去年9月份受两个实习生小伙伴讨论代码启发而做的一个小项目，这周五他们回学校了，我也把这个在草稿箱躺了11个月的文章改了改，发出来作为纪念。</p>
+</blockquote>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>为了找出开源代码仓库存在的问题（缺少证书，缺少文档，缺少测试，代码质量不高）并加以改进，我搭建了一个基于 LLM 来自动分析代码仓库并打分的网站，可以在这里体验</p>
+<h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><p>Clone 仓库<br>将仓库中的代码、文档、证书、测试例子等按照固定的格式，写成一个总结文档<br>设计给大模型的 PROMPT 提示词规范<br>将 PROMPT+总结文档喂给大模型（这里用的是智谱的免费模型 GLM-4-Flash)，大模型返回 json 格式的打分结果<br>网页渲染 json 结果，得到最终的输出</p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><p>打分维度考虑全面，包括代码质量、仓库大小、Git Commit 规范、文档、测试、开源证书等方面<br>基于大模型的打分并给出了建议，可以根据建议来改进代码质量<br>有结果保存成图片的功能，方便记录<br>代码开源，源代码地址: <a target="_blank" rel="noopener" href="https://github.com/vra/llm-code-scorer">https://github.com/vra/llm-code-scorer</a><br>下面是这个网站制作的详细说明，希望能给想做简单好玩AI应用的朋友们提供一个参考。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>有一次想到某个仓库的代码，逻辑非常绕，很不直观。要是有办法能让作者意识到这里的问题，进行优化改进，对使用者也是极好的。</p>
+<p>然后联想到有一次团队的一个小伙伴提到某个开源代码，评价其是“一坨狗屎”，突然灵光一现：能不能做一个大模型来对代码进行分析的工具，给出0-10分的打分，最差的0分，锐评就是“一坨狗屎”，把这个梗用上去。</p>
+<p>然后整体评估了下，整体上是可行的，大模型见过了那么多的代码，肯定知道哪些代码是好的，哪些代码是烂的。</p>
+<h2 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a>方案设计</h2><p>然后一个核心问题出现了：GitHub上的开源代码仓库有大有小，包含文档、配置、测试和真正的有用源代码，如何将这么多东西喂给大模型输出一个总体的评分呢？想起了之前看过的LLM的项目，我设计了一个模板，将内容按照源码、配置项、README、证书，是否有测试等情况进行分类，按照一个模板，汇总成输入给到大模型。</p>
+<p>打分的时候，也是设计了Prompt，根据不同的维度进行考察，Prompt如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">PROMPT = &quot;&quot;&quot;</span><br><span class="line">---</span><br><span class="line">已将一个 Git 仓库的所有信息按照概要格式组织，请仔细阅读概要信息，尤其是一定一定要对[Code Snapshot]部分的代码风格、逻辑、规范进行仔细查阅，然后结合具体的例子，给出下面6个维度的0-10分的打分（打分标准见下): 代码质量、文档规范、配置规范、提交规范、大小规范、测试规范，最后完整全面地总结代码的优点和待改进点，给出总结和建议。</span><br><span class="line"></span><br><span class="line">### 概要格式</span><br></pre></td></tr></table></figure>
+<p>[.gitignore]:<br>[Git Commit]:<br>[Code Snapshot]:<br>[Test Files]:<br>[Binary Files]:<br>[Repo Size]:<br>[Total Files]:</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 评分维度说明</span><br><span class="line"></span><br><span class="line">#### 1. 代码质量（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 代码不易读，逻辑混乱，缺乏注释, 命名不规范，风格不一致，难以理解，存在多个严重的潜在错误。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 代码可读性一般，有部分注释，存在一些逻辑问题和不规范命名，风格混合（例如驼峰和下划线命名混用）,偶尔有潜在错误。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 代码整体清晰，注释较为充分，逻辑严谨通顺，命名统一规范，潜在错误较少。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 代码结构良好，规范一贯，逻辑清晰，易于理解，命名准确一致，几乎没有潜在错误。</span><br><span class="line"><span class="bullet">- </span>如果[Code Snapshot]部分内容为空，说明没有任何源代码，代码质量直接为0分，评分理由是没有任何源代码，</span><br><span class="line"></span><br><span class="line">#### 2. 文档规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 文档缺失(例如没有README)或只包含极少信息(README没有使用说明)，无法帮助用户理解和使用。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 文档不完整，有部分信息缺失，用户可能需要额外查找信息。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 文档较为完整，提供了大部分所需信息，少量细节需要完善。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 文档非常详尽，覆盖所有重要细节，除了README，还有BUILD,CONTRIBUTING，faq，trobuleshooting，docs等专门的文档或目录，用户能够轻松理解和上手。</span><br><span class="line"></span><br><span class="line">#### 3. 配置规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 项目配置混乱，缺少必要的配置文件（如 .gitignore, LICENSE）。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 项目配置一般，有一些配置文件，但不充分，例如虽然有.gitignore，但是没有忽略.pyc，.DS_Store, .out，.so等中间结果。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 项目配置良好，包含必要的配置文件，结构清晰，忽略了常见的非源码文件。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 优化的项目配置，包含所有必要文件(如.gitignore, LICENSE, setup.cfg等)，并遵循最佳实践，忽略了全部的非源码文件，已经不需要的数据目录等。</span><br><span class="line"><span class="bullet">- </span>如果[LICENSE]部分或者[.gitignore]部分内容为空，说明没有证书或者忽略规则，配置规范直接为0分，没有证书和gitignore规则是很不专业的开源方式</span><br><span class="line"></span><br><span class="line">#### 4. 提交规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 提交信息极其简单，完全无法理解提交的目的(例如简单的update, upload等)。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 提交信息有一定描述，但描述不够详细或含糊。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 提交信息清晰，能够理解修改的内容和目的，同时有固定的格式如angular规范等。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 提交信息详细且准确，充分解释每次提交的变更和背景，详细内容通过空行再详细说明的形式提交。</span><br><span class="line"></span><br><span class="line">#### 5. 大小规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 计算[Repo Size] / [Total Files]，也就是平均每个文件的大小，超过1M，越小分值越高</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 平均每个文件大小超过500K，越小分值越高</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 平均每个文件大小超过100K，越小分值越高</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 平均每个文件大小小于100K，越小分值越高, 如果小于30K，则为10分</span><br><span class="line"><span class="bullet">- </span>如果[Code Snapshot]部分内容为空，但[Size]部分超过10M，大小规范直接为0分，没有源码但size超大说明保存的是二进制文件而不是代码</span><br><span class="line"></span><br><span class="line">#### 6. 测试规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 没有任何的单元测试或者集成测试，也没有任何文档说明 。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 有默认的mock测试文件，但没有真正代码的测试例子。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 有一些实际代码的测试例子，但测试覆盖率很低，没有说明怎么进行测试。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 如果[Test Files]中的测试文件数目/[Total Files] 超过10%，说明测试覆盖率高，这个占比越高分值也越高，同时有详细的说明进行如何测试。</span><br><span class="line"><span class="bullet">- </span>如果[Test Files]部分内容为空，说明没有任何的测试，测试规范直接为0分</span><br><span class="line"></span><br><span class="line">重要的附加说明：打分一定要有区分度，例如[Test Files]，[LICENSE], [.gitignore] 或 [Code Snapshot] 如果为空，则对应的评分维度就果断打0分，这样最终的结果才有警示意义和区分度，如果做的很好就果断给10分，不要中庸地给8分或者9分.</span><br></pre></td></tr></table></figure>
+<p>由于智谱提供了免费的LLM API，因此打分模型基于这个免费的API来构建。</p>
+<p>思路定了后，就想找一些网页效果比较酷炫的网站来看看，因为模仿也是写代码中很重要的一个部分（看看国内各大大模型的上传图片的UI就知道了）。 之前王登科分享过一个文字风格测试的网站（已经无法使用），想参考其做网站页面。 最后参考了之前体验的 Year in code的网站，渐变的色彩 <a target="_blank" rel="noopener" href="https://year-in-code.com/">https://year-in-code.com/</a></p>
+<p>既然想做一个稍微正式点的Side Project，还是值得花点钱准备一些必须要的软硬件。</p>
+<p>首先是申请域名时发现， 因为之前调查过，各家云厂商都有100块左右一年的低配机器，而阿里云目前在国内还是做的比较好，又是一个系统的，因此下单了99年一年的机器。</p>
+<p>所以这个Side Project的总支出是7+99=106元，算是低成本了。</p>
+<p>之前看过一个大佬的博客，说他50%的时间花在Coding上， 50%的时间花在Marketing，因此推广自己的作品和写代码一样重要，不要觉得推广自己的东西很羞耻，如果你做的东西很棒，那就应该让更多的人知道，毕竟在这个信息爆炸的时代，酒香也怕巷子深。</p>
+<p>关于这个项目，我的定位还是低成本的Side Project，因此做的推广并不多。具体来说，在网站搭建好，域名还没有备案完成时，先在几个好友之间共享，收集他们的评论和反馈意见。然后网址完成备案后，在v2ex上进行了分享，源码在GitHub上开源，所有人都可以自己跑，然后修改。</p>
+<h2 id="它真的有用吗？"><a href="#它真的有用吗？" class="headerlink" title="它真的有用吗？"></a>它真的有用吗？</h2><p>平心而论，我觉得目前这个版本用处有限，可能最大的用处是让开发者能知道格式上的问题，例如代码没有README，没有写测试，提交不规范等等，对代码逻辑是否通顺、写法是否优雅这种细致到代码实现细节的方面，它能做的不多。</p>
+<p>那么问题在哪里呢？一方面是采用的免费模型还有改进空间，采用更强大的付费模型肯定会有提升，但按token数计算的支出可能是个无底洞，已经超出了这个Side Project的经费上限。</p>
+<p>另一方面，Prompt可能还有改进的空间，通过几个版本Prompt的表现来看，修改Prompt是最有效的提升效果的方法，未来我可能也会优化Prompt来更新这个网站。</p>
+<p>其实在设计评分结果展示方案的时候，还考虑过用AI生成梗图的方式，例如锐评是“你写的代码比雷军还优雅”，就生成一张类似雷军的点赞的图片，但实际尝试后发现有几个问题： 1. 首先是AI生成的图片中文字效果还做不好，例如下面采用可灵的图片， 然后考虑到AI生图与代码评分本身关系不是很大，即使做好了也只是在戏剧和传播效果有一些作用，对程序员真正地发现代码中的问题并无直接帮助，因此也就去掉了这部分比较耗时的工作。</p>
+<p>因为我不懂前端，Vue和css的代码全部是GPT生成的，因此现在的效果展示部分还比较简单。我尝试了让Vue调用D3.js来生成蜘蛛图，显示6个考察的维度，但最终没有成功。另外想做一个生成分享页面的功能，将所有信息都展示到一张图片上，再加上网站的二维码，可以进行社交媒体的分享，因为不熟悉前端也没能搞定。后来实习的小伙伴帮忙优化了网页展示，这里也表示感谢。</p>
+<p>其实刚开始我也想过微信或者支付宝小程序，因为它们的传播效应会很明显，万一这个东西做的出色，出圈了，小程序能够做到快速地社群传播。 但小程序也有问题，开发难度比一个网站大，而且又得专门学自有的一台编程语言和工具系统，同时不太开放，而且之前看到小程序也要备案，难度又增大了。 这里我还是考虑Side Project的短平快属性与小程序较高的学习成本与漫长的合法审核周期不契合，因此果断放弃这个思路。如果未来有个创业团队将这种AI打分App当作一个严肃的产品来对待，那小程序还是值得做的平台。</p>
+<p>总体上，我认为代码打分这个方向未来肯定会有更专业的人做出一个合格的产品出来，这里因为各方面的原因，我目前能提供的就是这个版本了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/08/23/wavlm-onnx-mnn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/08/23/wavlm-onnx-mnn/" class="post-title-link" itemprop="url">wavlm-large模型onnx和mnn版本的导出与使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-23 16:43:20" itemprop="dateCreated datePublished" datetime="2025-08-23T16:43:20+08:00">2025-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-01 16:52:27" itemprop="dateModified" datetime="2026-01-01T16:52:27+08:00">2026-01-01</time>
+    </span>
+
+  
+    <span id="/2025/08/23/wavlm-onnx-mnn/" class="post-meta-item leancloud_visitors" data-flag-title="wavlm-large模型onnx和mnn版本的导出与使用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在音频处理领域，WavLM是一个强大的预训练模型，可以提取高质量的音频特征表示。然而，在实际应用中，我们常常面临模型体积大、推理速度慢以及部署复杂等问题。本文将详细记录我对s3prl项目中的WavLM模型进行优化，包括简化推理过程、ONNX导出以及MNN转换（包括FP16和INT8量化）的过程，用于解决上面提到的问题。</p>
+<p>代码仓库：<a target="_blank" rel="noopener" href="https://github.com/vra/s3prl">https://github.com/vra/s3prl</a>, README详细记录了导出过程与使用说明</p>
+<p>ONNX模型：<a target="_blank" rel="noopener" href="https://huggingface.co/yunfengwang/wavlm-large-onnx">https://huggingface.co/yunfengwang/wavlm-large-onnx</a></p>
+<p>MNN模型：<a target="_blank" rel="noopener" href="https://huggingface.co/yunfengwang/wavlm-large-mnn">https://huggingface.co/yunfengwang/wavlm-large-mnn</a></p>
+<h2 id="Pytorch版本的问题"><a href="#Pytorch版本的问题" class="headerlink" title="Pytorch版本的问题"></a>Pytorch版本的问题</h2><p>在开始优化之前，让我们先了解原始WavLM模型在s3prl项目中存在的几个问题：</p>
+<p>网络依赖复杂：原始代码依赖于torch.hub加载模型，这种模式会从GitHub上拉取代码，这在国内环境中会遇到连接问题。<br>推理流程繁琐：需要加载完整的s3prl库和相关依赖，代码冗长且不直观。<br>模型体积大：原始PyTorch模型体积较大，不适合在资源受限的设备上部署。<br>推理速度慢：没有针对推理场景进行优化，存在不必要的计算开销。</p>
+<h2 id="优化过程"><a href="#优化过程" class="headerlink" title="优化过程"></a>优化过程</h2><p>针对上述问题，实施了以下优化方案：</p>
+<p>简化推理代码：创建了独立的demo.py文件，封装了一个简洁的VoiceEmbeddingExtractor类。<br>ONNX导出：修改了s3prl/upstream/wavlm/expert.py文件，支持将模型导出为ONNX格式。<br>MNN转换：将ONNX模型转换为MNN格式，并进行FP16和INT8量化。<br>推理示例代码：分别为PyTorch、ONNX和MNN模型提供了简洁的推理示例代码。<br>下面，我将详细介绍每一步的实现过程和技术细节。</p>
+<h2 id="简化推理代码"><a href="#简化推理代码" class="headerlink" title="简化推理代码"></a>简化推理代码</h2><p>首先，参考UniSpeech中的代码，创建了一个利用WavLM进行音频embedding提取的demo.py文件，其中包含网络的定义，预训练权重的加载，以及一个VoiceEmbeddingExtractor类，用于封装WavLM模型的推理过程。这个类的设计非常简洁，主要包含以下功能：</p>
+<p>初始化函数：加载预训练的WavLM模型。<br>extract_embedding函数：接收音频文件路径，返回提取的音频特征向量。<br>export_onnx函数：将PyTorch模型导出为ONNX格式。<br>关键代码片段如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VoiceEmbeddingExtractor</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, ckpt_path, model_name=<span class="string">&quot;wavlm_large&quot;</span>, device=<span class="string">&quot;cuda&quot;</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        self.device = device</span><br><span class="line">        self.model = init_model(model_name, ckpt_path).to(self.device).<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">extract_embedding</span>(<span class="params">self, audio_path</span>):</span></span><br><span class="line">        audio = whisper.load_audio(audio_path)</span><br><span class="line">        audio = torch.from_numpy(audio).to(self.device).unsqueeze(<span class="number">0</span>).<span class="built_in">float</span>()</span><br><span class="line">        <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">            embed = self.model(audio)</span><br><span class="line">        <span class="keyword">return</span> embed</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">export_onnx</span>(<span class="params">self, onnx_save_path</span>):</span></span><br><span class="line">        dynamic_axes = &#123;</span><br><span class="line">            <span class="string">&quot;audio&quot;</span>: &#123;<span class="number">0</span>: <span class="string">&quot;batch_size&quot;</span>, <span class="number">1</span>: <span class="string">&quot;seq_len&quot;</span>&#125;,</span><br><span class="line">            <span class="string">&quot;embed&quot;</span>: &#123;<span class="number">0</span>: <span class="string">&quot;batch_size&quot;</span>&#125;,</span><br><span class="line">        &#125;</span><br><span class="line">        dummy_audio = torch.randn((<span class="number">1</span>, <span class="number">1024</span>)).<span class="built_in">float</span>().to(self.device)</span><br><span class="line">        torch.onnx.export(</span><br><span class="line">            self.model,</span><br><span class="line">            (dummy_audio,),</span><br><span class="line">            onnx_save_path,</span><br><span class="line">            input_names=[<span class="string">&quot;audio&quot;</span>],</span><br><span class="line">            output_names=[<span class="string">&quot;embed&quot;</span>],</span><br><span class="line">            dynamic_axes=dynamic_axes,</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<p>这段代码大大简化了WavLM模型的使用方式，用户只需提供预训练模型路径和音频文件路径，即可轻松提取音频特征。</p>
+<h2 id="ONNX导出"><a href="#ONNX导出" class="headerlink" title="ONNX导出"></a>ONNX导出</h2><p>为了支持ONNX导出，修改s3prl/upstream/wavlm/expert.py文件，主要修改包括：</p>
+<p>确保模型的forward函数支持ONNX导出格式。<br>处理动态输入尺寸，使导出的ONNX模型能够处理不同长度的音频输入。<br>简化模型结构，移除训练时特有的组件，只保留推理所需的部分。<br>在demo.py中，我实现了export_onnx方法，用于将PyTorch模型导出为ONNX格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">export_onnx</span>(<span class="params">self, onnx_save_path</span>):</span></span><br><span class="line">    dynamic_axes = &#123;</span><br><span class="line">        <span class="string">&quot;audio&quot;</span>: &#123;<span class="number">0</span>: <span class="string">&quot;batch_size&quot;</span>, <span class="number">1</span>: <span class="string">&quot;seq_len&quot;</span>&#125;,</span><br><span class="line">        <span class="string">&quot;embed&quot;</span>: &#123;<span class="number">0</span>: <span class="string">&quot;batch_size&quot;</span>&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    dummy_audio = torch.randn((<span class="number">1</span>, <span class="number">1024</span>)).<span class="built_in">float</span>().to(self.device)</span><br><span class="line">    torch.onnx.export(</span><br><span class="line">        self.model,</span><br><span class="line">        (dummy_audio,),</span><br><span class="line">        onnx_save_path,</span><br><span class="line">        input_names=[<span class="string">&quot;audio&quot;</span>],</span><br><span class="line">        output_names=[<span class="string">&quot;embed&quot;</span>],</span><br><span class="line">        dynamic_axes=dynamic_axes,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>导出ONNX模型的命令非常简单：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python demo.py -t <span class="built_in">export</span> -m /path/to/wavlm_large_finetune.pth -o wavlm_large.onnx</span><br></pre></td></tr></table></figure>
+<h2 id="MNN转换"><a href="#MNN转换" class="headerlink" title="MNN转换"></a>MNN转换</h2><p>将ONNX模型转换为MNN格式可以进一步优化模型体积和推理速度。MNN是阿里巴巴开源的一个轻量级深度学习推理引擎，专为移动设备设计，具有高性能、低内存占用的特点。</p>
+<p>我使用MNN的转换工具将ONNX模型转换为MNN格式，并进行了FP16和INT8量化：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#安装MNN python包</span></span><br><span class="line">pip install MNN</span><br><span class="line"></span><br><span class="line"><span class="comment"># FP16量化</span></span><br><span class="line">mnnconvert -f ONNX --modelFile wavlm_large.onnx --MNNModel wavlm_large_fp16.mnn --fp16</span><br><span class="line"></span><br><span class="line"><span class="comment"># INT8量化</span></span><br><span class="line">mnnconvert -f ONNX --modelFile wavlm_large.onnx --MNNModel wavlm_large_int8.mnn --weightQuantBits 8 --weightQuantAsymmetric</span><br></pre></td></tr></table></figure>
+<p>FP16量化将模型的权重从32位浮点数转换为16位浮点数，可以将模型体积减小约50%，同时保持较高的精度。INT8量化则将权重量化为8位整数，可以将模型体积进一步减小，但可能会导致一定的精度损失。</p>
+<p>推理示例代码<br>为了方便用户使用优化后的模型，我分别为PyTorch、ONNX和MNN模型提供了简洁的推理示例代码。</p>
+<h2 id="PyTorch模型推理"><a href="#PyTorch模型推理" class="headerlink" title="PyTorch模型推理"></a>PyTorch模型推理</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用demo.py中的VoiceEmbeddingExtractor类</span></span><br><span class="line">extractor = VoiceEmbeddingExtractor(ckpt_path=args.ckpt_path)</span><br><span class="line">embed = extractor.extract_embedding(args.input_audio_path)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;embedding&#x27;s mean:&quot;</span>, embed.mean())</span><br><span class="line">ONNX模型推理 (infer_onnx.py)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ONNXModel</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, onnx_path</span>):</span></span><br><span class="line">        self.onnx_session = onnxruntime.InferenceSession(onnx_path)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        pred_audio = self.onnx_session.run(</span><br><span class="line">            <span class="literal">None</span>,</span><br><span class="line">            input_feed=&#123;</span><br><span class="line">                <span class="string">&quot;audio&quot;</span>: x,</span><br><span class="line">            &#125;,</span><br><span class="line">        )</span><br><span class="line">        embed = pred_audio[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> embed</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用示例</span></span><br><span class="line">model = ONNXModel(onnx_path=args.onnx_path)</span><br><span class="line">audio = whisper.load_audio(args.input_audio_path)[<span class="literal">None</span>]</span><br><span class="line">embed = model.process(audio)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;embedding&#x27;s mean:&quot;</span>, embed.mean())</span><br><span class="line">MNN模型推理 (infer_mnn.py)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MNNModel</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, mnn_model_path: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        input_names = [<span class="string">&quot;audio&quot;</span>]</span><br><span class="line">        output_names = [<span class="string">&quot;embed&quot;</span>]</span><br><span class="line"></span><br><span class="line">        self.chinese_bert = MNN.nn.load_module_from_file(</span><br><span class="line">            mnn_model_path,</span><br><span class="line">            input_names,</span><br><span class="line">            output_names,</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process</span>(<span class="params">self, audio</span>):</span></span><br><span class="line">        mnn_audio = MNN.expr.placeholder(audio.shape, dtype=MNN.numpy.float32)</span><br><span class="line">        mnn_audio.write(audio)</span><br><span class="line">        output = self.chinese_bert.forward([mnn_audio])</span><br><span class="line">        output = MNN.expr.convert(output[<span class="number">0</span>], MNN.expr.NCHW)</span><br><span class="line">        embed = output.read()</span><br><span class="line">        <span class="keyword">return</span> embed</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用示例</span></span><br><span class="line">model = MNNModel(mnn_model_path=args.mnn_model_path)</span><br><span class="line">audio = whisper.load_audio(args.input_audio_path)[<span class="literal">None</span>]</span><br><span class="line">embed = model.process(audio)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;embedding&#x27;s mean:&quot;</span>, embed.mean())</span><br></pre></td></tr></table></figure>
+<h2 id="优化效果对比"><a href="#优化效果对比" class="headerlink" title="优化效果对比"></a>优化效果对比</h2><p>通过上述优化，我们取得了显著的效果：</p>
+<p>代码简化：推理代码从复杂的s3prl库依赖简化为不到60行的独立代码。<br>模型体积：<br>原始PyTorch模型：约1.2GB<br>ONNX模型：约1.1GB<br>MNN FP16模型：约600MB<br>MNN INT8模型：约300MB<br>部署便捷性：不再依赖torch.hub和完整的s3prl库，只需要一个.onnx或.mnn文件和少量代码即可完成部署。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过对s3prl项目中WavLM模型的优化，我们成功地简化了推理过程，减小了模型体积，提高了推理速度，并提供了更便捷的部署方式。这些优化使得WavLM模型更适合在资源受限的环境中部署，也为其他预训练音频模型的优化提供了参考。</p>
+<p>主要贡献包括：</p>
+<p>修改了s3prl/upstream/wavlm/expert.py文件，支持ONNX导出。<br>创建了独立的demo.py文件，封装了简洁的推理接口。<br>提供了ONNX和MNN模型的转换方法和推理示例代码。<br>实现了FP16和INT8量化，大幅减小了模型体积。<br>这些优化不仅提高了WavLM模型的实用性，也为其他研究者和开发者提供了有价值的参考。</p>
+<p>资源链接<br>优化后的模型已上传至Hugging Face：</p>
+<p>ONNX模型：<a target="_blank" rel="noopener" href="https://huggingface.co/yunfengwang/wavlm-large-onnx">https://huggingface.co/yunfengwang/wavlm-large-onnx</a><br>MNN模型：<a target="_blank" rel="noopener" href="https://huggingface.co/yunfengwang/wavlm-large-mnn">https://huggingface.co/yunfengwang/wavlm-large-mnn</a></p>
 
       
     </div>
@@ -705,498 +1245,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/28/qwen-vlo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/06/28/qwen-vlo/" class="post-title-link" itemprop="url">Qwen VLo 效果实测</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-06-28 19:06:35" itemprop="dateCreated datePublished" datetime="2025-06-28T19:06:35+08:00">2025-06-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-03 19:10:37" itemprop="dateModified" datetime="2025-08-03T19:10:37+08:00">2025-08-03</time>
-    </span>
-
-  
-    <span id="/2025/06/28/qwen-vlo/" class="post-meta-item leancloud_visitors" data-flag-title="Qwen VLo 效果实测" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>2025年6月26日，Qwen团队发布了<a target="_blank" rel="noopener" href="https://qwenlm.github.io/blog/qwen-vlo/">Qwen VLo</a>，一个定位是“unified multimodal understanding and generation model”的模型，包括多模态的理解和生成。</p>
-<p>根据官方的介绍博客，Qwen VLo包含下面的功能：</p>
-<ul>
-<li>图像生成：文生图、2D卡通图像转真实图像</li>
-<li>图像编辑：例如修改某个主体、更换颜色、更换风格</li>
-<li>图像算法能力：例如检测框、canny 算子、图像分割结果</li>
-</ul>
-<p>经过一段时间的测试，我个人的总结是：</p>
-<ol>
-<li>生图能力：效果比较差，感觉是一两年前生图模型的水平</li>
-<li>图像风格转换：效果比较稳定，生图有美感</li>
-<li>图像编辑能力：还算可以，有一些case做不好</li>
-<li>检测框：能稳定生成，单人没问题，多人场景下也不算很准</li>
-<li>图像分割：没有成功</li>
-<li>canny算子：细节更丰富，但有一些地方与原图并非完全对齐</li>
-</ol>
-<p>再单独吐槽一个点，刚开始没找到Qwen VLo的入口，看微信公众号文章的留言才发现，并不是以一个模型列在可选模型列表中的，而是不管选择什么模型，只要做生图任务或者上传图片进行对话，都调用Qwen VLo。这种不遵从用户已有习惯的设置，随意而为的做法，用户体验很差，要是没看到留言回复，真的不知道怎么用。</p>
-<p>下面详细展开我上面总结中各个条目的实际结果。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/28/qwen-vlo/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/12/meituan-nocode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/06/12/meituan-nocode/" class="post-title-link" itemprop="url">美团 NoCode 简单使用体验</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-06-12 19:02:05" itemprop="dateCreated datePublished" datetime="2025-06-12T19:02:05+08:00">2025-06-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-03 19:20:58" itemprop="dateModified" datetime="2025-08-03T19:20:58+08:00">2025-08-03</time>
-    </span>
-
-  
-    <span id="/2025/06/12/meituan-nocode/" class="post-meta-item leancloud_visitors" data-flag-title="美团 NoCode 简单使用体验" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>网站地址：<a target="_blank" rel="noopener" href="https://nocode.cn/">NoCode-零代码应用生成平台</a></p>
-<p>简单使用了下，生成代码速度挺快的，NoCode的UI设计也简洁好用，但试了几次官方的实例（）生成的代码也没跑起来。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/12/meituan-nocode/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/08/text-friendly-product/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/06/08/text-friendly-product/" class="post-title-link" itemprop="url">AI时代的产品文本化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-06-08 18:57:25" itemprop="dateCreated datePublished" datetime="2025-06-08T18:57:25+08:00">2025-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-03 18:59:49" itemprop="dateModified" datetime="2025-08-03T18:59:49+08:00">2025-08-03</time>
-    </span>
-
-  
-    <span id="/2025/06/08/text-friendly-product/" class="post-meta-item leancloud_visitors" data-flag-title="AI时代的产品文本化" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Andrej Karpathy 有一条关于AI时代产品文本化的推文如下：</p>
-<blockquote>
-<p>Products with extensive/rich UIs lots of sliders, switches, menus, with no scripting support, and built on opaque, custom, binary formats are ngmi in the era of heavy human+AI collaboration.</p>
-<p>If an LLM can’t read the underlying representations and manipulate them and all of the related settings via scripting, then it also can’t co-pilot your product with existing professionals and it doesn’t allow vibe coding for the 100X more aspiring prosumers.</p>
-<p>Example high risk (binary objects/artifacts, no text DSL): every Adobe product, DAWs, CAD/3D Example medium-high risk (already partially text scriptable): Blender, Unity<br>Example medium-low risk (mostly but not entirely text already, some automation/plugins ecosystem): Excel<br>Example low risk (already just all text, lucky!): IDEs like VS Code, Figma, Jupyter, Obsidian, …</p>
-<p>Al’s will get better and better at human UIUX (Operator and friends), but I suspect the products that attempt to exclusively wait for this future without trying to meet the technology halfway where it is today are not going to have a good time.</p>
-</blockquote>
-<p>以下是我的一些见解。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/08/text-friendly-product/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/08/comma-v0-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/06/08/comma-v0-1/" class="post-title-link" itemprop="url">Comma v0.1 -全开源数据训练的可复现大模型</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-06-08 18:47:57" itemprop="dateCreated datePublished" datetime="2025-06-08T18:47:57+08:00">2025-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-03 18:49:19" itemprop="dateModified" datetime="2025-08-03T18:49:19+08:00">2025-08-03</time>
-    </span>
-
-  
-    <span id="/2025/06/08/comma-v0-1/" class="post-meta-item leancloud_visitors" data-flag-title="Comma v0.1 -全开源数据训练的可复现大模型" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>credit: <a target="_blank" rel="noopener" href="https://simonwillison.net/2025/Jun/7/comma/">via</a></p>
-</blockquote>
-<p>近期，<a target="_blank" rel="noopener" href="https://huggingface.co/common-pile">Common Pile</a> 团队开源了利用开放数据训练的7B LLM模型Comma v0.1 1T和2T，训练数据采用的是这个团队采集的<a target="_blank" rel="noopener" href="https://huggingface.co/collections/common-pile/common-pile-v01-68307d37df48e36f02717f21">Common Pile v0.1</a>，1个8T的数据集，包含公开数据，以及开放证书的数据，也就是训练大模型都是合法的，没有采用带版权的数据。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/08/comma-v0-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/06/04/graio-mcp-server/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yunfeng Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yunfeng's Simple Blog">
-      <meta itemprop="description" content="Love, Life, Linux">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Yunfeng's Simple Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/06/04/graio-mcp-server/" class="post-title-link" itemprop="url">用gradio部署mcp server</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-06-04 18:41:54" itemprop="dateCreated datePublished" datetime="2025-06-04T18:41:54+08:00">2025-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-03 18:45:46" itemprop="dateModified" datetime="2025-08-03T18:45:46+08:00">2025-08-03</time>
-    </span>
-
-  
-    <span id="/2025/06/04/graio-mcp-server/" class="post-meta-item leancloud_visitors" data-flag-title="用gradio部署mcp server" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h3><p>mcp是一种创新的开源协议，用于规范大模型对外部工具的调用流程。mcp服务是供大模型调用的外部服务，用于增强大模型解决问题的能力。</p>
-<p>mcp服务可以用mcp python-sdk来搭建，官方教程在<a target="_blank" rel="noopener" href="https://github.com/modelcontextprotocol/python-sdk">这里</a>。对第一次尝试的同学来说，官方的sdk还是有一定门槛的。</p>
-<p>最近发现gradio 默认支持mcp server的<a target="_blank" rel="noopener" href="https://www.gradio.app/guides/building-mcp-server-with-gradio">部署</a>，也就是launch一个gradio demo后，默认就起一个mcp服务，无需额外学习mcp python sdk的使用。这对于已经熟悉gradio demo搭建的同学来说，方便了不少。下面我将展示一个简单的基于gradio的mcp server搭建，以及在一个mcp client中调用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/04/graio-mcp-server/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

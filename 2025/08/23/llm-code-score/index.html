@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vra.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这是去年9月份受两个实习生小伙伴讨论代码启发而做的一个小项目，这周五他们回学校了，我也把这个在草稿箱躺了11个月的文章改了改，发出来作为纪念。  背景介绍为了找出开源代码仓库存在的问题（缺少证书，缺少文档，缺少测试，代码质量不高）并加以改进，我搭建了一个基于 LLM 来自动分析代码仓库并打分的网站，可以在这里体验 实现细节Clone 仓库将仓库中的代码、文档、证书、测试例子等按照固定的格式，写成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="llm-code-scorer">
+<meta property="og:url" content="http://vra.github.io/2025/08/23/llm-code-score/index.html">
+<meta property="og:site_name" content="Yunfeng&#39;s Simple Blog">
+<meta property="og:description" content="这是去年9月份受两个实习生小伙伴讨论代码启发而做的一个小项目，这周五他们回学校了，我也把这个在草稿箱躺了11个月的文章改了改，发出来作为纪念。  背景介绍为了找出开源代码仓库存在的问题（缺少证书，缺少文档，缺少测试，代码质量不高）并加以改进，我搭建了一个基于 LLM 来自动分析代码仓库并打分的网站，可以在这里体验 实现细节Clone 仓库将仓库中的代码、文档、证书、测试例子等按照固定的格式，写成">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-23T08:47:27.000Z">
+<meta property="article:modified_time" content="2026-01-01T08:51:49.042Z">
+<meta property="article:author" content="Yunfeng Wang">
+<meta property="article:tag" content="Python, Computer Vision, Deep Learning, AI">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://vra.github.io/2025/08/23/llm-code-score/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://vra.github.io/2025/08/23/llm-code-score/","path":"2025/08/23/llm-code-score/","title":"llm-code-scorer"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>llm-code-scorer | Yunfeng's Simple Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERXYNX7C7P"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ERXYNX7C7P","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Yunfeng's Simple Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yunfeng's Simple Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Love, Life, Linux</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">204</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">221</span></a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Projects</a></li><li class="menu-item menu-item-publications"><a href="/publications/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Publications</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">2.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Features"><span class="nav-number">3.</span> <span class="nav-text">Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">4.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">方案设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%83%E7%9C%9F%E7%9A%84%E6%9C%89%E7%94%A8%E5%90%97%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">它真的有用吗？</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yunfeng Wang</p>
+  <div class="site-description" itemprop="description">Love, Life, Linux</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">221</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">204</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vra" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vra" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vra.github.io/2025/08/23/llm-code-score/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yunfeng Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yunfeng's Simple Blog">
+      <meta itemprop="description" content="Love, Life, Linux">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="llm-code-scorer | Yunfeng's Simple Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          llm-code-scorer
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-23 16:47:27" itemprop="dateCreated datePublished" datetime="2025-08-23T16:47:27+08:00">2025-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-01 16:51:49" itemprop="dateModified" datetime="2026-01-01T16:51:49+08:00">2026-01-01</time>
+    </span>
+
+  
+    <span id="/2025/08/23/llm-code-score/" class="post-meta-item leancloud_visitors" data-flag-title="llm-code-scorer" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>这是去年9月份受两个实习生小伙伴讨论代码启发而做的一个小项目，这周五他们回学校了，我也把这个在草稿箱躺了11个月的文章改了改，发出来作为纪念。</p>
+</blockquote>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>为了找出开源代码仓库存在的问题（缺少证书，缺少文档，缺少测试，代码质量不高）并加以改进，我搭建了一个基于 LLM 来自动分析代码仓库并打分的网站，可以在这里体验</p>
+<h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><p>Clone 仓库<br>将仓库中的代码、文档、证书、测试例子等按照固定的格式，写成一个总结文档<br>设计给大模型的 PROMPT 提示词规范<br>将 PROMPT+总结文档喂给大模型（这里用的是智谱的免费模型 GLM-4-Flash)，大模型返回 json 格式的打分结果<br>网页渲染 json 结果，得到最终的输出</p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><p>打分维度考虑全面，包括代码质量、仓库大小、Git Commit 规范、文档、测试、开源证书等方面<br>基于大模型的打分并给出了建议，可以根据建议来改进代码质量<br>有结果保存成图片的功能，方便记录<br>代码开源，源代码地址: <a target="_blank" rel="noopener" href="https://github.com/vra/llm-code-scorer">https://github.com/vra/llm-code-scorer</a><br>下面是这个网站制作的详细说明，希望能给想做简单好玩AI应用的朋友们提供一个参考。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>有一次想到某个仓库的代码，逻辑非常绕，很不直观。要是有办法能让作者意识到这里的问题，进行优化改进，对使用者也是极好的。</p>
+<p>然后联想到有一次团队的一个小伙伴提到某个开源代码，评价其是“一坨狗屎”，突然灵光一现：能不能做一个大模型来对代码进行分析的工具，给出0-10分的打分，最差的0分，锐评就是“一坨狗屎”，把这个梗用上去。</p>
+<p>然后整体评估了下，整体上是可行的，大模型见过了那么多的代码，肯定知道哪些代码是好的，哪些代码是烂的。</p>
+<h2 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a>方案设计</h2><p>然后一个核心问题出现了：GitHub上的开源代码仓库有大有小，包含文档、配置、测试和真正的有用源代码，如何将这么多东西喂给大模型输出一个总体的评分呢？想起了之前看过的LLM的项目，我设计了一个模板，将内容按照源码、配置项、README、证书，是否有测试等情况进行分类，按照一个模板，汇总成输入给到大模型。</p>
+<p>打分的时候，也是设计了Prompt，根据不同的维度进行考察，Prompt如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">PROMPT = &quot;&quot;&quot;</span><br><span class="line">---</span><br><span class="line">已将一个 Git 仓库的所有信息按照概要格式组织，请仔细阅读概要信息，尤其是一定一定要对[Code Snapshot]部分的代码风格、逻辑、规范进行仔细查阅，然后结合具体的例子，给出下面6个维度的0-10分的打分（打分标准见下): 代码质量、文档规范、配置规范、提交规范、大小规范、测试规范，最后完整全面地总结代码的优点和待改进点，给出总结和建议。</span><br><span class="line"></span><br><span class="line">### 概要格式</span><br></pre></td></tr></table></figure>
+<p>[.gitignore]:<br>[Git Commit]:<br>[Code Snapshot]:<br>[Test Files]:<br>[Binary Files]:<br>[Repo Size]:<br>[Total Files]:</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 评分维度说明</span><br><span class="line"></span><br><span class="line">#### 1. 代码质量（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 代码不易读，逻辑混乱，缺乏注释, 命名不规范，风格不一致，难以理解，存在多个严重的潜在错误。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 代码可读性一般，有部分注释，存在一些逻辑问题和不规范命名，风格混合（例如驼峰和下划线命名混用）,偶尔有潜在错误。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 代码整体清晰，注释较为充分，逻辑严谨通顺，命名统一规范，潜在错误较少。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 代码结构良好，规范一贯，逻辑清晰，易于理解，命名准确一致，几乎没有潜在错误。</span><br><span class="line"><span class="bullet">- </span>如果[Code Snapshot]部分内容为空，说明没有任何源代码，代码质量直接为0分，评分理由是没有任何源代码，</span><br><span class="line"></span><br><span class="line">#### 2. 文档规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 文档缺失(例如没有README)或只包含极少信息(README没有使用说明)，无法帮助用户理解和使用。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 文档不完整，有部分信息缺失，用户可能需要额外查找信息。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 文档较为完整，提供了大部分所需信息，少量细节需要完善。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 文档非常详尽，覆盖所有重要细节，除了README，还有BUILD,CONTRIBUTING，faq，trobuleshooting，docs等专门的文档或目录，用户能够轻松理解和上手。</span><br><span class="line"></span><br><span class="line">#### 3. 配置规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 项目配置混乱，缺少必要的配置文件（如 .gitignore, LICENSE）。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 项目配置一般，有一些配置文件，但不充分，例如虽然有.gitignore，但是没有忽略.pyc，.DS_Store, .out，.so等中间结果。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 项目配置良好，包含必要的配置文件，结构清晰，忽略了常见的非源码文件。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 优化的项目配置，包含所有必要文件(如.gitignore, LICENSE, setup.cfg等)，并遵循最佳实践，忽略了全部的非源码文件，已经不需要的数据目录等。</span><br><span class="line"><span class="bullet">- </span>如果[LICENSE]部分或者[.gitignore]部分内容为空，说明没有证书或者忽略规则，配置规范直接为0分，没有证书和gitignore规则是很不专业的开源方式</span><br><span class="line"></span><br><span class="line">#### 4. 提交规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 提交信息极其简单，完全无法理解提交的目的(例如简单的update, upload等)。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 提交信息有一定描述，但描述不够详细或含糊。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 提交信息清晰，能够理解修改的内容和目的，同时有固定的格式如angular规范等。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 提交信息详细且准确，充分解释每次提交的变更和背景，详细内容通过空行再详细说明的形式提交。</span><br><span class="line"></span><br><span class="line">#### 5. 大小规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 计算[Repo Size] / [Total Files]，也就是平均每个文件的大小，超过1M，越小分值越高</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 平均每个文件大小超过500K，越小分值越高</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 平均每个文件大小超过100K，越小分值越高</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 平均每个文件大小小于100K，越小分值越高, 如果小于30K，则为10分</span><br><span class="line"><span class="bullet">- </span>如果[Code Snapshot]部分内容为空，但[Size]部分超过10M，大小规范直接为0分，没有源码但size超大说明保存的是二进制文件而不是代码</span><br><span class="line"></span><br><span class="line">#### 6. 测试规范（0-10）</span><br><span class="line"><span class="bullet">- </span><span class="strong">**0-3**</span>: 没有任何的单元测试或者集成测试，也没有任何文档说明 。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**4-6**</span>: 有默认的mock测试文件，但没有真正代码的测试例子。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**7-8**</span>: 有一些实际代码的测试例子，但测试覆盖率很低，没有说明怎么进行测试。</span><br><span class="line"><span class="bullet">- </span><span class="strong">**9-10**</span>: 如果[Test Files]中的测试文件数目/[Total Files] 超过10%，说明测试覆盖率高，这个占比越高分值也越高，同时有详细的说明进行如何测试。</span><br><span class="line"><span class="bullet">- </span>如果[Test Files]部分内容为空，说明没有任何的测试，测试规范直接为0分</span><br><span class="line"></span><br><span class="line">重要的附加说明：打分一定要有区分度，例如[Test Files]，[LICENSE], [.gitignore] 或 [Code Snapshot] 如果为空，则对应的评分维度就果断打0分，这样最终的结果才有警示意义和区分度，如果做的很好就果断给10分，不要中庸地给8分或者9分.</span><br></pre></td></tr></table></figure>
+<p>由于智谱提供了免费的LLM API，因此打分模型基于这个免费的API来构建。</p>
+<p>思路定了后，就想找一些网页效果比较酷炫的网站来看看，因为模仿也是写代码中很重要的一个部分（看看国内各大大模型的上传图片的UI就知道了）。 之前王登科分享过一个文字风格测试的网站（已经无法使用），想参考其做网站页面。 最后参考了之前体验的 Year in code的网站，渐变的色彩 <a target="_blank" rel="noopener" href="https://year-in-code.com/">https://year-in-code.com/</a></p>
+<p>既然想做一个稍微正式点的Side Project，还是值得花点钱准备一些必须要的软硬件。</p>
+<p>首先是申请域名时发现， 因为之前调查过，各家云厂商都有100块左右一年的低配机器，而阿里云目前在国内还是做的比较好，又是一个系统的，因此下单了99年一年的机器。</p>
+<p>所以这个Side Project的总支出是7+99=106元，算是低成本了。</p>
+<p>之前看过一个大佬的博客，说他50%的时间花在Coding上， 50%的时间花在Marketing，因此推广自己的作品和写代码一样重要，不要觉得推广自己的东西很羞耻，如果你做的东西很棒，那就应该让更多的人知道，毕竟在这个信息爆炸的时代，酒香也怕巷子深。</p>
+<p>关于这个项目，我的定位还是低成本的Side Project，因此做的推广并不多。具体来说，在网站搭建好，域名还没有备案完成时，先在几个好友之间共享，收集他们的评论和反馈意见。然后网址完成备案后，在v2ex上进行了分享，源码在GitHub上开源，所有人都可以自己跑，然后修改。</p>
+<h2 id="它真的有用吗？"><a href="#它真的有用吗？" class="headerlink" title="它真的有用吗？"></a>它真的有用吗？</h2><p>平心而论，我觉得目前这个版本用处有限，可能最大的用处是让开发者能知道格式上的问题，例如代码没有README，没有写测试，提交不规范等等，对代码逻辑是否通顺、写法是否优雅这种细致到代码实现细节的方面，它能做的不多。</p>
+<p>那么问题在哪里呢？一方面是采用的免费模型还有改进空间，采用更强大的付费模型肯定会有提升，但按token数计算的支出可能是个无底洞，已经超出了这个Side Project的经费上限。</p>
+<p>另一方面，Prompt可能还有改进的空间，通过几个版本Prompt的表现来看，修改Prompt是最有效的提升效果的方法，未来我可能也会优化Prompt来更新这个网站。</p>
+<p>其实在设计评分结果展示方案的时候，还考虑过用AI生成梗图的方式，例如锐评是“你写的代码比雷军还优雅”，就生成一张类似雷军的点赞的图片，但实际尝试后发现有几个问题： 1. 首先是AI生成的图片中文字效果还做不好，例如下面采用可灵的图片， 然后考虑到AI生图与代码评分本身关系不是很大，即使做好了也只是在戏剧和传播效果有一些作用，对程序员真正地发现代码中的问题并无直接帮助，因此也就去掉了这部分比较耗时的工作。</p>
+<p>因为我不懂前端，Vue和css的代码全部是GPT生成的，因此现在的效果展示部分还比较简单。我尝试了让Vue调用D3.js来生成蜘蛛图，显示6个考察的维度，但最终没有成功。另外想做一个生成分享页面的功能，将所有信息都展示到一张图片上，再加上网站的二维码，可以进行社交媒体的分享，因为不熟悉前端也没能搞定。后来实习的小伙伴帮忙优化了网页展示，这里也表示感谢。</p>
+<p>其实刚开始我也想过微信或者支付宝小程序，因为它们的传播效应会很明显，万一这个东西做的出色，出圈了，小程序能够做到快速地社群传播。 但小程序也有问题，开发难度比一个网站大，而且又得专门学自有的一台编程语言和工具系统，同时不太开放，而且之前看到小程序也要备案，难度又增大了。 这里我还是考虑Side Project的短平快属性与小程序较高的学习成本与漫长的合法审核周期不契合，因此果断放弃这个思路。如果未来有个创业团队将这种AI打分App当作一个严肃的产品来对待，那小程序还是值得做的平台。</p>
+<p>总体上，我认为代码打分这个方向未来肯定会有更专业的人做出一个合格的产品出来，这里因为各方面的原因，我目前能提供的就是这个版本了。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/alipay.jpg" alt="Yunfeng Wang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yunfeng Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vra.github.io/2025/08/23/llm-code-score/" title="llm-code-scorer">http://vra.github.io/2025/08/23/llm-code-score/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/23/wavlm-onnx-mnn/" rel="prev" title="wavlm-large模型onnx和mnn版本的导出与使用">
+                  <i class="fa fa-chevron-left"></i> wavlm-large模型onnx和mnn版本的导出与使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/04/lepton-ai-part2/" rel="next" title="Lepton AI后续">
+                  Lepton AI后续 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="vra/vra.github.io" 
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMzgxNzM5NQ==" 
+        data-category="Show and tell"
+        data-category-id="DIC_kwDOAgQDM84CR6XZ"
+        data-mapping="pathname" 
+        data-reactions-enabled="1" 
+        data-emit-metadata="1" 
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-input-position="bottom"
+        data-loading="lazy"
+        async>
+    </script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfeng Wang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
